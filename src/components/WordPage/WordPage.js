@@ -16,7 +16,22 @@ class WordPage extends React.Component {
     const frameSet = activeScene.frameSet;
     let frame;
 
-    if (frameSet && frameSet.framesAfter) {
+    const questStatus = localStateStore.getQuestStatus();
+
+    // // console.log("questStatus", toJS(questStatus));
+
+    const missionToUnlockFramesAfter =
+      activeScene.sceneConfig.unlockConditions &&
+      activeScene.sceneConfig.unlockConditions.currentMission;
+
+    const framesUnlocked =
+      typeof missionToUnlockFramesAfter === "number" &&
+      questStatus.activeMission > missionToUnlockFramesAfter;
+
+    console.log("questStatus.activeMission", toJS(questStatus.activeMission));
+    console.log("missionToUnlockFramesAfter", missionToUnlockFramesAfter);
+
+    if (framesUnlocked && frameSet && frameSet.framesAfter) {
       frame =
         frameSet &&
         frameSet.framesAfter &&
