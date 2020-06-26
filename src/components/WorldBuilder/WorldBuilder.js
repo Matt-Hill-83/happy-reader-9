@@ -422,7 +422,7 @@ class WorldBuilder extends Component {
     return <div className={css.newGrid}>{gridRows}</div>;
   };
 
-  createNewFrames = ({ newScene }) => {
+  createNewFramesFromJson = ({ newScene }) => {
     const { frames, sceneConfig } = newScene;
 
     // arrays of frames extracted from the json which has an easy to write struture,
@@ -519,7 +519,7 @@ class WorldBuilder extends Component {
         Object.assign(newBornScene, scene.sceneConfig);
       }
 
-      newBornScene.frameSet.frames = this.createNewFrames({ newScene: scene });
+      newBornScene.frameSet.frames = this.createNewFramesFromJson({ newScene: scene });
       scenesGrid[coordinates.row][coordinates.col] = newBornScene;
     });
 
