@@ -49,6 +49,26 @@ const story9102 = {
           ],
         },
       ],
+      framesAfter: [
+        {
+          frameConfig: {
+            items: [],
+            faces: [
+              { character: "liz2", characterIndex: 1, face: "happy" },
+              {
+                character: "kat",
+                characterIndex: 0,
+                face: "kat-happy.9e02afab.png",
+              },
+            ],
+            creatures: ["kat", "liz2"],
+          },
+          dialogs: [
+            '{"kat" : "W><><><><><><???><?><?><?><?><?><?><?><."}',
+            
+          ],
+        },
+      ],
     },
     {
       title: "taffy01",
