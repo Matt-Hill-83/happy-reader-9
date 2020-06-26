@@ -422,8 +422,9 @@ class WorldBuilder extends Component {
     return <div className={css.newGrid}>{gridRows}</div>;
   };
 
-  createNewFramesFromJson = ({ newScene }) => {
-    const { frames, sceneConfig } = newScene;
+  createNewFramesFromJson = ({ frames, sceneConfig }) => {
+    // createNewFramesFromJson = ({ newScene }) => {
+    // const { frames, sceneConfig } = newScene;
 
     // arrays of frames extracted from the json which has an easy to write struture,
     // but need to be transformed.
@@ -504,7 +505,8 @@ class WorldBuilder extends Component {
     const theScenes = newWorld.scenes2 || newWorld.scenes;
 
     theScenes.forEach((scene, sceneIndex) => {
-      const { sceneConfig } = scene;
+      // const { sceneConfig } = scene;
+      const { frames, sceneConfig, framesAfter } = scene;
 
       const coordinates = sceneConfig.coordinates || {
         col: sceneIndex,
@@ -519,7 +521,17 @@ class WorldBuilder extends Component {
         Object.assign(newBornScene, scene.sceneConfig);
       }
 
-      newBornScene.frameSet.frames = this.createNewFramesFromJson({ newScene: scene });
+      newBornScene.frameSet.frames = this.createNewFramesFromJson({
+        frames,
+        sceneConfig,
+      });
+
+      if (framesAfter && framesAfter.length > 0) {
+        newBornScene.frameSet.framesAfter = this.createNewFramesFromJson({
+          frames: framesAfter,
+          sceneConfig,
+        });
+      }
       scenesGrid[coordinates.row][coordinates.col] = newBornScene;
     });
 
@@ -549,9 +561,7 @@ class WorldBuilder extends Component {
         <div className={css.buttonHolder}>
           <FrameSetUploader
             onSave={this.onChangeDialog}
-            onImportJson={({ newWorld }) =>
-              this.importWorld({ newWorld })
-            }
+            onImportJson={({ newWorld }) => this.importWorld({ newWorld })}
           />
           <GetSceneConfig
             className={css.frameSetUploaderBox1}
@@ -563,9 +573,7 @@ class WorldBuilder extends Component {
             className={css.frameSetUploaderBox1}
             onSave={this.onChangeDialog}
             scenesGrid={scenesGrid}
-            onImportJson={({ newWorld }) =>
-              this.importWorld({ newWorld })
-            }
+            onImportJson={({ newWorld }) => this.importWorld({ newWorld })}
           />
         </div>
 

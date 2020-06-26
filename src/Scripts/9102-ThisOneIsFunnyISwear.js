@@ -26,6 +26,7 @@ const story9102 = {
         isEndScene: false,
         isStartScene: true,
         items: [],
+        unlockConditions: { currentMission: 1 },
       },
       frames: [
         {
@@ -63,10 +64,7 @@ const story9102 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "W><><><><><><???><?><?><?><?><?><?><?><."}',
-            
-          ],
+          dialogs: ['{"kat" : "W><><><><><><???><?><?><?><?><?><?><?><."}'],
         },
       ],
     },
@@ -238,7 +236,7 @@ const story9102 = {
 
     // TODO
     // TODO
-    
+
     // add locking of scenes based on whether the mission is complete
     // color code sub missions in quest
     // have frames for before and after a mission is completed
