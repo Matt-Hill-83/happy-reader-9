@@ -95,7 +95,7 @@ class BuildEpic extends Component {
     epicStory.scenes2 = scenes2
     console.log("epicStory", toJS(epicStory)) // zzz
 
-    onImportJson({ newFrameSet: epicStory })
+    onImportJson({ newWorld: epicStory })
   }
 
   render = () => {

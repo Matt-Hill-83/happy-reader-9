@@ -484,7 +484,7 @@ class WorldBuilder extends Component {
     return newDialogs;
   };
 
-  importWorld = ({ newFrameSet }) => {
+  importWorld = ({ newWorld }) => {
     console.log(""); // zzz
     console.log("importWorld------------"); // zzz
 
@@ -492,16 +492,16 @@ class WorldBuilder extends Component {
       title = "no title",
       description = "none",
       questConfig = { data: "none" },
-    } = newFrameSet;
+    } = newWorld;
 
-    console.log("newFrameSet", toJS(newFrameSet)); // zzz
+    console.log("newWorld", toJS(newWorld)); // zzz
 
     // I should probably create a new scenesGrid here, based on the required dimensions
     // I should probably create a new scenesGrid here, based on the required dimensions
     // I should probably create a new scenesGrid here, based on the required dimensions
     const scenesGrid = localStateStore.getWorldBuilderScenesGrid();
 
-    const theScenes = newFrameSet.scenes2 || newFrameSet.scenes;
+    const theScenes = newWorld.scenes2 || newWorld.scenes;
 
     theScenes.forEach((scene, sceneIndex) => {
       const { sceneConfig } = scene;
@@ -549,8 +549,8 @@ class WorldBuilder extends Component {
         <div className={css.buttonHolder}>
           <FrameSetUploader
             onSave={this.onChangeDialog}
-            onImportJson={({ newFrameSet }) =>
-              this.importWorld({ newFrameSet })
+            onImportJson={({ newWorld }) =>
+              this.importWorld({ newWorld })
             }
           />
           <GetSceneConfig
@@ -563,8 +563,8 @@ class WorldBuilder extends Component {
             className={css.frameSetUploaderBox1}
             onSave={this.onChangeDialog}
             scenesGrid={scenesGrid}
-            onImportJson={({ newFrameSet }) =>
-              this.importWorld({ newFrameSet })
+            onImportJson={({ newWorld }) =>
+              this.importWorld({ newWorld })
             }
           />
         </div>

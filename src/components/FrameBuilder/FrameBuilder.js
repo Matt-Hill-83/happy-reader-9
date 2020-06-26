@@ -94,7 +94,7 @@ class FrameBuilder extends Component {
     return (this.state.scene && this.state.scene.frameSet) || {}
   }
 
-  getNewFrameSet = () => {
+  getnewWorld = () => {
     return {
       name: "test",
       title: "test",
@@ -110,7 +110,7 @@ class FrameBuilder extends Component {
     } = this.props
 
     if (!frameSet) {
-      this.getNewFrameSet()
+      this.getnewWorld()
       updateMap({})
     }
 

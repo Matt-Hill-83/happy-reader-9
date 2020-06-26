@@ -113,15 +113,15 @@ class FrameSetUploader extends Component {
     const { onImportJson } = this.props;
     const text = this.state.text;
 
-    let newFrameSet = { noData: 5 };
+    let newWorld = { noData: 5 };
 
     if (text) {
-      newFrameSet = JSON.parse(text);
+      newWorld = JSON.parse(text);
     }
 
     return (
       <Button
-        onClick={() => onImportJson({ newFrameSet })}
+        onClick={() => onImportJson({ newWorld })}
         className={cx(css.uploadButton)}
       >
         Upload JSON
