@@ -1,0 +1,52 @@
+@import "./Styles/colors.modules.scss";
+@import "./Styles/sizes.modules.scss";
+@import "./Styles/mixins.modules.scss";
+
+body {
+  margin: 0px;
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex: 1;
+}
+
+.mobile {
+  --window-height: 360px;
+  --story-font-size: 16px;
+}
+
+.mobilePortrait {
+  --window-height: 100vh;
+  --story-font-size: 16px;
+
+  [class*="WorldViewer_main"] {
+    flex-direction: column;
+  }
+  [class*="WorldViewer_leftHalf"] {
+    width: 100%;
+  }
+}
+
+.mobileLandscape {
+  --window-height: 360px;
+  --story-font-size: 16px;
+}
+
+.desktop {
+  --window-height: 100vh;
+  --story-font-size: 30px;
+  // overflow: auto;
+
+  // TODO: use this for font size:
+  // font-size: 15vmin;
+}
+
+.mediaMsg {
+  border: 1px solid red !important;
+  position: absolute;
+  z-index: 5;
+  background: var(--light-pink);
+  right: 0px;
+}

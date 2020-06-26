@@ -1,0 +1,40 @@
+@import "../../Styles/mixins.modules.scss";
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  background: var(--color-pink);
+
+  height: var(--window-height);
+
+  .body {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    .storyBox {
+      display: flex;
+      position: relative;
+
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.floatingButtons {
+  position: absolute;
+  display: flex;
+  z-index: 5;
+  left: 60vw;
+  z-index: 1010;
+  top: 3.1vh;
+}
+
+.toaster {
+  background: #f8ffc1;
+  border: 4px solid #ff00d4 !important;
+  border-radius: 41px;
+}
