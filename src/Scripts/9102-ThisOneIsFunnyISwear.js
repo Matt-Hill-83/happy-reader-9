@@ -218,7 +218,7 @@ const story9102 = {
 
     // TODO
     // TODO
-    // make locations trigger mission completion triggers
+    
     // add locking of scenes based on whether the mission is complete
     // color code sub missions in quest
     // have frames for before and after a mission is completed

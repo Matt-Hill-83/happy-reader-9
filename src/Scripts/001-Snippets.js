@@ -8,8 +8,16 @@ const test = {
   '{"kat" : "or somehow invest your gold to build tools to acquire more words. "}',
   '{"kat" : "convert the game to more of a Santorini tye immersive feel"}',
 
+  '{"kat" : "-----"}',
+  '{"liz2" : "-----"}',
+  '{"kat" : "-----"}',
+  '{"liz2" : "-----"}',
+  '{"kat" : "-----"}',
+  '{"liz2" : "-----"}',
+  '{"kat" : "-----"}',
+  '{"liz2" : "-----"}',
 
-  
+
 
 
   'Pup is really lost',
@@ -31,7 +39,15 @@ const test = {
   '{"plot" : "They use the frog hopper to get to the weird whatever thing"}',
   '{"plot" : "----"}',
   '{"kat" : "----------"}',
-  '{"liz2" : "----------"}',
+  
+  'Space Race',
+  'kat alone, very ',
+  '------------------------',
+  '------------------------',
+  '------------------------',
+  '------------------------',
+  '------------------------',
+  '------------------------',
   '{"kat" : "----------"}',
   '{"liz2" : "----------"}',
   '{"kat" : "----------"}',
