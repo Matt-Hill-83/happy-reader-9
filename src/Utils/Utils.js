@@ -401,18 +401,34 @@ export default class Utils {
     return neighbors;
   };
 
-  static getNeighborNames = ({ coordinates }) => {
-    const neighbors = Utils.getNeighbors({ coordinates });
+  static getNeighborsAsArray = ({ coordinates }) => {
+    const directions = Object.keys(Utils.neighborPositionsEnum);
+    const neighbors = [];
 
-    const neighborNames = [];
-    for (const item in neighbors) {
-      const neighbor = neighbors[item];
+    directions.forEach((direction) => {
+      neighbors.push(
+        Utils.getNeighbor({
+          coordinates,
+          direction,
+        })
+      );
+    });
 
-      if (neighbor) {
-        neighborNames.push(neighbor.location.name);
-      }
-    }
-
-    return neighborNames;
+    return neighbors;
   };
+
+  // static getNeighborNames = ({ coordinates }) => {
+  //   const neighbors = Utils.getNeighbors({ coordinates });
+
+  //   const neighborNames = [];
+  //   for (const item in neighbors) {
+  //     const neighbor = neighbors[item];
+
+  //     if (neighbor) {
+  //       neighborNames.push(neighbor.location.name);
+  //     }
+  //   }
+
+  //   return neighborNames;
+  // };
 }

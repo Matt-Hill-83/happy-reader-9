@@ -30,7 +30,8 @@ useDefaultWorldId = false;
 useDefaultWorldId = true;
 const defaultWorldIdProd = "ZR0GOSFFqFPoWjSgvgOQ";
 // const defaultWorldIdNonProd = "ZWS4fGTQDjQSoCD6yQ7U";
-const defaultWorldIdNonProd = "GJDdtcFuOl6rpb4vJw2k";
+const defaultWorldIdNonProd = "TTIcrfQu5Qb4dukzY4an";
+// const defaultWorldIdNonProd = "GJDdtcFuOl6rpb4vJw2k";
 // const defaultWorldIdNonProd = "YcbUBJFPIj6oDRwklgUd";
 const defaultWorldId = IS_PROD_RELEASE
   ? defaultWorldIdProd
@@ -128,15 +129,19 @@ class MainStory extends React.Component {
     const startScene = this.getTerminalScene({});
     if (!startScene) return;
 
+    localStateStore.setVisitedScenes([]);
+    localStateStore.setUnlockedSubQuests([0]);
     this.updateActiveScene({ sceneId: startScene.id });
   };
 
   updateActiveScene = ({ sceneId }) => {
     localStateStore.setActiveSceneId(sceneId);
     localStateStore.setActiveFrameIndex(0);
+    localStateStore.addVisitedScenes(sceneId);
 
     const hideMissionConsole = localStateStore.getQuestStatus()
       .hideMissionConsole;
+    localStateStore.addUnlockedSubQuest();
 
     if (!hideMissionConsole) {
       this.updateQuestStatus({ sceneId });

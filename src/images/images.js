@@ -17,7 +17,7 @@ import pond from "./locations/pond.png";
 import pool from "./locations/pool.png";
 import slide from "./locations/slide.png";
 import stump from "./locations/stump.png";
-import swamp from "./locations/swamp.png";
+// import swamp from "./locations/swamp.png";
 import swing from "./locations/swing.png";
 import tree from "./locations/treehouse.png";
 import waterfall from "./locations/waterfall.png";
@@ -466,7 +466,7 @@ const locations = {
   pool,
   slide,
   stump,
-  swamp,
+  swamp: bog,
   swing,
   tree,
   waterfall,

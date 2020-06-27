@@ -1,5 +1,5 @@
 const story9102 = {
-  title: "9102-ThisOneIsFunnyISwear",
+  title: "-----9102-ThisOneIsFunnyISwear",
   questConfig: {
     missions: [
       {
@@ -11,7 +11,7 @@ const story9102 = {
       {
         recipient: { name: "madElf01" },
         item: { name: "goat01" },
-        name: "Give the elf a pet.",
+        name: "Find a pet for the elf.",
         rewards: [{ name: "gold", amount: 5 }],
       },
     ],
@@ -27,6 +27,7 @@ const story9102 = {
         isStartScene: true,
         items: [],
         unlockConditions: { currentMission: 1 },
+        subQuestId: 1,
       },
       frames: [
         {
@@ -71,6 +72,7 @@ const story9102 = {
     {
       title: "taffy01",
       sceneConfig: {
+        subQuestId: 1,
         worldTitle: "--- test - 002",
         coordinates: { col: 1, row: 0 },
         creatures: ["kat", "liz2"],
@@ -104,6 +106,7 @@ const story9102 = {
     {
       title: "strawberry01",
       sceneConfig: {
+        subQuestId: 1,
         worldTitle: "--- test - 002",
         coordinates: { col: 2, row: 0 },
         creatures: ["kat", "liz2"],
@@ -137,6 +140,7 @@ const story9102 = {
     {
       title: "madElf01",
       sceneConfig: {
+        subQuestId: 1,
         worldTitle: "--- test - 002",
         coordinates: { col: 3, row: 0 },
         creatures: ["kat", "liz2"],
@@ -244,6 +248,7 @@ const story9102 = {
     {
       title: "goat01",
       sceneConfig: {
+        subQuestId: 1,
         unlockConditions: { currentMission: 1 },
         worldTitle: "--- test - 002",
         coordinates: { col: 1, row: 1 },
@@ -284,6 +289,7 @@ const story9102 = {
         isEndScene: false,
         isStartScene: false,
         items: [],
+        subQuestId: 1,
       },
       frames: [
         {
