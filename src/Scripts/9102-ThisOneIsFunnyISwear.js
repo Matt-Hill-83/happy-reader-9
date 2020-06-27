@@ -174,6 +174,7 @@ const story9102 = {
     {
       title: "paradox01",
       sceneConfig: {
+        subQuestId: 2,
         worldTitle: "--- test - 002",
         coordinates: { col: 4, row: 0 },
         creatures: ["kat", "liz2"],
@@ -207,6 +208,7 @@ const story9102 = {
     {
       title: "waterfall",
       sceneConfig: {
+        subQuestId: 2,
         worldTitle: "--- test - 002",
         coordinates: { col: 5, row: 0 },
         creatures: ["kat", "liz2"],
@@ -317,6 +319,7 @@ const story9102 = {
     {
       title: "razzleDazzle01",
       sceneConfig: {
+        subQuestId: 2,
         worldTitle: "--- test - 002",
         coordinates: { col: 5, row: 1 },
         creatures: ["kat", "liz2"],
@@ -350,6 +353,7 @@ const story9102 = {
     {
       title: "cave",
       sceneConfig: {
+        subQuestId: 2,
         worldTitle: "--- test - 002",
         coordinates: { col: 6, row: 1 },
         creatures: ["kat", "liz2"],
@@ -383,6 +387,7 @@ const story9102 = {
     {
       title: "zanzibar01",
       sceneConfig: {
+        subQuestId: 2,
         worldTitle: "--- test - 002",
         coordinates: { col: 5, row: 2 },
         creatures: ["kat", "liz2"],
