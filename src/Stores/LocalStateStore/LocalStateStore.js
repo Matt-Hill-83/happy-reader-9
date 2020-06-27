@@ -32,11 +32,11 @@ class LocalStateStore {
   addUnlockedSubQuest = (sceneId) => {
     const scene = this.getActiveScene();
     const subQuestId = _get(scene, "sceneConfig.subQuestId");
-    console.log("subQuestId", subQuestId);
-    if (typeof sceneId === "number") {
-      this.unlockedSubQuests.push(sceneId);
+    // console.log("subQuestId", subQuestId);
+    if (typeof subQuestId === "number") {
+      this.unlockedSubQuests.push(subQuestId);
     }
-    console.log("this.unlockedSubQuests", toJS(this.unlockedSubQuests));
+    // console.log("this.unlockedSubQuests", toJS(this.unlockedSubQuests));
   };
   ///////////////
   ///////////////
@@ -52,12 +52,12 @@ class LocalStateStore {
 
   addVisitedScenes = (sceneId) => {
     this.visitedScenes.push(sceneId);
-    console.log("this.visitedScenes", toJS(this.visitedScenes));
+    // console.log("this.visitedScenes", toJS(this.visitedScenes));
   };
 
   isVisitedScene = (sceneId) => {
-    console.log("sceneId", sceneId);
-    console.log("this.visitedScenes", toJS(this.visitedScenes));
+    // console.log("sceneId", sceneId);
+    // console.log("this.visitedScenes", toJS(this.visitedScenes));
 
     return this.visitedScenes.some((scene) => scene === sceneId);
   };

@@ -12,6 +12,7 @@ import Utils from "../../Utils/Utils.js";
 import css from "./MiniLocation.module.scss";
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js";
 import cx from "classnames";
+import _get from "lodash.get";
 
 import { toJS } from "mobx";
 import MiniTable from "../MiniTable/MiniTable.js";
@@ -176,8 +177,10 @@ class MiniLocation extends React.Component {
     const {
       coordinates,
       // id,
-      sceneConfig: { storyIndex, subQuestId } = {},
+      sceneConfig: { storyIndex, subQuestId = 0 } = {},
     } = scene;
+
+    const questStatus = localStateStore.getQuestStatus();
 
     const isVisitedScene = localStateStore.isVisitedScene(scene.id);
 
@@ -192,19 +195,27 @@ class MiniLocation extends React.Component {
     );
 
     if (scene && scene.location.name !== "blank") {
-      console.log("id", toJS(id));
-      console.log("isVisitedScene", toJS(isVisitedScene));
-      console.log("neighbors", toJS(neighbors));
-      console.log("neighborsArray", toJS(neighborsArray));
     }
 
-    neighborWasVisited &&
-      console.log(
-        "neighborWasVisited-------------------------------------",
-        toJS(neighborWasVisited)
-      );
+    const missionToUnlockFramesAfter =
+      _get(scene, "sceneConfig.unlockConditions.currentMission") || 0;
 
-    const showCloud = !isVisitedScene && !neighborWasVisited;
+    const framesUnlocked =
+      typeof missionToUnlockFramesAfter === "number" &&
+      questStatus.activeMission > missionToUnlockFramesAfter;
+
+    console.log("framesUnlocked--------------------", framesUnlocked);
+
+    console.log("questStatus.activeMission", toJS(questStatus.activeMission));
+    console.log("missionToUnlockFramesAfter", missionToUnlockFramesAfter);
+
+    const unlockedSubQuests = localStateStore.getUnlockedSubQuests();
+    const subQuestIsActive = unlockedSubQuests.includes(subQuestId);
+    console.log("subQuestIsActive", toJS(subQuestIsActive));
+
+    const noCloud = isVisitedScene || subQuestIsActive;
+    const showCloud = !noCloud;
+    // const showCloud = !isVisitedScene && !neighborWasVisited;
     // const showCloud = false;
     const { items = [], creatures = [] } = scene;
     const locationName = scene.location.name;
