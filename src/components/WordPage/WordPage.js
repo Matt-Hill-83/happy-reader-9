@@ -19,7 +19,8 @@ class WordPage extends React.Component {
     const questStatus = localStateStore.getQuestStatus();
 
     const missionToUnlockFramesAfter =
-      _get(activeScene, "sceneConfig.unlockConditions.currentMission") || 0;
+      _get(activeScene, "sceneConfig.newFrameSetConditions.currentMission") ||
+      0;
 
     const framesUnlocked =
       typeof missionToUnlockFramesAfter === "number" &&

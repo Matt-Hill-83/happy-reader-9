@@ -26,7 +26,7 @@ const story9102 = {
         isEndScene: false,
         isStartScene: true,
         items: [],
-        unlockConditions: { currentMission: 1 },
+        newFrameSetConditions: { currentMission: 1 },
         subQuestId: 1,
       },
       frames: [
@@ -251,7 +251,7 @@ const story9102 = {
       title: "goat01",
       sceneConfig: {
         subQuestId: 1,
-        unlockConditions: { currentMission: 1 },
+        newFrameSetConditions: { currentMission: 1 },
         worldTitle: "--- test - 002",
         coordinates: { col: 1, row: 1 },
         creatures: ["kat", "liz2"],

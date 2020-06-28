@@ -198,9 +198,12 @@ class MiniLocation extends React.Component {
     }
 
     const missionToUnlockFramesAfter =
-      _get(scene, "sceneConfig.unlockConditions.currentMission") || -1;
+      _get(scene, "sceneConfig.newFrameSetConditions.currentMission") || -1;
 
-    const test = _get(scene, "sceneConfig.unlockConditions.currentMission");
+    const test = _get(
+      scene,
+      "sceneConfig.newFrameSetConditions.currentMission"
+    );
     if (test > -1) {
       console.log("test---------------------_>>>>>>>>>>>>>>>>>>>>>>>>>>", test); // zzz
     }
