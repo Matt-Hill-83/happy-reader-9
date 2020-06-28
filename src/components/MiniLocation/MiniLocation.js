@@ -194,40 +194,46 @@ class MiniLocation extends React.Component {
       localStateStore.isVisitedScene(neighbor && neighbor.id)
     );
 
-    if (scene && scene.location.name !== "blank") {
-    }
-
-    const missionToUnlockFramesAfter =
+    const newFrameSetMission =
       _get(scene, "sceneConfig.newFrameSetConditions.currentMission") || -1;
 
-    const test = _get(
-      scene,
-      "sceneConfig.newFrameSetConditions.currentMission"
-    );
-    if (test > -1) {
-      console.log("test---------------------_>>>>>>>>>>>>>>>>>>>>>>>>>>", test); // zzz
-    }
+    const unlockSceneMission =
+      _get(scene, "sceneConfig.unlockSceneConditions.currentMission") || -1;
+    const frameSet2Unlocked =
+      typeof newFrameSetMission === "number" &&
+      questStatus.activeMission >= newFrameSetMission;
+
     const sceneUnlocked =
-      typeof missionToUnlockFramesAfter === "number" &&
-      questStatus.activeMission > missionToUnlockFramesAfter;
+      typeof unlockSceneMission === "number" &&
+      questStatus.activeMission >= unlockSceneMission;
 
-    console.log("sceneUnlocked--------------------", sceneUnlocked); //zzz
+    if (scene && scene.location.name === "goat01") {
+      console.log("----------------------------");
+      console.log("----------------------------");
+      console.log(
+        "scene && scene.location.name",
+        toJS(scene && scene.location.name)
+      ); // zzz
+      console.log("scene.sceneConfig", toJS(scene.sceneConfig)); // zzz
+      console.log("questStatus.activeMission", toJS(questStatus.activeMission)); //zzz
 
-    console.log("questStatus.activeMission", toJS(questStatus.activeMission)); //zzz
-    console.log(
-      "missionToUnlockFramesAfter+++++++++++++++++++++++++++++++++++++++++",
-      missionToUnlockFramesAfter
-    ); //zzz
+      console.log("unlockSceneMission", unlockSceneMission); // zzz
+      console.log(
+        "newFrameSetMission+++++++++++++++++++++++++++++++++++++++++",
+        newFrameSetMission
+      ); //zzz
+
+      console.log("frameSet2Unlocked--------------------", frameSet2Unlocked); //zzz
+      console.log("sceneUnlocked", toJS(sceneUnlocked)); // zzz
+    }
 
     const unlockedSubQuests = localStateStore.getUnlockedSubQuests();
-    const subQuestIsActive = unlockedSubQuests.includes(subQuestId);
-    console.log("subQuestIsActive", toJS(subQuestIsActive)); //zzz
+    const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId);
 
-    const noCloud = isVisitedScene || subQuestIsActive;
-    // const noCloud = (isVisitedScene || subQuestIsActive) && sceneUnlocked;
+    const showLock = frameSet2Unlocked;
+    const noCloud = isVisitedScene || subQuestIsUnlocked;
     const showCloud = !noCloud;
-    // const showCloud = !isVisitedScene && !neighborWasVisited;
-    // const showCloud = false;
+
     const { items = [], creatures = [] } = scene;
     const locationName = scene.location.name;
     const isBlank = locationName === "blank";

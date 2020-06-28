@@ -29,10 +29,9 @@ let useDefaultWorldId;
 useDefaultWorldId = false;
 useDefaultWorldId = true;
 const defaultWorldIdProd = "ZR0GOSFFqFPoWjSgvgOQ";
+// const defaultWorldIdNonProd = "C44icxFHhQ28Zx9rWipx";
+const defaultWorldIdNonProd = "JXrHnXMGYVThkGKKbLCI";
 // const defaultWorldIdNonProd = "ZWS4fGTQDjQSoCD6yQ7U";
-const defaultWorldIdNonProd = "EaKsGak2debvqqLNqbIb";
-// const defaultWorldIdNonProd = "GJDdtcFuOl6rpb4vJw2k";
-// const defaultWorldIdNonProd = "YcbUBJFPIj6oDRwklgUd";
 const defaultWorldId = IS_PROD_RELEASE
   ? defaultWorldIdProd
   : defaultWorldIdNonProd;

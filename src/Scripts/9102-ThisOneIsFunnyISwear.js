@@ -27,6 +27,7 @@ const story9102 = {
         isStartScene: true,
         items: [],
         newFrameSetConditions: { currentMission: 1 },
+        unlockSceneConditions: { currentMission: 0 },
         subQuestId: 1,
       },
       frames: [
@@ -251,7 +252,9 @@ const story9102 = {
       title: "goat01",
       sceneConfig: {
         subQuestId: 1,
-        newFrameSetConditions: { currentMission: 1 },
+        unlockSceneConditions: { currentMission: 1 },
+        newFrameSetConditions: { currentMission: 2 },
+
         worldTitle: "--- test - 002",
         coordinates: { col: 1, row: 1 },
         creatures: ["kat", "liz2"],
@@ -274,7 +277,7 @@ const story9102 = {
             creatures: ["kat", "liz2"],
           },
           dialogs: [
-            '{"kat" : "We can play."}',
+            '{"kat" : "test - 100."}',
             '{"liz2" : ""}',
             '{"liz2" : ""}',
             '{"liz2" : ""}',
@@ -518,7 +521,7 @@ const story9102 = {
       ],
     },
     {
-      title: "goat01",
+      title: "log",
       sceneConfig: {
         worldTitle: "--- test - 002",
         coordinates: { col: 6, row: 3 },
