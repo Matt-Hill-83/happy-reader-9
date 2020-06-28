@@ -230,7 +230,7 @@ class MiniLocation extends React.Component {
     const unlockedSubQuests = localStateStore.getUnlockedSubQuests();
     const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId);
 
-    const showLock = frameSet2Unlocked;
+    const showLock = !frameSet2Unlocked;
     const noCloud = isVisitedScene || subQuestIsUnlocked;
     const showCloud = !noCloud;
 
@@ -244,6 +244,7 @@ class MiniLocation extends React.Component {
     const rockImage = Images.backgrounds["rock"];
     const rockImageVertical = Images.backgrounds["rock02Vertical"];
     const cloudImage = Images.backgrounds["cloud"];
+    const lockImage = Images.backgrounds["rock"];
     const defaultDoorImage = Images.backgrounds["door"];
 
     // let renderedLocationImg = null
@@ -355,6 +356,15 @@ class MiniLocation extends React.Component {
                 <img
                   className={css.cloudImage}
                   src={cloudImage}
+                  alt={"imagex"}
+                />
+              </div>
+            )}
+            {showLock && (
+              <div className={css.cloudImageContainer}>
+                <img
+                  className={css.cloudImage}
+                  src={lockImage}
                   alt={"imagex"}
                 />
               </div>

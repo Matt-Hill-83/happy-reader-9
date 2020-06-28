@@ -27,7 +27,7 @@ const story9102 = {
         isStartScene: true,
         items: [],
         newFrameSetConditions: { currentMission: 1 },
-        unlockSceneConditions: { currentMission: 0 },
+        // unlockSceneConditions: { currentMission: 0 },
         subQuestId: 1,
       },
       frames: [
