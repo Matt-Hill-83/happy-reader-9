@@ -198,22 +198,30 @@ class MiniLocation extends React.Component {
     }
 
     const missionToUnlockFramesAfter =
-      _get(scene, "sceneConfig.unlockConditions.currentMission") || 0;
+      _get(scene, "sceneConfig.unlockConditions.currentMission") || -1;
 
-    const framesUnlocked =
+    const test = _get(scene, "sceneConfig.unlockConditions.currentMission");
+    if (test > -1) {
+      console.log("test---------------------_>>>>>>>>>>>>>>>>>>>>>>>>>>", test); // zzz
+    }
+    const sceneUnlocked =
       typeof missionToUnlockFramesAfter === "number" &&
       questStatus.activeMission > missionToUnlockFramesAfter;
 
-    console.log("framesUnlocked--------------------", framesUnlocked);
+    console.log("sceneUnlocked--------------------", sceneUnlocked); //zzz
 
-    console.log("questStatus.activeMission", toJS(questStatus.activeMission));
-    console.log("missionToUnlockFramesAfter", missionToUnlockFramesAfter);
+    console.log("questStatus.activeMission", toJS(questStatus.activeMission)); //zzz
+    console.log(
+      "missionToUnlockFramesAfter+++++++++++++++++++++++++++++++++++++++++",
+      missionToUnlockFramesAfter
+    ); //zzz
 
     const unlockedSubQuests = localStateStore.getUnlockedSubQuests();
     const subQuestIsActive = unlockedSubQuests.includes(subQuestId);
-    console.log("subQuestIsActive", toJS(subQuestIsActive));
+    console.log("subQuestIsActive", toJS(subQuestIsActive)); //zzz
 
     const noCloud = isVisitedScene || subQuestIsActive;
+    // const noCloud = (isVisitedScene || subQuestIsActive) && sceneUnlocked;
     const showCloud = !noCloud;
     // const showCloud = !isVisitedScene && !neighborWasVisited;
     // const showCloud = false;

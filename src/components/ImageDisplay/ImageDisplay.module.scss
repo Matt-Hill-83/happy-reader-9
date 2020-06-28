@@ -61,20 +61,18 @@
 
   .amount {
     position: absolute;
+    z-index: 2;
     display: flex;
     align-items: center;
-    border: 1px solid black;
-    /* width: 2vh; */
-    /* height: 2vh; */
-    z-index: 2;
     justify-content: center;
-    border-radius: 0px;
+    top: -1px;
+    transform: translateX(100%);
+    padding: 0vh;
+    margin-top: 0px;
+    line-height: 5vh;
     background: #ffb8b87a;
+    font-size: 5vh;
     right: 0px;
-    font-size: 1vh;
-    padding: 0 0.1rem;
-    border-bottom-left-radius: 4px;
-    border-top: none;
-    border-right: none;
+    min-width: 5vh;
   }
 }
