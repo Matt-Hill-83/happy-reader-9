@@ -195,10 +195,16 @@ class MiniLocation extends React.Component {
     );
 
     const newFrameSetMission =
-      _get(scene, "sceneConfig.newFrameSetConditions.currentMission") || -1;
+      _get(
+        scene,
+        "sceneConfig.triggers.newFrameSetConditions.currentMission"
+      ) || -1;
 
     const unlockSceneMission =
-      _get(scene, "sceneConfig.unlockSceneConditions.currentMission") || -1;
+      _get(
+        scene,
+        "sceneConfig.triggers.unlockSceneConditions.currentMission"
+      ) || -1;
 
     const frameSet2Unlocked =
       typeof newFrameSetMission === "number" &&

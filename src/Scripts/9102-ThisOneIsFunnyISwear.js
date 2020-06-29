@@ -1,33 +1,15 @@
 const story9102 = {
   title: "-----9102-ThisOneIsFunnyISwear",
-  questConfig: {
-    missions: [
-      {
-        item: { name: "dog01" },
-        name: "Bring the skull to Taffy",
-        recipient: { name: "taffy01" },
-        rewards: [{ amount: 5, name: "gold" }],
-      },
-      {
-        recipient: { name: "madElf01" },
-        item: { name: "goat01" },
-        name: "Find a pet for the elf.",
-        rewards: [{ name: "gold", amount: 5 }],
-      },
-    ],
-  },
   scenes: [
     {
       title: "home",
       sceneConfig: {
         worldTitle: "--- test - 002",
-        coordinates: { col: 0, row: 0 },
+        coordinates: { row: 0, col: 0 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: true,
-        items: [],
-        // newFrameSetConditions: { currentMission: 1 },
-        // unlockSceneConditions: { currentMission: 0 },
+        items: [{ name: "empty" }],
         subQuestId: 1,
       },
       frames: [
@@ -35,11 +17,11 @@ const story9102 = {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { characterIndex: 1, character: "liz2", face: "happy" },
               {
+                face: "kat-happy.9e02afab.png",
                 character: "kat",
                 characterIndex: 0,
-                face: "kat-happy.9e02afab.png",
               },
             ],
             creatures: ["kat", "liz2"],
@@ -56,25 +38,25 @@ const story9102 = {
     {
       title: "taffy01",
       sceneConfig: {
-        newFrameSetConditions: { currentMission: 1 },
-        subQuestId: 1,
         worldTitle: "--- test - 002",
-        coordinates: { col: 1, row: 0 },
+        coordinates: { row: 0, col: 1 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        subQuestId: 1,
+        items: [{ name: "empty" }],
+        triggers: { newFrameSetConditions: { currentMission: 1 } },
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { character: "liz2", face: "happy", characterIndex: 1 },
               {
                 character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
               },
             ],
             creatures: ["kat", "liz2"],
@@ -87,45 +69,28 @@ const story9102 = {
           ],
         },
       ],
-      framesAfter: [
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
-              {
-                character: "kat",
-                characterIndex: 0,
-                face: "kat-happy.9e02afab.png",
-              },
-            ],
-            creatures: ["kat", "liz2"],
-          },
-          dialogs: ['{"kat" : "W><><><><><><???><?><?><?><?><?><?><?><."}'],
-        },
-      ],
     },
     {
       title: "strawberry01",
       sceneConfig: {
-        subQuestId: 1,
         worldTitle: "--- test - 002",
-        coordinates: { col: 2, row: 0 },
+        coordinates: { row: 0, col: 2 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
+        subQuestId: 1,
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { face: "happy", character: "liz2", characterIndex: 1 },
               {
-                character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
+                character: "kat",
               },
             ],
             creatures: ["kat", "liz2"],
@@ -142,13 +107,13 @@ const story9102 = {
     {
       title: "madElf01",
       sceneConfig: {
-        subQuestId: 1,
         worldTitle: "--- test - 002",
         coordinates: { col: 3, row: 0 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        subQuestId: 1,
+        items: [{ name: "empty" }],
       },
       frames: [
         {
@@ -157,8 +122,8 @@ const story9102 = {
             faces: [
               { character: "liz2", characterIndex: 1, face: "happy" },
               {
-                character: "kat",
                 characterIndex: 0,
+                character: "kat",
                 face: "kat-happy.9e02afab.png",
               },
             ],
@@ -176,13 +141,13 @@ const story9102 = {
     {
       title: "paradox01",
       sceneConfig: {
-        subQuestId: 2,
         worldTitle: "--- test - 002",
         coordinates: { col: 4, row: 0 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        subQuestId: 2,
+        items: [{ name: "empty" }],
       },
       frames: [
         {
@@ -192,8 +157,8 @@ const story9102 = {
               { character: "liz2", characterIndex: 1, face: "happy" },
               {
                 character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
               },
             ],
             creatures: ["kat", "liz2"],
@@ -210,24 +175,24 @@ const story9102 = {
     {
       title: "waterfall",
       sceneConfig: {
-        subQuestId: 2,
         worldTitle: "--- test - 002",
-        coordinates: { col: 5, row: 0 },
+        coordinates: { row: 0, col: 5 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
+        subQuestId: 2,
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { character: "liz2", face: "happy", characterIndex: 1 },
               {
                 character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
               },
             ],
             creatures: ["kat", "liz2"],
@@ -241,34 +206,24 @@ const story9102 = {
         },
       ],
     },
-
-    // TODO
-    // TODO
-
-    // add locking of scenes based on whether the mission is complete
-    // color code sub missions in quest
-    // have frames for before and after a mission is completed
-    // A mission should have a condition where you simply find an item and don't give it to anyone.
     {
       title: "goat01",
       sceneConfig: {
-        subQuestId: 1,
-        unlockSceneConditions: { currentMission: 1 },
-        // newFrameSetConditions: { currentMission: 2 },
-
         worldTitle: "--- test - 002",
         coordinates: { col: 1, row: 1 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
+        subQuestId: 1,
+        triggers: { unlockSceneConditions: { currentMission: 1 } },
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { character: "liz2", face: "happy", characterIndex: 1 },
               {
                 character: "kat",
                 characterIndex: 0,
@@ -294,7 +249,7 @@ const story9102 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
         subQuestId: 1,
       },
       frames: [
@@ -302,7 +257,7 @@ const story9102 = {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { characterIndex: 1, character: "liz2", face: "happy" },
               {
                 character: "kat",
                 characterIndex: 0,
@@ -323,13 +278,13 @@ const story9102 = {
     {
       title: "razzleDazzle01",
       sceneConfig: {
-        subQuestId: 2,
         worldTitle: "--- test - 002",
-        coordinates: { col: 5, row: 1 },
+        coordinates: { row: 1, col: 5 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        subQuestId: 2,
+        items: [{ name: "empty" }],
       },
       frames: [
         {
@@ -338,8 +293,8 @@ const story9102 = {
             faces: [
               { character: "liz2", characterIndex: 1, face: "happy" },
               {
-                character: "kat",
                 characterIndex: 0,
+                character: "kat",
                 face: "kat-happy.9e02afab.png",
               },
             ],
@@ -357,13 +312,13 @@ const story9102 = {
     {
       title: "cave",
       sceneConfig: {
-        subQuestId: 2,
         worldTitle: "--- test - 002",
-        coordinates: { col: 6, row: 1 },
+        coordinates: { row: 1, col: 6 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        subQuestId: 2,
+        items: [{ name: "empty" }],
       },
       frames: [
         {
@@ -372,9 +327,9 @@ const story9102 = {
             faces: [
               { character: "liz2", characterIndex: 1, face: "happy" },
               {
+                face: "kat-happy.9e02afab.png",
                 character: "kat",
                 characterIndex: 0,
-                face: "kat-happy.9e02afab.png",
               },
             ],
             creatures: ["kat", "liz2"],
@@ -391,13 +346,13 @@ const story9102 = {
     {
       title: "zanzibar01",
       sceneConfig: {
-        subQuestId: 2,
         worldTitle: "--- test - 002",
         coordinates: { col: 5, row: 2 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        subQuestId: 2,
+        items: [{ name: "empty" }],
       },
       frames: [
         {
@@ -406,9 +361,9 @@ const story9102 = {
             faces: [
               { character: "liz2", characterIndex: 1, face: "happy" },
               {
-                character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
+                character: "kat",
               },
             ],
             creatures: ["kat", "liz2"],
@@ -430,18 +385,18 @@ const story9102 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { character: "liz2", face: "happy", characterIndex: 1 },
               {
                 character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
               },
             ],
             creatures: ["kat", "liz2"],
@@ -459,22 +414,22 @@ const story9102 = {
       title: "waterfall",
       sceneConfig: {
         worldTitle: "--- test - 002",
-        coordinates: { col: 3, row: 3 },
+        coordinates: { row: 3, col: 3 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { face: "happy", characterIndex: 1, character: "liz2" },
               {
                 character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
               },
             ],
             creatures: ["kat", "liz2"],
@@ -496,17 +451,17 @@ const story9102 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { character: "liz2", face: "happy", characterIndex: 1 },
               {
-                character: "kat",
                 characterIndex: 0,
+                character: "kat",
                 face: "kat-happy.9e02afab.png",
               },
             ],
@@ -529,18 +484,18 @@ const story9102 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { characterIndex: 1, face: "happy", character: "liz2" },
               {
                 character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
               },
             ],
             creatures: ["kat", "liz2"],
@@ -558,22 +513,22 @@ const story9102 = {
       title: "ringOfZandar01",
       sceneConfig: {
         worldTitle: "--- test - 002",
-        coordinates: { col: 0, row: 4 },
+        coordinates: { row: 4, col: 0 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { characterIndex: 1, face: "happy", character: "liz2" },
               {
-                character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
+                character: "kat",
               },
             ],
             creatures: ["kat", "liz2"],
@@ -595,18 +550,18 @@ const story9102 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { characterIndex: 1, face: "happy", character: "liz2" },
               {
-                character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
+                character: "kat",
               },
             ],
             creatures: ["kat", "liz2"],
@@ -628,7 +583,7 @@ const story9102 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
@@ -637,9 +592,9 @@ const story9102 = {
             faces: [
               { character: "liz2", characterIndex: 1, face: "happy" },
               {
-                character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
+                character: "kat",
               },
             ],
             creatures: ["kat", "liz2"],
@@ -661,18 +616,18 @@ const story9102 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { face: "happy", characterIndex: 1, character: "liz2" },
               {
-                character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
+                character: "kat",
               },
             ],
             creatures: ["kat", "liz2"],
@@ -694,14 +649,14 @@ const story9102 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { face: "happy", characterIndex: 1, character: "liz2" },
               {
                 character: "kat",
                 characterIndex: 0,
@@ -727,7 +682,7 @@ const story9102 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
@@ -736,9 +691,9 @@ const story9102 = {
             faces: [
               { character: "liz2", characterIndex: 1, face: "happy" },
               {
-                character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
+                character: "kat",
               },
             ],
             creatures: ["kat", "liz2"],
@@ -756,18 +711,18 @@ const story9102 = {
       title: "rose01",
       sceneConfig: {
         worldTitle: "--- test - 002",
-        coordinates: { col: 1, row: 5 },
+        coordinates: { row: 5, col: 1 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { face: "happy", characterIndex: 1, character: "liz2" },
               {
                 character: "kat",
                 characterIndex: 0,
@@ -789,22 +744,22 @@ const story9102 = {
       title: "log",
       sceneConfig: {
         worldTitle: "--- test - 002",
-        coordinates: { col: 0, row: 6 },
+        coordinates: { row: 6, col: 0 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { character: "liz2", face: "happy", characterIndex: 1 },
               {
                 character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
               },
             ],
             creatures: ["kat", "liz2"],
@@ -826,18 +781,18 @@ const story9102 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { characterIndex: 1, character: "liz2", face: "happy" },
               {
                 character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
               },
             ],
             creatures: ["kat", "liz2"],
@@ -855,21 +810,21 @@ const story9102 = {
       title: "pantherGirl02",
       sceneConfig: {
         worldTitle: "--- test - 002",
-        coordinates: { col: 2, row: 6 },
+        coordinates: { row: 6, col: 2 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { face: "happy", characterIndex: 1, character: "liz2" },
               {
-                character: "kat",
                 characterIndex: 0,
+                character: "kat",
                 face: "kat-happy.9e02afab.png",
               },
             ],
@@ -888,11 +843,11 @@ const story9102 = {
       title: "pinky01",
       sceneConfig: {
         worldTitle: "--- test - 002",
-        coordinates: { col: 3, row: 6 },
+        coordinates: { row: 6, col: 3 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
@@ -901,9 +856,9 @@ const story9102 = {
             faces: [
               { character: "liz2", characterIndex: 1, face: "happy" },
               {
-                character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
+                character: "kat",
               },
             ],
             creatures: ["kat", "liz2"],
@@ -921,11 +876,11 @@ const story9102 = {
       title: "donutShop01",
       sceneConfig: {
         worldTitle: "--- test - 002",
-        coordinates: { col: 4, row: 6 },
+        coordinates: { row: 6, col: 4 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
@@ -934,9 +889,9 @@ const story9102 = {
             faces: [
               { character: "liz2", characterIndex: 1, face: "happy" },
               {
-                character: "kat",
                 characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                character: "kat",
               },
             ],
             creatures: ["kat", "liz2"],
@@ -954,22 +909,22 @@ const story9102 = {
       title: "hippityHop01",
       sceneConfig: {
         worldTitle: "--- test - 002",
-        coordinates: { col: 5, row: 6 },
+        coordinates: { row: 6, col: 5 },
         creatures: ["kat", "liz2"],
         isEndScene: true,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { characterIndex: 1, character: "liz2", face: "happy" },
               {
-                character: "kat",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
+                character: "kat",
               },
             ],
             creatures: ["kat", "liz2"],
@@ -991,17 +946,17 @@ const story9102 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [],
+        items: [{ name: "empty" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
+              { face: "happy", characterIndex: 1, character: "liz2" },
               {
-                character: "kat",
                 characterIndex: 0,
+                character: "kat",
                 face: "kat-happy.9e02afab.png",
               },
             ],
@@ -1017,6 +972,21 @@ const story9102 = {
       ],
     },
   ],
+  questConfig: {
+    missions: [
+      {
+        name: "Bring the skull to Taffy",
+        recipient: { name: "taffy01" },
+        rewards: [{ amount: 5, name: "gold" }],
+        item: { name: "dog01" },
+      },
+      {
+        item: { name: "goat01" },
+        recipient: { name: "madElf01" },
+        rewards: [{ name: "gold", amount: 5 }],
+        name: "Find a pet for the elf.",
+      },
+    ],
+  },
 };
-
 export default story9102;

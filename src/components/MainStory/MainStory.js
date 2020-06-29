@@ -29,9 +29,8 @@ let useDefaultWorldId;
 useDefaultWorldId = false;
 useDefaultWorldId = true;
 const defaultWorldIdProd = "ZR0GOSFFqFPoWjSgvgOQ";
-// const defaultWorldIdNonProd = "C44icxFHhQ28Zx9rWipx";
-const defaultWorldIdNonProd = "JXrHnXMGYVThkGKKbLCI";
-// const defaultWorldIdNonProd = "ZWS4fGTQDjQSoCD6yQ7U";
+// const defaultWorldIdNonProd = "ZR0GOSFFqFPoWjSgvgOQ";
+const defaultWorldIdNonProd = "zAGLlwy1YFypi00uyvLx";
 const defaultWorldId = IS_PROD_RELEASE
   ? defaultWorldIdProd
   : defaultWorldIdNonProd;
