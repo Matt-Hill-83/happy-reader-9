@@ -237,8 +237,9 @@ const story9102 = {
       ],
     },
     {
-      title: "paradox01",
+      title: "bog",
       sceneConfig: {
+        triggers: { unlockSceneConditions: { currentMission: 2 } },
         worldTitle: "--- test - 002",
         coordinates: { col: 4, row: 0 },
         creatures: ["kat", "liz2"],
@@ -279,7 +280,7 @@ const story9102 = {
         isEndScene: false,
         isStartScene: false,
         items: [{ name: "wizard" }],
-        subQuestId: 1,
+        subQuestId: 2,
       },
       frames: [
         {

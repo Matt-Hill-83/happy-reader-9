@@ -253,7 +253,7 @@ class MiniLocation extends React.Component {
     const rockImage = Images.backgrounds["rock"];
     const rockImageVertical = Images.backgrounds["rock02Vertical"];
     const cloudImage = Images.backgrounds["cloud"];
-    const lockImage = Images.backgrounds["rock"];
+    const lockImage = Images.items["lock02"];
     const defaultDoorImage = Images.backgrounds["door"];
 
     // let renderedLocationImg = null

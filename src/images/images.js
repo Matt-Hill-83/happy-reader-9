@@ -195,6 +195,7 @@ import doorYellow from "./doors/doorYellow.jpg";
 
 // backgrounds
 import lock01 from "./backgrounds/lock01.png";
+import lock02 from "./items/lock02.png";
 import checkMarkRed01 from "./backgrounds/checkMarkRed01.png";
 import checkMarkGreen01 from "./backgrounds/checkMarkGreen01.png";
 import planetGlorp02 from "./backgrounds/planetGlorp02.png";
@@ -606,6 +607,7 @@ const items = {
   smoke,
 
   skull01,
+  lock02,
   ringOfZandar01,
   // glenda01NoFace,
 
@@ -651,6 +653,7 @@ const doors = {
 
 const backgrounds = {
   lock01,
+
   door,
   planetGlorp02,
   checkMarkGreen01,
@@ -698,8 +701,4 @@ export default {
   doors,
   backgrounds,
   posableGirls: [posableLiz, posableKat, posableChad],
-  // sceneView: {
-  //   book: sceneViewBook,
-  //   notebook: sceneViewNotebook,
-  // },
 };
