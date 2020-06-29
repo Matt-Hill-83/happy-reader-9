@@ -506,7 +506,7 @@ class WorldBuilder extends Component {
 
     theScenes.forEach((scene, sceneIndex) => {
       // const { sceneConfig } = scene;
-      const { frames, sceneConfig, framesAfter } = scene;
+      const { frames, sceneConfig, frames2 } = scene;
 
       const coordinates = sceneConfig.coordinates || {
         col: sceneIndex,
@@ -526,9 +526,13 @@ class WorldBuilder extends Component {
         sceneConfig,
       });
 
-      if (framesAfter && framesAfter.length > 0) {
-        newBornScene.frameSet.framesAfter = this.createNewFramesFromJson({
-          frames: framesAfter,
+      if (frames2 && frames2.length > 0) {
+        console.log(
+          "frames2------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+          toJS(frames2)
+        ); // zzz
+        newBornScene.frameSet.frames2 = this.createNewFramesFromJson({
+          frames: frames2,
           sceneConfig,
         });
       }

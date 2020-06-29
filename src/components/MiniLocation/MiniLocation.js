@@ -15,7 +15,7 @@ import cx from "classnames";
 import _get from "lodash.get";
 
 import { toJS } from "mobx";
-import MiniTable from "../MiniTable/MiniTable.js";
+// import MiniTable from "../MiniTable/MiniTable.js";
 
 class MiniLocation extends React.Component {
   defaultDoorIsOpen = {
@@ -166,13 +166,7 @@ class MiniLocation extends React.Component {
   };
 
   render() {
-    const {
-      scene,
-      isActive,
-      className,
-      // showLabel = true,
-      id,
-    } = this.props;
+    const { scene, isActive, className, id } = this.props;
 
     const {
       coordinates,
@@ -190,15 +184,9 @@ class MiniLocation extends React.Component {
       (neighbor) => neighbor && neighbor.id
     );
 
-    const neighborWasVisited = neighborsArray.some((neighbor) =>
-      localStateStore.isVisitedScene(neighbor && neighbor.id)
-    );
-
-    const newFrameSetMission =
-      _get(
-        scene,
-        "sceneConfig.triggers.newFrameSetConditions.currentMission"
-      ) || -1;
+    // const neighborWasVisited = neighborsArray.some((neighbor) =>
+    //   localStateStore.isVisitedScene(neighbor && neighbor.id)
+    // );
 
     const unlockSceneMission =
       _get(
@@ -206,16 +194,11 @@ class MiniLocation extends React.Component {
         "sceneConfig.triggers.unlockSceneConditions.currentMission"
       ) || -1;
 
-    const frameSet2Unlocked =
-      typeof newFrameSetMission === "number" &&
-      questStatus.activeMission >= newFrameSetMission;
-
     const sceneUnlocked =
       typeof unlockSceneMission === "number" &&
       questStatus.activeMission >= unlockSceneMission;
 
     if (scene && scene.location.name === "taffy01") {
-      // if (scene && scene.location.name === "goat01") {
       console.log("----------------------------");
       console.log("----------------------------");
       console.log(
@@ -224,14 +207,7 @@ class MiniLocation extends React.Component {
       ); // zzz
       console.log("scene.sceneConfig", toJS(scene.sceneConfig)); // zzz
       console.log("questStatus.activeMission", toJS(questStatus.activeMission)); //zzz
-
       console.log("unlockSceneMission", unlockSceneMission); // zzz
-      console.log(
-        "newFrameSetMission+++++++++++++++++++++++++++++++++++++++++",
-        newFrameSetMission
-      ); //zzz
-
-      console.log("frameSet2Unlocked--------------------", frameSet2Unlocked); //zzz
       console.log("sceneUnlocked", toJS(sceneUnlocked)); // zzz
     }
 
@@ -239,7 +215,6 @@ class MiniLocation extends React.Component {
     const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId);
 
     const showLock = !sceneUnlocked;
-    // const showLock = !frameSet2Unlocked;
     const noCloud = isVisitedScene || subQuestIsUnlocked;
     const showCloud = !noCloud;
 
@@ -255,8 +230,6 @@ class MiniLocation extends React.Component {
     const cloudImage = Images.backgrounds["cloud"];
     const lockImage = Images.items["lock02"];
     const defaultDoorImage = Images.backgrounds["door"];
-
-    // let renderedLocationImg = null
 
     const showLocationOnly = locationName === "roadLeftRight01";
 
@@ -291,49 +264,16 @@ class MiniLocation extends React.Component {
     const colors = ["fcf6bd", "d0f4de", "a9def9", "e4c1f9"];
 
     const colorIndex = subQuestId % colors.length;
-    // const colorIndex = storyIndex % colors.length;
     const backgroundColor = colors[colorIndex];
 
     const style = {
       "background-color": `#${backgroundColor}`,
     };
 
-    // const columnNames = ["", ""]
-
-    // const tableData = [
-    //   ["Gold", "4"],
-    //   ["Prizes", "shoes, [white]"],
-    // ]
-
-    // const tableProps = {
-    //   defaultColumnWidth: 100,
-    //   columnWidths: [70, 150],
-    // }
-
-    // const firstSceneInfo = (
-    //   <div className={css.firstScene}>
-    //     <span className={css.storyTitle}>{storyTitle}</span>
-    //     <MiniTable
-    //       tableProps={tableProps}
-    //       columnNames={columnNames}
-    //       tableData={tableData}
-    //     />
-    //   </div>
-    // )
-
     return (
       <div
         key={id}
         id={id}
-        // className={cx(
-        //   css.main,
-        //   className,
-        //   {
-        //     [css.isStartScene]: this.props.scene.isStartScene,
-        //     [css.isBlank]: this.props.scene.isBlank,
-        //   },
-        //   localClass
-        // )}
         className={`${css.main} ${className} ${
           this.props.scene.isStartScene ? css.isStartScene : ""
         } ${isBlank ? css.isBlank : ""} ${localClass} `}
@@ -341,8 +281,6 @@ class MiniLocation extends React.Component {
       >
         {!isBlank && (
           <div className={css.container}>
-            {/* {firstScene && firstSceneInfo} */}
-
             {/* Paths that connect scenes */}
             {showRightPath && (
               <div className={css.rightPath}>

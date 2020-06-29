@@ -22,12 +22,32 @@ class GetSceneConfig extends Component {
     return <Button className={cx(css.uploadButton)}>DOWNLOAD JSON</Button>;
   };
 
+  formatFramesForExport = ({ frames }) => {
+    const newFrames = frames.map((oldFrame) => {
+      const newFrame = {
+        frameConfig: {
+          items: [],
+          id: oldFrame.id,
+          faces: oldFrame.faces,
+          creatures: oldFrame.creatures,
+        },
+      };
+      const newDialogs = oldFrame.dialog.map((item) => {
+        return `{"${item.character}" : "${item.text}"}`;
+      });
+
+      newFrame.dialogs = newDialogs;
+      return newFrame;
+    });
+
+    return newFrames;
+  };
+
   render = () => {
     const { world } = this.props;
     if (!world) {
       return null;
     }
-    // const { scenesGrid, world } = this.props
     const scenesGrid = world.newGrid5;
     const { questConfig } = world;
     console.log("world", toJS(world)); // zzz
@@ -38,27 +58,14 @@ class GetSceneConfig extends Component {
     const newScenesList = [];
     test1.forEach((scene) => {
       const oldFrames = scene.frameSet.frames;
+      const oldFrames2 = scene.frameSet.frames2 || [];
 
       // convert the old frames into the new frames
-      const newFrames = oldFrames.map((oldFrame) => {
-        const newFrame = {
-          frameConfig: {
-            items: [],
-            id: oldFrame.id,
-            faces: oldFrame.faces,
-            creatures: oldFrame.creatures,
-          },
-        };
-        const newDialogs = oldFrame.dialog.map((item) => {
-          return `{"${item.character}" : "${item.text}"}`;
-        });
-
-        newFrame.dialogs = newDialogs;
-        return newFrame;
-      });
+      const newFrames = this.formatFramesForExport({ frames: oldFrames });
+      const newFrames2 = this.formatFramesForExport({ frames: oldFrames2 });
 
       const creatures = scene.characters.map((item) => item.name);
-      console.log("scene.sceneConfig", toJS(scene.sceneConfig)); // zzz
+      // console.log("scene.sceneConfig", toJS(scene.sceneConfig)); // zzz
       const newBornScene = {
         title: scene.location.name,
         sceneConfig: {
@@ -72,6 +79,7 @@ class GetSceneConfig extends Component {
           ...scene.sceneConfig,
         },
         frames: newFrames,
+        frames2: newFrames2,
         faces: scene.frameSet.faces,
       };
 
