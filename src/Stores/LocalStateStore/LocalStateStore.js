@@ -250,8 +250,6 @@ class LocalStateStore {
       }
     });
     console.log("foundItems", toJS(foundItems)); // zzz
-    // const foundItem =
-    //   itemsInScene.find((item) => item.name === desiredItem.name) || null;
     const foundItem = foundItems[0];
     if (!foundItem) {
       return null;

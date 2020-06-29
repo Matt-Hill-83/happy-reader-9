@@ -33,8 +33,26 @@
   top: 3.1vh;
 }
 
+.toasterContainer {
+  top: 50% !important;
+  bottom: auto;
+  transform: translateY(-50%);
+}
+
 .toaster {
   background: #f8ffc1;
   border: 4px solid #ff00d4 !important;
-  border-radius: 41px;
+  border-radius: 8px;
+  min-height: 10vh;
+  align-items: center;
+  padding: 1vh;
+  font-size: 4vh;
+  max-width: 50vw;
+
+  :global {
+    .bp3-icon > svg:not([fill]) {
+      height: 75px !important;
+      width: 75px !important;
+    }
+  }
 }

@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 import { toJS } from "mobx";
 import _get from "lodash.get";
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core";
+import { Dialog } from "@material-ui/core";
 
 import { maps } from "../../Stores/InitStores.js";
 import { worldNameStore } from "../../Stores/FrameSetStore.js";
@@ -28,9 +29,9 @@ SHOW_BOOK_PICKER = false;
 let useDefaultWorldId;
 useDefaultWorldId = false;
 useDefaultWorldId = true;
-const defaultWorldIdProd = "ZR0GOSFFqFPoWjSgvgOQ";
+const defaultWorldIdProd = "mRpN51k8AmA5BqgikVoz";
 // const defaultWorldIdNonProd = "ZR0GOSFFqFPoWjSgvgOQ";
-const defaultWorldIdNonProd = "zAGLlwy1YFypi00uyvLx";
+const defaultWorldIdNonProd = "mRpN51k8AmA5BqgikVoz";
 const defaultWorldId = IS_PROD_RELEASE
   ? defaultWorldIdProd
   : defaultWorldIdNonProd;
@@ -41,6 +42,7 @@ SHOW_WORLD_BUILDER = false;
 
 const toaster = Toaster.create({
   position: Position.TOP,
+  className: css.toasterContainer,
 });
 
 class MainStory extends React.Component {
