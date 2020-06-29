@@ -280,7 +280,7 @@ const story9102 = {
         isEndScene: false,
         isStartScene: false,
         items: [{ name: "wizard" }],
-        subQuestId: 2,
+        subQuestId: 1,
       },
       frames: [
         {
@@ -485,6 +485,7 @@ const story9102 = {
         isEndScene: false,
         isStartScene: false,
         items: [{ name: "empty" }],
+        subQuestId: 2,
       },
       frames: [
         {
@@ -510,7 +511,7 @@ const story9102 = {
       ],
     },
     {
-      title: "waterfall",
+      title: "pond",
       sceneConfig: {
         worldTitle: "--- test - 002",
         coordinates: { col: 3, row: 3 },
@@ -518,6 +519,7 @@ const story9102 = {
         isEndScene: false,
         isStartScene: false,
         items: [{ name: "empty" }],
+        subQuestId: 2,
       },
       frames: [
         {
@@ -545,6 +547,7 @@ const story9102 = {
     {
       title: "gerald01",
       sceneConfig: {
+        subQuestId: 3,
         worldTitle: "--- test - 002",
         coordinates: { row: 3, col: 5 },
         creatures: ["kat", "liz2"],
@@ -578,6 +581,7 @@ const story9102 = {
     {
       title: "log",
       sceneConfig: {
+        subQuestId: 3,
         worldTitle: "--- test - 002",
         coordinates: { row: 3, col: 6 },
         creatures: ["kat", "liz2"],
@@ -611,6 +615,7 @@ const story9102 = {
     {
       title: "ringOfZandar01",
       sceneConfig: {
+        subQuestId: 3,
         worldTitle: "--- test - 002",
         coordinates: { row: 4, col: 0 },
         creatures: ["kat", "liz2"],
@@ -644,6 +649,7 @@ const story9102 = {
     {
       title: "zanyDog01",
       sceneConfig: {
+        subQuestId: 3,
         worldTitle: "--- test - 002",
         coordinates: { col: 1, row: 4 },
         creatures: ["kat", "liz2"],
@@ -677,6 +683,7 @@ const story9102 = {
     {
       title: "ghandi01",
       sceneConfig: {
+        subQuestId: 3,
         worldTitle: "--- test - 002",
         coordinates: { col: 2, row: 4 },
         creatures: ["kat", "liz2"],
@@ -710,6 +717,7 @@ const story9102 = {
     {
       title: "dennisTheMenace",
       sceneConfig: {
+        subQuestId: 3,
         worldTitle: "--- test - 002",
         coordinates: { col: 3, row: 4 },
         creatures: ["kat", "liz2"],
@@ -743,6 +751,7 @@ const story9102 = {
     {
       title: "lucy",
       sceneConfig: {
+        subQuestId: 3,
         worldTitle: "--- test - 002",
         coordinates: { row: 4, col: 4 },
         creatures: ["kat", "liz2"],
@@ -776,6 +785,7 @@ const story9102 = {
     {
       title: "hill",
       sceneConfig: {
+        subQuestId: 3,
         worldTitle: "--- test - 002",
         coordinates: { row: 4, col: 5 },
         creatures: ["kat", "liz2"],
@@ -809,6 +819,7 @@ const story9102 = {
     {
       title: "rose01",
       sceneConfig: {
+        subQuestId: 3,
         worldTitle: "--- test - 002",
         coordinates: { col: 1, row: 5 },
         creatures: ["kat", "liz2"],
@@ -842,6 +853,7 @@ const story9102 = {
     {
       title: "log",
       sceneConfig: {
+        subQuestId: 3,
         worldTitle: "--- test - 002",
         coordinates: { col: 0, row: 6 },
         creatures: ["kat", "liz2"],
