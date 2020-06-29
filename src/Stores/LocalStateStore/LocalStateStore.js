@@ -119,6 +119,11 @@ class LocalStateStore {
     return activeMission.item;
   };
 
+  getDesiredItems = () => {
+    const { missions } = this.questStatus.questConfig;
+    return missions.map((mission) => mission.item);
+  };
+
   getActiveMission = () => {
     const { missions } = this.questStatus.questConfig;
     return missions[this.questStatus.activeMission] || null;
@@ -230,13 +235,24 @@ class LocalStateStore {
 
   _findItem = ({ itemsInScene }) => {
     const desiredItem = this.getDesiredItem() || {};
+    const desiredItems = this.getDesiredItems() || {};
+    console.log("desiredItems", toJS(desiredItems)); // zzz
     const questStatus = this.questStatus;
 
     const { pockets = {} } = questStatus;
 
-    const foundItem =
-      itemsInScene.find((item) => item.name === desiredItem.name) || null;
-
+    const foundItems = [];
+    desiredItems.forEach((desiredItem2) => {
+      const foundItem =
+        itemsInScene.find((item) => item.name === desiredItem2.name) || null;
+      if (foundItem) {
+        foundItems.push(foundItem);
+      }
+    });
+    console.log("foundItems", toJS(foundItems)); // zzz
+    // const foundItem =
+    //   itemsInScene.find((item) => item.name === desiredItem.name) || null;
+    const foundItem = foundItems[0];
     if (!foundItem) {
       return null;
     }
