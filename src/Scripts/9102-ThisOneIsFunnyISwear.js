@@ -3,7 +3,7 @@ const story9102 = {
   questConfig: {
     missions: [
       {
-        item: { name: "skull01" },
+        item: { name: "dog01" },
         name: "Bring the skull to Taffy",
         recipient: { name: "taffy01" },
         rewards: [{ amount: 5, name: "gold" }],
@@ -26,9 +26,44 @@ const story9102 = {
         isEndScene: false,
         isStartScene: true,
         items: [],
-        newFrameSetConditions: { currentMission: 1 },
+        // newFrameSetConditions: { currentMission: 1 },
         // unlockSceneConditions: { currentMission: 0 },
         subQuestId: 1,
+      },
+      frames: [
+        {
+          frameConfig: {
+            items: [],
+            faces: [
+              { character: "liz2", characterIndex: 1, face: "happy" },
+              {
+                character: "kat",
+                characterIndex: 0,
+                face: "kat-happy.9e02afab.png",
+              },
+            ],
+            creatures: ["kat", "liz2"],
+          },
+          dialogs: [
+            '{"kat" : "We can play."}',
+            '{"liz2" : ""}',
+            '{"liz2" : ""}',
+            '{"liz2" : ""}',
+          ],
+        },
+      ],
+    },
+    {
+      title: "taffy01",
+      sceneConfig: {
+        newFrameSetConditions: { currentMission: 1 },
+        subQuestId: 1,
+        worldTitle: "--- test - 002",
+        coordinates: { col: 1, row: 0 },
+        creatures: ["kat", "liz2"],
+        isEndScene: false,
+        isStartScene: false,
+        items: [],
       },
       frames: [
         {
@@ -67,40 +102,6 @@ const story9102 = {
             creatures: ["kat", "liz2"],
           },
           dialogs: ['{"kat" : "W><><><><><><???><?><?><?><?><?><?><?><."}'],
-        },
-      ],
-    },
-    {
-      title: "taffy01",
-      sceneConfig: {
-        subQuestId: 1,
-        worldTitle: "--- test - 002",
-        coordinates: { col: 1, row: 0 },
-        creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
-        items: [],
-      },
-      frames: [
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
-              {
-                character: "kat",
-                characterIndex: 0,
-                face: "kat-happy.9e02afab.png",
-              },
-            ],
-            creatures: ["kat", "liz2"],
-          },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
         },
       ],
     },
@@ -253,7 +254,7 @@ const story9102 = {
       sceneConfig: {
         subQuestId: 1,
         unlockSceneConditions: { currentMission: 1 },
-        newFrameSetConditions: { currentMission: 2 },
+        // newFrameSetConditions: { currentMission: 2 },
 
         worldTitle: "--- test - 002",
         coordinates: { col: 1, row: 1 },
@@ -286,7 +287,7 @@ const story9102 = {
       ],
     },
     {
-      title: "skull01",
+      title: "dog01",
       sceneConfig: {
         worldTitle: "--- test - 002",
         coordinates: { col: 3, row: 1 },

@@ -199,6 +199,7 @@ class MiniLocation extends React.Component {
 
     const unlockSceneMission =
       _get(scene, "sceneConfig.unlockSceneConditions.currentMission") || -1;
+
     const frameSet2Unlocked =
       typeof newFrameSetMission === "number" &&
       questStatus.activeMission >= newFrameSetMission;
@@ -207,7 +208,8 @@ class MiniLocation extends React.Component {
       typeof unlockSceneMission === "number" &&
       questStatus.activeMission >= unlockSceneMission;
 
-    if (scene && scene.location.name === "goat01") {
+    if (scene && scene.location.name === "taffy01") {
+      // if (scene && scene.location.name === "goat01") {
       console.log("----------------------------");
       console.log("----------------------------");
       console.log(
@@ -230,7 +232,8 @@ class MiniLocation extends React.Component {
     const unlockedSubQuests = localStateStore.getUnlockedSubQuests();
     const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId);
 
-    const showLock = !frameSet2Unlocked;
+    const showLock = !sceneUnlocked;
+    // const showLock = !frameSet2Unlocked;
     const noCloud = isVisitedScene || subQuestIsUnlocked;
     const showCloud = !noCloud;
 
