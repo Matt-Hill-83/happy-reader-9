@@ -161,7 +161,6 @@ class MainStory extends React.Component {
     });
 
     if (foundItem) {
-      console.log("foundItem", toJS(foundItem)); // zzz
       const message = (
         <div>
           <span>{`You find a ${foundItem.name}.`}</span>
@@ -172,7 +171,7 @@ class MainStory extends React.Component {
       toaster.show({ message, className: css.toaster, timeout: 30000 });
     }
 
-    console.log("completedMission", toJS(completedMission)); // zzz
+    // TODO: this should probably happen on the last frame.
     if (completedMission) {
       const { rewards, item, recipient, name } = completedMission;
 
@@ -234,6 +233,7 @@ class MainStory extends React.Component {
   };
 
   toggleWorldBuilder = () => {
+    toaster.clear();
     const showWorldBuilder = localStateStore.getShowWorldBuilder();
     const newShowWorldBuilder = !showWorldBuilder;
 

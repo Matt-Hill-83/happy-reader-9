@@ -8,9 +8,9 @@ const test = {
   '{"kat" : "or somehow invest your gold to build tools to acquire more words. "}',
   '{"kat" : "convert the game to more of a Santorini tye immersive feel"}',
 
-  '{"kat" : "-----"}',
-  '{"liz2" : "-----"}',
-  '{"kat" : "-----"}',
+  '{"idea" : "rock scissors paper mini game, where you need to beat the robot by figuring out the pattern."}',
+  '{"liz2" : "and you drag around the words."}',
+  '{"kat" : "rat-cat-hat"}',
   '{"liz2" : "-----"}',
   '{"kat" : "-----"}',
   '{"liz2" : "-----"}',
@@ -41,7 +41,6 @@ const test = {
   '{"kat" : "----------"}',
   
   'Space Race',
-  'kat alone, very ',
   '------------------------',
   '------------------------',
   '------------------------',

@@ -31,7 +31,7 @@ import story8000 from "../../Scripts/8000-dogAndPup-001.js";
 import story9000 from "../../Scripts/9000-ANewSoundInTheWoods";
 import story9100 from "../../Scripts/9100-KatsSecondQuest";
 import story9103 from "../../Scripts/000-ScriptTemplate.js";
-import story9104 from "../../Scripts/000-charlieAndLucy.js";
+// import story9104 from "../../Scripts/000-charlieAndLucy.js";
 import story9901 from "../../Scripts/9901-randomBits01";
 import story9902 from "../../Scripts/9902-randomBits02";
 import story9903 from "../../Scripts/9903-randomBits03-LizHasElfEars.js";
@@ -54,6 +54,7 @@ import story9920 from "../../Scripts/9920-test-BugYuck.js";
 import story8054 from "../../Scripts/8054-math-NineTimesSix.js";
 import story8010 from "../../Scripts/8010-dogAndPup-002.js";
 import story9102 from "../../Scripts/9102-ThisOneIsFunnyISwear.js";
+import story9104 from "../../Scripts/9104-ThisOneIsNotFunny-001.js";
 
 class FrameSetUploader extends Component {
   // state = { text: JSON.stringify(story002) }
@@ -99,11 +100,12 @@ class FrameSetUploader extends Component {
   // state = { text: JSON.stringify(story9918) };
   // state = { text: JSON.stringify(story9919) };
   // state = { text: JSON.stringify(story8054) };
-  state = { text: JSON.stringify(story9102) };
+  // state = { text: JSON.stringify(story9102) };
+  state = { text: JSON.stringify(story9104) };
   // state = { text: JSON.stringify(story8010) };
   // state = { text: JSON.stringify(story9920) };
 
-  onChangeDialog = ({ event, lineIndex }) => {
+  onChangeDialog = ({ event }) => {
     const text = event.target.value;
 
     this.setState({ text });

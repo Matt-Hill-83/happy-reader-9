@@ -11,6 +11,8 @@ import css from "./MissionConsole.module.scss";
 import MiniTable from "../MiniTable/MiniTable";
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore";
 import ImageDisplay from "../ImageDisplay/ImageDisplay";
+import MiniTable2 from "../MiniTable2/MiniTable2";
+import DenseTable from "../MiniTable2/MiniTable2";
 
 class MissionConsole extends Component {
   state = {};
@@ -90,7 +92,12 @@ class MissionConsole extends Component {
         <div className={css.body}>
           <div className={css.row}>
             <div className={css.left}>
-              <MiniTable
+              {/* <MiniTable
+                columnNames={columnNames}
+                tableData={tableData}
+                tableProps={tableProps}
+              /> */}
+              <DenseTable
                 columnNames={columnNames}
                 tableData={tableData}
                 tableProps={tableProps}
