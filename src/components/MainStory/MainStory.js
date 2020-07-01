@@ -180,7 +180,6 @@ class MainStory extends React.Component {
 
       const message2 = (
         <div>
-          <span>{`Good Job!`}</span>
           <br />
           <span>{`Mission Complete: "${name}".`}</span>
           <br />
@@ -199,7 +198,6 @@ class MainStory extends React.Component {
   };
 
   onChangeWorld = ({ mapId }) => {
-    console.log("onChangeWorld"); // zzz
     console.log("onChangeWorld"); // zzz
     console.log("mapId", mapId);
 

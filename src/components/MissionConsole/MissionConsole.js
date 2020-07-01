@@ -8,11 +8,9 @@ import { observer } from "mobx-react";
 import { toJS } from "mobx";
 import _get from "lodash.get";
 import css from "./MissionConsole.module.scss";
-import MiniTable from "../MiniTable/MiniTable";
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore";
 import ImageDisplay from "../ImageDisplay/ImageDisplay";
 import MiniTable2 from "../MiniTable2/MiniTable2";
-import DenseTable from "../MiniTable2/MiniTable2";
 
 class MissionConsole extends Component {
   state = {};
@@ -71,7 +69,7 @@ class MissionConsole extends Component {
       "Gold",
       "Complete",
     ];
-    const tableProps = { columnWidths: [255, 80, 80, null, null] };
+    // const tableProps = { columnWidths: [255, 80, 80, null, null] };
     if (!missions || missions.length === 0) {
       return null;
     }
@@ -92,15 +90,10 @@ class MissionConsole extends Component {
         <div className={css.body}>
           <div className={css.row}>
             <div className={css.left}>
-              {/* <MiniTable
+              <MiniTable2
                 columnNames={columnNames}
                 tableData={tableData}
-                tableProps={tableProps}
-              /> */}
-              <DenseTable
-                columnNames={columnNames}
-                tableData={tableData}
-                tableProps={tableProps}
+                // tableProps={tableProps}
               />
             </div>
             <div className={css.right}>

@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 });
 
 const headers = ["one", "two", "three", "four", "five", "six", "seven"];
-const data = [
+const xxxxdata = [
   {
     dataOne: 1,
     dataTwo: 2,
@@ -67,12 +67,35 @@ const data = [
   },
 ];
 
-// function DenseTable() {
-class DenseTable extends Component {
-  // export def ault function DenseTable() {
-  // classes = useStyles();
+class MiniTable2 extends Component {
+  renderCell = ({ content }) => {
+    const value = content;
+    let cellContent = null;
+
+    if (typeof value === "undefined") {
+      // cellContent = "";
+      cellContent = <span role="img">❌</span>;
+    } else if (value === true) {
+      cellContent = <span role="img">✅</span>;
+    } else if (value === false) {
+      cellContent = <span role="img">❌</span>;
+    } else {
+      cellContent = value ? value.toString() : "";
+    }
+
+    return (
+      <TableCell
+        className={css.cellClass}
+        tooltip={value ? value.toString() : ""}
+      >
+        {cellContent}
+      </TableCell>
+    );
+  };
 
   render = () => {
+    const { tableData, columnNames } = this.props;
+
     return (
       <TableContainer component={Paper}>
         <Table
@@ -82,19 +105,20 @@ class DenseTable extends Component {
         >
           <TableHead>
             <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+              {columnNames.map((header, index) => (
+                <TableCell key={index}>{header}</TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((element, firstIndex) => (
+            {tableData.map((element, firstIndex) => (
               <TableRow key={firstIndex}>
-                {Object.keys(element).map((child, secondIndex) => (
-                  <TableCell key={secondIndex}>{element[child]}</TableCell>
-                ))}
+                {Object.keys(element).map((child, secondIndex) => {
+                  return (
+                    // <TableCell key={secondIndex}>{element[child]}</TableCell>
+                    this.renderCell({ content: element[child] })
+                  );
+                })}
               </TableRow>
             ))}
           </TableBody>
@@ -104,4 +128,4 @@ class DenseTable extends Component {
   };
 }
 
-export default DenseTable;
+export default MiniTable2;
