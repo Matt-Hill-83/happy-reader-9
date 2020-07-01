@@ -138,6 +138,7 @@ class MainStory extends React.Component {
     localStateStore.setActiveSceneId(sceneId);
     localStateStore.setActiveFrameIndex(0);
     localStateStore.addVisitedScenes(sceneId);
+    // toaster.clear();
 
     const hideMissionConsole = localStateStore.getQuestStatus()
       .hideMissionConsole;
@@ -200,6 +201,7 @@ class MainStory extends React.Component {
   onChangeWorld = ({ mapId }) => {
     console.log("onChangeWorld"); // zzz
     console.log("mapId", mapId);
+    toaster.clear();
 
     localStateStore.setActiveMapId(mapId);
     const map = localStateStore.getActiveWorld();
@@ -263,8 +265,13 @@ class MainStory extends React.Component {
     this.setState({ showYouWinModal: true });
   };
 
+  toggleYouWinModal = () => {
+    this.setState({ showYouWinModal: !this.state.showYouWinModal });
+  };
+
   renderWorldPicker = () => {
     const { showProd, showYouWinModal } = this.state;
+    toaster.clear();
 
     return (
       <QuestDialog
@@ -294,7 +301,9 @@ class MainStory extends React.Component {
           {!isProdRelease && (
             <Button onClick={this.toggleWorldBuilder}>World Builder</Button>
           )}
-          <Button onClick={this.openYouWinModal}>Pick a Single Quest...</Button>
+          <Button onClick={this.toggleYouWinModal}>
+            Pick a Single Quest...
+          </Button>
           {!isProdRelease && (
             <Button onClick={this.toggleBookPicker}>
               Pick a Book of Quests...
@@ -308,7 +317,6 @@ class MainStory extends React.Component {
   render() {
     const { className } = this.props;
     const activeWorld = localStateStore.getActiveWorld();
-
     const showWorldBuilder = localStateStore.getShowWorldBuilder();
 
     if (showWorldBuilder) {
