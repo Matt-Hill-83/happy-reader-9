@@ -7,5 +7,4 @@ https://stackoverflow.com/questions/52659859/module-not-found-cant-resolve-fireb
 
 ---
 
-yarn add @blueprintjs/table
 yarn add @firebase/firestore

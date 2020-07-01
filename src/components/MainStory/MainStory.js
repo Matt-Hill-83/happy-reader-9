@@ -19,8 +19,8 @@ import BookPicker from "../BookPicker/BookPicker.js";
 
 let IS_PROD_RELEASE;
 
-IS_PROD_RELEASE = true;
 IS_PROD_RELEASE = false;
+IS_PROD_RELEASE = true;
 
 let SHOW_BOOK_PICKER;
 SHOW_BOOK_PICKER = true;
