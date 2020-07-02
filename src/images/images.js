@@ -296,6 +296,7 @@ import katPonytail from "./rigged-girls/kat/kat-ponytail.png";
 
 import greenKey from "./items/green-key.png";
 import helicopter01 from "./items/helicopter01.png";
+import frogHopper01 from "./items/frogHopper01.png";
 import hat from "./items/hat.png";
 import key from "./items/key.png";
 import gold from "./items/gold.png";
@@ -620,6 +621,8 @@ const items = {
   fig,
   flag,
   greenKey,
+  helicopter01,
+  frogHopper01,
   hat,
   hoop,
   hug,
