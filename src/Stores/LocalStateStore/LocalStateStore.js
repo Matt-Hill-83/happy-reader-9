@@ -19,6 +19,12 @@ class LocalStateStore {
   showBookPicker = false;
   visitedScenes = [];
   unlockedSubQuests = [0];
+  defaultWorldId = null;
+
+  getDefaultWorldId = () => this.defaultWorldId;
+  setDefaultWorldId = (defaultWorldId) => {
+    this.defaultWorldId = defaultWorldId;
+  };
 
   getUnlockedSubQuests = () => this.unlockedSubQuests;
   setUnlockedSubQuests = (unlockedSubQuests) => {
@@ -381,6 +387,7 @@ decorate(LocalStateStore, {
   showBookPicker: observable,
   visitedScenes: observable,
   unlockedSubQuests: observable,
+  defaultWorldId: observable,
 });
 
 const localStateStore = new LocalStateStore();

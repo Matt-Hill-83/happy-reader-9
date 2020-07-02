@@ -8,6 +8,7 @@ import { toJS } from "mobx";
 import _get from "lodash.get";
 import css from "./FrameSetUploader.module.scss";
 
+// import story9104 from "../../Scripts/000-charlieAndLucy.js";
 import story002 from "../../Scripts/002-BrightNewDay";
 import story003 from "../../Scripts/003-KatGetsADress";
 import story004 from "../../Scripts/004-KatGoesOffScript";
@@ -28,10 +29,13 @@ import story300 from "../../Scripts/300-MerlindaTheFairyPrincessPart1";
 import story310 from "../../Scripts/310-MerlindaTheFairyPrincessPart2";
 import story330 from "../../Scripts/330-MerlindaTheFairyPrincessPart3";
 import story8000 from "../../Scripts/8000-dogAndPup-001.js";
+import story8010 from "../../Scripts/8010-dogAndPup-002.js";
+import story8054 from "../../Scripts/8054-math-NineTimesSix.js";
 import story9000 from "../../Scripts/9000-ANewSoundInTheWoods";
 import story9100 from "../../Scripts/9100-KatsSecondQuest";
+import story9102 from "../../Scripts/9102-ThisOneIsFunnyISwear.js";
 import story9103 from "../../Scripts/000-ScriptTemplate.js";
-// import story9104 from "../../Scripts/000-charlieAndLucy.js";
+import story9104 from "../../Scripts/9104-ThisOneIsNotFunny-001.js";
 import story9901 from "../../Scripts/9901-randomBits01";
 import story9902 from "../../Scripts/9902-randomBits02";
 import story9903 from "../../Scripts/9903-randomBits03-LizHasElfEars.js";
@@ -51,10 +55,7 @@ import story9917 from "../../Scripts/9917-test-MyDadIsSoCold.js";
 import story9918 from "../../Scripts/9918-test-KatMightGetADress.js";
 import story9919 from "../../Scripts/9919-test-ILikeJam.js";
 import story9920 from "../../Scripts/9920-test-BugYuck.js";
-import story8054 from "../../Scripts/8054-math-NineTimesSix.js";
-import story8010 from "../../Scripts/8010-dogAndPup-002.js";
-import story9102 from "../../Scripts/9102-ThisOneIsFunnyISwear.js";
-import story9104 from "../../Scripts/9104-ThisOneIsNotFunny-001.js";
+import story9921 from "../../Scripts/9921-test-WeGetAPet.js";
 
 class FrameSetUploader extends Component {
   // state = { text: JSON.stringify(story002) }
@@ -104,6 +105,7 @@ class FrameSetUploader extends Component {
   state = { text: JSON.stringify(story9104) };
   // state = { text: JSON.stringify(story8010) };
   // state = { text: JSON.stringify(story9920) };
+  state = { text: JSON.stringify(story9921) };
 
   onChangeDialog = ({ event }) => {
     const text = event.target.value;

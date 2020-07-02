@@ -30,9 +30,6 @@ import FrameSetUploader from "../FrameSetUploader/FrameSetUploader";
 import GetSceneConfig from "../GetSceneConfig/GetSceneConfig";
 import BuildEpic from "../BuildEpic/BuildEpic";
 
-const INITIAL_MAP_INDEX = 0;
-// const NUM_ROWS_LOCATIONS_GRID = 2
-// const NUM_COLS_LOCATIONS_GRID = 3
 const NUM_ROWS_LOCATIONS_GRID = 8;
 const NUM_COLS_LOCATIONS_GRID = 10;
 
@@ -44,8 +41,8 @@ class WorldBuilder extends Component {
 
   // Changing this to DidMount breaks things
   async componentWillMount() {
-    this.onChangeWorld({ mapId: "ZWS4fGTQDjQSoCD6yQ7U" });
-    // this.onChangeWorld({ index: INITIAL_MAP_INDEX });
+    const defaultWorldId = localStateStore.getDefaultWorldId();
+    this.onChangeWorld({ mapId: defaultWorldId });
   }
 
   onChangeWorld = ({ mapId, newWorld }) => {
@@ -72,17 +69,6 @@ class WorldBuilder extends Component {
       localStateStore.setWorldBuilderScenesGrid(reCreatedScenesGrid);
     }
   };
-
-  // onDeleteMap = async ({ map }) => {
-  //   if (this._deleting) return;
-  //   this._deleting = true;
-  //   try {
-  //     await map.delete();
-  //     this._deleting = false;
-  //   } catch (err) {
-  //     this._deleting = false;
-  //   }
-  // };
 
   getMapById = (mapId) => {
     const savedWorlds = Utils.getItemsFromDbObj({ dbList: maps });

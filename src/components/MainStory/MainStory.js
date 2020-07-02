@@ -19,8 +19,8 @@ import BookPicker from "../BookPicker/BookPicker.js";
 
 let IS_PROD_RELEASE;
 
-IS_PROD_RELEASE = false;
 IS_PROD_RELEASE = true;
+IS_PROD_RELEASE = false;
 
 let SHOW_BOOK_PICKER;
 SHOW_BOOK_PICKER = true;
@@ -29,12 +29,15 @@ SHOW_BOOK_PICKER = false;
 let useDefaultWorldId;
 useDefaultWorldId = false;
 useDefaultWorldId = true;
-const defaultWorldIdProd = "mRpN51k8AmA5BqgikVoz";
-// const defaultWorldIdNonProd = "ZR0GOSFFqFPoWjSgvgOQ";
-const defaultWorldIdNonProd = "mRpN51k8AmA5BqgikVoz";
+const defaultWorldInProd = "mRpN51k8AmA5BqgikVoz";
+// const defaultWorldInNonProd = "ZR0GOSFFqFPoWjSgvgOQ";
+const defaultWorldInNonProd = "FnSykeHiNm0daGPeZuo8";
+// const defaultWorldInNonProd = "mRpN51k8AmA5BqgikVoz";
 const defaultWorldId = IS_PROD_RELEASE
-  ? defaultWorldIdProd
-  : defaultWorldIdNonProd;
+  ? defaultWorldInProd
+  : defaultWorldInNonProd;
+
+localStateStore.setDefaultWorldId(defaultWorldId);
 
 let SHOW_WORLD_BUILDER;
 // SHOW_WORLD_BUILDER = true
@@ -54,6 +57,7 @@ class MainStory extends React.Component {
 
   async componentWillMount() {
     localStateStore.setIsProdRelease(IS_PROD_RELEASE);
+    const defaultWorldId = localStateStore.getDefaultWorldId();
 
     // I need to make these stores shared singletons
     //  Move these to App.js

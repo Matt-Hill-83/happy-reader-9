@@ -295,6 +295,7 @@ import katPonytail from "./rigged-girls/kat/kat-ponytail.png";
 //items
 
 import greenKey from "./items/green-key.png";
+import helicopter01 from "./items/helicopter01.png";
 import hat from "./items/hat.png";
 import key from "./items/key.png";
 import gold from "./items/gold.png";
