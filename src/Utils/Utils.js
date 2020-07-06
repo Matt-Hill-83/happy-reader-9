@@ -293,12 +293,11 @@ export default class Utils {
   static reCreateGridFromCondensedGrid = ({ gridDimensions, newGrid5 }) => {
     const { numRows, numCols } = gridDimensions;
 
-    const maxDimensions = { maxRows: 8, maxCols: 10 };
+    const maxDimensions = { maxRows: 8, maxCols: 20 };
 
     const finalRows = Math.min(numRows, maxDimensions.maxRows);
     const finalCols = Math.min(numCols, maxDimensions.maxCols);
 
-    // const {maxRows, maxCols} =
     const rows = Array(finalRows).fill(0);
     const columns = Array(finalCols).fill(0);
     const grid = [];
