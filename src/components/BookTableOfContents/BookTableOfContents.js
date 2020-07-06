@@ -1,60 +1,49 @@
-import React from "react"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
-import _get from "lodash.get"
-import Images from "../../images/images.js"
-import cx from "classnames"
+import React from "react";
+import { observer } from "mobx-react";
+import { toJS } from "mobx";
+import _get from "lodash.get";
+import Images from "../../images/images.js";
+import cx from "classnames";
 
-import { Button, Dialog, ButtonGroup } from "@blueprintjs/core"
-import Utils from "../../Utils/Utils.js"
+import { Button, Dialog, ButtonGroup } from "@blueprintjs/core";
+import Utils from "../../Utils/Utils.js";
 
-import { maps } from "../../Stores/InitStores.js"
+import { maps } from "../../Stores/InitStores.js";
 
-import css from "./BookTableOfContents.module.scss"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
+import css from "./BookTableOfContents.module.scss";
+import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js";
 
 class BookTableOfContents extends React.Component {
-  state = {}
+  state = {};
 
   constructor(props) {
-    super(props)
-    const showProdInitialValue = localStateStore.getIsProdRelease()
-    this.state = { showProd: true, showToggle: !showProdInitialValue }
+    super(props);
+    const showProdInitialValue = localStateStore.getIsProdRelease();
+    this.state = { showProd: true, showToggle: !showProdInitialValue };
   }
 
   toggleShowProd = () => {
-    this.setState({ showProd: !this.state.showProd })
-  }
+    this.setState({ showProd: !this.state.showProd });
+  };
 
   render = () => {
-    const { selectedBook, onChangeWorld } = this.props
-    const {} = this.state
+    const { selectedBook, onChangeWorld } = this.props;
+    const {} = this.state;
 
-    console.log("selectedBook", toJS(selectedBook)) // zzz
-
-    const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
-    let filteredMaps = []
+    const savedMaps = Utils.getItemsFromDbObj({ dbList: maps });
+    let filteredMaps = [];
 
     filteredMaps = savedMaps.filter((map) => {
-      return (
-        map.data.released &&
-        // map.data.releasedToProd &&
-        selectedBook.chapters.includes(map.id)
-      )
-    })
+      return map.data.released && selectedBook.chapters.includes(map.id);
+    });
 
-    const sortedMaps = filteredMaps
-    // const sortedMaps = Utils.sortDataByNestedKey({
-    //   data: filteredMaps,
-    //   keys: ["data", "title"],
-    //   order: "ASC",
-    // })
+    const sortedMaps = filteredMaps;
 
     const mapList = sortedMaps.map((map, index) => {
-      const { title } = map.data
+      const { title } = map.data;
 
-      const mapId = map.id
-      console.log("mapId", mapId) // zzz
+      const mapId = map.id;
+      console.log("mapId", mapId); // zzz
 
       const text = (
         <div className={css.questRow}>
@@ -64,9 +53,9 @@ class BookTableOfContents extends React.Component {
             <span role="img">✅</span>
           </div>
         </div>
-      )
-      return <div onClick={() => onChangeWorld({ index, mapId })}>{text}</div>
-    })
+      );
+      return <div onClick={() => onChangeWorld({ index, mapId })}>{text}</div>;
+    });
 
     const tableHeader = (
       <div className={cx(css.tableHeader)}>
@@ -74,8 +63,8 @@ class BookTableOfContents extends React.Component {
         <div className={cx(css.tableCell, css.gold)}>Gold</div>
         <div className={cx(css.tableCell, css.status)}>Completed</div>
       </div>
-    )
-    const dummyQuest01 = Images.backgrounds["dummyQuest01"]
+    );
+    const dummyQuest01 = Images.backgrounds["dummyQuest01"];
     return (
       <div className={css.main}>
         <div className={css.questTable}>
@@ -88,8 +77,8 @@ class BookTableOfContents extends React.Component {
           alt={"imagex"}
         />
       </div>
-    )
-  }
+    );
+  };
 }
 
-export default observer(BookTableOfContents)
+export default observer(BookTableOfContents);

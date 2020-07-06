@@ -1,6 +1,7 @@
 import localStateStore from "../Stores/LocalStateStore/LocalStateStore.js";
 import { maps } from "../Stores/InitStores.js";
 import { toJS } from "mobx";
+import _get from "lodash.get";
 
 export default class Utils {
   // CONSTANTS ---------------------------------- start ---------------------------
@@ -416,18 +417,22 @@ export default class Utils {
     return neighbors;
   };
 
-  // static getNeighborNames = ({ coordinates }) => {
-  //   const neighbors = Utils.getNeighbors({ coordinates });
+  static unHideSubQuests = ({ unHideTriggers = [] }) => {
+    const requiredCompletedMission = _get(
+      unHideTriggers,
+      "unHideTriggers.completedMission",
+      null
+    );
 
-  //   const neighborNames = [];
-  //   for (const item in neighbors) {
-  //     const neighbor = neighbors[item];
+    const completedMissions = localStateStore.getCompletedMissions();
+    console.log("requiredCompletedMission", toJS(requiredCompletedMission)); // zzz
+    console.log(
+      "completedMissions+_+_+_+_+_+_+_+_+_---->>>",
+      toJS(completedMissions)
+    ); // zzz
 
-  //     if (neighbor) {
-  //       neighborNames.push(neighbor.location.name);
-  //     }
-  //   }
-
-  //   return neighborNames;
-  // };
+    if (requiredCompletedMission) {
+      localStateStore.unHideSubQuestById(requiredCompletedMission);
+    }
+  };
 }

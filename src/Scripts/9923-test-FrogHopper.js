@@ -4,7 +4,9 @@ const story9123 = {
     {
       title: "log",
       sceneConfig: {
-        triggers: { unlockSceneConditions: { currentMission: 1 } },
+        triggers: {
+          unlockSceneConditions: { currentMission: 1 },
+        },
         subQuestId: 1,
         coordinates: { col: 0, row: 1 },
         creatures: ["liz2"],
@@ -1264,6 +1266,9 @@ const story9123 = {
     },
   ],
   questConfig: {
+    subQuestTriggers: [
+      { subQuest: 1, unHideTriggers: { completedMission: 0 } },
+    ],
     missions: [
       {
         item: { name: "bun" },

@@ -70,10 +70,6 @@ class WorldViewer extends React.Component {
   };
 
   render() {
-    console.log("render World Viewer+++++++++++++++++++++++++"); // zzz
-    console.log("render World Viewer+++++++++++++++++++++++++"); // zzz
-    console.log("render World Viewer+++++++++++++++++++++++++"); // zzz
-
     const map = localStateStore.getActiveWorld();
     const key = new Date();
 

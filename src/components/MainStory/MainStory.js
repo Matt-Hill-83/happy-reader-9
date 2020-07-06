@@ -120,7 +120,7 @@ class MainStory extends React.Component {
     const startScene = scenesGrid.find(
       (item) => item.id === map.data.startSceneId
     );
-
+    console.log("startScene", toJS(startScene)); // zzz
     const terminalScene = start ? startScene : endScene;
     const firstScene = scenesGrid[0];
     const lastScene = scenesGrid[scenesGrid.length - 1];
@@ -142,11 +142,10 @@ class MainStory extends React.Component {
     localStateStore.setActiveSceneId(sceneId);
     localStateStore.setActiveFrameIndex(0);
     localStateStore.addVisitedScenes(sceneId);
-    // toaster.clear();
 
     const hideMissionConsole = localStateStore.getQuestStatus()
       .hideMissionConsole;
-    localStateStore.addUnlockedSubQuest();
+    localStateStore.unlockSubQuestForActiveScene();
 
     if (!hideMissionConsole) {
       this.updateQuestStatus({ sceneId });
@@ -217,7 +216,6 @@ class MainStory extends React.Component {
       const combinedPockets = localStateStore.addToPockets({
         newPockets: clonedQuestConfig.pockets,
       });
-      console.log("combinedPockets", toJS(combinedPockets)); // zzz
 
       localStateStore.setQuestStatus({
         activeMission: 0,

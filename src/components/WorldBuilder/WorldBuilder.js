@@ -108,7 +108,6 @@ class WorldBuilder extends Component {
       map.data.endSceneId = scene.id;
       map.data.endScene = name;
     }
-
     this.updateMap({ newProps: { ...map.data } });
   };
 
@@ -219,7 +218,6 @@ class WorldBuilder extends Component {
     map.data.newGrid5 = Utils.createCondensedGridFromGrid();
 
     delete map.data.grid;
-    console.log("map.data", toJS(map.data)); // zzz
 
     await map.update(map.data);
   };
@@ -472,16 +470,11 @@ class WorldBuilder extends Component {
   };
 
   importWorld = ({ newWorld }) => {
-    console.log(""); // zzz
-    console.log("importWorld------------"); // zzz
-
     const {
       title = "no title",
       description = "none",
       questConfig = { data: "none" },
     } = newWorld;
-
-    console.log("newWorld", toJS(newWorld)); // zzz
 
     // I should probably create a new scenesGrid here, based on the required dimensions
     // I should probably create a new scenesGrid here, based on the required dimensions

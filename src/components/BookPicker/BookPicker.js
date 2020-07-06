@@ -1,16 +1,16 @@
-import React from "react"
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
-import _get from "lodash.get"
-import Images from "../../images/images.js"
-import cx from "classnames"
+import React from "react";
+import { observer } from "mobx-react";
+import { toJS } from "mobx";
+import _get from "lodash.get";
+import Images from "../../images/images.js";
+import cx from "classnames";
 
-import { Button, Dialog, ButtonGroup } from "@blueprintjs/core"
-import Utils from "../../Utils/Utils.js"
+import { Button, Dialog, ButtonGroup } from "@blueprintjs/core";
+import Utils from "../../Utils/Utils.js";
 
-import css from "./BookPicker.module.scss"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
-import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
+import css from "./BookPicker.module.scss";
+import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js";
+import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js";
 
 const bookList = [
   {
@@ -56,26 +56,25 @@ const bookList = [
 
     chapters: [],
   },
-]
+];
 
 class BookPicker extends React.Component {
-  state = { showChapterView: false, selectedBook: bookList[0] }
+  state = { showChapterView: false, selectedBook: bookList[0] };
 
   changeSelectedBook = ({ index }) => {
-    const selectedBook = bookList[index]
-    console.log("selectedBook", toJS(selectedBook)) // zzz
+    const selectedBook = bookList[index];
 
     this.setState({
       showChapterView: !this.state.showChapterView,
       selectedBook,
-    })
-  }
+    });
+  };
 
   renderChapterView = () => {
-    const { selectedBook } = this.state
+    const { selectedBook } = this.state;
 
     // const bookImage = Images.backgrounds[selectedBook && selectedBook.imageName]
-    const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
+    const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"];
 
     return (
       <div className={css.chapterView}>
@@ -93,18 +92,18 @@ class BookPicker extends React.Component {
           Back
         </Button> */}
       </div>
-    )
-  }
+    );
+  };
 
   render = () => {
-    const {} = this.props
-    const { showToggle } = this.state
+    const {} = this.props;
+    const { showToggle } = this.state;
 
     const renderedBookList = bookList.map((book, index) => {
-      const title = book.name
+      const title = book.name;
 
-      const mapId = book.id
-      const bookImage = Images.backgrounds[book.imageName]
+      const mapId = book.id;
+      const bookImage = Images.backgrounds[book.imageName];
 
       const text = (
         <div
@@ -116,12 +115,12 @@ class BookPicker extends React.Component {
             <img className={css.bookImage} src={bookImage} alt={"imagex"} />
           </div>
         </div>
-      )
-      return text
-    })
+      );
+      return text;
+    });
 
-    const backgroundImage = Images.backgrounds["meadow"]
-    const backButtonLabel = "Back To Book LIst"
+    const backgroundImage = Images.backgrounds["meadow"];
+    const backButtonLabel = "Back To Book LIst";
 
     return (
       <Dialog isOpen={true} isCloseButtonShown={true} className={css.main}>
@@ -165,8 +164,8 @@ class BookPicker extends React.Component {
           </Button> */}
         </div>
       </Dialog>
-    )
-  }
+    );
+  };
 }
 
-export default observer(BookPicker)
+export default observer(BookPicker);

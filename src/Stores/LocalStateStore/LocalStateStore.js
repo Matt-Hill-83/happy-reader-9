@@ -19,6 +19,7 @@ class LocalStateStore {
   showBookPicker = false;
   visitedScenes = [];
   unlockedSubQuests = [0];
+  completedMissions = [];
   defaultWorldId = null;
 
   getDefaultWorldId = () => this.defaultWorldId;
@@ -31,19 +32,27 @@ class LocalStateStore {
     this.unlockedSubQuests = unlockedSubQuests;
   };
 
+  getCompletedMissions = () => this.completedMissions;
+  setCompletedMissions = (completedMissions) => {
+    this.completedMissions = completedMissions;
+  };
+
   clearUnlockedSubQuests = () => {
     this.unlockedSubQuests.length = 0;
   };
 
-  addUnlockedSubQuest = (sceneId) => {
+  unlockSubQuestForActiveScene = () => {
     const scene = this.getActiveScene();
     const subQuestId = _get(scene, "sceneConfig.subQuestId");
-    // console.log("subQuestId", subQuestId);
     if (typeof subQuestId === "number") {
       this.unlockedSubQuests.push(subQuestId);
     }
-    // console.log("this.unlockedSubQuests", toJS(this.unlockedSubQuests));
   };
+
+  unHideSubQuestById = (subQuestId) => {
+    this.unlockedSubQuests.push(subQuestId);
+  };
+
   ///////////////
   ///////////////
   ///////////////
@@ -58,13 +67,9 @@ class LocalStateStore {
 
   addVisitedScenes = (sceneId) => {
     this.visitedScenes.push(sceneId);
-    // console.log("this.visitedScenes", toJS(this.visitedScenes));
   };
 
   isVisitedScene = (sceneId) => {
-    // console.log("sceneId", sceneId);
-    // console.log("this.visitedScenes", toJS(this.visitedScenes));
-
     return this.visitedScenes.some((scene) => scene === sceneId);
   };
 
@@ -173,8 +178,8 @@ class LocalStateStore {
     if (!missions) {
       return {};
     }
-
-    const activeMission = missions[questStatus.activeMission] || null;
+    const activeMissionId = questStatus.activeMission;
+    const activeMission = missions[activeMissionId] || null;
     if (!activeMission) {
       return {};
     }
@@ -185,6 +190,12 @@ class LocalStateStore {
     });
 
     if (isMissionCompleted) {
+      this.completedMissions.push(activeMissionId);
+      console.log(
+        "this.completedMissions------------------------------>>>",
+        toJS(this.completedMissions)
+      ); //
+
       // remove item from pocket
       const desiredItem = this.getDesiredItem();
 
@@ -242,7 +253,6 @@ class LocalStateStore {
   _findItem = ({ itemsInScene }) => {
     // const desiredItem = this.getDesiredItem() || {};
     const desiredItems = this.getDesiredItems() || {};
-    // console.log("desiredItems", toJS(desiredItems)); // zzz
     const questStatus = this.questStatus;
 
     const { pockets = {} } = questStatus;
@@ -255,7 +265,6 @@ class LocalStateStore {
         foundItems.push(foundItem);
       }
     });
-    // console.log("foundItems", toJS(foundItems)); // zzz
     const foundItem = foundItems[0];
     if (!foundItem) {
       return null;
@@ -370,24 +379,25 @@ class LocalStateStore {
 }
 
 decorate(LocalStateStore, {
+  activeFrameIndex: observable,
   activeMapId: observable,
+  activeSceneId: observable,
+  completedMissions: observable,
   creatures: observable,
-  maps: observable,
+  defaultWorldId: observable,
+  locationDetails: observable,
   mapBuilderGrid: observable,
   mapBuilderWorld: observable,
+  maps: observable,
   page: observable,
   plot: observable,
-  showWorldBuilder: observable,
-  you: observable,
-  locationDetails: observable,
-  activeFrameIndex: observable,
-  activeSceneId: observable,
   questStatus: observable,
-  test: observable,
   showBookPicker: observable,
-  visitedScenes: observable,
+  showWorldBuilder: observable,
+  test: observable,
   unlockedSubQuests: observable,
-  defaultWorldId: observable,
+  visitedScenes: observable,
+  you: observable,
 });
 
 const localStateStore = new LocalStateStore();

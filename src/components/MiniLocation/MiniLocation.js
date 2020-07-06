@@ -198,19 +198,6 @@ class MiniLocation extends React.Component {
       typeof unlockSceneMission === "number" &&
       questStatus.activeMission >= unlockSceneMission;
 
-    if (scene && scene.location.name === "taffy01") {
-      console.log("----------------------------");
-      console.log("----------------------------");
-      console.log(
-        "scene && scene.location.name",
-        toJS(scene && scene.location.name)
-      ); // zzz
-      console.log("scene.sceneConfig", toJS(scene.sceneConfig)); // zzz
-      console.log("questStatus.activeMission", toJS(questStatus.activeMission)); //zzz
-      console.log("unlockSceneMission", unlockSceneMission); // zzz
-      console.log("sceneUnlocked", toJS(sceneUnlocked)); // zzz
-    }
-
     const unlockedSubQuests = localStateStore.getUnlockedSubQuests();
     const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId);
 

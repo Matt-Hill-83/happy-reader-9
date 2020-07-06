@@ -34,30 +34,7 @@ class WordPage extends React.Component {
         "sceneConfig.triggers.newFrameSetConditions.currentMission"
       ) || -1;
 
-    const frameSet2Unlocked =
-      typeof newFrameSetMission === "number" &&
-      questStatus.activeMission >= newFrameSetMission;
-
-    console.log(
-      "frameSet2Unlocked-------------OIUOIUOIU-------->>>>>",
-      frameSet2Unlocked
-    ); // zzz
-
-    if (activeScene.location.name === "taffy01") {
-      console.log(
-        "frameSet+_+_+_+_+_+_+_+_+_------------------->",
-        toJS(frameSet)
-      ); // zzz
-    }
-    console.log("questStatus.activeMission", toJS(questStatus.activeMission)); // zzz
-    console.log("missionToUnlockFramesAfter", missionToUnlockFramesAfter); // zzz
-    console.log("framesUnlocked", toJS(framesUnlocked)); // zzz
-
     if (framesUnlocked && frameSet && frameSet.frames2) {
-      console.log(
-        "frameSet.frames2-------------------------------->>>>>>>>>>",
-        toJS(frameSet.frames2)
-      ); // zzz
       frame =
         frameSet && frameSet.frames2 && frameSet.frames2[activeFrameIndex];
     } else {
