@@ -1010,6 +1010,5 @@ const story9123 = {
       frames2: [],
     },
   ],
-  questConfig: { data: "none" },
 };
 export default story9123;
