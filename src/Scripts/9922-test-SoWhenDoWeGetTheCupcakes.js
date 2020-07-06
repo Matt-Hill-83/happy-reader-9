@@ -1,5 +1,3 @@
-import { IDerivationState } from "mobx";
-
 const story9122 = {
   title: "-----9922-test-SoWhenDoWeGetTheCupcakes",
   scenes: [

@@ -31,7 +31,7 @@ import GetSceneConfig from "../GetSceneConfig/GetSceneConfig";
 import BuildEpic from "../BuildEpic/BuildEpic";
 
 const NUM_ROWS_LOCATIONS_GRID = 8;
-const NUM_COLS_LOCATIONS_GRID = 10;
+const NUM_COLS_LOCATIONS_GRID = 20;
 
 class WorldBuilder extends Component {
   state = {
