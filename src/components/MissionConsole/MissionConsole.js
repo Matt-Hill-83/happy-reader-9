@@ -61,6 +61,7 @@ class MissionConsole extends Component {
       return null;
     }
     const { missions } = questStatus.questConfig;
+    const { activeMission } = questStatus;
 
     const columnNames = [
       "Mission",
@@ -82,6 +83,7 @@ class MissionConsole extends Component {
 
     return (
       <div className={css.main}>
+        activeMission: {activeMission}
         {showHeader && (
           <div className={css.header}>
             <div className={css.title}>Your Stuff</div>
