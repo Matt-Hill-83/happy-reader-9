@@ -1,168 +1,181 @@
-import React from "react";
-import { observer } from "mobx-react";
-import { toJS } from "mobx";
-import _get from "lodash.get";
-import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core";
-import { Dialog } from "@material-ui/core";
+import React from "react"
+import { observer } from "mobx-react"
+import { toJS } from "mobx"
+import _get from "lodash.get"
+import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
+import { Dialog } from "@material-ui/core"
 
-import { maps } from "../../Stores/InitStores.js";
-import { worldNameStore } from "../../Stores/FrameSetStore.js";
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js";
-import StoryMode from "../StoryMode/StoryMode";
-import QuestDialog from "../QuestDialog/QuestDialog.js";
-import Utils from "../../Utils/Utils";
-import WorldBuilder from "../WorldBuilder/WorldBuilder.js";
-import { UserConfigStore } from "../../Stores/UserConfigStore.js";
+import { maps } from "../../Stores/InitStores.js"
+import { worldNameStore } from "../../Stores/FrameSetStore.js"
+import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
+import StoryMode from "../StoryMode/StoryMode"
+import QuestDialog from "../QuestDialog/QuestDialog.js"
+import Utils from "../../Utils/Utils"
+import WorldBuilder from "../WorldBuilder/WorldBuilder.js"
+import { UserConfigStore } from "../../Stores/UserConfigStore.js"
 
-import css from "./MainStory.module.scss";
-import BookPicker from "../BookPicker/BookPicker.js";
+import css from "./MainStory.module.scss"
+import BookPicker from "../BookPicker/BookPicker.js"
 
-let IS_PROD_RELEASE;
+let IS_PROD_RELEASE
 
-IS_PROD_RELEASE = true;
-IS_PROD_RELEASE = false;
+IS_PROD_RELEASE = true
+IS_PROD_RELEASE = false
 
-let SHOW_BOOK_PICKER;
-SHOW_BOOK_PICKER = true;
-SHOW_BOOK_PICKER = false;
+let SHOW_BOOK_PICKER
+SHOW_BOOK_PICKER = true
+SHOW_BOOK_PICKER = false
 
-let useDefaultWorldId;
-useDefaultWorldId = false;
-useDefaultWorldId = true;
-const defaultWorldInProd = "mRpN51k8AmA5BqgikVoz";
+let useDefaultWorldId
+useDefaultWorldId = false
+useDefaultWorldId = true
+const defaultWorldInProd = "mRpN51k8AmA5BqgikVoz"
 // const defaultWorldInNonProd = "ZR0GOSFFqFPoWjSgvgOQ";
-const defaultWorldInNonProd = "Cgp15K6a6zx1mrzCHJoP";
+const defaultWorldInNonProd = "Cgp15K6a6zx1mrzCHJoP"
 // const defaultWorldInNonProd = "mRpN51k8AmA5BqgikVoz";
 const defaultWorldId = IS_PROD_RELEASE
   ? defaultWorldInProd
-  : defaultWorldInNonProd;
+  : defaultWorldInNonProd
 
-localStateStore.setDefaultWorldId(defaultWorldId);
+localStateStore.setDefaultWorldId(defaultWorldId)
 
-let SHOW_WORLD_BUILDER;
+let SHOW_WORLD_BUILDER
 // SHOW_WORLD_BUILDER = true
-SHOW_WORLD_BUILDER = false;
+SHOW_WORLD_BUILDER = false
 
 const toaster = Toaster.create({
   position: Position.TOP,
   className: css.toasterContainer,
-});
+})
 
 class MainStory extends React.Component {
   state = {
     activeScene: undefined,
     showYouWinModal: IS_PROD_RELEASE,
     showBookPicker: true,
-  };
+  }
 
   async componentWillMount() {
-    localStateStore.setIsProdRelease(IS_PROD_RELEASE);
-    const defaultWorldId = localStateStore.getDefaultWorldId();
+    localStateStore.setIsProdRelease(IS_PROD_RELEASE)
+    const defaultWorldId = localStateStore.getDefaultWorldId()
 
     // I need to make these stores shared singletons
     //  Move these to App.js
-    await maps.fetch();
+    await maps.fetch()
     // This needs to be here or WorldBuilder won't work.
-    await worldNameStore.fetch();
+    await worldNameStore.fetch()
 
     if (maps.docs && maps.docs[0]) {
-      const defaultMap = Utils.getFirstReleasedMap();
-      const mapId = _get(defaultMap, "id");
+      const defaultMap = Utils.getFirstReleasedMap()
+      const mapId = _get(defaultMap, "id")
 
       if (useDefaultWorldId) {
         // if (!IS_PROD_RELEASE && useDefaultWorldId) {
-        localStateStore.setActiveMapId(defaultWorldId);
+        localStateStore.setActiveMapId(defaultWorldId)
       } else {
-        localStateStore.setActiveMapId(mapId);
+        localStateStore.setActiveMapId(mapId)
       }
     }
 
-    localStateStore.setShowBookPicker(SHOW_BOOK_PICKER);
+    localStateStore.setShowBookPicker(SHOW_BOOK_PICKER)
 
     if (SHOW_WORLD_BUILDER) {
-      this.toggleWorldBuilder();
+      this.toggleWorldBuilder()
     } else {
-      await this.init();
+      await this.init()
     }
   }
 
   init = async () => {
     // Utils.getFirstReleasedMap()
-    const savedMaps = Utils.getItemsFromDbObj({ dbList: maps });
-    const filteredMaps = savedMaps.filter((map) => map.data.released);
+    const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
+    const filteredMaps = savedMaps.filter((map) => map.data.released)
 
     // TODO - I need to get maps by id, not by index, because I'm filtering them.
     filteredMaps.forEach((map) => {
       const {
         data: { gridDimensions, newGrid5 },
-      } = map;
+      } = map
 
       const grid = Utils.reCreateGridFromCondensedGrid({
         gridDimensions,
         maxDimensions: { numRows: 8, numCols: 12 },
         newGrid5,
-      });
+      })
 
-      map.data.grid = grid;
-    });
+      map.data.grid = grid
+    })
 
-    localStateStore.setShowWorldBuilder(SHOW_WORLD_BUILDER);
-    if (SHOW_WORLD_BUILDER) return;
-    const mapId = localStateStore.getActiveWorldId();
-    this.onChangeWorld({ mapId });
-  };
+    localStateStore.setShowWorldBuilder(SHOW_WORLD_BUILDER)
+    if (SHOW_WORLD_BUILDER) return
+    const mapId = localStateStore.getActiveWorldId()
+    this.onChangeWorld({ mapId })
+  }
 
   getTerminalScene = ({ start = true }) => {
-    const map = localStateStore.getActiveWorld();
-    const scenesGrid = _get(map, "data.newGrid5") || [];
+    const map = localStateStore.getActiveWorld()
+    const scenesGrid = _get(map, "data.newGrid5") || []
 
-    const endScene = scenesGrid.find((item) => item.id === map.data.endSceneId);
+    const endScene = scenesGrid.find((item) => item.id === map.data.endSceneId)
     const startScene = scenesGrid.find(
       (item) => item.id === map.data.startSceneId
-    );
-    console.log("startScene", toJS(startScene)); // zzz
-    const terminalScene = start ? startScene : endScene;
-    const firstScene = scenesGrid[0];
-    const lastScene = scenesGrid[scenesGrid.length - 1];
+    )
+    console.log("startScene", toJS(startScene)) // zzz
+    const terminalScene = start ? startScene : endScene
+    const firstScene = scenesGrid[0]
+    const lastScene = scenesGrid[scenesGrid.length - 1]
 
     // If no start and finish scenes are marked, choose some, so the program doesn't break
-    return terminalScene || (start ? firstScene : lastScene);
-  };
+    return terminalScene || (start ? firstScene : lastScene)
+  }
 
   initWorld = async () => {
-    const startScene = this.getTerminalScene({});
-    if (!startScene) return;
+    const startScene = this.getTerminalScene({})
+    if (!startScene) return
 
-    localStateStore.setVisitedScenes([]);
-    localStateStore.setUnlockedSubQuests([0]);
-    this.updateActiveScene({ sceneId: startScene.id });
-  };
+    localStateStore.setVisitedScenes([])
+    localStateStore.setUnlockedSubQuests([0])
+    this.updateActiveScene({ sceneId: startScene.id })
+  }
 
   updateActiveScene = ({ sceneId }) => {
-    localStateStore.setActiveSceneId(sceneId);
-    localStateStore.setActiveFrameIndex(0);
-    localStateStore.addVisitedScenes(sceneId);
+    console.log("updateActiveScene") // zzz
 
-    const hideMissionConsole = localStateStore.getQuestStatus()
-      .hideMissionConsole;
-    localStateStore.unlockSubQuestForActiveScene();
+    localStateStore.setActiveSceneId(sceneId)
+    localStateStore.setActiveFrameIndex(0)
+    localStateStore.addVisitedScenes(sceneId)
+    const questStatus = localStateStore.getQuestStatus()
+
+    const { questConfig } = questStatus
+    const subQuestTriggers = questConfig.subQuestTriggers
+    console.log("subQuestTriggers", toJS(subQuestTriggers)) // zzz
+
+    const unHideTriggers = _get(
+      questConfig,
+      "subQuestTriggers[0].unHideTriggers"
+    )
+
+    Utils.unHideSubQuests({ unHideTriggers })
+
+    const hideMissionConsole = questStatus.hideMissionConsole
+    localStateStore.unlockSubQuestForActiveScene()
 
     if (!hideMissionConsole) {
-      this.updateQuestStatus({ sceneId });
+      this.updateQuestStatus({ sceneId })
     }
-  };
+  }
 
   updateQuestStatus = () => {
-    toaster.clear();
-    const activeScene = localStateStore.getActiveScene();
-    console.log("activeScene", toJS(activeScene)); // zzz
+    toaster.clear()
+    const activeScene = localStateStore.getActiveScene()
+    console.log("activeScene", toJS(activeScene)) // zzz
 
-    const { items = [], characters = [], location } = activeScene;
+    const { items = [], characters = [], location } = activeScene
 
     const { foundItem, completedMission } = localStateStore.updateQuestState({
       itemsInScene: [...items, location],
       charactersInScene: [...characters, ...items, location],
-    });
+    })
 
     if (foundItem) {
       const message = (
@@ -171,16 +184,16 @@ class MainStory extends React.Component {
           <br />
           <span>{`You put the ${foundItem.name} in your pocket.`}</span>
         </div>
-      );
-      toaster.show({ message, className: css.toaster, timeout: 30000 });
+      )
+      toaster.show({ message, className: css.toaster, timeout: 30000 })
     }
 
     // TODO: this should probably happen on the last frame.
     if (completedMission) {
-      const { rewards, item, recipient, name } = completedMission;
+      const { rewards, item, recipient, name } = completedMission
 
-      const reward = rewards[0];
-      const message = `You give the  ${item.name} to the ${recipient.name}.`;
+      const reward = rewards[0]
+      const message = `You give the  ${item.name} to the ${recipient.name}.`
 
       const message2 = (
         <div>
@@ -189,91 +202,91 @@ class MainStory extends React.Component {
           <br />
           <span>{`You win: ${reward.amount}  ${reward.name}.`}</span>
         </div>
-      );
+      )
       toaster.show({
         message: message2,
         className: css.toaster,
         timeout: 30000,
-      });
-      toaster.show({ message, className: css.toaster, timeout: 30000 });
+      })
+      toaster.show({ message, className: css.toaster, timeout: 30000 })
     }
 
-    this.setState({ dummy: new Date() });
-  };
+    this.setState({ dummy: new Date() })
+  }
 
   onChangeWorld = ({ mapId }) => {
-    console.log("onChangeWorld"); // zzz
-    console.log("mapId", mapId);
-    toaster.clear();
+    console.log("onChangeWorld") // zzz
+    console.log("mapId", mapId)
+    toaster.clear()
 
-    localStateStore.setActiveMapId(mapId);
-    const map = localStateStore.getActiveWorld();
-    const { questConfig } = map.data;
+    localStateStore.setActiveMapId(mapId)
+    const map = localStateStore.getActiveWorld()
+    const { questConfig } = map.data
 
     if (questConfig) {
-      const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig));
+      const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig))
 
       const combinedPockets = localStateStore.addToPockets({
         newPockets: clonedQuestConfig.pockets,
-      });
+      })
 
       localStateStore.setQuestStatus({
         activeMission: 0,
         pockets: combinedPockets,
         questConfig: clonedQuestConfig,
-      });
+      })
     } else {
       localStateStore.setQuestStatus({
         activeMission: 0,
         hideMissionConsole: true,
-      });
+      })
     }
-    localStateStore.setShowBookPicker(false);
+    localStateStore.setShowBookPicker(false)
 
-    this.setState({ showYouWinModal: false });
-    this.initWorld();
-  };
+    this.setState({ showYouWinModal: false })
+    this.initWorld()
+  }
 
   toggleWorldBuilder = () => {
-    toaster.clear();
-    const showWorldBuilder = localStateStore.getShowWorldBuilder();
-    const newShowWorldBuilder = !showWorldBuilder;
+    toaster.clear()
+    const showWorldBuilder = localStateStore.getShowWorldBuilder()
+    const newShowWorldBuilder = !showWorldBuilder
 
-    localStateStore.setShowWorldBuilder(newShowWorldBuilder);
+    localStateStore.setShowWorldBuilder(newShowWorldBuilder)
 
     if (newShowWorldBuilder === false) {
-      this.init();
+      this.init()
     }
-  };
+  }
 
   toggleBookPicker = () => {
-    const test = localStateStore.getShowBookPicker();
-    console.log("test", toJS(test)); // zzz
+    const test = localStateStore.getShowBookPicker()
+    console.log("test", toJS(test)) // zzz
 
-    localStateStore.setShowBookPicker(!test);
-    const test2 = localStateStore.getShowBookPicker();
-    console.log("test2", toJS(test2)); // zzz
-  };
+    localStateStore.setShowBookPicker(!test)
+    const test2 = localStateStore.getShowBookPicker()
+    console.log("test2", toJS(test2)) // zzz
+  }
 
   closeBookPicker = () => {
-    localStateStore.setShowBookPicker(false);
-  };
+    localStateStore.setShowBookPicker(false)
+  }
 
   closeYouWinModal = () => {
-    this.setState({ showYouWinModal: false });
-  };
+    this.setState({ showYouWinModal: false })
+  }
 
   openYouWinModal = () => {
-    this.setState({ showYouWinModal: true });
-  };
+    this.setState({ showYouWinModal: true })
+  }
 
   toggleYouWinModal = () => {
-    this.setState({ showYouWinModal: !this.state.showYouWinModal });
-  };
+    this.setState({ showYouWinModal: !this.state.showYouWinModal })
+  }
 
   renderWorldPicker = () => {
-    const { showProd, showYouWinModal } = this.state;
-    toaster.clear();
+    const { showProd, showYouWinModal } = this.state
+    toaster.clear()
 
     return (
       <QuestDialog
@@ -282,8 +295,8 @@ class MainStory extends React.Component {
         showYouWinModal={showYouWinModal}
         onChangeWorld={this.onChangeWorld}
       />
-    );
-  };
+    )
+  }
 
   renderBookPicker = () => {
     return (
@@ -291,11 +304,11 @@ class MainStory extends React.Component {
         closeYouWinModal={this.closeBookPicker}
         onChangeWorld={this.onChangeWorld}
       />
-    );
-  };
+    )
+  }
 
   renderButtons = () => {
-    const isProdRelease = localStateStore.getIsProdRelease();
+    const isProdRelease = localStateStore.getIsProdRelease()
 
     return (
       <div className={css.floatingButtons}>
@@ -313,13 +326,13 @@ class MainStory extends React.Component {
           )}
         </ButtonGroup>
       </div>
-    );
-  };
+    )
+  }
 
   render() {
-    const { className } = this.props;
-    const activeWorld = localStateStore.getActiveWorld();
-    const showWorldBuilder = localStateStore.getShowWorldBuilder();
+    const { className } = this.props
+    const activeWorld = localStateStore.getActiveWorld()
+    const showWorldBuilder = localStateStore.getShowWorldBuilder()
 
     if (showWorldBuilder) {
       return (
@@ -327,19 +340,19 @@ class MainStory extends React.Component {
           {showWorldBuilder && <WorldBuilder />}
           {this.renderButtons()}
         </div>
-      );
+      )
     }
 
     if (!activeWorld || !activeWorld.data || !activeWorld.data.title) {
-      return null;
+      return null
     }
 
-    const activeScene = localStateStore.getActiveScene();
+    const activeScene = localStateStore.getActiveScene()
     if (!activeScene) {
-      return null;
+      return null
     }
 
-    const showBookPicker = localStateStore.getShowBookPicker();
+    const showBookPicker = localStateStore.getShowBookPicker()
 
     return (
       <div className={`${css.main} ${className}`}>
@@ -352,8 +365,8 @@ class MainStory extends React.Component {
         {!IS_PROD_RELEASE && showBookPicker && this.renderBookPicker()}
         {this.state.showYouWinModal && this.renderWorldPicker()}
       </div>
-    );
+    )
   }
 }
 
-export default observer(MainStory);
+export default observer(MainStory)

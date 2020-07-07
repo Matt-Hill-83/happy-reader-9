@@ -1290,5 +1290,5 @@ const story9123 = {
       },
     ],
   },
-};
-export default story9123;
+}
+export default story9123
