@@ -10,8 +10,6 @@ const story9123 = {
         subQuestId: 1,
         coordinates: { col: 0, row: 3 },
         creatures: ["liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -67,8 +65,6 @@ const story9123 = {
         subQuestId: 1,
         coordinates: { row: 3, col: 1 },
         creatures: ["liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [{ name: "hog" }],
       },
       frames: [
@@ -125,8 +121,6 @@ const story9123 = {
         subQuestId: 1,
         coordinates: { row: 3, col: 2 },
         creatures: ["liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [{ name: "fig" }],
       },
       frames: [
@@ -154,8 +148,6 @@ const story9123 = {
         subQuestId: 1,
         coordinates: { row: 3, col: 3 },
         creatures: ["liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -199,8 +191,6 @@ const story9123 = {
         worldTitle: "--- test - FrogHopper - 001",
         coordinates: { col: 5, row: 1 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -228,8 +218,6 @@ const story9123 = {
         subQuestId: 5,
         coordinates: { row: 1, col: 6 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -257,8 +245,6 @@ const story9123 = {
         subQuestId: 5,
         coordinates: { col: 7, row: 1 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -286,8 +272,6 @@ const story9123 = {
         subQuestId: 5,
         coordinates: { col: 8, row: 1 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -315,8 +299,6 @@ const story9123 = {
         subQuestId: 5,
         coordinates: { row: 1, col: 9 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -345,8 +327,6 @@ const story9123 = {
         subQuestId: 2,
         coordinates: { row: 2, col: 3 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [{ name: "babyTroll01" }],
       },
       frames: [
@@ -422,8 +402,6 @@ const story9123 = {
         subQuestId: 2,
         coordinates: { row: 2, col: 4 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -451,8 +429,6 @@ const story9123 = {
         subQuestId: 2,
         coordinates: { row: 2, col: 5 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -480,8 +456,6 @@ const story9123 = {
         subQuestId: 7,
         coordinates: { col: 9, row: 2 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -509,8 +483,6 @@ const story9123 = {
         subQuestId: 7,
         coordinates: { col: 10, row: 2 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -538,8 +510,6 @@ const story9123 = {
         subQuestId: 7,
         coordinates: { col: 11, row: 2 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -567,8 +537,6 @@ const story9123 = {
         subQuestId: 0,
         coordinates: { row: 1, col: 0 },
         creatures: ["kat"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -658,8 +626,6 @@ const story9123 = {
         subQuestId: 0,
         coordinates: { row: 0, col: 1 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
         triggers: { unlockSceneConditions: { currentMission: 2 } },
       },
@@ -688,8 +654,6 @@ const story9123 = {
         subQuestId: 0,
         coordinates: { row: 1, col: 1 },
         creatures: ["kat"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -732,8 +696,6 @@ const story9123 = {
         subQuestId: 0,
         coordinates: { row: 1, col: 2 },
         creatures: ["kat"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -791,8 +753,6 @@ const story9123 = {
         subQuestId: 0,
         coordinates: { col: 3, row: 1 },
         creatures: ["kat"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -839,8 +799,6 @@ const story9123 = {
         worldTitle: "--- test - FrogHopper - 001",
         coordinates: { row: 3, col: 5 },
         creatures: ["kat"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -868,8 +826,6 @@ const story9123 = {
         subQuestId: 6,
         coordinates: { col: 6, row: 3 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -897,8 +853,6 @@ const story9123 = {
         subQuestId: 6,
         coordinates: { row: 3, col: 7 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -926,8 +880,6 @@ const story9123 = {
         subQuestId: 6,
         coordinates: { col: 8, row: 3 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -955,8 +907,6 @@ const story9123 = {
         subQuestId: 6,
         coordinates: { col: 9, row: 3 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -984,8 +934,6 @@ const story9123 = {
         subQuestId: 8,
         coordinates: { row: 3, col: 11 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -1013,8 +961,6 @@ const story9123 = {
         subQuestId: 8,
         coordinates: { row: 3, col: 12 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -1042,8 +988,6 @@ const story9123 = {
         subQuestId: 8,
         coordinates: { row: 3, col: 13 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -1071,8 +1015,6 @@ const story9123 = {
         subQuestId: 9,
         coordinates: { col: 13, row: 4 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
@@ -1100,8 +1042,6 @@ const story9123 = {
         subQuestId: 9,
         coordinates: { col: 14, row: 4 },
         creatures: ["kat", "liz2"],
-        isEndScene: false,
-        isStartScene: false,
         items: [],
       },
       frames: [
