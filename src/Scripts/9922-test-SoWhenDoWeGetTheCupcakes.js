@@ -112,13 +112,11 @@ const story9122 = {
             '{"liz2" : "I kept telling everyone that..."}',
             '{"kat" : "Liiiiiiizzzzz!!!"}',
             '{"kat" : "Oh sorry."}',
-            '{"liz2" : "So the frog was in on it the whole time."}',
-            '{"liz2" : "Wow."}',
 
             '{"kat" : "First you do step one."}',
             '{"kat" : "Then you do step two."}',
             '{"liz2" : "Oh I get it."}',
-            '{"liz2" : "If you give thebun to the pig, you get 5 gold."}',
+            '{"liz2" : "If you give the bun to the pig, you get 5 gold."}',
             '{"kat" : "Yes."}',
 
             '{"liz2" : "And that has been there this whole time?"}',
