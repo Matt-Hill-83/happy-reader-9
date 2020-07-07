@@ -39,17 +39,22 @@ class LocalStateStore {
   unlockSubQuestForActiveScene = () => {
     const scene = this.getActiveScene()
     const subQuestId = _get(scene, "sceneConfig.subQuestId")
+    this.unLockSubQuestById({ subQuestId })
+    // if (
+    //   typeof subQuestId === "number" &&
+    //   !this.unlockedSubQuests.includes(subQuestId)
+    // ) {
+    //   this.unlockedSubQuests.push(subQuestId)
+    // }
+  }
 
+  unLockSubQuestById = ({ subQuestId }) => {
     if (
       typeof subQuestId === "number" &&
       !this.unlockedSubQuests.includes(subQuestId)
     ) {
       this.unlockedSubQuests.push(subQuestId)
     }
-  }
-
-  unLockSubQuestById = ({ subQuestId }) => {
-    this.unlockedSubQuests.push(subQuestId)
   }
 
   ///////////////

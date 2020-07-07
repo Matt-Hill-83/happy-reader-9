@@ -187,7 +187,10 @@ const story9123 = {
     {
       title: "cub",
       sceneConfig: {
-        subQuestId: 5,
+        triggers: {
+          unlockSceneConditions: { currentMission: 3 },
+        },
+        subQuestId: 4,
         worldTitle: "--- test - FrogHopper - 001",
         coordinates: { col: 5, row: 1 },
         creatures: ["kat", "liz2"],
@@ -215,7 +218,7 @@ const story9123 = {
     {
       title: "hog",
       sceneConfig: {
-        subQuestId: 5,
+        subQuestId: 4,
         coordinates: { row: 1, col: 6 },
         creatures: ["kat", "liz2"],
         items: [],
@@ -242,7 +245,7 @@ const story9123 = {
     {
       title: "sassafras01Happy",
       sceneConfig: {
-        subQuestId: 5,
+        subQuestId: 4,
         coordinates: { col: 7, row: 1 },
         creatures: ["kat", "liz2"],
         items: [],
@@ -269,7 +272,7 @@ const story9123 = {
     {
       title: "cat01",
       sceneConfig: {
-        subQuestId: 5,
+        subQuestId: 4,
         coordinates: { col: 8, row: 1 },
         creatures: ["kat", "liz2"],
         items: [],
@@ -296,7 +299,7 @@ const story9123 = {
     {
       title: "boomALoo01",
       sceneConfig: {
-        subQuestId: 5,
+        subQuestId: 4,
         coordinates: { row: 1, col: 9 },
         creatures: ["kat", "liz2"],
         items: [],
@@ -457,6 +460,9 @@ const story9123 = {
       title: "brindle01Happy",
       sceneConfig: {
         subQuestId: 7,
+        triggers: {
+          unlockSceneConditions: { currentMission: 5 },
+        },
         coordinates: { col: 9, row: 2 },
         creatures: ["kat", "liz2"],
         items: [],
@@ -630,7 +636,7 @@ const story9123 = {
         coordinates: { row: 0, col: 1 },
         creatures: ["kat", "liz2"],
         items: [{ name: "mug" }],
-        triggers: { unlockSceneConditions: { currentMission: 3 } },
+        triggers: { unlockSceneConditions: { currentMission: 2 } },
       },
       frames: [
         {
@@ -797,8 +803,10 @@ const story9123 = {
     {
       title: "katieKooper01",
       sceneConfig: {
-        subQuestId: 6,
-
+        subQuestId: 5,
+        triggers: {
+          unlockSceneConditions: { currentMission: 4 },
+        },
         worldTitle: "--- test - FrogHopper - 001",
         coordinates: { row: 3, col: 5 },
         creatures: ["kat"],
@@ -826,7 +834,7 @@ const story9123 = {
     {
       title: "cap",
       sceneConfig: {
-        subQuestId: 6,
+        subQuestId: 5,
         coordinates: { col: 6, row: 3 },
         creatures: ["kat", "liz2"],
         items: [],
@@ -853,7 +861,7 @@ const story9123 = {
     {
       title: "bun",
       sceneConfig: {
-        subQuestId: 6,
+        subQuestId: 5,
         coordinates: { row: 3, col: 7 },
         creatures: ["kat", "liz2"],
         items: [],
@@ -880,7 +888,7 @@ const story9123 = {
     {
       title: "fan",
       sceneConfig: {
-        subQuestId: 6,
+        subQuestId: 5,
         coordinates: { col: 8, row: 3 },
         creatures: ["kat", "liz2"],
         items: [],
@@ -907,7 +915,7 @@ const story9123 = {
     {
       title: "cat_king",
       sceneConfig: {
-        subQuestId: 6,
+        subQuestId: 5,
         coordinates: { col: 9, row: 3 },
         creatures: ["kat", "liz2"],
         items: [],
@@ -935,6 +943,9 @@ const story9123 = {
       title: "sassafras01Happy",
       sceneConfig: {
         subQuestId: 8,
+        triggers: {
+          unlockSceneConditions: { currentMission: 7 },
+        },
         coordinates: { row: 3, col: 11 },
         creatures: ["kat", "liz2"],
         items: [],
@@ -1073,6 +1084,8 @@ const story9123 = {
       { subQuestId: 1, unHideTriggers: { completedMission: 0 } },
       { subQuestId: 2, unHideTriggers: { completedMission: 1 } },
       { subQuestId: 3, unHideTriggers: { completedMission: 2 } },
+      { subQuestId: 4, unHideTriggers: { completedMission: 2 } },
+      { subQuestId: 5, unHideTriggers: { completedMission: 3 } },
     ],
     missions: [
       {
@@ -1088,15 +1101,15 @@ const story9123 = {
         recipient: { name: "goat01" },
       },
       {
-        recipient: { name: "babyTroll01" },
-        name: "Give a Troll a Gift.",
-        item: { name: "pin" },
-        rewards: [{ name: "gold", amount: 5 }],
-      },
-      {
         recipient: { name: "pinky01" },
         name: "Give Pinky a gift.",
         item: { name: "mug" },
+        rewards: [{ name: "gold", amount: 5 }],
+      },
+      {
+        recipient: { name: "babyTroll01" },
+        name: "Give a Troll a Gift.",
+        item: { name: "pin" },
         rewards: [{ name: "gold", amount: 5 }],
       },
     ],
