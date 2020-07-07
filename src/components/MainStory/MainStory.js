@@ -145,23 +145,20 @@ class MainStory extends React.Component {
     localStateStore.setActiveFrameIndex(0)
     localStateStore.addVisitedScenes(sceneId)
 
-    const questStatus = localStateStore.getQuestStatus()
-    const { questConfig } = questStatus
+    localStateStore.unlockSubQuestForActiveScene()
 
-    const hideMissionConsole = questStatus.hideMissionConsole
+    const questStatus = localStateStore.getQuestStatus()
+    const { questConfig, hideMissionConsole } = questStatus
+
     if (!hideMissionConsole) {
       this.updateQuestStatus({ sceneId })
     }
 
-    const subQuestTriggersList = questConfig.subQuestTriggersList
-    // console.log("subQuestTriggersList", toJS(subQuestTriggersList)) // zzz
+    const { subQuestTriggersList } = questConfig
 
     subQuestTriggersList.forEach((subQuestTriggers) => {
-      // const subQuestTriggers = _get(questConfig, "subQuestTriggersList[0]")
       Utils.unLockSubQuests({ subQuestTriggers })
     })
-
-    localStateStore.unlockSubQuestForActiveScene()
 
     // this.setState({ test: Math.random() })
   }

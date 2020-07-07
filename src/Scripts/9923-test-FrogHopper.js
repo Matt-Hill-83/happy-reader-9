@@ -73,14 +73,14 @@ const story9123 = {
       frames2: [],
     },
     {
-      title: "lake",
+      title: "goat01",
       sceneConfig: {
         subQuestId: 1,
         coordinates: { row: 3, col: 1 },
         creatures: ["liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "goat01" }],
+        items: [{ name: "hog" }],
       },
       frames: [
         {
@@ -396,8 +396,7 @@ const story9123 = {
     {
       title: "hill",
       sceneConfig: {
-        subQuestId: 5,
-        subQuestId: 3,
+        subQuestId: 2,
         coordinates: { row: 2, col: 3 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -501,7 +500,7 @@ const story9123 = {
     {
       title: "pinky01",
       sceneConfig: {
-        subQuestId: 3,
+        subQuestId: 2,
         coordinates: { row: 2, col: 4 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -535,7 +534,7 @@ const story9123 = {
     {
       title: "dragon",
       sceneConfig: {
-        subQuestId: 3,
+        subQuestId: 2,
         coordinates: { row: 2, col: 5 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -1267,7 +1266,7 @@ const story9123 = {
   ],
   questConfig: {
     subQuestTriggersList: [
-      { subQuestId: 0, unHideTriggers: {} },
+      // { subQuestId: 0, unHideTriggers: {} },
       { subQuestId: 1, unHideTriggers: { completedMission: 0 } },
       { subQuestId: 2, unHideTriggers: { completedMission: 1 } },
       { subQuestId: 3, unHideTriggers: { completedMission: 2 } },
