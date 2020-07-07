@@ -12,7 +12,7 @@ const story9123 = {
         creatures: ["liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -80,7 +80,7 @@ const story9123 = {
         creatures: ["liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "goat01" }],
       },
       frames: [
         {
@@ -148,7 +148,7 @@ const story9123 = {
         creatures: ["liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -158,7 +158,7 @@ const story9123 = {
               { face: "happy", character: "liz2", characterIndex: 1 },
               { characterIndex: 0, character: "kat", face: "happy" },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["liz2"],
           },
           dialogs: [
             '{"kat" : ""}',
@@ -180,7 +180,7 @@ const story9123 = {
         creatures: ["liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -190,7 +190,7 @@ const story9123 = {
               { characterIndex: 1, character: "liz2", face: "happy" },
               { characterIndex: 0, face: "happy", character: "kat" },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["liz2"],
           },
           dialogs: [
             '{"kat" : ""}',
@@ -231,7 +231,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -265,7 +265,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -299,7 +299,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -333,7 +333,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -367,7 +367,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -402,7 +402,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -506,7 +506,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -540,7 +540,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -574,7 +574,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -608,7 +608,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -642,7 +642,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -676,7 +676,7 @@ const story9123 = {
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -686,7 +686,7 @@ const story9123 = {
               { characterIndex: 1, character: "liz2", face: "happy" },
               { face: "happy", characterIndex: 0, character: "kat" },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["kat"],
           },
           dialogs: [
             '{"kat" : "Today is the big day."}',
@@ -704,7 +704,7 @@ const story9123 = {
               { face: "happy", characterIndex: 1, character: "liz2" },
               { face: "happy", characterIndex: 0, character: "kat" },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["kat"],
           },
           dialogs: [
             '{"kat" : "First get the bun."}',
@@ -722,7 +722,7 @@ const story9123 = {
               { characterIndex: 1, face: "happy", character: "liz2" },
               { face: "happy", characterIndex: 0, character: "kat" },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["kat"],
           },
           dialogs: [
             '{"kat" : "Get the bun."}',
@@ -740,7 +740,7 @@ const story9123 = {
               { face: "happy", characterIndex: 1, character: "liz2" },
               { characterIndex: 0, face: "happy", character: "kat" },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["kat"],
           },
           dialogs: [
             '{"kat" : "I need to find the bun."}',
@@ -762,7 +762,7 @@ const story9123 = {
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -772,7 +772,7 @@ const story9123 = {
               { character: "liz2", characterIndex: 1, face: "happy" },
               { face: "happy", characterIndex: 0, character: "kat" },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["kat"],
           },
           dialogs: [
             '{"kat" : "I see the bun!"}',
@@ -790,7 +790,7 @@ const story9123 = {
               { character: "liz2", characterIndex: 1, face: "happy" },
               { characterIndex: 0, character: "kat", face: "happy" },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["kat"],
           },
           dialogs: [
             '{"kat" : "I will run to the bun..."}',
@@ -812,7 +812,7 @@ const story9123 = {
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -822,7 +822,7 @@ const story9123 = {
               { character: "liz2", characterIndex: 1, face: "happy" },
               { character: "kat", face: "happy", characterIndex: 0 },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["kat"],
           },
           dialogs: [
             '{"kat" : "Yay! I got the bun!"}',
@@ -840,7 +840,7 @@ const story9123 = {
               { face: "happy", character: "liz2", characterIndex: 1 },
               { characterIndex: 0, face: "happy", character: "kat" },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["kat"],
           },
           dialogs: [
             '{"kat" : "Find the pig."}',
@@ -858,7 +858,7 @@ const story9123 = {
               { face: "happy", character: "liz2", characterIndex: 1 },
               { character: "kat", characterIndex: 0, face: "happy" },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["kat"],
           },
           dialogs: [
             '{"kat" : "I need to find a pig."}',
@@ -880,7 +880,7 @@ const story9123 = {
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -890,7 +890,7 @@ const story9123 = {
               { face: "happy", character: "liz2", characterIndex: 1 },
               { face: "happy", characterIndex: 0, character: "kat" },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["kat"],
           },
           dialogs: [
             '{"kat" : "I see the pig!"}',
@@ -908,7 +908,7 @@ const story9123 = {
               { face: "happy", characterIndex: 1, character: "liz2" },
               { characterIndex: 0, character: "kat", face: "happy" },
             ],
-            creatures: ["kat", "liz2"],
+            creatures: ["kat"],
           },
           dialogs: [
             '{"kat" : "Pig, do you want a twig?"}',
@@ -929,10 +929,10 @@ const story9123 = {
 
         worldTitle: "--- test - FrogHopper - 001",
         coordinates: { row: 3, col: 5 },
-        creatures: ["kat", "liz2"],
+        creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -966,7 +966,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -1000,7 +1000,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -1034,7 +1034,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -1068,7 +1068,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -1102,7 +1102,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -1136,7 +1136,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -1170,7 +1170,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -1204,7 +1204,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
@@ -1238,7 +1238,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "flag" }, { name: "bag" }],
+        items: [{ name: "pin" }],
       },
       frames: [
         {
