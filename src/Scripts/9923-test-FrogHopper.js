@@ -12,7 +12,7 @@ const story9123 = {
         creatures: ["liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -25,12 +25,8 @@ const story9123 = {
             creatures: ["liz2"],
           },
           dialogs: [
-            '{"kat" : ""}',
             '{"liz2" : "I see a frog. I see a frog on a log."}',
-            '{"kat" : ""}',
             '{"liz2" : "Tee Hee Hee."}',
-            '{"kat" : ""}',
-            '{"liz2" : ""}',
           ],
         },
         {
@@ -43,11 +39,8 @@ const story9123 = {
             creatures: ["liz2"],
           },
           dialogs: [
-            '{"kat" : ""}',
             '{"liz2" : "I need a pet."}',
-            '{"kat" : ""}',
             '{"liz2" : "I will get a pet."}',
-            '{"kat" : ""}',
             '{"liz2" : "I will go to the vet."}',
           ],
         },
@@ -61,12 +54,8 @@ const story9123 = {
             creatures: ["liz2"],
           },
           dialogs: [
-            '{"kat" : ""}',
             '{"liz2" : "I did not get a pet yet."}',
-            '{"kat" : ""}',
             '{"liz2" : "My feet are wet."}',
-            '{"kat" : ""}',
-            '{"liz2" : ""}',
           ],
         },
       ],
@@ -93,11 +82,8 @@ const story9123 = {
             creatures: ["liz2"],
           },
           dialogs: [
-            '{"kat" : ""}',
             '{"liz2" : "I see a pig."}',
-            '{"kat" : ""}',
             '{"liz2" : " I see a pig in a wig."}',
-            '{"kat" : ""}',
             '{"liz2" : "That pig is big. Tee Hee Hee."}',
           ],
         },
@@ -111,11 +97,8 @@ const story9123 = {
             creatures: ["kat", "liz2"],
           },
           dialogs: [
-            '{"kat" : ""}',
             '{"liz2" : "I see a twig."}',
-            '{"kat" : ""}',
             '{"liz2" : "I wish I had a pet."}',
-            '{"kat" : ""}',
             '{"liz2" : "I will look. I will look in a book."}',
           ],
         },
@@ -129,12 +112,8 @@ const story9123 = {
             creatures: ["kat", "liz2"],
           },
           dialogs: [
-            '{"kat" : ""}',
             '{"liz2" : "I wish I had a pal."}',
-            '{"kat" : ""}',
             '{"liz2" : "I will find a pal."}',
-            '{"kat" : ""}',
-            '{"liz2" : ""}',
           ],
         },
       ],
@@ -161,11 +140,8 @@ const story9123 = {
             creatures: ["liz2"],
           },
           dialogs: [
-            '{"kat" : ""}',
             '{"liz2" : "I will go to the bun."}',
-            '{"kat" : ""}',
             '{"liz2" : "The bun will be fun."}',
-            '{"kat" : ""}',
             '{"liz2" : "I will run to the bun!"}',
           ],
         },
@@ -173,14 +149,14 @@ const story9123 = {
       frames2: [],
     },
     {
-      title: "helicopter01",
+      title: "ringOfZandar01",
       sceneConfig: {
         subQuestId: 1,
         coordinates: { row: 3, col: 3 },
         creatures: ["liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -193,11 +169,8 @@ const story9123 = {
             creatures: ["liz2"],
           },
           dialogs: [
-            '{"kat" : ""}',
             '{"liz2" : "I see a..."}',
-            '{"kat" : ""}',
             '{"liz2" : "I see a..."}',
-            '{"kat" : ""}',
             '{"liz2" : "I have no idea what I see."}',
           ],
         },
@@ -211,11 +184,8 @@ const story9123 = {
             creatures: ["kat", "liz2"],
           },
           dialogs: [
-            '{"kat" : ""}',
             '{"liz2" : "I see a red lego car..."}',
-            '{"kat" : ""}',
             '{"liz2" : "...that can fly?"}',
-            '{"kat" : ""}',
             '{"liz2" : "Oh my. Oh my."}',
           ],
         },
@@ -231,7 +201,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -247,12 +217,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -265,7 +230,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -281,12 +246,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -299,7 +259,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -315,12 +275,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -333,7 +288,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -349,12 +304,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -367,7 +317,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -383,12 +333,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -396,12 +341,13 @@ const story9123 = {
     {
       title: "hill",
       sceneConfig: {
+        triggers: { unlockSceneConditions: { currentMission: 2 } },
         subQuestId: 2,
         coordinates: { row: 2, col: 3 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [{ name: "babyTroll01" }],
       },
       frames: [
         {
@@ -415,11 +361,8 @@ const story9123 = {
           },
           dialogs: [
             '{"kat" : "I see a girl."}',
-            '{"liz2" : ""}',
             '{"kat" : "I see a girl..."}',
-            '{"liz2" : ""}',
             '{"kat" : "...twirl."}',
-            '{"liz2" : ""}',
           ],
         },
         {
@@ -434,9 +377,7 @@ const story9123 = {
           dialogs: [
             '{"kat" : "Hello girl."}',
             '{"liz2" : "Oh my gosh! I see a girl too!"}',
-            '{"kat" : ""}',
             '{"liz2" : "Are you a girl..."}',
-            '{"kat" : ""}',
             '{"liz2" : "...or a robot?"}',
           ],
         },
@@ -455,7 +396,6 @@ const story9123 = {
             '{"kat" : "I will be your pal!"}',
             '{"liz2" : "Yay!"}',
             '{"kat" : "You are my best pal!"}',
-            '{"liz2" : ""}',
           ],
         },
         {
@@ -471,27 +411,6 @@ const story9123 = {
             '{"kat" : "We can have fun."}',
             '{"liz2" : "We can have fun..."}',
             '{"kat" : "...in the sun!"}',
-            '{"liz2" : ""}',
-            '{"kat" : ""}',
-            '{"liz2" : ""}',
-          ],
-        },
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { face: "happy", characterIndex: 1, character: "liz2" },
-              { face: "happy", character: "kat", characterIndex: 0 },
-            ],
-            creatures: ["kat", "liz2"],
-          },
-          dialogs: [
-            '{"kat" : ""}',
-            '{"liz2" : ""}',
-            '{"kat" : ""}',
-            '{"liz2" : ""}',
-            '{"kat" : ""}',
-            '{"liz2" : ""}',
           ],
         },
       ],
@@ -505,7 +424,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -521,12 +440,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"pinky" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -539,7 +453,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -555,12 +469,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -573,7 +482,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -589,12 +498,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -607,7 +511,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -623,12 +527,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -641,7 +540,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -657,12 +556,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -675,7 +569,7 @@ const story9123 = {
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -689,11 +583,8 @@ const story9123 = {
           },
           dialogs: [
             '{"kat" : "Today is the big day."}',
-            '{"liz2" : ""}',
             '{"kat" : "Do the steps."}',
-            '{"liz2" : ""}',
             '{"kat" : "Do the steps and get the dress."}',
-            '{"liz2" : ""}',
           ],
         },
         {
@@ -707,11 +598,8 @@ const story9123 = {
           },
           dialogs: [
             '{"kat" : "First get the bun."}',
-            '{"liz2" : ""}',
             '{"kat" : "Do the steps."}',
-            '{"liz2" : ""}',
             '{"kat" : "Get the dress."}',
-            '{"liz2" : ""}',
           ],
         },
         {
@@ -725,11 +613,8 @@ const story9123 = {
           },
           dialogs: [
             '{"kat" : "Get the bun."}',
-            '{"liz2" : ""}',
             '{"kat" : "Give the bun to the pig."}',
-            '{"liz2" : ""}',
             '{"kat" : "I will find the bun."}',
-            '{"liz2" : ""}',
           ],
         },
         {
@@ -743,11 +628,55 @@ const story9123 = {
           },
           dialogs: [
             '{"kat" : "I need to find the bun."}',
-            '{"liz2" : ""}',
             '{"kat" : "I will find a bun..."}',
-            '{"liz2" : ""}',
             '{"kat" : "...in the sun. Tee Hee Hee."}',
-            '{"liz2" : ""}',
+          ],
+        },
+        {
+          frameConfig: {
+            items: [],
+            faces: [
+              { face: "happy", characterIndex: 1, character: "liz2" },
+              { characterIndex: 0, face: "happy", character: "kat" },
+            ],
+            creatures: ["kat"],
+          },
+          dialogs: [
+            '{"kat" : "You want a bun?"}',
+            '{"liz2" : "Did you find that on the ground?"}',
+            '{"kat" : "yes."}',
+            '{"liz2" : "I do not want a bun."}',
+            '{"kat" : "Good call."}',
+          ],
+        },
+      ],
+      frames2: [],
+    },
+    {
+      title: "slide",
+      sceneConfig: {
+        subQuestId: 0,
+        coordinates: { row: 0, col: 1 },
+        creatures: ["kat", "liz2"],
+        isEndScene: false,
+        isStartScene: false,
+        items: [],
+        triggers: { unlockSceneConditions: { currentMission: 2 } },
+      },
+      frames: [
+        {
+          frameConfig: {
+            items: [{ name: "mug" }],
+            faces: [
+              { character: "liz2", characterIndex: 1, face: "happy" },
+              { face: "happy", characterIndex: 0, character: "kat" },
+            ],
+            creatures: ["kat"],
+          },
+          dialogs: [
+            '{"kat" : "I see the bun!"}',
+            '{"kat" : "I see the bun!"}',
+            '{"kat" : "I will run to the bun."}',
           ],
         },
       ],
@@ -761,7 +690,7 @@ const story9123 = {
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -775,11 +704,8 @@ const story9123 = {
           },
           dialogs: [
             '{"kat" : "I see the bun!"}',
-            '{"liz2" : ""}',
             '{"kat" : "I see the bun!"}',
-            '{"liz2" : ""}',
             '{"kat" : "I will run to the bun."}',
-            '{"liz2" : ""}',
           ],
         },
         {
@@ -793,11 +719,8 @@ const story9123 = {
           },
           dialogs: [
             '{"kat" : "I will run to the bun..."}',
-            '{"liz2" : ""}',
             '{"kat" : "...in the sun!"}',
-            '{"liz2" : ""}',
             '{"kat" : "Tee Hee Hee!"}',
-            '{"liz2" : ""}',
           ],
         },
       ],
@@ -811,7 +734,7 @@ const story9123 = {
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -825,11 +748,8 @@ const story9123 = {
           },
           dialogs: [
             '{"kat" : "Yay! I got the bun!"}',
-            '{"liz2" : ""}',
             '{"kat" : "Ok Kat. Good job."}',
-            '{"liz2" : ""}',
             '{"kat" : "Now. Give the bun to the pig."}',
-            '{"liz2" : ""}',
           ],
         },
         {
@@ -843,11 +763,8 @@ const story9123 = {
           },
           dialogs: [
             '{"kat" : "Find the pig."}',
-            '{"liz2" : ""}',
             '{"kat" : "Give the bun to the pig."}',
-            '{"liz2" : ""}',
             '{"kat" : "Do the steps. Get the dress."}',
-            '{"liz2" : ""}',
           ],
         },
         {
@@ -861,11 +778,8 @@ const story9123 = {
           },
           dialogs: [
             '{"kat" : "I need to find a pig."}',
-            '{"liz2" : ""}',
             '{"kat" : "Here piggy piggy piggy!"}',
-            '{"liz2" : ""}',
             '{"kat" : "I will find a big pig."}',
-            '{"liz2" : ""}',
           ],
         },
       ],
@@ -879,7 +793,7 @@ const story9123 = {
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -893,11 +807,8 @@ const story9123 = {
           },
           dialogs: [
             '{"kat" : "I see the pig!"}',
-            '{"liz2" : ""}',
             '{"kat" : "Wow! The pig is big."}',
-            '{"liz2" : ""}',
             '{"kat" : "Hello pig!"}',
-            '{"liz2" : ""}',
           ],
         },
         {
@@ -913,7 +824,6 @@ const story9123 = {
             '{"kat" : "Pig, do you want a twig?"}',
             '{"liz2" : "pig: me want more bun."}',
             '{"kat" : "More bun? Wow. You eat a lot."}',
-            '{"liz2" : ""}',
             '{"kat" : "Feeding a pig is a lot of work."}',
             '{"liz2" : "pig: oink!"}',
           ],
@@ -931,7 +841,7 @@ const story9123 = {
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -947,12 +857,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -965,7 +870,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -981,12 +886,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -999,7 +899,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -1015,12 +915,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -1033,7 +928,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -1049,12 +944,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -1067,7 +957,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -1083,12 +973,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -1101,7 +986,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -1117,12 +1002,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -1135,7 +1015,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -1151,12 +1031,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -1169,7 +1044,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -1185,12 +1060,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -1203,7 +1073,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -1219,12 +1089,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -1237,7 +1102,7 @@ const story9123 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [],
       },
       frames: [
         {
@@ -1253,12 +1118,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "We can play."}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-            '{"liz2" : ""}',
-          ],
+          dialogs: ['{"kat" : "We can play."}'],
         },
       ],
       frames2: [],
@@ -1275,26 +1135,26 @@ const story9123 = {
       {
         item: { name: "bun" },
         name: "Feed the pig",
-        rewards: [{ amount: 5, name: "pin" }],
+        rewards: [{ amount: 5, name: "gold" }],
         recipient: { name: "pig" },
       },
       {
         item: { name: "fig" },
         name: "Feed the goat.",
-        rewards: [{ amount: 5, name: "top" }],
+        rewards: [{ amount: 5, name: "gold" }],
         recipient: { name: "goat01" },
       },
       {
-        recipient: { name: "gerald01" },
-        name: "Bring the skull to Grimelda.",
-        item: { name: "helicopter01" },
-        rewards: [{ name: "hat", amount: 5 }],
+        recipient: { name: "pinky01" },
+        name: "Give Pinky a gift.",
+        item: { name: "mug" },
+        rewards: [{ name: "gold", amount: 5 }],
       },
       {
-        recipient: { name: "gerald01" },
+        recipient: { name: "gerald01babyTroll01" },
         name: "Bring the skull to Grimelda.",
-        item: { name: "helicopter01" },
-        rewards: [{ name: "hat", amount: 5 }],
+        item: { name: "ringOfZandar01" },
+        rewards: [{ name: "gold", amount: 5 }],
       },
     ],
   },
