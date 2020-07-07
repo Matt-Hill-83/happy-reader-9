@@ -10,8 +10,7 @@ class LocalStateStore {
   creatures = []
   defaultWorldId = null
   mapBuilderGrid = []
-  maps = []
-  page = ""
+  // maps = []
   showBookPicker = false
   showWorldBuilder = false
   test = null
@@ -39,14 +38,19 @@ class LocalStateStore {
   }
 
   unlockSubQuestForActiveScene = () => {
+    console.log("unlockSubQuestForActiveScene") // zzz
     const scene = this.getActiveScene()
     const subQuestId = _get(scene, "sceneConfig.subQuestId")
     if (typeof subQuestId === "number") {
-      this.unlockedSubQuests.push(subQuestId)
+      console.log("this.unlockedSubQuests", toJS(this.unlockedSubQuests)) // zzz
+      if (!this.unlockedSubQuests.includes(subQuestId)) {
+        this.unlockedSubQuests.push(subQuestId)
+      }
     }
   }
 
-  unHideSubQuestById = ({ subQuestId }) => {
+  unLockSubQuestById = ({ subQuestId }) => {
+    console.log("unLockSubQuestById-------------------------->>>") // zzz
     this.unlockedSubQuests.push(subQuestId)
   }
 
@@ -384,8 +388,7 @@ decorate(LocalStateStore, {
   defaultWorldId: observable,
   mapBuilderGrid: observable,
   mapBuilderWorld: observable,
-  maps: observable,
-  page: observable,
+  // maps: observable,
   questStatus: observable,
   showBookPicker: observable,
   showWorldBuilder: observable,

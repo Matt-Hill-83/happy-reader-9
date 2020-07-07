@@ -415,7 +415,10 @@ export default class Utils {
     return neighbors
   }
 
-  static unHideSubQuests = ({ unHideTriggers = [] }) => {
+  static unLockSubQuests = ({ subQuestTriggers = [] }) => {
+    console.log("subQuestTriggers", toJS(subQuestTriggers)) // zzz
+    const { unHideTriggers, subQuestId } = subQuestTriggers
+
     const questStatus = localStateStore.getQuestStatus()
     console.log("questStatus", toJS(questStatus)) // zzz
 
@@ -434,8 +437,7 @@ export default class Utils {
     ) // zzz
 
     if (completedMissions.includes(requiredCompletedMission)) {
-      const subQuestId = 9
-      localStateStore.unHideSubQuestById({ subQuestId })
+      localStateStore.unLockSubQuestById({ subQuestId })
     }
   }
 }

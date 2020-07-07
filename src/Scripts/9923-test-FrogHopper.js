@@ -671,7 +671,7 @@ const story9123 = {
     {
       title: "home",
       sceneConfig: {
-        subQuestId: 2,
+        subQuestId: 0,
         coordinates: { row: 3, col: 0 },
         creatures: ["kat"],
         isEndScene: false,
@@ -757,7 +757,7 @@ const story9123 = {
     {
       title: "ant",
       sceneConfig: {
-        subQuestId: 2,
+        subQuestId: 0,
         coordinates: { row: 3, col: 1 },
         creatures: ["kat"],
         isEndScene: false,
@@ -807,7 +807,7 @@ const story9123 = {
     {
       title: "bun",
       sceneConfig: {
-        subQuestId: 2,
+        subQuestId: 0,
         coordinates: { row: 3, col: 2 },
         creatures: ["kat"],
         isEndScene: false,
@@ -875,7 +875,7 @@ const story9123 = {
     {
       title: "pig",
       sceneConfig: {
-        subQuestId: 2,
+        subQuestId: 0,
         coordinates: { col: 3, row: 3 },
         creatures: ["kat"],
         isEndScene: false,
@@ -1266,7 +1266,7 @@ const story9123 = {
     },
   ],
   questConfig: {
-    subQuestTriggers: [
+    subQuestTriggersList: [
       { subQuestId: 1, unHideTriggers: { completedMission: 0 } },
     ],
     missions: [

@@ -194,7 +194,7 @@ class MiniLocation extends React.Component {
       questStatus.activeMission >= unlockSceneMission
 
     const unlockedSubQuests = localStateStore.getUnlockedSubQuests()
-    console.log("unlockedSubQuests", toJS(unlockedSubQuests)) // zzz
+    // console.log("unlockedSubQuests", toJS(unlockedSubQuests)) // zzz
 
     const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId)
 
@@ -243,7 +243,7 @@ class MiniLocation extends React.Component {
     const showBottomPath = neighbors[Utils.neighborPositionsEnum.bottom]
     const showRightPath = neighbors[Utils.neighborPositionsEnum.right]
 
-    const colors = ["fcf6bd", "d0f4de", "a9def9", "e4c1f9"]
+    const colors = ["d0f4de", "a9def9", "e4c1f9", "fcf6bd"]
 
     const colorIndex = subQuestId % colors.length
     const backgroundColor = colors[colorIndex]

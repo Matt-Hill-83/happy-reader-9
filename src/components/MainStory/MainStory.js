@@ -144,25 +144,25 @@ class MainStory extends React.Component {
     localStateStore.setActiveSceneId(sceneId)
     localStateStore.setActiveFrameIndex(0)
     localStateStore.addVisitedScenes(sceneId)
+
     const questStatus = localStateStore.getQuestStatus()
-
     const { questConfig } = questStatus
-    const subQuestTriggers = questConfig.subQuestTriggers
-    console.log("subQuestTriggers", toJS(subQuestTriggers)) // zzz
 
-    const unHideTriggers = _get(
-      questConfig,
-      "subQuestTriggers[0].unHideTriggers"
-    )
+    const subQuestTriggersList = questConfig.subQuestTriggersList
+    console.log("subQuestTriggersList", toJS(subQuestTriggersList)) // zzz
 
-    Utils.unHideSubQuests({ unHideTriggers })
+    const subQuestTriggers = _get(questConfig, "subQuestTriggersList[0]")
 
     const hideMissionConsole = questStatus.hideMissionConsole
-    localStateStore.unlockSubQuestForActiveScene()
-
     if (!hideMissionConsole) {
       this.updateQuestStatus({ sceneId })
     }
+
+    Utils.unLockSubQuests({ subQuestTriggers })
+    console.log("unLockSubQuests---------------------------------------->>>") // zzz
+    localStateStore.unlockSubQuestForActiveScene()
+
+    // this.setState({ test: Math.random() })
   }
 
   updateQuestStatus = () => {
@@ -330,6 +330,13 @@ class MainStory extends React.Component {
   }
 
   render() {
+    console.log("") // zzz
+    console.log("") // zzz
+    console.log("") // zzz
+    console.log("main story render") // zzz
+    const unlockedSubQuests = localStateStore.getUnlockedSubQuests()
+    console.log("unlockedSubQuests", toJS(unlockedSubQuests)) // zzz
+
     const { className } = this.props
     const activeWorld = localStateStore.getActiveWorld()
     const showWorldBuilder = localStateStore.getShowWorldBuilder()
