@@ -279,8 +279,10 @@ export default class Utils {
       location: { name: "blank" },
       doorRight: { name: "doorYellow" },
       doorBottom: { name: "doorGreen" },
-      characters: [{ name: "kat" }, { name: "liz2" }],
-      items: [{ name: "cup" }, { name: "pig" }],
+      characters: [{ name: "kat" }, { name: "liz2" }, { name: "dog01" }],
+      // characters: [],
+      // items: [],
+      items: [{ name: "cup" }, { name: "pin" }],
       frameSet: { frames: [dummyFrame] },
       id,
     }

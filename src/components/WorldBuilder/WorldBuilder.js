@@ -262,6 +262,8 @@ class WorldBuilder extends Component {
           isLastCol,
           coordinates,
           id,
+          // items: [{ name: "cup" }, { name: "pup01" }],
+          // characters: [{ name: "kat" }, { name: "liz2" }, { name: "dog01" }],
         }
 
         const blankScene = Utils.getBlankScene({ props })
@@ -484,7 +486,6 @@ class WorldBuilder extends Component {
     const theScenes = newWorld.scenes2 || newWorld.scenes
 
     theScenes.forEach((scene, sceneIndex) => {
-      // const { sceneConfig } = scene;
       const { frames, sceneConfig, frames2 } = scene
 
       const coordinates = sceneConfig.coordinates || {
