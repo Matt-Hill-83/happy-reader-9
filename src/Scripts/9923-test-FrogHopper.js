@@ -143,7 +143,7 @@ const story9123 = {
       frames2: [],
     },
     {
-      title: "ringOfZandar01",
+      title: "pin",
       sceneConfig: {
         subQuestId: 1,
         coordinates: { row: 3, col: 3 },
@@ -418,7 +418,7 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: ['{"pinky" : "We can play."}'],
+          dialogs: ['{"pinky" : "Me need mug."}'],
         },
       ],
       frames2: [],
@@ -445,7 +445,10 @@ const story9123 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: ['{"kat" : "We can play."}'],
+          dialogs: [
+            '{"kat" : "I need to go now."}',
+            '{"liz2" : "We can play soon."}',
+          ],
         },
       ],
       frames2: [],
@@ -505,7 +508,7 @@ const story9123 = {
       frames2: [],
     },
     {
-      title: "pig",
+      title: "elf",
       sceneConfig: {
         subQuestId: 7,
         coordinates: { col: 11, row: 2 },
@@ -626,8 +629,8 @@ const story9123 = {
         subQuestId: 0,
         coordinates: { row: 0, col: 1 },
         creatures: ["kat", "liz2"],
-        items: [],
-        triggers: { unlockSceneConditions: { currentMission: 2 } },
+        items: [{ name: "mug" }],
+        triggers: { unlockSceneConditions: { currentMission: 3 } },
       },
       frames: [
         {
@@ -1085,15 +1088,15 @@ const story9123 = {
         recipient: { name: "goat01" },
       },
       {
-        recipient: { name: "pinky01" },
-        name: "Give Pinky a gift.",
-        item: { name: "mug" },
+        recipient: { name: "babyTroll01" },
+        name: "Give a Troll a Gift.",
+        item: { name: "pin" },
         rewards: [{ name: "gold", amount: 5 }],
       },
       {
-        recipient: { name: "gerald01babyTroll01" },
-        name: "Bring the skull to Grimelda.",
-        item: { name: "ringOfZandar01" },
+        recipient: { name: "pinky01" },
+        name: "Give Pinky a gift.",
+        item: { name: "mug" },
         rewards: [{ name: "gold", amount: 5 }],
       },
     ],
