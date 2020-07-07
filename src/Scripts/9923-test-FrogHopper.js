@@ -1267,7 +1267,10 @@ const story9123 = {
   ],
   questConfig: {
     subQuestTriggersList: [
+      { subQuestId: 0, unHideTriggers: {} },
       { subQuestId: 1, unHideTriggers: { completedMission: 0 } },
+      { subQuestId: 2, unHideTriggers: { completedMission: 1 } },
+      { subQuestId: 3, unHideTriggers: { completedMission: 2 } },
     ],
     missions: [
       {
@@ -1278,15 +1281,21 @@ const story9123 = {
       },
       {
         item: { name: "fig" },
-        name: "Find a pet for the elf.",
-        rewards: [{ amount: 5, name: "gold" }],
+        name: "Feed the goat.",
+        rewards: [{ amount: 5, name: "top" }],
         recipient: { name: "goat01" },
       },
       {
-        recipient: { name: "wizard" },
+        recipient: { name: "gerald01" },
         name: "Bring the skull to Grimelda.",
-        item: { name: "skull01" },
-        rewards: [{ name: "gold", amount: 5 }],
+        item: { name: "helicopter01" },
+        rewards: [{ name: "hat", amount: 5 }],
+      },
+      {
+        recipient: { name: "gerald01" },
+        name: "Bring the skull to Grimelda.",
+        item: { name: "helicopter01" },
+        rewards: [{ name: "hat", amount: 5 }],
       },
     ],
   },
