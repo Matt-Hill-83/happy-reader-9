@@ -46,6 +46,7 @@ SHOW_WORLD_BUILDER = false
 const toaster = Toaster.create({
   position: Position.TOP,
   className: css.toasterContainer,
+  canEscapeKeyClear: true,
 })
 
 class MainStory extends React.Component {
@@ -183,7 +184,12 @@ class MainStory extends React.Component {
           <span>{`You put the ${foundItem.name} in your pocket.`}</span>
         </div>
       )
-      toaster.show({ message, className: css.toaster, timeout: 30000 })
+      toaster.show({
+        message,
+        className: css.toaster,
+        timeout: 30000,
+        canEscapeKeyClear: true,
+      })
     }
 
     // TODO: this should probably happen on the last frame.
