@@ -154,7 +154,7 @@ class MainStory extends React.Component {
       this.updateQuestStatus({ sceneId })
     }
 
-    const { subQuestTriggersList = [] } = questConfig
+    const subQuestTriggersList = _get(questConfig, "subQuestTriggersList") || []
 
     subQuestTriggersList.forEach((subQuestTriggers) => {
       Utils.unLockSubQuests({ subQuestTriggers })

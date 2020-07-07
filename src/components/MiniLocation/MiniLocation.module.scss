@@ -21,8 +21,8 @@
   --hex-color: pink;
   --fence-width: 2%;
   --story-item-height: 5vh;
-  // --story-item-height: 10vh;
   --story-item-width: calc(var(--story-item-height) * 1);
+  --color-yellow: #a9def9;
 
   box-shadow: 5px 7px 8px 0px rgba(50, 50, 50, 0.81);
 
@@ -46,9 +46,6 @@
 
   max-height: var(--story-item-height);
   max-width: var(--story-item-width);
-
-  // margin-right: 3vh;
-  // margin-bottom: 2vh;
 
   overflow: visible;
   background: var(--color-yellow);
@@ -335,8 +332,6 @@
     background: var(--color-yellow);
     transform: translateY(-50%);
     top: 50%;
-    // width: 82%;
-    // right: -74%;
     width: 129%;
     right: -120%;
   }
