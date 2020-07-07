@@ -1267,7 +1267,7 @@ const story9123 = {
   ],
   questConfig: {
     subQuestTriggers: [
-      { subQuest: 1, unHideTriggers: { completedMission: 0 } },
+      { subQuestId: 1, unHideTriggers: { completedMission: 0 } },
     ],
     missions: [
       {

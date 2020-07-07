@@ -1,20 +1,15 @@
-import React from "react";
-import { observer } from "mobx-react";
-import {
-  FormControl,
-  MenuItem,
-  OutlinedInput,
-  Select,
-} from "@material-ui/core";
+import React from "react"
+import { observer } from "mobx-react"
+import { FormControl, MenuItem, OutlinedInput, Select } from "@material-ui/core"
 
-import Images from "../../images/images.js";
-import Utils from "../../Utils/Utils.js";
-import css from "./MiniLocation.module.scss";
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js";
-import cx from "classnames";
-import _get from "lodash.get";
+import Images from "../../images/images.js"
+import Utils from "../../Utils/Utils.js"
+import css from "./MiniLocation.module.scss"
+import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
+import cx from "classnames"
+import _get from "lodash.get"
 
-import { toJS } from "mobx";
+import { toJS } from "mobx"
 // import MiniTable from "../MiniTable/MiniTable.js";
 
 class MiniLocation extends React.Component {
@@ -23,11 +18,11 @@ class MiniLocation extends React.Component {
     right: { image: "doorGreen", open: false },
     top: { image: "doorGreen", open: true },
     bottom: { image: "doorGreen", open: true },
-  };
+  }
 
   renderYouMini = () => {
-    const you = localStateStore.getYou();
-    const youImage = you.creature;
+    const you = localStateStore.getYou()
+    const youImage = you.creature
 
     return (
       <div className={css.miniYou}>
@@ -37,27 +32,27 @@ class MiniLocation extends React.Component {
           alt={youImage}
         />
       </div>
-    );
-  };
+    )
+  }
 
   changeDoor = ({ event }) => {
     this.setState({
       // youCreature: event.target.value,
       name: event.target.name,
-    });
-  };
+    })
+  }
 
   async componentWillMount() {
     const {
       scene: { doors },
       isStartScene,
       isEndScene,
-    } = this.props;
+    } = this.props
 
-    this.setState({ isStartScene, isEndScene });
+    this.setState({ isStartScene, isEndScene })
 
     if (doors) {
-      this.setState({ doors });
+      this.setState({ doors })
     }
   }
 
@@ -66,28 +61,28 @@ class MiniLocation extends React.Component {
       scene: { doors },
       isStartScene,
       isEndScene,
-    } = newProps;
+    } = newProps
 
     // TODO - do all this for end scene
     // TODO - do all this for end scene
     // TODO - do all this for end scene
     // TODO - do all this for end scene
     // TODO - do all this for end scene
-    this.setState({ isStartScene, isEndScene });
+    this.setState({ isStartScene, isEndScene })
 
     if (doors) {
-      this.setState({ doors });
+      this.setState({ doors })
     }
   }
 
   state = {
     doors: this.defaultDoorIsOpen,
-  };
+  }
 
   createDoorPickerOptions = () => {
-    const doors = ["doorYellow", "door", "doorGreen"];
+    const doors = ["doorYellow", "door", "doorGreen"]
     const renderedMenuItems = doors.map((door, index) => {
-      const doorImage = Images.doors[door];
+      const doorImage = Images.doors[door]
       return (
         <MenuItem key={index} value={door}>
           <div className={css.doorPickerItem}>
@@ -95,14 +90,14 @@ class MiniLocation extends React.Component {
           </div>
           {/* {door && door.toUpperCase()} */}
         </MenuItem>
-      );
-    });
+      )
+    })
 
-    return renderedMenuItems;
-  };
+    return renderedMenuItems
+  }
 
   renderButton = ({ className }) => {
-    const defaultDoorName = "door";
+    const defaultDoorName = "door"
 
     return (
       <div className={`${className} ${css.doorPickerContainer}`}>
@@ -111,7 +106,7 @@ class MiniLocation extends React.Component {
             className={css.doorPickerDropdown}
             value={defaultDoorName}
             onChange={(event) => {
-              this.changeDoor({ event });
+              this.changeDoor({ event })
             }}
             input={<OutlinedInput id="outlined-age-simple" />}
           >
@@ -119,14 +114,14 @@ class MiniLocation extends React.Component {
           </Select>
         </FormControl>
       </div>
-    );
-  };
+    )
+  }
 
   renderCreatures = ({ isActive, creatures }) => {
     const renderedCharacters = creatures.map((creature) => {
-      const creatureType = creature && creature.type;
+      const creatureType = creature && creature.type
 
-      const image = Images.creatures[creatureType] || null;
+      const image = Images.creatures[creatureType] || null
 
       const friend = (
         <img
@@ -134,55 +129,55 @@ class MiniLocation extends React.Component {
           src={image}
           alt={creatureType}
         />
-      );
+      )
 
-      return friend;
-    });
+      return friend
+    })
 
     if (isActive) {
-      const you = this.renderYouMini();
-      renderedCharacters.unshift(you);
+      const you = this.renderYouMini()
+      renderedCharacters.unshift(you)
     }
 
-    return <div className={css.charactersContainer}>{renderedCharacters}</div>;
-  };
+    return <div className={css.charactersContainer}>{renderedCharacters}</div>
+  }
 
   checkIsStartScene = () => {
-    const { scene } = this.props;
-    scene.isStartScene = !this.state.isStartScene;
+    const { scene } = this.props
+    scene.isStartScene = !this.state.isStartScene
 
     this.props.updateMap &&
-      this.props.updateMap({ newProps: { startScene: scene.name } });
-    this.setState({ isStartScene: !this.state.isStartScene });
-  };
+      this.props.updateMap({ newProps: { startScene: scene.name } })
+    this.setState({ isStartScene: !this.state.isStartScene })
+  }
 
   checkIsEndScene = () => {
-    const { scene } = this.props;
-    scene.isEndScene = !this.state.isEndScene;
+    const { scene } = this.props
+    scene.isEndScene = !this.state.isEndScene
 
     this.props.updateMap &&
-      this.props.updateMap({ newProps: { endScene: scene.name } });
-    this.setState({ isEndScene: !this.state.isEndScene });
-  };
+      this.props.updateMap({ newProps: { endScene: scene.name } })
+    this.setState({ isEndScene: !this.state.isEndScene })
+  }
 
   render() {
-    const { scene, isActive, className, id } = this.props;
+    const { scene, isActive, className, id } = this.props
 
     const {
       coordinates,
       // id,
       sceneConfig: { storyIndex, subQuestId = 0 } = {},
-    } = scene;
+    } = scene
 
-    const questStatus = localStateStore.getQuestStatus();
+    const questStatus = localStateStore.getQuestStatus()
 
-    const isVisitedScene = localStateStore.isVisitedScene(scene.id);
+    const isVisitedScene = localStateStore.isVisitedScene(scene.id)
 
-    const neighbors = Utils.getNeighbors({ coordinates });
+    const neighbors = Utils.getNeighbors({ coordinates })
 
     const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
       (neighbor) => neighbor && neighbor.id
-    );
+    )
 
     // const neighborWasVisited = neighborsArray.some((neighbor) =>
     //   localStateStore.isVisitedScene(neighbor && neighbor.id)
@@ -192,36 +187,38 @@ class MiniLocation extends React.Component {
       _get(
         scene,
         "sceneConfig.triggers.unlockSceneConditions.currentMission"
-      ) || -1;
+      ) || -1
 
     const sceneUnlocked =
       typeof unlockSceneMission === "number" &&
-      questStatus.activeMission >= unlockSceneMission;
+      questStatus.activeMission >= unlockSceneMission
 
-    const unlockedSubQuests = localStateStore.getUnlockedSubQuests();
-    const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId);
+    const unlockedSubQuests = localStateStore.getUnlockedSubQuests()
+    console.log("unlockedSubQuests", toJS(unlockedSubQuests)) // zzz
 
-    const showLock = !sceneUnlocked;
-    const noCloud = isVisitedScene || subQuestIsUnlocked;
-    const showCloud = !noCloud;
+    const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId)
 
-    const { items = [], creatures = [] } = scene;
-    const locationName = scene.location.name;
-    const isBlank = locationName === "blank";
+    const showLock = !sceneUnlocked
+    const noCloud = isVisitedScene || subQuestIsUnlocked
+    const showCloud = !noCloud
 
-    const localClass = isActive ? css.activeClass : "";
-    const locationImage = Images.all[locationName];
+    const { items = [], creatures = [] } = scene
+    const locationName = scene.location.name
+    const isBlank = locationName === "blank"
 
-    const rockImage = Images.backgrounds["rock"];
-    const rockImageVertical = Images.backgrounds["rock02Vertical"];
-    const cloudImage = Images.backgrounds["cloud"];
-    const lockImage = Images.items["lock02"];
-    const defaultDoorImage = Images.backgrounds["door"];
+    const localClass = isActive ? css.activeClass : ""
+    const locationImage = Images.all[locationName]
 
-    const showLocationOnly = locationName === "roadLeftRight01";
+    const rockImage = Images.backgrounds["rock"]
+    const rockImageVertical = Images.backgrounds["rock02Vertical"]
+    const cloudImage = Images.backgrounds["cloud"]
+    const lockImage = Images.items["lock02"]
+    const defaultDoorImage = Images.backgrounds["door"]
+
+    const showLocationOnly = locationName === "roadLeftRight01"
 
     if (showLocationOnly) {
-      const roadLeftRight01 = Images.items["roadLeftRight01"];
+      const roadLeftRight01 = Images.items["roadLeftRight01"]
       return (
         <div className={`${css.main} ${className} ${localClass}`}>
           <div className={css.container}>
@@ -230,32 +227,30 @@ class MiniLocation extends React.Component {
             </div>
           </div>
         </div>
-      );
+      )
     }
 
-    let renderedItems;
+    let renderedItems
     renderedItems = items.map((item) => {
-      const renderedItem = Images.all[item.name];
-      return (
-        <img className={css.itemImage} src={renderedItem} alt={"imagex"} />
-      );
-    });
+      const renderedItem = Images.all[item.name]
+      return <img className={css.itemImage} src={renderedItem} alt={"imagex"} />
+    })
 
     if (!locationName) {
-      return <div className={`${css.main} ${className} ${localClass}`}></div>;
+      return <div className={`${css.main} ${className} ${localClass}`}></div>
     }
 
-    const showBottomPath = neighbors[Utils.neighborPositionsEnum.bottom];
-    const showRightPath = neighbors[Utils.neighborPositionsEnum.right];
+    const showBottomPath = neighbors[Utils.neighborPositionsEnum.bottom]
+    const showRightPath = neighbors[Utils.neighborPositionsEnum.right]
 
-    const colors = ["fcf6bd", "d0f4de", "a9def9", "e4c1f9"];
+    const colors = ["fcf6bd", "d0f4de", "a9def9", "e4c1f9"]
 
-    const colorIndex = subQuestId % colors.length;
-    const backgroundColor = colors[colorIndex];
+    const colorIndex = subQuestId % colors.length
+    const backgroundColor = colors[colorIndex]
 
     const style = {
       "background-color": `#${backgroundColor}`,
-    };
+    }
 
     return (
       <div
@@ -334,8 +329,8 @@ class MiniLocation extends React.Component {
           </div>
         )}
       </div>
-    );
+    )
   }
 }
 
-export default observer(MiniLocation);
+export default observer(MiniLocation)

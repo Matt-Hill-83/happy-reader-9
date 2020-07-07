@@ -416,21 +416,26 @@ export default class Utils {
   }
 
   static unHideSubQuests = ({ unHideTriggers = [] }) => {
+    const questStatus = localStateStore.getQuestStatus()
+    console.log("questStatus", toJS(questStatus)) // zzz
+
     const requiredCompletedMission = _get(
       unHideTriggers,
-      "unHideTriggers.completedMission",
+      "completedMission",
       null
     )
-
     const completedMissions = localStateStore.getCompletedMissions()
+
+    console.log("unHideTriggers", toJS(unHideTriggers)) // zzz
     console.log("requiredCompletedMission", toJS(requiredCompletedMission)) // zzz
     console.log(
       "completedMissions+_+_+_+_+_+_+_+_+_---->>>",
       toJS(completedMissions)
     ) // zzz
 
-    if (requiredCompletedMission) {
-      localStateStore.unHideSubQuestById(requiredCompletedMission)
+    if (completedMissions.includes(requiredCompletedMission)) {
+      const subQuestId = 9
+      localStateStore.unHideSubQuestById({ subQuestId })
     }
   }
 }
