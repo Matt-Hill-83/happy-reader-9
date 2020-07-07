@@ -8,7 +8,7 @@ const story9123 = {
           unlockSceneConditions: { currentMission: 1 },
         },
         subQuestId: 1,
-        coordinates: { col: 0, row: 1 },
+        coordinates: { col: 0, row: 3 },
         creatures: ["liz2"],
         isEndScene: false,
         isStartScene: false,
@@ -76,7 +76,7 @@ const story9123 = {
       title: "lake",
       sceneConfig: {
         subQuestId: 1,
-        coordinates: { row: 1, col: 1 },
+        coordinates: { row: 3, col: 1 },
         creatures: ["liz2"],
         isEndScene: false,
         isStartScene: false,
@@ -141,14 +141,14 @@ const story9123 = {
       frames2: [],
     },
     {
-      title: "fig",
+      title: "hat",
       sceneConfig: {
         subQuestId: 1,
-        coordinates: { row: 1, col: 2 },
+        coordinates: { row: 3, col: 2 },
         creatures: ["liz2"],
         isEndScene: false,
         isStartScene: false,
-        items: [{ name: "pin" }],
+        items: [{ name: "fig" }],
       },
       frames: [
         {
@@ -176,7 +176,7 @@ const story9123 = {
       title: "helicopter01",
       sceneConfig: {
         subQuestId: 1,
-        coordinates: { row: 1, col: 3 },
+        coordinates: { row: 3, col: 3 },
         creatures: ["liz2"],
         isEndScene: false,
         isStartScene: false,
@@ -672,7 +672,7 @@ const story9123 = {
       title: "home",
       sceneConfig: {
         subQuestId: 0,
-        coordinates: { row: 3, col: 0 },
+        coordinates: { row: 1, col: 0 },
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
@@ -758,7 +758,7 @@ const story9123 = {
       title: "ant",
       sceneConfig: {
         subQuestId: 0,
-        coordinates: { row: 3, col: 1 },
+        coordinates: { row: 1, col: 1 },
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
@@ -808,7 +808,7 @@ const story9123 = {
       title: "bun",
       sceneConfig: {
         subQuestId: 0,
-        coordinates: { row: 3, col: 2 },
+        coordinates: { row: 1, col: 2 },
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
@@ -876,7 +876,7 @@ const story9123 = {
       title: "pig",
       sceneConfig: {
         subQuestId: 0,
-        coordinates: { col: 3, row: 3 },
+        coordinates: { col: 3, row: 1 },
         creatures: ["kat"],
         isEndScene: false,
         isStartScene: false,
@@ -1273,14 +1273,14 @@ const story9123 = {
       {
         item: { name: "bun" },
         name: "Feed the pig",
-        rewards: [{ amount: 5, name: "fig" }],
+        rewards: [{ amount: 5, name: "pin" }],
         recipient: { name: "pig" },
       },
       {
-        item: { name: "goat01" },
+        item: { name: "fig" },
         name: "Find a pet for the elf.",
         rewards: [{ amount: 5, name: "gold" }],
-        recipient: { name: "madElf01" },
+        recipient: { name: "goat01" },
       },
       {
         recipient: { name: "wizard" },
