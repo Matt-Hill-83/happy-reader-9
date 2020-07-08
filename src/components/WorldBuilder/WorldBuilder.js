@@ -325,7 +325,7 @@ class WorldBuilder extends Component {
           <CrudMachine
             className={`${css.crudMachine} ${css.locationMachine}`}
             items={locations}
-            onEditItem={this.onEditLocation}
+            // onEditItem={this.onEditLocation}
             buttons={buttons}
             itemRenderer={itemRenderer}
             saveItems={onSave}

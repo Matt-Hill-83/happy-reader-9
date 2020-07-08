@@ -317,7 +317,8 @@ class Frame extends Component {
     // TODO -  I need put in a dummy frame for when there is none.
     // TODO -  I need put in a dummy frame for when there is none.
     // TODO -  I need put in a dummy frame for when there is none.
-    const items = frame.items || []
+    // const items = frame.items || []
+    const { critters1 = [], critters2 = [] } = frame
 
     const allCharacters =
       (scene.characters && scene.characters.map((item) => item.name)) || []
@@ -330,16 +331,23 @@ class Frame extends Component {
       <div className={`${css.main}`}>
         <div className={` ${css.scenesContainer}`}>
           {this.renderFrame({ allCharacters })}
-          {false && (
-            <CrudMachine
-              className={css.crudMachine}
-              items={items}
-              itemRenderer={itemRenderer}
-              saveItems={this.saveItems}
-              title={"stuff"}
-            />
-          )}
-          (
+
+          <CrudMachine
+            className={css.crudMachine}
+            items={critters1}
+            itemRenderer={itemRenderer}
+            saveItems={this.saveItems}
+            title={"critters1"}
+          />
+
+          <CrudMachine
+            className={css.crudMachine}
+            items={critters2}
+            itemRenderer={itemRenderer}
+            saveItems={this.saveItems}
+            title={"critters2"}
+          />
+
           <Button className={css.closeButton} onClick={this.deleteFrame}>
             X
           </Button>

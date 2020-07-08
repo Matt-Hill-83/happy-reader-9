@@ -70,8 +70,6 @@ export default class Utils {
   }
 
   static getNewFrame = ({ characters }) => {
-    // const you = localStateStore.getYou()
-    // const yourName = you.name
     let allCharacters = []
 
     if (characters && characters.length) {
@@ -82,6 +80,13 @@ export default class Utils {
     const creatureName0 = allCharacters[0] || "kat"
     const creatureName1 = allCharacters[1] || "liz2"
 
+    const critters2 = []
+    const critters1 = allCharacters.map((item) => {
+      return {
+        name: item,
+      }
+    })
+
     const newFrame = {
       // this is a hacky fix
       // this is a hacky fix
@@ -89,7 +94,8 @@ export default class Utils {
       // this is a hacky fix
       // creatures: ["kat", "liz2"],
       creatures: allCharacters,
-      story: [`${creatureName0} is happy.`],
+      critters1: critters1,
+      critters2: critters2,
       faces: [
         { character: creatureName1, characterIndex: 1, face: "happy" },
         { character: creatureName0, characterIndex: 0, face: "happy" },
