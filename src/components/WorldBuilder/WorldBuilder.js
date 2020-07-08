@@ -409,9 +409,6 @@ class WorldBuilder extends Component {
   }
 
   createNewFramesFromJson = ({ frames, sceneConfig }) => {
-    // createNewFramesFromJson = ({ newScene }) => {
-    // const { frames, sceneConfig } = newScene;
-
     // arrays of frames extracted from the json which has an easy to write struture,
     // but need to be transformed.
 
@@ -446,6 +443,7 @@ class WorldBuilder extends Component {
         props: { ...configProps, dialog: newDialogs },
       })
 
+      console.log("newFrame", toJS(newFrame)) // zzz
       return newFrame
     })
 
@@ -471,7 +469,7 @@ class WorldBuilder extends Component {
     return newDialogs
   }
 
-  importWorld = ({ newWorld }) => {
+  importWorldFromJson = ({ newWorld }) => {
     const {
       title = "no title",
       description = "none",
@@ -545,7 +543,9 @@ class WorldBuilder extends Component {
         <div className={css.buttonHolder}>
           <FrameSetUploader
             onSave={this.onChangeDialog}
-            onImportJson={({ newWorld }) => this.importWorld({ newWorld })}
+            onImportJson={({ newWorld }) =>
+              this.importWorldFromJson({ newWorld })
+            }
           />
           <GetSceneConfig
             className={css.frameSetUploaderBox1}
@@ -557,7 +557,9 @@ class WorldBuilder extends Component {
             className={css.frameSetUploaderBox1}
             onSave={this.onChangeDialog}
             scenesGrid={scenesGrid}
-            onImportJson={({ newWorld }) => this.importWorld({ newWorld })}
+            onImportJson={({ newWorld }) =>
+              this.importWorldFromJson({ newWorld })
+            }
           />
         </div>
 

@@ -70,12 +70,12 @@ export default class Utils {
   }
 
   static getNewFrame = ({ characters }) => {
-    const you = localStateStore.getYou()
-    const yourName = you.name
-    let allCharacters = [yourName]
+    // const you = localStateStore.getYou()
+    // const yourName = you.name
+    let allCharacters = []
 
     if (characters && characters.length) {
-      const friendNames = characters.map((creature) => creature.type)
+      const friendNames = characters.map((creature) => creature.name)
       allCharacters.push(...friendNames)
     }
 
@@ -87,8 +87,8 @@ export default class Utils {
       // this is a hacky fix
       // this is a hacky fix
       // this is a hacky fix
-      creatures: ["kat", "liz2"],
-      // creatures: allCharacters,
+      // creatures: ["kat", "liz2"],
+      creatures: allCharacters,
       story: [`${creatureName0} is happy.`],
       faces: [
         { character: creatureName1, characterIndex: 1, face: "happy" },
@@ -231,7 +231,7 @@ export default class Utils {
         {
           character: "kat",
           characterIndex: 0,
-          text: "We can play.",
+          text: "Something funny here.",
         },
         {
           character: "liz2",

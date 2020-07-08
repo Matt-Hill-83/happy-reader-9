@@ -1,67 +1,69 @@
-import { Button, Icon } from "@blueprintjs/core";
+import { Button, Icon } from "@blueprintjs/core"
 
-import React, { Component } from "react";
+import React, { Component } from "react"
 
-import Frame from "../Frame/Frame";
-import { IconNames } from "@blueprintjs/icons";
-import { observer } from "mobx-react";
-import { toJS } from "mobx";
+import Frame from "../Frame/Frame"
+import { IconNames } from "@blueprintjs/icons"
+import { observer } from "mobx-react"
+import { toJS } from "mobx"
 
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore";
+import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 
-import css from "./FrameBuilder.module.scss";
-import Utils from "../../Utils/Utils";
+import css from "./FrameBuilder.module.scss"
+import Utils from "../../Utils/Utils"
 
 class FrameBuilder extends Component {
   state = {
     frames: [],
     frameSet: "",
-  };
+  }
 
   componentWillMount() {
-    const { scene } = this.props;
-    this.setState({ scene });
+    const { scene } = this.props
+    this.setState({ scene })
   }
 
   componentWillReceiveProps(newProps) {
-    const { scene } = newProps;
-    this.setState({ scene });
+    const { scene } = newProps
+    this.setState({ scene })
   }
 
   onExitFrameBuilder = () => {
-    const { onExitFrameBuilder } = this.props;
+    const { onExitFrameBuilder } = this.props
 
-    const frames = [{ test: 5 }];
-    onExitFrameBuilder && onExitFrameBuilder({ frames });
-  };
+    const frames = [{ test: 5 }]
+    onExitFrameBuilder && onExitFrameBuilder({ frames })
+  }
 
   getNewFrame = () => {
+    console.log("getNewFrame") // zzz
+    console.log("this.state.scene", toJS(this.state.scene)) // zzz
     const {
-      scene: { creatures = [] },
-    } = this.state;
+      scene: { characters = [] },
+    } = this.state
 
-    return Utils.getNewFrame({ characters: creatures });
-  };
+    return Utils.getNewFrame({ characters: characters })
+  }
 
   onAddFrame = async () => {
     const {
       scene: { frameSet },
-    } = this.state;
-    const { updateMap } = this.props;
+    } = this.state
+    const { updateMap } = this.props
 
-    const newFrame = this.getNewFrame();
-    frameSet.frames.push(newFrame);
+    const newFrame = this.getNewFrame()
+    frameSet.frames.push(newFrame)
 
-    await updateMap({});
-  };
+    await updateMap({})
+  }
 
   updateFrameSet = async () => {
-    const { updateMap } = this.props;
-    const frameSet = this.state;
+    const { updateMap } = this.props
+    const frameSet = this.state
 
-    updateMap({});
-    this.setState({ frameSet });
-  };
+    updateMap({})
+    this.setState({ frameSet })
+  }
 
   deleteFrame = async ({ frameIndex }) => {
     const {
@@ -69,54 +71,54 @@ class FrameBuilder extends Component {
       scene: {
         frameSet: { frames },
       },
-    } = this.state;
+    } = this.state
 
-    const { updateMap } = this.props;
-    frames.splice(frameIndex, 1);
+    const { updateMap } = this.props
+    frames.splice(frameIndex, 1)
 
-    await updateMap({});
-    this.setState({ scene });
-  };
+    await updateMap({})
+    this.setState({ scene })
+  }
 
   onPressDelete = async ({ item }) => {
-    if (this._deleting) return;
-    this._deleting = true;
+    if (this._deleting) return
+    this._deleting = true
     try {
-      await item.delete();
-      this._deleting = false;
+      await item.delete()
+      this._deleting = false
     } catch (err) {
-      this._deleting = false;
+      this._deleting = false
     }
-  };
+  }
 
   getFrameSet = () => {
-    return (this.state.scene && this.state.scene.frameSet) || {};
-  };
+    return (this.state.scene && this.state.scene.frameSet) || {}
+  }
 
   getnewWorld = () => {
     return {
       name: "test",
       title: "test",
       frames: [this.getNewFrame()],
-    };
-  };
+    }
+  }
 
   renderFrames = () => {
     const {
       scene,
       scene: { frameSet },
       updateMap,
-    } = this.props;
+    } = this.props
 
     if (!frameSet) {
-      this.getnewWorld();
-      updateMap({});
+      this.getnewWorld()
+      updateMap({})
     }
 
-    let frames = frameSet.frames && frameSet.frames.length && frameSet.frames;
+    let frames = frameSet.frames && frameSet.frames.length && frameSet.frames
     if (!frames) {
-      frames = [this.getNewFrame()];
-      updateMap({});
+      frames = [this.getNewFrame()]
+      updateMap({})
     }
 
     return frames.map((frame, index) => {
@@ -129,14 +131,14 @@ class FrameBuilder extends Component {
           frameIndex={index}
           updateMap={updateMap}
         />
-      );
-    });
-  };
+      )
+    })
+  }
 
   render() {
-    const { scene } = this.props;
+    const { scene } = this.props
     if (!scene) {
-      return null;
+      return null
     }
 
     return (
@@ -154,8 +156,8 @@ class FrameBuilder extends Component {
         </div>
         <div className={css.framesContainer}>{this.renderFrames()}</div>
       </div>
-    );
+    )
   }
 }
 
-export default observer(FrameBuilder);
+export default observer(FrameBuilder)

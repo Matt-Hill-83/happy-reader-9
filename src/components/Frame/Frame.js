@@ -5,74 +5,74 @@ import {
   InputGroup,
   TextArea,
   FormGroup,
-} from "@blueprintjs/core";
-import React, { Component } from "react";
+} from "@blueprintjs/core"
+import React, { Component } from "react"
 
-import Character from "../Character/Character";
-import Head from "../Head/Head";
-import { IconNames } from "@blueprintjs/icons";
-import { observer } from "mobx-react";
-import { toJS } from "mobx";
-import _get from "lodash.get";
+import Character from "../Character/Character"
+import Head from "../Head/Head"
+import { IconNames } from "@blueprintjs/icons"
+import { observer } from "mobx-react"
+import { toJS } from "mobx"
+import _get from "lodash.get"
 
-import Images from "../../images/images";
+import Images from "../../images/images"
 
-import css from "./Frame.module.scss";
-import CharacterPicker from "../CharacterPicker/CharacterPicker";
-import images from "../../images/images";
-import CrudMachine from "../CrudMachine/CrudMachine";
-import ImageDisplay from "../ImageDisplay/ImageDisplay";
-import Utils from "../../Utils/Utils";
-import cx from "classnames";
+import css from "./Frame.module.scss"
+import CharacterPicker from "../CharacterPicker/CharacterPicker"
+import images from "../../images/images"
+import CrudMachine from "../CrudMachine/CrudMachine"
+import ImageDisplay from "../ImageDisplay/ImageDisplay"
+import Utils from "../../Utils/Utils"
+import cx from "classnames"
 
 class Frame extends Component {
   state = {
     showFacePicker: false,
     showItemPicker: false,
     items: [],
-  };
+  }
 
   componentWillMount() {
-    const { frameIndex, scene = {} } = this.props;
-    const frameSet = scene.frameSet;
-    const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex];
-    this.setState({ frame });
+    const { frameIndex, scene = {} } = this.props
+    const frameSet = scene.frameSet
+    const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex]
+    this.setState({ frame })
   }
 
   componentWillReceiveProps(newProps) {
-    const { frameIndex, scene = {} } = newProps;
-    const frameSet = scene.frameSet;
-    const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex];
-    this.setState({ frame });
+    const { frameIndex, scene = {} } = newProps
+    const frameSet = scene.frameSet
+    const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex]
+    this.setState({ frame })
   }
 
   deleteFrame = async () => {
-    const { deleteFrame, frameIndex } = this.props;
-    await deleteFrame({ frameIndex });
-  };
+    const { deleteFrame, frameIndex } = this.props
+    await deleteFrame({ frameIndex })
+  }
 
   cloneFrame = async () => {
-    const { cloneFrame, frameIndex } = this.props;
-    await cloneFrame({ frameIndex });
-  };
+    const { cloneFrame, frameIndex } = this.props
+    await cloneFrame({ frameIndex })
+  }
 
   selectHead = ({ name, head }) => {
-    const { updateFrameSet } = this.props;
+    const { updateFrameSet } = this.props
 
     const {
       frame,
       frame: { faces },
-    } = this.state;
+    } = this.state
 
-    const thisFace = faces.find((face) => face.character === name);
-    thisFace.face = head.mood;
+    const thisFace = faces.find((face) => face.character === name)
+    thisFace.face = head.mood
 
     //  /TODO - chage to update world maybe?
-    updateFrameSet({});
+    updateFrameSet({})
 
-    this.setState({ frame });
-    this.toggleFacePicker({});
-  };
+    this.setState({ frame })
+    this.toggleFacePicker({})
+  }
 
   // TODO -
   // TODO -
@@ -85,19 +85,19 @@ class Frame extends Component {
   // But start out by just editing existing items, like characters
 
   onSelectItem = ({ itemId, name }) => {
-    this.toggleItemPicker({});
-  };
+    this.toggleItemPicker({})
+  }
 
   renderFacePicker = ({ character }) => {
-    const girlImages = Images.posableGirls;
-    const images = girlImages.find((girl) => girl.name === character);
+    const girlImages = Images.posableGirls
+    const images = girlImages.find((girl) => girl.name === character)
 
     // For characters with no posable images
-    if (!images) return null;
+    if (!images) return null
 
     const {
       images: { heads },
-    } = images;
+    } = images
 
     const headImages = heads.map((head, headIndex) => {
       return (
@@ -108,42 +108,42 @@ class Frame extends Component {
         >
           <Head name={character} head={head} />
         </div>
-      );
-    });
+      )
+    })
 
     return (
       <div className={css.girlPickerContainer}>
         <div className={css.girlPicker}>{headImages}</div>
       </div>
-    );
-  };
+    )
+  }
 
   toggleFacePicker = ({ character }) => {
-    const showFacePicker = !this.state.showFacePicker;
-    this.setState({ showFacePicker, facePickerCharacter: character });
-  };
+    const showFacePicker = !this.state.showFacePicker
+    this.setState({ showFacePicker, facePickerCharacter: character })
+  }
 
   toggleItemPicker = ({ item = null }) => {
-    const showItemPicker = !this.state.showItemPicker;
-    this.setState({ showItemPicker, itemPickerItem: item });
-  };
+    const showItemPicker = !this.state.showItemPicker
+    this.setState({ showItemPicker, itemPickerItem: item })
+  }
 
   renderNarrative = () => {
-    const { frame } = this.state;
-    const { story = [] } = frame;
+    const { frame } = this.state
+    const { story = [] } = frame
 
-    if (!story.length || !story[0]) return null;
-  };
+    if (!story.length || !story[0]) return null
+  }
 
   renderDialog = () => {
-    const { frame } = this.state;
-    const dialog = (frame && frame.dialog) || [];
+    const { frame } = this.state
+    const dialog = (frame && frame.dialog) || []
 
     const renderedDialogs = dialog.map((line, lineIndex) => {
-      const { text, characterIndex } = line;
+      const { text, characterIndex } = line
 
-      const className = `character${characterIndex}`;
-      const characterName = line.character || "";
+      const className = `character${characterIndex}`
+      const characterName = line.character || ""
 
       return (
         <div className={css.textAreaWrapper}>
@@ -160,94 +160,99 @@ class Frame extends Component {
             onBlur={(event) => this.saveDialog({ event })}
           />
         </div>
-      );
-    });
+      )
+    })
 
-    return <div className={css.dialog}>{renderedDialogs}</div>;
-  };
+    return <div className={css.dialog}>{renderedDialogs}</div>
+  }
 
   onChangeDialog = ({ event, lineIndex }) => {
-    const { frame } = this.state;
-    const dialog = (frame && frame.dialog) || [];
+    const { frame } = this.state
+    const dialog = (frame && frame.dialog) || []
 
-    const newLine = event.target.value;
-    dialog[lineIndex]["text"] = newLine;
-    this.setState({ frame });
-  };
+    const newLine = event.target.value
+    dialog[lineIndex]["text"] = newLine
+    this.setState({ frame })
+  }
 
   getMood = ({ name, faces }) => {
-    let mood = "ok";
-    const newMood = faces && faces.find((face) => face.character === name);
-    mood = (newMood && newMood.face) || mood;
-    return mood;
-  };
+    let mood = "ok"
+    const newMood = faces && faces.find((face) => face.character === name)
+    mood = (newMood && newMood.face) || mood
+    return mood
+  }
 
   saveDialog = async (event) => {
     if (event && !event.value) {
-      return;
+      return
     }
 
-    const { updateMap } = this.props;
-    await updateMap({});
-  };
+    const { updateMap } = this.props
+    await updateMap({})
+  }
 
   onChangeNarrative = ({ event, lineIndex }) => {
-    const { frame } = this.state;
-    const newLine = event.target.value;
-    frame.story[lineIndex] = newLine;
-    this.setState({ frame });
-  };
+    const { frame } = this.state
+    const newLine = event.target.value
+    frame.story[lineIndex] = newLine
+    this.setState({ frame })
+  }
 
   renderLocationImage = () => {
-    const { scene = true } = this.props;
-    const locationImage = Images.all[_get(this.props, "scene.location.name")];
+    const { scene = true } = this.props
+    const locationImage = Images.all[_get(this.props, "scene.location.name")]
 
     return (
       <div className={css.locationImageContainer}>
         <img className={css.locationImage} src={locationImage} alt={"imagex"} />
         <span className={`${css.locationLabel}`}>{scene.name}</span>
       </div>
-    );
-  };
+    )
+  }
 
   saveItems = async ({ items = [] }) => {
-    const { frame } = this.state;
-    const { updateMap } = this.props;
+    const { frame } = this.state
+    const { updateMap } = this.props
 
-    frame.items = items;
+    frame.items = items
 
-    this.setState({ frame }, () => updateMap({}));
-  };
+    this.setState({ frame }, () => updateMap({}))
+  }
 
   renderItems = () => {
-    const items = _get(this, "props.scene.items") || [];
+    const items = _get(this, "props.scene.items") || []
 
     return items.map((item) => {
-      const { name } = item;
+      const { name } = item
 
-      return <ImageDisplay className={css.itemContainer} item={{ name }} />;
-    });
-  };
+      return <ImageDisplay className={css.itemContainer} item={{ name }} />
+    })
+  }
 
   renderCharacters = () => {
-    const { scene } = this.props;
+    const { scene } = this.props
 
-    const { frame } = this.state;
-    const { faces = [] } = frame;
-    if (!frame) return null;
+    const { frame } = this.state
+    const { faces = [] } = frame
+    if (!frame) return null
+    let allCharacters = []
+    console.log("frame - Frame.js", toJS(frame)) // zzz
 
-    const allCharacters =
-      (scene.characters && scene.characters.map((item) => item.name)) || [];
+    if (frame.creatures) {
+      allCharacters = frame.creatures.map((item) => item) || []
+    } else {
+      allCharacters =
+        (scene.characters && scene.characters.map((item) => item.name)) || []
+    }
 
-    const allItems =
-      (scene.items && scene.items.map((item) => item.name)) || [];
+    const allItems = (scene.items && scene.items.map((item) => item.name)) || []
 
     // temp code DELETE ME!!! (end)
-    allCharacters.push(...allItems);
+    allCharacters.push(...allItems)
     // temp code DELETE ME!!! (end)
 
     return allCharacters.map((friend, index) => {
-      const mood = this.getMood({ name: friend, faces });
+      const mood = this.getMood({ name: friend, faces })
 
       return (
         <div className={`${css.characterContainer}`} key={index}>
@@ -260,17 +265,17 @@ class Frame extends Component {
             />
           </div>
         </div>
-      );
-    });
-  };
+      )
+    })
+  }
 
   renderFrame = () => {
-    const { frame } = this.state;
+    const { frame } = this.state
 
-    if (!frame) return null;
+    if (!frame) return null
 
-    const renderedItems = this.renderItems();
-    const renderedFriends = this.renderCharacters();
+    const renderedItems = this.renderItems()
+    const renderedFriends = this.renderCharacters()
 
     return (
       <div className={`${css.scenes}`}>
@@ -289,21 +294,21 @@ class Frame extends Component {
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   render() {
-    const { scene } = this.props;
+    const { scene } = this.props
 
     const {
       frame,
       showFacePicker,
       showItemPicker,
       facePickerCharacter,
-    } = this.state;
+    } = this.state
 
     if (!frame) {
-      return null;
+      return null
     }
 
     // TODO -  I need put in a dummy frame for when there is none.
@@ -312,14 +317,14 @@ class Frame extends Component {
     // TODO -  I need put in a dummy frame for when there is none.
     // TODO -  I need put in a dummy frame for when there is none.
     // TODO -  I need put in a dummy frame for when there is none.
-    const items = frame.items || [];
+    const items = frame.items || []
 
     const allCharacters =
-      (scene.characters && scene.characters.map((item) => item.name)) || [];
+      (scene.characters && scene.characters.map((item) => item.name)) || []
 
     const itemRenderer = ({ item }) => {
-      return <ImageDisplay item={item} />;
-    };
+      return <ImageDisplay item={item} />
+    }
 
     return (
       <div className={`${css.main}`}>
@@ -365,8 +370,8 @@ class Frame extends Component {
           />
         )}
       </div>
-    );
+    )
   }
 }
 
-export default observer(Frame);
+export default observer(Frame)

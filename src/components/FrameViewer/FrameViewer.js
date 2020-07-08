@@ -157,6 +157,7 @@ class FrameViewer extends Component {
     if (!frame) return null
 
     let allCreatures = []
+    console.log("frame-----friends", toJS(frame)) // zzz
 
     if (frame.creatures && frame.creatures.length > 0) {
       allCreatures = [...frame.creatures]
@@ -216,9 +217,14 @@ class FrameViewer extends Component {
     const { scene, frame } = this.props
     const { faces = [] } = frame
     if (!frame) return null
+    console.log("") // zzz
+    console.log("") // zzz
+    console.log("") // zzz
+    console.log("frame----liz and kat", toJS(frame)) // zzz
 
     let allCreatures = []
-
+    console.log("frame.creatures", toJS(frame.creatures)) // zzz
+    console.log("scene.characters", toJS(scene.characters)) // zzz
     if (frame.creatures && frame.creatures.length > 0) {
       allCreatures = [...frame.creatures]
     } else {
