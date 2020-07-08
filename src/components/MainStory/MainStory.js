@@ -31,7 +31,9 @@ useDefaultWorldId = false
 useDefaultWorldId = true
 const defaultWorldInProd = "mRpN51k8AmA5BqgikVoz"
 // const defaultWorldInNonProd = "ZR0GOSFFqFPoWjSgvgOQ";
-const defaultWorldInNonProd = "Cgp15K6a6zx1mrzCHJoP"
+const defaultWorldInNonProd = "MR9L9z0aMiO4tUfG5Pr8"
+
+// const defaultWorldInNonProd = "Cgp15K6a6zx1mrzCHJoP"
 // const defaultWorldInNonProd = "mRpN51k8AmA5BqgikVoz";
 const defaultWorldId = IS_PROD_RELEASE
   ? defaultWorldInProd
@@ -121,7 +123,6 @@ class MainStory extends React.Component {
     const startScene = scenesGrid.find(
       (item) => item.id === map.data.startSceneId
     )
-    console.log("startScene", toJS(startScene)) // zzz
     const terminalScene = start ? startScene : endScene
     const firstScene = scenesGrid[0]
     const lastScene = scenesGrid[scenesGrid.length - 1]
@@ -220,7 +221,10 @@ class MainStory extends React.Component {
 
   onChangeWorld = ({ mapId }) => {
     console.log("onChangeWorld") // zzz
-    console.log("mapId", mapId)
+    console.log(
+      "-----------------------mapId---------------------------",
+      mapId
+    )
     toaster.clear()
 
     localStateStore.setActiveMapId(mapId)
