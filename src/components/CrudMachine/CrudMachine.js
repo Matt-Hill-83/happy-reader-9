@@ -6,135 +6,139 @@ import {
   FormGroup,
   Popover,
   PopoverInteractionKind,
-} from "@blueprintjs/core";
+} from "@blueprintjs/core"
 
-import { IconNames } from "@blueprintjs/icons";
-import { observer } from "mobx-react";
-import { toJS } from "mobx";
-import React, { Component } from "react";
+import { IconNames } from "@blueprintjs/icons"
+import { observer } from "mobx-react"
+import { toJS } from "mobx"
+import React, { Component } from "react"
 
-import images from "../../images/images";
+import images from "../../images/images"
 
-import ImageDisplay from "../ImageDisplay/ImageDisplay";
-import CharacterPicker from "../CharacterPicker/CharacterPicker";
+import ImageDisplay from "../ImageDisplay/ImageDisplay"
+import CharacterPicker from "../CharacterPicker/CharacterPicker"
 
-import css from "./CrudMachine.module.scss";
+import css from "./CrudMachine.module.scss"
 
-const DEFAULT_BUTTONS = { trash: true, edit: true, add: true };
+const DEFAULT_BUTTONS = { trash: true, edit: true, add: true }
 
 class CrudMachine extends Component {
   state = {
     items: [],
-  };
+  }
 
   componentWillMount() {
-    let { items = [] } = this.props;
-    items = this.addItemIfNone({ items });
-    this.setState({ items });
+    let { items = [] } = this.props
+    items = this.addItemIfNone({ items })
+    this.setState({ items })
     // this.setState({ items: [...items] })
   }
 
   componentWillReceiveProps(newProps) {
-    let { items = [] } = newProps;
-    items = this.addItemIfNone({ items });
-    this.setState({ items: [...items] });
+    let { items = [] } = newProps
+    items = this.addItemIfNone({ items })
+    this.setState({ items: [...items] })
   }
 
   getNewItem = () => {
-    return { name: "empty" };
-  };
+    return { name: "empty" }
+  }
 
   // cloneItem = async ({ index }) => {}
 
   addItemIfNone = ({ items }) => {
     if (items && !items.length) {
-      items.push(this.getNewItem());
+      items.push(this.getNewItem())
     }
-    return items;
-  };
+    return items
+  }
 
   ////////////////////////////
   /////////////     CRUD     ///////////////
   ////////////////////////////
 
   onAddItemBefore = ({ index, event }) => {
-    event.stopPropagation();
-    const { items } = this.state;
+    event.stopPropagation()
+    const { items } = this.state
 
-    const part1 = items.slice(0, index);
-    const part2 = items.slice(index);
-    const newItem = this.getNewItem();
-    const final = [...part1, newItem, ...part2];
+    const part1 = items.slice(0, index)
+    const part2 = items.slice(index)
+    const newItem = this.getNewItem()
+    const final = [...part1, newItem, ...part2]
 
-    const statePropsToSave = { items: final };
-    this.setStateAndSave({ statePropsToSave });
-  };
+    const statePropsToSave = { items: final }
+    this.setStateAndSave({ statePropsToSave })
+  }
 
   onDeleteItem = ({ index, event }) => {
-    event.stopPropagation();
-    const { items } = this.state;
+    event.stopPropagation()
+    const { items } = this.state
 
-    const part1 = items.slice(0, index);
-    const part2 = items.slice(index + 1);
-    const final = [...part1, ...part2];
+    const part1 = items.slice(0, index)
+    const part2 = items.slice(index + 1)
+    const final = [...part1, ...part2]
 
     const statePropsToSave = {
       [this.props.propNameForItems]: final,
       items: final,
-    };
+    }
 
-    this.setStateAndSave({ statePropsToSave });
-  };
+    this.setStateAndSave({ statePropsToSave })
+  }
 
   onAddItemAfter = ({ index, event }) => {
-    event.stopPropagation();
-    const { items } = this.state;
+    event.stopPropagation()
+    const { items } = this.state
 
-    const part1 = items.slice(0, index + 1);
-    const part2 = items.slice(index + 1);
-    const newItem = this.getNewItem();
-    const final = [...part1, newItem, ...part2];
+    const part1 = items.slice(0, index + 1)
+    const part2 = items.slice(index + 1)
+    const newItem = this.getNewItem()
+    const final = [...part1, newItem, ...part2]
 
-    const statePropsToSave = { items: final };
-    this.setStateAndSave({ statePropsToSave });
-  };
+    const statePropsToSave = { items: final }
+    console.log("final", toJS(final)) // zzz
+    this.setStateAndSave({ statePropsToSave })
+  }
 
   onEditItem = ({ index, item, event }) => {
-    event.stopPropagation();
-    this.toggleItemPicker({ item, index });
-  };
+    event.stopPropagation()
+    this.toggleItemPicker({ item, index })
+  }
 
   setStateAndSave = ({ statePropsToSave }) => {
     this.setState({ ...statePropsToSave }, () =>
       this.saveChanges({ statePropsToSave })
-    );
-  };
+    )
+  }
 
   onSelectItem = ({ name }) => {
-    const { itemPickerItem } = this.state;
+    const { itemPickerItem } = this.state
     // I should probably ref this item by id
-    itemPickerItem.name = name;
+    itemPickerItem.name = name
 
-    this.saveChanges();
-    this.toggleItemPicker({});
-  };
+    this.saveChanges()
+    this.toggleItemPicker({})
+  }
 
   saveChanges = () => {
-    const { saveItems } = this.props;
-    const { items } = this.state;
-    console.log("items", toJS(items)); // zzz
+    const { saveItems } = this.props
+    const { items } = this.state
 
-    saveItems && saveItems({});
-  };
+    // swap modified array elements into array reference instead of returning it.
+    const test = this.props.items
+    test.splice(0, test.length, ...items)
 
-  toggleItemPicker = ({ index, item = null }) => {
-    const showItemPicker = !this.state.showItemPicker;
-    this.setState({ showItemPicker, itemPickerItem: item });
-  };
+    saveItems && saveItems({})
+  }
 
-  renderButtons = ({ item, index, isLastItem }) => {
-    const { buttons = DEFAULT_BUTTONS } = this.props;
-    const { edit, add, trash } = buttons;
+  toggleItemPicker = ({ item = null }) => {
+    const showItemPicker = !this.state.showItemPicker
+    this.setState({ showItemPicker, itemPickerItem: item })
+  }
+
+  renderButtons = ({ item, index }) => {
+    const { buttons = DEFAULT_BUTTONS } = this.props
+    const { edit, add, trash } = buttons
 
     return (
       <div className={css.buttonsRow} key={index}>
@@ -167,17 +171,17 @@ class CrudMachine extends Component {
           />
         )}
       </div>
-    );
-  };
+    )
+  }
 
   renderItems = () => {
-    const { items } = this.state;
+    const { items } = this.state
 
-    const defaultItemRenderer = ({ item }) => <ImageDisplay item={item} />;
-    const itemRenderer = this.props.itemRenderer || defaultItemRenderer;
+    const defaultItemRenderer = ({ item }) => <ImageDisplay item={item} />
+    const itemRenderer = this.props.itemRenderer || defaultItemRenderer
 
     const renderedItems = items.map((item, index) => {
-      const isLastItem = index === items.length - 1;
+      const isLastItem = index === items.length - 1
 
       return (
         <div
@@ -193,24 +197,24 @@ class CrudMachine extends Component {
             {this.renderButtons({ item, index, isLastItem })}
           </Popover>
         </div>
-      );
-    });
+      )
+    })
 
-    return renderedItems || null;
-  };
+    return renderedItems || null
+  }
 
   render() {
-    const { showItemPicker } = this.state;
-    const { className, title = "" } = this.props;
+    const { showItemPicker } = this.state
+    const { className, title = "" } = this.props
 
     const defaultImageSets = [
       images.creatures,
       images.locations,
       images.vehicles,
       images.items,
-    ];
+    ]
 
-    const imageSets = this.props.imageSets || defaultImageSets;
+    const imageSets = this.props.imageSets || defaultImageSets
 
     return (
       <div className={`${css.main} ${className ? className : ""}`}>
@@ -229,8 +233,8 @@ class CrudMachine extends Component {
           />
         )}
       </div>
-    );
+    )
   }
 }
 
-export default observer(CrudMachine);
+export default observer(CrudMachine)
