@@ -153,13 +153,16 @@ class FrameViewer extends Component {
 
   renderFriends = () => {
     const { scene, frame } = this.props
-    const { faces = [] } = frame
     if (!frame) return null
 
     let allCreatures = []
     console.log("frame-----friends", toJS(frame)) // zzz
 
-    if (frame.creatures && frame.creatures.length > 0) {
+    const { critters1 = null, faces = [] } = frame
+
+    if (critters1 && critters1.length > 0) {
+      allCreatures = [...frame.critters1.map((item) => item.name)]
+    } else if (frame.creatures && frame.creatures.length > 0) {
       allCreatures = [...frame.creatures]
     } else {
       allCreatures =
