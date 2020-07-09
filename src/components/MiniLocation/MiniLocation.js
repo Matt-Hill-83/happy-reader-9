@@ -117,28 +117,33 @@ class MiniLocation extends React.Component {
     )
   }
 
-  renderCreatures = ({ isActive, creatures }) => {
-    const renderedCharacters = creatures.map((creature) => {
-      const creatureType = creature && creature.type
+  renderCreatures = ({ isActive }) => {
+    if (!isActive) {
+      return null
+    }
+    console.log("") // zzz
+    console.log("renderCreatures----------------------------->") // zzz
+    const activeFrame = localStateStore.getActiveFrame() || {}
+    const { creatures = [] } = activeFrame
 
-      const image = Images.creatures[creatureType] || null
+    console.log("activeFrame", toJS(activeFrame)) // zzz
+    console.log("creatures", toJS(creatures)) // zzz
+
+    // const {frameSet} = activeScene;
+    const renderedCharacters = creatures.map((creature) => {
+      const image = Images.all[creature] || null
 
       const friend = (
         <img
           className={`${css.characterImageMini} ${css.character1Mini}`}
           src={image}
-          alt={creatureType}
+          alt={"creatureType"}
         />
       )
 
       return friend
     })
-
-    if (isActive) {
-      const you = this.renderYouMini()
-      renderedCharacters.unshift(you)
-    }
-
+    console.log("renderedCharacters", toJS(renderedCharacters)) // zzz
     return <div className={css.charactersContainer}>{renderedCharacters}</div>
   }
 
@@ -160,8 +165,27 @@ class MiniLocation extends React.Component {
     this.setState({ isEndScene: !this.state.isEndScene })
   }
 
+  // renderPocketItems = ({ critters1 }) => {
+  //   return critters1.map((key, index) => {
+  //     const existingItem = items[key]
+  //     const { amount } = existingItem
+
+  //     const newItem = { name: key, index }
+
+  //     return (
+  //       <ImageDisplay
+  //         className={css.itemContainer}
+  //         item={newItem}
+  //         showLabel={true}
+  //         amount={amount}
+  //       />
+  //     )
+  //   })
+  // }
+
   render() {
     const { scene, isActive, className, id } = this.props
+    console.log("scene.creatures", toJS(scene.creatures)) // zzz
 
     const {
       coordinates,

@@ -60,7 +60,7 @@ const story9124 = {
       frames2: [],
     },
     {
-      title: "hill",
+      title: "goat01",
       sceneConfig: {
         subQuestId: 1,
         coordinates: { row: 3, col: 1 },
@@ -114,7 +114,7 @@ const story9124 = {
       frames2: [],
     },
     {
-      title: "hat",
+      title: "bun",
       sceneConfig: {
         subQuestId: 1,
         coordinates: { row: 3, col: 2 },
@@ -515,7 +515,7 @@ const story9124 = {
       title: "home",
       sceneConfig: {
         subQuestId: 0,
-        coordinates: { row: 1, col: 0 },
+        coordinates: { row: 0, col: 1 },
         creatures: ["kat", "dog01"],
         items: [],
       },
@@ -570,7 +570,7 @@ const story9124 = {
       title: "slide",
       sceneConfig: {
         subQuestId: 0,
-        coordinates: { row: 0, col: 1 },
+        coordinates: { row: 1, col: 0 },
         creatures: ["kat", "liz2"],
         items: [{ name: "mug" }],
         triggers: { unlockSceneConditions: { currentMission: 2 } },
@@ -636,7 +636,8 @@ const story9124 = {
         subQuestId: 0,
         coordinates: { row: 1, col: 2 },
         creatures: ["kat", "dog01"],
-        items: [{ name: "fig" }],
+        items: [],
+        // items: [{ name: "fig" }],
       },
       frames: [
         {
@@ -661,8 +662,9 @@ const story9124 = {
       frames2: [],
     },
     {
-      title: "goat01",
+      title: "hill",
       sceneConfig: {
+        triggers: { newFrameSetConditions: { currentMission: 2 } },
         subQuestId: 0,
         coordinates: { col: 3, row: 2 },
         creatures: ["kat", "dog01"],
@@ -679,8 +681,6 @@ const story9124 = {
             creatures: ["kat", "dog01"],
           },
           dialogs: [
-            '{"kat" : "Hi pig."}',
-            '{"kat" : "You can have a fig!."}',
             '{"kat" : "Oh no.  The path is locked."}',
             '{"kat" : "The path is locked and blocked."}',
             '{"kat" : "Boo Hoo."}',
@@ -695,22 +695,20 @@ const story9124 = {
             '{"kat" : "Can you get us to the log?"}',
           ],
         },
+      ],
+      frames2: [
         {
           frameConfig: {
             items: [],
             faces: [
-              { face: "happy", characterIndex: 1, character: "liz2" },
-              { characterIndex: 0, character: "kat", face: "happy" },
+              { face: "happy", character: "liz2", characterIndex: 1 },
+              { face: "happy", characterIndex: 0, character: "kat" },
             ],
             creatures: ["kat", "dog01"],
           },
-          dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
-          ],
+          dialogs: ['{"kat" : "TEST - alt frames."}'],
         },
       ],
-      frames2: [],
     },
     {
       title: "katieKooper01",

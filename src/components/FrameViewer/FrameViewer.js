@@ -124,32 +124,32 @@ class FrameViewer extends Component {
     )
   }
 
-  renderPocketItems = () => {
-    const questStatus = localStateStore.getQuestStatus()
+  // renderPocketItems = () => {
+  //   const questStatus = localStateStore.getQuestStatus()
 
-    const items = _get(questStatus, "pockets") || null
+  //   const items = _get(questStatus, "pockets") || null
 
-    const itemKeys = Object.keys(items)
-    if (itemKeys.length === 0 || !items) {
-      return null
-    }
+  //   const itemKeys = Object.keys(items)
+  //   if (itemKeys.length === 0 || !items) {
+  //     return null
+  //   }
 
-    return itemKeys.map((key, index) => {
-      const existingItem = items[key]
-      const { amount } = existingItem
+  //   return itemKeys.map((key, index) => {
+  //     const existingItem = items[key]
+  //     const { amount } = existingItem
 
-      const newItem = { name: key, index }
+  //     const newItem = { name: key, index }
 
-      return (
-        <ImageDisplay
-          className={css.itemContainer}
-          item={newItem}
-          showLabel={true}
-          amount={amount}
-        />
-      )
-    })
-  }
+  //     return (
+  //       <ImageDisplay
+  //         className={css.itemContainer}
+  //         item={newItem}
+  //         showLabel={true}
+  //         amount={amount}
+  //       />
+  //     )
+  //   })
+  // }
 
   renderFriends = () => {
     const { scene, frame } = this.props

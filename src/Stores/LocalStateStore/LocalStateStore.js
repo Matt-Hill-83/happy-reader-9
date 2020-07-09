@@ -8,7 +8,6 @@ class LocalStateStore {
   activeSceneId = null
   completedMissions = []
   creatures = []
-  // desiredItems = []
   defaultWorldId = null
   mapBuilderGrid = []
   showBookPicker = false
@@ -357,6 +356,14 @@ class LocalStateStore {
   getActiveFrameIndex = () => this.activeFrameIndex
   setActiveFrameIndex = (activeFrameIndex) => {
     this.activeFrameIndex = activeFrameIndex
+  }
+
+  getActiveFrame = () => {
+    const activeScene = localStateStore.getActiveScene()
+    const { frameSet } = activeScene
+    const firstFrame = _get(frameSet, "frames[0]")
+    console.log("firstFrame", toJS(firstFrame)) // zzz
+    return firstFrame
   }
 
   incrementActiveFrameIndex = (reset) => {
