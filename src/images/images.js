@@ -1,50 +1,49 @@
 import { toJS } from "mobx"
 
 //locations
+
+import bag from "./locations/bag.png"
 import barn from "./locations/barn.png"
-import blank from "./locations/blank.png"
 import bees from "./locations/bees.png"
+import blank from "./locations/blank.png"
 import bog from "./locations/bog.png"
+import bun from "./locations/bun.png"
 import bus from "./locations/bus.png"
+import cap from "./locations/cap.png"
+import car from "./locations/car.png"
 import castle from "./locations/castle.png"
 import cave from "./locations/cave.png"
 import coop from "./locations/coop.png"
-import hill from "./locations/hill.png"
-import house from "./locations/house.png"
-import lake from "./locations/lake.png"
-import log from "./locations/log.png"
-import pond from "./locations/pond.png"
-import pool from "./locations/pool.png"
-import slide from "./locations/slide.png"
-import stump from "./locations/stump.png"
-// import swamp from "./locations/swamp.png";
-import swing from "./locations/swing.png"
-import tree from "./locations/treehouse.png"
-import waterfall from "./locations/waterfall.png"
-
-import bag from "./locations/bag.png"
-import bun from "./locations/bun.png"
-import cap from "./locations/cap.png"
-import car from "./locations/car.png"
 import cup from "./locations/cup.png"
+import donutShop01 from "./locations/donutShop01.png"
 import drip from "./locations/drip.png"
 import fan from "./locations/fan.png"
 import fig from "./locations/fig.png"
 import flag from "./locations/flag.png"
+import hill from "./locations/hill.png"
 import hoop from "./locations/hoop.png"
+import house from "./locations/house.png"
 import hug from "./locations/hug.png"
 import jug from "./locations/jug.png"
+import lake from "./locations/lake.png"
+import log from "./locations/log.png"
 import mat from "./locations/mat.png"
 import mop from "./locations/mop.png"
 import mug from "./locations/mug.png"
 import pan from "./locations/pan.png"
 import pin from "./locations/pin.png"
+import pond from "./locations/pond.png"
+import pool from "./locations/pool.png"
 import rag from "./locations/rag.png"
+import slide from "./locations/slide.png"
+import stump from "./locations/stump.png"
+import swing from "./locations/swing.png"
 import tag from "./locations/tag.png"
 import top from "./locations/top.png"
+import tree from "./locations/treehouse.png"
 import tug from "./locations/tug.png"
 import van from "./locations/van.png"
-import donutShop01 from "./locations/donutShop01.png"
+import waterfall from "./locations/waterfall.png"
 
 import bookCoil01 from "./backgrounds/bookCoil01.png"
 import mapBackground07 from "./backgrounds/mapBackground07.jpg"
@@ -65,52 +64,17 @@ import dummyQuest01 from "./bookcovers/dummyQuest01.png"
 // creatures
 // creatures
 
-import cow01 from "./creatures/cow01.png"
-import chick01 from "./creatures/chick01.png"
 import angus01 from "./creatures/angus01.png"
-import elsa02 from "./creatures/elsa02.png"
-import merida02 from "./creatures/merida02.png"
-import anna02 from "./creatures/anna02.png"
-
-import pooPoo01 from "./creatures/pooPoo01.png"
-import chooChoo01 from "./creatures/chooChoo01.png"
-
-import babyTroll01 from "./creatures/babyTroll01.png"
-import cleopatra01 from "./creatures/cleopatra01.png"
-import strawberry01 from "./creatures/strawberry01.png"
-import madElf01 from "./creatures/madElf01.png"
-
-import parrot01 from "./creatures/parrot01.png"
-import taffy01 from "./creatures/taffy01.png"
-import swordGirl01 from "./creatures/swordGirl01.png"
-import mom01 from "./creatures/mom01.png"
-import ghandi01 from "./creatures/ghandi01.png"
-import slicerDicer01 from "./creatures/slicerDicer01.png"
-
-import barkPhone01 from "./creatures/barkPhone01.png"
-import islandGirl01 from "./creatures/islandGirl01.png"
-import islandGirl02 from "./creatures/islandGirl02.png"
-import rose01 from "./creatures/rose01.png"
-import foxy01 from "./creatures/foxy01.png"
-import pinky01 from "./creatures/pinky01.png"
-import hippityHop01 from "./creatures/hippityHop01.png"
-import uniBow01 from "./creatures/uniBow01.png"
-import razzleDazzle01 from "./creatures/razzleDazzle01.png"
-import boomALoo01 from "./creatures/boomALoo01.png"
-import splendaCat01 from "./creatures/splendaCat01.png"
-import oopsieCat01 from "./creatures/oopsieCat01.png"
-import zanzibar01 from "./creatures/zanzibar01.png"
-import wilda01 from "./creatures/wilda01.png"
-import queenZupula01 from "./creatures/queenZupula01.png"
-import crow01 from "./creatures/crow01.png"
-import paradox01 from "./creatures/paradox01.png"
-import brenda01 from "./creatures/brenda01.png"
-
 import anna from "./creatures/anna.png"
+import anna02 from "./creatures/anna02.png"
 import ant from "./creatures/ant.png"
 import ash01 from "./creatures/ash01.png"
+import babyTroll01 from "./creatures/babyTroll01.png"
+import barkPhone01 from "./creatures/barkPhone01.png"
 import bat from "./creatures/bat.png"
 import blankDragon01 from "./creatures/blankDragon01.png"
+import boomALoo01 from "./creatures/boomALoo01.png"
+import brenda01 from "./creatures/brenda01.png"
 import brindle01Happy from "./creatures/brindle01Happy.png"
 import bubbleGirl01 from "./creatures/bubbleGirl01.png"
 import bug from "./creatures/bug.png"
@@ -119,8 +83,13 @@ import camperGirl from "./creatures/camper_girl.png"
 import cat_king from "./creatures/cat_king.gif"
 import cat01 from "./creatures/cat01.png"
 import charlie01 from "./creatures/charlie01.png"
+import chick01 from "./creatures/chick01.png"
+import chooChoo01 from "./creatures/chooChoo01.png"
+import cleopatra01 from "./creatures/cleopatra01.png"
 import coldGirl from "./creatures/cold_girl.png"
 import cop from "./creatures/cop.png"
+import cow01 from "./creatures/cow01.png"
+import crow01 from "./creatures/crow01.png"
 import cub from "./creatures/cub.png"
 import dennisTheMenace from "./creatures/dennisTheMenace.png"
 import dog01 from "./creatures/dog01.png"
@@ -137,48 +106,64 @@ import dress06 from "./creatures/dress06.png"
 import dress07 from "./creatures/dress07.png"
 import dress08 from "./creatures/dress08.png"
 import elf from "./creatures/elf-1.png"
+import elsa02 from "./creatures/elsa02.png"
 import emmet01 from "./creatures/emmet01.png"
 import end from "./creatures/end.png"
 import fairy from "./creatures/fairy.png"
+import foxy01 from "./creatures/foxy01.png"
 import frogGirl01 from "./creatures/frogGirl01.png"
 import gerald01 from "./creatures/gerald01.png"
+import ghandi01 from "./creatures/ghandi01.png"
 import goat01 from "./creatures/goat01.png"
 import goatInABoat from "./creatures/goatInABoat.png"
 import goblin from "./creatures/goblin.png"
-import gonzay from "./rigged-girls/gonzay/gonzay-pt-mode.png"
+import hippityHop01 from "./creatures/hippityHop01.png"
 import hobbit from "./creatures/hobbit.png"
 import hog from "./creatures/hog.png"
+import islandGirl01 from "./creatures/islandGirl01.png"
 import jasmine01 from "./creatures/jasmine01.png"
 import johnny02 from "./creatures/johnny02.png"
 import kat from "./rigged-girls/kat/kat-normal.png"
 import katieKooper01 from "./creatures/katieKooper01.png"
 import lucy from "./creatures/lucy.png"
+import madElf01 from "./creatures/madElf01.png"
 import magicGirl01 from "./creatures/magicGirl01.png"
 import man from "./creatures/man.png"
+import merida02 from "./creatures/merida02.png"
 import mermaid from "./creatures/mermaid.png"
+import mom01 from "./creatures/mom01.png"
 import monster from "./creatures/monster.png"
+import oopsieCat01 from "./creatures/oopsieCat01.png"
 import pantherGirl01 from "./creatures/pantherGirl01.png"
 import pantherGirl02 from "./creatures/pantherGirl02.png"
+import paradox01 from "./creatures/paradox01.png"
+import parrot01 from "./creatures/parrot01.png"
 import pig from "./creatures/pig.png"
 import pigInAWig from "./creatures/pigInAWig.png"
-import poppy01 from "./creatures/poppy01.png"
+import pinky01 from "./creatures/pinky01.png"
+import pooPoo01 from "./creatures/pooPoo01.png"
 import princess_alibera from "./creatures/princess_alibera.png"
 import pug from "./creatures/pug.png"
 import pup01 from "./creatures/pup01.png"
 import queen_hashami from "./creatures/queen_hashami.png"
-import rapunzel01 from "./creatures/rapunzel01.png"
+import queenZupula01 from "./creatures/queenZupula01.png"
 import rat from "./creatures/rat.png"
+import razzleDazzle01 from "./creatures/razzleDazzle01.png"
 import rori from "./creatures/rori-front-01.png"
 import rori_nice from "./creatures/rori_nice.png"
 import rori02 from "./creatures/rori02.png"
+import rose01 from "./creatures/rose01.png"
 import sassafras01Happy from "./creatures/sassafras01Happy.png"
 import scribbleDragon01 from "./creatures/scribbleDragon01.png"
+import slicerDicer01 from "./creatures/slicerDicer01.png"
 import smoke from "./creatures/smoke.png"
 import sparkle01 from "./creatures/sparkle01.png"
+import splendaCat01 from "./creatures/splendaCat01.png"
 import squirrel01 from "./creatures/squirrel01.png"
-import star from "./creatures/star.png"
-import start from "./creatures/start.png"
+import strawberry01 from "./creatures/strawberry01.png"
 import sweaterGirl01 from "./creatures/sweaterGirl01.png"
+import swordGirl01 from "./creatures/swordGirl01.png"
+import taffy01 from "./creatures/taffy01.png"
 import tink from "./creatures/tink.png"
 import tiredGirl from "./creatures/tired_girl.png"
 import toothless from "./creatures/toothless.png"
@@ -186,11 +171,13 @@ import troll from "./creatures/troll-01.png"
 import troll01 from "./creatures/troll-01.png"
 import troll02 from "./creatures/goblin.png"
 import trumpetGirl01 from "./creatures/trumpetGirl01.png"
+import uniBow01 from "./creatures/uniBow01.png"
 import unicorn from "./creatures/unicorn-1.png"
 import vanellope_little from "./creatures/vanellope_little.png"
 import vulcan01 from "./creatures/vulcan01.png"
+import wilda01 from "./creatures/wilda01.png"
 import wizard from "./creatures/wizard.png"
-import zombie from "./creatures/zombie.png"
+import zanzibar01 from "./creatures/zanzibar01.png"
 //////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////
@@ -310,11 +297,8 @@ import gold from "./items/gold.png"
 
 import skull01 from "./items/skull01.png"
 import ringOfZandar01 from "./items/ringOfZandar01.png"
-// import glenda01NoFace from "./items/glenda01NoFace.png"
 
 // scene view
-import sceneViewBook from "./scene-view/book01.png"
-import sceneViewNotebook from "./scene-view/notebook-01.png"
 
 const lizHeads = [
   liz1,
@@ -492,7 +476,6 @@ const creatures = {
   cleopatra01,
   strawberry01,
   madElf01,
-  // coffeeZombie01,
   swordGirl01,
   mom01,
   ghandi01,
@@ -509,7 +492,6 @@ const creatures = {
   crow01,
   paradox01,
 
-  // islandGirl02,
   razzleDazzle01,
   queenZupula01,
 
@@ -540,8 +522,6 @@ const creatures = {
   foxy01,
   hippityHop01,
   uniBow01,
-  // girl,
-  // rapunzel01,
   pinky01,
   frogGirl01,
   goat01,
@@ -577,7 +557,6 @@ const creatures = {
   fairy,
   goatInABoat,
   goblin,
-  gonzay,
   hobbit,
   hog,
   jasmine01,
@@ -591,7 +570,6 @@ const creatures = {
   monster,
   pig,
   pigInAWig,
-  // poppy01,
   princess_alibera,
   queen_hashami,
   rat,

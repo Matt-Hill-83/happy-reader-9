@@ -1,5 +1,6 @@
 const story9124 = {
   title: "------9924-test-FrogHopperPart01",
+
   scenes: [
     {
       title: "log",
@@ -17,10 +18,24 @@ const story9124 = {
           frameConfig: {
             items: [],
             faces: [
-              { character: "liz2", face: "happy", characterIndex: 1 },
-              { characterIndex: 0, face: "happy", character: "kat" },
+              { characterIndex: 1, face: "happy", character: "liz2" },
+              { character: "kat", characterIndex: 0, face: "happy" },
             ],
             creatures: ["liz2"],
+          },
+          dialogs: [
+            '{"kat" : "---------------"}',
+            '{"liz2" : "---------------"}',
+          ],
+        },
+        {
+          frameConfig: {
+            items: [],
+            faces: [
+              { characterIndex: 1, character: "liz2", face: "happy" },
+              { characterIndex: 0, face: "happy", character: "kat" },
+            ],
+            creatures: ["kat", "liz2"],
           },
           dialogs: [
             '{"kat" : "---------------"}',
@@ -32,23 +47,9 @@ const story9124 = {
             items: [],
             faces: [
               { characterIndex: 1, face: "happy", character: "liz2" },
-              { face: "happy", character: "kat", characterIndex: 0 },
+              { character: "kat", characterIndex: 0, face: "happy" },
             ],
-            creatures: ["liz2"],
-          },
-          dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
-          ],
-        },
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { character: "liz2", face: "happy", characterIndex: 1 },
-              { characterIndex: 0, character: "kat", face: "happy" },
-            ],
-            creatures: ["liz2"],
+            creatures: ["kat", "liz2"],
           },
           dialogs: [
             '{"kat" : "---------------"}',
@@ -141,6 +142,7 @@ const story9124 = {
     {
       title: "pin",
       sceneConfig: {
+        triggers: { unlockSceneConditions: { currentMission: 2 } },
         subQuestId: 1,
         coordinates: { row: 3, col: 3 },
         creatures: ["liz2"],
@@ -335,9 +337,8 @@ const story9124 = {
     {
       title: "hill",
       sceneConfig: {
-        triggers: { unlockSceneConditions: { currentMission: 2 } },
-        subQuestId: 2,
-        coordinates: { row: 2, col: 3 },
+        subQuestId: 0,
+        coordinates: { row: 1, col: 3 },
         creatures: ["kat", "liz2"],
         items: [{ name: "babyTroll01" }],
       },
@@ -352,8 +353,8 @@ const story9124 = {
             creatures: ["kat", "liz2"],
           },
           dialogs: [
-            '{"kat" : "---------------"}',
             '{"liz2" : "---------------"}',
+            '{"kat" : "---------------"}',
           ],
         },
         {
@@ -404,6 +405,7 @@ const story9124 = {
     {
       title: "pinky01",
       sceneConfig: {
+        triggers: { unlockSceneConditions: { currentMission: 2 } },
         subQuestId: 2,
         coordinates: { row: 2, col: 4 },
         creatures: ["kat", "liz2"],
@@ -559,7 +561,7 @@ const story9124 = {
       sceneConfig: {
         subQuestId: 0,
         coordinates: { row: 1, col: 0 },
-        creatures: ["kat"],
+        creatures: ["kat", "dog01"],
         items: [],
       },
       frames: [
@@ -567,70 +569,43 @@ const story9124 = {
           frameConfig: {
             items: [],
             faces: [
-              { characterIndex: 1, character: "liz2", face: "happy" },
-              { face: "happy", characterIndex: 0, character: "kat" },
-            ],
-            creatures: ["kat"],
-          },
-          dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
-          ],
-        },
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { face: "happy", characterIndex: 1, character: "liz2" },
-              { face: "happy", characterIndex: 0, character: "kat" },
-            ],
-            creatures: ["kat"],
-          },
-          dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
-          ],
-        },
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { characterIndex: 1, face: "happy", character: "liz2" },
-              { face: "happy", characterIndex: 0, character: "kat" },
-            ],
-            creatures: ["kat"],
-          },
-          dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
-          ],
-        },
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { face: "happy", characterIndex: 1, character: "liz2" },
+              { character: "liz2", face: "happy", characterIndex: 1 },
               { characterIndex: 0, face: "happy", character: "kat" },
             ],
-            creatures: ["kat"],
+            creatures: ["kat", "dog01"],
           },
           dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
-          ],
-        },
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { face: "happy", characterIndex: 1, character: "liz2" },
-              { characterIndex: 0, face: "happy", character: "kat" },
-            ],
-            creatures: ["kat"],
-          },
-          dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
+            '{"kat" : "Hi kid."}',
+            '{"kat" : "I am Kat."}',
+            '{"kat" : "Today is a big day."}',
+            '{"kat" : "...big day."}',
+
+            '{"kat" : "Hey kid!  Will you help me get some gold?"}',
+            '{"kat" : "Wait.  You do not look happy."}',
+            '{"kat" : "You look like your Mom is making you read this."}',
+            '{"kat" : "Poor kid."}',
+
+            '{"kat" : "Wait.  Are you the kid that eats worms?"}',
+            '{"kat" : "I see that smile."}',
+            '{"kat" : "Yes.  You are the kid that eats worms!"}',
+            '{"kat" : "I remember you."}',
+
+            '{"kat" : "I like you kid."}',
+            '{"kat" : "And I have a deal for you."}',
+            '{"kat" : "Do you like gems?"}',
+            '{"kat" : "Do you like sparkles?"}',
+            '{"kat" : "Do you like tiny puppies?"}',
+            '{"kat" : "Then you are going to love this deal."}',
+
+            '{"kat" : "Here is the deal."}',
+            '{"kat" : "If you help me get the gold, we can go to Happy Time Baby Land."}',
+            '{"kat" : "There are sparkles and gems and cute pets there."}',
+            '{"kat" : "Plus, I can make the words very easy."}',
+            '{"kat" : "Are you in?"}',
+
+            '{"kat" : "I see you smiling."}',
+            '{"kat" : "Come on, let\'s go on a trip!"}',
+            '{"kat" : "We are going to be best friends."}',
           ],
         },
       ],
@@ -653,7 +628,7 @@ const story9124 = {
               { character: "liz2", characterIndex: 1, face: "happy" },
               { face: "happy", characterIndex: 0, character: "kat" },
             ],
-            creatures: ["kat"],
+            creatures: ["kat", "dog01"],
           },
           dialogs: [
             '{"kat" : "---------------"}',
@@ -668,7 +643,7 @@ const story9124 = {
       sceneConfig: {
         subQuestId: 0,
         coordinates: { row: 1, col: 1 },
-        creatures: ["kat"],
+        creatures: ["kat", "dog01"],
         items: [],
       },
       frames: [
@@ -679,25 +654,23 @@ const story9124 = {
               { character: "liz2", characterIndex: 1, face: "happy" },
               { face: "happy", characterIndex: 0, character: "kat" },
             ],
-            creatures: ["kat"],
+            creatures: ["kat", "dog01"],
           },
           dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
-          ],
-        },
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { character: "liz2", characterIndex: 1, face: "happy" },
-              { characterIndex: 0, character: "kat", face: "happy" },
-            ],
-            creatures: ["kat"],
-          },
-          dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
+            '{"kat" : "I will tell you how to get the gold."}',
+            '{"kat" : "See the words up there."}',
+            '{"kat" : "At the top of the screen..."}',
+            '{"kat" : "That tells you the steps."}',
+            '{"disembodied voice" : "What are the steps?"}',
+            '{"kat" : "Great question."}',
+
+            '{"kat" : "If you do the steps, you get the gold."}',
+            '{"kat" : "Step 1, get the bun to the pig..."}',
+            '{"kat" : "Get it?"}',
+            '{"kat" : "Easy as pie!"}',
+
+            '{"kat" : "We can go find a bun."}',
+            '{"kat" : "Fun Fun..."}',
           ],
         },
       ],
@@ -708,7 +681,7 @@ const story9124 = {
       sceneConfig: {
         subQuestId: 0,
         coordinates: { row: 1, col: 2 },
-        creatures: ["kat"],
+        creatures: ["kat", "dog01"],
         items: [],
       },
       frames: [
@@ -719,39 +692,15 @@ const story9124 = {
               { character: "liz2", characterIndex: 1, face: "happy" },
               { character: "kat", face: "happy", characterIndex: 0 },
             ],
-            creatures: ["kat"],
+            creatures: ["kat", "dog01"],
           },
           dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
-          ],
-        },
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { face: "happy", character: "liz2", characterIndex: 1 },
-              { characterIndex: 0, face: "happy", character: "kat" },
-            ],
-            creatures: ["kat"],
-          },
-          dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
-          ],
-        },
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { face: "happy", character: "liz2", characterIndex: 1 },
-              { character: "kat", characterIndex: 0, face: "happy" },
-            ],
-            creatures: ["kat"],
-          },
-          dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
+            '{"kat" : "We got the bun!"}',
+            '{"kat" : "Good work kid!"}',
+            '{"kat" : "We got 5 gold!"}',
+
+            '{"kat" : "Now, do you see a pig?"}',
+            '{"kat" : "You do?  Let\'s go to the pig?"}',
           ],
         },
       ],
@@ -761,8 +710,8 @@ const story9124 = {
       title: "pig",
       sceneConfig: {
         subQuestId: 0,
-        coordinates: { col: 3, row: 1 },
-        creatures: ["kat"],
+        coordinates: { col: 3, row: 2 },
+        creatures: ["kat", "dog01"],
         items: [],
       },
       frames: [
@@ -773,10 +722,10 @@ const story9124 = {
               { face: "happy", character: "liz2", characterIndex: 1 },
               { face: "happy", characterIndex: 0, character: "kat" },
             ],
-            creatures: ["kat"],
+            creatures: ["kat", "dog01"],
           },
           dialogs: [
-            '{"kat" : "---------------"}',
+            '{"kat" : "Oh no.  The road is blocked!"}',
             '{"liz2" : "---------------"}',
           ],
         },
@@ -787,7 +736,7 @@ const story9124 = {
               { face: "happy", characterIndex: 1, character: "liz2" },
               { characterIndex: 0, character: "kat", face: "happy" },
             ],
-            creatures: ["kat"],
+            creatures: ["kat", "dog01"],
           },
           dialogs: [
             '{"kat" : "---------------"}',
