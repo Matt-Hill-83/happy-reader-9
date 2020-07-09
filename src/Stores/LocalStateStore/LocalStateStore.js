@@ -19,7 +19,7 @@ class LocalStateStore {
 
   _defaultQuestStatus = {
     activeMission: 0,
-    pockets: { gold: { amount: 1 } },
+    pockets: { gold: { amount: 0 } },
     desiredItems: [],
     questConfig: {
       missions: [],

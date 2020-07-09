@@ -11,7 +11,8 @@ const story9124 = {
         subQuestId: 1,
         coordinates: { col: 0, row: 3 },
         creatures: ["liz2"],
-        items: [],
+        items: [{ name: "top" }, { name: "cup" }, { name: "mug" }],
+        // items: [],
       },
       frames: [
         {
@@ -704,9 +705,16 @@ const story9124 = {
               { face: "happy", character: "liz2", characterIndex: 1 },
               { face: "happy", characterIndex: 0, character: "kat" },
             ],
-            creatures: ["kat", "dog01"],
+            creatures: ["kat", "liz2"],
           },
-          dialogs: ['{"kat" : "TEST - alt frames."}'],
+          dialogs: [
+            '{"kat" : "Liz!  You came back."}',
+            '{"liz2" : "Yes.  I came back from my trip."}',
+            '{"kat" : "----------"}',
+            '{"liz2" : "----------"}',
+            '{"kat" : "----------"}',
+            '{"liz2" : "----------"}',
+          ],
         },
       ],
     },
