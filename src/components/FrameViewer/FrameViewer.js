@@ -187,7 +187,14 @@ class FrameViewer extends Component {
     console.log("allCreatures", toJS(allCreatures)) // zzz
 
     const filteredCharacters = allCreatures.filter((item) => {
-      return !["liz2", "kat", "katieKooper01"].includes(item)
+      return ![
+        "liz2",
+        "kat",
+        "katieKooper01",
+        // "anna02",
+        // "elsa02",
+        // "merida02",
+      ].includes(item)
     })
 
     const lock01 = Images.backgrounds["lock01"]
@@ -251,7 +258,14 @@ class FrameViewer extends Component {
     console.log("allCreatures", toJS(allCreatures)) // zzz
 
     const filteredCharacters = allCreatures.filter((item) => {
-      return ["liz2", "kat", "katieKooper01"].includes(item)
+      return [
+        "liz2",
+        "kat",
+        "katieKooper01",
+        // "anna02",
+        // "elsa02",
+        // "merida02",
+      ].includes(item)
     })
 
     return filteredCharacters.map((character, index) => {

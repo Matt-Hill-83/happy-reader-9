@@ -31,7 +31,8 @@ useDefaultWorldId = false
 useDefaultWorldId = true
 const defaultWorldInProd = "mRpN51k8AmA5BqgikVoz"
 // const defaultWorldInNonProd = "ZR0GOSFFqFPoWjSgvgOQ";
-const defaultWorldInNonProd = "MR9L9z0aMiO4tUfG5Pr8"
+const defaultWorldInNonProd = "XOlvcow0Om6bJPZYxT9i"
+// const defaultWorldInNonProd = "MR9L9z0aMiO4tUfG5Pr8"
 
 // const defaultWorldInNonProd = "Cgp15K6a6zx1mrzCHJoP"
 // const defaultWorldInNonProd = "mRpN51k8AmA5BqgikVoz";

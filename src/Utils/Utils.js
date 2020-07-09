@@ -285,10 +285,10 @@ export default class Utils {
       location: { name: "blank" },
       doorRight: { name: "doorYellow" },
       doorBottom: { name: "doorGreen" },
-      characters: [{ name: "kat" }, { name: "liz2" }, { name: "dog01" }],
+      characters: [{ name: "kat" }, { name: "liz2" }],
       // characters: [],
-      // items: [],
-      items: [{ name: "cup" }, { name: "pin" }],
+      items: [],
+      // items: [{ name: "cup" }, { name: "pin" }],
       frameSet: { frames: [dummyFrame] },
       id,
     }
