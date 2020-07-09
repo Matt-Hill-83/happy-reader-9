@@ -60,7 +60,7 @@ const story9124 = {
       frames2: [],
     },
     {
-      title: "goat01",
+      title: "hill",
       sceneConfig: {
         subQuestId: 1,
         coordinates: { row: 3, col: 1 },
@@ -335,12 +335,12 @@ const story9124 = {
       frames2: [],
     },
     {
-      title: "hill",
+      title: "goat01",
       sceneConfig: {
         subQuestId: 0,
         coordinates: { row: 1, col: 3 },
-        creatures: ["kat", "liz2"],
-        items: [{ name: "babyTroll01" }],
+        creatures: ["kat"],
+        // items: [{ name: "babyTroll01" }],
       },
       frames: [
         {
@@ -353,8 +353,9 @@ const story9124 = {
             creatures: ["kat", "liz2"],
           },
           dialogs: [
-            '{"liz2" : "---------------"}',
-            '{"kat" : "---------------"}',
+            '{"kat" : "I see a goat."}',
+            '{"kat" : "You are not a pig."}',
+            '{"kat" : "You do not get a fig."}',
           ],
         },
         {
@@ -677,7 +678,7 @@ const story9124 = {
       frames2: [],
     },
     {
-      title: "bun",
+      title: "fig",
       sceneConfig: {
         subQuestId: 0,
         coordinates: { row: 1, col: 2 },
@@ -695,7 +696,7 @@ const story9124 = {
             creatures: ["kat", "dog01"],
           },
           dialogs: [
-            '{"kat" : "We got the bun!"}',
+            '{"kat" : "We got the fig!"}',
             '{"kat" : "Good work kid!"}',
             '{"kat" : "We got 5 gold!"}',
 
@@ -1065,7 +1066,7 @@ const story9124 = {
     ],
     missions: [
       {
-        item: { name: "bun" },
+        item: { name: "fig" },
         name: "Feed the pig",
         rewards: [{ amount: 5, name: "gold" }],
         recipient: { name: "pig" },

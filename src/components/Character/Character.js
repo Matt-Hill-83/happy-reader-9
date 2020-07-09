@@ -19,7 +19,6 @@ class Character extends Component {
     // if there are no posable images
     if (!images) {
       const image = Images.all[name]
-      // const image = Images.creatures[name]
       if (!image) return null
       return (
         <div className={css.characterContainer}>
@@ -40,12 +39,15 @@ class Character extends Component {
       : `${css.headForBody} ${isEditMode ? "" : css.noBorder}`
 
     const headOnly = (
-      <Head
-        name={name}
-        head={head}
-        className={headClassName || className}
-        isEditMode={isEditMode}
-      />
+      <>
+        <Head
+          name={name}
+          head={head}
+          className={headClassName || className}
+          isEditMode={isEditMode}
+        />
+        <span className={`${css.bodyLabel}`}>{name}</span>
+      </>
     )
 
     if (showHeadOnly) {
