@@ -233,16 +233,23 @@ class MainStory extends React.Component {
     const { questConfig } = map.data
 
     if (questConfig) {
+      const { missions } = questConfig
+      const desiredItems = missions.map((mission) => mission.item)
+      console.log("desiredItems", toJS(desiredItems)) // zzz
+
       const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig))
 
       const combinedPockets = localStateStore.addToPockets({
         newPockets: clonedQuestConfig.pockets,
       })
 
+      console.log("-----------------this.questStatus", toJS(this.questStatus)) // zzz
+
       localStateStore.setQuestStatus({
         activeMission: 0,
         pockets: combinedPockets,
         questConfig: clonedQuestConfig,
+        desiredItems,
       })
     } else {
       localStateStore.setQuestStatus({
@@ -345,6 +352,11 @@ class MainStory extends React.Component {
     console.log("main story render") // zzz
     const unlockedSubQuests = localStateStore.getUnlockedSubQuests()
     console.log("unlockedSubQuests", toJS(unlockedSubQuests)) // zzz
+    const questStatus = localStateStore.getQuestStatus()
+    console.log(
+      "questStatus.desiredItems------------------------------------><><><><><",
+      toJS(questStatus.desiredItems)
+    ) // zzz
 
     const { className } = this.props
     const activeWorld = localStateStore.getActiveWorld()

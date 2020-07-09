@@ -335,7 +335,7 @@ const story9124 = {
       frames2: [],
     },
     {
-      title: "goat01",
+      title: "pig",
       sceneConfig: {
         subQuestId: 0,
         coordinates: { row: 1, col: 3 },
@@ -352,53 +352,7 @@ const story9124 = {
             ],
             creatures: ["kat", "liz2"],
           },
-          dialogs: [
-            '{"kat" : "I see a goat."}',
-            '{"kat" : "You are not a pig."}',
-            '{"kat" : "You do not get a fig."}',
-          ],
-        },
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { characterIndex: 1, face: "happy", character: "liz2" },
-              { character: "kat", characterIndex: 0, face: "happy" },
-            ],
-            creatures: ["kat", "liz2"],
-          },
-          dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
-          ],
-        },
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { character: "liz2", face: "happy", characterIndex: 1 },
-              { face: "happy", character: "kat", characterIndex: 0 },
-            ],
-            creatures: ["kat", "liz2"],
-          },
-          dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
-          ],
-        },
-        {
-          frameConfig: {
-            items: [],
-            faces: [
-              { character: "liz2", face: "happy", characterIndex: 1 },
-              { character: "kat", face: "happy", characterIndex: 0 },
-            ],
-            creatures: ["kat", "liz2"],
-          },
-          dialogs: [
-            '{"kat" : "---------------"}',
-            '{"liz2" : "---------------"}',
-          ],
+          dialogs: ['{"kat" : "Hi pig."}', '{"kat" : "You can have a fig!."}'],
         },
       ],
       frames2: [],
@@ -666,12 +620,11 @@ const story9124 = {
             '{"kat" : "Great question."}',
 
             '{"kat" : "If you do the steps, you get the gold."}',
-            '{"kat" : "Step 1, get the bun to the pig..."}',
+            '{"kat" : "Step 1, get the fig to the pig..."}',
             '{"kat" : "Get it?"}',
             '{"kat" : "Easy as pie!"}',
 
-            '{"kat" : "We can go find a bun."}',
-            '{"kat" : "Fun Fun..."}',
+            '{"kat" : "We can go find a fig."}',
           ],
         },
       ],
@@ -683,7 +636,7 @@ const story9124 = {
         subQuestId: 0,
         coordinates: { row: 1, col: 2 },
         creatures: ["kat", "dog01"],
-        items: [],
+        items: [{ name: "fig" }],
       },
       frames: [
         {
@@ -708,7 +661,7 @@ const story9124 = {
       frames2: [],
     },
     {
-      title: "pig",
+      title: "goat01",
       sceneConfig: {
         subQuestId: 0,
         coordinates: { col: 3, row: 2 },
@@ -726,8 +679,20 @@ const story9124 = {
             creatures: ["kat", "dog01"],
           },
           dialogs: [
-            '{"kat" : "Oh no.  The road is blocked!"}',
-            '{"liz2" : "---------------"}',
+            '{"kat" : "Hi pig."}',
+            '{"kat" : "You can have a fig!."}',
+            '{"kat" : "Oh no.  The path is locked."}',
+            '{"kat" : "The path is locked and blocked."}',
+            '{"kat" : "Boo Hoo."}',
+
+            '{"kat" : "What can we do?"}',
+            '{"dog01" : "Ask the kid."}',
+            '{"kat" : "Hey kid!"}',
+            '{"kat" : "Yeah you!"}',
+            '{"kat" : "The kid that eats worms!"}',
+
+            '{"kat" : "Kid, we are stuck.!"}',
+            '{"kat" : "Can you get us to the log?"}',
           ],
         },
         {
@@ -1072,7 +1037,7 @@ const story9124 = {
         recipient: { name: "pig" },
       },
       {
-        item: { name: "fig" },
+        item: { name: "bun" },
         name: "Feed the goat.",
         rewards: [{ amount: 5, name: "gold" }],
         recipient: { name: "goat01" },

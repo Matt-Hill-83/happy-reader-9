@@ -8,6 +8,7 @@ class LocalStateStore {
   activeSceneId = null
   completedMissions = []
   creatures = []
+  // desiredItems = []
   defaultWorldId = null
   mapBuilderGrid = []
   showBookPicker = false
@@ -16,6 +17,24 @@ class LocalStateStore {
   unlockedSubQuests = [0]
   visitedScenes = []
   you = {}
+
+  _defaultQuestStatus = {
+    activeMission: 0,
+    pockets: { gold: { amount: 1 } },
+    desiredItems: [],
+    questConfig: {
+      missions: [],
+    },
+  }
+
+  questStatus = { ...this._defaultQuestStatus }
+
+  getQuestNames = () => this.questStatus.quests.map((item) => item.name)
+
+  getQuestStatus = () => this.questStatus
+  setQuestStatus = (questStatus) => {
+    this.questStatus = questStatus
+  }
 
   getDefaultWorldId = () => this.defaultWorldId
   setDefaultWorldId = (defaultWorldId) => {
@@ -40,12 +59,6 @@ class LocalStateStore {
     const scene = this.getActiveScene()
     const subQuestId = _get(scene, "sceneConfig.subQuestId")
     this.unLockSubQuestById({ subQuestId })
-    // if (
-    //   typeof subQuestId === "number" &&
-    //   !this.unlockedSubQuests.includes(subQuestId)
-    // ) {
-    //   this.unlockedSubQuests.push(subQuestId)
-    // }
   }
 
   unLockSubQuestById = ({ subQuestId }) => {
@@ -77,36 +90,6 @@ class LocalStateStore {
     return this.visitedScenes.some((scene) => scene === sceneId)
   }
 
-  _defaultQuestStatus = {
-    activeMission: 0,
-    pockets: { gold: { amount: 5 } },
-    questConfig: {
-      missions: [
-        {
-          name: "Feed Piggy",
-          rewards: [{ name: "gold", amount: 1 }],
-          item: { name: "bun" },
-          recipient: { name: "pig" },
-        },
-        {
-          name: "Bring Piggy Home",
-          rewards: [{ name: "gold", amount: 5 }],
-          item: { name: "pig" },
-          recipient: { name: "troll" },
-        },
-      ],
-    },
-  }
-
-  questStatus = { ...this._defaultQuestStatus }
-
-  getQuestNames = () => this.questStatus.quests.map((item) => item.name)
-
-  getQuestStatus = () => this.questStatus
-  setQuestStatus = (questStatus) => {
-    this.questStatus = questStatus
-  }
-
   convertItemToObjFormat = ({ itemsArray = [] }) => {
     const newObj = {}
     itemsArray.forEach((item) => {
@@ -135,8 +118,28 @@ class LocalStateStore {
   }
 
   getDesiredItems = () => {
-    const { missions } = this.questStatus.questConfig
-    return missions.map((mission) => mission.item)
+    return this.questStatus.desiredItems
+  }
+
+  removeItemFromDesiredItems = ({ itemToRemove }) => {
+    if (!itemToRemove) {
+      return
+    }
+
+    console.log("itemToRemove", toJS(itemToRemove)) // zzz
+    console.log("this.questStatus", toJS(this.questStatus)) // zzz
+    console.log(
+      "this.questStatus.desiredItems",
+      toJS(this.questStatus.desiredItems)
+    ) // zzz
+
+    const modifiedArray = this.questStatus.desiredItems.filter((item) => {
+      return item.name !== itemToRemove.name
+    })
+
+    console.log("modifiedArray", toJS(modifiedArray)) // zzz
+    this.questStatus.desiredItems.length = 0
+    this.questStatus.desiredItems.push(...modifiedArray)
   }
 
   getActiveMission = () => {
@@ -195,10 +198,6 @@ class LocalStateStore {
 
     if (isMissionCompleted) {
       this.completedMissions.push(activeMissionId)
-      console.log(
-        "this.completedMissions------------------------------>>>",
-        toJS(this.completedMissions)
-      ) //
 
       // remove item from pocket
       const desiredItem = this.getDesiredItem()
@@ -217,6 +216,10 @@ class LocalStateStore {
     }
 
     const foundItem = this._findItem({ itemsInScene })
+    console.log("itemsInScene", toJS(itemsInScene)) // zzz
+    console.log("--------------->>>>---------------foundItem", toJS(foundItem)) // zzz
+    this.removeItemFromDesiredItems({ itemToRemove: foundItem })
+
     return {
       foundItem,
       completedMission: isMissionCompleted ? activeMission : false,
@@ -255,8 +258,8 @@ class LocalStateStore {
   }
 
   _findItem = ({ itemsInScene }) => {
-    // const desiredItem = this.getDesiredItem() || {};
-    const desiredItems = this.getDesiredItems() || {}
+    console.log("itemsInScene", toJS(itemsInScene)) // zzz
+    const desiredItems = this.getDesiredItems() || []
     const questStatus = this.questStatus
 
     const { pockets = {} } = questStatus
@@ -389,6 +392,7 @@ decorate(LocalStateStore, {
   completedMissions: observable,
   creatures: observable,
   defaultWorldId: observable,
+  desiredItems: observable,
   mapBuilderGrid: observable,
   mapBuilderWorld: observable,
   questStatus: observable,
