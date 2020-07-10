@@ -451,6 +451,9 @@ class WorldBuilder extends Component {
   }
 
   createNewDialogs = ({ dialogs }) => {
+    if (!dialogs) {
+      return []
+    }
     const newDialogs = dialogs.map((sentenceObj) => {
       const itemObj = JSON.parse(sentenceObj)
       const itemKey = Object.keys(itemObj)[0]

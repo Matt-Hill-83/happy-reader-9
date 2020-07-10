@@ -19,6 +19,8 @@ export default class Utils {
     rori: 3,
     troll01: 2,
     troll02: 3,
+    anna02: 2,
+    angus01: 3,
     pup01: 2,
     dog01: 3,
     trumpetGirl01: 2,
@@ -30,11 +32,12 @@ export default class Utils {
     babyTroll01: 2,
     rose01: 2,
     coldGirl: 3,
+    coldGirl: 3,
   }
   // CONSTANTS ---------------------------------- end ---------------------------
 
   static getCharacterDialogIndex = ({ characterId, characterName }) => {
-    return this.characterDialogIndex[characterName] || 0
+    return this.characterDialogIndex[characterName] || 2
   }
 
   static getWordsByType = ({ words, type, returnName = false }) => {

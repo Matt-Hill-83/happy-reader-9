@@ -88,7 +88,7 @@ import bunny from "./creatures/bunny.png"
 import camperGirl from "./creatures/camper_girl.png"
 import cat_king from "./creatures/cat_king.gif"
 import cat01 from "./creatures/cat01.png"
-import charlie01 from "./creatures/charlie01.png"
+// // import charlie01 from "./creatures/charlie01.png"
 import chick01 from "./creatures/chick01.png"
 import chooChoo01 from "./creatures/chooChoo01.png"
 import cleopatra01 from "./creatures/cleopatra01.png"
@@ -542,7 +542,7 @@ const creatures = {
   camperGirl,
   cat_king,
   chad: chad01,
-  charlie01,
+  // charlie01,
   coldGirl,
   cop,
   cub,
@@ -648,7 +648,7 @@ const vehicles = {
   car,
   tug,
   van,
-  charlie01,
+  // charlie01,
   bus,
 }
 

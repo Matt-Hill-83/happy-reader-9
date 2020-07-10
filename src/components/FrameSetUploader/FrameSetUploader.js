@@ -60,6 +60,7 @@ import story9922 from "../../Scripts/9922-test-SoWhenDoWeGetTheCupcakes.js"
 import story9923 from "../../Scripts/9923-test-FrogHopper.js"
 import story8013 from "../../Scripts/8013-CharAndLucy-003.js"
 import story9924 from "../../Scripts/9924-test-FrogHopperPart01.js"
+import story9925 from "../../Scripts/9925-test-AnnaWantCupcake.js"
 
 class FrameSetUploader extends Component {
   // state = { text: JSON.stringify(story002) }
@@ -113,7 +114,8 @@ class FrameSetUploader extends Component {
   // state = { text: JSON.stringify(story9922) };
   // state = { text: JSON.stringify(story9923) };
   // state = { text: JSON.stringify(story8013) }
-  state = { text: JSON.stringify(story9924) }
+  // state = { text: JSON.stringify(story9924) }
+  state = { text: JSON.stringify(story9925) }
 
   onChangeDialog = ({ event }) => {
     const text = event.target.value
