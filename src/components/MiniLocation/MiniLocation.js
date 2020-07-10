@@ -121,13 +121,13 @@ class MiniLocation extends React.Component {
     if (!isActive) {
       return null
     }
-    console.log("") // zzz
-    console.log("renderCreatures----------------------------->") // zzz
+    // console.log("") // zzz
+    // console.log("renderCreatures----------------------------->") // zzz
     const activeFrame = localStateStore.getActiveFrame() || {}
     const { creatures = [] } = activeFrame
 
-    console.log("activeFrame", toJS(activeFrame)) // zzz
-    console.log("creatures", toJS(creatures)) // zzz
+    // console.log("activeFrame", toJS(activeFrame)) // zzz
+    // console.log("creatures", toJS(creatures)) // zzz
 
     // const {frameSet} = activeScene;
     const renderedCharacters = creatures.map((creature) => {
@@ -143,7 +143,7 @@ class MiniLocation extends React.Component {
 
       return friend
     })
-    console.log("renderedCharacters", toJS(renderedCharacters)) // zzz
+    // console.log("renderedCharacters", toJS(renderedCharacters)) // zzz
     return <div className={css.charactersContainer}>{renderedCharacters}</div>
   }
 
@@ -185,7 +185,7 @@ class MiniLocation extends React.Component {
 
   render() {
     const { scene, isActive, className, id } = this.props
-    console.log("scene.creatures", toJS(scene.creatures)) // zzz
+    // console.log("scene.creatures", toJS(scene.creatures)) // zzz
 
     const {
       coordinates,

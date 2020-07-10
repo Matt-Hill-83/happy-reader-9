@@ -64,6 +64,12 @@ import dummyQuest01 from "./bookcovers/dummyQuest01.png"
 // creatures
 // creatures
 
+import snake01 from "./creatures/snake01.png"
+import bee01 from "./creatures/bee01.png"
+
+import spaceShip01 from "./items/spaceShip01.png"
+import note01 from "./items/note01.png"
+
 import angus01 from "./creatures/angus01.png"
 import anna from "./creatures/anna.png"
 import anna02 from "./creatures/anna02.png"
@@ -485,6 +491,7 @@ const creatures = {
   pantherGirl02,
   sweaterGirl01,
   bubbleGirl01,
+  bee01,
   islandGirl01,
   zanzibar01,
   rose01,
@@ -627,6 +634,11 @@ const items = {
   pin,
   rori,
   barkPhone01,
+
+  snake01,
+  spaceShip01,
+  note01,
+
   rag,
   tag,
   top,
