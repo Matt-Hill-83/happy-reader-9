@@ -36,8 +36,6 @@ class FrameBuilder extends Component {
   }
 
   getNewFrame = () => {
-    console.log("getNewFrame") // zzz
-    console.log("this.state.scene", toJS(this.state.scene)) // zzz
     const {
       scene: { characters = [] },
     } = this.state

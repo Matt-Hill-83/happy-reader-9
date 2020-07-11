@@ -143,8 +143,6 @@ class MainStory extends React.Component {
   }
 
   updateActiveScene = ({ sceneId }) => {
-    console.log("updateActiveScene") // zzz
-
     localStateStore.setActiveSceneId(sceneId)
     localStateStore.setActiveFrameIndex(0)
     localStateStore.addVisitedScenes(sceneId)
@@ -170,7 +168,6 @@ class MainStory extends React.Component {
   updateQuestStatus = () => {
     toaster.clear()
     const activeScene = localStateStore.getActiveScene()
-    console.log("activeScene", toJS(activeScene)) // zzz
 
     const { items = [], characters = [], location } = activeScene
 
@@ -222,7 +219,6 @@ class MainStory extends React.Component {
   }
 
   onChangeWorld = ({ mapId }) => {
-    console.log("onChangeWorld") // zzz
     console.log(
       "-----------------------mapId---------------------------",
       mapId
@@ -234,17 +230,14 @@ class MainStory extends React.Component {
     const { questConfig } = map.data
 
     if (questConfig) {
-      const { missions } = questConfig
+      const { missions = [] } = questConfig
       const desiredItems = missions.map((mission) => mission.item)
-      console.log("desiredItems", toJS(desiredItems)) // zzz
 
       const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig))
 
       const combinedPockets = localStateStore.addToPockets({
         newPockets: clonedQuestConfig.pockets,
       })
-
-      console.log("-----------------this.questStatus", toJS(this.questStatus)) // zzz
 
       localStateStore.setQuestStatus({
         activeMission: 0,
@@ -278,11 +271,9 @@ class MainStory extends React.Component {
 
   toggleBookPicker = () => {
     const test = localStateStore.getShowBookPicker()
-    console.log("test", toJS(test)) // zzz
 
     localStateStore.setShowBookPicker(!test)
     const test2 = localStateStore.getShowBookPicker()
-    console.log("test2", toJS(test2)) // zzz
   }
 
   closeBookPicker = () => {
@@ -347,17 +338,8 @@ class MainStory extends React.Component {
   }
 
   render() {
-    console.log("") // zzz
-    console.log("") // zzz
-    console.log("") // zzz
-    console.log("main story render") // zzz
-    const unlockedSubQuests = localStateStore.getUnlockedSubQuests()
-    console.log("unlockedSubQuests", toJS(unlockedSubQuests)) // zzz
-    const questStatus = localStateStore.getQuestStatus()
-    console.log(
-      "questStatus.desiredItems------------------------------------><><><><><",
-      toJS(questStatus.desiredItems)
-    ) // zzz
+    console.log("")
+    console.log("main story render")
 
     const { className } = this.props
     const activeWorld = localStateStore.getActiveWorld()

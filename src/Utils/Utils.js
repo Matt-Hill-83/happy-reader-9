@@ -75,7 +75,6 @@ export default class Utils {
   }
 
   static getNewFrame = ({ characters, props = {} }) => {
-    console.log("getNewFrame") // zzz
     let allCharacters = []
 
     if (characters && characters.length) {
@@ -233,8 +232,6 @@ export default class Utils {
   }
 
   static getDummyFrame = ({ props }) => {
-    console.log("getDummyFrame") // zzz
-
     const dummyFrame = {
       creatures: ["kat", "liz2"],
       dialog: [
@@ -429,11 +426,9 @@ export default class Utils {
   }
 
   static unLockSubQuests = ({ subQuestTriggers = [] }) => {
-    // console.log("subQuestTriggers", toJS(subQuestTriggers)) // zzz
     const { unHideTriggers, subQuestId } = subQuestTriggers
 
     const questStatus = localStateStore.getQuestStatus()
-    // console.log("questStatus", toJS(questStatus)) // zzz
 
     const requiredCompletedMission = _get(
       unHideTriggers,
@@ -441,13 +436,6 @@ export default class Utils {
       null
     )
     const completedMissions = localStateStore.getCompletedMissions()
-
-    // console.log("unHideTriggers", toJS(unHideTriggers)) // zzz
-    // console.log("requiredCompletedMission", toJS(requiredCompletedMission)) // zzz
-    // console.log(
-    //   "completedMissions+_+_+_+_+_+_+_+_+_---->>>",
-    //   toJS(completedMissions)
-    // ) // zzz
 
     if (completedMissions.includes(requiredCompletedMission)) {
       localStateStore.unLockSubQuestById({ subQuestId })

@@ -26,7 +26,8 @@ class GetSceneConfig extends Component {
     const newFrames = frames.map((oldFrame) => {
       const newFrame = {
         frameConfig: {
-          items: [],
+          // items: [],
+          items: oldFrame.items,
           id: oldFrame.id,
           faces: oldFrame.faces,
           creatures: oldFrame.creatures,

@@ -549,7 +549,7 @@ const story9925 = {
         triggers: { newFrameSetConditions: { currentMission: 1 } },
         subQuestId: 0,
         coordinates: { row: 1, col: 1 },
-        creatures: ["anna02", "angus01"],
+        creatures: ["anna02", "angus01", "note01"],
       },
       frames: [
         {

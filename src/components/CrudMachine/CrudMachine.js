@@ -96,7 +96,6 @@ class CrudMachine extends Component {
     const final = [...part1, newItem, ...part2]
 
     const statePropsToSave = { items: final }
-    console.log("final", toJS(final)) // zzz
     this.setStateAndSave({ statePropsToSave })
   }
 

@@ -434,7 +434,6 @@ class WorldBuilder extends Component {
       } else {
         configProps.creatures = sceneConfig.creatures || []
       }
-      console.log("frameConfig.items", toJS(frameConfig.items)) // zzz
       if (frameConfig && frameConfig.items) {
         configProps.items = frameConfig.items
       } else {
@@ -443,10 +442,8 @@ class WorldBuilder extends Component {
 
       // and put the properties into the new Frame...
       const newFrame = Utils.getNewFrame({
-        // const newFrame = Utils.getDummyFrame({
         props: { ...configProps, dialog: newDialogs },
       })
-      console.log("newFrame", toJS(newFrame)) // zzz
       return newFrame
     })
 
@@ -511,10 +508,6 @@ class WorldBuilder extends Component {
       })
 
       if (frames2 && frames2.length > 0) {
-        console.log(
-          "frames2------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
-          toJS(frames2)
-        ) // zzz
         newBornScene.frameSet.frames2 = this.createNewFramesFromJson({
           frames: frames2,
           sceneConfig,
@@ -523,9 +516,7 @@ class WorldBuilder extends Component {
       scenesGrid[coordinates.row][coordinates.col] = newBornScene
     })
 
-    console.log("scenesGrid", toJS(scenesGrid)) // zzz
     const newProps = { title, description, questConfig }
-    console.log("newProps", toJS(newProps)) // zzz
 
     this.updateMap({ newProps })
   }

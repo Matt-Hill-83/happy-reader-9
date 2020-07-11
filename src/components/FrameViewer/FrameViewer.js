@@ -19,20 +19,6 @@ import ArrowNavigator from "../ArrowNavigator/ArrowNavigator"
 class FrameViewer extends Component {
   state = {}
 
-  renderNarrative = () => {
-    const { frame } = this.props
-    const { story = [] } = frame
-
-    if (!story.length || !story[0]) return null
-
-    const renderedNarrative = story.map((line, lineIndex) => {
-      return <WordGroup story={[line]} className={css.narrativeClass} />
-    })
-
-    return <div className={css.narrative}></div>
-    // return <div className={css.narrative}>{renderedNarrative}</div>
-  }
-
   renderDialog = ({ cloneIndex }) => {
     const { frame } = this.props
     const dialog = (frame && frame.dialog) || []
@@ -124,39 +110,11 @@ class FrameViewer extends Component {
     )
   }
 
-  // renderPocketItems = () => {
-  //   const questStatus = localStateStore.getQuestStatus()
-
-  //   const items = _get(questStatus, "pockets") || null
-
-  //   const itemKeys = Object.keys(items)
-  //   if (itemKeys.length === 0 || !items) {
-  //     return null
-  //   }
-
-  //   return itemKeys.map((key, index) => {
-  //     const existingItem = items[key]
-  //     const { amount } = existingItem
-
-  //     const newItem = { name: key, index }
-
-  //     return (
-  //       <ImageDisplay
-  //         className={css.itemContainer}
-  //         item={newItem}
-  //         showLabel={true}
-  //         amount={amount}
-  //       />
-  //     )
-  //   })
-  // }
-
   renderFriends = () => {
     const { scene, frame } = this.props
     if (!frame) return null
 
     let allCreatures = []
-    console.log("frame-----friends", toJS(frame)) // zzz
 
     const { critters1 = null, faces = [] } = frame
 
@@ -170,31 +128,18 @@ class FrameViewer extends Component {
     }
 
     let allItems = []
-
     if (frame.items && frame.items.length > 0) {
-      allItems = [...frame.items]
+      allItems = (frame.items && frame.items.map((item) => item.name)) || []
     } else {
       allItems = (scene.items && scene.items.map((item) => item.name)) || []
     }
-    console.log("allItems", toJS(allItems)) // zzz
-    console.log("scene.items", toJS(scene.items)) // zzz
-
-    // const allItems = (scene.items && scene.items.map((item) => item.name)) || []
 
     // temp code DELETE ME!!! (start)
     allCreatures.push(...allItems)
     // temp code DELETE ME!!! (end)
-    console.log("allCreatures", toJS(allCreatures)) // zzz
 
     const filteredCharacters = allCreatures.filter((item) => {
-      return ![
-        "liz2",
-        "kat",
-        "katieKooper01",
-        // "anna02",
-        // "elsa02",
-        // "merida02",
-      ].includes(item)
+      return !["liz2", "kat", "katieKooper01"].includes(item)
     })
 
     const lock01 = Images.backgrounds["lock01"]
@@ -227,14 +172,8 @@ class FrameViewer extends Component {
     const { scene, frame } = this.props
     const { faces = [] } = frame
     if (!frame) return null
-    console.log("") // zzz
-    console.log("") // zzz
-    console.log("") // zzz
-    console.log("frame----liz and kat", toJS(frame)) // zzz
 
     let allCreatures = []
-    console.log("frame.creatures", toJS(frame.creatures)) // zzz
-    console.log("scene.characters", toJS(scene.characters)) // zzz
     if (frame.creatures && frame.creatures.length > 0) {
       allCreatures = [...frame.creatures]
     } else {
@@ -255,7 +194,6 @@ class FrameViewer extends Component {
     // temp code DELETE ME!!! (start)
     allCreatures.push(...allItems)
     // temp code DELETE ME!!! (end)
-    console.log("allCreatures", toJS(allCreatures)) // zzz
 
     const filteredCharacters = allCreatures.filter((item) => {
       return [
