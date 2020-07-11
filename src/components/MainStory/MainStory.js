@@ -16,6 +16,7 @@ import { UserConfigStore } from "../../Stores/UserConfigStore.js"
 
 import css from "./MainStory.module.scss"
 import BookPicker from "../BookPicker/BookPicker.js"
+import BookBuilder from "../BookBuilder/BookBuilder.js"
 
 let IS_PROD_RELEASE
 
@@ -337,6 +338,14 @@ class MainStory extends React.Component {
     )
   }
 
+  renderBookBuilder = () => {
+    return (
+      <div className={css.floatingButtons}>
+        <BookBuilder></BookBuilder>
+      </div>
+    )
+  }
+
   render() {
     console.log("")
     console.log("main story render")
@@ -368,6 +377,8 @@ class MainStory extends React.Component {
     return (
       <div className={`${css.main} ${className}`}>
         {this.renderButtons()}
+        {this.renderBookBuilder()}
+
         <StoryMode
           updateActiveScene={this.updateActiveScene}
           activeScene={activeScene}
