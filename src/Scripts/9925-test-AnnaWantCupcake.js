@@ -11,7 +11,6 @@ const story9925 = {
         subQuestId: 1,
         coordinates: { col: 0, row: 3 },
         creatures: ["merida02"],
-        items: [{ name: "top" }, { name: "cup" }, { name: "mug" }],
         // items: [],
       },
       frames: [
@@ -19,7 +18,7 @@ const story9925 = {
           frameConfig: {
             items: [],
             faces: [{ character: "anna02", characterIndex: 0, face: "happy" }],
-            creatures: ["merida02"],
+            creatures: ["merida02", "cub"],
           },
           dialogs: [
             '{"merida02" : "La la la la la!"}',
@@ -34,9 +33,10 @@ const story9925 = {
     {
       title: "goatInABoat",
       sceneConfig: {
+        triggers: { newFrameSetConditions: { currentMission: 2 } },
         subQuestId: 1,
         coordinates: { row: 3, col: 1 },
-        creatures: ["merida02"],
+        creatures: ["merida02", "cub"],
         items: [],
       },
       frames: [
@@ -44,12 +44,23 @@ const story9925 = {
           frameConfig: {
             items: [],
             faces: [{ character: "anna02", characterIndex: 0, face: "happy" }],
-            creatures: ["merida02"],
+            creatures: ["merida02", "cub"],
           },
           dialogs: [
             '{"merida02" : "Hello goat."}',
             '{"cub" : "You are not my mommy."}',
             '{"goat01" : "baaaaaa"}',
+          ],
+        },
+      ],
+      frames: [
+        {
+          frameConfig: {
+            items: [],
+            faces: [{ character: "anna02", characterIndex: 0, face: "happy" }],
+            creatures: ["merida02", "cub"],
+          },
+          dialogs: [
             '{"merida02" : "Goat, what do you want?"}',
             '{"goat01" : "Me want food!"}',
             '{"cub" : "Goat, we will find you food!"}',
@@ -57,9 +68,18 @@ const story9925 = {
         },
       ],
       frames2: [
-        '{"goat01" : "Me eat bun!"}',
-        '{"goat01" : "Yum! Yum!"}',
-        '{"angus01" : "Bark! Bark!"}',
+        {
+          frameConfig: {
+            items: [],
+            faces: [{ character: "anna02", characterIndex: 0, face: "happy" }],
+            creatures: ["merida02", "cub"],
+          },
+          dialogs: [
+            '{"goat01" : "Me eat bun!"}',
+            '{"goat01" : "Yum! Yum!"}',
+            '{"angus01" : "Bark! Bark!"}',
+          ],
+        },
       ],
     },
     {
@@ -67,21 +87,32 @@ const story9925 = {
       sceneConfig: {
         subQuestId: 1,
         coordinates: { row: 3, col: 2 },
-        creatures: ["merida02"],
-        items: [{ name: "fig" }],
+        creatures: ["merida02", "cub"],
+        // items: [{ name: "fig" }],
       },
       frames: [
         {
           frameConfig: {
             items: [],
             faces: [{ characterIndex: 0, character: "anna02", face: "happy" }],
-            creatures: ["merida02"],
+            creatures: ["merida02", "cub"],
           },
           dialogs: [
             '{"merida02" : "I see a bun!"}',
             '{"cub" : "I see a bun... in the sun!"}',
             '{"merida02" : "We will get the bun!"}',
             '{"cub" : "We can give the bun to the goat."}',
+          ],
+        },
+      ],
+      frames: [
+        {
+          frameConfig: {
+            items: [],
+            faces: [{ characterIndex: 0, character: "anna02", face: "happy" }],
+            creatures: ["merida02", "cub"],
+          },
+          dialogs: [
             '{"merida02" : "Fun! Fun! Fun!"}',
             '{"cub" : "We can run with the bun."}',
             '{"merida02" : "We can run with the bun.. in the sun!"}',
@@ -97,7 +128,7 @@ const story9925 = {
         triggers: { unlockSceneConditions: { currentMission: 2 } },
         subQuestId: 1,
         coordinates: { row: 3, col: 3 },
-        creatures: ["merida02"],
+        creatures: ["merida02", "cub"],
         items: [],
       },
       frames: [
@@ -105,11 +136,11 @@ const story9925 = {
           frameConfig: {
             items: [],
             faces: [{ characterIndex: 0, face: "happy", character: "anna02" }],
-            creatures: ["merida02"],
+            creatures: ["merida02", "cub"],
           },
           dialogs: [
-            '{"anna02" : "---------------"}',
-            '{"merida02" : "---------------"}',
+            '{"merida02" : "I see a pin!"}',
+            '{"cub" : "We can get the pin!"}',
           ],
         },
         {
@@ -275,7 +306,7 @@ const story9925 = {
         {
           frameConfig: {
             items: [],
-            creatures: ["anna02", "merida02"],
+            creatures: ["anna02"],
           },
           dialogs: [
             '{"angus01" : "Hi pig."}',
@@ -436,18 +467,38 @@ const story9925 = {
             '{"angus01" : "Hi girls. Bark. Bark."}',
             '{"anna02" : "My name is Anna."}',
             '{"angus01" : "And I am Angus."}',
+          ],
+        },
+        {
+          frameConfig: {
+            items: [{ name: "note01" }],
+            creatures: ["anna02", "angus01"],
+          },
+          dialogs: [
             '{"anna02" : "Can you play with us today?"}',
-
-            '{"anna02" : "Oh Good."}',
-
             '{"anna02" : "We can go to a cup cake party."}',
             '{"angus01" : "A cup cake party!"}',
+          ],
+        },
+        {
+          frameConfig: {
+            items: [{ name: "note01" }],
+            creatures: ["anna02", "angus01"],
+          },
+          dialogs: [
             '{"anna02" : "Angus likes cupcakes."}',
             '{"angus01" : "Me like cupcakes!"}',
             '{"angus01" : "Me love cupcakes!"}',
-
-            '{"anna02" : "The cup cake party is at the log."}',
-            '{"angus01" : "We can go to the log!"}',
+          ],
+        },
+        {
+          frameConfig: {
+            items: [{ name: "note01" }],
+            creatures: ["anna02", "angus01"],
+          },
+          dialogs: [
+            '{"anna02" : "The cup cake party is at the hill."}',
+            '{"angus01" : "We can go to the hill!"}',
           ],
         },
       ],
@@ -488,31 +539,57 @@ const story9925 = {
         {
           frameConfig: {
             items: [{ name: "note01" }],
-            creatures: ["anna02", "angus01"],
+            creatures: ["anna02", "angus01", "note01"],
           },
           dialogs: [
             '{"anna02" : "Look!  I see a note!"}',
             '{"angus01" : "You see a note?"}',
             '{"anna02" : "I see a note... on a goat."}',
             '{"angus01" : "Hi goat!"}',
-            '{"anna02" : "I will read the note."}',
-            '{"angus01" : "Read the note mommy!"}',
-
+          ],
+        },
+        {
+          frameConfig: {
+            items: [{ name: "note01" }],
+            creatures: ["anna02", "angus01"],
+          },
+          dialogs: [
             '{"anna02" : "The note is from Elsa."}',
             '{"angus01" : "I love Elsa!"}',
 
             '{"anna02" : "Elsa wants us to help her. "}',
             '{"angus01" : "Elsa wants help?"}',
-
+          ],
+        },
+        {
+          frameConfig: {
+            items: [{ name: "note01" }],
+            creatures: ["anna02", "angus01"],
+          },
+          dialogs: [
             '{"anna02" : "Elsa wants us to feed the pig"}',
             '{"angus01" : "I love the pig."}',
             '{"anna02" : "We need to feed the pig a fig."}',
-
+          ],
+        },
+        {
+          frameConfig: {
+            items: [{ name: "note01" }],
+            creatures: ["anna02", "angus01"],
+          },
+          dialogs: [
             '{"anna02" : "We do not have a fig."}',
             '{"angus01" : "Boo Hoo!"}',
             '{"anna02" : "We can find a fig!"}',
             '{"angus01" : "We can find a fig, and feed it to the pig!"}',
-
+          ],
+        },
+        {
+          frameConfig: {
+            items: [{ name: "note01" }],
+            creatures: ["anna02", "angus01"],
+          },
+          dialogs: [
             '{"anna02" : "After we feed the pig, we go to the cupcake party."}',
             '{"angus01" : "Me want cup cake!"}',
             '{"angus01" : "Me love cup cake!"}',
@@ -566,15 +643,9 @@ const story9925 = {
           dialogs: [
             '{"anna02" : "Oh no.  The Trolls ate all the cup cakes!"}',
             '{"anna02" : "The path is locked and blocked."}',
-            '{"anna02" : "Boo Hoo."}',
+            '{"angus01" : "Boo Hoo."}',
 
-            '{"anna02" : "What can we do?"}',
-            '{"angus01" : "Ask the kid."}',
-            '{"anna02" : "Hey kid!"}',
-            '{"anna02" : "Yeah you!  Lucy and Charlie!  You need to help us!"}',
-            '{"angus01" : "Bark! Bark!"}',
-
-            '{"anna02" : "Charlie, can you get Merida to help us?"}',
+            '{"anna02" : "Merida can help us?"}',
             '{"angus01" : "Merida is at the log."}',
           ],
         },
@@ -586,12 +657,12 @@ const story9925 = {
             creatures: ["anna02", "merida02"],
           },
           dialogs: [
-            '{"anna02" : "Liz!  You came back."}',
-            '{"merida02" : "Yes.  I came back from my trip."}',
-            '{"anna02" : "----------"}',
-            '{"merida02" : "----------"}',
-            '{"anna02" : "----------"}',
-            '{"merida02" : "----------"}',
+            '{"anna02" : "Merida!  Did you come to help?"}',
+            '{"merida02" : "Yes.  I can help."}',
+            '{"anna02" : "The Trolls ate the cup cakes!"}',
+            '{"merida02" : "They ate all the cup cakes?"}',
+            '{"anna02" : "Can we get more?"}',
+            '{"merida02" : "We can get more."}',
           ],
         },
       ],
@@ -890,7 +961,7 @@ const story9925 = {
         item: { name: "bun" },
         name: "Feed the goat.",
         rewards: [{ amount: 5, name: "gold" }],
-        recipient: { name: "goat01" },
+        recipient: { name: "goatInABoat" },
       },
       {
         recipient: { name: "pinky01" },

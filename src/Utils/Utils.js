@@ -31,8 +31,10 @@ export default class Utils {
     elf: 2,
     babyTroll01: 2,
     rose01: 2,
+    cub: 1,
+    goat01: 0,
     coldGirl: 3,
-    coldGirl: 3,
+    merida02: 3,
   }
   // CONSTANTS ---------------------------------- end ---------------------------
 

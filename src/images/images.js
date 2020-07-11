@@ -67,6 +67,10 @@ import dummyQuest01 from "./bookcovers/dummyQuest01.png"
 import snake01 from "./creatures/snake01.png"
 import bee01 from "./creatures/bee01.png"
 
+import angusBalloon01 from "./creatures/angusBalloon01.png"
+import balloons01 from "./items/balloons01.png"
+import moon01 from "./items/moon01.png"
+
 import spaceShip01 from "./items/spaceShip01.png"
 import note01 from "./items/note01.png"
 
@@ -637,6 +641,10 @@ const items = {
 
   snake01,
   spaceShip01,
+
+  angusBalloon01,
+  balloons01,
+  moon01,
   note01,
 
   rag,
