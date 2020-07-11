@@ -11,7 +11,6 @@ const story9925 = {
         subQuestId: 1,
         coordinates: { col: 0, row: 3 },
         creatures: ["merida02"],
-        // items: [],
       },
       frames: [
         {
@@ -521,7 +520,7 @@ const story9925 = {
       ],
     },
     {
-      title: "slide",
+      title: "mug",
       sceneConfig: {
         subQuestId: 0,
         coordinates: { row: 1, col: 0 },
