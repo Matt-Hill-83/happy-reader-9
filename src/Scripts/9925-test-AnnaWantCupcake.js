@@ -49,7 +49,7 @@ const story9925 = {
           dialogs: [
             '{"merida02" : "Hello goat."}',
             '{"cub" : "You are not my mommy."}',
-            '{"goat01" : "baaaaaa"}',
+            '{"goat" : "baaaaaa"}',
           ],
         },
       ],
@@ -62,7 +62,7 @@ const story9925 = {
           },
           dialogs: [
             '{"merida02" : "Goat, what do you want?"}',
-            '{"goat01" : "Me want food!"}',
+            '{"goat" : "Me want food!"}',
             '{"cub" : "Goat, we will find you food!"}',
           ],
         },
@@ -75,8 +75,8 @@ const story9925 = {
             creatures: ["merida02", "cub"],
           },
           dialogs: [
-            '{"goat01" : "Me eat bun!"}',
-            '{"goat01" : "Yum! Yum!"}',
+            '{"goat" : "Me eat bun!"}',
+            '{"goat" : "Yum! Yum!"}',
             '{"angus01" : "Bark! Bark!"}',
           ],
         },
@@ -297,6 +297,7 @@ const story9925 = {
     {
       title: "pig",
       sceneConfig: {
+        triggers: { newFrameSetConditions: { currentMission: 1 } },
         subQuestId: 0,
         coordinates: { row: 1, col: 3 },
         creatures: ["anna02"],
@@ -306,7 +307,7 @@ const story9925 = {
         {
           frameConfig: {
             items: [],
-            creatures: ["anna02"],
+            creatures: ["anna02", "angus01"],
           },
           dialogs: [
             '{"angus01" : "Hi pig."}',
@@ -315,7 +316,15 @@ const story9925 = {
           ],
         },
       ],
-      frames2: [],
+      frames2: [
+        {
+          frameConfig: {
+            items: [],
+            creatures: ["anna02", "angus01"],
+          },
+          dialogs: ['{"angus01" : "Hi pig."}', '{"pig" : "Oink!"}'],
+        },
+      ],
     },
     {
       title: "pinky01",
@@ -451,6 +460,7 @@ const story9925 = {
     {
       title: "home",
       sceneConfig: {
+        triggers: { newFrameSetConditions: { currentMission: 1 } },
         subQuestId: 0,
         coordinates: { row: 0, col: 1 },
         creatures: ["anna02"],
@@ -459,7 +469,6 @@ const story9925 = {
       frames: [
         {
           frameConfig: {
-            items: [{ name: "note01" }],
             creatures: ["anna02", "angus01"],
           },
           dialogs: [
@@ -471,7 +480,6 @@ const story9925 = {
         },
         {
           frameConfig: {
-            items: [{ name: "note01" }],
             creatures: ["anna02", "angus01"],
           },
           dialogs: [
@@ -482,7 +490,6 @@ const story9925 = {
         },
         {
           frameConfig: {
-            items: [{ name: "note01" }],
             creatures: ["anna02", "angus01"],
           },
           dialogs: [
@@ -493,7 +500,6 @@ const story9925 = {
         },
         {
           frameConfig: {
-            items: [{ name: "note01" }],
             creatures: ["anna02", "angus01"],
           },
           dialogs: [
@@ -502,7 +508,17 @@ const story9925 = {
           ],
         },
       ],
-      frames2: [],
+      frames2: [
+        {
+          frameConfig: {
+            creatures: ["anna02", "angus01"],
+          },
+          dialogs: [
+            '{"anna02" : "I see my home."}',
+            '{"angus01" : "Bark. Bark."}',
+          ],
+        },
+      ],
     },
     {
       title: "slide",
@@ -530,16 +546,16 @@ const story9925 = {
     {
       title: "goat01",
       sceneConfig: {
+        triggers: { newFrameSetConditions: { currentMission: 1 } },
         subQuestId: 0,
         coordinates: { row: 1, col: 1 },
         creatures: ["anna02", "angus01"],
-        items: [],
       },
       frames: [
         {
           frameConfig: {
-            items: [{ name: "note01" }],
-            creatures: ["anna02", "angus01", "note01"],
+            items: [{ name: "note01", name: "top" }],
+            creatures: ["anna02", "angus01"],
           },
           dialogs: [
             '{"anna02" : "Look!  I see a note!"}',
@@ -596,11 +612,20 @@ const story9925 = {
           ],
         },
       ],
-      frames2: [],
+      frames2: [
+        {
+          frameConfig: {
+            items: [],
+            creatures: ["anna02", "angus01"],
+          },
+          dialogs: ['{"anna01" : "Hi goat!"}', '{"goat" : "Baaaaa!"}'],
+        },
+      ],
     },
     {
       title: "fig",
       sceneConfig: {
+        triggers: { newFrameSetConditions: { currentMission: 1 } },
         subQuestId: 0,
         coordinates: { row: 1, col: 2 },
         creatures: ["anna02", "angus01"],
@@ -623,7 +648,15 @@ const story9925 = {
           ],
         },
       ],
-      frames2: [],
+      frames2: [
+        {
+          frameConfig: {
+            items: [],
+            creatures: ["anna02", "angus01"],
+          },
+          dialogs: ['{"anna01" : "I see a fig!"}'],
+        },
+      ],
     },
     {
       title: "hill",
@@ -631,7 +664,7 @@ const story9925 = {
         triggers: { newFrameSetConditions: { currentMission: 2 } },
         subQuestId: 0,
         coordinates: { col: 3, row: 2 },
-        creatures: ["anna02", "angus01"],
+        // creatures: ["anna02", "angus01"],
         items: [],
       },
       frames: [
@@ -654,7 +687,7 @@ const story9925 = {
         {
           frameConfig: {
             items: [],
-            creatures: ["anna02", "merida02"],
+            creatures: ["anna02", "merida02", "angus01"],
           },
           dialogs: [
             '{"anna02" : "Merida!  Did you come to help?"}',

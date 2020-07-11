@@ -74,7 +74,8 @@ export default class Utils {
     return filteredItems || []
   }
 
-  static getNewFrame = ({ characters }) => {
+  static getNewFrame = ({ characters, props = {} }) => {
+    console.log("getNewFrame") // zzz
     let allCharacters = []
 
     if (characters && characters.length) {
@@ -93,11 +94,6 @@ export default class Utils {
     })
 
     const newFrame = {
-      // this is a hacky fix
-      // this is a hacky fix
-      // this is a hacky fix
-      // this is a hacky fix
-      // creatures: ["kat", "liz2"],
       creatures: allCharacters,
       critters1: critters1,
       critters2: critters2,
@@ -138,6 +134,7 @@ export default class Utils {
         },
       ],
     }
+    props && Object.assign(newFrame, props)
 
     return newFrame
   }
@@ -236,6 +233,8 @@ export default class Utils {
   }
 
   static getDummyFrame = ({ props }) => {
+    console.log("getDummyFrame") // zzz
+
     const dummyFrame = {
       creatures: ["kat", "liz2"],
       dialog: [
@@ -280,7 +279,8 @@ export default class Utils {
   }
 
   static getBlankScene = ({ props }) => {
-    const dummyFrame = this.getDummyFrame({ props: {} })
+    const dummyFrame = this.getNewFrame({ props: {} })
+    // const dummyFrame = this.getDummyFrame({ props: {} })
 
     const id = Utils.generateUuid()
 
