@@ -128,12 +128,14 @@ class FrameViewer extends Component {
     }
 
     let allItems = []
+    console.log("frame.items", toJS(frame.items)) // zzz
     if (frame.items && frame.items.length > 0) {
       allItems = (frame.items && frame.items.map((item) => item.name)) || []
     } else {
       allItems = (scene.items && scene.items.map((item) => item.name)) || []
     }
 
+    console.log("allItems", toJS(allItems)) // zzz
     // temp code DELETE ME!!! (start)
     allCreatures.push(...allItems)
     // temp code DELETE ME!!! (end)

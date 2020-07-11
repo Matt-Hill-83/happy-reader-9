@@ -554,7 +554,8 @@ const story9925 = {
       frames: [
         {
           frameConfig: {
-            items: [{ name: "note01", name: "top" }],
+            // items: [{ name: "note01", name: "top" }],
+            items: [{ name: "note01" }],
             creatures: ["anna02", "angus01"],
           },
           dialogs: [
