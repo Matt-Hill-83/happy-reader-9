@@ -169,11 +169,21 @@ class MainStory extends React.Component {
     toaster.clear()
     const activeScene = localStateStore.getActiveScene()
 
-    const { items = [], characters = [], location } = activeScene
+    const {
+      items = [],
+      characters = [],
+      location,
+      critters1 = [],
+    } = activeScene
+
+    // TODO: this should look for items in the frame, so it can use critters.
+    // TODO: this should look for items in the frame, so it can use critters.
+    // TODO: this should look for items in the frame, so it can use critters.
+    // TODO: this should look for items in the frame, so it can use critters.
 
     const { foundItem, completedMission } = localStateStore.updateQuestState({
-      itemsInScene: [...items, location],
-      charactersInScene: [...characters, ...items, location],
+      itemsInScene: [...items, location, ...critters1],
+      charactersInScene: [...characters, ...items, location, ...critters1],
     })
 
     if (foundItem) {
