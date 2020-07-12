@@ -3,7 +3,6 @@ import { observer } from "mobx-react"
 import { toJS } from "mobx"
 import _get from "lodash.get"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
-import { Dialog } from "@material-ui/core"
 
 import { maps } from "../../Stores/InitStores.js"
 import { worldNameStore } from "../../Stores/FrameSetStore.js"
@@ -32,7 +31,7 @@ useDefaultWorldId = false
 useDefaultWorldId = true
 const defaultWorldInProd = "mRpN51k8AmA5BqgikVoz"
 // const defaultWorldInNonProd = "ZR0GOSFFqFPoWjSgvgOQ";
-const defaultWorldInNonProd = "Td8yS1etkzygCJFMLUrm"
+const defaultWorldInNonProd = "4Ij854mVNw1yDcfO2Tu5"
 // const defaultWorldInNonProd = "2pFSacsMVNUYILs1y1ZZ"
 // const defaultWorldInNonProd = "MR9L9z0aMiO4tUfG5Pr8"
 
@@ -45,7 +44,7 @@ const defaultWorldId = IS_PROD_RELEASE
 localStateStore.setDefaultWorldId(defaultWorldId)
 
 let SHOW_WORLD_BUILDER
-// SHOW_WORLD_BUILDER = true
+SHOW_WORLD_BUILDER = true
 SHOW_WORLD_BUILDER = false
 
 const toaster = Toaster.create({
@@ -340,7 +339,7 @@ class MainStory extends React.Component {
 
   renderBookBuilder = () => {
     return (
-      <div className={css.floatingButtons}>
+      <div className={css.bookBuilder}>
         <BookBuilder></BookBuilder>
       </div>
     )

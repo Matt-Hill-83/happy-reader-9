@@ -211,7 +211,6 @@ class Frame extends Component {
 
   renderItems = () => {
     const items = _get(this, "props.scene.items") || []
-
     return items.map((item) => {
       const { name } = item
 
@@ -237,7 +236,7 @@ class Frame extends Component {
     const allItems = (scene.items && scene.items.map((item) => item.name)) || []
 
     // temp code DELETE ME!!! (end)
-    allCharacters.push(...allItems)
+    // allCharacters.push(...allItems)
     // temp code DELETE ME!!! (end)
 
     return allCharacters.map((friend, index) => {
@@ -278,8 +277,13 @@ class Frame extends Component {
 
           <div className={css.imageGroupsContainer}>
             {/* uncomment this when more than 2 characters can be added */}
-            {/* <div className={css.itemsContainer}>{renderedItems}</div> */}
-            {/* <div className={css.charactersContainer}>{renderedFriends}</div> */}
+
+            <div className={css.itemsContainer}>
+              <div>Items</div>
+              {renderedItems}
+            </div>
+            <div>Scene.characters, will be overridden by Frame.characters</div>
+            <div className={css.charactersContainer}>{renderedFriends}</div>
           </div>
         </div>
       </div>
