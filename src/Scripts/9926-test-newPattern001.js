@@ -1011,4 +1011,4 @@ const story9926 = {
     ],
   },
 }
-export default story9929926 - test - newPattern001
+export default story9926
