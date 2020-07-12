@@ -434,6 +434,13 @@ class WorldBuilder extends Component {
       } else {
         configProps.creatures = sceneConfig.creatures || []
       }
+
+      if (frameConfig && frameConfig.critters1) {
+        configProps.critters1 = frameConfig.critters1 || []
+      } else {
+        configProps.critters1 = sceneConfig.critters1 || []
+      }
+
       if (frameConfig && frameConfig.items) {
         configProps.items = frameConfig.items
       } else {

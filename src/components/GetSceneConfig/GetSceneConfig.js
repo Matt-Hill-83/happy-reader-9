@@ -28,6 +28,8 @@ class GetSceneConfig extends Component {
         frameConfig: {
           // items: [],
           items: oldFrame.items,
+          critters1: oldFrame.critters1,
+          // critters2: oldFrame.critters2,
           id: oldFrame.id,
           faces: oldFrame.faces,
           creatures: oldFrame.creatures,
