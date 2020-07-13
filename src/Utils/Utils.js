@@ -453,7 +453,7 @@ export default class Utils {
     await map.update(map.data)
   }
 
-  static getCritters2 = ({ frame, scene }) => {
+  static getCritters1 = ({ frame, scene }) => {
     let allCreatures = []
     if (frame.creatures && frame.creatures.length > 0) {
       allCreatures = [...frame.creatures]

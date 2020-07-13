@@ -36,6 +36,13 @@ class Frame extends Component {
     const { frameIndex, scene = {} } = this.props
     const frameSet = scene.frameSet
     const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex]
+
+    console.log("frame.critters1", toJS(frame.critters1)) // zzz
+    if (!frame.critters1) {
+      const critters1 = Utils.getCritters1({ frame, scene })
+      console.log("critters1", toJS(critters1)) // zzz
+      frame.critters1 = critters1
+    }
     this.setState({ frame })
   }
 

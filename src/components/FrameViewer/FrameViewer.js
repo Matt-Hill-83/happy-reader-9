@@ -175,7 +175,7 @@ class FrameViewer extends Component {
     const { faces = [] } = frame
     if (!frame) return null
 
-    const filteredCharacters = Utils.getCritters2({ frame, scene })
+    const filteredCharacters = Utils.getCritters1({ frame, scene })
 
     return filteredCharacters.map((character, index) => {
       const mood = this.getMood({ name: character, faces })
