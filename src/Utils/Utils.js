@@ -441,4 +441,15 @@ export default class Utils {
       localStateStore.unLockSubQuestById({ subQuestId })
     }
   }
+
+  static updateMap = async ({ newProps = {} }) => {
+    const map = localStateStore.getWorldBuilderWorld()
+    Object.assign(map.data, toJS(newProps))
+
+    map.data.newGrid5 = Utils.createCondensedGridFromGrid()
+
+    delete map.data.grid
+
+    await map.update(map.data)
+  }
 }

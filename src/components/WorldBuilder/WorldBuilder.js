@@ -108,7 +108,7 @@ class WorldBuilder extends Component {
       map.data.endSceneId = scene.id
       map.data.endScene = name
     }
-    this.updateMap({ newProps: { ...map.data } })
+    Utils.updateMap({ newProps: { ...map.data } })
   }
 
   // turn this into a component
@@ -211,16 +211,16 @@ class WorldBuilder extends Component {
   }
 
   // TODO - make this global Util
-  updateMap = async ({ newProps = {} }) => {
-    const map = localStateStore.getWorldBuilderWorld()
-    Object.assign(map.data, toJS(newProps))
+  // updateMap = async ({ newProps = {} }) => {
+  //   const map = localStateStore.getWorldBuilderWorld()
+  //   Object.assign(map.data, toJS(newProps))
 
-    map.data.newGrid5 = Utils.createCondensedGridFromGrid()
+  //   map.data.newGrid5 = Utils.createCondensedGridFromGrid()
 
-    delete map.data.grid
+  //   delete map.data.grid
 
-    await map.update(map.data)
-  }
+  //   await map.update(map.data)
+  // }
 
   onChangeTitle = async ({ event }) => {
     const world = localStateStore.getWorldBuilderWorld()
@@ -231,7 +231,7 @@ class WorldBuilder extends Component {
 
   saveTitle = async ({ event }) => {
     const title = event.target.value
-    await this.updateMap({ title })
+    await Utils.updateMap({ title })
   }
 
   createNewGrid = () => {
@@ -276,7 +276,7 @@ class WorldBuilder extends Component {
   }
 
   saveItems = async () => {
-    await this.updateMap({})
+    await Utils.updateMap({})
   }
 
   generateRandomLocation = ({ location, locationNames }) => {
@@ -284,7 +284,7 @@ class WorldBuilder extends Component {
       locationNames[Math.floor(Math.random() * locationNames.length)]
 
     location.name = randomName
-    this.updateMap({})
+    Utils.updateMap({})
   }
 
   // TODO: on save, Crudmachine shoud return the mutated list and a callback should save it
@@ -525,7 +525,7 @@ class WorldBuilder extends Component {
 
     const newProps = { title, description, questConfig }
 
-    this.updateMap({ newProps })
+    Utils.updateMap({ newProps })
   }
 
   render() {
@@ -616,7 +616,7 @@ class WorldBuilder extends Component {
               world={world}
               scene={sceneToEdit}
               onExitFrameBuilder={(frame) => this.onExitFrameBuilder({ frame })}
-              updateMap={this.updateMap}
+              updateMap={Utils.updateMap}
             />
           </div>
         )}
