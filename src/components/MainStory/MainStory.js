@@ -349,9 +349,7 @@ class MainStory extends React.Component {
 
   renderBookBuilder = () => {
     return (
-      <div className={css.bookBuilder}>
-        <BookBuilder></BookBuilder>
-      </div>
+      <div className={css.bookBuilder}>{/* <BookBuilder></BookBuilder> */}</div>
     )
   }
 
