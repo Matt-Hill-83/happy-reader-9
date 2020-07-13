@@ -505,7 +505,10 @@ class WorldBuilder extends Component {
     return newDialogs
   }
 
-  importWorldFromJson = ({ newWorld }) => {
+  importWorldFromJson = async ({ newWorld }) => {
+    console.log("importWorldFromJson") // zzz
+    await this.addNewWorld()
+
     const {
       title = "no title",
       description = "none",
@@ -528,7 +531,11 @@ class WorldBuilder extends Component {
       }
 
       const newBornScene = Utils.getBlankScene({
-        props: { sceneConfig, coordinates, location: { name: scene.title } },
+        props: {
+          sceneConfig,
+          coordinates,
+          location: { name: scene.title },
+        },
       })
 
       if (scene.sceneConfig) {
@@ -549,7 +556,7 @@ class WorldBuilder extends Component {
       scenesGrid[coordinates.row][coordinates.col] = newBornScene
     })
 
-    const newProps = { title, description, questConfig }
+    const newProps = { title: title + "-xxx", description, questConfig }
     console.log("scenesGrid", toJS(scenesGrid)) // zzz
 
     const newWorld2 = localStateStore.getWorldBuilderWorld()

@@ -63,6 +63,62 @@ import story9924 from "../../Scripts/9924-test-FrogHopperPart01.js"
 import story9925 from "../../Scripts/9925-test-AnnaWantCupcake.js"
 import story9926 from "../../Scripts/9926-test-newPattern001.js"
 
+const worlds = [
+  // story002,
+  // story003,
+  // story004,
+  // story005,
+  // story006,
+  // story007,
+  // story010,
+  // story011,
+  // story013,
+  // story014,
+  // story015,
+  // story020,
+  // story050,
+  // story100,
+  // story110,
+  // story200,
+  // story300,
+  // story310,
+  // story330,
+  // story8000,
+  // story8010,
+  // story8054,
+  // story9000,
+  // story9100,
+  // story9102,
+  // story9103,
+  // story9104,
+  // story9901,
+  // story9902,
+  // story9903,
+  // story9904,
+  // story9905,
+  // story9906,
+  // story9907,
+  // story9908,
+  // story9909,
+  // story9910,
+  // story9912,
+  // story9913,
+  // story9914,
+  // story9915,
+  // story9916,
+  // story9917,
+  // story9918,
+  // story9919,
+  story9920,
+  // story9921,
+  // story9922,
+  // story9923,
+  // story8013,
+  // story9924,
+  // story9925,
+  // story9926,
+]
+
 class FrameSetUploader extends Component {
   // state = { text: JSON.stringify(story002) }
   // state = { text: JSON.stringify(story003) }
@@ -116,13 +172,22 @@ class FrameSetUploader extends Component {
   // state = { text: JSON.stringify(story9923) };
   // state = { text: JSON.stringify(story8013) }
   // state = { text: JSON.stringify(story9924) }
-  // state = { text: JSON.stringify(story9925) }
-  state = { text: JSON.stringify(story9926) }
+  state = { text: JSON.stringify(story9925) }
+  // state = { text: JSON.stringify(story9926) }
 
   onChangeDialog = ({ event }) => {
     const text = event.target.value
 
     this.setState({ text })
+  }
+
+  importMultipleWorlds = () => {
+    console.log("importMultipleWorlds") // zzz
+    worlds.forEach((world) => {
+      console.log("worlds", toJS(worlds)) // zzz
+      const newWorld = world
+      this.props.onImportJson({ newWorld })
+    })
   }
 
   renderButton = () => {
@@ -137,7 +202,8 @@ class FrameSetUploader extends Component {
 
     return (
       <Button
-        onClick={() => onImportJson({ newWorld })}
+        onClick={() => this.importMultipleWorlds()}
+        // onClick={() => onImportJson({ newWorld })}
         className={cx(css.uploadButton)}
       >
         Upload JSON
