@@ -70,6 +70,39 @@ class WorldBuilder extends Component {
     }
   }
 
+  addCritters1Single = ({ world }) => {
+    const worlds = [world]
+    worlds.forEach((map) => {
+      if (!map) return null
+
+      if (!map.data) {
+        return null
+      }
+
+      const { newGrid5 } = map.data
+      console.log("map.data.title", toJS(map.data.title)) // zzz
+      if (newGrid5) {
+        newGrid5.forEach((scene) => {
+          const frames = _get(scene, "frameSet.frames") || []
+          // console.log("frames", toJS(frames)) // zzz
+          frames.forEach((frame) => {
+            console.log("frame.critters1", toJS(frame.critters1)) // zzz
+            if (true) {
+              // if (!frame.critters1) {
+              const critters1 = Utils.getCritters1({ frame, scene }) || []
+              frame.critters1 = critters1.map((item) => {
+                return { name: item }
+              })
+            }
+            console.log("frame.critters1", toJS(frame.critters1)) // zzz
+          })
+        })
+      }
+      // Utils.updateMap({ mapToUpdate: map })
+      // console.log("newGrid5", toJS(newGrid5)) // zzz
+    })
+  }
+
   addCritters1 = ({ mapId, newWorld }) => {
     const myMaps = Utils.getItemsFromDbObj({ dbList: maps })
     myMaps.forEach((map) => {
@@ -449,25 +482,29 @@ class WorldBuilder extends Component {
       const newDialogs = this.createNewDialogs({ dialogs })
 
       const configProps = {}
-      if (frameConfig && frameConfig.faces) {
+      if (frameConfig.faces) {
         configProps.faces = frameConfig.faces
       } else {
         configProps.faces = sceneConfig.faces || []
       }
 
-      if (frameConfig && frameConfig.creatures) {
+      if (frameConfig.creatures) {
         configProps.creatures = frameConfig.creatures || []
       } else {
         configProps.creatures = sceneConfig.creatures || []
       }
 
-      if (frameConfig && frameConfig.critters1) {
-        configProps.critters1 = frameConfig.critters1 || []
+      if (frameConfig.critters1) {
+        configProps.critters1 = frameConfig.critters1
       } else {
-        configProps.critters1 = sceneConfig.critters1 || []
+        const critters1 =
+          Utils.getCritters1New({ frameConfig, sceneConfig }) || []
+        configProps.critters1 = critters1.map((item) => {
+          return { name: item }
+        })
       }
 
-      if (frameConfig && frameConfig.items) {
+      if (frameConfig.items) {
         configProps.items = frameConfig.items
       } else {
         configProps.items = sceneConfig.items || []

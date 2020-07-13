@@ -1,5 +1,5 @@
 const story9920 = {
-  title: "9920-test-BugYuck",
+  title: "----- 9920-test-BugYuck",
   scenes: [
     {
       title: "bun",
@@ -113,5 +113,5 @@ const story9920 = {
       },
     ],
   },
-};
-export default story9920;
+}
+export default story9920
