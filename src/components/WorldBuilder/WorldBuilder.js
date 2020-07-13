@@ -70,6 +70,43 @@ class WorldBuilder extends Component {
     }
   }
 
+  addCritters1 = ({ mapId, newWorld }) => {
+    const myMaps = Utils.getItemsFromDbObj({ dbList: maps })
+    myMaps.forEach((map) => {
+      // myMaps.slice(0, 25).forEach((map) => {
+      // myMaps.slice(0, 15).forEach((map) => {
+      // const map = localStateStore.getWorldBuilderWorld()
+      if (!map) return null
+
+      if (!map.data) {
+        return null
+      }
+      // console.log("map.data", toJS(map.data)) // zzz
+
+      const { newGrid5 } = map.data
+      console.log("map.data.title", toJS(map.data.title)) // zzz
+      if (newGrid5) {
+        newGrid5.forEach((scene) => {
+          const frames = _get(scene, "frameSet.frames") || []
+          // console.log("frames", toJS(frames)) // zzz
+          frames.forEach((frame) => {
+            console.log("frame.critters1", toJS(frame.critters1)) // zzz
+            if (true) {
+              // if (!frame.critters1) {
+              const critters1 = Utils.getCritters1({ frame, scene }) || []
+              frame.critters1 = critters1.map((item) => {
+                return { name: item }
+              })
+            }
+            console.log("frame.critters1", toJS(frame.critters1)) // zzz
+          })
+        })
+      }
+      Utils.updateMap({ mapToUpdate: map })
+      // console.log("newGrid5", toJS(newGrid5)) // zzz
+    })
+  }
+
   getMapById = (mapId) => {
     const savedWorlds = Utils.getItemsFromDbObj({ dbList: maps })
 
@@ -175,6 +212,7 @@ class WorldBuilder extends Component {
   }
 
   addNewWorld = async () => {
+    console.log("addNewWorld") // zzz
     let previousMapName =
       toJS(
         worldNameStore.docs &&
@@ -209,18 +247,6 @@ class WorldBuilder extends Component {
     const newMapReturned = await maps.add(newMap)
     localStateStore.setWorldBuilderWorld(newMapReturned)
   }
-
-  // TODO - make this global Util
-  // updateMap = async ({ newProps = {} }) => {
-  //   const map = localStateStore.getWorldBuilderWorld()
-  //   Object.assign(map.data, toJS(newProps))
-
-  //   map.data.newGrid5 = Utils.createCondensedGridFromGrid()
-
-  //   delete map.data.grid
-
-  //   await map.update(map.data)
-  // }
 
   onChangeTitle = async ({ event }) => {
     const world = localStateStore.getWorldBuilderWorld()
@@ -524,8 +550,12 @@ class WorldBuilder extends Component {
     })
 
     const newProps = { title, description, questConfig }
+    console.log("scenesGrid", toJS(scenesGrid)) // zzz
 
+    const newWorld2 = localStateStore.getWorldBuilderWorld()
+    console.log("newWorld2", toJS(newWorld2)) // zzz
     Utils.updateMap({ newProps })
+    // Utils.updateMap({ newProps, mapToUpdate: newWorld2 })
   }
 
   render() {
@@ -601,6 +631,10 @@ class WorldBuilder extends Component {
                   <Button
                     text={"+ New Map"}
                     onClick={() => this.onChangeWorld({ newWorld: true })}
+                  />
+                  <Button
+                    text={"create critters1"}
+                    onClick={() => this.addCritters1({ newWorld: true })}
                   />
                 </div>
               </div>

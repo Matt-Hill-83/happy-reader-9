@@ -112,37 +112,10 @@ class FrameViewer extends Component {
 
   renderFriends = () => {
     const { scene, frame } = this.props
+
     if (!frame) return null
-
-    let allCreatures = []
-
-    const { critters1 = null, faces = [] } = frame
-
-    if (critters1 && critters1.length > 0) {
-      allCreatures = [...frame.critters1.map((item) => item.name)]
-    } else if (frame.creatures && frame.creatures.length > 0) {
-      allCreatures = [...frame.creatures]
-    } else {
-      allCreatures =
-        (scene.characters && scene.characters.map((item) => item.name)) || []
-    }
-
-    let allItems = []
-    console.log("frame.items", toJS(frame.items)) // zzz
-    if (frame.items && frame.items.length > 0) {
-      allItems = (frame.items && frame.items.map((item) => item.name)) || []
-    } else {
-      allItems = (scene.items && scene.items.map((item) => item.name)) || []
-    }
-
-    console.log("allItems", toJS(allItems)) // zzz
-    // temp code DELETE ME!!! (start)
-    allCreatures.push(...allItems)
-    // temp code DELETE ME!!! (end)
-
-    const filteredCharacters = allCreatures.filter((item) => {
-      return !["liz2", "kat", "katieKooper01"].includes(item)
-    })
+    const { faces = [] } = frame
+    const filteredCharacters = Utils.getCritters2({ frame, scene })
 
     const lock01 = Images.backgrounds["lock01"]
 
@@ -171,13 +144,25 @@ class FrameViewer extends Component {
   }
 
   renderLizAndKat = () => {
+    console.log("renderLizAndKat") // zzz
+
     const { scene, frame } = this.props
     const { faces = [] } = frame
+    let critters
+
     if (!frame) return null
 
-    const filteredCharacters = Utils.getCritters1({ frame, scene })
+    console.log("frame.critters1", toJS(frame.critters1)) // zzz
+    if (frame.critters1) {
+      critters = frame.critters1
+    } else {
+      critters = []
+      // critters = Utils.getCritters1({ frame, scene })
+    }
 
-    return filteredCharacters.map((character, index) => {
+    const critterNames = critters.map((item) => item.name)
+    return critterNames.map((character, index) => {
+      // return critters1.map((character, index) => {
       const mood = this.getMood({ name: character, faces })
 
       return (

@@ -346,7 +346,7 @@ export default class Utils {
     return grid
   }
 
-  static createCondensedGridFromGrid = () => {
+  static createCondensedGridFromGrid = ({ world }) => {
     // trim down the grid to just the non-bank scenes and make them accessible by id, instead of
     // defined by the 2 array position
 
@@ -442,11 +442,32 @@ export default class Utils {
     }
   }
 
-  static updateMap = async ({ newProps = {} }) => {
-    const map = localStateStore.getWorldBuilderWorld()
+  static updateMap = async ({ newProps = {}, mapToUpdate }) => {
+    const map = mapToUpdate || localStateStore.getWorldBuilderWorld()
+    console.log("map.data", toJS(map.data)) // zzz
     Object.assign(map.data, toJS(newProps))
 
-    map.data.newGrid5 = Utils.createCondensedGridFromGrid()
+    if (mapToUpdate) {
+      const {
+        data: { gridDimensions, newGrid5 },
+      } = mapToUpdate
+
+      console.log("newGrid5", toJS(newGrid5)) // zzz
+      // const reCreatedScenesGrid = Utils.reCreateGridFromCondensedGrid({
+      //   gridDimensions,
+      //   newGrid5,
+      // })
+    } else {
+      // fuck.  everything broke because this does not pull from the correct grid.
+      // fuck.  everything broke because this does not pull from the correct grid.
+      // fuck.  everything broke because this does not pull from the correct grid.
+      // fuck.  everything broke because this does not pull from the correct grid.
+      // fuck.  everything broke because this does not pull from the correct grid.
+      // fuck.  everything broke because this does not pull from the correct grid.
+      // fuck.  everything broke because this does not pull from the correct grid.
+      map.data.newGrid5 = Utils.createCondensedGridFromGrid({})
+      console.log("map.data.newGrid5", toJS(map.data.newGrid5)) // zzz
+    }
 
     delete map.data.grid
 
@@ -478,6 +499,39 @@ export default class Utils {
       return ["liz2", "kat", "katieKooper01"].includes(item)
     })
 
+    return filteredCharacters
+  }
+
+  static getCritters2 = ({ frame, scene }) => {
+    let allCreatures = []
+
+    const { critters1 = null } = frame
+
+    if (critters1 && critters1.length > 0) {
+      allCreatures = [...frame.critters1.map((item) => item.name)]
+    } else if (frame.creatures && frame.creatures.length > 0) {
+      allCreatures = [...frame.creatures]
+    } else {
+      allCreatures =
+        (scene.characters && scene.characters.map((item) => item.name)) || []
+    }
+
+    let allItems = []
+    console.log("frame.items", toJS(frame.items)) // zzz
+    if (frame.items && frame.items.length > 0) {
+      allItems = (frame.items && frame.items.map((item) => item.name)) || []
+    } else {
+      allItems = (scene.items && scene.items.map((item) => item.name)) || []
+    }
+
+    console.log("allItems", toJS(allItems)) // zzz
+    // temp code DELETE ME!!! (start)
+    allCreatures.push(...allItems)
+    // temp code DELETE ME!!! (end)
+
+    const filteredCharacters = allCreatures.filter((item) => {
+      return !["liz2", "kat", "katieKooper01"].includes(item)
+    })
     return filteredCharacters
   }
 }

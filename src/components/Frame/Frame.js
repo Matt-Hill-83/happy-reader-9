@@ -38,10 +38,15 @@ class Frame extends Component {
     const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex]
 
     console.log("frame.critters1", toJS(frame.critters1)) // zzz
+
+    // temp code to move db records
+    // temp code to move db records
+    // temp code to move db records
     if (!frame.critters1) {
-      const critters1 = Utils.getCritters1({ frame, scene })
-      console.log("critters1", toJS(critters1)) // zzz
-      frame.critters1 = critters1
+      // const critters1 = Utils.getCritters1({ frame, scene })
+      // console.log("critters1", toJS(critters1)) // zzz
+      // frame.critters1 = critters1
+      // Utils.updateMap({})
     }
     this.setState({ frame })
   }
@@ -306,6 +311,12 @@ class Frame extends Component {
       showItemPicker,
       facePickerCharacter,
     } = this.state
+
+    console.log("") // zzz
+    console.log("Frame.js-------------------------------------------->") // zzz
+    console.log("scene", toJS(scene)) // zzz
+    console.log("frame.critters1", toJS(frame.critters1)) // zzz
+    console.log("") // zzz
 
     if (!frame) {
       return null
