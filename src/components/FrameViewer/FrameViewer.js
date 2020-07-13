@@ -175,38 +175,7 @@ class FrameViewer extends Component {
     const { faces = [] } = frame
     if (!frame) return null
 
-    let allCreatures = []
-    if (frame.creatures && frame.creatures.length > 0) {
-      allCreatures = [...frame.creatures]
-    } else {
-      allCreatures =
-        (scene.characters && scene.characters.map((item) => item.name)) || []
-    }
-
-    let allItems = []
-
-    if (frame.items && frame.items.length > 0) {
-      allItems = [...frame.items]
-    } else {
-      allItems = (scene.items && scene.items.map((item) => item.name)) || []
-    }
-
-    // const allItems = (scene.items && scene.items.map((item) => item.name)) || []
-
-    // temp code DELETE ME!!! (start)
-    allCreatures.push(...allItems)
-    // temp code DELETE ME!!! (end)
-
-    const filteredCharacters = allCreatures.filter((item) => {
-      return [
-        "liz2",
-        "kat",
-        "katieKooper01",
-        // "anna02",
-        // "elsa02",
-        // "merida02",
-      ].includes(item)
-    })
+    const filteredCharacters = Utils.getCritters2({ frame, scene })
 
     return filteredCharacters.map((character, index) => {
       const mood = this.getMood({ name: character, faces })

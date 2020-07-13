@@ -452,4 +452,32 @@ export default class Utils {
 
     await map.update(map.data)
   }
+
+  static getCritters2 = ({ frame, scene }) => {
+    let allCreatures = []
+    if (frame.creatures && frame.creatures.length > 0) {
+      allCreatures = [...frame.creatures]
+    } else {
+      allCreatures =
+        (scene.characters && scene.characters.map((item) => item.name)) || []
+    }
+
+    let allItems = []
+
+    if (frame.items && frame.items.length > 0) {
+      allItems = [...frame.items]
+    } else {
+      allItems = (scene.items && scene.items.map((item) => item.name)) || []
+    }
+
+    // temp code DELETE ME!!! (start)
+    allCreatures.push(...allItems)
+    // temp code DELETE ME!!! (end)
+
+    const filteredCharacters = allCreatures.filter((item) => {
+      return ["liz2", "kat", "katieKooper01"].includes(item)
+    })
+
+    return filteredCharacters
+  }
 }
