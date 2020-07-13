@@ -110,13 +110,13 @@ const worlds = [
   // story9918,
   // story9919,
   story9920,
-  // story9921,
-  // story9922,
-  // story9923,
-  // story8013,
-  // story9924,
-  // story9925,
-  // story9926,
+  story9921,
+  story9922,
+  story9923,
+  story8013,
+  story9924,
+  story9925,
+  story9926,
 ]
 
 class FrameSetUploader extends Component {

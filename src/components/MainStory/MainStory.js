@@ -30,18 +30,12 @@ SHOW_BOOK_PICKER = true
 SHOW_BOOK_PICKER = false
 
 let useDefaultWorldId
-useDefaultWorldId = false
 useDefaultWorldId = true
+useDefaultWorldId = false
 
 const defaultWorldInProd = "mRpN51k8AmA5BqgikVoz"
-// const defaultWorldInNonProd = "ZR0GOSFFqFPoWjSgvgOQ";
-// const defaultWorldInNonProd = "6s1Ui3F6ZIg3GdshlD2I"
-// const defaultWorldInNonProd = "4Ij854mVNw1yDcfO2Tu5"
 const defaultWorldInNonProd = "2pFSacsMVNUYILs1y1ZZ"
-// const defaultWorldInNonProd = "MR9L9z0aMiO4tUfG5Pr8"
 
-// const defaultWorldInNonProd = "Cgp15K6a6zx1mrzCHJoP"
-// const defaultWorldInNonProd = "mRpN51k8AmA5BqgikVoz";
 const defaultWorldId = IS_PROD_RELEASE
   ? defaultWorldInProd
   : defaultWorldInNonProd

@@ -52,7 +52,7 @@ class WorldBuilder extends Component {
       return
     } else {
       const world = Utils.getMapFromId2({ id: mapId })
-      if (!world.data) {
+      if (!world || !world.data) {
         return
       }
 
@@ -70,75 +70,76 @@ class WorldBuilder extends Component {
     }
   }
 
-  addCritters1Single = ({ world }) => {
-    const worlds = [world]
-    worlds.forEach((map) => {
-      if (!map) return null
+  // addCritters1Single = ({ world }) => {
+  //   const worlds = [world]
+  //   worlds.forEach((map) => {
+  //     if (!map) return null
 
-      if (!map.data) {
-        return null
-      }
+  //     if (!map.data) {
+  //       return null
+  //     }
 
-      const { newGrid5 } = map.data
-      console.log("map.data.title", toJS(map.data.title)) // zzz
-      if (newGrid5) {
-        newGrid5.forEach((scene) => {
-          const frames = _get(scene, "frameSet.frames") || []
-          // console.log("frames", toJS(frames)) // zzz
-          frames.forEach((frame) => {
-            console.log("frame.critters1", toJS(frame.critters1)) // zzz
-            if (true) {
-              // if (!frame.critters1) {
-              const critters1 = Utils.getCritters1({ frame, scene }) || []
-              frame.critters1 = critters1.map((item) => {
-                return { name: item }
-              })
-            }
-            console.log("frame.critters1", toJS(frame.critters1)) // zzz
-          })
-        })
-      }
-      // Utils.updateMap({ mapToUpdate: map })
-      // console.log("newGrid5", toJS(newGrid5)) // zzz
-    })
-  }
+  //     const { newGrid5 } = map.data
+  //     console.log("map.data.title", toJS(map.data.title)) // zzz
+  //     if (newGrid5) {
+  //       newGrid5.forEach((scene) => {
+  //         const frames = _get(scene, "frameSet.frames") || []
+  //         // console.log("frames", toJS(frames)) // zzz
+  //         frames.forEach((frame) => {
+  //           console.log("frame.critters1", toJS(frame.critters1)) // zzz
+  //           if (true) {
+  //             // if (!frame.critters1) {
+  //             const critters1 = Utils.getCritters1({ frame, scene }) || []
+  //             frame.critters1 = critters1.map((item) => {
+  //               return { name: item }
+  //             })
+  //           }
+  //           console.log("frame.critters1", toJS(frame.critters1)) // zzz
+  //         })
+  //       })
+  //     }
+  //     // Utils.updateMap({ mapToUpdate: map })
+  //     // console.log("newGrid5", toJS(newGrid5)) // zzz
+  //   })
+  // }
 
-  addCritters1 = ({ mapId, newWorld }) => {
-    const myMaps = Utils.getItemsFromDbObj({ dbList: maps })
-    myMaps.forEach((map) => {
-      // myMaps.slice(0, 25).forEach((map) => {
-      // myMaps.slice(0, 15).forEach((map) => {
-      // const map = localStateStore.getWorldBuilderWorld()
-      if (!map) return null
+  // addCritters1 = ({ mapId, newWorld }) => {
+  //   return
+  //   const myMaps = Utils.getItemsFromDbObj({ dbList: maps })
+  //   myMaps.forEach((map) => {
+  //     // myMaps.slice(0, 25).forEach((map) => {
+  //     // myMaps.slice(0, 15).forEach((map) => {
+  //     // const map = localStateStore.getWorldBuilderWorld()
+  //     if (!map) return null
 
-      if (!map.data) {
-        return null
-      }
-      // console.log("map.data", toJS(map.data)) // zzz
+  //     if (!map.data) {
+  //       return null
+  //     }
+  //     // console.log("map.data", toJS(map.data)) // zzz
 
-      const { newGrid5 } = map.data
-      console.log("map.data.title", toJS(map.data.title)) // zzz
-      if (newGrid5) {
-        newGrid5.forEach((scene) => {
-          const frames = _get(scene, "frameSet.frames") || []
-          // console.log("frames", toJS(frames)) // zzz
-          frames.forEach((frame) => {
-            console.log("frame.critters1", toJS(frame.critters1)) // zzz
-            if (true) {
-              // if (!frame.critters1) {
-              const critters1 = Utils.getCritters1({ frame, scene }) || []
-              frame.critters1 = critters1.map((item) => {
-                return { name: item }
-              })
-            }
-            console.log("frame.critters1", toJS(frame.critters1)) // zzz
-          })
-        })
-      }
-      Utils.updateMap({ mapToUpdate: map })
-      // console.log("newGrid5", toJS(newGrid5)) // zzz
-    })
-  }
+  //     const { newGrid5 } = map.data
+  //     console.log("map.data.title", toJS(map.data.title)) // zzz
+  //     if (newGrid5) {
+  //       newGrid5.forEach((scene) => {
+  //         const frames = _get(scene, "frameSet.frames") || []
+  //         // console.log("frames", toJS(frames)) // zzz
+  //         frames.forEach((frame) => {
+  //           console.log("frame.critters1", toJS(frame.critters1)) // zzz
+  //           if (true) {
+  //             // if (!frame.critters1) {
+  //             const critters1 = Utils.getCritters1({ frame, scene }) || []
+  //             frame.critters1 = critters1.map((item) => {
+  //               return { name: item }
+  //             })
+  //           }
+  //           console.log("frame.critters1", toJS(frame.critters1)) // zzz
+  //         })
+  //       })
+  //     }
+  //     Utils.updateMap({ mapToUpdate: map })
+  //     // console.log("newGrid5", toJS(newGrid5)) // zzz
+  //   })
+  // }
 
   getMapById = (mapId) => {
     const savedWorlds = Utils.getItemsFromDbObj({ dbList: maps })
@@ -593,7 +594,7 @@ class WorldBuilder extends Component {
       scenesGrid[coordinates.row][coordinates.col] = newBornScene
     })
 
-    const newProps = { title: title + "-xxx", description, questConfig }
+    const newProps = { title: title, description, questConfig }
     console.log("scenesGrid", toJS(scenesGrid)) // zzz
 
     const newWorld2 = localStateStore.getWorldBuilderWorld()
@@ -678,7 +679,7 @@ class WorldBuilder extends Component {
                   />
                   <Button
                     text={"create critters1"}
-                    onClick={() => this.addCritters1({ newWorld: true })}
+                    // onClick={() => this.addCritters1({ newWorld: true })}
                   />
                 </div>
               </div>
