@@ -488,7 +488,7 @@ export default class Utils {
     allCreatures.push(...allItems)
 
     const filteredCharacters = allCreatures.filter((item) => {
-      return ["liz2", "kat", "katieKooper01"].includes(item)
+      return ["liz2", "kat"].includes(item)
     })
 
     return filteredCharacters
