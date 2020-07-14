@@ -30,6 +30,9 @@ const story310 = {
           ],
         },
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [
             `{"kat": "Keep talking."}`,
             `{"liz2": "Have you heard of Watta-Lee-Achee?"}`,
@@ -49,6 +52,8 @@ const story310 = {
       },
       frames: [
         {
+          frameConfig: {},
+          items: [],
           dialogs: [
             `{"kat": "Cool..."}`,
             `{"liz2": "And this dragon, Watta-Lee-Achee..."}`,
@@ -57,6 +62,9 @@ const story310 = {
           ],
         },
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [
             `{"kat": "Nothing"}`,
             `{"liz2": "Watta-Lee-Achee guards the dress of Atacama."}`,
@@ -76,6 +84,9 @@ const story310 = {
       },
       frames: [
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [
             `{"liz2": "It glimmers and it shimmers."}`,
             `{"liz2": "It shines like a thousand suns."}`,
@@ -83,12 +94,18 @@ const story310 = {
           ],
         },
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [
             `{"liz2": "Ummm...hello? Kat, are you even listening to me?"}`,
             `{"liz2": "There is a girl-eating dragon guarding that dress!"}`,
           ],
         },
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [
             `{"kat": "Well we have something even scarier than that Dragon."}`,
             `{"kat": "We have the Queen of Crazy."}`,

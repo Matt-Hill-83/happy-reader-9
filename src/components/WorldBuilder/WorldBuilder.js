@@ -49,6 +49,8 @@ class WorldBuilder extends Component {
     // new map
     if (newWorld) {
       this.addNewWorld()
+      // localStateStore.setWorldBuilderWorld(world)
+      // localStateStore.setWorldBuilderScenesGrid(reCreatedScenesGrid)
       return
     } else {
       const world = Utils.getMapFromId2({ id: mapId })
@@ -69,77 +71,6 @@ class WorldBuilder extends Component {
       localStateStore.setWorldBuilderScenesGrid(reCreatedScenesGrid)
     }
   }
-
-  // addCritters1Single = ({ world }) => {
-  //   const worlds = [world]
-  //   worlds.forEach((map) => {
-  //     if (!map) return null
-
-  //     if (!map.data) {
-  //       return null
-  //     }
-
-  //     const { newGrid5 } = map.data
-  //     console.log("map.data.title", toJS(map.data.title)) // zzz
-  //     if (newGrid5) {
-  //       newGrid5.forEach((scene) => {
-  //         const frames = _get(scene, "frameSet.frames") || []
-  //         // console.log("frames", toJS(frames)) // zzz
-  //         frames.forEach((frame) => {
-  //           console.log("frame.critters1", toJS(frame.critters1)) // zzz
-  //           if (true) {
-  //             // if (!frame.critters1) {
-  //             const critters1 = Utils.getCritters1({ frame, scene }) || []
-  //             frame.critters1 = critters1.map((item) => {
-  //               return { name: item }
-  //             })
-  //           }
-  //           console.log("frame.critters1", toJS(frame.critters1)) // zzz
-  //         })
-  //       })
-  //     }
-  //     // Utils.updateMap({ mapToUpdate: map })
-  //     // console.log("newGrid5", toJS(newGrid5)) // zzz
-  //   })
-  // }
-
-  // addCritters1 = ({ mapId, newWorld }) => {
-  //   return
-  //   const myMaps = Utils.getItemsFromDbObj({ dbList: maps })
-  //   myMaps.forEach((map) => {
-  //     // myMaps.slice(0, 25).forEach((map) => {
-  //     // myMaps.slice(0, 15).forEach((map) => {
-  //     // const map = localStateStore.getWorldBuilderWorld()
-  //     if (!map) return null
-
-  //     if (!map.data) {
-  //       return null
-  //     }
-  //     // console.log("map.data", toJS(map.data)) // zzz
-
-  //     const { newGrid5 } = map.data
-  //     console.log("map.data.title", toJS(map.data.title)) // zzz
-  //     if (newGrid5) {
-  //       newGrid5.forEach((scene) => {
-  //         const frames = _get(scene, "frameSet.frames") || []
-  //         // console.log("frames", toJS(frames)) // zzz
-  //         frames.forEach((frame) => {
-  //           console.log("frame.critters1", toJS(frame.critters1)) // zzz
-  //           if (true) {
-  //             // if (!frame.critters1) {
-  //             const critters1 = Utils.getCritters1({ frame, scene }) || []
-  //             frame.critters1 = critters1.map((item) => {
-  //               return { name: item }
-  //             })
-  //           }
-  //           console.log("frame.critters1", toJS(frame.critters1)) // zzz
-  //         })
-  //       })
-  //     }
-  //     Utils.updateMap({ mapToUpdate: map })
-  //     // console.log("newGrid5", toJS(newGrid5)) // zzz
-  //   })
-  // }
 
   getMapById = (mapId) => {
     const savedWorlds = Utils.getItemsFromDbObj({ dbList: maps })
@@ -267,10 +198,10 @@ class WorldBuilder extends Component {
     const newGrid5 = []
 
     localStateStore.setWorldBuilderScenesGrid(grid)
-
+    console.log("setWorldBuilderScenesGrid+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_") // zzz
     const newMap = {
       name: newName,
-      title: "Test Map",
+      title: "Test Map" + newName,
       newGrid5,
       released: true,
       releasedToProd: true,
@@ -322,8 +253,6 @@ class WorldBuilder extends Component {
           isLastCol,
           coordinates,
           id,
-          // items: [{ name: "cup" }, { name: "pup01" }],
-          // characters: [{ name: "kat" }, { name: "liz2" }, { name: "dog01" }],
         }
 
         const blankScene = Utils.getBlankScene({ props })
@@ -557,6 +486,19 @@ class WorldBuilder extends Component {
     // I should probably create a new scenesGrid here, based on the required dimensions
     // I should probably create a new scenesGrid here, based on the required dimensions
     const scenesGrid = localStateStore.getWorldBuilderScenesGrid()
+    const scene1 = scenesGrid[0][0].location.name
+    const scene2 = scenesGrid[1][1].location.name
+    console.log("scene1", toJS(scene1)) // zzz
+    console.log("scene2", toJS(scene2)) // zzz
+
+    console.log("") // zzz
+    console.log("---------------------------------->") // zzz
+    console.log("---------------------------------->") // zzz
+
+    console.log(
+      "scenesGrid----------------------------------------->>>",
+      toJS(scenesGrid)
+    ) // zzz
 
     const theScenes = newWorld.scenes2 || newWorld.scenes
 
@@ -596,11 +538,14 @@ class WorldBuilder extends Component {
 
     const newProps = { title: title, description, questConfig }
     console.log("scenesGrid", toJS(scenesGrid)) // zzz
+    const scene1b = scenesGrid[0][0].location.name
+    const scene2b = scenesGrid[1][1].location.name
+    console.log("scene1b", toJS(scene1b)) // zzz
+    console.log("scene2b", toJS(scene2b)) // zzz
 
-    const newWorld2 = localStateStore.getWorldBuilderWorld()
-    console.log("newWorld2", toJS(newWorld2)) // zzz
+    // const newWorld2 = localStateStore.getWorldBuilderWorld()
+    // console.log("newWorld2", toJS(newWorld2)) // zzz
     Utils.updateMap({ newProps })
-    // Utils.updateMap({ newProps, mapToUpdate: newWorld2 })
   }
 
   render() {

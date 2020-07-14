@@ -62,6 +62,8 @@ import story8013 from "../../Scripts/8013-CharAndLucy-003.js"
 import story9924 from "../../Scripts/9924-test-FrogHopperPart01.js"
 import story9925 from "../../Scripts/9925-test-AnnaWantCupcake.js"
 import story9926 from "../../Scripts/9926-test-newPattern001.js"
+import story0001 from "../../Scripts/----- test-001.js"
+import story0002 from "../../Scripts/----- test-002.js"
 
 const worlds = [
   // story002,
@@ -71,6 +73,7 @@ const worlds = [
   // story006,
   // story007,
   // story010,
+
   // story011,
   // story013,
   // story014,
@@ -78,13 +81,17 @@ const worlds = [
   // story020,
   // story050,
   // story100,
+
   // story110,
+
   // story200,
   // story300,
-  // story310,
+  story310,
   // story330,
   // story8000,
+
   // story8010,
+
   // story8054,
   // story9000,
   // story9100,
@@ -94,6 +101,7 @@ const worlds = [
   // story9901,
   // story9902,
   // story9903,
+
   // story9904,
   // story9905,
   // story9906,
@@ -106,17 +114,20 @@ const worlds = [
   // story9914,
   // story9915,
   // story9916,
+
   // story9917,
   // story9918,
   // story9919,
-  story9920,
-  story9921,
-  story9922,
-  story9923,
-  story8013,
-  story9924,
-  story9925,
-  story9926,
+  // story9920,
+  // story9921,
+  // story9922,
+  // story9923,
+  // story8013,
+  // story9924,
+  // story9925,
+  // story9926,
+  // story0001,
+  // story0002,
 ]
 
 class FrameSetUploader extends Component {
@@ -126,7 +137,7 @@ class FrameSetUploader extends Component {
   // state = { text: JSON.stringify(story005) }
   // state = { text: JSON.stringify(story006) }
   // state = { text: JSON.stringify(story007) }
-  // state = { text: JSON.stringify(story010) };
+  // state = { text: JSON.stringify(story010) }
   // state = { text: JSON.stringify(story011) }
   // state = { text: JSON.stringify(story013) }
   // state = { text: JSON.stringify(story014) }
@@ -140,40 +151,40 @@ class FrameSetUploader extends Component {
   // state = { text: JSON.stringify(story310) }
   // state = { text: JSON.stringify(story330) }
   // state = { text: JSON.stringify(story8000) }
-  // state = { text: JSON.stringify(story9000) };
+  // state = { text: JSON.stringify(story9000) }
   // state = { text: JSON.stringify(story9100) }
-  // state = { text: JSON.stringify(story9103) };
+  // state = { text: JSON.stringify(story9103) }
   // state = { text: JSON.stringify(story9901) }
   // state = { text: JSON.stringify(story9902) }
-  // state = { text: JSON.stringify(story9903) };
-  // state = { text: JSON.stringify(story9904) };
-  // state = { text: JSON.stringify(story9905) };
-  // state = { text: JSON.stringify(story9906) };
-  // state = { text: JSON.stringify(story9907) };
-  // state = { text: JSON.stringify(story9908) };
-  // state = { text: JSON.stringify(story9104) };
-  // state = { text: JSON.stringify(story9909) };
-  // state = { text: JSON.stringify(story9910) };
-  // state = { text: JSON.stringify(story9912) };
-  // state = { text: JSON.stringify(story9913) };
-  // state = { text: JSON.stringify(story9914) };
-  // state = { text: JSON.stringify(story9915) };
-  // state = { text: JSON.stringify(story9916) };
-  // state = { text: JSON.stringify(story9917) };
-  // state = { text: JSON.stringify(story9918) };
-  // state = { text: JSON.stringify(story9919) };
-  // state = { text: JSON.stringify(story8054) };
-  // state = { text: JSON.stringify(story9102) };
-  // state = { text: JSON.stringify(story9104) };
-  // state = { text: JSON.stringify(story8010) };
-  // state = { text: JSON.stringify(story9920) };
-  // state = { text: JSON.stringify(story9921) };
-  // state = { text: JSON.stringify(story9922) }
-  // state = { text: JSON.stringify(story9923) };
-  // state = { text: JSON.stringify(story8013) }
-  // state = { text: JSON.stringify(story9924) }
+  // state = { text: JSON.stringify(story9903) }
+  // state = { text: JSON.stringify(story9904) }
+  // state = { text: JSON.stringify(story9905) }
+  // state = { text: JSON.stringify(story9906) }
+  // state = { text: JSON.stringify(story9907) }
+  // state = { text: JSON.stringify(story9908) }
+  // state = { text: JSON.stringify(story9104) }
+  // state = { text: JSON.stringify(story9909) }
+  // state = { text: JSON.stringify(story9910) }
+  // state = { text: JSON.stringify(story9912) }
+  // state = { text: JSON.stringify(story9913) }
+  // state = { text: JSON.stringify(story9914) }
+  // state = { text: JSON.stringify(story9915) }
+  // state = { text: JSON.stringify(story9916) }
+  // state = { text: JSON.stringify(story9917) }
+  // state = { text: JSON.stringify(story9918) }
+  // state = { text: JSON.stringify(story9919) }
+  // state = { text: JSON.stringify(story8054) }
+  // state = { text: JSON.stringify(story9102) }
+  // state = { text: JSON.stringify(story9104) }
+  // state = { text: JSON.stringify(story8010) }
+  // state = { text: JSON.stringify(story9920) }
+  // state = { text: JSON.stringify(story9921) }
+  state = { text: JSON.stringify(story9922) }
+  state = { text: JSON.stringify(story9923) }
+  state = { text: JSON.stringify(story8013) }
+  state = { text: JSON.stringify(story9924) }
   state = { text: JSON.stringify(story9925) }
-  // state = { text: JSON.stringify(story9926) }
+  state = { text: JSON.stringify(story9926) }
 
   onChangeDialog = ({ event }) => {
     const text = event.target.value
@@ -181,13 +192,21 @@ class FrameSetUploader extends Component {
     this.setState({ text })
   }
 
-  importMultipleWorlds = () => {
+  importMultipleWorlds = async () => {
     console.log("importMultipleWorlds") // zzz
-    worlds.forEach((world) => {
+
+    for (let index = 0; index < worlds.length; index++) {
+      const world = worlds[index]
       console.log("worlds", toJS(worlds)) // zzz
       const newWorld = world
-      this.props.onImportJson({ newWorld })
-    })
+      await this.props.onImportJson({ newWorld })
+    }
+
+    // worlds.forEach((world) => {
+    //   console.log("worlds", toJS(worlds)) // zzz
+    //   const newWorld = world
+    //   this.props.onImportJson({ newWorld })
+    // })
   }
 
   renderButton = () => {
