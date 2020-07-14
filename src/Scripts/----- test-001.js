@@ -6,7 +6,7 @@ const story8054 = {
       sceneConfig: {
         worldTitle: "001",
         coordinates: { row: 0, col: 0 },
-        creatures: ["kat", "liz2"],
+        // creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: false,
         items: [{ name: "cup" }, { name: "pig" }],
@@ -23,7 +23,7 @@ const story8054 = {
                 character: "kat",
               },
             ],
-            creatures: ["kat", "liz2"],
+            // creatures: ["kat", "liz2"],
           },
           dialogs: [
             '{"kat" : "Nine time six"}',

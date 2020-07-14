@@ -415,11 +415,11 @@ class WorldBuilder extends Component {
         configProps.faces = sceneConfig.faces || []
       }
 
-      if (frameConfig.creatures) {
-        configProps.creatures = frameConfig.creatures || []
-      } else {
-        configProps.creatures = sceneConfig.creatures || []
-      }
+      // if (frameConfig.creatures) {
+      //   configProps.creatures = frameConfig.creatures || []
+      // } else {
+      //   configProps.creatures = sceneConfig.creatures || []
+      // }
 
       if (frameConfig.critters1) {
         configProps.critters1 = frameConfig.critters1

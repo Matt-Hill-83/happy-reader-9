@@ -201,7 +201,7 @@ class MiniLocation extends React.Component {
     const noCloud = isVisitedScene || subQuestIsUnlocked
     const showCloud = !noCloud
 
-    const { creatures = [] } = scene
+    // const { creatures = [] } = scene
     const locationName = scene.location.name
     const isBlank = locationName === "blank"
 
@@ -314,7 +314,7 @@ class MiniLocation extends React.Component {
             </div>
 
             <div className={css.characters}>
-              {this.renderCreatures({ creatures, isActive })}
+              {this.renderCreatures({ isActive })}
             </div>
 
             <span className={css.locationTitle}>{locationName}</span>

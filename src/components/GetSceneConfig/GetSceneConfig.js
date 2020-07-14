@@ -32,7 +32,7 @@ class GetSceneConfig extends Component {
           critters2: oldFrame.critters2,
           id: oldFrame.id,
           faces: oldFrame.faces,
-          creatures: oldFrame.creatures,
+          // creatures: oldFrame.creatures,
         },
       }
       const newDialogs = oldFrame.dialog.map((item) => {
@@ -65,7 +65,7 @@ class GetSceneConfig extends Component {
       const newFrames = this.formatFramesForExport({ frames: oldFrames })
       const newFrames2 = this.formatFramesForExport({ frames: oldFrames2 })
 
-      const creatures = scene.characters.map((item) => item.name)
+      // const creatures = scene.characters.map((item) => item.name)
       const newBornScene = {
         title: scene.location.name,
         sceneConfig: {
@@ -73,7 +73,7 @@ class GetSceneConfig extends Component {
           worldId: world.id,
           worldTitle: world.title,
           coordinates: scene.coordinates,
-          creatures,
+          // creatures,
           isEndScene: scene.isEndScene,
           isStartScene: scene.isStartScene,
           ...scene.sceneConfig,

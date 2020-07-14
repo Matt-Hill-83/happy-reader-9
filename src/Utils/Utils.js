@@ -93,7 +93,7 @@ export default class Utils {
     })
 
     const newFrame = {
-      creatures: allCharacters,
+      // creatures: allCharacters,
       critters1: critters1,
       critters2: critters2,
       faces: [
@@ -466,7 +466,6 @@ export default class Utils {
     }
 
     delete map.data.grid
-    console.log("map.data.title", toJS(map.data.title)) // zzz
     console.log("map.data", toJS(map.data)) // zzz
     await map.update(map.data)
   }
@@ -555,7 +554,7 @@ export default class Utils {
       return !["liz2", "kat", "katieKooper01"].includes(item)
     })
 
-    return filteredCharacters.filter((item) => !!item)
+    return filteredCharacters
   }
 
   static getCritters2 = ({ frame, scene }) => {

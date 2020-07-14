@@ -176,7 +176,6 @@ class MainStory extends React.Component {
     const { foundItem, completedMission } = localStateStore.updateQuestState({
       itemsInScene: [location, ...critters1, ...critters2],
       charactersInScene: [location, ...critters1, ...critters2],
-      // charactersInScene: [...characters, location, ...critters1, ...critters2],
     })
 
     if (foundItem) {

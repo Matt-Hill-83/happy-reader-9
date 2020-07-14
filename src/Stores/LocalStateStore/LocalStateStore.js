@@ -7,7 +7,7 @@ class LocalStateStore {
   activeMapId = null
   activeSceneId = null
   completedMissions = []
-  creatures = []
+  // creatures = []
   defaultWorldId = null
   mapBuilderGrid = []
   showBookPicker = false
@@ -385,7 +385,7 @@ decorate(LocalStateStore, {
   activeMapId: observable,
   activeSceneId: observable,
   completedMissions: observable,
-  creatures: observable,
+  // creatures: observable,
   defaultWorldId: observable,
   desiredItems: observable,
   mapBuilderGrid: observable,
