@@ -1,11 +1,4 @@
-import {
-  Button,
-  Icon,
-  Position,
-  InputGroup,
-  TextArea,
-  FormGroup,
-} from "@blueprintjs/core"
+import { Button, Icon, TextArea } from "@blueprintjs/core"
 import React, { Component } from "react"
 
 import Character from "../Character/Character"
@@ -29,7 +22,7 @@ class Frame extends Component {
   state = {
     showFacePicker: false,
     showItemPicker: false,
-    items: [],
+    // items: [],
   }
 
   componentWillMount() {
@@ -212,23 +205,23 @@ class Frame extends Component {
     )
   }
 
-  saveItems = async ({ items = [] }) => {
+  saveItems = async () => {
     const { frame } = this.state
     const { updateMap } = this.props
 
-    frame.items = items
+    // frame.items = items
 
     this.setState({ frame }, () => updateMap({}))
   }
 
-  renderItems = () => {
-    const items = _get(this, "props.scene.items") || []
-    return items.map((item) => {
-      const { name } = item
+  // renderItems = () => {
+  //   const items = _get(this, "props.scene.items") || []
+  //   return items.map((item) => {
+  //     const { name } = item
 
-      return <ImageDisplay className={css.itemContainer} item={{ name }} />
-    })
-  }
+  //     return <ImageDisplay className={css.itemContainer} item={{ name }} />
+  //   })
+  // }
 
   renderCharacters = () => {
     const { scene } = this.props
@@ -244,12 +237,6 @@ class Frame extends Component {
       allCharacters =
         (scene.characters && scene.characters.map((item) => item.name)) || []
     }
-
-    const allItems = (scene.items && scene.items.map((item) => item.name)) || []
-
-    // temp code DELETE ME!!! (end)
-    // allCharacters.push(...allItems)
-    // temp code DELETE ME!!! (end)
 
     return allCharacters.map((friend, index) => {
       const mood = this.getMood({ name: friend, faces })
@@ -274,7 +261,7 @@ class Frame extends Component {
 
     if (!frame) return null
 
-    const renderedItems = this.renderItems()
+    // const renderedItems = this.renderItems()
     const renderedFriends = this.renderCharacters()
 
     return (
@@ -291,8 +278,8 @@ class Frame extends Component {
             {/* uncomment this when more than 2 characters can be added */}
 
             <div className={css.itemsContainer}>
-              <div>Items</div>
-              {renderedItems}
+              {/* <div>Items</div>
+              {renderedItems} */}
             </div>
             <div>Scene.characters, will be overridden by Frame.characters</div>
             <div className={css.charactersContainer}>{renderedFriends}</div>
@@ -328,7 +315,6 @@ class Frame extends Component {
     // TODO -  I need put in a dummy frame for when there is none.
     // TODO -  I need put in a dummy frame for when there is none.
     // TODO -  I need put in a dummy frame for when there is none.
-    // const items = frame.items || []
     const { critters1 = [], critters2 = [] } = frame
 
     const allCharacters =

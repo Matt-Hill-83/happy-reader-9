@@ -291,7 +291,6 @@ class WorldBuilder extends Component {
 
     const characterImageSets = [images.creatures]
     const doorImageSets = [images.doors]
-    // const locationImageSets = [images.locations, images.vehicles, images.items]
     const locationImageSets = [images.all]
 
     const locationNames = Object.keys(images.locations)
@@ -304,7 +303,7 @@ class WorldBuilder extends Component {
         const doorsBottom = [scene.doorBottom]
         const doorsRight = [scene.doorRight]
         const characters = scene.characters
-        const items = scene.items
+        // const items = scene.items
 
         const hideScene = scene.location && scene.location.name === "blank"
 
@@ -358,14 +357,14 @@ class WorldBuilder extends Component {
                   imageSets={characterImageSets}
                 />
               )}
-              {!hideScene && (
+              {/* {!hideScene && (
                 <CrudMachine
                   className={`${css.crudMachine} ${css.itemBox} ${css.itemsMachine}`}
                   items={items}
                   itemRenderer={itemRenderer}
                   saveItems={onSave}
                 />
-              )}
+              )} */}
               {!hideScene && (
                 <CrudMachine
                   className={`${css.crudMachine} ${css.doorsBottomMachine}`}
@@ -448,11 +447,11 @@ class WorldBuilder extends Component {
         })
       }
 
-      if (frameConfig.items) {
-        configProps.items = frameConfig.items
-      } else {
-        configProps.items = sceneConfig.items || []
-      }
+      // if (frameConfig.items) {
+      //   configProps.items = frameConfig.items
+      // } else {
+      //   configProps.items = sceneConfig.items || []
+      // }
 
       // and put the properties into the new Frame...
       const newFrame = Utils.getNewFrame({

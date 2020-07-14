@@ -1,12 +1,4 @@
-import {
-  Button,
-  Icon,
-  Position,
-  InputGroup,
-  FormGroup,
-  Popover,
-  PopoverInteractionKind,
-} from "@blueprintjs/core"
+import { Button, Popover, PopoverInteractionKind } from "@blueprintjs/core"
 
 import { IconNames } from "@blueprintjs/icons"
 import { observer } from "mobx-react"
@@ -31,7 +23,6 @@ class CrudMachine extends Component {
     let { items = [] } = this.props
     items = this.addItemIfNone({ items })
     this.setState({ items })
-    // this.setState({ items: [...items] })
   }
 
   componentWillReceiveProps(newProps) {
@@ -43,8 +34,6 @@ class CrudMachine extends Component {
   getNewItem = () => {
     return { name: "empty" }
   }
-
-  // cloneItem = async ({ index }) => {}
 
   addItemIfNone = ({ items }) => {
     if (items && !items.length) {
