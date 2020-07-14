@@ -112,32 +112,33 @@ class FrameViewer extends Component {
 
   renderFriends = () => {
     const { scene, frame } = this.props
-
+    let critters
     if (!frame) return null
-    const { faces = [] } = frame
+
+    console.log("frame.critters1", toJS(frame.critters1)) // zzz
+    if (frame.critters2) {
+      critters = frame.critters2
+    } else {
+      critters = []
+      // critters = Utils.getCritters1({ frame, scene })
+    }
+
+    // const { faces = [] } = frame
+    const critterNames = critters.map((item) => item.name)
     const filteredCharacters = Utils.getCritters2({ frame, scene })
 
-    const lock01 = Images.backgrounds["lock01"]
-
-    // - determine is an item in the scene is a reward in a quest
-    // -- if so pick it up
-    // - determine if the user has
-    const playerHasCompletedAllQuests = false
-
-    return filteredCharacters.map((character, index) => {
-      const mood = this.getMood({ name: character, faces })
+    return critterNames.map((character, index) => {
+      // return filteredCharacters.map((character, index) => {
+      // const mood = this.getMood({ name: character, faces })
 
       return (
         <div className={`${css.characterContainer}`} key={index}>
           <Character
             name={character}
-            mood={mood}
+            // mood={mood}
             isEditMode={false}
             showHeadOnly={false}
           />
-          {playerHasCompletedAllQuests && (
-            <img className={css.lock01} src={lock01} alt={`backgroundImage`} />
-          )}
         </div>
       )
     })
@@ -152,7 +153,6 @@ class FrameViewer extends Component {
 
     if (!frame) return null
 
-    console.log("frame.critters1", toJS(frame.critters1)) // zzz
     if (frame.critters1) {
       critters = frame.critters1
     } else {

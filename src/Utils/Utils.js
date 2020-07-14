@@ -453,10 +453,6 @@ export default class Utils {
       } = mapToUpdate
 
       console.log("newGrid5", toJS(newGrid5)) // zzz
-      // const reCreatedScenesGrid = Utils.reCreateGridFromCondensedGrid({
-      //   gridDimensions,
-      //   newGrid5,
-      // })
     } else {
       // fuck.  everything broke because this does not pull from the correct grid.
       // fuck.  everything broke because this does not pull from the correct grid.
@@ -470,40 +466,9 @@ export default class Utils {
     }
 
     delete map.data.grid
+    console.log("map.data.title", toJS(map.data.title)) // zzz
     console.log("map.data", toJS(map.data)) // zzz
     await map.update(map.data)
-  }
-
-  static getCritters1New = ({ frameConfig, sceneConfig }) => {
-    console.log("sceneConfig---------------->", toJS(sceneConfig)) // zzz
-    let allCreatures = []
-    if (frameConfig.creatures && frameConfig.creatures.length > 0) {
-      allCreatures = [...frameConfig.creatures]
-    } else {
-      allCreatures =
-        (sceneConfig.creatures &&
-          sceneConfig.creatures.map((item) => item.name)) ||
-        []
-    }
-
-    let allItems = []
-
-    if (frameConfig.items && frameConfig.items.length > 0) {
-      allItems = [...frameConfig.items]
-    } else {
-      allItems =
-        (sceneConfig.items && sceneConfig.items.map((item) => item.name)) || []
-    }
-
-    // temp code DELETE ME!!! (start)
-    allCreatures.push(...allItems)
-    // temp code DELETE ME!!! (end)
-
-    const filteredCharacters = allCreatures.filter((item) => {
-      return ["liz2", "kat", "katieKooper01"].includes(item)
-    })
-
-    return filteredCharacters
   }
   // static getCritters1 = ({ frame, scene }) => {
   //   let allCreatures = []
@@ -533,13 +498,73 @@ export default class Utils {
   //   return filteredCharacters
   // }
 
+  static getCritters1New = ({ frameConfig, sceneConfig }) => {
+    // console.log("sceneConfig---------------->", toJS(sceneConfig)) // zzz
+    let allCreatures = []
+    if (frameConfig.creatures && frameConfig.creatures.length > 0) {
+      allCreatures = [...frameConfig.creatures]
+    } else {
+      allCreatures =
+        (sceneConfig.creatures &&
+          sceneConfig.creatures.map((item) => item.name)) ||
+        []
+    }
+
+    let allItems = []
+
+    if (frameConfig.items && frameConfig.items.length > 0) {
+      allItems = [...frameConfig.items]
+    } else {
+      allItems =
+        (sceneConfig.items && sceneConfig.items.map((item) => item.name)) || []
+    }
+
+    allCreatures.push(...allItems)
+
+    const filteredCharacters = allCreatures.filter((item) => {
+      return ["liz2", "kat", "katieKooper01"].includes(item)
+    })
+
+    return filteredCharacters
+  }
+
+  static getCritters2New = ({ frameConfig, sceneConfig }) => {
+    console.log("sceneConfig---------------->", toJS(sceneConfig)) // zzz
+    let allCreatures = []
+    if (frameConfig.creatures && frameConfig.creatures.length > 0) {
+      allCreatures = [...frameConfig.creatures]
+    } else {
+      allCreatures =
+        (sceneConfig.creatures &&
+          sceneConfig.creatures.map((item) => item.name)) ||
+        []
+    }
+
+    let allItems = []
+
+    if (frameConfig.items && frameConfig.items.length > 0) {
+      allItems = [...frameConfig.items]
+    } else {
+      allItems =
+        (sceneConfig.items && sceneConfig.items.map((item) => item.name)) || []
+    }
+
+    allCreatures.push(...allItems)
+
+    const filteredCharacters = allCreatures.filter((item) => {
+      return !["liz2", "kat", "katieKooper01"].includes(item)
+    })
+
+    return filteredCharacters.filter((item) => !!item)
+  }
+
   static getCritters2 = ({ frame, scene }) => {
     let allCreatures = []
 
-    const { critters1 = null } = frame
+    const { critters2 = null } = frame
 
-    if (critters1 && critters1.length > 0) {
-      allCreatures = [...frame.critters1.map((item) => item.name)]
+    if (critters2 && critters2.length > 0) {
+      allCreatures = [...frame.critters2.map((item) => item.name)]
     } else if (frame.creatures && frame.creatures.length > 0) {
       allCreatures = [...frame.creatures]
     } else {

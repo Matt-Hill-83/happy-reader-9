@@ -49,8 +49,6 @@ class WorldBuilder extends Component {
     // new map
     if (newWorld) {
       this.addNewWorld()
-      // localStateStore.setWorldBuilderWorld(world)
-      // localStateStore.setWorldBuilderScenesGrid(reCreatedScenesGrid)
       return
     } else {
       const world = Utils.getMapFromId2({ id: mapId })
@@ -433,6 +431,22 @@ class WorldBuilder extends Component {
           return { name: item }
         })
       }
+      // TODO = fix that
+      // TODO = fix that
+      // TODO = fix that
+      // TODO = fix that
+      // TODO = fix that
+      // if (false) {
+      if (frameConfig.critters2) {
+        configProps.critters2 = frameConfig.critters2
+      } else {
+        const critters2 =
+          Utils.getCritters2New({ frameConfig, sceneConfig }) || []
+
+        configProps.critters2 = critters2.map((item) => {
+          return { name: item }
+        })
+      }
 
       if (frameConfig.items) {
         configProps.items = frameConfig.items
@@ -536,15 +550,13 @@ class WorldBuilder extends Component {
       scenesGrid[coordinates.row][coordinates.col] = newBornScene
     })
 
-    const newProps = { title: title, description, questConfig }
+    const newProps = { title: title + "new", description, questConfig }
     console.log("scenesGrid", toJS(scenesGrid)) // zzz
     const scene1b = scenesGrid[0][0].location.name
     const scene2b = scenesGrid[1][1].location.name
     console.log("scene1b", toJS(scene1b)) // zzz
     console.log("scene2b", toJS(scene2b)) // zzz
 
-    // const newWorld2 = localStateStore.getWorldBuilderWorld()
-    // console.log("newWorld2", toJS(newWorld2)) // zzz
     Utils.updateMap({ newProps })
   }
 

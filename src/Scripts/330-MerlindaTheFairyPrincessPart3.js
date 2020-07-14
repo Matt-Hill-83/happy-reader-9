@@ -11,12 +11,18 @@ const story330 = {
       },
       frames: [
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [
             `{"kat": "Rori, I'm gonna get real with you."}`,
             `{"rori": "We must free the dragons from Maldred's evil spell!"}`,
           ],
         },
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [
             `{"kat": "Rori, do you like sparkles and glitter beyond your wildest dreams?"}`,
             `{"rori": "Does it shimmer with the power of the dragon stone?"}`,
@@ -25,6 +31,9 @@ const story330 = {
           ],
         },
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [
             `{"rori": "What class?"}`,
             `{"liz2": "K2. No, wait... K1.  Um...  both?"}`,
@@ -33,6 +42,9 @@ const story330 = {
           ],
         },
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [`{"liz2": "Oh... yeah right."}`, `{"rori": "Never mind."}`],
         },
       ],
@@ -47,6 +59,9 @@ const story330 = {
       },
       frames: [
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [
             `{"rori": "I think Watta-Lee-Achee is a class 2 lava dragon with a minor healing enchantment."}`,
             `{"kat": "Doo-Da-Lee-Doo"}`,
@@ -56,6 +71,9 @@ const story330 = {
         },
 
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [
             `{"rori": "Vulcan and I will battle Watta-Lee-Achee..."}`,
             `{"rori": "...and free the Dress of Atacama once and for all!!!"}`,
@@ -63,12 +81,18 @@ const story330 = {
           ],
         },
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [
             `{"rori": "I will join you on your Quest for the Dress!"}`,
             `{"liz2": "thanks Rori!"}`,
           ],
         },
         {
+          frameConfig: {
+            items: [],
+          },
           dialogs: [
             `{"rori": "I will join you..."}`,
             `{"rori": " ...on your..."}`,
