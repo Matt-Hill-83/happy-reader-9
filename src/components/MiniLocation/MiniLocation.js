@@ -121,15 +121,9 @@ class MiniLocation extends React.Component {
     if (!isActive) {
       return null
     }
-    // console.log("") // zzz
-    // console.log("renderCreatures----------------------------->") // zzz
     const activeFrame = localStateStore.getActiveFrame() || {}
     const { creatures = [] } = activeFrame
 
-    // console.log("activeFrame", toJS(activeFrame)) // zzz
-    // console.log("creatures", toJS(creatures)) // zzz
-
-    // const {frameSet} = activeScene;
     const renderedCharacters = creatures.map((creature) => {
       const image = Images.all[creature] || null
 
@@ -143,7 +137,6 @@ class MiniLocation extends React.Component {
 
       return friend
     })
-    // console.log("renderedCharacters", toJS(renderedCharacters)) // zzz
     return <div className={css.charactersContainer}>{renderedCharacters}</div>
   }
 
@@ -226,7 +219,8 @@ class MiniLocation extends React.Component {
     const noCloud = isVisitedScene || subQuestIsUnlocked
     const showCloud = !noCloud
 
-    const { items = [], creatures = [] } = scene
+    const { creatures = [] } = scene
+    // const { items = [], creatures = [] } = scene
     const locationName = scene.location.name
     const isBlank = locationName === "blank"
 
@@ -254,11 +248,11 @@ class MiniLocation extends React.Component {
       )
     }
 
-    let renderedItems
-    renderedItems = items.map((item) => {
-      const renderedItem = Images.all[item.name]
-      return <img className={css.itemImage} src={renderedItem} alt={"imagex"} />
-    })
+    // let renderedItems
+    // renderedItems = items.map((item) => {
+    //   const renderedItem = Images.all[item.name]
+    //   return <img className={css.itemImage} src={renderedItem} alt={"imagex"} />
+    // })
 
     if (!locationName) {
       return <div className={`${css.main} ${className} ${localClass}`}></div>
@@ -343,7 +337,7 @@ class MiniLocation extends React.Component {
                 alt={"imagex"}
               />
             </div>
-            {(false && renderedItems) || null}
+            {/* {(false && renderedItems) || null} */}
 
             <div className={css.characters}>
               {this.renderCreatures({ creatures, isActive })}

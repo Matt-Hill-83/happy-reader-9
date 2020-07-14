@@ -165,11 +165,19 @@ class MainStory extends React.Component {
     const activeScene = localStateStore.getActiveScene()
 
     const {
-      items = [],
-      characters = [],
+      // items = [],
+      // characters = [],
       location,
-      critters1 = [],
+      // critters1 = [],
+      // critters2 = [],
     } = activeScene
+
+    const activeFrame = localStateStore.getActiveFrame() || {}
+    console.log("activeFrame", toJS(activeFrame)) // zzz
+    const { critters1 = [], critters2 = [] } = activeFrame
+
+    const activeFrameIndex = localStateStore.getActiveFrameIndex()
+    console.log("activeFrameIndex", toJS(activeFrameIndex)) // zzz
 
     // TODO: this should look for items in the frame, so it can use critters.
     // TODO: this should look for items in the frame, so it can use critters.
@@ -177,8 +185,9 @@ class MainStory extends React.Component {
     // TODO: this should look for items in the frame, so it can use critters.
 
     const { foundItem, completedMission } = localStateStore.updateQuestState({
-      itemsInScene: [...items, location, ...critters1],
-      charactersInScene: [...characters, ...items, location, ...critters1],
+      itemsInScene: [location, ...critters1, ...critters2],
+      charactersInScene: [location, ...critters1, ...critters2],
+      // charactersInScene: [...characters, location, ...critters1, ...critters2],
     })
 
     if (foundItem) {

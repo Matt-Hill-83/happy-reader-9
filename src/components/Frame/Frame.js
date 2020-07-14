@@ -22,7 +22,6 @@ class Frame extends Component {
   state = {
     showFacePicker: false,
     showItemPicker: false,
-    // items: [],
   }
 
   componentWillMount() {
@@ -30,17 +29,6 @@ class Frame extends Component {
     const frameSet = scene.frameSet
     const frame = frameSet && frameSet.frames && frameSet.frames[frameIndex]
 
-    console.log("frame.critters1", toJS(frame.critters1)) // zzz
-
-    // temp code to move db records
-    // temp code to move db records
-    // temp code to move db records
-    if (!frame.critters1) {
-      // const critters1 = Utils.getCritters1({ frame, scene })
-      // console.log("critters1", toJS(critters1)) // zzz
-      // frame.critters1 = critters1
-      // Utils.updateMap({})
-    }
     this.setState({ frame })
   }
 
@@ -209,19 +197,8 @@ class Frame extends Component {
     const { frame } = this.state
     const { updateMap } = this.props
 
-    // frame.items = items
-
     this.setState({ frame }, () => updateMap({}))
   }
-
-  // renderItems = () => {
-  //   const items = _get(this, "props.scene.items") || []
-  //   return items.map((item) => {
-  //     const { name } = item
-
-  //     return <ImageDisplay className={css.itemContainer} item={{ name }} />
-  //   })
-  // }
 
   renderCharacters = () => {
     const { scene } = this.props
@@ -258,16 +235,12 @@ class Frame extends Component {
 
   renderFrame = () => {
     const { frame } = this.state
-
     if (!frame) return null
 
-    // const renderedItems = this.renderItems()
     const renderedFriends = this.renderCharacters()
 
     return (
       <div className={`${css.scenes}`}>
-        {/* {this.renderLocationImage()} */}
-
         <div className={css.relativePositionedContent}>
           <div className={css.wordsContainer}>
             {this.renderNarrative()}
@@ -275,12 +248,7 @@ class Frame extends Component {
           </div>
 
           <div className={css.imageGroupsContainer}>
-            {/* uncomment this when more than 2 characters can be added */}
-
-            <div className={css.itemsContainer}>
-              {/* <div>Items</div>
-              {renderedItems} */}
-            </div>
+            <div className={css.itemsContainer}></div>
             <div>Scene.characters, will be overridden by Frame.characters</div>
             <div className={css.charactersContainer}>{renderedFriends}</div>
           </div>

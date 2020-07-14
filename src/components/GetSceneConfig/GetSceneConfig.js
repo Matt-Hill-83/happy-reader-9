@@ -27,7 +27,7 @@ class GetSceneConfig extends Component {
       const newFrame = {
         frameConfig: {
           // items: [],
-          items: oldFrame.items,
+          // items: oldFrame.items,
           critters1: oldFrame.critters1,
           critters2: oldFrame.critters2,
           id: oldFrame.id,
@@ -83,18 +83,17 @@ class GetSceneConfig extends Component {
         faces: scene.frameSet.faces,
       }
 
-      if (scene.items && scene.items.length > 0) {
-        newBornScene.sceneConfig.items = scene.items
-      } else {
-        newBornScene.sceneConfig.items = []
-      }
+      // if (scene.items && scene.items.length > 0) {
+      //   newBornScene.sceneConfig.items = scene.items
+      // } else {
+      //   newBornScene.sceneConfig.items = []
+      // }
 
       newScenesList.push(newBornScene)
     })
 
     const output = {
       title: world.title,
-      // title: "story output",
       scenes: newScenesList,
       questConfig,
     }
