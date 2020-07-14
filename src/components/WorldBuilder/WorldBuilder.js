@@ -357,14 +357,6 @@ class WorldBuilder extends Component {
                   imageSets={characterImageSets}
                 />
               )}
-              {/* {!hideScene && (
-                <CrudMachine
-                  className={`${css.crudMachine} ${css.itemBox} ${css.itemsMachine}`}
-                  items={items}
-                  itemRenderer={itemRenderer}
-                  saveItems={onSave}
-                />
-              )} */}
               {!hideScene && (
                 <CrudMachine
                   className={`${css.crudMachine} ${css.doorsBottomMachine}`}

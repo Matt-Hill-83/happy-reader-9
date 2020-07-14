@@ -93,9 +93,8 @@ export default class Utils {
     })
 
     const newFrame = {
-      // creatures: allCharacters,
       critters1: critters1,
-      critters2: critters2,
+      critters2,
       faces: [
         { character: creatureName1, characterIndex: 1, face: "happy" },
         { character: creatureName0, characterIndex: 0, face: "happy" },
@@ -277,7 +276,6 @@ export default class Utils {
 
   static getBlankScene = ({ props }) => {
     const dummyFrame = this.getNewFrame({ props: {} })
-    // const dummyFrame = this.getDummyFrame({ props: {} })
 
     const id = Utils.generateUuid()
 
@@ -288,9 +286,6 @@ export default class Utils {
       doorRight: { name: "doorYellow" },
       doorBottom: { name: "doorGreen" },
       characters: [{ name: "kat" }, { name: "liz2" }],
-      // characters: [],
-      items: [],
-      // items: [{ name: "cup" }, { name: "pin" }],
       frameSet: { frames: [dummyFrame] },
       id,
     }
@@ -469,36 +464,8 @@ export default class Utils {
     console.log("map.data", toJS(map.data)) // zzz
     await map.update(map.data)
   }
-  // static getCritters1 = ({ frame, scene }) => {
-  //   let allCreatures = []
-  //   if (frame.creatures && frame.creatures.length > 0) {
-  //     allCreatures = [...frame.creatures]
-  //   } else {
-  //     allCreatures =
-  //       (scene.characters && scene.characters.map((item) => item.name)) || []
-  //   }
-
-  //   let allItems = []
-
-  //   if (frame.items && frame.items.length > 0) {
-  //     allItems = [...frame.items]
-  //   } else {
-  //     allItems = (scene.items && scene.items.map((item) => item.name)) || []
-  //   }
-
-  //   // temp code DELETE ME!!! (start)
-  //   allCreatures.push(...allItems)
-  //   // temp code DELETE ME!!! (end)
-
-  //   const filteredCharacters = allCreatures.filter((item) => {
-  //     return ["liz2", "kat", "katieKooper01"].includes(item)
-  //   })
-
-  //   return filteredCharacters
-  // }
 
   static getCritters1New = ({ frameConfig, sceneConfig }) => {
-    // console.log("sceneConfig---------------->", toJS(sceneConfig)) // zzz
     let allCreatures = []
     if (frameConfig.creatures && frameConfig.creatures.length > 0) {
       allCreatures = [...frameConfig.creatures]
@@ -528,7 +495,6 @@ export default class Utils {
   }
 
   static getCritters2New = ({ frameConfig, sceneConfig }) => {
-    console.log("sceneConfig---------------->", toJS(sceneConfig)) // zzz
     let allCreatures = []
     if (frameConfig.creatures && frameConfig.creatures.length > 0) {
       allCreatures = [...frameConfig.creatures]
@@ -580,9 +546,7 @@ export default class Utils {
     }
 
     console.log("allItems", toJS(allItems)) // zzz
-    // temp code DELETE ME!!! (start)
     allCreatures.push(...allItems)
-    // temp code DELETE ME!!! (end)
 
     const filteredCharacters = allCreatures.filter((item) => {
       return !["liz2", "kat", "katieKooper01"].includes(item)

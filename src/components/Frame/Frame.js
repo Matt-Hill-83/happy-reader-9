@@ -201,19 +201,11 @@ class Frame extends Component {
   }
 
   renderCharacters = () => {
-    const { scene } = this.props
-
     const { frame } = this.state
     const { faces = [] } = frame
     if (!frame) return null
-    let allCharacters = []
 
-    if (frame.creatures) {
-      allCharacters = frame.creatures.map((item) => item) || []
-    } else {
-      allCharacters =
-        (scene.characters && scene.characters.map((item) => item.name)) || []
-    }
+    const allCharacters = frame.critters1.map((item) => item.name) || []
 
     return allCharacters.map((friend, index) => {
       const mood = this.getMood({ name: friend, faces })
@@ -285,9 +277,6 @@ class Frame extends Component {
     // TODO -  I need put in a dummy frame for when there is none.
     const { critters1 = [], critters2 = [] } = frame
 
-    const allCharacters =
-      (scene.characters && scene.characters.map((item) => item.name)) || []
-
     const itemRenderer = ({ item }) => {
       return <ImageDisplay item={item} />
     }
@@ -295,7 +284,7 @@ class Frame extends Component {
     return (
       <div className={`${css.main}`}>
         <div className={` ${css.scenesContainer}`}>
-          {this.renderFrame({ allCharacters })}
+          {this.renderFrame()}
 
           <CrudMachine
             className={css.crudMachine}

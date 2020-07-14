@@ -6,7 +6,6 @@ import cx from "classnames"
 import { observer } from "mobx-react"
 import { toJS } from "mobx"
 import _get from "lodash.get"
-// import _pick from "lodash.pick"
 import css from "./GetSceneConfig.module.scss"
 
 class GetSceneConfig extends Component {
@@ -26,13 +25,10 @@ class GetSceneConfig extends Component {
     const newFrames = frames.map((oldFrame) => {
       const newFrame = {
         frameConfig: {
-          // items: [],
-          // items: oldFrame.items,
           critters1: oldFrame.critters1,
           critters2: oldFrame.critters2,
           id: oldFrame.id,
           faces: oldFrame.faces,
-          // creatures: oldFrame.creatures,
         },
       }
       const newDialogs = oldFrame.dialog.map((item) => {
@@ -65,7 +61,6 @@ class GetSceneConfig extends Component {
       const newFrames = this.formatFramesForExport({ frames: oldFrames })
       const newFrames2 = this.formatFramesForExport({ frames: oldFrames2 })
 
-      // const creatures = scene.characters.map((item) => item.name)
       const newBornScene = {
         title: scene.location.name,
         sceneConfig: {
@@ -73,7 +68,6 @@ class GetSceneConfig extends Component {
           worldId: world.id,
           worldTitle: world.title,
           coordinates: scene.coordinates,
-          // creatures,
           isEndScene: scene.isEndScene,
           isStartScene: scene.isStartScene,
           ...scene.sceneConfig,
@@ -82,12 +76,6 @@ class GetSceneConfig extends Component {
         frames2: newFrames2,
         faces: scene.frameSet.faces,
       }
-
-      // if (scene.items && scene.items.length > 0) {
-      //   newBornScene.sceneConfig.items = scene.items
-      // } else {
-      //   newBornScene.sceneConfig.items = []
-      // }
 
       newScenesList.push(newBornScene)
     })

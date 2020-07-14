@@ -19,21 +19,6 @@ class MiniLocation extends React.Component {
     bottom: { image: "doorGreen", open: true },
   }
 
-  renderYouMini = () => {
-    const you = localStateStore.getYou()
-    const youImage = you.creature
-
-    return (
-      <div className={css.miniYou}>
-        <img
-          className={`${css.characterImageMini} ${css.characterYouMini}`}
-          src={Images.creatures[youImage]}
-          alt={youImage}
-        />
-      </div>
-    )
-  }
-
   changeDoor = ({ event }) => {
     this.setState({
       name: event.target.name,

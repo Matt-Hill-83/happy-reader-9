@@ -11,18 +11,6 @@ import WorldViewer from "../WorldViewer/WorldViewer.js"
 import css from "./StoryMode.module.scss"
 
 class StoryMode extends React.Component {
-  renderYourItems = () => {
-    const you = localStateStore.getYou()
-    const items = you.items.map((item) => <div>{item}</div>)
-
-    return (
-      <div className={css.yourItems}>
-        <span>My Stuff</span>
-        {items}
-      </div>
-    )
-  }
-
   render() {
     const { activeScene, updateActiveScene, openYouWinModal } = this.props
     const activeWorld = localStateStore.getActiveWorld()
@@ -46,7 +34,6 @@ class StoryMode extends React.Component {
             activeScene={activeScene}
             openYouWinModal={openYouWinModal}
           />
-          {false && this.renderYourItems({})}
         </div>
 
         <div className={`${css.halfPage} ${css.rightHalf}`}>

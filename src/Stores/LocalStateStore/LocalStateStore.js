@@ -7,15 +7,13 @@ class LocalStateStore {
   activeMapId = null
   activeSceneId = null
   completedMissions = []
-  // creatures = []
   defaultWorldId = null
   mapBuilderGrid = []
   showBookPicker = false
   showWorldBuilder = false
-  test = null
+  // test = null
   unlockedSubQuests = [0]
   visitedScenes = []
-  you = {}
 
   _defaultQuestStatus = {
     activeMission: 0,
@@ -297,11 +295,6 @@ class LocalStateStore {
     return questItems
   }
 
-  getYou = () => this.you
-  setYou = (you) => {
-    this.you = you
-  }
-
   getWorldBuilderScenesGrid = () => this.mapBuilderGrid
   setWorldBuilderScenesGrid = (mapBuilderGrid) => {
     this.mapBuilderGrid = mapBuilderGrid
@@ -385,7 +378,6 @@ decorate(LocalStateStore, {
   activeMapId: observable,
   activeSceneId: observable,
   completedMissions: observable,
-  // creatures: observable,
   defaultWorldId: observable,
   desiredItems: observable,
   mapBuilderGrid: observable,
@@ -393,10 +385,9 @@ decorate(LocalStateStore, {
   questStatus: observable,
   showBookPicker: observable,
   showWorldBuilder: observable,
-  test: observable,
+  // test: observable,
   unlockedSubQuests: observable,
   visitedScenes: observable,
-  you: observable,
 })
 
 const localStateStore = new LocalStateStore()
