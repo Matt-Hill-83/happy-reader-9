@@ -550,7 +550,8 @@ class WorldBuilder extends Component {
       scenesGrid[coordinates.row][coordinates.col] = newBornScene
     })
 
-    const newProps = { title: title + "new", description, questConfig }
+    const newProps = { title: title, description, questConfig }
+    // const newProps = { title: title + "new", description, questConfig }
     console.log("scenesGrid", toJS(scenesGrid)) // zzz
     const scene1b = scenesGrid[0][0].location.name
     const scene2b = scenesGrid[1][1].location.name

@@ -62,10 +62,12 @@ import story8013 from "../../Scripts/8013-CharAndLucy-003.js"
 import story9924 from "../../Scripts/9924-test-FrogHopperPart01.js"
 import story9925 from "../../Scripts/9925-test-AnnaWantCupcake.js"
 import story9926 from "../../Scripts/9926-test-newPattern001.js"
+import story9927 from "../../Scripts/9927-test-end-2-end-test.js"
 import story0001 from "../../Scripts/----- test-001.js"
 import story0002 from "../../Scripts/----- test-002.js"
 
 const worlds = [
+  story9927,
   // story002,
   // story003,
   // story004,
@@ -124,65 +126,10 @@ const worlds = [
 ]
 
 class FrameSetUploader extends Component {
-  // state = { text: JSON.stringify(story002) }
-  // state = { text: JSON.stringify(story003) }
-  // state = { text: JSON.stringify(story004) }
-  // state = { text: JSON.stringify(story005) }
-  // state = { text: JSON.stringify(story006) }
-  // state = { text: JSON.stringify(story007) }
-  // state = { text: JSON.stringify(story010) }
-  // state = { text: JSON.stringify(story011) }
-  // state = { text: JSON.stringify(story013) }
-  // state = { text: JSON.stringify(story014) }
-  // state = { text: JSON.stringify(story015) }
-  // state = { text: JSON.stringify(story020) }
-  // state = { text: JSON.stringify(story050) }
-  // state = { text: JSON.stringify(story100) }
-  // state = { text: JSON.stringify(story110) }
-  // state = { text: JSON.stringify(story200) }
-  // state = { text: JSON.stringify(story300) }
-  // state = { text: JSON.stringify(story310) }
-  // state = { text: JSON.stringify(story330) }
-  // state = { text: JSON.stringify(story8000) }
-  // state = { text: JSON.stringify(story9000) }
-  // state = { text: JSON.stringify(story9100) }
-  // state = { text: JSON.stringify(story9103) }
-  // state = { text: JSON.stringify(story9901) }
-  // state = { text: JSON.stringify(story9902) }
-  // state = { text: JSON.stringify(story9903) }
-  // state = { text: JSON.stringify(story9904) }
-  // state = { text: JSON.stringify(story9905) }
-  // state = { text: JSON.stringify(story9906) }
-  // state = { text: JSON.stringify(story9907) }
-  // state = { text: JSON.stringify(story9908) }
-  // state = { text: JSON.stringify(story9104) }
-  // state = { text: JSON.stringify(story9909) }
-  // state = { text: JSON.stringify(story9910) }
-  // state = { text: JSON.stringify(story9912) }
-  // state = { text: JSON.stringify(story9913) }
-  // state = { text: JSON.stringify(story9914) }
-  // state = { text: JSON.stringify(story9915) }
-  // state = { text: JSON.stringify(story9916) }
-  // state = { text: JSON.stringify(story9917) }
-  // state = { text: JSON.stringify(story9918) }
-  // state = { text: JSON.stringify(story9919) }
-  // state = { text: JSON.stringify(story8054) }
-  // state = { text: JSON.stringify(story9102) }
-  // state = { text: JSON.stringify(story9104) }
-  // state = { text: JSON.stringify(story8010) }
-  // state = { text: JSON.stringify(story9920) }
-  // state = { text: JSON.stringify(story9921) }
-  state = { text: JSON.stringify(story9922) }
-  state = { text: JSON.stringify(story9923) }
-  state = { text: JSON.stringify(story8013) }
-  state = { text: JSON.stringify(story9924) }
-  state = { text: JSON.stringify(story9925) }
-  state = { text: JSON.stringify(story9926) }
-
   onChangeDialog = ({ event }) => {
     const text = event.target.value
 
-    this.setState({ text })
+    // this.setState({ text })
   }
 
   importMultipleWorlds = async () => {
@@ -203,14 +150,14 @@ class FrameSetUploader extends Component {
   }
 
   renderButton = () => {
-    const { onImportJson } = this.props
-    const text = this.state.text
+    // const { onImportJson } = this.props
+    // const text = this.state.text
 
-    let newWorld = { noData: 5 }
+    // let newWorld = { noData: 5 }
 
-    if (text) {
-      newWorld = JSON.parse(text)
-    }
+    // if (text) {
+    //   newWorld = JSON.parse(text)
+    // }
 
     return (
       <Button
@@ -224,17 +171,17 @@ class FrameSetUploader extends Component {
   }
 
   render = () => {
-    const { text } = this.state
+    // const { text = "" } = this.state
 
     return (
       <div className={css.main}>
         {this.renderButton()}
-        <TextArea
+        {/* <TextArea
           className={`${css.jsonPaster} }`}
           onChange={(event) => this.onChangeDialog({ event })}
           id="text-input"
           value={text}
-        />
+        /> */}
       </div>
     )
   }

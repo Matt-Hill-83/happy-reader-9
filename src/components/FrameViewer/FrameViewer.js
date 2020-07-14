@@ -111,58 +111,31 @@ class FrameViewer extends Component {
   }
 
   renderFriends = () => {
-    const { scene, frame } = this.props
-    let critters
+    const { frame } = this.props
     if (!frame) return null
 
-    console.log("frame.critters1", toJS(frame.critters1)) // zzz
-    if (frame.critters2) {
-      critters = frame.critters2
-    } else {
-      critters = []
-      // critters = Utils.getCritters1({ frame, scene })
-    }
-
-    // const { faces = [] } = frame
+    const critters = frame.critters2 || []
     const critterNames = critters.map((item) => item.name)
-    const filteredCharacters = Utils.getCritters2({ frame, scene })
 
     return critterNames.map((character, index) => {
-      // return filteredCharacters.map((character, index) => {
-      // const mood = this.getMood({ name: character, faces })
-
       return (
         <div className={`${css.characterContainer}`} key={index}>
-          <Character
-            name={character}
-            // mood={mood}
-            isEditMode={false}
-            showHeadOnly={false}
-          />
+          <Character name={character} isEditMode={false} showHeadOnly={false} />
         </div>
       )
     })
   }
 
   renderLizAndKat = () => {
-    console.log("renderLizAndKat") // zzz
-
-    const { scene, frame } = this.props
+    const { frame } = this.props
     const { faces = [] } = frame
-    let critters
 
     if (!frame) return null
 
-    if (frame.critters1) {
-      critters = frame.critters1
-    } else {
-      critters = []
-      // critters = Utils.getCritters1({ frame, scene })
-    }
+    const critters = frame.critters1 || []
 
     const critterNames = critters.map((item) => item.name)
     return critterNames.map((character, index) => {
-      // return critters1.map((character, index) => {
       const mood = this.getMood({ name: character, faces })
 
       return (
