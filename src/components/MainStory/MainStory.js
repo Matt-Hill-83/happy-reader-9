@@ -70,7 +70,6 @@ class MainStory extends React.Component {
       const mapId = _get(defaultMap, "id")
 
       if (useDefaultWorldId) {
-        // if (!IS_PROD_RELEASE && useDefaultWorldId) {
         localStateStore.setActiveMapId(defaultWorldId)
       } else {
         localStateStore.setActiveMapId(mapId)
@@ -87,7 +86,6 @@ class MainStory extends React.Component {
   }
 
   init = async () => {
-    // Utils.getFirstReleasedMap()
     const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
     const filteredMaps = savedMaps.filter((map) => map.data.released)
 

@@ -1,5 +1,5 @@
-import { Button, TextArea } from "@blueprintjs/core"
-import React, { Component, useState } from "react"
+import { Button } from "@blueprintjs/core"
+import React, { Component } from "react"
 
 import cx from "classnames"
 
@@ -8,7 +8,7 @@ import { toJS } from "mobx"
 import _get from "lodash.get"
 import css from "./FrameSetUploader.module.scss"
 
-// import story9104 from "../../Scripts/000-charlieAndLucy.js";
+// import story9104 from "../../Scripts/000-charlieAndLucy.js"
 import story002 from "../../Scripts/002-BrightNewDay"
 import story003 from "../../Scripts/003-KatGetsADress"
 import story004 from "../../Scripts/004-KatGoesOffScript"
@@ -126,43 +126,18 @@ const worlds = [
 ]
 
 class FrameSetUploader extends Component {
-  onChangeDialog = ({ event }) => {
-    const text = event.target.value
-
-    // this.setState({ text })
-  }
-
   importMultipleWorlds = async () => {
-    console.log("importMultipleWorlds") // zzz
-
     for (let index = 0; index < worlds.length; index++) {
       const world = worlds[index]
-      console.log("worlds", toJS(worlds)) // zzz
       const newWorld = world
       await this.props.onImportJson({ newWorld })
     }
-
-    // worlds.forEach((world) => {
-    //   console.log("worlds", toJS(worlds)) // zzz
-    //   const newWorld = world
-    //   this.props.onImportJson({ newWorld })
-    // })
   }
 
   renderButton = () => {
-    // const { onImportJson } = this.props
-    // const text = this.state.text
-
-    // let newWorld = { noData: 5 }
-
-    // if (text) {
-    //   newWorld = JSON.parse(text)
-    // }
-
     return (
       <Button
         onClick={() => this.importMultipleWorlds()}
-        // onClick={() => onImportJson({ newWorld })}
         className={cx(css.uploadButton)}
       >
         Upload JSON
@@ -171,19 +146,7 @@ class FrameSetUploader extends Component {
   }
 
   render = () => {
-    // const { text = "" } = this.state
-
-    return (
-      <div className={css.main}>
-        {this.renderButton()}
-        {/* <TextArea
-          className={`${css.jsonPaster} }`}
-          onChange={(event) => this.onChangeDialog({ event })}
-          id="text-input"
-          value={text}
-        /> */}
-      </div>
-    )
+    return <div className={css.main}>{this.renderButton()}</div>
   }
 }
 

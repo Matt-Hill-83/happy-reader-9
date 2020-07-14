@@ -11,7 +11,6 @@ class LocalStateStore {
   mapBuilderGrid = []
   showBookPicker = false
   showWorldBuilder = false
-  // test = null
   unlockedSubQuests = [0]
   visitedScenes = []
 
@@ -385,7 +384,6 @@ decorate(LocalStateStore, {
   questStatus: observable,
   showBookPicker: observable,
   showWorldBuilder: observable,
-  // test: observable,
   unlockedSubQuests: observable,
   visitedScenes: observable,
 })

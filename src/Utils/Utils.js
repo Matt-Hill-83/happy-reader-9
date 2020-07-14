@@ -517,40 +517,40 @@ export default class Utils {
     allCreatures.push(...allItems)
 
     const filteredCharacters = allCreatures.filter((item) => {
-      return !["liz2", "kat", "katieKooper01"].includes(item)
+      return !["liz2", "kat"].includes(item)
     })
 
     return filteredCharacters
   }
 
-  static getCritters2 = ({ frame, scene }) => {
-    let allCreatures = []
+  // static getCritters2 = ({ frame, scene }) => {
+  //   let allCreatures = []
 
-    const { critters2 = null } = frame
+  //   const { critters2 = null } = frame
 
-    if (critters2 && critters2.length > 0) {
-      allCreatures = [...frame.critters2.map((item) => item.name)]
-    } else if (frame.creatures && frame.creatures.length > 0) {
-      allCreatures = [...frame.creatures]
-    } else {
-      allCreatures =
-        (scene.characters && scene.characters.map((item) => item.name)) || []
-    }
+  //   if (critters2 && critters2.length > 0) {
+  //     allCreatures = [...frame.critters2.map((item) => item.name)]
+  //   } else if (frame.creatures && frame.creatures.length > 0) {
+  //     allCreatures = [...frame.creatures]
+  //   } else {
+  //     allCreatures =
+  //       (scene.characters && scene.characters.map((item) => item.name)) || []
+  //   }
 
-    let allItems = []
-    console.log("frame.items", toJS(frame.items)) // zzz
-    if (frame.items && frame.items.length > 0) {
-      allItems = (frame.items && frame.items.map((item) => item.name)) || []
-    } else {
-      allItems = (scene.items && scene.items.map((item) => item.name)) || []
-    }
+  //   let allItems = []
+  //   console.log("frame.items", toJS(frame.items)) // zzz
+  //   if (frame.items && frame.items.length > 0) {
+  //     allItems = (frame.items && frame.items.map((item) => item.name)) || []
+  //   } else {
+  //     allItems = (scene.items && scene.items.map((item) => item.name)) || []
+  //   }
 
-    console.log("allItems", toJS(allItems)) // zzz
-    allCreatures.push(...allItems)
+  //   console.log("allItems", toJS(allItems)) // zzz
+  //   allCreatures.push(...allItems)
 
-    const filteredCharacters = allCreatures.filter((item) => {
-      return !["liz2", "kat", "katieKooper01"].includes(item)
-    })
-    return filteredCharacters
-  }
+  //   const filteredCharacters = allCreatures.filter((item) => {
+  //     return !["liz2", "kat"].includes(item)
+  //   })
+  //   return filteredCharacters
+  // }
 }

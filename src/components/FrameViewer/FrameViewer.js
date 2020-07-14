@@ -110,7 +110,7 @@ class FrameViewer extends Component {
     )
   }
 
-  renderFriends = () => {
+  renderCritters2 = () => {
     const { frame } = this.props
     if (!frame) return null
 
@@ -126,7 +126,7 @@ class FrameViewer extends Component {
     })
   }
 
-  renderLizAndKat = () => {
+  renderCritters1 = () => {
     const { frame } = this.props
     const { faces = [] } = frame
 
@@ -227,12 +227,11 @@ class FrameViewer extends Component {
             </div>
           </div>
           <div className={css.imageGroupsContainer}>
-            {/* uncomment this when more than 2 characters can be added */}
             <div className={css.lizAndKatContainer}>
-              {this.renderLizAndKat()}
+              {this.renderCritters1()}
             </div>
             <div className={css.charactersContainer}>
-              {this.renderFriends()}
+              {this.renderCritters2()}
             </div>
           </div>
         </div>

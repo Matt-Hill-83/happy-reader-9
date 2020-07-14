@@ -196,7 +196,6 @@ class WorldBuilder extends Component {
     const newGrid5 = []
 
     localStateStore.setWorldBuilderScenesGrid(grid)
-    console.log("setWorldBuilderScenesGrid+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_") // zzz
     const newMap = {
       name: newName,
       title: "Test Map" + newName,
@@ -303,7 +302,6 @@ class WorldBuilder extends Component {
         const doorsBottom = [scene.doorBottom]
         const doorsRight = [scene.doorRight]
         const characters = scene.characters
-        // const items = scene.items
 
         const hideScene = scene.location && scene.location.name === "blank"
 
@@ -311,7 +309,6 @@ class WorldBuilder extends Component {
           <CrudMachine
             className={`${css.crudMachine} ${css.locationMachine}`}
             items={locations}
-            // onEditItem={this.onEditLocation}
             buttons={buttons}
             itemRenderer={itemRenderer}
             saveItems={onSave}
@@ -407,12 +404,6 @@ class WorldBuilder extends Component {
         configProps.faces = sceneConfig.faces || []
       }
 
-      // if (frameConfig.creatures) {
-      //   configProps.creatures = frameConfig.creatures || []
-      // } else {
-      //   configProps.creatures = sceneConfig.creatures || []
-      // }
-
       if (frameConfig.critters1) {
         configProps.critters1 = frameConfig.critters1
       } else {
@@ -422,12 +413,7 @@ class WorldBuilder extends Component {
           return { name: item }
         })
       }
-      // TODO = fix that
-      // TODO = fix that
-      // TODO = fix that
-      // TODO = fix that
-      // TODO = fix that
-      // if (false) {
+
       if (frameConfig.critters2) {
         configProps.critters2 = frameConfig.critters2
       } else {
@@ -438,12 +424,6 @@ class WorldBuilder extends Component {
           return { name: item }
         })
       }
-
-      // if (frameConfig.items) {
-      //   configProps.items = frameConfig.items
-      // } else {
-      //   configProps.items = sceneConfig.items || []
-      // }
 
       // and put the properties into the new Frame...
       const newFrame = Utils.getNewFrame({
@@ -478,7 +458,6 @@ class WorldBuilder extends Component {
   }
 
   importWorldFromJson = async ({ newWorld }) => {
-    console.log("importWorldFromJson") // zzz
     await this.addNewWorld()
 
     const {
@@ -491,19 +470,6 @@ class WorldBuilder extends Component {
     // I should probably create a new scenesGrid here, based on the required dimensions
     // I should probably create a new scenesGrid here, based on the required dimensions
     const scenesGrid = localStateStore.getWorldBuilderScenesGrid()
-    const scene1 = scenesGrid[0][0].location.name
-    const scene2 = scenesGrid[1][1].location.name
-    console.log("scene1", toJS(scene1)) // zzz
-    console.log("scene2", toJS(scene2)) // zzz
-
-    console.log("") // zzz
-    console.log("---------------------------------->") // zzz
-    console.log("---------------------------------->") // zzz
-
-    console.log(
-      "scenesGrid----------------------------------------->>>",
-      toJS(scenesGrid)
-    ) // zzz
 
     const theScenes = newWorld.scenes2 || newWorld.scenes
 
@@ -542,13 +508,6 @@ class WorldBuilder extends Component {
     })
 
     const newProps = { title: title, description, questConfig }
-    // const newProps = { title: title + "new", description, questConfig }
-    console.log("scenesGrid", toJS(scenesGrid)) // zzz
-    const scene1b = scenesGrid[0][0].location.name
-    const scene2b = scenesGrid[1][1].location.name
-    console.log("scene1b", toJS(scene1b)) // zzz
-    console.log("scene2b", toJS(scene2b)) // zzz
-
     Utils.updateMap({ newProps })
   }
 
@@ -578,7 +537,6 @@ class WorldBuilder extends Component {
           <GetSceneConfig
             className={css.frameSetUploaderBox1}
             onSave={this.onChangeDialog}
-            // scenesGrid={scenesGrid}
             world={world.data}
           />
           <BuildEpic
@@ -625,10 +583,6 @@ class WorldBuilder extends Component {
                   <Button
                     text={"+ New Map"}
                     onClick={() => this.onChangeWorld({ newWorld: true })}
-                  />
-                  <Button
-                    text={"create critters1"}
-                    // onClick={() => this.addCritters1({ newWorld: true })}
                   />
                 </div>
               </div>
