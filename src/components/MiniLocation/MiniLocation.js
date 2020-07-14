@@ -10,7 +10,6 @@ import cx from "classnames"
 import _get from "lodash.get"
 
 import { toJS } from "mobx"
-// import MiniTable from "../MiniTable/MiniTable.js";
 
 class MiniLocation extends React.Component {
   defaultDoorIsOpen = {
@@ -37,7 +36,6 @@ class MiniLocation extends React.Component {
 
   changeDoor = ({ event }) => {
     this.setState({
-      // youCreature: event.target.value,
       name: event.target.name,
     })
   }
@@ -121,22 +119,25 @@ class MiniLocation extends React.Component {
     if (!isActive) {
       return null
     }
-    const activeFrame = localStateStore.getActiveFrame() || {}
-    const { creatures = [] } = activeFrame
+    const activeFrame = localStateStore.getFirstFrame() || {}
+    const { critters1 = [] } = activeFrame
+    console.log("critters1", toJS(critters1)) // zzz
 
-    const renderedCharacters = creatures.map((creature) => {
-      const image = Images.all[creature] || null
+    const renderedCharacters = critters1
+      .map((item) => item.name)
+      .map((creature) => {
+        const image = Images.all[creature] || null
 
-      const friend = (
-        <img
-          className={`${css.characterImageMini} ${css.character1Mini}`}
-          src={image}
-          alt={"creatureType"}
-        />
-      )
+        const friend = (
+          <img
+            className={`${css.characterImageMini} ${css.character1Mini}`}
+            src={image}
+            alt={"creatureType"}
+          />
+        )
 
-      return friend
-    })
+        return friend
+      })
     return <div className={css.charactersContainer}>{renderedCharacters}</div>
   }
 
@@ -157,24 +158,6 @@ class MiniLocation extends React.Component {
       this.props.updateMap({ newProps: { endScene: scene.name } })
     this.setState({ isEndScene: !this.state.isEndScene })
   }
-
-  // renderPocketItems = ({ critters1 }) => {
-  //   return critters1.map((key, index) => {
-  //     const existingItem = items[key]
-  //     const { amount } = existingItem
-
-  //     const newItem = { name: key, index }
-
-  //     return (
-  //       <ImageDisplay
-  //         className={css.itemContainer}
-  //         item={newItem}
-  //         showLabel={true}
-  //         amount={amount}
-  //       />
-  //     )
-  //   })
-  // }
 
   render() {
     const { scene, isActive, className, id } = this.props
@@ -211,7 +194,6 @@ class MiniLocation extends React.Component {
       questStatus.activeMission >= unlockSceneMission
 
     const unlockedSubQuests = localStateStore.getUnlockedSubQuests()
-    // console.log("unlockedSubQuests", toJS(unlockedSubQuests)) // zzz
 
     const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId)
 
@@ -220,7 +202,6 @@ class MiniLocation extends React.Component {
     const showCloud = !noCloud
 
     const { creatures = [] } = scene
-    // const { items = [], creatures = [] } = scene
     const locationName = scene.location.name
     const isBlank = locationName === "blank"
 
@@ -247,12 +228,6 @@ class MiniLocation extends React.Component {
         </div>
       )
     }
-
-    // let renderedItems
-    // renderedItems = items.map((item) => {
-    //   const renderedItem = Images.all[item.name]
-    //   return <img className={css.itemImage} src={renderedItem} alt={"imagex"} />
-    // })
 
     if (!locationName) {
       return <div className={`${css.main} ${className} ${localClass}`}></div>
@@ -337,7 +312,6 @@ class MiniLocation extends React.Component {
                 alt={"imagex"}
               />
             </div>
-            {/* {(false && renderedItems) || null} */}
 
             <div className={css.characters}>
               {this.renderCreatures({ creatures, isActive })}

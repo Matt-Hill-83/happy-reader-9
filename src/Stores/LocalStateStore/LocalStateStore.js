@@ -125,18 +125,10 @@ class LocalStateStore {
       return
     }
 
-    console.log("itemToRemove", toJS(itemToRemove)) // zzz
-    console.log("this.questStatus", toJS(this.questStatus)) // zzz
-    console.log(
-      "this.questStatus.desiredItems",
-      toJS(this.questStatus.desiredItems)
-    ) // zzz
-
     const modifiedArray = this.questStatus.desiredItems.filter((item) => {
       return item.name !== itemToRemove.name
     })
 
-    console.log("modifiedArray", toJS(modifiedArray)) // zzz
     this.questStatus.desiredItems.length = 0
     this.questStatus.desiredItems.push(...modifiedArray)
   }
@@ -215,8 +207,6 @@ class LocalStateStore {
     }
 
     const foundItem = this._findItem({ itemsInScene })
-    console.log("itemsInScene", toJS(itemsInScene)) // zzz
-    console.log("--------------->>>>---------------foundItem", toJS(foundItem)) // zzz
     this.removeItemFromDesiredItems({ itemToRemove: foundItem })
 
     return {
@@ -257,7 +247,6 @@ class LocalStateStore {
   }
 
   _findItem = ({ itemsInScene }) => {
-    console.log("itemsInScene", toJS(itemsInScene)) // zzz
     const desiredItems = this.getDesiredItems() || []
     const questStatus = this.questStatus
 
@@ -358,11 +347,10 @@ class LocalStateStore {
     this.activeFrameIndex = activeFrameIndex
   }
 
-  getActiveFrame = () => {
+  getFirstFrame = () => {
     const activeScene = localStateStore.getActiveScene()
     const { frameSet } = activeScene
     const firstFrame = _get(frameSet, "frames[0]")
-    console.log("firstFrame", toJS(firstFrame)) // zzz
     return firstFrame
   }
 

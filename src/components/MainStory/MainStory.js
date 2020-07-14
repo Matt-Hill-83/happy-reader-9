@@ -164,25 +164,14 @@ class MainStory extends React.Component {
     toaster.clear()
     const activeScene = localStateStore.getActiveScene()
 
-    const {
-      // items = [],
-      // characters = [],
-      location,
-      // critters1 = [],
-      // critters2 = [],
-    } = activeScene
+    const { location } = activeScene
 
-    const activeFrame = localStateStore.getActiveFrame() || {}
+    const activeFrame = localStateStore.getFirstFrame() || {}
     console.log("activeFrame", toJS(activeFrame)) // zzz
     const { critters1 = [], critters2 = [] } = activeFrame
 
     const activeFrameIndex = localStateStore.getActiveFrameIndex()
     console.log("activeFrameIndex", toJS(activeFrameIndex)) // zzz
-
-    // TODO: this should look for items in the frame, so it can use critters.
-    // TODO: this should look for items in the frame, so it can use critters.
-    // TODO: this should look for items in the frame, so it can use critters.
-    // TODO: this should look for items in the frame, so it can use critters.
 
     const { foundItem, completedMission } = localStateStore.updateQuestState({
       itemsInScene: [location, ...critters1, ...critters2],
