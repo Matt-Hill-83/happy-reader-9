@@ -11,7 +11,7 @@ import Utils from "../../Utils/Utils.js"
 
 class WordPage extends React.Component {
   render() {
-    const { activeScene, openYouWinModal, updateActiveScene } = this.props
+    const { activeScene, openQuestPicker, updateActiveScene } = this.props
     const activeFrameIndex = localStateStore.getActiveFrameIndex()
     const frameSet = activeScene.frameSet
     let frame
@@ -43,7 +43,7 @@ class WordPage extends React.Component {
           frame={frame}
           isLastFrame={isLastFrame}
           onClickNext={this.incrementFrameIndex}
-          openYouWinModal={openYouWinModal}
+          openQuestPicker={openQuestPicker}
           scene={activeScene}
           updateActiveScene={updateActiveScene}
         />

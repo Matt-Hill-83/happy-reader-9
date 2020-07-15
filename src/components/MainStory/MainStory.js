@@ -264,7 +264,7 @@ class MainStory extends React.Component {
     this.setState({ showQuestPicker: false })
   }
 
-  openYouWinModal = () => {
+  openQuestPicker = () => {
     this.setState({ showQuestPicker: true })
   }
 
@@ -356,7 +356,7 @@ class MainStory extends React.Component {
         <StoryMode
           updateActiveScene={this.updateActiveScene}
           activeScene={activeScene}
-          openYouWinModal={this.openYouWinModal}
+          openQuestPicker={this.openQuestPicker}
         />
         {!IS_PROD_RELEASE && showBookPicker && this.renderBookPicker()}
         {this.state.showQuestPicker && this.renderWorldPicker()}

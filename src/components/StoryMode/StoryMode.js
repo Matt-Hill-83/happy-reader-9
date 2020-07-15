@@ -12,7 +12,7 @@ import css from "./StoryMode.module.scss"
 
 class StoryMode extends React.Component {
   render() {
-    const { activeScene, updateActiveScene, openYouWinModal } = this.props
+    const { activeScene, updateActiveScene, openQuestPicker } = this.props
     const activeWorld = localStateStore.getActiveWorld()
 
     if (!activeWorld || !activeWorld.data || !activeWorld.data.title) {
@@ -32,7 +32,7 @@ class StoryMode extends React.Component {
           <WordPage
             updateActiveScene={updateActiveScene}
             activeScene={activeScene}
-            openYouWinModal={openYouWinModal}
+            openQuestPicker={openQuestPicker}
           />
         </div>
 
