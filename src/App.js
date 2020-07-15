@@ -10,6 +10,7 @@ import getMuiTheme from "material-ui/styles/getMuiTheme"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import WorldBuilder from "./components/WorldBuilder/WorldBuilder"
 import { maps } from "./Stores/InitStores"
+import localStateStore from "./Stores/LocalStateStore/LocalStateStore.js"
 
 const worldItem = ({ worldId }) => {
   return `/world/${worldId}`
@@ -20,22 +21,30 @@ export default function App() {
   const muiTheme = getMuiTheme()
   const worldId = ":worldId"
 
+  let IS_PROD_RELEASE
+  IS_PROD_RELEASE = false
+  IS_PROD_RELEASE = true
+
+  localStateStore.setIsProdRelease(IS_PROD_RELEASE)
+
   maps.fetch()
 
   return (
     <Router>
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Story Viewer</Link>
-              </li>
-              <li>
-                <Link to="/world-builder">World Builder</Link>
-              </li>
-            </ul>
-          </nav>
+          {!IS_PROD_RELEASE && (
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Story Viewer</Link>
+                </li>
+                <li>
+                  <Link to="/world-builder">World Builder</Link>
+                </li>
+              </ul>
+            </nav>
+          )}
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

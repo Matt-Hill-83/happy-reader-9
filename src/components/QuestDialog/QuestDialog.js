@@ -119,20 +119,6 @@ class QuestDialog extends React.Component {
             {/* <span className={css.gameTitle}>Dress Quest IV</span> */}
             {/* <span className={css.gameTitle}>Liz Goes Nuts</span> */}
           </div>
-          <div className={css.playerStatsSection}>
-            <div className={css.playerStatsRow}>
-              <span className={css.playerStatsKey}>Gold</span>
-              <span className={css.playerStatsValue}>500</span>
-            </div>
-            <div className={css.playerStatsRow}>
-              <span className={css.playerStatsKey}>Trophies</span>
-              <span className={css.playerStatsValue}>2</span>
-            </div>
-            <div className={css.playerStatsRow}>
-              <span className={css.playerStatsKey}>Dresses</span>
-              <span className={css.playerStatsValue}>0</span>
-            </div>
-          </div>
 
           <div className={css.content}>
             <div className={css.questTable}>

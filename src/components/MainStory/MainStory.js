@@ -17,10 +17,6 @@ import css from "./MainStory.module.scss"
 import BookPicker from "../BookPicker/BookPicker.js"
 import BookBuilder from "../BookBuilder/BookBuilder.js"
 
-let IS_PROD_RELEASE
-IS_PROD_RELEASE = true
-IS_PROD_RELEASE = false
-
 let SHOW_BOOK_PICKER
 SHOW_BOOK_PICKER = true
 SHOW_BOOK_PICKER = false
@@ -29,10 +25,11 @@ let useDefaultWorldId
 useDefaultWorldId = true
 useDefaultWorldId = false
 
-const defaultWorldInProd = "mRpN51k8AmA5BqgikVoz"
-const defaultWorldInNonProd = "2pFSacsMVNUYILs1y1ZZ"
+const defaultWorldInProd = "aH5MjGenT8svEaPaty7G"
+const defaultWorldInNonProd = "aH5MjGenT8svEaPaty7G"
+const isProdRelease = localStateStore.getIsProdRelease()
 
-const defaultWorldId = IS_PROD_RELEASE
+const defaultWorldId = isProdRelease
   ? defaultWorldInProd
   : defaultWorldInNonProd
 
@@ -45,14 +42,15 @@ const toaster = Toaster.create({
 })
 
 class MainStory extends React.Component {
+  isProdRelease = localStateStore.getIsProdRelease()
+
   state = {
     activeScene: undefined,
-    showQuestPicker: IS_PROD_RELEASE,
+    showQuestPicker: this.isProdRelease,
     showBookPicker: true,
   }
 
   async componentWillMount() {
-    localStateStore.setIsProdRelease(IS_PROD_RELEASE)
     const defaultWorldId = localStateStore.getDefaultWorldId()
 
     // I need to make these stores shared singletons
@@ -343,6 +341,7 @@ class MainStory extends React.Component {
     }
 
     const showBookPicker = localStateStore.getShowBookPicker()
+    const isProdRelease = localStateStore.getIsProdRelease()
 
     return (
       <div className={`${css.main} ${className}`}>
@@ -353,7 +352,7 @@ class MainStory extends React.Component {
           activeScene={activeScene}
           openQuestPicker={this.openQuestPicker}
         />
-        {!IS_PROD_RELEASE && showBookPicker && this.renderBookPicker()}
+        {!isProdRelease && showBookPicker && this.renderBookPicker()}
         {this.state.showQuestPicker && this.renderWorldPicker()}
       </div>
     )
