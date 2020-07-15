@@ -17,10 +17,6 @@ import css from "./MainStory.module.scss"
 import BookPicker from "../BookPicker/BookPicker.js"
 import BookBuilder from "../BookBuilder/BookBuilder.js"
 
-let SHOW_WORLD_BUILDER
-SHOW_WORLD_BUILDER = true
-SHOW_WORLD_BUILDER = false
-
 let IS_PROD_RELEASE
 IS_PROD_RELEASE = true
 IS_PROD_RELEASE = false
@@ -51,7 +47,7 @@ const toaster = Toaster.create({
 class MainStory extends React.Component {
   state = {
     activeScene: undefined,
-    showYouWinModal: IS_PROD_RELEASE,
+    showQuestPicker: IS_PROD_RELEASE,
     showBookPicker: true,
   }
 
@@ -80,11 +76,7 @@ class MainStory extends React.Component {
 
     localStateStore.setShowBookPicker(SHOW_BOOK_PICKER)
 
-    if (SHOW_WORLD_BUILDER) {
-      this.toggleWorldBuilder()
-    } else {
-      await this.init()
-    }
+    await this.init()
   }
 
   init = async () => {
@@ -106,8 +98,6 @@ class MainStory extends React.Component {
       map.data.grid = grid
     })
 
-    localStateStore.setShowWorldBuilder(SHOW_WORLD_BUILDER)
-    if (SHOW_WORLD_BUILDER) return
     const mapId = localStateStore.getActiveWorldId()
     this.onChangeWorld({ mapId })
   }
@@ -255,20 +245,8 @@ class MainStory extends React.Component {
     }
     localStateStore.setShowBookPicker(false)
 
-    this.setState({ showYouWinModal: false })
+    this.setState({ showQuestPicker: false })
     this.initWorld()
-  }
-
-  toggleWorldBuilder = () => {
-    toaster.clear()
-    const showWorldBuilder = localStateStore.getShowWorldBuilder()
-    const newShowWorldBuilder = !showWorldBuilder
-
-    localStateStore.setShowWorldBuilder(newShowWorldBuilder)
-
-    if (newShowWorldBuilder === false) {
-      this.init()
-    }
   }
 
   toggleBookPicker = () => {
@@ -283,26 +261,26 @@ class MainStory extends React.Component {
   }
 
   closeYouWinModal = () => {
-    this.setState({ showYouWinModal: false })
+    this.setState({ showQuestPicker: false })
   }
 
   openYouWinModal = () => {
-    this.setState({ showYouWinModal: true })
+    this.setState({ showQuestPicker: true })
   }
 
-  toggleYouWinModal = () => {
-    this.setState({ showYouWinModal: !this.state.showYouWinModal })
+  toggleQuestPicker = () => {
+    this.setState({ showQuestPicker: !this.state.showQuestPicker })
   }
 
   renderWorldPicker = () => {
-    const { showProd, showYouWinModal } = this.state
+    const { showProd, showQuestPicker } = this.state
     toaster.clear()
 
     return (
       <QuestDialog
         showProd={showProd}
         closeYouWinModal={this.closeYouWinModal}
-        showYouWinModal={showYouWinModal}
+        showQuestPicker={showQuestPicker}
         onChangeWorld={this.onChangeWorld}
       />
     )
@@ -323,10 +301,7 @@ class MainStory extends React.Component {
     return (
       <div className={css.floatingButtons}>
         <ButtonGroup color="primary">
-          {!isProdRelease && (
-            <Button onClick={this.toggleWorldBuilder}>World Builder</Button>
-          )}
-          <Button onClick={this.toggleYouWinModal}>
+          <Button onClick={this.toggleQuestPicker}>
             Pick a Single Quest...
           </Button>
           {!isProdRelease && (
@@ -384,7 +359,7 @@ class MainStory extends React.Component {
           openYouWinModal={this.openYouWinModal}
         />
         {!IS_PROD_RELEASE && showBookPicker && this.renderBookPicker()}
-        {this.state.showYouWinModal && this.renderWorldPicker()}
+        {this.state.showQuestPicker && this.renderWorldPicker()}
       </div>
     )
   }
