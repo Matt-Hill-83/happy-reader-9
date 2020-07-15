@@ -92,7 +92,6 @@ import bunny from "./creatures/bunny.png"
 import camperGirl from "./creatures/camper_girl.png"
 import cat_king from "./creatures/cat_king.gif"
 import cat01 from "./creatures/cat01.png"
-// // import charlie01 from "./creatures/charlie01.png"
 import chick01 from "./creatures/chick01.png"
 import chooChoo01 from "./creatures/chooChoo01.png"
 import cleopatra01 from "./creatures/cleopatra01.png"
@@ -258,17 +257,6 @@ import liz26 from "./rigged-girls/liz/png/liz-26.png"
 import liz27 from "./rigged-girls/liz/png/liz-27.png"
 import liz28 from "./rigged-girls/liz/png/liz-28.png"
 
-// chad2
-// import chad01 from "./rigged-girls/chad/chad-01.png"
-// import chad02 from "./rigged-girls/chad/chad-02.png"
-// import chad03 from "./rigged-girls/chad/chad-03.png"
-// import chad04 from "./rigged-girls/chad/chad-04.png"
-// import chad05 from "./rigged-girls/chad/chad-05.png"
-// import chad06 from "./rigged-girls/chad/chad-06.png"
-// import chad07 from "./rigged-girls/chad/chad-07.png"
-// import chad08 from "./rigged-girls/chad/chad-08.png"
-// import chad09 from "./rigged-girls/chad/chad-09.png"
-
 // rigged girl - kat
 import katBlissful from "./rigged-girls/kat/kat-blissful.png"
 import katBody from "./rigged-girls/jan/jan-body.png"
@@ -341,18 +329,6 @@ const lizHeads = [
   liz28,
 ]
 
-// const chadHeads = [
-//   chad01,
-//   chad02,
-//   chad03,
-//   chad04,
-//   chad05,
-//   chad06,
-//   chad07,
-//   chad08,
-//   chad09,
-// ]
-
 const katHeads = [
   katHappy,
   katLauging,
@@ -388,27 +364,6 @@ const katHeads = [
   katPigtails,
   katPonytail,
 ]
-
-// const posableChad = {
-//   name: "chad",
-//   type: "chad",
-//   mood: "chad1",
-//   images: {
-//     heads: [],
-//     body: { image: katBody },
-//   },
-// }
-
-// posableChad.images.heads = chadHeads.map((image) => {
-//   const regex = `([^/]+?)$`
-//   const match = image.match(regex)
-//   const mood = match && match[0]
-
-//   return {
-//     image,
-//     mood,
-//   }
-// })
 
 const posableLiz = {
   name: "liz2",
