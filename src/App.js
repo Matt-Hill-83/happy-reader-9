@@ -8,18 +8,23 @@ import { UserConfigStore } from "./Stores/UserConfigStore"
 import css from "./App.module.scss"
 import getMuiTheme from "material-ui/styles/getMuiTheme"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import WorldMaker from "./components/WorldMaker/WorldMaker"
+import WorldBuilder from "./components/WorldBuilder/WorldBuilder"
 
 export default function App() {
+  FocusStyleManager.onlyShowFocusOnTabs()
+  const muiTheme = getMuiTheme()
+
   return (
     <Router>
       <div>
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">StoryViewer</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about">WorldMaker</Link>
             </li>
             <li>
               <Link to="/users">Users</Link>
@@ -31,13 +36,15 @@ export default function App() {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/about">
-            <About />
+            <MuiThemeProvider muiTheme={muiTheme}>
+              <WorldBuilder />
+            </MuiThemeProvider>
           </Route>
           <Route path="/users">
-            <Users />
+            <WorldMaker />
           </Route>
           <Route path="/">
-            <Home />
+            <StoryViewer />
           </Route>
         </Switch>
       </div>
@@ -45,7 +52,7 @@ export default function App() {
   )
 }
 
-function Home() {
+function StoryViewer() {
   FocusStyleManager.onlyShowFocusOnTabs()
   const muiTheme = getMuiTheme()
 
@@ -76,9 +83,9 @@ function Home() {
   )
 }
 
-function About() {
-  return <h2>About</h2>
-}
+// function WorldMaker() {
+//   return <h2>WorldMaker</h2>
+// }
 
 function Users() {
   return <h2>Users</h2>

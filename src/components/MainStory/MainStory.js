@@ -61,9 +61,11 @@ class MainStory extends React.Component {
 
     // I need to make these stores shared singletons
     //  Move these to App.js
-    await maps.fetch()
-    // This needs to be here or WorldBuilder won't work.
-    await worldNameStore.fetch()
+    try {
+      await maps.fetch()
+      // This needs to be here or WorldBuilder won't work.
+      await worldNameStore.fetch()
+    } catch (error) {}
 
     if (maps.docs && maps.docs[0]) {
       const defaultMap = Utils.getFirstReleasedMap()
