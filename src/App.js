@@ -1,16 +1,17 @@
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { FocusStyleManager } from "@blueprintjs/core"
-import MainStory from "./components/MainStory/MainStory"
+import getMuiTheme from "material-ui/styles/getMuiTheme"
 import MediaQuery from "react-responsive"
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 import React from "react"
-// import this last
-// import { UserConfigStore } from "./Stores/UserConfigStore"
-import css from "./App.module.scss"
-import getMuiTheme from "material-ui/styles/getMuiTheme"
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+
 import WorldBuilder from "./components/WorldBuilder/WorldBuilder"
-import { maps } from "./Stores/InitStores"
+import MainStory from "./components/MainStory/MainStory"
+
 import localStateStore from "./Stores/LocalStateStore/LocalStateStore.js"
+import { maps } from "./Stores/InitStores"
+
+import css from "./App.module.scss"
 
 const worldItem = ({ worldId }) => {
   return `/world/${worldId}`
