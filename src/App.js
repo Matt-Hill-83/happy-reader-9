@@ -16,8 +16,7 @@ import {
 } from "react-router-dom"
 import WorldBuilder from "./components/WorldBuilder/WorldBuilder"
 
-const routeTest = ({ worldId }) => {
-  console.log("test-----------------") // zzz
+const worldItem = ({ worldId }) => {
   return `/world/${worldId}`
 }
 
@@ -36,10 +35,7 @@ export default function App() {
                 <Link to="/">Story Viewer</Link>
               </li>
               <li>
-                <Link to="/main">World Builder</Link>
-              </li>
-              <li>
-                <Link to="/world/1">item detail</Link>
+                <Link to="/world-builder">World Builder</Link>
               </li>
             </ul>
           </nav>
@@ -47,10 +43,12 @@ export default function App() {
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/main">
-              <WorldBuilder />
+            <Route path="/world-builder">
+              <div className={`${css.App} `}>
+                <WorldBuilder />
+              </div>
             </Route>
-            <Route path={routeTest({ worldId })} component={StoryViewer} />
+            <Route path={worldItem({ worldId })} component={StoryViewer} />
             <Route path="/">
               <StoryViewer />
             </Route>
@@ -62,7 +60,6 @@ export default function App() {
 }
 
 function StoryViewer({ match }) {
-  console.log("match----StoryViewer", match) // zzz
   return (
     <div className={`${css.App} `}>
       <MediaQuery minDeviceWidth={1224}>
