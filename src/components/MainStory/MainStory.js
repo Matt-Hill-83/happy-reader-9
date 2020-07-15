@@ -17,6 +17,8 @@ import css from "./MainStory.module.scss"
 import BookPicker from "../BookPicker/BookPicker.js"
 import BookBuilder from "../BookBuilder/BookBuilder.js"
 
+import { useLocation, useParams } from "react-router-dom"
+
 let IS_PROD_RELEASE
 IS_PROD_RELEASE = true
 IS_PROD_RELEASE = false
@@ -52,6 +54,10 @@ class MainStory extends React.Component {
   }
 
   async componentWillMount() {
+    console.log(
+      "componentWillMount--------------------------------------------------->>>>>>>>>>>>>>>>>>"
+    ) // zzz
+
     localStateStore.setIsProdRelease(IS_PROD_RELEASE)
     const defaultWorldId = localStateStore.getDefaultWorldId()
 
@@ -76,28 +82,27 @@ class MainStory extends React.Component {
 
     localStateStore.setShowBookPicker(SHOW_BOOK_PICKER)
 
-    await this.init()
+    this.init()
   }
 
-  init = async () => {
-    const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
-    const filteredMaps = savedMaps.filter((map) => map.data.released)
+  UNSAFE_componentWillReceiveProps(newProps) {
+    console.log(
+      "componentWillReceiveProps-------------_______________________-------_________><><"
+    ) // zzz
+    console.log("newProps.match", newProps.match) // zzz
 
-    // TODO - I need to get maps by id, not by index, because I'm filtering them.
-    filteredMaps.forEach((map) => {
-      const {
-        data: { gridDimensions, newGrid5 },
-      } = map
+    const worldId = _get(newProps, "match.params.worldId")
+    console.log("worldId", worldId) // zzz
 
-      const grid = Utils.reCreateGridFromCondensedGrid({
-        gridDimensions,
-        maxDimensions: { numRows: 8, numCols: 12 },
-        newGrid5,
-      })
+    this.setState({ showQuestPicker: false })
 
-      map.data.grid = grid
-    })
+    if (worldId) {
+      localStateStore.setActiveMapId(worldId)
+      this.init()
+    }
+  }
 
+  init = () => {
     const mapId = localStateStore.getActiveWorldId()
     this.onChangeWorld({ mapId })
   }
@@ -250,17 +255,17 @@ class MainStory extends React.Component {
   }
 
   toggleBookPicker = () => {
-    const test = localStateStore.getShowBookPicker()
+    // const test = localStateStore.getShowBookPicker()
 
     localStateStore.setShowBookPicker(!test)
-    const test2 = localStateStore.getShowBookPicker()
+    // const test2 = localStateStore.getShowBookPicker()
   }
 
   closeBookPicker = () => {
     localStateStore.setShowBookPicker(false)
   }
 
-  closeYouWinModal = () => {
+  closeQuestPicker = () => {
     this.setState({ showQuestPicker: false })
   }
 
@@ -279,7 +284,7 @@ class MainStory extends React.Component {
     return (
       <QuestDialog
         showProd={showProd}
-        closeYouWinModal={this.closeYouWinModal}
+        closeQuestPicker={this.closeQuestPicker}
         showQuestPicker={showQuestPicker}
         onChangeWorld={this.onChangeWorld}
       />
@@ -289,7 +294,7 @@ class MainStory extends React.Component {
   renderBookPicker = () => {
     return (
       <BookPicker
-        closeYouWinModal={this.closeBookPicker}
+        closeQuestPicker={this.closeBookPicker}
         onChangeWorld={this.onChangeWorld}
       />
     )
@@ -352,7 +357,6 @@ class MainStory extends React.Component {
       <div className={`${css.main} ${className}`}>
         {this.renderButtons()}
         {this.renderBookBuilder()}
-
         <StoryMode
           updateActiveScene={this.updateActiveScene}
           activeScene={activeScene}

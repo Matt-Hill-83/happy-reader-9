@@ -7,7 +7,13 @@ import React from "react"
 import { UserConfigStore } from "./Stores/UserConfigStore"
 import css from "./App.module.scss"
 import getMuiTheme from "material-ui/styles/getMuiTheme"
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import {
+  useParams,
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+} from "react-router-dom"
 import WorldBuilder from "./components/WorldBuilder/WorldBuilder"
 
 const routeTest = ({ worldId }) => {
@@ -55,13 +61,14 @@ export default function App() {
   )
 }
 
-function StoryViewer() {
+function StoryViewer({ match }) {
+  console.log("match----StoryViewer", match) // zzz
   return (
     <div className={`${css.App} `}>
       <MediaQuery minDeviceWidth={1224}>
         {/* <div className={css.mediaMsg}>You are a desktop</div> */}
         {/* set global css vars thru class */}
-        <MainStory className={css.desktop} />
+        <MainStory className={css.desktop} match={match} />
         {/* <MainStory className={css.mobile} /> */}
       </MediaQuery>
       <MediaQuery maxDeviceWidth={1224}>

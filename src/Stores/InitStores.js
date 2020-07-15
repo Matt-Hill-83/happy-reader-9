@@ -7,7 +7,7 @@ import { struct } from "superstruct"
 import { toJS } from "mobx"
 
 firebase.initializeApp({
-  projectId: "happy-reader-4"
+  projectId: "happy-reader-4",
 })
 
 initFirestorter({ firebase: firebase })
@@ -15,18 +15,13 @@ initFirestorter({ firebase: firebase })
 class Map extends Document {
   constructor(source, options) {
     super(source, {
-      ...(options || {})
-      // schema: struct({
-      //   name: "string?",
-      //   grid: "string?",
-      //   finished: "boolean?"
-      // })
+      ...(options || {}),
     })
   }
 }
 
 const maps = new Collection("maps", {
-  DocumentClass: Map
+  DocumentClass: Map,
 })
 
 export { maps }

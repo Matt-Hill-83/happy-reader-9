@@ -106,7 +106,6 @@ class MiniLocation extends React.Component {
     }
     const activeFrame = localStateStore.getFirstFrame() || {}
     const { critters1 = [] } = activeFrame
-    console.log("critters1", toJS(critters1)) // zzz
 
     const renderedCharacters = critters1
       .map((item) => item.name)
@@ -146,7 +145,6 @@ class MiniLocation extends React.Component {
 
   render() {
     const { scene, isActive, className, id } = this.props
-    // console.log("scene.creatures", toJS(scene.creatures)) // zzz
 
     const {
       coordinates,

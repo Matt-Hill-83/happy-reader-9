@@ -1,77 +1,87 @@
-import React from "react";
-import { observer } from "mobx-react";
-import { toJS } from "mobx";
-import _get from "lodash.get";
-import Images from "../../images/images.js";
-import cx from "classnames";
-import { IconNames } from "@blueprintjs/icons";
+import React from "react"
+import { observer } from "mobx-react"
+import { toJS } from "mobx"
+import _get from "lodash.get"
+import Images from "../../images/images.js"
+import cx from "classnames"
+import { IconNames } from "@blueprintjs/icons"
 
-import { Button, Dialog, ButtonGroup, Icon } from "@blueprintjs/core";
-import Utils from "../../Utils/Utils.js";
+import { Button, Dialog, ButtonGroup, Icon } from "@blueprintjs/core"
+import Utils from "../../Utils/Utils.js"
 
-import { maps } from "../../Stores/InitStores.js";
+import { maps } from "../../Stores/InitStores.js"
 
-import css from "./QuestDialog.module.scss";
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js";
+import css from "./QuestDialog.module.scss"
+import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
+import { Link } from "react-router-dom"
 
 class QuestDialog extends React.Component {
-  state = {};
+  state = {}
 
   constructor(props) {
-    super(props);
-    const showProdInitialValue = localStateStore.getIsProdRelease();
-    this.state = { showProd: true, showToggle: !showProdInitialValue };
+    super(props)
+    const showProdInitialValue = localStateStore.getIsProdRelease()
+    this.state = { showProd: true, showToggle: !showProdInitialValue }
   }
 
   toggleShowProd = () => {
-    this.setState({ showProd: !this.state.showProd });
-  };
+    this.setState({ showProd: !this.state.showProd })
+  }
 
   onDeleteMap = async ({ map, event }) => {
-    if (this._deleting) return;
-    this._deleting = true;
+    if (this._deleting) return
+    this._deleting = true
     try {
-      event.stopPropagation();
-      await map.delete();
-      this._deleting = false;
+      event.stopPropagation()
+      await map.delete()
+      this._deleting = false
       // TODO: I need to refresh the list from the db here.
     } catch (err) {
-      this._deleting = false;
+      this._deleting = false
     }
-  };
+  }
 
   render = () => {
-    const { onChangeWorld } = this.props;
-    const { showProd, showToggle } = this.state;
+    // const { onChangeWorld } = this.props
+    const { showProd, showToggle } = this.state
 
-    const savedMaps = Utils.getItemsFromDbObj({ dbList: maps });
-    let filteredMaps = [];
+    const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
+    let filteredMaps = []
 
     if (showProd) {
       filteredMaps = savedMaps.filter((map) => {
-        return map.data.releasedToProd;
-      });
+        return map.data.releasedToProd
+      })
     } else {
       filteredMaps = savedMaps.filter((map) => {
-        return map.data.released && !map.data.releasedToProd;
-      });
+        return map.data.released && !map.data.releasedToProd
+      })
     }
 
     const sortedMaps = Utils.sortDataByNestedKey({
       data: filteredMaps,
       keys: ["data", "title"],
       order: "ASC",
-    });
+    })
 
-    const isProdRelease = localStateStore.getIsProdRelease();
+    const isProdRelease = localStateStore.getIsProdRelease()
+
+    console.log("this.props", this.props) // zzz
 
     const mapList = sortedMaps.map((map, index) => {
-      const { title } = map.data;
+      const { title } = map.data
 
-      const mapId = map.id;
+      const mapId = map.id
       const text = (
         <div className={css.questRow}>
-          <div className={cx(css.tableCell, css.questName)}>{title}</div>
+          <div className={cx(css.tableCell, css.questName)}>
+            <Link to={`/world/${mapId}`}>
+              {title}---
+              {mapId}
+            </Link>
+          </div>
+          {/* <div className={cx(css.tableCell, css.questName)}>{title}</div> */}
+
           <div className={cx(css.tableCell, css.dragonPoints)}>100 </div>
           <div className={cx(css.tableCell, css.questStatus)}>
             <span role="img">✅</span>
@@ -82,11 +92,12 @@ class QuestDialog extends React.Component {
             </span>
           )}
         </div>
-      );
-      return <div onClick={() => onChangeWorld({ index, mapId })}>{text}</div>;
-    });
+      )
+      return <div>{text}</div>
+      // return <div onClick={() => onChangeWorld({ mapId })}>{text}</div>
+    })
 
-    const cloudImage = Images.backgrounds["splashScreen01"];
+    const cloudImage = Images.backgrounds["splashScreen01"]
 
     const tableHeader = (
       <div className={cx(css.tableHeader)}>
@@ -94,9 +105,9 @@ class QuestDialog extends React.Component {
         <div className={cx(css.tableCell, css.gold)}>Gold</div>
         <div className={cx(css.tableCell, css.status)}>Completed</div>
       </div>
-    );
+    )
 
-    const showProdButtonLabel = showProd ? "New Quests" : "Old Quests";
+    const showProdButtonLabel = showProd ? "New Quests" : "Old Quests"
 
     return (
       <Dialog isOpen={true} isCloseButtonShown={true} className={css.main}>
@@ -108,11 +119,11 @@ class QuestDialog extends React.Component {
         <img className={css.backgroundImage} src={cloudImage} alt={"imagex"} />
         <div className={css.questPage}>
           <div className={css.header}>
-            {/* <span className={css.gameTitle}>Fashion Slayer</span> */}
             <span className={css.gameTitle}>
               ...no I would not like to participate in a short survey after the
               call...
             </span>
+            {/* <span className={css.gameTitle}>Fashion Slayer</span> */}
             {/* <span className={css.gameTitle}>Dress Quest IV</span> */}
             {/* <span className={css.gameTitle}>Liz Goes Nuts</span> */}
           </div>
@@ -130,6 +141,7 @@ class QuestDialog extends React.Component {
               <span className={css.playerStatsValue}>0</span>
             </div>
           </div>
+
           <div className={css.content}>
             <div className={css.questTable}>
               {tableHeader}
@@ -138,12 +150,12 @@ class QuestDialog extends React.Component {
           </div>
         </div>
 
-        {/* <Button className={css.playButton} onClick={closeYouWinModal}>
-          PLAY
+        {/* <Button className={css.playButton} onClick={closeQuestPicker}>
+          Close
         </Button> */}
       </Dialog>
-    );
-  };
+    )
+  }
 }
 
-export default observer(QuestDialog);
+export default observer(QuestDialog)

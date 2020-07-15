@@ -159,7 +159,7 @@ class BookPicker extends React.Component {
             {this.renderChapterView()}
           </div>
 
-          {/* <Button className={css.playButton} onClick={closeYouWinModal}>
+          {/* <Button className={css.playButton} onClick={closeQuestPicker}>
             PLAY
           </Button> */}
         </div>
