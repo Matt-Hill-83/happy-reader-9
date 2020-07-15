@@ -42,7 +42,6 @@ class QuestDialog extends React.Component {
   }
 
   render = () => {
-    // const { onChangeWorld } = this.props
     const { showProd, showToggle } = this.state
 
     const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
@@ -66,8 +65,6 @@ class QuestDialog extends React.Component {
 
     const isProdRelease = localStateStore.getIsProdRelease()
 
-    console.log("this.props", this.props) // zzz
-
     const mapList = sortedMaps.map((map, index) => {
       const { title } = map.data
 
@@ -75,12 +72,8 @@ class QuestDialog extends React.Component {
       const text = (
         <div className={css.questRow}>
           <div className={cx(css.tableCell, css.questName)}>
-            <Link to={`/world/${mapId}`}>
-              {title}---
-              {mapId}
-            </Link>
+            <Link to={`/world/${mapId}`}>{title}</Link>
           </div>
-          {/* <div className={cx(css.tableCell, css.questName)}>{title}</div> */}
 
           <div className={cx(css.tableCell, css.dragonPoints)}>100 </div>
           <div className={cx(css.tableCell, css.questStatus)}>
@@ -94,7 +87,6 @@ class QuestDialog extends React.Component {
         </div>
       )
       return <div>{text}</div>
-      // return <div onClick={() => onChangeWorld({ mapId })}>{text}</div>
     })
 
     const cloudImage = Images.backgrounds["splashScreen01"]

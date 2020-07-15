@@ -54,10 +54,6 @@ class MainStory extends React.Component {
   }
 
   async componentWillMount() {
-    console.log(
-      "componentWillMount--------------------------------------------------->>>>>>>>>>>>>>>>>>"
-    ) // zzz
-
     localStateStore.setIsProdRelease(IS_PROD_RELEASE)
     const defaultWorldId = localStateStore.getDefaultWorldId()
 
@@ -86,15 +82,9 @@ class MainStory extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(newProps) {
-    console.log(
-      "componentWillReceiveProps-------------_______________________-------_________><><"
-    ) // zzz
-    console.log("newProps.match", newProps.match) // zzz
-
     const worldId = _get(newProps, "match.params.worldId")
-    console.log("worldId", worldId) // zzz
 
-    this.setState({ showQuestPicker: false })
+    // this.setState({ showQuestPicker: false })
 
     if (worldId) {
       localStateStore.setActiveMapId(worldId)
@@ -162,11 +152,9 @@ class MainStory extends React.Component {
     const { location } = activeScene
 
     const activeFrame = localStateStore.getFirstFrame() || {}
-    console.log("activeFrame", toJS(activeFrame)) // zzz
     const { critters1 = [], critters2 = [] } = activeFrame
 
     const activeFrameIndex = localStateStore.getActiveFrameIndex()
-    console.log("activeFrameIndex", toJS(activeFrameIndex)) // zzz
 
     const { foundItem, completedMission } = localStateStore.updateQuestState({
       itemsInScene: [location, ...critters1, ...critters2],
