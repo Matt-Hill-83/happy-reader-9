@@ -259,15 +259,15 @@ import liz27 from "./rigged-girls/liz/png/liz-27.png"
 import liz28 from "./rigged-girls/liz/png/liz-28.png"
 
 // chad2
-import chad01 from "./rigged-girls/chad/chad-01.png"
-import chad02 from "./rigged-girls/chad/chad-02.png"
-import chad03 from "./rigged-girls/chad/chad-03.png"
-import chad04 from "./rigged-girls/chad/chad-04.png"
-import chad05 from "./rigged-girls/chad/chad-05.png"
-import chad06 from "./rigged-girls/chad/chad-06.png"
-import chad07 from "./rigged-girls/chad/chad-07.png"
-import chad08 from "./rigged-girls/chad/chad-08.png"
-import chad09 from "./rigged-girls/chad/chad-09.png"
+// import chad01 from "./rigged-girls/chad/chad-01.png"
+// import chad02 from "./rigged-girls/chad/chad-02.png"
+// import chad03 from "./rigged-girls/chad/chad-03.png"
+// import chad04 from "./rigged-girls/chad/chad-04.png"
+// import chad05 from "./rigged-girls/chad/chad-05.png"
+// import chad06 from "./rigged-girls/chad/chad-06.png"
+// import chad07 from "./rigged-girls/chad/chad-07.png"
+// import chad08 from "./rigged-girls/chad/chad-08.png"
+// import chad09 from "./rigged-girls/chad/chad-09.png"
 
 // rigged girl - kat
 import katBlissful from "./rigged-girls/kat/kat-blissful.png"
@@ -341,17 +341,17 @@ const lizHeads = [
   liz28,
 ]
 
-const chadHeads = [
-  chad01,
-  chad02,
-  chad03,
-  chad04,
-  chad05,
-  chad06,
-  chad07,
-  chad08,
-  chad09,
-]
+// const chadHeads = [
+//   chad01,
+//   chad02,
+//   chad03,
+//   chad04,
+//   chad05,
+//   chad06,
+//   chad07,
+//   chad08,
+//   chad09,
+// ]
 
 const katHeads = [
   katHappy,
@@ -389,26 +389,26 @@ const katHeads = [
   katPonytail,
 ]
 
-const posableChad = {
-  name: "chad",
-  type: "chad",
-  mood: "chad1",
-  images: {
-    heads: [],
-    body: { image: katBody },
-  },
-}
+// const posableChad = {
+//   name: "chad",
+//   type: "chad",
+//   mood: "chad1",
+//   images: {
+//     heads: [],
+//     body: { image: katBody },
+//   },
+// }
 
-posableChad.images.heads = chadHeads.map((image) => {
-  const regex = `([^/]+?)$`
-  const match = image.match(regex)
-  const mood = match && match[0]
+// posableChad.images.heads = chadHeads.map((image) => {
+//   const regex = `([^/]+?)$`
+//   const match = image.match(regex)
+//   const mood = match && match[0]
 
-  return {
-    image,
-    mood,
-  }
-})
+//   return {
+//     image,
+//     mood,
+//   }
+// })
 
 const posableLiz = {
   name: "liz2",
@@ -545,7 +545,7 @@ const creatures = {
   bug,
   camperGirl,
   cat_king,
-  chad: chad01,
+  // chad: chad01,
   // charlie01,
   coldGirl,
   cop,
@@ -715,5 +715,5 @@ export default {
   items,
   doors,
   backgrounds,
-  posableGirls: [posableLiz, posableKat, posableChad],
+  posableGirls: [posableLiz, posableKat],
 }
