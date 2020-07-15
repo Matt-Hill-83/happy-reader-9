@@ -4,7 +4,7 @@ import MediaQuery from "react-responsive"
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 import React from "react"
 // import this last
-import { UserConfigStore } from "./Stores/UserConfigStore"
+// import { UserConfigStore } from "./Stores/UserConfigStore"
 import css from "./App.module.scss"
 import getMuiTheme from "material-ui/styles/getMuiTheme"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
@@ -22,8 +22,8 @@ export default function App() {
   const worldId = ":worldId"
 
   let IS_PROD_RELEASE
-  IS_PROD_RELEASE = false
   IS_PROD_RELEASE = true
+  IS_PROD_RELEASE = false
 
   localStateStore.setIsProdRelease(IS_PROD_RELEASE)
 
