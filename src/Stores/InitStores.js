@@ -3,7 +3,6 @@ import "@firebase/firestore"
 import { Collection, Document, initFirestorter } from "firestorter"
 
 import firebase from "@firebase/app"
-import { struct } from "superstruct"
 import { toJS } from "mobx"
 
 firebase.initializeApp({
