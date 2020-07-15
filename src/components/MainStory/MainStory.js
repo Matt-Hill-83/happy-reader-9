@@ -4,7 +4,7 @@ import { toJS } from "mobx"
 import _get from "lodash.get"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
-import { maps } from "../../Stores/InitStores.js"
+import { maps, books } from "../../Stores/InitStores.js"
 import { worldNameStore } from "../../Stores/FrameSetStore.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import StoryMode from "../StoryMode/StoryMode"
@@ -16,8 +16,6 @@ import { UserConfigStore } from "../../Stores/UserConfigStore.js"
 import css from "./MainStory.module.scss"
 import BookPicker from "../BookPicker/BookPicker.js"
 import BookBuilder from "../BookBuilder/BookBuilder.js"
-
-import { useLocation, useParams } from "react-router-dom"
 
 let IS_PROD_RELEASE
 IS_PROD_RELEASE = true
@@ -60,9 +58,11 @@ class MainStory extends React.Component {
     // I need to make these stores shared singletons
     //  Move these to App.js
     try {
-      await maps.fetch()
+      // await maps.fetch()
+      await books.fetch()
+      console.log("books.docs", toJS(books.docs)) // zzz
       // This needs to be here or WorldBuilder won't work.
-      await worldNameStore.fetch()
+      // await worldNameStore.fetch()
     } catch (error) {}
 
     if (maps.docs && maps.docs[0]) {
@@ -212,6 +212,9 @@ class MainStory extends React.Component {
 
     localStateStore.setActiveMapId(mapId)
     const map = localStateStore.getActiveWorld()
+    if (!map) {
+      return
+    }
     const { questConfig } = map.data
 
     if (questConfig) {

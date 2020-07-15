@@ -43,6 +43,7 @@ class WorldBuilder extends Component {
   async componentWillMount() {
     const defaultWorldId = localStateStore.getDefaultWorldId()
     this.onChangeWorld({ mapId: defaultWorldId })
+    await worldNameStore.fetch()
   }
 
   onChangeWorld = ({ mapId, newWorld }) => {

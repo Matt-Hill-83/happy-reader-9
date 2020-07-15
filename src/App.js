@@ -7,14 +7,9 @@ import React from "react"
 import { UserConfigStore } from "./Stores/UserConfigStore"
 import css from "./App.module.scss"
 import getMuiTheme from "material-ui/styles/getMuiTheme"
-import {
-  useParams,
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-} from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import WorldBuilder from "./components/WorldBuilder/WorldBuilder"
+import { maps } from "./Stores/InitStores"
 
 const worldItem = ({ worldId }) => {
   return `/world/${worldId}`
@@ -24,6 +19,8 @@ export default function App() {
   FocusStyleManager.onlyShowFocusOnTabs()
   const muiTheme = getMuiTheme()
   const worldId = ":worldId"
+
+  maps.fetch()
 
   return (
     <Router>

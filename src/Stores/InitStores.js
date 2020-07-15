@@ -23,4 +23,16 @@ const maps = new Collection("maps", {
   DocumentClass: Map,
 })
 
-export { maps }
+class Book extends Document {
+  constructor(source, options) {
+    super(source, {
+      ...(options || {}),
+    })
+  }
+}
+
+const books = new Collection("books", {
+  DocumentClass: Book,
+})
+
+export { maps, books }
