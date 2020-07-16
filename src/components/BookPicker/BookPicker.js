@@ -72,13 +72,15 @@ const bookList = [
 ]
 
 class BookPicker extends React.Component {
+  books2 = books.docs || []
+  // books2 = bookList
   state = {
     showBookBuilder: false,
-    selectedBook: bookList[0],
+    selectedBook: this.books2[0],
   }
 
   changeSelectedBook = ({ index }) => {
-    const selectedBook = bookList[index]
+    const selectedBook = this.books2[index]
 
     this.setState({
       selectedBook,
@@ -87,10 +89,12 @@ class BookPicker extends React.Component {
 
   editBook = ({ index, selectedBook }) => {
     console.log("index", index) // zzz
-    // const selectedBook = bookList[index]
+    // const selectedBook = this.books2[index]
     console.log("selectedBook", selectedBook) // zzz
 
-    books.add(selectedBook)
+    // this.books2.forEach((item) => {
+    //   this.books2.add(item)
+    // })
     this.setState({
       openBookBuilder: !this.state.showBookBuilder,
       selectedBook,
@@ -127,14 +131,17 @@ class BookPicker extends React.Component {
   }
 
   render = () => {
+    console.log("this.books2", toJS(this.books2)) // zzz
     const {} = this.props
     const { showToggle } = this.state
 
-    const renderedBookList = bookList.map((book, index) => {
-      const title = book.name
+    const renderedBookList = this.books2.map((book, index) => {
+      const bookItem = book.data
+      console.log("bookItem", toJS(bookItem)) // zzz
+      const title = bookItem.name
 
-      const mapId = book.id
-      const bookImage = Images.backgrounds[book.imageName]
+      const mapId = bookItem.id
+      const bookImage = Images.backgrounds[bookItem.imageName]
 
       const text = (
         <div

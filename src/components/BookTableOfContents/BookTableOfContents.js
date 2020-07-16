@@ -34,7 +34,9 @@ class BookTableOfContents extends React.Component {
     let filteredMaps = []
 
     filteredMaps = savedMaps.filter((map) => {
-      return map.data.released && selectedBook.chapters.includes(map.id)
+      const chapters = _get(selectedBook, "chapters") || []
+
+      return map.data.released && chapters.includes(map.id)
     })
 
     const sortedMaps = filteredMaps

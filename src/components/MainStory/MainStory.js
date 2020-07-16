@@ -69,7 +69,8 @@ class MainStory extends React.Component {
       }
     }
 
-    localStateStore.setShowBookPicker(SHOW_BOOK_PICKER)
+    localStateStore.setShowBookPicker(true)
+    // localStateStore.setShowBookPicker(SHOW_BOOK_PICKER)
 
     this.init()
   }
@@ -232,16 +233,17 @@ class MainStory extends React.Component {
         hideMissionConsole: true,
       })
     }
-    localStateStore.setShowBookPicker(false)
+    // uncomment this after building feature
+    // localStateStore.setShowBookPicker(false)
 
     this.setState({ showQuestPicker: false })
     this.initWorld()
   }
 
   toggleBookPicker = () => {
-    const test = localStateStore.getShowBookPicker()
+    const show = localStateStore.getShowBookPicker()
 
-    localStateStore.setShowBookPicker(!test)
+    localStateStore.setShowBookPicker(!show)
     // const test2 = localStateStore.getShowBookPicker()
   }
 
