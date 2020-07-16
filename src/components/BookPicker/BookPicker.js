@@ -154,7 +154,8 @@ class BookPicker extends React.Component {
 
     console.log("this.books2", toJS(this.books2)) // zzz
     const {} = this.props
-    const { showBookEditor } = this.state
+    const showBookEditor = true
+    // const { showBookEditor } = this.state
 
     const renderedBookList = this.books2.map((book, index) => {
       const bookItem = book.data
@@ -193,7 +194,12 @@ class BookPicker extends React.Component {
 
     return (
       <Dialog isOpen={true} isCloseButtonShown={true} className={css.main}>
-        {showBookEditor && <WorldMultiPicker2></WorldMultiPicker2>}
+        {showBookEditor && (
+          <div class={css.worldPicker}>
+            <WorldMultiPicker2></WorldMultiPicker2>
+          </div>
+        )}
+
         <img
           className={css.backgroundImage}
           src={backgroundImage}

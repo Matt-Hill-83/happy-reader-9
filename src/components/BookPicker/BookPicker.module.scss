@@ -15,27 +15,15 @@
   margin: unset;
   border: 2px solid #000 !important;
 
-  // :global {
-  //   [class*="CrudMachine_main__"] {
-  //     display: flex;
-  //     flex-direction: column;
-  //     align-items: flex-start;
-  //     border: 4px solid black !important;
-  //     z-index: 100000;
-  //     height: max-content;
-  //     width: max-content;
-  //     left: 0px;
-  //     position: relative;
-  //     align-self: flex-start;
-  //   }
+  .worldPicker {
+    position: absolute;
+    z-index: 100;
 
-  //   [class*="CrudMachine_itemContainer_"] {
-  //     width: 5vh !important;
-  //     height: 5vh !important;
-  //     border: 4px solid green !important;
-  //     z-index: 100000;
-  //   }
-  // }
+    border: 4px solid red !important;
+    width: 50vw;
+    background: white;
+    min-height: 20vh;
+  }
 
   .bookImage {
     height: 20vh;

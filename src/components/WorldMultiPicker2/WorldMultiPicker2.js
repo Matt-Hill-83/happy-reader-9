@@ -1,14 +1,15 @@
-import React from "react"
-import clsx from "clsx"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
+import { toJS } from "mobx"
+import Chip from "@material-ui/core/Chip"
+
+import FormControl from "@material-ui/core/FormControl"
 import Input from "@material-ui/core/Input"
 import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
-import FormControl from "@material-ui/core/FormControl"
-import ListItemText from "@material-ui/core/ListItemText"
+import React from "react"
 import Select from "@material-ui/core/Select"
-import Checkbox from "@material-ui/core/Checkbox"
-import Chip from "@material-ui/core/Chip"
+import cx from "classnames"
+import css from "./WorldMultiPicker2.module.scss"
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -39,17 +40,30 @@ const MenuProps = {
   },
 }
 
+// const names = [
+//   "Oliver Hansen",
+//   "Van Henry",
+//   "April Tucker",
+//   "Ralph Hubbard",
+//   "Omar Alexander",
+//   "Carlos Abbott",
+//   "Miriam Wagner",
+//   "Bradley Wilkerson",
+//   "Virginia Andrews",
+//   "Kelly Snyder",
+// ]
+
 const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
+  { id: 5, name: "Oliver Hansen" },
+  { id: 5, name: "Van Henry" },
+  { id: 5, name: "April Tucker" },
+  { id: 5, name: "Ralph Hubbard" },
+  { id: 5, name: "Omar Alexander" },
+  { id: 5, name: "Carlos Abbott" },
+  { id: 5, name: "Miriam Wagner" },
+  { id: 5, name: "Bradley Wilkerson" },
+  { id: 5, name: "Virginia Andrews" },
+  { id: 5, name: "Kelly Snyder" },
 ]
 
 function getStyles(name, personName, theme) {
@@ -65,51 +79,52 @@ export default function WorldMultiPicker2() {
   const classes = useStyles()
   const theme = useTheme()
   const [personName, setPersonName] = React.useState([])
+  console.log("personName", toJS(personName)) // zzz
 
   const handleChange = (event) => {
     setPersonName(event.target.value)
   }
 
-  const handleChangeMultiple = (event) => {
-    const { options } = event.target
-    const value = []
-    for (let i = 0, l = options.length; i < l; i += 1) {
-      if (options[i].selected) {
-        value.push(options[i].value)
-      }
-    }
-    setPersonName(value)
-  }
-
   return (
     <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-mutiple-chip-label">Chip</InputLabel>
+      <FormControl className={cx(classes.formControl, css.main)}>
+        {/* <FormControl className={classes.formControl}> */}
+        <InputLabel id="demo-mutiple-chip-label">Quests</InputLabel>
         <Select
+          className={cx(classes.formControl, css.main2)}
           labelId="demo-mutiple-chip-label"
           id="demo-mutiple-chip"
           multiple
           value={personName}
           onChange={handleChange}
           input={<Input id="select-multiple-chip" />}
-          renderValue={(selected) => (
-            <div className={classes.chips}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} className={classes.chip} />
-              ))}
-            </div>
-          )}
+          renderValue={(selected) => {
+            console.log("selected", selected) // zzz
+            return (
+              <div className={classes.chips}>
+                {selected.map((item) => {
+                  const value = item.name
+                  return (
+                    <Chip key={value} label={value} className={classes.chip} />
+                  )
+                })}
+              </div>
+            )
+          }}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
+          {names.map((item) => {
+            const name = item.name
+            return (
+              <MenuItem
+                key={name}
+                value={item}
+                style={getStyles(name, personName, theme)}
+              >
+                {name}
+              </MenuItem>
+            )
+          })}
         </Select>
       </FormControl>
     </div>
