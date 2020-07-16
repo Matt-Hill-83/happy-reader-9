@@ -11,61 +11,88 @@ import Utils from "../../Utils/Utils.js"
 import css from "./BookPicker.module.scss"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
+import { books } from "../../Stores/InitStores.js"
 
 const bookList = [
   {
     name: "Functional Quests",
     imageName: "bookCover01BatOfDoom",
     chapters: [
-      "yFhG3pGNtOVZKoQ7K5fG",
-      "8hmBGXtP870qDA8xlXbw",
-      "UA2QDGO1knDcq6Y9sD4y",
+      "6u9TJAt500bF8um6VBA1",
+      "Qcdiltt2IsPsu8UboUk7",
+      "0RJSnOlO3hOax3o5dkZa",
     ],
   },
   {
     name: "Easy stuff",
     imageName: "bookCover01BatOfDoom",
-    chapters: ["Kx78cfHCkhpm2NQnmCp8", "8hmBGXtP870qDA8xlXbw"],
+    chapters: [
+      "6u9TJAt500bF8um6VBA1",
+      "Qcdiltt2IsPsu8UboUk7",
+      "0RJSnOlO3hOax3o5dkZa",
+    ],
   },
   {
     name: "Fun Dialog",
     imageName: "bookCover01BatOfDoom",
-    chapters: ["Kx78cfHCkhpm2NQnmCp8", "8hmBGXtP870qDA8xlXbw"],
+    chapters: [
+      "6u9TJAt500bF8um6VBA1",
+      "Qcdiltt2IsPsu8UboUk7",
+      "0RJSnOlO3hOax3o5dkZa",
+    ],
   },
   {
     name: "Old Stuff",
     imageName: "bookCover01BatOfDoom",
-    chapters: ["Kx78cfHCkhpm2NQnmCp8", "8hmBGXtP870qDA8xlXbw"],
+    chapters: [
+      "6u9TJAt500bF8um6VBA1",
+      "Qcdiltt2IsPsu8UboUk7",
+      "0RJSnOlO3hOax3o5dkZa",
+    ],
   },
   {
     name: "Charlie Stuff",
     imageName: "bookCover01BatOfDoom",
     chapters: [
-      "K2MNaqNyN5doDvq5DeSsU",
-      "KsdQq5puwQMFlMIfOENJV",
-      "KryOfvqHlBCWpPKWjp8vJ",
-      "KSHNmmMhxxShqpWhOpFjU",
-      "Ki2FknxtJIPxjyApAIrQ5",
-      "KJkrRsMGKkoatdAG6XCn3",
-      "KPT0kV1znaii2wzDm5hwJ",
+      "6u9TJAt500bF8um6VBA1",
+      "Qcdiltt2IsPsu8UboUk7",
+      "0RJSnOlO3hOax3o5dkZa",
     ],
   },
   {
     name: "Scraps",
     imageName: "bookCover01BatOfDoom",
 
-    chapters: [],
+    chapters: [
+      "6u9TJAt500bF8um6VBA1",
+      "Qcdiltt2IsPsu8UboUk7",
+      "0RJSnOlO3hOax3o5dkZa",
+    ],
   },
 ]
 
 class BookPicker extends React.Component {
-  state = { showChapterView: false, selectedBook: bookList[0] }
+  state = {
+    showBookBuilder: false,
+    selectedBook: bookList[0],
+  }
 
   changeSelectedBook = ({ index }) => {
     const selectedBook = bookList[index]
 
     this.setState({
-      showChapterView: !this.state.showChapterView,
+      selectedBook,
+    })
+  }
+
+  editBook = ({ index, selectedBook }) => {
+    console.log("index", index) // zzz
+    // const selectedBook = bookList[index]
+    console.log("selectedBook", selectedBook) // zzz
+
+    books.add(selectedBook)
+    this.setState({
+      openBookBuilder: !this.state.showBookBuilder,
       selectedBook,
     })
   }
@@ -88,9 +115,13 @@ class BookPicker extends React.Component {
           selectedBook={selectedBook}
           onChangeWorld={this.props.onChangeWorld}
         />
-        {/* <Button className={css.playButton} onClick={this.changeSelectedBook}>
-          Back
-        </Button> */}
+        <Button
+          className={css.playButton}
+          onClick={() => this.editBook({ selectedBook })}
+        >
+          {/* <Button className={css.playButton} onClick={this.changeSelectedBook}> */}
+          Back----
+        </Button>
       </div>
     )
   }

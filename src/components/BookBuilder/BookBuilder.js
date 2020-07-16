@@ -1,9 +1,10 @@
 /* eslint-disable no-use-before-define */
 import React from "react"
-import Chip from "@material-ui/core/Chip"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import { makeStyles } from "@material-ui/core/styles"
 import TextField from "@material-ui/core/TextField"
+import cx from "classnames"
+import css from "./BookBuilder.module.scss"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +19,8 @@ export default function BookBuilder() {
   const classes = useStyles()
   // return null
   return (
-    <div className={classes.root}>
+    // <div className={classes.root}>
+    <div className={cx(classes.root, css.main)}>
       <Autocomplete
         multiple
         id="tags-outlined"

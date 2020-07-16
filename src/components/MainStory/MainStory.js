@@ -18,8 +18,8 @@ import BookPicker from "../BookPicker/BookPicker.js"
 import BookBuilder from "../BookBuilder/BookBuilder.js"
 
 let SHOW_BOOK_PICKER
-SHOW_BOOK_PICKER = true
 SHOW_BOOK_PICKER = false
+SHOW_BOOK_PICKER = true
 
 let useDefaultWorldId
 useDefaultWorldId = true
@@ -53,14 +53,9 @@ class MainStory extends React.Component {
   async componentWillMount() {
     const defaultWorldId = localStateStore.getDefaultWorldId()
 
-    // I need to make these stores shared singletons
-    //  Move these to App.js
     try {
-      // await maps.fetch()
       await books.fetch()
       console.log("books.docs", toJS(books.docs)) // zzz
-      // This needs to be here or WorldBuilder won't work.
-      // await worldNameStore.fetch()
     } catch (error) {}
 
     if (maps.docs && maps.docs[0]) {
@@ -244,7 +239,7 @@ class MainStory extends React.Component {
   }
 
   toggleBookPicker = () => {
-    // const test = localStateStore.getShowBookPicker()
+    const test = localStateStore.getShowBookPicker()
 
     localStateStore.setShowBookPicker(!test)
     // const test2 = localStateStore.getShowBookPicker()
@@ -310,7 +305,10 @@ class MainStory extends React.Component {
 
   renderBookBuilder = () => {
     return (
-      <div className={css.bookBuilder}>{/* <BookBuilder></BookBuilder> */}</div>
+      <div className={css.bookBuilder}>
+        {/*--------------------------------------------- <BookBuilder></BookBuilder> */}
+        <BookBuilder></BookBuilder>
+      </div>
     )
   }
 

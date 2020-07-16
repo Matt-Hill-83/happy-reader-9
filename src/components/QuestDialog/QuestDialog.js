@@ -65,7 +65,7 @@ class QuestDialog extends React.Component {
 
     const isProdRelease = localStateStore.getIsProdRelease()
 
-    const mapList = sortedMaps.map((map, index) => {
+    const mapList = sortedMaps.map((map) => {
       const { title } = map.data
 
       const mapId = map.id

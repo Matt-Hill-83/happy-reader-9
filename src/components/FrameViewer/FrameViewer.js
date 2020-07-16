@@ -9,9 +9,7 @@ import _get from "lodash.get"
 
 import Images from "../../images/images"
 import WordGroup from "../WordGroup/WordGroup"
-
 import css from "./FrameViewer.module.scss"
-import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import Utils from "../../Utils/Utils"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import ArrowNavigator from "../ArrowNavigator/ArrowNavigator"
