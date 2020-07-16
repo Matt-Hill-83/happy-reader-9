@@ -5,13 +5,19 @@ import _get from "lodash.get"
 import Images from "../../images/images.js"
 import cx from "classnames"
 
-import { Button, Dialog, ButtonGroup } from "@blueprintjs/core"
+// import { Button, Dialog, ButtonGroup } from "@blueprintjs/core"
+import { Button, Dialog, ButtonGroup, Icon } from "@blueprintjs/core"
 import Utils from "../../Utils/Utils.js"
 
+import CrudMachine from "../CrudMachine/CrudMachine"
 import css from "./BookPicker.module.scss"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
 import { books } from "../../Stores/InitStores.js"
+// import { Icon } from "@material-ui/core"
+import { IconNames } from "@blueprintjs/icons"
+import CrudMachineForBooks from "../CrudMachineForBooks/CrudMachineForBooks.js"
+import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 
 const bookList = [
   {
@@ -77,6 +83,8 @@ class BookPicker extends React.Component {
   state = {
     showBookBuilder: false,
     selectedBook: this.books2[0],
+    showBookEditor: false,
+    questToEdit: null,
   }
 
   changeSelectedBook = ({ index }) => {
@@ -105,6 +113,7 @@ class BookPicker extends React.Component {
     const { selectedBook } = this.state
 
     // const bookImage = Images.backgrounds[selectedBook && selectedBook.imageName]
+    // const bookTableOfContents01 = Images.backgrounds[selectedBook.imageName]
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
 
     return (
@@ -130,10 +139,22 @@ class BookPicker extends React.Component {
     )
   }
 
+  onDeleteBook = async ({ book, event }) => {
+    console.log("book", toJS(book)) // zzz
+    await book.delete()
+    return
+  }
+
+  onChooseQuests = async ({ book, event }) => {
+    this.setState({ questToEdit: book, showBookEditor: true })
+  }
+
   render = () => {
+    const isProdRelease = false
+
     console.log("this.books2", toJS(this.books2)) // zzz
     const {} = this.props
-    const { showToggle } = this.state
+    const { showBookEditor } = this.state
 
     const renderedBookList = this.books2.map((book, index) => {
       const bookItem = book.data
@@ -143,7 +164,7 @@ class BookPicker extends React.Component {
       const mapId = bookItem.id
       const bookImage = Images.backgrounds[bookItem.imageName]
 
-      const text = (
+      const renderedBook = (
         <div
           onClick={() => this.changeSelectedBook({ index, mapId })}
           className={css.questRow}
@@ -152,44 +173,49 @@ class BookPicker extends React.Component {
             <div className={cx(css.questName)}>{title}</div>
             <img className={css.bookImage} src={bookImage} alt={"imagex"} />
           </div>
+          {!isProdRelease && (
+            <span onClick={(event) => this.onDeleteBook({ book, event })}>
+              <Icon icon={IconNames.TRASH} />
+            </span>
+          )}
+          {!isProdRelease && (
+            <span onClick={(event) => this.onChooseQuests({ book, event })}>
+              <Icon icon={IconNames.EDIT} />
+            </span>
+          )}
         </div>
       )
-      return text
+      return renderedBook
     })
 
     const backgroundImage = Images.backgrounds["meadow"]
-    const backButtonLabel = "Back To Book LIst"
+    // const buttons = { add: true, trash: true, edit: true }
 
     return (
       <Dialog isOpen={true} isCloseButtonShown={true} className={css.main}>
-        {showToggle && (
-          <ButtonGroup className={css.buttonGroup} color="primary">
-            <Button onClick={this.toggleShowProd}>{backButtonLabel}</Button>
-          </ButtonGroup>
-        )}
+        {showBookEditor && <WorldMultiPicker2></WorldMultiPicker2>}
         <img
           className={css.backgroundImage}
           src={backgroundImage}
           alt={"imagex"}
         />
+
+        {/* {true && (
+          <CrudMachineForBooks
+            className={`${css.crudMachine} ${css.locationMachine}`}
+            // items={[]}
+            items={this.books2}
+            buttons={buttons}
+            // itemRenderer={itemRenderer}
+            // saveItems={onSave}
+            // imageSets={locationImageSets}
+          />
+        )} */}
         <div className={css.questPage}>
           <div className={css.header}>
-            <span className={css.gameTitle}>Tickle Brain</span>
+            <span className={css.gameTitle}>Troll Need Gold</span>
           </div>
-          <div className={css.playerStatsSection}>
-            <div className={css.playerStatsRow}>
-              <span className={css.playerStatsKey}>Gold</span>
-              <span className={css.playerStatsValue}>500</span>
-            </div>
-            <div className={css.playerStatsRow}>
-              <span className={css.playerStatsKey}>Trophies</span>
-              <span className={css.playerStatsValue}>2</span>
-            </div>
-            <div className={css.playerStatsRow}>
-              <span className={css.playerStatsKey}>Dresses</span>
-              <span className={css.playerStatsValue}>0</span>
-            </div>
-          </div>
+
           <div className={css.content}>
             <div className={css.questTable}>
               <div className={css.scrollArea}>{renderedBookList}</div>
