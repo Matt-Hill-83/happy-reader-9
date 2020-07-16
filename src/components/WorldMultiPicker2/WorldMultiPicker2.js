@@ -9,6 +9,7 @@ import MenuItem from "@material-ui/core/MenuItem"
 import React from "react"
 import Select from "@material-ui/core/Select"
 import cx from "classnames"
+
 import css from "./WorldMultiPicker2.module.scss"
 
 const useStyles = makeStyles((theme) => ({
@@ -40,19 +41,6 @@ const MenuProps = {
   },
 }
 
-// const names = [
-//   "Oliver Hansen",
-//   "Van Henry",
-//   "April Tucker",
-//   "Ralph Hubbard",
-//   "Omar Alexander",
-//   "Carlos Abbott",
-//   "Miriam Wagner",
-//   "Bradley Wilkerson",
-//   "Virginia Andrews",
-//   "Kelly Snyder",
-// ]
-
 const names = [
   { id: 5, name: "Oliver Hansen" },
   { id: 5, name: "Van Henry" },
@@ -75,7 +63,9 @@ function getStyles(name, personName, theme) {
   }
 }
 
-export default function WorldMultiPicker2() {
+export default function WorldMultiPicker2({ props }) {
+  console.log("props", props) // zzz
+  console.log("props.maps", toJS(props.maps)) // zzz
   const classes = useStyles()
   const theme = useTheme()
   const [personName, setPersonName] = React.useState([])
@@ -84,6 +74,8 @@ export default function WorldMultiPicker2() {
   const handleChange = (event) => {
     setPersonName(event.target.value)
   }
+
+  const names = props.maps
 
   return (
     <div>
@@ -103,7 +95,7 @@ export default function WorldMultiPicker2() {
             return (
               <div className={classes.chips}>
                 {selected.map((item) => {
-                  const value = item.name
+                  const value = item.title
                   return (
                     <Chip key={value} label={value} className={classes.chip} />
                   )
@@ -114,14 +106,15 @@ export default function WorldMultiPicker2() {
           MenuProps={MenuProps}
         >
           {names.map((item) => {
-            const name = item.name
+            console.log("item", toJS(item)) // zzz
+            const { title } = item.data
             return (
               <MenuItem
-                key={name}
-                value={item}
-                style={getStyles(name, personName, theme)}
+                key={title}
+                value={item.data}
+                style={getStyles(title, personName, theme)}
               >
-                {name}
+                {title}
               </MenuItem>
             )
           })}

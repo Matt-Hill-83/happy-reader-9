@@ -9,11 +9,10 @@ import cx from "classnames"
 import { Button, Dialog, ButtonGroup, Icon } from "@blueprintjs/core"
 import Utils from "../../Utils/Utils.js"
 
-import CrudMachine from "../CrudMachine/CrudMachine"
 import css from "./BookPicker.module.scss"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
-import { books } from "../../Stores/InitStores.js"
+import { maps, books } from "../../Stores/InitStores.js"
 // import { Icon } from "@material-ui/core"
 import { IconNames } from "@blueprintjs/icons"
 import CrudMachineForBooks from "../CrudMachineForBooks/CrudMachineForBooks.js"
@@ -190,13 +189,14 @@ class BookPicker extends React.Component {
     })
 
     const backgroundImage = Images.backgrounds["meadow"]
-    // const buttons = { add: true, trash: true, edit: true }
+    const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
+    const props = { test: 5, maps: savedMaps }
 
     return (
       <Dialog isOpen={true} isCloseButtonShown={true} className={css.main}>
         {showBookEditor && (
           <div class={css.worldPicker}>
-            <WorldMultiPicker2></WorldMultiPicker2>
+            <WorldMultiPicker2 props={props}></WorldMultiPicker2>
           </div>
         )}
 
