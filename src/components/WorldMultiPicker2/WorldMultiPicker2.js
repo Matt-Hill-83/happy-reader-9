@@ -11,6 +11,7 @@ import Select from "@material-ui/core/Select"
 import cx from "classnames"
 
 import css from "./WorldMultiPicker2.module.scss"
+import Utils from "../../Utils/Utils"
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -51,31 +52,26 @@ function getStyles(name, selectedItems, theme) {
 }
 
 export default function WorldMultiPicker2({ props }) {
-  console.log("props", props) // zzz
-  console.log("props.maps", toJS(props.maps)) // zzz
   const classes = useStyles()
   const theme = useTheme()
   const [selectedItems, setSelectedItems] = React.useState([])
 
-  console.log("selectedItems", toJS(selectedItems)) // zzz
-
   function onClose({ selectedItems = [] }) {
-    console.log("onClose") // zzz
-    console.log("selectedItems", toJS(selectedItems)) // zzz
     const worldIds = selectedItems.map((item) => {
-      console.log("item", toJS(item)) // zzz
       return item.id
     })
-    console.log("worldIds", toJS(worldIds)) // zzz
     props.onClose && props.onClose({ selectedItems })
   }
 
   const handleChange = (event) => {
     setSelectedItems(event.target.value)
   }
-
-  const worlds = props.maps
-  console.log("worlds", toJS(worlds)) // zzz
+  const worlds = toJS(props.maps)
+  const sortedWorlds = Utils.sortDataByNestedKey({
+    data: worlds.docs,
+    keys: ["data", "title"],
+    order: "ASC",
+  })
 
   return (
     <div>
@@ -92,7 +88,6 @@ export default function WorldMultiPicker2({ props }) {
           onClose={() => onClose({ selectedItems })}
           input={<Input id="select-multiple-chip" />}
           renderValue={(selected) => {
-            console.log("selected", selected) // zzz
             return (
               <div className={classes.chips}>
                 {selected.map((item) => {
@@ -106,8 +101,7 @@ export default function WorldMultiPicker2({ props }) {
           }}
           MenuProps={MenuProps}
         >
-          {worlds.docs.map((item) => {
-            // console.log("item", toJS(item)) // zzz
+          {sortedWorlds.map((item) => {
             const { title } = item.data
             return (
               <MenuItem
