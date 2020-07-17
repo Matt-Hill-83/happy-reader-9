@@ -109,12 +109,23 @@ class BookPicker extends React.Component {
 
   renderChapterView = () => {
     const { selectedBook } = this.state
+    const { id: bookId, data: bookData } = selectedBook
+    const { imageName } = bookData
+
+    console.log("selectedBook", toJS(selectedBook)) // zzz
+    console.log("selectedBook.data.chapters", toJS(selectedBook.data.chapters)) // zzz
     const showBookEditor = true
     // const { showBookEditor } = this.state
-    const worldMultiPickerProps = { maps, onClose: this.onClose }
 
+    const worldMultiPickerProps = {
+      maps,
+      onClose: ({ selectedItems }) =>
+        this.onCloseWorldPicker({ selectedItems, bookId }),
+    }
+
+    console.log("selectedBook.imageName", toJS(imageName)) // zzz
     // const bookImage = Images.backgrounds[selectedBook && selectedBook.imageName]
-    // const bookTableOfContents01 = Images.backgrounds[selectedBook.imageName]
+    // const bookTableOfContents01 = Images.backgrounds[imageName]
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
 
     return (
@@ -155,6 +166,23 @@ class BookPicker extends React.Component {
 
   onClose = async ({ book, event }) => {
     this.setState({ questToEdit: book, showBookEditor: true })
+  }
+
+  onCloseWorldPicker = async ({ selectedItems, bookId }) => {
+    console.log("selectedItems", toJS(selectedItems)) // zzz
+    console.log("bookId", toJS(bookId)) // zzz
+    const bookUnderEdit = books.docs.find((item) => item.id === bookId)
+
+    console.log("bookUnderEdit", toJS(bookUnderEdit)) // zzz
+    const newChapters = selectedItems.map((item) => item.id)
+    console.log("newChapters", toJS(newChapters)) // zzz
+    const newProps = { chapters: newChapters }
+    Object.assign(bookUnderEdit.data, toJS(newProps))
+
+    // bookUnderEdit.data.chapters = newChapters
+
+    await bookUnderEdit.update(bookUnderEdit.data)
+    // await map.update(bookUnderEdit.data)
   }
 
   onChooseQuests = async ({ book, event }) => {

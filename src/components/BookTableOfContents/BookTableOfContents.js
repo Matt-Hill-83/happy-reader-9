@@ -5,7 +5,6 @@ import _get from "lodash.get"
 import Images from "../../images/images.js"
 import cx from "classnames"
 
-import { Button, Dialog, ButtonGroup } from "@blueprintjs/core"
 import Utils from "../../Utils/Utils.js"
 
 import { maps } from "../../Stores/InitStores.js"
@@ -34,7 +33,7 @@ class BookTableOfContents extends React.Component {
     let filteredMaps = []
 
     filteredMaps = savedMaps.filter((map) => {
-      const chapters = _get(selectedBook, "chapters") || []
+      const chapters = _get(selectedBook, "data.chapters") || []
 
       return map.data.released && chapters.includes(map.id)
     })

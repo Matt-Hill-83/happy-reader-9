@@ -41,19 +41,6 @@ const MenuProps = {
   },
 }
 
-// const worlds = [
-//   { id: 5, name: "Oliver Hansen" },
-//   { id: 5, name: "Van Henry" },
-//   { id: 5, name: "April Tucker" },
-//   { id: 5, name: "Ralph Hubbard" },
-//   { id: 5, name: "Omar Alexander" },
-//   { id: 5, name: "Carlos Abbott" },
-//   { id: 5, name: "Miriam Wagner" },
-//   { id: 5, name: "Bradley Wilkerson" },
-//   { id: 5, name: "Virginia Andrews" },
-//   { id: 5, name: "Kelly Snyder" },
-// ]
-
 function getStyles(name, selectedItems, theme) {
   return {
     fontWeight:
