@@ -190,7 +190,8 @@ class BookPicker extends React.Component {
 
     const backgroundImage = Images.backgrounds["meadow"]
     const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
-    const props = { test: 5, maps: savedMaps }
+    const props = { test: 5, maps }
+    // const props = { test: 5, maps: savedMaps }
 
     return (
       <Dialog isOpen={true} isCloseButtonShown={true} className={css.main}>
@@ -206,17 +207,6 @@ class BookPicker extends React.Component {
           alt={"imagex"}
         />
 
-        {/* {true && (
-          <CrudMachineForBooks
-            className={`${css.crudMachine} ${css.locationMachine}`}
-            // items={[]}
-            items={this.books2}
-            buttons={buttons}
-            // itemRenderer={itemRenderer}
-            // saveItems={onSave}
-            // imageSets={locationImageSets}
-          />
-        )} */}
         <div className={css.questPage}>
           <div className={css.header}>
             <span className={css.gameTitle}>Troll Need Gold</span>
