@@ -6,7 +6,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 import React from "react"
 
 import WorldBuilder from "./components/WorldBuilder/WorldBuilder"
-import MainStory from "./components/MainStory/MainStory"
+import TopLevel from "./components/TopLevel/TopLevel"
 
 import localStateStore from "./Stores/LocalStateStore/LocalStateStore.js"
 import { maps } from "./Stores/InitStores"
@@ -72,19 +72,19 @@ function StoryViewer({ match }) {
       <MediaQuery minDeviceWidth={1224}>
         {/* <div className={css.mediaMsg}>You are a desktop</div> */}
         {/* set global css vars thru class */}
-        <MainStory className={css.desktop} match={match} />
-        {/* <MainStory className={css.mobile} /> */}
+        <TopLevel className={css.desktop} match={match} />
+        {/* <TopLevel className={css.mobile} /> */}
       </MediaQuery>
       <MediaQuery maxDeviceWidth={1224}>
         {/* <div className={css.mediaMsg}>You are a tablet or mobile phone</div> */}
         <MediaQuery orientation="portrait">
-          <MainStory className={css.mobilePortrait} />
+          <TopLevel className={css.mobilePortrait} />
           {/* <div className={css.mediaMsg}>
               You are in portrait view. Please Rotate Screen.
             </div> */}
         </MediaQuery>
         <MediaQuery orientation="landscape">
-          <MainStory className={css.mobileLandscape} />
+          <TopLevel className={css.mobileLandscape} />
           {/* <div className={css.mediaMsg}>You are landscape</div> */}
         </MediaQuery>
       </MediaQuery>

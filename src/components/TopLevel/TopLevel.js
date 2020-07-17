@@ -13,7 +13,7 @@ import Utils from "../../Utils/Utils"
 import WorldBuilder from "../WorldBuilder/WorldBuilder.js"
 import { UserConfigStore } from "../../Stores/UserConfigStore.js"
 
-import css from "./MainStory.module.scss"
+import css from "./TopLevel.module.scss"
 import BookPicker from "../BookPicker/BookPicker.js"
 import BookBuilder from "../BookBuilder/BookBuilder.js"
 
@@ -41,7 +41,7 @@ const toaster = Toaster.create({
   canEscapeKeyClear: true,
 })
 
-class MainStory extends React.Component {
+class TopLevel extends React.Component {
   isProdRelease = localStateStore.getIsProdRelease()
 
   state = {
@@ -359,4 +359,4 @@ class MainStory extends React.Component {
   }
 }
 
-export default observer(MainStory)
+export default observer(TopLevel)

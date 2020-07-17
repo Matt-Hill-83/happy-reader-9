@@ -144,6 +144,10 @@ class BookPicker extends React.Component {
     return
   }
 
+  onClose = async ({ book, event }) => {
+    this.setState({ questToEdit: book, showBookEditor: true })
+  }
+
   onChooseQuests = async ({ book, event }) => {
     this.setState({ questToEdit: book, showBookEditor: true })
   }
@@ -189,9 +193,7 @@ class BookPicker extends React.Component {
     })
 
     const backgroundImage = Images.backgrounds["meadow"]
-    const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
-    const props = { test: 5, maps }
-    // const props = { test: 5, maps: savedMaps }
+    const props = { maps, onClose: this.onClose }
 
     return (
       <Dialog isOpen={true} isCloseButtonShown={true} className={css.main}>

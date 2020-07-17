@@ -81,6 +81,7 @@ export default function WorldMultiPicker2({ props }) {
       return item.id
     })
     console.log("worldIds", toJS(worldIds)) // zzz
+    props.onClose && props.onClose({ selectedItems })
   }
 
   const handleChange = (event) => {
