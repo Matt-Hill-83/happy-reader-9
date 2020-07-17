@@ -66,7 +66,6 @@ function getStyles(name, selectedItems, theme) {
 export default function WorldMultiPicker2({ props }) {
   console.log("props", props) // zzz
   console.log("props.maps", toJS(props.maps)) // zzz
-  console.log("props.maps[0].data", toJS(props.maps[0])) // zzz
   const classes = useStyles()
   const theme = useTheme()
   const [selectedItems, setSelectedItems] = React.useState([])
@@ -91,12 +90,6 @@ export default function WorldMultiPicker2({ props }) {
   const worlds = props.maps
   console.log("worlds", toJS(worlds)) // zzz
 
-  // TODO: pass selected object id's to update function to update book object chapters prop
-  // TODO: pass selected object id's to update function to update book object chapters prop
-  // TODO: pass selected object id's to update function to update book object chapters prop
-  // TODO: pass selected object id's to update function to update book object chapters prop
-  // TODO: pass selected object id's to update function to update book object chapters prop
-  // TODO: pass selected object id's to update function to update book object chapters prop
   return (
     <div>
       <FormControl className={cx(classes.formControl, css.main)}>
@@ -127,7 +120,7 @@ export default function WorldMultiPicker2({ props }) {
           MenuProps={MenuProps}
         >
           {worlds.docs.map((item) => {
-            console.log("item", toJS(item)) // zzz
+            // console.log("item", toJS(item)) // zzz
             const { title } = item.data
             return (
               <MenuItem

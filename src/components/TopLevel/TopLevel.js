@@ -346,7 +346,7 @@ class TopLevel extends React.Component {
     return (
       <div className={`${css.main} ${className}`}>
         {this.renderButtons()}
-        {this.renderBookBuilder()}
+        {false && this.renderBookBuilder()}
         <StoryMode
           updateActiveScene={this.updateActiveScene}
           activeScene={activeScene}

@@ -15,7 +15,6 @@ import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
 import { maps, books } from "../../Stores/InitStores.js"
 // import { Icon } from "@material-ui/core"
 import { IconNames } from "@blueprintjs/icons"
-import CrudMachineForBooks from "../CrudMachineForBooks/CrudMachineForBooks.js"
 import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 
 const bookList = [
@@ -110,6 +109,9 @@ class BookPicker extends React.Component {
 
   renderChapterView = () => {
     const { selectedBook } = this.state
+    const showBookEditor = true
+    // const { showBookEditor } = this.state
+    const worldMultiPickerProps = { maps, onClose: this.onClose }
 
     // const bookImage = Images.backgrounds[selectedBook && selectedBook.imageName]
     // const bookTableOfContents01 = Images.backgrounds[selectedBook.imageName]
@@ -134,6 +136,13 @@ class BookPicker extends React.Component {
           {/* <Button className={css.playButton} onClick={this.changeSelectedBook}> */}
           Back----
         </Button>
+        {showBookEditor && (
+          <div class={css.worldPicker}>
+            <WorldMultiPicker2
+              props={worldMultiPickerProps}
+            ></WorldMultiPicker2>
+          </div>
+        )}
       </div>
     )
   }
@@ -157,8 +166,8 @@ class BookPicker extends React.Component {
 
     console.log("this.books2", toJS(this.books2)) // zzz
     const {} = this.props
-    const showBookEditor = true
-    // const { showBookEditor } = this.state
+    // const showBookEditor = true
+    // // const { showBookEditor } = this.state
 
     const renderedBookList = this.books2.map((book, index) => {
       const bookItem = book.data
@@ -193,15 +202,15 @@ class BookPicker extends React.Component {
     })
 
     const backgroundImage = Images.backgrounds["meadow"]
-    const props = { maps, onClose: this.onClose }
+    // const props = { maps, onClose: this.onClose }
 
     return (
       <Dialog isOpen={true} isCloseButtonShown={true} className={css.main}>
-        {showBookEditor && (
+        {/* {showBookEditor && (
           <div class={css.worldPicker}>
             <WorldMultiPicker2 props={props}></WorldMultiPicker2>
           </div>
-        )}
+        )} */}
 
         <img
           className={css.backgroundImage}
