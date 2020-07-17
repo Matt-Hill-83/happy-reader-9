@@ -67,9 +67,24 @@ export default function WorldMultiPicker2({ props }) {
   }
 
   const worlds = toJS(maps)
+  const mutatedWorlds = worlds.docs.map((world) => {
+    const { title } = world.data
+    const worldId = world.id
+    console.log("worldId", worldId) // zzz
+
+    const belongsToABook = Utils.belongsToABook({ bookId, worldId })
+    console.log("belongsToABook", toJS(belongsToABook)) // zzz
+
+    if (belongsToABook) {
+      world.data.newTitle = `xxx - ${title} - [${belongsToABook.toString()}]`
+    } else {
+      world.data.newTitle = title
+    }
+  })
+
   const sortedWorlds = Utils.sortDataByNestedKey({
     data: worlds.docs,
-    keys: ["data", "title"],
+    keys: ["data", "newTitle"],
     order: "ASC",
   })
 
@@ -102,19 +117,14 @@ export default function WorldMultiPicker2({ props }) {
           MenuProps={MenuProps}
         >
           {sortedWorlds.map((item) => {
-            const { title } = item.data
-            const worldId = item.id
-            console.log("worldId", worldId) // zzz
-            const belongsToABook = Utils.belongsToABook({ bookId, worldId })
-            console.log("belongsToABook", toJS(belongsToABook)) // zzz
-
+            const { title, newTitle } = item.data
             return (
               <MenuItem
                 key={title}
                 value={item}
                 style={getStyles(title, selectedItems, theme)}
               >
-                {title}
+                {newTitle}
               </MenuItem>
             )
           })}
