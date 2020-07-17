@@ -52,21 +52,21 @@ function getStyles(name, selectedItems, theme) {
 }
 
 export default function WorldMultiPicker2({ props }) {
+  const { bookId, onClose, maps } = props
+
   const classes = useStyles()
   const theme = useTheme()
   const [selectedItems, setSelectedItems] = React.useState([])
 
-  function onClose({ selectedItems = [] }) {
-    const worldIds = selectedItems.map((item) => {
-      return item.id
-    })
-    props.onClose && props.onClose({ selectedItems })
+  function onClosePicker({ selectedItems = [] }) {
+    onClose && onClose({ selectedItems })
   }
 
   const handleChange = (event) => {
     setSelectedItems(event.target.value)
   }
-  const worlds = toJS(props.maps)
+
+  const worlds = toJS(maps)
   const sortedWorlds = Utils.sortDataByNestedKey({
     data: worlds.docs,
     keys: ["data", "title"],
@@ -85,7 +85,7 @@ export default function WorldMultiPicker2({ props }) {
           multiple
           value={selectedItems}
           onChange={handleChange}
-          onClose={() => onClose({ selectedItems })}
+          onClose={() => onClosePicker({ selectedItems })}
           input={<Input id="select-multiple-chip" />}
           renderValue={(selected) => {
             return (
@@ -103,6 +103,11 @@ export default function WorldMultiPicker2({ props }) {
         >
           {sortedWorlds.map((item) => {
             const { title } = item.data
+            const worldId = item.id
+            console.log("worldId", worldId) // zzz
+            const belongsToABook = Utils.belongsToABook({ bookId, worldId })
+            console.log("belongsToABook", toJS(belongsToABook)) // zzz
+
             return (
               <MenuItem
                 key={title}

@@ -119,6 +119,7 @@ class BookPicker extends React.Component {
 
     const worldMultiPickerProps = {
       maps,
+      bookId,
       onClose: ({ selectedItems }) =>
         this.onCloseWorldPicker({ selectedItems, bookId }),
     }

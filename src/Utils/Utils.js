@@ -1,5 +1,5 @@
 import localStateStore from "../Stores/LocalStateStore/LocalStateStore.js"
-import { maps } from "../Stores/InitStores.js"
+import { maps, books } from "../Stores/InitStores.js"
 import { toJS } from "mobx"
 import _get from "lodash.get"
 
@@ -37,6 +37,21 @@ export default class Utils {
     merida02: 3,
   }
   // CONSTANTS ---------------------------------- end ---------------------------
+
+  static belongsToABook = ({ bookId, worldId }) => {
+    const owningBooks = []
+
+    let bookFound = false
+    books.docs.forEach((book) => {
+      const belongstoThisBook = book.data.chapters.includes(worldId)
+      if (belongstoThisBook) {
+        owningBooks.push(book.data.name)
+        bookFound = true
+      }
+    })
+
+    return bookFound ? owningBooks : null
+  }
 
   static getCharacterDialogIndex = ({ characterId, characterName }) => {
     return this.characterDialogIndex[characterName] || 2
