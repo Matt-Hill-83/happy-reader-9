@@ -13,6 +13,14 @@
   margin: unset;
   border: 2px solid #000 !important;
 
+  .selectedBook {
+    border: 1px solid red !important;
+    padding: 1vh;
+    position: absolute;
+    z-index: 10;
+    background: white;
+  }
+
   .worldPicker {
     position: absolute;
     z-index: 100;
@@ -79,6 +87,20 @@
     /* width: 6vh; */
     right: 1vh;
     bottom: 1vh;
+    position: absolute;
+  }
+
+  .addBookButton {
+    display: flex;
+    font-size: 2vh;
+    background-color: var(--color-purple) !important;
+    z-index: 1;
+    font-family: fantasy;
+    padding: 2%;
+    position: relative;
+    /* width: 6vh; */
+    right: 1vh;
+    top: 1vh;
     position: absolute;
   }
 

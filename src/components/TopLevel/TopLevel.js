@@ -5,13 +5,13 @@ import _get from "lodash.get"
 import { Toaster, Position, ButtonGroup, Button } from "@blueprintjs/core"
 
 import { maps, books } from "../../Stores/InitStores.js"
-import { worldNameStore } from "../../Stores/FrameSetStore.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import StoryMode from "../StoryMode/StoryMode"
 import QuestDialog from "../QuestDialog/QuestDialog.js"
 import Utils from "../../Utils/Utils"
 import WorldBuilder from "../WorldBuilder/WorldBuilder.js"
-import { UserConfigStore } from "../../Stores/UserConfigStore.js"
+// import { worldNameStore } from "../../Stores/FrameSetStore.js"
+// import { UserConfigStore } from "../../Stores/UserConfigStore.js"
 
 import css from "./TopLevel.module.scss"
 import BookPicker from "../BookPicker/BookPicker.js"
@@ -47,7 +47,7 @@ class TopLevel extends React.Component {
   state = {
     activeScene: undefined,
     showQuestPicker: this.isProdRelease,
-    showBookPicker: true,
+    showBookPicker: false,
   }
 
   async componentWillMount() {
@@ -70,7 +70,6 @@ class TopLevel extends React.Component {
     }
 
     localStateStore.setShowBookPicker(true)
-    // localStateStore.setShowBookPicker(SHOW_BOOK_PICKER)
 
     this.init()
   }
@@ -78,7 +77,7 @@ class TopLevel extends React.Component {
   UNSAFE_componentWillReceiveProps(newProps) {
     const worldId = _get(newProps, "match.params.worldId")
 
-    // this.setState({ showQuestPicker: false })
+    this.setState({ showQuestPicker: false })
 
     if (worldId) {
       localStateStore.setActiveMapId(worldId)
@@ -89,6 +88,10 @@ class TopLevel extends React.Component {
   init = () => {
     const mapId = localStateStore.getActiveWorldId()
     this.onChangeWorld({ mapId })
+  }
+
+  forceUpdate = () => {
+    this.setState({ test: Math.random() })
   }
 
   getTerminalScene = ({ start = true }) => {
@@ -242,9 +245,7 @@ class TopLevel extends React.Component {
 
   toggleBookPicker = () => {
     const show = localStateStore.getShowBookPicker()
-
     localStateStore.setShowBookPicker(!show)
-    // const test2 = localStateStore.getShowBookPicker()
   }
 
   closeBookPicker = () => {
@@ -282,6 +283,7 @@ class TopLevel extends React.Component {
       <BookPicker
         closeQuestPicker={this.closeBookPicker}
         onChangeWorld={this.onChangeWorld}
+        forceUpdate={this.forceUpdate}
       />
     )
   }
@@ -301,15 +303,6 @@ class TopLevel extends React.Component {
             </Button>
           )}
         </ButtonGroup>
-      </div>
-    )
-  }
-
-  renderBookBuilder = () => {
-    return (
-      <div className={css.bookBuilder}>
-        {/*--------------------------------------------- <BookBuilder></BookBuilder> */}
-        {/* <BookBuilder></BookBuilder> */}
       </div>
     )
   }
@@ -346,7 +339,6 @@ class TopLevel extends React.Component {
     return (
       <div className={`${css.main} ${className}`}>
         {this.renderButtons()}
-        {false && this.renderBookBuilder()}
         <StoryMode
           updateActiveScene={this.updateActiveScene}
           activeScene={activeScene}

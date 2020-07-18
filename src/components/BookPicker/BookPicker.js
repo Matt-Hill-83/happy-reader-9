@@ -5,79 +5,17 @@ import _get from "lodash.get"
 import Images from "../../images/images.js"
 import cx from "classnames"
 
-// import { Button, Dialog, ButtonGroup } from "@blueprintjs/core"
-import { Button, Dialog, ButtonGroup, Icon } from "@blueprintjs/core"
-import Utils from "../../Utils/Utils.js"
+import { Button, Dialog, Icon } from "@blueprintjs/core"
+// import Utils from "../../Utils/Utils.js"
 
 import css from "./BookPicker.module.scss"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
 import { maps, books } from "../../Stores/InitStores.js"
-// import { Icon } from "@material-ui/core"
 import { IconNames } from "@blueprintjs/icons"
 import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 
-const bookList = [
-  {
-    name: "Functional Quests",
-    imageName: "bookCover01BatOfDoom",
-    chapters: [
-      "6u9TJAt500bF8um6VBA1",
-      "Qcdiltt2IsPsu8UboUk7",
-      "0RJSnOlO3hOax3o5dkZa",
-    ],
-  },
-  {
-    name: "Easy stuff",
-    imageName: "bookCover01BatOfDoom",
-    chapters: [
-      "6u9TJAt500bF8um6VBA1",
-      "Qcdiltt2IsPsu8UboUk7",
-      "0RJSnOlO3hOax3o5dkZa",
-    ],
-  },
-  {
-    name: "Fun Dialog",
-    imageName: "bookCover01BatOfDoom",
-    chapters: [
-      "6u9TJAt500bF8um6VBA1",
-      "Qcdiltt2IsPsu8UboUk7",
-      "0RJSnOlO3hOax3o5dkZa",
-    ],
-  },
-  {
-    name: "Old Stuff",
-    imageName: "bookCover01BatOfDoom",
-    chapters: [
-      "6u9TJAt500bF8um6VBA1",
-      "Qcdiltt2IsPsu8UboUk7",
-      "0RJSnOlO3hOax3o5dkZa",
-    ],
-  },
-  {
-    name: "Charlie Stuff",
-    imageName: "bookCover01BatOfDoom",
-    chapters: [
-      "6u9TJAt500bF8um6VBA1",
-      "Qcdiltt2IsPsu8UboUk7",
-      "0RJSnOlO3hOax3o5dkZa",
-    ],
-  },
-  {
-    name: "Scraps",
-    imageName: "bookCover01BatOfDoom",
-
-    chapters: [
-      "6u9TJAt500bF8um6VBA1",
-      "Qcdiltt2IsPsu8UboUk7",
-      "0RJSnOlO3hOax3o5dkZa",
-    ],
-  },
-]
-
 class BookPicker extends React.Component {
   books2 = books.docs || []
-  // books2 = bookList
   state = {
     showBookBuilder: false,
     selectedBook: this.books2[0],
@@ -93,40 +31,36 @@ class BookPicker extends React.Component {
     })
   }
 
-  editBook = ({ index, selectedBook }) => {
-    // console.log("index", index) // zzz
-    // console.log("selectedBook", selectedBook) // zzz
-
+  editBook = ({ selectedBook }) => {
     this.setState({
       showBookBuilder: !this.state.showBookBuilder,
       selectedBook,
     })
   }
 
+  forceUpdate = () => {
+    this.props.forceUpdate()
+  }
+
   renderChapterView = () => {
     const { showBookBuilder, selectedBook } = this.state
     const { id: bookId } = selectedBook
-    const { chapters, name } = selectedBook.data
-    console.log("name", name) // zzz
-
-    console.log("selectedBook", toJS(selectedBook)) // zzz
-    console.log("chapters", toJS(chapters)) // zzz
+    const { name } = selectedBook.data
 
     const worldMultiPickerProps = {
       maps,
       bookId,
       onClose: ({ selectedItems }) =>
-        this.onCloseWorldPicker({ selectedItems, bookId }),
+        this.updateworld({ selectedItems, bookId }),
     }
 
-    // console.log("selectedBook.imageName", toJS(imageName)) // zzz
     // const bookImage = Images.backgrounds[selectedBook && selectedBook.imageName]
     // const bookTableOfContents01 = Images.backgrounds[imageName]
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
 
     return (
       <div className={css.chapterView}>
-        {/* name {name} */}
+        <div className={css.selectedBook}>name {name}</div>
         <img
           className={cx(css.bookTableOfContents01)}
           src={bookTableOfContents01}
@@ -153,53 +87,53 @@ class BookPicker extends React.Component {
     )
   }
 
-  onDeleteBook = async ({ book, event }) => {
-    console.log("book", toJS(book)) // zzz
+  onDeleteBook = async ({ book }) => {
     await book.delete()
-    return
+    this.forceUpdate()
   }
 
-  onClose = async ({ book, event }) => {
+  onClose = async ({ book }) => {
     this.setState({ questToEdit: book, showBookEditor: true })
   }
 
-  onCloseWorldPicker = async ({ selectedItems, bookId }) => {
-    console.log("selectedItems", toJS(selectedItems)) // zzz
-    console.log("bookId", toJS(bookId)) // zzz
+  updateworld = async ({ selectedItems, bookId }) => {
     const bookUnderEdit = books.docs.find((item) => item.id === bookId)
-
-    console.log("bookUnderEdit", toJS(bookUnderEdit)) // zzz
     const newChapters = selectedItems.map((item) => item.id)
-    console.log("newChapters", toJS(newChapters)) // zzz
     const newProps = { chapters: newChapters }
     Object.assign(bookUnderEdit.data, toJS(newProps))
 
-    // bookUnderEdit.data.chapters = newChapters
-
     await bookUnderEdit.update(bookUnderEdit.data)
-    // await map.update(bookUnderEdit.data)
   }
 
-  onChooseQuests = async ({ book, event }) => {
+  addBook = async () => {
+    const newBook = {
+      name: "new book",
+      chapters: [],
+      imageName: "bookCover01BatOfDoom",
+    }
+    await books.add(newBook)
+    this.forceUpdate()
+  }
+
+  onChooseQuests = async ({ book }) => {
     this.setState({ questToEdit: book, showBookEditor: true })
   }
 
   render = () => {
     const isProdRelease = false
 
-    console.log("this.books2", toJS(this.books2)) // zzz
     const {} = this.props
-    // const showBookEditor = true
     const { selectedBook } = this.state
 
     const renderedBookList = this.books2.map((book, index) => {
+      console.log("book".data, toJS(book.data)) // zzz
       const bookItem = book.data
-      console.log("bookItem", toJS(bookItem)) // zzz
       const title = bookItem.name
 
       const mapId = bookItem.id
       const bookImage = Images.backgrounds[bookItem.imageName]
 
+      console.log("bookImage", bookImage) // zzz
       const renderedBook = (
         <div
           onClick={() => this.changeSelectedBook({ index, mapId })}
@@ -225,7 +159,6 @@ class BookPicker extends React.Component {
     })
 
     const backgroundImage = Images.backgrounds["meadow"]
-    // const props = { maps, onClose: this.onClose }
 
     return (
       <Dialog isOpen={true} isCloseButtonShown={true} className={css.main}>
@@ -247,9 +180,9 @@ class BookPicker extends React.Component {
             {this.renderChapterView()}
           </div>
 
-          {/* <Button className={css.playButton} onClick={closeQuestPicker}>
-            PLAY
-          </Button> */}
+          <Button className={css.addBookButton} onClick={this.addBook}>
+            Add Book
+          </Button>
         </div>
       </Dialog>
     )
