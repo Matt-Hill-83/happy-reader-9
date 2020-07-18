@@ -94,28 +94,23 @@ class BookPicker extends React.Component {
   }
 
   editBook = ({ index, selectedBook }) => {
-    console.log("index", index) // zzz
-    // const selectedBook = this.books2[index]
-    console.log("selectedBook", selectedBook) // zzz
+    // console.log("index", index) // zzz
+    // console.log("selectedBook", selectedBook) // zzz
 
-    // this.books2.forEach((item) => {
-    //   this.books2.add(item)
-    // })
     this.setState({
-      openBookBuilder: !this.state.showBookBuilder,
+      showBookBuilder: !this.state.showBookBuilder,
       selectedBook,
     })
   }
 
   renderChapterView = () => {
-    const { selectedBook } = this.state
-    const { id: bookId, data: bookData } = selectedBook
-    const { imageName } = bookData
+    const { showBookBuilder, selectedBook } = this.state
+    const { id: bookId } = selectedBook
+    const { chapters, name } = selectedBook.data
+    console.log("name", name) // zzz
 
     console.log("selectedBook", toJS(selectedBook)) // zzz
-    console.log("selectedBook.data.chapters", toJS(selectedBook.data.chapters)) // zzz
-    const showBookEditor = true
-    // const { showBookEditor } = this.state
+    console.log("chapters", toJS(chapters)) // zzz
 
     const worldMultiPickerProps = {
       maps,
@@ -124,19 +119,19 @@ class BookPicker extends React.Component {
         this.onCloseWorldPicker({ selectedItems, bookId }),
     }
 
-    console.log("selectedBook.imageName", toJS(imageName)) // zzz
+    // console.log("selectedBook.imageName", toJS(imageName)) // zzz
     // const bookImage = Images.backgrounds[selectedBook && selectedBook.imageName]
     // const bookTableOfContents01 = Images.backgrounds[imageName]
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
 
     return (
       <div className={css.chapterView}>
+        {/* name {name} */}
         <img
           className={cx(css.bookTableOfContents01)}
           src={bookTableOfContents01}
           alt={"imagex"}
         />
-
         <BookTableOfContents
           selectedBook={selectedBook}
           onChangeWorld={this.props.onChangeWorld}
@@ -145,10 +140,9 @@ class BookPicker extends React.Component {
           className={css.playButton}
           onClick={() => this.editBook({ selectedBook })}
         >
-          {/* <Button className={css.playButton} onClick={this.changeSelectedBook}> */}
-          Back----
+          Edit Book
         </Button>
-        {showBookEditor && (
+        {showBookBuilder && (
           <div class={css.worldPicker}>
             <WorldMultiPicker2
               props={worldMultiPickerProps}
@@ -196,7 +190,7 @@ class BookPicker extends React.Component {
     console.log("this.books2", toJS(this.books2)) // zzz
     const {} = this.props
     // const showBookEditor = true
-    // // const { showBookEditor } = this.state
+    const { selectedBook } = this.state
 
     const renderedBookList = this.books2.map((book, index) => {
       const bookItem = book.data
@@ -221,7 +215,7 @@ class BookPicker extends React.Component {
             </span>
           )}
           {!isProdRelease && (
-            <span onClick={(event) => this.onChooseQuests({ book, event })}>
+            <span onClick={() => this.editBook({ selectedBook })}>
               <Icon icon={IconNames.EDIT} />
             </span>
           )}
@@ -235,12 +229,6 @@ class BookPicker extends React.Component {
 
     return (
       <Dialog isOpen={true} isCloseButtonShown={true} className={css.main}>
-        {/* {showBookEditor && (
-          <div class={css.worldPicker}>
-            <WorldMultiPicker2 props={props}></WorldMultiPicker2>
-          </div>
-        )} */}
-
         <img
           className={css.backgroundImage}
           src={backgroundImage}

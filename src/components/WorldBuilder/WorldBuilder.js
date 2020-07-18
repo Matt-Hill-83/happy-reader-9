@@ -28,7 +28,6 @@ import css from "./WorldBuilder.module.scss"
 import WorldPicker from "../WorldPicker/WorldPicker"
 import FrameSetUploader from "../FrameSetUploader/FrameSetUploader"
 import GetSceneConfig from "../GetSceneConfig/GetSceneConfig"
-import BuildEpic from "../BuildEpic/BuildEpic"
 
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
@@ -539,14 +538,6 @@ class WorldBuilder extends Component {
             className={css.frameSetUploaderBox1}
             onSave={this.onChangeDialog}
             world={world.data}
-          />
-          <BuildEpic
-            className={css.frameSetUploaderBox1}
-            onSave={this.onChangeDialog}
-            scenesGrid={scenesGrid}
-            onImportJson={({ newWorld }) =>
-              this.importWorldFromJson({ newWorld })
-            }
           />
         </div>
 
