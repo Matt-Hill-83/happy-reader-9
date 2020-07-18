@@ -258,6 +258,7 @@ import liz27 from "./rigged-girls/liz/png/liz-27.png"
 import liz28 from "./rigged-girls/liz/png/liz-28.png"
 
 // rigged girl - kat
+import katBody from "./rigged-girls/kat/kat-body.png"
 import katBlissful from "./rigged-girls/kat/kat-blissful.png"
 import katCringing from "./rigged-girls/kat/kat-cringing.png"
 import katCrying from "./rigged-girls/kat/kat-crying.png"
@@ -370,8 +371,7 @@ const posableLiz = {
   mood: "liz1",
   images: {
     heads: [],
-    body: { image: cat01 },
-    // body: { image: katBody },
+    body: { image: katBody },
   },
 }
 
@@ -392,8 +392,7 @@ const posableKat = {
   mood: "katHappy",
   images: {
     heads: [],
-    body: { image: cat01 },
-    // body: { image: katBody },
+    body: { image: katBody },
   },
 }
 posableKat.images.heads = katHeads.map((image) => {
