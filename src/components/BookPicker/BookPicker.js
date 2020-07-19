@@ -8,32 +8,24 @@ import cx from "classnames"
 import { Button, Dialog, Icon } from "@blueprintjs/core"
 // import Utils from "../../Utils/Utils.js"
 
-import css from "./BookPicker.module.scss"
 import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
 import { maps, books } from "../../Stores/InitStores.js"
 import { IconNames } from "@blueprintjs/icons"
 import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
 
+import css from "./BookPicker.module.scss"
+
 class BookPicker extends React.Component {
-  books2 = books.docs || []
   state = {
     showBookBuilder: false,
-    selectedBook: this.books2[0],
+    selectedBook: books.docs[0],
     showBookEditor: false,
     questToEdit: null,
-    json: {
-      array: [1, 2, 3],
-      boolean: true,
-      null: null,
-      number: 123,
-      object: { a: "b", c: "d" },
-      string: "Hello World",
-    },
   }
 
   changeSelectedBook = ({ index }) => {
-    const selectedBook = this.books2[index]
+    const selectedBook = books.docs[index]
 
     this.setState({
       selectedBook,
@@ -53,21 +45,16 @@ class BookPicker extends React.Component {
 
   onChangeJSON = (json) => {
     console.log("onChangeJSON") // zzz
-    console.log("json", json) // zzz
-
     const { selectedBook } = this.state
-    // selectedBook.data = json
-    // this.updateBook({ selectedItems, bookId })
     selectedBook.update(json)
-    console.log("selectedBook.data", toJS(selectedBook.data)) // zzz
-    this.props.forceUpdate()
-    // this.setState({ selectedBook })
+    this.forceUpdate()
   }
 
   updateTime = () => {
     const time = new Date().toISOString()
 
     this.setState({
+      // This is updating the wrong object
       json: Object.assign({}, this.state.json, { time }),
     })
   }
@@ -75,12 +62,13 @@ class BookPicker extends React.Component {
   renderChapterView = () => {
     const { showBookBuilder, selectedBook, json } = this.state
     const { id: bookId } = selectedBook
-    const { name } = selectedBook.data
+    const { chapters, name } = selectedBook.data
     console.log("selectedBook", toJS(selectedBook)) // zzz
     console.log("json", json) // zzz
 
     const worldMultiPickerProps = {
-      maps,
+      selectedWorlds: toJS(chapters) || [],
+      allWorlds: maps,
       bookId,
       onClose: ({ selectedItems }) =>
         this.updateBook({ selectedItems, bookId }),
@@ -170,12 +158,14 @@ class BookPicker extends React.Component {
   }
 
   render = () => {
+    console.log("render Book Picker **********************************") // zzz
+    console.log("books.docs.length", toJS(books.docs.length)) // zzz
     const isProdRelease = false
 
     const {} = this.props
     const { selectedBook } = this.state
 
-    const renderedBookList = this.books2.map((book, index) => {
+    const renderedBookList = books.docs.map((book, index) => {
       console.log("book".data, toJS(book.data)) // zzz
       const bookItem = book.data
       const title = bookItem.name
@@ -183,7 +173,6 @@ class BookPicker extends React.Component {
       const mapId = bookItem.id
       const bookImage = Images.backgrounds[bookItem.imageName]
 
-      console.log("bookImage", bookImage) // zzz
       const renderedBook = (
         <div
           onClick={() => this.changeSelectedBook({ index, mapId })}

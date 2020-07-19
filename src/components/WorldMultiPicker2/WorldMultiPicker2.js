@@ -1,3 +1,4 @@
+import React, { useEffect } from "react"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import { toJS } from "mobx"
 import Chip from "@material-ui/core/Chip"
@@ -6,7 +7,6 @@ import FormControl from "@material-ui/core/FormControl"
 import Input from "@material-ui/core/Input"
 import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
-import React from "react"
 import Select from "@material-ui/core/Select"
 import cx from "classnames"
 
@@ -52,11 +52,29 @@ function getStyles(name, selectedItems, theme) {
 }
 
 export default function WorldMultiPicker2({ props }) {
-  const { bookId, onClose, maps } = props
+  const { bookId, onClose, allWorlds, selectedWorlds } = props
+  console.log("selectedWorlds--------------->>", selectedWorlds) // zzz
+
+  useEffect(() => {
+    console.log(
+      "selectedWorlds-----------------2------------------------------>",
+      toJS(selectedWorlds)
+    ) // zzz
+  }, [props.selectedWorlds])
+
+  // get names from selected allWorlds
+
+  const worldNames = selectedWorlds.map((selectedWorld) => {
+    const world = allWorlds.docs.find((world) => world.id === selectedWorld)
+    console.log("world", toJS(world)) // zzz
+    return world.title || ""
+  })
+  console.log("worldNames", toJS(worldNames)) // zzz
 
   const classes = useStyles()
   const theme = useTheme()
   const [selectedItems, setSelectedItems] = React.useState([])
+  console.log("selectedItems", selectedItems) // zzz
 
   function onClosePicker({ selectedItems = [] }) {
     onClose && onClose({ selectedItems })
@@ -66,8 +84,8 @@ export default function WorldMultiPicker2({ props }) {
     setSelectedItems(event.target.value)
   }
 
-  const worlds = toJS(maps)
-  const mutatedWorlds = worlds.docs.map((world) => {
+  const worlds = toJS(allWorlds)
+  worlds.docs.map((world) => {
     const { title } = world.data
     const worldId = world.id
 
@@ -89,7 +107,6 @@ export default function WorldMultiPicker2({ props }) {
   return (
     <div>
       <FormControl className={cx(classes.formControl, css.main)}>
-        {/* <FormControl className={classes.formControl}> */}
         <InputLabel id="demo-mutiple-chip-label">Quests</InputLabel>
         <Select
           className={cx(classes.formControl, css.main2)}

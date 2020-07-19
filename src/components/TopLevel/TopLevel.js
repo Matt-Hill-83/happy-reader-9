@@ -15,7 +15,7 @@ import WorldBuilder from "../WorldBuilder/WorldBuilder.js"
 
 import css from "./TopLevel.module.scss"
 import BookPicker from "../BookPicker/BookPicker.js"
-import BookBuilder from "../BookBuilder/BookBuilder.js"
+// import BookBuilder from "../BookBuilder/BookBuilder.js"
 
 let SHOW_BOOK_PICKER
 SHOW_BOOK_PICKER = false
@@ -48,15 +48,19 @@ class TopLevel extends React.Component {
     activeScene: undefined,
     showQuestPicker: this.isProdRelease,
     showBookPicker: false,
+    keyForBookPicker: 0,
   }
 
   async componentWillMount() {
     const defaultWorldId = localStateStore.getDefaultWorldId()
 
-    try {
-      await books.fetch()
-      console.log("books.docs", toJS(books.docs)) // zzz
-    } catch (error) {}
+    await books.fetch()
+    console.log("books.docs", toJS(books.docs)) // zzz
+
+    // try {
+    //   await books.fetch()
+    //   console.log("books.docs", toJS(books.docs)) // zzz
+    // } catch (error) {}
 
     if (maps.docs && maps.docs[0]) {
       const defaultMap = Utils.getFirstReleasedMap()
@@ -91,7 +95,19 @@ class TopLevel extends React.Component {
   }
 
   forceUpdate = () => {
-    this.setState({ test: Math.random() })
+    console.log(
+      "-----------------------------forceUpdate---------------------------"
+    ) // zzz
+    console.log(
+      "-----------------------------forceUpdate---------------------------"
+    ) // zzz
+    console.log(
+      "-----------------------------forceUpdate---------------------------"
+    ) // zzz
+
+    // debugger
+    // this.forceUpdate()
+    this.setState({ test: Math.random(), keyForBookPicker: Math.random() })
   }
 
   getTerminalScene = ({ start = true }) => {
@@ -281,6 +297,7 @@ class TopLevel extends React.Component {
   renderBookPicker = () => {
     return (
       <BookPicker
+        test={this.state.keyForBookPicker}
         closeQuestPicker={this.closeBookPicker}
         onChangeWorld={this.onChangeWorld}
         forceUpdate={this.forceUpdate}
@@ -310,6 +327,9 @@ class TopLevel extends React.Component {
   render() {
     console.log("")
     console.log("main story render")
+
+    // this console.log needs to be here, or else the children won't render correctly
+    console.log("books.docs", toJS(books.docs.length))
 
     const { className } = this.props
     const activeWorld = localStateStore.getActiveWorld()
