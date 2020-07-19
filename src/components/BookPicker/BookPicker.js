@@ -70,6 +70,7 @@ class BookPicker extends React.Component {
 
   saveBookChanges = ({ selectedBook, bookId }) => {
     console.log("selectedBook", selectedBook) // zzz
+    this.setState({ showBookBuilder: false })
     this.updateBook({ newProps: selectedBook, bookId })
   }
 
