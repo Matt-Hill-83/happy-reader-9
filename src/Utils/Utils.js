@@ -38,7 +38,7 @@ export default class Utils {
   }
   // CONSTANTS ---------------------------------- end ---------------------------
 
-  static belongsToABook = ({ bookId, worldId }) => {
+  static belongsToABook = ({ worldId }) => {
     const owningBooks = []
 
     let bookFound = false
@@ -55,31 +55,6 @@ export default class Utils {
 
   static getCharacterDialogIndex = ({ characterId, characterName }) => {
     return this.characterDialogIndex[characterName] || 2
-  }
-
-  static getWordsByType = ({ words, type, returnName = false }) => {
-    const items = words.filter((word) => {
-      if (word.data) {
-        return word.data.type === type
-      }
-
-      return word.type === type
-    })
-
-    if (returnName) {
-      return items.map((item) => item.name)
-    } else {
-      return items
-    }
-  }
-
-  static getRandomItem = ({ items }) =>
-    items[Math.floor(Math.random() * items.length)]
-
-  static getRandomWordByType = ({ words, type }) => {
-    const output = this.getWordsByType({ words, type }).map((word) => word.name)
-
-    return this.getRandomItem({ items: output })
   }
 
   static getItemsFromDbObj = ({ dbList }) => {
@@ -220,12 +195,16 @@ export default class Utils {
 
     if (!id) return defaultMap
 
-    // const filteredMaps = mapsDocs.filter((map) => map.data.released)
     const foundMap = mapsDocs
       ? mapsDocs.find((map) => map.id === id)
       : defaultMap
 
     return foundMap
+  }
+
+  static getBookFromId = ({ id }) => {
+    const booksDocs = toJS(books.docs)
+    return booksDocs.find((map) => map.id === id)
   }
 
   static getFirstReleasedMap = () =>

@@ -54,12 +54,17 @@ function getStyles(name, selectedItems, theme) {
 export default function WorldMultiPicker2({ props }) {
   const { bookId, onClose, allWorlds, selectedWorlds } = props
   console.log("selectedWorlds--------------->>", selectedWorlds) // zzz
+  const [selectedItems, setSelectedItems] = React.useState([])
 
   useEffect(() => {
+    console.log(
+      "useEffect-------$$$$$$$$$$$$$$$$$$$$$$--------------------->>>>>>>>>>>>"
+    ) // zzz
     console.log(
       "selectedWorlds-----------------2------------------------------>",
       toJS(selectedWorlds)
     ) // zzz
+    // setSelectedItems(selectedWorlds)
   }, [props.selectedWorlds])
 
   // get names from selected allWorlds
@@ -73,7 +78,6 @@ export default function WorldMultiPicker2({ props }) {
 
   const classes = useStyles()
   const theme = useTheme()
-  const [selectedItems, setSelectedItems] = React.useState([])
   console.log("selectedItems", selectedItems) // zzz
 
   function onClosePicker({ selectedItems = [] }) {

@@ -48,7 +48,7 @@ class TopLevel extends React.Component {
     activeScene: undefined,
     showQuestPicker: this.isProdRelease,
     showBookPicker: false,
-    keyForBookPicker: 0,
+    // keyForBookPicker: 0,
   }
 
   async componentWillMount() {
@@ -95,19 +95,9 @@ class TopLevel extends React.Component {
   }
 
   forceUpdate = () => {
-    console.log(
-      "-----------------------------forceUpdate---------------------------"
-    ) // zzz
-    console.log(
-      "-----------------------------forceUpdate---------------------------"
-    ) // zzz
-    console.log(
-      "-----------------------------forceUpdate---------------------------"
-    ) // zzz
-
-    // debugger
-    // this.forceUpdate()
-    this.setState({ test: Math.random(), keyForBookPicker: Math.random() })
+    console.log("-----------------------------forceUpdate--------------") // zzz
+    this.setState({ test: Math.random() })
+    // this.setState({ test: Math.random(), keyForBookPicker: Math.random() })
   }
 
   getTerminalScene = ({ start = true }) => {
@@ -297,7 +287,6 @@ class TopLevel extends React.Component {
   renderBookPicker = () => {
     return (
       <BookPicker
-        test={this.state.keyForBookPicker}
         closeQuestPicker={this.closeBookPicker}
         onChangeWorld={this.onChangeWorld}
         forceUpdate={this.forceUpdate}

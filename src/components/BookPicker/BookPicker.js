@@ -25,8 +25,8 @@ class BookPicker extends React.Component {
     questToEdit: null,
   }
 
-  changeSelectedBook = ({ index }) => {
-    const selectedBook = books.docs[index]
+  changeSelectedBook = ({ bookId }) => {
+    const selectedBook = Utils.getBookFromId({ id: bookId })
 
     this.setState({
       selectedBook,
@@ -40,15 +40,14 @@ class BookPicker extends React.Component {
     })
   }
 
-  forceUpdate = () => {
-    this.props.forceUpdate()
-  }
+  // forceUpdateTopLevel = () => {
+  //   this.props.forceUpdate()
+  // }
 
   onChangeJSON = (json) => {
-    console.log("onChangeJSON") // zzz
     const { selectedBook } = this.state
-    selectedBook.update(json)
-    this.forceUpdate()
+    // selectedBook.update(json)
+    // this.forceUpdateTopLevel()
   }
 
   updateTime = () => {
@@ -61,11 +60,9 @@ class BookPicker extends React.Component {
   }
 
   renderChapterView = () => {
-    const { showBookBuilder, selectedBook, json } = this.state
+    const { showBookBuilder, selectedBook } = this.state
     const { id: bookId } = selectedBook
     const { chapters, name } = selectedBook.data
-    console.log("selectedBook", toJS(selectedBook)) // zzz
-    console.log("json", json) // zzz
 
     const worldMultiPickerProps = {
       selectedWorlds: toJS(chapters) || [],
@@ -108,7 +105,6 @@ class BookPicker extends React.Component {
                   </button>
                 </div>
                 <JSONEditorDemo
-                  // json={json}
                   json={selectedBook.data}
                   onChangeJSON={this.onChangeJSON}
                 />
@@ -124,8 +120,9 @@ class BookPicker extends React.Component {
   }
 
   onDeleteBook = async ({ book }) => {
+    console.log("book", toJS(book)) // zzz
     await book.delete()
-    this.forceUpdate()
+    // this.forceUpdateTopLevel()
   }
 
   onClose = async ({ book }) => {
@@ -151,7 +148,7 @@ class BookPicker extends React.Component {
       imageName: "bookCover01BatOfDoom",
     }
     await books.add(newBook)
-    this.forceUpdate()
+    // this.forceUpdateTopLevel()
   }
 
   onChooseQuests = async ({ book }) => {
@@ -159,8 +156,6 @@ class BookPicker extends React.Component {
   }
 
   render() {
-    console.log("render Book Picker **********************************") // zzz
-    console.log("books.docs.length", toJS(books.docs.length)) // zzz
     const isProdRelease = false
 
     const {} = this.props
@@ -171,21 +166,17 @@ class BookPicker extends React.Component {
       keys: ["data", "name"],
       order: "ASC",
     })
-    console.log("sortedBooks", toJS(sortedBooks)) // zzz
 
-    const renderedBookList = sortedBooks.map((book, index) => {
-      // const renderedBookList = books.docs.map((book, index) => {
-      console.log("book".data, toJS(book.data)) // zzz
-      // console.log("book".data.title, toJS(book.data.title)) // zzz
+    const renderedBookList = sortedBooks.map((book) => {
       const bookItem = book.data
       const title = bookItem.name
 
-      const mapId = bookItem.id
+      const bookId = book.id
       const bookImage = Images.backgrounds[bookItem.imageName]
 
       const renderedBook = (
         <div
-          onClick={() => this.changeSelectedBook({ index, mapId })}
+          onClick={() => this.changeSelectedBook({ bookId })}
           className={css.questRow}
         >
           <div className={cx(css.tableCell)}>
