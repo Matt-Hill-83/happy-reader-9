@@ -6,7 +6,6 @@ import Images from "../../images/images.js"
 import cx from "classnames"
 
 import { Button, Dialog, Icon } from "@blueprintjs/core"
-// import Utils from "../../Utils/Utils.js"
 
 import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
 import { maps, books } from "../../Stores/InitStores.js"
@@ -23,6 +22,7 @@ class BookPicker extends React.Component {
     selectedBook: books.docs[0],
     showBookEditor: false,
     questToEdit: null,
+    jsonUnderEdit: "null",
   }
 
   changeSelectedBook = ({ bookId }) => {
@@ -36,7 +36,15 @@ class BookPicker extends React.Component {
   editBook = ({ selectedBook }) => {
     this.setState({
       showBookBuilder: !this.state.showBookBuilder,
+      jsonUnderEdit: selectedBook.data,
       selectedBook,
+    })
+  }
+
+  onCloseBookBuilder = () => {
+    this.setState({
+      showBookBuilder: false,
+      selectedBook: books.docs[0] || {},
     })
   }
 
@@ -45,7 +53,8 @@ class BookPicker extends React.Component {
   // }
 
   onChangeJSON = (json) => {
-    const { selectedBook } = this.state
+    console.log("json", json) // zzz
+    this.setState({ jsonUnderEdit: json })
     // selectedBook.update(json)
     // this.forceUpdateTopLevel()
   }
@@ -59,8 +68,13 @@ class BookPicker extends React.Component {
     })
   }
 
+  saveBookChanges = ({ selectedBook, bookId }) => {
+    console.log("selectedBook", selectedBook) // zzz
+    this.updateBook({ newProps: selectedBook, bookId })
+  }
+
   renderChapterView = () => {
-    const { showBookBuilder, selectedBook } = this.state
+    const { showBookBuilder, selectedBook, jsonUnderEdit } = this.state
     const { id: bookId } = selectedBook
     const { chapters, name } = selectedBook.data
 
@@ -68,14 +82,17 @@ class BookPicker extends React.Component {
       selectedWorlds: toJS(chapters) || [],
       allWorlds: maps,
       bookId,
-      onClose: ({ selectedItems }) =>
-        this.updateBook({ selectedItems, bookId }),
+      onClose: ({ selectedItems }) => {
+        const newChapters = selectedItems.map((item) => item.id)
+        const newProps = { chapters: newChapters }
+        this.updateBook({ newProps, bookId })
+      },
     }
 
     // const bookImage = Images.backgrounds[selectedBook && selectedBook.imageName]
     // const bookTableOfContents01 = Images.backgrounds[imageName]
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
-
+    console.log("selectedBook.data", toJS(selectedBook.data)) // zzz
     return (
       <div className={css.chapterView}>
         <div className={css.selectedBook}>name {name}</div>
@@ -94,27 +111,38 @@ class BookPicker extends React.Component {
         >
           Edit Book
         </Button>
-        {showBookBuilder && (
-          <div class={css.worldPicker}>
-            <div className="app">
-              <h1>JSONEditor</h1>
-              <div className="contents">
-                <div className="menu">
-                  <button onClick={this.updateTime}>
-                    Create/update a field "time"
-                  </button>
-                </div>
-                <JSONEditorDemo
-                  json={selectedBook.data}
-                  onChangeJSON={this.onChangeJSON}
-                />
-              </div>
+        <Dialog
+          isOpen={showBookBuilder}
+          onClose={this.onCloseBookBuilder}
+          isCloseButtonShown={true}
+          class={css.worldPicker}
+          title={"test"}
+          canOutsideClickClose={true}
+          canEscapeKeyClose={true}
+        >
+          <div className="contents">
+            <div className="menu">
+              <button onClick={this.updateTime}>
+                Create/update a field "time"
+              </button>
             </div>
-            <WorldMultiPicker2
-              props={worldMultiPickerProps}
-            ></WorldMultiPicker2>
+
+            {/* I neeed to store the json in state.  Now it is only stored in the component */}
+            <JSONEditorDemo
+              json={jsonUnderEdit}
+              onChangeJSON={this.onChangeJSON}
+            />
           </div>
-        )}
+          <WorldMultiPicker2 props={worldMultiPickerProps}></WorldMultiPicker2>
+          <Button
+            className={css.playButton}
+            onClick={() =>
+              this.saveBookChanges({ selectedBook: jsonUnderEdit, bookId })
+            }
+          >
+            Save Changes
+          </Button>
+        </Dialog>
       </div>
     )
   }
@@ -122,6 +150,7 @@ class BookPicker extends React.Component {
   onDeleteBook = async ({ book }) => {
     console.log("book", toJS(book)) // zzz
     await book.delete()
+    this.setState({ selectedBook: books.docs[0] || null })
     // this.forceUpdateTopLevel()
   }
 
@@ -129,15 +158,13 @@ class BookPicker extends React.Component {
     this.setState({ questToEdit: book, showBookEditor: true })
   }
 
-  updateBook = async ({ selectedItems, bookId }) => {
+  updateBook = async ({ bookId, newProps }) => {
+    console.log("newProps", newProps) // zzz
+
+    console.log("bookId", bookId) // zzz
     const bookUnderEdit = books.docs.find((item) => item.id === bookId)
 
-    if (selectedItems) {
-      const newChapters = selectedItems.map((item) => item.id)
-      const newProps = { chapters: newChapters }
-      Object.assign(bookUnderEdit.data, toJS(newProps))
-    }
-
+    Object.assign(bookUnderEdit.data, toJS(newProps))
     await bookUnderEdit.update(bookUnderEdit.data)
   }
 

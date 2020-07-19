@@ -64,7 +64,12 @@ export default function WorldMultiPicker2({ props }) {
       "selectedWorlds-----------------2------------------------------>",
       toJS(selectedWorlds)
     ) // zzz
-    // setSelectedItems(selectedWorlds)
+
+    const selectedWorldObjs = selectedWorlds.map((item) => {
+      return Utils.getMapFromId({ id: item })
+    })
+    console.log("selectedWorldObjs", toJS(selectedWorldObjs)) // zzz
+    setSelectedItems(selectedWorldObjs)
   }, [props.selectedWorlds])
 
   // get names from selected allWorlds
