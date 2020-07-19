@@ -15,6 +15,7 @@ import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
 
 import css from "./BookPicker.module.scss"
+import Utils from "../../Utils/Utils.js"
 
 class BookPicker extends React.Component {
   state = {
@@ -157,7 +158,7 @@ class BookPicker extends React.Component {
     this.setState({ questToEdit: book, showBookEditor: true })
   }
 
-  render = () => {
+  render() {
     console.log("render Book Picker **********************************") // zzz
     console.log("books.docs.length", toJS(books.docs.length)) // zzz
     const isProdRelease = false
@@ -165,8 +166,17 @@ class BookPicker extends React.Component {
     const {} = this.props
     const { selectedBook } = this.state
 
-    const renderedBookList = books.docs.map((book, index) => {
+    const sortedBooks = Utils.sortDataByNestedKey({
+      data: books.docs,
+      keys: ["data", "name"],
+      order: "ASC",
+    })
+    console.log("sortedBooks", toJS(sortedBooks)) // zzz
+
+    const renderedBookList = sortedBooks.map((book, index) => {
+      // const renderedBookList = books.docs.map((book, index) => {
       console.log("book".data, toJS(book.data)) // zzz
+      // console.log("book".data.title, toJS(book.data.title)) // zzz
       const bookItem = book.data
       const title = bookItem.name
 
