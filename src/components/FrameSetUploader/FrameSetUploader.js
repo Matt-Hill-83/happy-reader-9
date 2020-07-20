@@ -68,7 +68,7 @@ import story9927 from "../../Scripts/9927-test-end-2-end-test.js"
 
 const worlds = [
   // story020,
-  story100,
+  // story100,
   //
   //
   //
@@ -124,7 +124,7 @@ const worlds = [
   // story8013,
   // story9924,
   // story9925,
-  // story9926,
+  story9926,
   // story0001,
   // story0002,
 ]
