@@ -156,7 +156,7 @@ const story020 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: true,
-        items: ["flag", "cup"],
+        // items: ["flag", "cup"],
       },
       frames: [
         {
@@ -239,7 +239,7 @@ const story020 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: true,
-        items: ["flag", "cup"],
+        // items: ["flag", "cup"],
       },
       frames: [
         {
@@ -321,7 +321,7 @@ const story020 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: true,
-        items: ["flag", "cup"],
+        // items: ["flag", "cup"],
       },
       frames: [
         {

@@ -158,7 +158,6 @@ const story100 = {
         creatures: ["kat", "liz2"],
         isEndScene: false,
         isStartScene: true,
-        items: ["flag", "cup"],
       },
       frames: [
         {

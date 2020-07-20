@@ -37,7 +37,7 @@ const story002 = {
         },
         {
           frameConfig: {
-            items: ["troll01", "troll02"],
+            // items: ["troll01", "troll02"],
             faces: [
               { character: "liz2", face: "happy" },
               { character: "kat", face: "kat-cringing.62a27ad4.png" },

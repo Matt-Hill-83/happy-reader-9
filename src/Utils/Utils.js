@@ -434,6 +434,7 @@ export default class Utils {
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
     const map = mapToUpdate || localStateStore.getWorldBuilderWorld()
     console.log("map.data", toJS(map.data)) // zzz
+    console.log("map.data.title", toJS(map.data.title)) // zzz
     Object.assign(map.data, toJS(newProps))
 
     if (mapToUpdate) {
@@ -451,7 +452,7 @@ export default class Utils {
       // fuck.  everything broke because this does not pull from the correct grid.
       // fuck.  everything broke because this does not pull from the correct grid.
       map.data.newGrid5 = Utils.createCondensedGridFromGrid({})
-      console.log("map.data.newGrid5", toJS(map.data.newGrid5)) // zzz
+      // console.log("map.data.newGrid5", toJS(map.data.newGrid5)) // zzz
     }
 
     delete map.data.grid
@@ -482,7 +483,7 @@ export default class Utils {
     allCreatures.push(...allItems)
 
     const filteredCharacters = allCreatures.filter((item) => {
-      return ["liz2", "kat"].includes(item)
+      return item && ["liz2", "kat"].includes(item)
     })
 
     return filteredCharacters
@@ -511,7 +512,7 @@ export default class Utils {
     allCreatures.push(...allItems)
 
     const filteredCharacters = allCreatures.filter((item) => {
-      return !["liz2", "kat"].includes(item)
+      return item && !["liz2", "kat"].includes(item)
     })
 
     return filteredCharacters

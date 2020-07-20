@@ -15,7 +15,6 @@ const story9920 = {
       frames: [
         {
           frameConfig: {
-            items: ["sweaterGirl01", "gram"],
             faces: [
               { characterIndex: 1, face: "happy", character: "liz2" },
               {

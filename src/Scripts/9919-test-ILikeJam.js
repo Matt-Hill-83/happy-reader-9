@@ -15,7 +15,6 @@ const story9919 = {
       frames: [
         {
           frameConfig: {
-            items: ["sweaterGirl01", "gram"],
             faces: [
               { characterIndex: 1, face: "happy", character: "liz2" },
               {
@@ -104,5 +103,5 @@ const story9919 = {
       },
     ],
   },
-};
-export default story9919;
+}
+export default story9919

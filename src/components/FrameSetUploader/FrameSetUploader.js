@@ -9,6 +9,8 @@ import _get from "lodash.get"
 import css from "./FrameSetUploader.module.scss"
 
 // import story9104 from "../../Scripts/000-charlieAndLucy.js"
+import story0001 from "../../Scripts/----- test-001.js"
+import story0002 from "../../Scripts/----- test-002.js"
 import story002 from "../../Scripts/002-BrightNewDay"
 import story003 from "../../Scripts/003-KatGetsADress"
 import story004 from "../../Scripts/004-KatGoesOffScript"
@@ -30,6 +32,7 @@ import story310 from "../../Scripts/310-MerlindaTheFairyPrincessPart2"
 import story330 from "../../Scripts/330-MerlindaTheFairyPrincessPart3"
 import story8000 from "../../Scripts/8000-dogAndPup-001.js"
 import story8010 from "../../Scripts/8010-dogAndPup-002.js"
+import story8013 from "../../Scripts/8013-CharAndLucy-003.js"
 import story8054 from "../../Scripts/8054-math-NineTimesSix.js"
 import story9000 from "../../Scripts/9000-ANewSoundInTheWoods"
 import story9100 from "../../Scripts/9100-KatsSecondQuest"
@@ -58,16 +61,22 @@ import story9920 from "../../Scripts/9920-test-BugYuck.js"
 import story9921 from "../../Scripts/9921-test-WeGetAPet.js"
 import story9922 from "../../Scripts/9922-test-SoWhenDoWeGetTheCupcakes.js"
 import story9923 from "../../Scripts/9923-test-FrogHopper.js"
-import story8013 from "../../Scripts/8013-CharAndLucy-003.js"
 import story9924 from "../../Scripts/9924-test-FrogHopperPart01.js"
 import story9925 from "../../Scripts/9925-test-AnnaWantCupcake.js"
 import story9926 from "../../Scripts/9926-test-newPattern001.js"
 import story9927 from "../../Scripts/9927-test-end-2-end-test.js"
-import story0001 from "../../Scripts/----- test-001.js"
-import story0002 from "../../Scripts/----- test-002.js"
 
 const worlds = [
-  story9927,
+  // story020,
+  // story100,
+
+  //
+  //
+  //
+  //
+  // story110,
+  story9104,
+  // story9927,
   // story002,
   // story003,
   // story004,
@@ -79,10 +88,7 @@ const worlds = [
   // story013,
   // story014,
   // story015,
-  // story020,
   // story050,
-  // story100,
-  // story110,
   // story200,
   // story300,
   // story310,
@@ -94,7 +100,6 @@ const worlds = [
   // story9100,
   // story9102,
   // story9103,
-  // story9104,
   // story9901,
   // story9902,
   // story9903,

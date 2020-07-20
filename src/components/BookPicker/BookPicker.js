@@ -205,12 +205,12 @@ class BookPicker extends React.Component {
           </div>
           {!isProdRelease && (
             <span onClick={(event) => this.onDeleteBook({ book, event })}>
-              <Icon icon={IconNames.TRASH} />
+              <Icon className={css.buttonIcon} icon={IconNames.TRASH} />
             </span>
           )}
           {!isProdRelease && (
             <span onClick={() => this.editBook({ selectedBook })}>
-              <Icon icon={IconNames.EDIT} />
+              <Icon className={css.buttonIcon} icon={IconNames.EDIT} />
             </span>
           )}
         </div>

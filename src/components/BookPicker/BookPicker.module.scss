@@ -13,8 +13,19 @@
   margin: unset;
   border: 2px solid #000 !important;
 
+  .buttonIcon {
+    border: 1px solid red !important;
+    // height: min-content;
+
+    > svg {
+      border: 4px solid green !important;
+      height: 4vh !important;
+      width: 4vh !important;
+    }
+  }
   .selectedBook {
     border: 1px solid red !important;
+
     padding: 1vh;
     position: absolute;
     z-index: 10;
@@ -218,7 +229,6 @@
 
   .tableCell {
     display: flex;
-    // padding: 0.4vh 1.2vh;
     flex-direction: column;
     position: relative;
   }
