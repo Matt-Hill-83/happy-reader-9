@@ -53,7 +53,6 @@ class BookPicker extends React.Component {
   // }
 
   onChangeJSON = (json) => {
-    console.log("json", json) // zzz
     this.setState({ jsonUnderEdit: json })
     // selectedBook.update(json)
     // this.forceUpdateTopLevel()
@@ -69,7 +68,6 @@ class BookPicker extends React.Component {
   }
 
   saveBookChanges = ({ selectedBook, bookId }) => {
-    console.log("selectedBook", selectedBook) // zzz
     this.setState({ showBookBuilder: false })
     this.updateBook({ newProps: selectedBook, bookId })
   }
@@ -93,7 +91,6 @@ class BookPicker extends React.Component {
     // const bookImage = Images.backgrounds[selectedBook && selectedBook.imageName]
     // const bookTableOfContents01 = Images.backgrounds[imageName]
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
-    console.log("selectedBook.data", toJS(selectedBook.data)) // zzz
     return (
       <div className={css.chapterView}>
         <div className={css.selectedBook}>name {name}</div>
@@ -113,13 +110,12 @@ class BookPicker extends React.Component {
           Edit Book
         </Button>
         <Dialog
+          canEscapeKeyClose={true}
+          canOutsideClickClose={true}
+          isCloseButtonShown={true}
           isOpen={showBookBuilder}
           onClose={this.onCloseBookBuilder}
-          isCloseButtonShown={true}
-          class={css.worldPicker}
           title={"test"}
-          canOutsideClickClose={true}
-          canEscapeKeyClose={true}
         >
           <div className="contents">
             <div className="menu">
@@ -149,7 +145,6 @@ class BookPicker extends React.Component {
   }
 
   onDeleteBook = async ({ book }) => {
-    console.log("book", toJS(book)) // zzz
     await book.delete()
     this.setState({ selectedBook: books.docs[0] || null })
     // this.forceUpdateTopLevel()
@@ -160,9 +155,6 @@ class BookPicker extends React.Component {
   }
 
   updateBook = async ({ bookId, newProps }) => {
-    console.log("newProps", newProps) // zzz
-
-    console.log("bookId", bookId) // zzz
     const bookUnderEdit = books.docs.find((item) => item.id === bookId)
 
     Object.assign(bookUnderEdit.data, toJS(newProps))

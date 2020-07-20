@@ -53,22 +53,12 @@ function getStyles(name, selectedItems, theme) {
 
 export default function WorldMultiPicker2({ props }) {
   const { bookId, onClose, allWorlds, selectedWorlds } = props
-  console.log("selectedWorlds--------------->>", selectedWorlds) // zzz
   const [selectedItems, setSelectedItems] = React.useState([])
 
   useEffect(() => {
-    console.log(
-      "useEffect-------$$$$$$$$$$$$$$$$$$$$$$--------------------->>>>>>>>>>>>"
-    ) // zzz
-    console.log(
-      "selectedWorlds-----------------2------------------------------>",
-      toJS(selectedWorlds)
-    ) // zzz
-
     const selectedWorldObjs = selectedWorlds.map((item) => {
       return Utils.getMapFromId({ id: item })
     })
-    console.log("selectedWorldObjs", toJS(selectedWorldObjs)) // zzz
     setSelectedItems(selectedWorldObjs)
   }, [props.selectedWorlds])
 
@@ -76,14 +66,11 @@ export default function WorldMultiPicker2({ props }) {
 
   const worldNames = selectedWorlds.map((selectedWorld) => {
     const world = allWorlds.docs.find((world) => world.id === selectedWorld)
-    console.log("world", toJS(world)) // zzz
     return world.title || ""
   })
-  console.log("worldNames", toJS(worldNames)) // zzz
 
   const classes = useStyles()
   const theme = useTheme()
-  console.log("selectedItems", selectedItems) // zzz
 
   function onClosePicker({ selectedItems = [] }) {
     onClose && onClose({ selectedItems })
