@@ -17,10 +17,6 @@ import css from "./TopLevel.module.scss"
 import BookPicker from "../BookPicker/BookPicker.js"
 // import BookBuilder from "../BookBuilder/BookBuilder.js"
 
-let SHOW_BOOK_PICKER
-SHOW_BOOK_PICKER = false
-SHOW_BOOK_PICKER = true
-
 let useDefaultWorldId
 useDefaultWorldId = true
 useDefaultWorldId = false
@@ -48,19 +44,16 @@ class TopLevel extends React.Component {
     activeScene: undefined,
     showQuestPicker: this.isProdRelease,
     showBookPicker: false,
-    // keyForBookPicker: 0,
   }
 
   async componentWillMount() {
+    console.log("") // zzz
+    console.log("") // zzz
+    console.log("componentWillMount---------------------------------") // zzz
     const defaultWorldId = localStateStore.getDefaultWorldId()
 
     await books.fetch()
     console.log("books.docs", toJS(books.docs)) // zzz
-
-    // try {
-    //   await books.fetch()
-    //   console.log("books.docs", toJS(books.docs)) // zzz
-    // } catch (error) {}
 
     if (maps.docs && maps.docs[0]) {
       const defaultMap = Utils.getFirstReleasedMap()
@@ -79,9 +72,10 @@ class TopLevel extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(newProps) {
+    console.log("UNSAFE_componentWillReceiveProps--------------->>>>>>>>>>>") // zzz
     const worldId = _get(newProps, "match.params.worldId")
 
-    this.setState({ showQuestPicker: false })
+    this.setState({ showQuestPicker: false, showBookPicker: false })
 
     if (worldId) {
       localStateStore.setActiveMapId(worldId)
@@ -207,6 +201,7 @@ class TopLevel extends React.Component {
   }
 
   onChangeWorld = ({ mapId }) => {
+    console.log("onChangeWorld") // zzz
     console.log(
       "-----------------------mapId---------------------------",
       mapId
@@ -243,7 +238,7 @@ class TopLevel extends React.Component {
       })
     }
     // uncomment this after building feature
-    // localStateStore.setShowBookPicker(false)
+    localStateStore.setShowBookPicker(false)
 
     this.setState({ showQuestPicker: false })
     this.initWorld()
@@ -267,7 +262,10 @@ class TopLevel extends React.Component {
   }
 
   toggleQuestPicker = () => {
-    this.setState({ showQuestPicker: !this.state.showQuestPicker })
+    this.setState({
+      showQuestPicker: !this.state.showQuestPicker,
+      showBookPicker: false,
+    })
   }
 
   renderWorldPicker = () => {

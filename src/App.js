@@ -55,6 +55,11 @@ export default function App() {
                 <WorldBuilder />
               </div>
             </Route>
+            {/* <Route
+              path={worldItem({ worldId })}
+              // pass props to force component to remount when route changes
+              component={(props) => <StoryViewer {...props} />}
+            /> */}
             <Route path={worldItem({ worldId })} component={StoryViewer} />
             <Route path="/">
               <StoryViewer />

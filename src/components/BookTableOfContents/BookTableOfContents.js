@@ -11,6 +11,7 @@ import { maps } from "../../Stores/InitStores.js"
 
 import css from "./BookTableOfContents.module.scss"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
+import { Link } from "react-router-dom/cjs/react-router-dom.min"
 
 class BookTableOfContents extends React.Component {
   state = {}
@@ -54,7 +55,9 @@ class BookTableOfContents extends React.Component {
           </div>
         </div>
       )
-      return <div onClick={() => onChangeWorld({ index, mapId })}>{text}</div>
+
+      return <Link to={`/world/${mapId}`}>{text}</Link>
+      return <div onClick={() => onChangeWorld({ mapId })}>{text}</div>
     })
 
     const tableHeader = (
