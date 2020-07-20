@@ -507,7 +507,8 @@ class WorldBuilder extends Component {
       scenesGrid[coordinates.row][coordinates.col] = newBornScene
     })
 
-    const newProps = { title: title + "---test2", description, questConfig }
+    const newProps = { title: title, description, questConfig }
+    // const newProps = { title: title + "---test2", description, questConfig }
     console.log("newProps", toJS(newProps)) // zzz
     Utils.updateMap({ newProps })
   }

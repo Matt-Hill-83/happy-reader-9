@@ -23,13 +23,21 @@ class GetSceneConfig extends Component {
 
   formatFramesForExport = ({ frames }) => {
     const newFrames = frames.map((oldFrame) => {
+      const frameConfig = {
+        id: oldFrame.id,
+      }
+      if (oldFrame.critters1 && oldFrame.critters1.length > 0) {
+        frameConfig.critters1 = oldFrame.critters1
+      }
+      if (oldFrame.critters2 && oldFrame.critters2.length > 0) {
+        frameConfig.critters2 = oldFrame.critters2
+      }
+      if (oldFrame.faces && oldFrame.faces.length > 0) {
+        frameConfig.faces = oldFrame.faces
+      }
+
       const newFrame = {
-        frameConfig: {
-          critters1: oldFrame.critters1,
-          critters2: oldFrame.critters2,
-          id: oldFrame.id,
-          faces: oldFrame.faces,
-        },
+        frameConfig,
       }
       const newDialogs = oldFrame.dialog.map((item) => {
         return `{"${item.character}" : "${item.text}"}`
@@ -66,10 +74,10 @@ class GetSceneConfig extends Component {
         sceneConfig: {
           id: scene.location.id,
           worldId: world.id,
-          worldTitle: world.title,
+          // worldTitle: world.title,
           coordinates: scene.coordinates,
-          isEndScene: scene.isEndScene,
-          isStartScene: scene.isStartScene,
+          // isEndScene: scene.isEndScene,
+          // isStartScene: scene.isStartScene,
           ...scene.sceneConfig,
         },
         frames: newFrames,
