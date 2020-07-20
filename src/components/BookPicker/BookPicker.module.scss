@@ -202,16 +202,14 @@
 
   .scrollArea {
     display: flex;
-    overflow: auto;
-    /* flex-direction: column; */
     flex-wrap: wrap;
+    overflow: auto;
   }
 
   .questRow {
     display: flex;
 
     border-radius: 0.6vh;
-    border: 1px solid blue !important;
     justify-content: center;
     margin-right: 2vh;
 
