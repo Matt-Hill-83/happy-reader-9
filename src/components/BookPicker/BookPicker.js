@@ -204,13 +204,21 @@ class BookPicker extends React.Component {
             <img className={css.bookImage} src={bookImage} alt={"imagex"} />
           </div>
           {!isProdRelease && (
-            <span onClick={(event) => this.onDeleteBook({ book, event })}>
-              <Icon className={css.buttonIcon} icon={IconNames.TRASH} />
+            <span>
+              <Icon
+                onClick={(event) => this.onDeleteBook({ book, event })}
+                className={css.buttonIcon}
+                icon={IconNames.TRASH}
+              />
             </span>
           )}
           {!isProdRelease && (
-            <span onClick={() => this.editBook({ selectedBook })}>
-              <Icon className={css.buttonIcon} icon={IconNames.EDIT} />
+            <span>
+              <Icon
+                onClick={() => this.editBook({ selectedBook })}
+                className={css.buttonIcon}
+                icon={IconNames.EDIT}
+              />
             </span>
           )}
         </div>
