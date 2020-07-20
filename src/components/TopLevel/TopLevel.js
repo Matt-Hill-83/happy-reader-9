@@ -43,7 +43,7 @@ class TopLevel extends React.Component {
   state = {
     activeScene: undefined,
     showQuestPicker: this.isProdRelease,
-    showBookPicker: false,
+    // showBookPicker: false,
   }
 
   async componentWillMount() {
@@ -75,7 +75,8 @@ class TopLevel extends React.Component {
     console.log("UNSAFE_componentWillReceiveProps--------------->>>>>>>>>>>") // zzz
     const worldId = _get(newProps, "match.params.worldId")
 
-    this.setState({ showQuestPicker: false, showBookPicker: false })
+    this.setState({ showQuestPicker: false })
+    // this.setState({ showQuestPicker: false, showBookPicker: false })
 
     if (worldId) {
       localStateStore.setActiveMapId(worldId)
@@ -245,6 +246,7 @@ class TopLevel extends React.Component {
   }
 
   toggleBookPicker = () => {
+    this.setState({ showQuestPicker: false })
     const show = localStateStore.getShowBookPicker()
     localStateStore.setShowBookPicker(!show)
   }
@@ -262,9 +264,10 @@ class TopLevel extends React.Component {
   }
 
   toggleQuestPicker = () => {
+    localStateStore.setShowBookPicker(false)
     this.setState({
       showQuestPicker: !this.state.showQuestPicker,
-      showBookPicker: false,
+      // showBookPicker: false,
     })
   }
 
