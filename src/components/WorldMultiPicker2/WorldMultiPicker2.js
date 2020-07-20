@@ -54,7 +54,7 @@ function getStyles(name, selectedItems, theme) {
 export default function WorldMultiPicker2({ props }) {
   const { bookId, onClose, allWorlds, selectedWorlds } = props
   const [selectedItems, setSelectedItems] = React.useState([])
-  console.log("selectedWorlds", selectedWorlds) // zzz
+
   useEffect(() => {
     const selectedWorldObjs = selectedWorlds.map((item) => {
       return Utils.getMapFromId({ id: item })

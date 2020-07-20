@@ -1,20 +1,19 @@
-import React from "react"
+import _get from "lodash.get"
+import { ButtonGroup, Button, Dialog, Icon } from "@blueprintjs/core"
+import { IconNames } from "@blueprintjs/icons"
 import { observer } from "mobx-react"
 import { toJS } from "mobx"
-import _get from "lodash.get"
-import Images from "../../images/images.js"
 import cx from "classnames"
+import React from "react"
 
-import { Button, Dialog, Icon } from "@blueprintjs/core"
-
-import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
 import { maps, books } from "../../Stores/InitStores.js"
-import { IconNames } from "@blueprintjs/icons"
-import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
+import BookTableOfContents from "../BookTableOfContents/BookTableOfContents.js"
+import Images from "../../images/images.js"
 import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo.js"
+import Utils from "../../Utils/Utils.js"
+import WorldMultiPicker2 from "../WorldMultiPicker2/WorldMultiPicker2.js"
 
 import css from "./BookPicker.module.scss"
-import Utils from "../../Utils/Utils.js"
 
 class BookPicker extends React.Component {
   state = {
@@ -77,6 +76,8 @@ class BookPicker extends React.Component {
     const { id: bookId } = selectedBook
     const { chapters, name } = selectedBook.data
 
+    const isProdRelease = false
+
     const worldMultiPickerProps = {
       selectedWorlds: toJS(chapters) || [],
       allWorlds: maps,
@@ -88,8 +89,6 @@ class BookPicker extends React.Component {
       },
     }
 
-    // const bookImage = Images.backgrounds[selectedBook && selectedBook.imageName]
-    // const bookTableOfContents01 = Images.backgrounds[imageName]
     const bookTableOfContents01 = Images.backgrounds["bookTableOfContents01"]
     return (
       <div className={css.chapterView}>
@@ -103,12 +102,20 @@ class BookPicker extends React.Component {
           selectedBook={selectedBook}
           onChangeWorld={this.props.onChangeWorld}
         />
-        <Button
-          className={css.playButton}
-          onClick={() => this.editBook({ selectedBook })}
-        >
-          Edit Book
-        </Button>
+        {!isProdRelease && (
+          <ButtonGroup className={css.buttonGroup} color="primary">
+            <Button
+              onClick={() => this.editBook({ selectedBook })}
+              icon={IconNames.EDIT}
+            />
+            <Button
+              onClick={(event) =>
+                this.onDeleteBook({ book: selectedBook, event })
+              }
+              icon={IconNames.TRASH}
+            />
+          </ButtonGroup>
+        )}
         <Dialog
           canEscapeKeyClose={true}
           canOutsideClickClose={true}
@@ -179,7 +186,7 @@ class BookPicker extends React.Component {
     const isProdRelease = false
 
     const {} = this.props
-    const { selectedBook } = this.state
+    // const { selectedBook } = this.state
 
     const sortedBooks = Utils.sortDataByNestedKey({
       data: books.docs,
@@ -203,24 +210,6 @@ class BookPicker extends React.Component {
             <div className={cx(css.questName)}>{title}</div>
             <img className={css.bookImage} src={bookImage} alt={"imagex"} />
           </div>
-          {!isProdRelease && (
-            <span>
-              <Icon
-                onClick={(event) => this.onDeleteBook({ book, event })}
-                className={css.buttonIcon}
-                icon={IconNames.TRASH}
-              />
-            </span>
-          )}
-          {!isProdRelease && (
-            <span>
-              <Icon
-                onClick={() => this.editBook({ selectedBook })}
-                className={css.buttonIcon}
-                icon={IconNames.EDIT}
-              />
-            </span>
-          )}
         </div>
       )
       return renderedBook
