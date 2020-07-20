@@ -122,16 +122,15 @@ class BookPicker extends React.Component {
           isCloseButtonShown={true}
           isOpen={showBookBuilder}
           onClose={this.onCloseBookBuilder}
-          title={"test"}
+          title={"Edit Book"}
         >
           <div className="contents">
-            <div className="menu">
+            {/* <div className="menu">
               <button onClick={this.updateTime}>
                 Create/update a field "time"
               </button>
-            </div>
+            </div> */}
 
-            {/* I neeed to store the json in state.  Now it is only stored in the component */}
             <JSONEditorDemo
               json={jsonUnderEdit}
               onChangeJSON={this.onChangeJSON}
