@@ -31,17 +31,27 @@ class BookTableOfContents extends React.Component {
     const {} = this.state
 
     const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
+    // const savedMaps = Utils.getItemsFromDbObj({ dbList: maps })
     let filteredMaps = []
 
-    filteredMaps = savedMaps.filter((map) => {
+    const sortedWorlds = Utils.sortWorlds({ worlds: maps })
+    console.log("sortedWorlds", toJS(sortedWorlds)) // zzz
+
+    filteredMaps = sortedWorlds.filter((map) => {
+      // filteredMaps = maps.docs.filter((map) => {
+      // filteredMaps = savedMaps.filter((map) => {
       const chapters = _get(selectedBook, "data.chapters") || []
 
       return map.data.released && chapters.includes(map.id)
     })
 
+    console.log("filteredMaps", toJS(filteredMaps)) // zzz
+    // const sortedWorlds = Utils.sortWorlds({ worlds: filteredMaps })
+
     const sortedMaps = filteredMaps
 
     const mapList = sortedMaps.map((map, index) => {
+      // const mapList = sortedMaps.map((map, index) => {
       const { title } = map.data
 
       const mapId = map.id

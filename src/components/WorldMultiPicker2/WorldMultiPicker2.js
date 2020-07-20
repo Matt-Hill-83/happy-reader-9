@@ -88,13 +88,7 @@ export default function WorldMultiPicker2({ props }) {
     }
   })
 
-  const sortedWorlds = Utils.sortWorlds({ worlds })
-
-  // const sortedWorlds = Utils.sortDataByNestedKey({
-  //   data: worlds.docs,
-  //   keys: ["data", "newTitle"],
-  //   order: "ASC",
-  // })
+  const sortedWorlds = Utils.sortWorlds({ worlds, keys: ["data", "newTitle"] })
 
   return (
     <div>

@@ -38,10 +38,20 @@ export default class Utils {
   }
   // CONSTANTS ---------------------------------- end ---------------------------
 
-  static sortWorlds = ({ worlds }) => {
+  static sortWorlds = ({ worlds, keys }) => {
     const sortedWorlds = Utils.sortDataByNestedKey({
       data: worlds.docs,
-      keys: ["data", "newTitle"],
+      keys: keys || ["data", "title"],
+      order: "ASC",
+    })
+
+    return sortedWorlds
+  }
+
+  static sortWorlds2 = ({ worlds }) => {
+    const sortedWorlds = Utils.sortDataByNestedKey({
+      data: worlds.docs,
+      keys: ["data", "title"],
       order: "ASC",
     })
 
