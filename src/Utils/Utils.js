@@ -38,6 +38,16 @@ export default class Utils {
   }
   // CONSTANTS ---------------------------------- end ---------------------------
 
+  static sortWorlds = ({ worlds }) => {
+    const sortedWorlds = Utils.sortDataByNestedKey({
+      data: worlds.docs,
+      keys: ["data", "newTitle"],
+      order: "ASC",
+    })
+
+    return sortedWorlds
+  }
+
   static belongsToABook = ({ worldId }) => {
     const owningBooks = []
 

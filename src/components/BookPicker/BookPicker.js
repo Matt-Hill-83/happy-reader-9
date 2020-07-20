@@ -237,9 +237,9 @@ class BookPicker extends React.Component {
         />
 
         <div className={css.questPage}>
-          <div className={css.header}>
+          {/* <div className={css.header}>
             <span className={css.gameTitle}>Troll Need Gold</span>
-          </div>
+          </div> */}
 
           <div className={css.content}>
             <div className={css.questTable}>

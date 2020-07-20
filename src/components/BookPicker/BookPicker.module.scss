@@ -93,9 +93,8 @@
     background-color: var(--color-purple) !important;
     z-index: 1;
     font-family: fantasy;
-    padding: 2%;
+    padding: 1vh;
     position: relative;
-    /* width: 6vh; */
     right: 6vh;
     top: 1vh;
     position: absolute;
@@ -107,12 +106,10 @@
     background-color: var(--color-purple) !important;
     z-index: 1;
     font-family: fantasy;
-    padding: 2%;
-    position: relative;
-    /* width: 6vh; */
     right: 1vh;
     top: 1vh;
     position: absolute;
+    padding: 1vh;
   }
 
   .questPage {
@@ -168,7 +165,7 @@
     display: flex;
     align-self: center;
     justify-self: center;
-    margin-top: 8vh;
+    margin-top: 0vh;
     padding: 0px;
     flex-direction: column;
     width: 100%;
