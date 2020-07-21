@@ -41,28 +41,30 @@ export default function App() {
 
   maps.fetch()
 
+  const nav = IS_PROD_RELEASE ? null : (
+    <nav className={`${css.nav}`}>
+      <ul>
+        <li>
+          <Link to="/">Story Viewer</Link>
+        </li>
+        <li>
+          <Link to="/world-builder">World Builder</Link>
+        </li>
+      </ul>
+    </nav>
+  )
+
   return (
     <Router>
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          {!IS_PROD_RELEASE && (
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">Story Viewer</Link>
-                </li>
-                <li>
-                  <Link to="/world-builder">World Builder</Link>
-                </li>
-              </ul>
-            </nav>
-          )}
+          {nav}
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/world-builder">
-              <div className={`${css.App} `}>
+              <div className={`${css.main} `}>
                 <WorldBuilder />
               </div>
             </Route>
@@ -80,7 +82,7 @@ export default function App() {
 
 function StoryViewer({ match }) {
   return (
-    <div className={`${css.App} `}>
+    <div className={`${css.main} `}>
       <MediaQuery minDeviceWidth={1224}>
         {/* <div className={css.mediaMsg}>You are a desktop</div> */}
         {/* set global css vars thru class */}

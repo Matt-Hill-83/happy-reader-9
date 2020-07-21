@@ -6,10 +6,19 @@ body {
   margin: 0px;
 }
 
-.App {
+.main {
   text-align: center;
   display: flex;
   flex: 1;
+}
+.nav {
+  position: absolute;
+  z-index: 10000000;
+  left: 26vw;
+  background: wheat;
+  padding: 1vh;
+  border: 1px solid red !important;
+  border-radius: 1vh;
 }
 
 .mobile {

@@ -803,6 +803,39 @@ const story9926 = {
       { unHideTriggers: { completedMission: 2 }, subQuestId: 4 },
       { unHideTriggers: { completedMission: 3 }, subQuestId: 5 },
     ],
+    subQuests: [
+      {
+        name: "sq1",
+        scenes: [{ name: "log" }],
+        triggers: {
+          lock: [
+            { completedMission: 0 },
+            { currentMission: 0 },
+            { completedScene: "log" },
+          ],
+          unLock: [{ completedMission: 0 }],
+          unHide: [{ completedMission: 0 }],
+          newFrameSet: [{ completedMission: 0 }],
+        },
+      },
+    ],
+    sceneTriggersList: [
+      {
+        name: "log",
+        triggers: {
+          lock: [
+            { completedMission: 0 },
+            { currentMission: 0 },
+            { completedScene: "log" },
+          ],
+          unLock: [{ completedMission: 0 }],
+          unHide: [{ completedMission: 0 }],
+          newFrameSet: [{ completedMission: 0 }],
+        },
+      },
+      { name: "log", unHideTriggers: { completedMission: 0 } },
+      { name: "log", unHideTriggers: { completedMission: 0 } },
+    ],
   },
 }
 export default story9926
