@@ -19,7 +19,7 @@ import css from "./WorldPicker.module.scss"
 import { Checkbox } from "material-ui"
 
 class WorldPicker extends Component {
-  state = { selectedMap: "Select Map" }
+  state = { selectedMap: this.props.initialValue || "Select Map" }
 
   changeMap = ({ index, mapId }) => {
     const { onChangeWorld } = this.props

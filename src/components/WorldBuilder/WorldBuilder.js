@@ -568,58 +568,12 @@ class WorldBuilder extends Component {
     const world = localStateStore.getWorldBuilderWorld() || {}
     console.log("world", world) // zzz
 
-    Utils.updateMap({ newProps: { ...world.data }, mapToUpdate: world })
-
-    // Utils.updateMap({})
-    // this.setState({ showBookBuilder: false })
-    // this.updateBook({ newProps: selectedBook, bookId })
+    // Utils.updateMap({ newProps: { ...world.data }, mapToUpdate: world })
   }
 
   render() {
-    const {
-      sceneToEdit,
-      showFrameBuilder,
-      showQuestConfig,
-      // jsonUnderEdit = { test: "12345" },
-    } = this.state
+    const { sceneToEdit, showFrameBuilder, showQuestConfig } = this.state
 
-    const jsonUnderEdit = {
-      missions: [
-        {
-          name: "Feed the pig",
-          item: { name: "fig" },
-          recipient: { name: "pig" },
-          rewards: [{ name: "gold", amount: 5 }],
-        },
-        {
-          recipient: { name: "goatInABoat" },
-          name: "Feed the goat.",
-          rewards: [{ name: "gold", amount: 5 }],
-          item: { name: "bun" },
-        },
-        {
-          recipient: { name: "pinky01" },
-          name: "Give Pinky a gift.",
-          item: { name: "mug" },
-          rewards: [{ amount: 5, name: "gold" }],
-        },
-        {
-          recipient: { name: "babyTroll01" },
-          name: "Give a Troll a Gift.",
-          rewards: [{ name: "gold", amount: 5 }],
-          item: { name: "pin" },
-        },
-      ],
-      subQuestTriggersList: [
-        { subQuestId: 1, unHideTriggers: { completedMission: 0 } },
-        { subQuestId: 2, unHideTriggers: { completedMission: 1 } },
-        { subQuestId: 3, unHideTriggers: { completedMission: 2 } },
-        { unHideTriggers: { completedMission: 2 }, subQuestId: 4 },
-        { unHideTriggers: { completedMission: 3 }, subQuestId: 5 },
-      ],
-    }
-
-    console.log("jsonUnderEdit", toJS(jsonUnderEdit)) // zzz
     const world = localStateStore.getWorldBuilderWorld() || {}
     if (!world.data) {
       return null
@@ -711,6 +665,7 @@ class WorldBuilder extends Component {
               <div className={css.subTitle}>
                 <div className={css.editWorldButtons}>
                   <WorldPicker
+                    initialValue={world.data.title}
                     showDelete={true}
                     showReleased={true}
                     showReleasedToProd={true}
