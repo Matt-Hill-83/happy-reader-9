@@ -145,22 +145,14 @@ class MiniLocation extends React.Component {
 
   render() {
     const { scene, isActive, className, id } = this.props
-
-    const {
-      coordinates,
-      // id,
-      sceneConfig: { storyIndex, subQuestId = 0 } = {},
-    } = scene
-
+    const { coordinates, sceneConfig: { subQuestId = 0 } = {} } = scene
     const questStatus = localStateStore.getQuestStatus()
-
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
-
     const neighbors = Utils.getNeighbors({ coordinates })
 
-    const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
-      (neighbor) => neighbor && neighbor.id
-    )
+    // const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
+    //   (neighbor) => neighbor && neighbor.id
+    // )
 
     // const neighborWasVisited = neighborsArray.some((neighbor) =>
     //   localStateStore.isVisitedScene(neighbor && neighbor.id)
@@ -184,7 +176,6 @@ class MiniLocation extends React.Component {
     const noCloud = isVisitedScene || subQuestIsUnlocked
     const showCloud = !noCloud
 
-    // const { creatures = [] } = scene
     const locationName = scene.location.name
     const isBlank = locationName === "blank"
 

@@ -10,7 +10,6 @@ import StoryMode from "../StoryMode/StoryMode"
 import QuestDialog from "../QuestDialog/QuestDialog.js"
 import Utils from "../../Utils/Utils"
 import WorldBuilder from "../WorldBuilder/WorldBuilder.js"
-// import { worldNameStore } from "../../Stores/FrameSetStore.js"
 // import { UserConfigStore } from "../../Stores/UserConfigStore.js"
 
 import css from "./TopLevel.module.scss"
@@ -20,16 +19,6 @@ import BookPicker from "../BookPicker/BookPicker.js"
 let useDefaultWorldId
 useDefaultWorldId = true
 useDefaultWorldId = false
-
-const defaultWorldInProd = "aH5MjGenT8svEaPaty7G"
-const defaultWorldInNonProd = "aH5MjGenT8svEaPaty7G"
-const isProdRelease = localStateStore.getIsProdRelease()
-
-const defaultWorldId = isProdRelease
-  ? defaultWorldInProd
-  : defaultWorldInNonProd
-
-localStateStore.setDefaultWorldId(defaultWorldId)
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -43,7 +32,6 @@ class TopLevel extends React.Component {
   state = {
     activeScene: undefined,
     showQuestPicker: this.isProdRelease,
-    // showBookPicker: false,
   }
 
   async componentWillMount() {
@@ -76,7 +64,6 @@ class TopLevel extends React.Component {
     const worldId = _get(newProps, "match.params.worldId")
 
     this.setState({ showQuestPicker: false })
-    // this.setState({ showQuestPicker: false, showBookPicker: false })
 
     if (worldId) {
       localStateStore.setActiveMapId(worldId)

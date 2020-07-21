@@ -30,7 +30,8 @@ import images from "../../images/images"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import Utils from "../../Utils/Utils"
 import WorldPicker from "../WorldPicker/WorldPicker"
-import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo"
+import JsonEditor2 from "../JsonEditor2/JsonEditor2"
+// import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo"
 
 import css from "./WorldBuilder.module.scss"
 
@@ -46,9 +47,10 @@ class WorldBuilder extends Component {
 
   // Changing this to DidMount breaks things
   async componentWillMount() {
-    const defaultWorldId = localStateStore.getDefaultWorldId()
-    this.onChangeWorld({ mapId: defaultWorldId })
     await worldNameStore.fetch()
+    const defaultWorldId = localStateStore.getDefaultWorldId()
+    console.log("defaultWorldId-------------WB", defaultWorldId) // zzz
+    this.onChangeWorld({ mapId: defaultWorldId })
   }
 
   onChangeWorld = ({ mapId, newWorld }) => {
@@ -519,6 +521,10 @@ class WorldBuilder extends Component {
     Utils.updateMap({ newProps })
   }
 
+  onChangeJSON = (json) => {
+    this.setState({ jsonUnderEdit: json })
+  }
+
   render() {
     const {
       sceneToEdit,
@@ -527,17 +533,19 @@ class WorldBuilder extends Component {
       jsonUnderEdit = { test: "12345" },
     } = this.state
 
-    console.log("showQuestConfig", showQuestConfig) // zzz
+    console.log("jsonUnderEdit", toJS(jsonUnderEdit)) // zzz
     const world = localStateStore.getWorldBuilderWorld() || {}
 
     // Record title for when map is copied
     this.previousTitle = (world.data && world.data.title) || this.previousTitle
 
     let title = "no title"
-    // let scenesGrid = []
     if (world.data) {
       title = (world.data && world.data.title) || this.previousTitle + " copy"
-      // scenesGrid = world.data.newGrid5 || []
+    }
+    const jsonEditorProps = {
+      json: jsonUnderEdit,
+      onChangeJSON: this.onChangeJSON,
     }
 
     return (
@@ -599,14 +607,11 @@ class WorldBuilder extends Component {
               </button>
             </div> */}
 
-              <JSONEditorDemo
-                json={jsonUnderEdit}
-                onChangeJSON={this.onChangeJSON}
-              />
+              <JsonEditor2 props={jsonEditorProps} />
             </div>
             <ButtonGroup
-              vertical={true}
-              className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
+              vertical={false}
+              className={cx(Classes.ALIGN_LEFT, css.jsonEditorButtonGroup)}
             >
               <Button
                 className={css.saveButton}

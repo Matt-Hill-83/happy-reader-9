@@ -58,26 +58,23 @@ class GetSceneConfig extends Component {
     const scenesGrid = world.newGrid5
     const { questConfig } = world
 
-    const test1 = toJS(scenesGrid)
-    console.log({ test1 })
+    const scenesGridJs = toJS(scenesGrid)
     const newScenesList = []
-    test1.forEach((scene) => {
+    scenesGridJs.forEach((scene) => {
       const oldFrames = scene.frameSet.frames
       const oldFrames2 = scene.frameSet.frames2 || []
 
       // convert the old frames into the new frames
       const newFrames = this.formatFramesForExport({ frames: oldFrames })
       const newFrames2 = this.formatFramesForExport({ frames: oldFrames2 })
+      console.log("scene.sceneConfig", toJS(scene.sceneConfig)) // zzz
 
       const newBornScene = {
         title: scene.location.name,
         sceneConfig: {
           id: scene.location.id,
           worldId: world.id,
-          // worldTitle: world.title,
           coordinates: scene.coordinates,
-          // isEndScene: scene.isEndScene,
-          // isStartScene: scene.isStartScene,
           ...scene.sceneConfig,
         },
         frames: newFrames,
