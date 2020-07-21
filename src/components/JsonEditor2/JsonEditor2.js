@@ -1,28 +1,43 @@
-import React, { useEffect, useState } from "react"
-import JSONEditor, { cssText } from "jsoneditor"
+import React, { useEffect } from "react"
+import JSONEditor from "jsoneditor"
 import cx from "classnames"
+import {
+  Button,
+  Icon,
+  Menu,
+  MenuItem,
+  Popover,
+  Position,
+  InputGroup,
+  Classes,
+  ButtonGroup,
+} from "@blueprintjs/core"
+
 import "jsoneditor/dist/jsoneditor.css"
-// import "./JsonEditor2.module.css"
 import css from "./JsonEditor2.module.scss"
 
 export default function JsonEditor2({ props }) {
   let container
   let jsoneditor
 
-  console.log("props", props) // zzz
-  console.log("jsoneditor", jsoneditor) // zzz
+  const [json, setJson] = React.useState([])
 
-  // const { json } = props
-  // const [json, setJson] = React.useState([])
+  console.log("props.json", props.json) // zzz
+
+  const onChange = (json) => {
+    setJson(json)
+    console.log("onChange") // zzz
+    console.log("json", json) // zzz
+    props.onChangeJSON && props.onChangeJSON()
+  }
 
   useEffect(() => {
+    console.log("useEffect------------mounting-------------------->>>") // zzz
     const options = {
       mode: "tree",
-      onChangeJSON: props && props.onChangeJSON,
+      onChangeJSON: onChange,
     }
-    console.log("useEffect------------mounting-------------------->>>") // zzz
     // on mount
-    console.log("options", options) // zzz
     jsoneditor = new JSONEditor(container, options)
     jsoneditor.set(props.json)
 
@@ -40,10 +55,33 @@ export default function JsonEditor2({ props }) {
   }, [props.json])
 
   return (
-    <div
-      // className="jsoneditor-react-container"
-      className={cx("jsoneditor-react-container", css.main)}
-      ref={(elem) => (container = elem)}
-    />
+    <div className={cx(css.main)}>
+      <div
+        // className={cx("jsoneditor-react-container")}
+        ref={(elem) => (container = elem)}
+      />
+      <ButtonGroup
+        vertical={false}
+        className={cx(Classes.ALIGN_LEFT, css.jsonEditorButtonGroup)}
+      >
+        <Button
+          className={css.saveButton}
+          onClick={() => props.onSaveJSON({ json })}
+        >
+          Save Changes
+        </Button>
+        {/* <Button
+          className={css.saveButton}
+          onClick={() =>
+            this.saveBookChanges({
+              questConfig: "test",
+              worldId: 5,
+            })
+          }
+        >
+          Exit
+        </Button> */}
+      </ButtonGroup>
+    </div>
   )
 }

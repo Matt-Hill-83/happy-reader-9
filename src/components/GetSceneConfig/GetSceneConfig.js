@@ -67,7 +67,6 @@ class GetSceneConfig extends Component {
       // convert the old frames into the new frames
       const newFrames = this.formatFramesForExport({ frames: oldFrames })
       const newFrames2 = this.formatFramesForExport({ frames: oldFrames2 })
-      console.log("scene.sceneConfig", toJS(scene.sceneConfig)) // zzz
 
       const newBornScene = {
         title: scene.location.name,

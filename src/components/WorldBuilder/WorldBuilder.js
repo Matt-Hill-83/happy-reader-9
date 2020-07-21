@@ -11,10 +11,9 @@ import {
   Popover,
   Position,
   InputGroup,
+  Classes,
+  ButtonGroup,
 } from "@blueprintjs/core"
-
-import { Classes } from "@blueprintjs/core"
-import { ButtonGroup, Dialog } from "@blueprintjs/core"
 
 import { IconNames } from "@blueprintjs/icons"
 import _get from "lodash.get"
@@ -27,11 +26,10 @@ import FrameSetUploader from "../FrameSetUploader/FrameSetUploader"
 import GetSceneConfig from "../GetSceneConfig/GetSceneConfig"
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import images from "../../images/images"
+import JsonEditor2 from "../JsonEditor2/JsonEditor2"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import Utils from "../../Utils/Utils"
 import WorldPicker from "../WorldPicker/WorldPicker"
-import JsonEditor2 from "../JsonEditor2/JsonEditor2"
-// import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo"
 
 import css from "./WorldBuilder.module.scss"
 
@@ -42,7 +40,7 @@ class WorldBuilder extends Component {
   state = {
     sceneToEdit: null,
     showFrameBuilder: false,
-    showQuestConfig: true,
+    showQuestConfig: false,
   }
 
   // Changing this to DidMount breaks things
@@ -54,6 +52,7 @@ class WorldBuilder extends Component {
   }
 
   onChangeWorld = ({ mapId, newWorld }) => {
+    this.setState({ showQuestConfig: false })
     // new map
     if (newWorld) {
       this.addNewWorld()
@@ -116,7 +115,8 @@ class WorldBuilder extends Component {
       map.data.endSceneId = scene.id
       map.data.endScene = name
     }
-    Utils.updateMap({ newProps: { ...map.data } })
+
+    Utils.updateMap({ newProps: { ...map.data }, mapToUpdate: map })
   }
 
   // turn this into a component
@@ -203,6 +203,42 @@ class WorldBuilder extends Component {
 
     const newGrid5 = []
 
+    const questConfig = {
+      missions: [
+        {
+          name: "Feed the pig",
+          item: { name: "fig" },
+          recipient: { name: "pig" },
+          rewards: [{ name: "gold", amount: 5 }],
+        },
+        {
+          recipient: { name: "goatInABoat" },
+          name: "Feed the goat.",
+          rewards: [{ name: "gold", amount: 5 }],
+          item: { name: "bun" },
+        },
+        {
+          recipient: { name: "pinky01" },
+          name: "Give Pinky a gift.",
+          item: { name: "mug" },
+          rewards: [{ amount: 5, name: "gold" }],
+        },
+        {
+          recipient: { name: "babyTroll01" },
+          name: "Give a Troll a Gift.",
+          rewards: [{ name: "gold", amount: 5 }],
+          item: { name: "pin" },
+        },
+      ],
+      subQuestTriggersList: [
+        { subQuestId: 1, unHideTriggers: { completedMission: 0 } },
+        { subQuestId: 2, unHideTriggers: { completedMission: 1 } },
+        { subQuestId: 3, unHideTriggers: { completedMission: 2 } },
+        { unHideTriggers: { completedMission: 2 }, subQuestId: 4 },
+        { unHideTriggers: { completedMission: 3 }, subQuestId: 5 },
+      ],
+    }
+
     localStateStore.setWorldBuilderScenesGrid(grid)
     const newMap = {
       name: newName,
@@ -212,6 +248,7 @@ class WorldBuilder extends Component {
       releasedToProd: true,
       ignore: false,
       gridDimensions,
+      questConfig,
     }
 
     const newMapReturned = await maps.add(newMap)
@@ -522,7 +559,20 @@ class WorldBuilder extends Component {
   }
 
   onChangeJSON = (json) => {
-    this.setState({ jsonUnderEdit: json })
+    // this.setState({ jsonUnderEdit: json })
+  }
+
+  onSaveJSON = ({ json }) => {
+    console.log("onSaveJSON") // zzz
+    console.log("json", json) // zzz
+    const world = localStateStore.getWorldBuilderWorld() || {}
+    console.log("world", world) // zzz
+
+    Utils.updateMap({ newProps: { ...world.data }, mapToUpdate: world })
+
+    // Utils.updateMap({})
+    // this.setState({ showBookBuilder: false })
+    // this.updateBook({ newProps: selectedBook, bookId })
   }
 
   render() {
@@ -530,11 +580,52 @@ class WorldBuilder extends Component {
       sceneToEdit,
       showFrameBuilder,
       showQuestConfig,
-      jsonUnderEdit = { test: "12345" },
+      // jsonUnderEdit = { test: "12345" },
     } = this.state
+
+    const jsonUnderEdit = {
+      missions: [
+        {
+          name: "Feed the pig",
+          item: { name: "fig" },
+          recipient: { name: "pig" },
+          rewards: [{ name: "gold", amount: 5 }],
+        },
+        {
+          recipient: { name: "goatInABoat" },
+          name: "Feed the goat.",
+          rewards: [{ name: "gold", amount: 5 }],
+          item: { name: "bun" },
+        },
+        {
+          recipient: { name: "pinky01" },
+          name: "Give Pinky a gift.",
+          item: { name: "mug" },
+          rewards: [{ amount: 5, name: "gold" }],
+        },
+        {
+          recipient: { name: "babyTroll01" },
+          name: "Give a Troll a Gift.",
+          rewards: [{ name: "gold", amount: 5 }],
+          item: { name: "pin" },
+        },
+      ],
+      subQuestTriggersList: [
+        { subQuestId: 1, unHideTriggers: { completedMission: 0 } },
+        { subQuestId: 2, unHideTriggers: { completedMission: 1 } },
+        { subQuestId: 3, unHideTriggers: { completedMission: 2 } },
+        { unHideTriggers: { completedMission: 2 }, subQuestId: 4 },
+        { unHideTriggers: { completedMission: 3 }, subQuestId: 5 },
+      ],
+    }
 
     console.log("jsonUnderEdit", toJS(jsonUnderEdit)) // zzz
     const world = localStateStore.getWorldBuilderWorld() || {}
+    if (!world.data) {
+      return null
+    }
+    console.log("world.data", toJS(world.data)) // zzz
+    const { questConfig = { no: "data" } } = world.data
 
     // Record title for when map is copied
     this.previousTitle = (world.data && world.data.title) || this.previousTitle
@@ -543,14 +634,26 @@ class WorldBuilder extends Component {
     if (world.data) {
       title = (world.data && world.data.title) || this.previousTitle + " copy"
     }
+
     const jsonEditorProps = {
-      json: jsonUnderEdit,
+      json: questConfig,
       onChangeJSON: this.onChangeJSON,
+      onSaveJSON: this.onSaveJSON,
     }
 
     return (
       <div className={css.main}>
         <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
+          <Button
+            icon="document"
+            // rightIcon="caret-down"
+            text="quest config"
+            onClick={() =>
+              this.setState({
+                showQuestConfig: !this.state.showQuestConfig,
+              })
+            }
+          />
           <Popover
             content={
               <ButtonGroup
@@ -561,17 +664,6 @@ class WorldBuilder extends Component {
                   onSave={this.onChangeDialog}
                   onImportJson={({ newWorld }) =>
                     this.importWorldFromJson({ newWorld })
-                  }
-                />
-
-                <Button
-                  icon="document"
-                  rightIcon="caret-down"
-                  text="quest config"
-                  onClick={() =>
-                    this.setState({
-                      showQuestConfig: !this.state.showQuestConfig,
-                    })
                   }
                 />
               </ButtonGroup>
@@ -601,41 +693,8 @@ class WorldBuilder extends Component {
         {showQuestConfig && (
           <div className={css.jsonEditor}>
             <div className={css.content}>
-              {/* <div className="menu">
-              <button onClick={this.updateTime}>
-                Create/update a field "time"
-              </button>
-            </div> */}
-
               <JsonEditor2 props={jsonEditorProps} />
             </div>
-            <ButtonGroup
-              vertical={false}
-              className={cx(Classes.ALIGN_LEFT, css.jsonEditorButtonGroup)}
-            >
-              <Button
-                className={css.saveButton}
-                onClick={() =>
-                  this.saveBookChanges({
-                    questConfig: jsonUnderEdit,
-                    worldId: world.id,
-                  })
-                }
-              >
-                Save Changes
-              </Button>
-              <Button
-                className={css.saveButton}
-                onClick={() =>
-                  this.saveBookChanges({
-                    questConfig: jsonUnderEdit,
-                    worldId: world.id,
-                  })
-                }
-              >
-                Exit
-              </Button>
-            </ButtonGroup>
           </div>
         )}
         {!showFrameBuilder && (

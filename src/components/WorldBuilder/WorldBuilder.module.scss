@@ -14,10 +14,9 @@
   .jsonEditor {
     position: absolute;
     display: flex;
-
     width: 40vw;
-    height: 80vh;
-    border: 4px solid blue !important;
+    max-height: 80vh;
+    border: 1px solid blue !important;
     right: 2vh;
     top: 2vh;
     z-index: 2;

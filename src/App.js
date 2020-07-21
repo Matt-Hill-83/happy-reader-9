@@ -28,12 +28,9 @@ export default function App() {
 
   localStateStore.setIsProdRelease(IS_PROD_RELEASE)
 
-  // let useDefaultWorldId
-  // useDefaultWorldId = true
-  // useDefaultWorldId = false
-
   const defaultWorldInProd = "aH5MjGenT8svEaPaty7G"
-  const defaultWorldInNonProd = "aH5MjGenT8svEaPaty7G"
+  const defaultWorldInNonProd = "h92rJulSAivdo78z4E3b"
+  // const defaultWorldInNonProd = "aH5MjGenT8svEaPaty7G"
   const isProdRelease = localStateStore.getIsProdRelease()
 
   const defaultWorldId = isProdRelease
@@ -69,11 +66,7 @@ export default function App() {
                 <WorldBuilder />
               </div>
             </Route>
-            {/* <Route
-              path={worldItem({ worldId })}
-              // pass props to force component to remount when route changes
-              component={(props) => <StoryViewer {...props} />}
-            /> */}
+
             <Route path={worldItem({ worldId })} component={StoryViewer} />
             <Route path="/">
               <StoryViewer />
