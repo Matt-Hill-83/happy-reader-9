@@ -47,7 +47,6 @@ class WorldBuilder extends Component {
   async componentWillMount() {
     await worldNameStore.fetch()
     const defaultWorldId = localStateStore.getDefaultWorldId()
-    console.log("defaultWorldId-------------WB", defaultWorldId) // zzz
     this.onChangeWorld({ mapId: defaultWorldId })
   }
 
@@ -183,7 +182,6 @@ class WorldBuilder extends Component {
   }
 
   addNewWorld = async () => {
-    console.log("addNewWorld") // zzz
     let previousMapName =
       toJS(
         worldNameStore.docs &&
@@ -554,7 +552,6 @@ class WorldBuilder extends Component {
 
     const newProps = { title: title, description, questConfig }
     // const newProps = { title: title + "---test2", description, questConfig }
-    console.log("newProps", toJS(newProps)) // zzz
     Utils.updateMap({ newProps })
   }
 
@@ -563,12 +560,13 @@ class WorldBuilder extends Component {
   }
 
   onSaveJSON = ({ json }) => {
-    console.log("onSaveJSON") // zzz
-    console.log("json", json) // zzz
     const world = localStateStore.getWorldBuilderWorld() || {}
-    console.log("world", world) // zzz
 
-    // Utils.updateMap({ newProps: { ...world.data }, mapToUpdate: world })
+    Utils.updateMap({ newProps: { questConfig: json }, mapToUpdate: world })
+  }
+
+  onCloseJsonEditor = () => {
+    this.setState({ showQuestConfig: false })
   }
 
   render() {
@@ -578,7 +576,6 @@ class WorldBuilder extends Component {
     if (!world.data) {
       return null
     }
-    console.log("world.data", toJS(world.data)) // zzz
     const { questConfig = { no: "data" } } = world.data
 
     // Record title for when map is copied
@@ -593,6 +590,7 @@ class WorldBuilder extends Component {
       json: questConfig,
       onChangeJSON: this.onChangeJSON,
       onSaveJSON: this.onSaveJSON,
+      onClose: this.onCloseJsonEditor,
     }
 
     return (
@@ -646,7 +644,7 @@ class WorldBuilder extends Component {
 
         {showQuestConfig && (
           <div className={css.jsonEditor}>
-            <div className={css.content}>
+            <div className={css.jsonEditorContent}>
               <JsonEditor2 props={jsonEditorProps} />
             </div>
           </div>

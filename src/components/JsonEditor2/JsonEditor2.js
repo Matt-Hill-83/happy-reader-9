@@ -22,17 +22,12 @@ export default function JsonEditor2({ props }) {
 
   const [json, setJson] = React.useState([])
 
-  console.log("props.json", props.json) // zzz
-
   const onChange = (json) => {
     setJson(json)
-    console.log("onChange") // zzz
-    console.log("json", json) // zzz
     props.onChangeJSON && props.onChangeJSON()
   }
 
   useEffect(() => {
-    console.log("useEffect------------mounting-------------------->>>") // zzz
     const options = {
       mode: "tree",
       onChangeJSON: onChange,
@@ -50,16 +45,12 @@ export default function JsonEditor2({ props }) {
   }, [])
 
   useEffect(() => {
-    console.log("useEffect------------new props.json-------------------->>>") // zzz
     props.json && jsoneditor && jsoneditor.update(props.json)
   }, [props.json])
 
   return (
     <div className={cx(css.main)}>
-      <div
-        // className={cx("jsoneditor-react-container")}
-        ref={(elem) => (container = elem)}
-      />
+      <div ref={(elem) => (container = elem)} />
       <ButtonGroup
         vertical={false}
         className={cx(Classes.ALIGN_LEFT, css.jsonEditorButtonGroup)}
@@ -70,17 +61,12 @@ export default function JsonEditor2({ props }) {
         >
           Save Changes
         </Button>
-        {/* <Button
+        <Button
           className={css.saveButton}
-          onClick={() =>
-            this.saveBookChanges({
-              questConfig: "test",
-              worldId: 5,
-            })
-          }
+          onClick={() => props.onClose && props.onClose()}
         >
           Exit
-        </Button> */}
+        </Button>
       </ButtonGroup>
     </div>
   )
