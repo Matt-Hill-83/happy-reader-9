@@ -3,13 +3,20 @@
   height: 100%;
   border: 1px solid red !important;
 
+  .jsonHolder {
+    display: flex;
+    flex: 1;
+    border: 6px solid red !important;
+    overflow: auto;
+    height: 88%;
+  }
+
   .jsonEditorButtonGroup {
     display: flex;
+    flex: 1 1;
     border: 1px solid green !important;
-    margin-top: 10%;
-    flex: 1;
-    width: min-content;
-    margin-left: auto;
     position: relative;
+    overflow: hidden;
+    justify-content: flex-end;
   }
 }

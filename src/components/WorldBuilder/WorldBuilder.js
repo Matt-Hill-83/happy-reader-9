@@ -576,7 +576,7 @@ class WorldBuilder extends Component {
     if (!world.data) {
       return null
     }
-    const { questConfig = { no: "data" } } = world.data
+    const { newGrid5, questConfig = { no: "data" } } = world.data
 
     // Record title for when map is copied
     this.previousTitle = (world.data && world.data.title) || this.previousTitle
@@ -587,6 +587,7 @@ class WorldBuilder extends Component {
     }
 
     const jsonEditorProps = {
+      // json: newGrid5,
       json: questConfig,
       onChangeJSON: this.onChangeJSON,
       onSaveJSON: this.onSaveJSON,

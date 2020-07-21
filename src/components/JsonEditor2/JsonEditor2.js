@@ -50,7 +50,7 @@ export default function JsonEditor2({ props }) {
 
   return (
     <div className={cx(css.main)}>
-      <div ref={(elem) => (container = elem)} />
+      <div className={cx(css.jsonHolder)} ref={(elem) => (container = elem)} />
       <ButtonGroup
         vertical={false}
         className={cx(Classes.ALIGN_LEFT, css.jsonEditorButtonGroup)}
