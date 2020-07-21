@@ -1,5 +1,5 @@
 import _get from "lodash.get"
-import { ButtonGroup, Button, Dialog, Icon } from "@blueprintjs/core"
+import { ButtonGroup, Button, Dialog } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import { observer } from "mobx-react"
 import { toJS } from "mobx"

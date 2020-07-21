@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { observer } from "mobx-react"
 import { toJS } from "mobx"
+import cx from "classnames"
 
 import {
   Button,
@@ -12,6 +13,9 @@ import {
   InputGroup,
 } from "@blueprintjs/core"
 
+import { Classes } from "@blueprintjs/core"
+import { ButtonGroup, Dialog } from "@blueprintjs/core"
+
 import { IconNames } from "@blueprintjs/icons"
 import _get from "lodash.get"
 
@@ -19,15 +23,16 @@ import { maps } from "../../Stores/InitStores"
 import { worldNameStore } from "../../Stores/FrameSetStore"
 import CrudMachine from "../CrudMachine/CrudMachine"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
-import ImageDisplay from "../ImageDisplay/ImageDisplay"
-import images from "../../images/images"
-import Utils from "../../Utils/Utils"
-
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
-import css from "./WorldBuilder.module.scss"
-import WorldPicker from "../WorldPicker/WorldPicker"
 import FrameSetUploader from "../FrameSetUploader/FrameSetUploader"
 import GetSceneConfig from "../GetSceneConfig/GetSceneConfig"
+import ImageDisplay from "../ImageDisplay/ImageDisplay"
+import images from "../../images/images"
+import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
+import Utils from "../../Utils/Utils"
+import WorldPicker from "../WorldPicker/WorldPicker"
+import JSONEditorDemo from "../JsonEdtor/JSONEditorDemo"
+
+import css from "./WorldBuilder.module.scss"
 
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
@@ -36,6 +41,7 @@ class WorldBuilder extends Component {
   state = {
     sceneToEdit: null,
     showFrameBuilder: false,
+    showQuestConfig: true,
   }
 
   // Changing this to DidMount breaks things
@@ -514,28 +520,60 @@ class WorldBuilder extends Component {
   }
 
   render() {
-    const { sceneToEdit, showFrameBuilder } = this.state
+    const {
+      sceneToEdit,
+      showFrameBuilder,
+      showQuestConfig,
+      jsonUnderEdit = { test: "12345" },
+    } = this.state
+
+    console.log("showQuestConfig", showQuestConfig) // zzz
     const world = localStateStore.getWorldBuilderWorld() || {}
 
     // Record title for when map is copied
     this.previousTitle = (world.data && world.data.title) || this.previousTitle
 
     let title = "no title"
-    let scenesGrid = []
+    // let scenesGrid = []
     if (world.data) {
       title = (world.data && world.data.title) || this.previousTitle + " copy"
-      scenesGrid = world.data.newGrid5 || []
+      // scenesGrid = world.data.newGrid5 || []
     }
 
     return (
       <div className={css.main}>
-        <div className={css.buttonHolder}>
-          <FrameSetUploader
-            onSave={this.onChangeDialog}
-            onImportJson={({ newWorld }) =>
-              this.importWorldFromJson({ newWorld })
+        <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
+          <Popover
+            content={
+              <ButtonGroup
+                vertical={true}
+                className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
+              >
+                <FrameSetUploader
+                  onSave={this.onChangeDialog}
+                  onImportJson={({ newWorld }) =>
+                    this.importWorldFromJson({ newWorld })
+                  }
+                />
+
+                <Button
+                  icon="document"
+                  rightIcon="caret-down"
+                  text="quest config"
+                  onClick={() =>
+                    this.setState({
+                      showQuestConfig: !this.state.showQuestConfig,
+                    })
+                  }
+                />
+              </ButtonGroup>
             }
-          />
+          >
+            <Button icon="document" rightIcon="caret-down" text="Config" />
+          </Popover>
+        </ButtonGroup>
+        <div className={css.buttonHolder}>
+          scene config for download
           <GetSceneConfig
             className={css.frameSetUploaderBox1}
             onSave={this.onChangeDialog}
@@ -552,6 +590,49 @@ class WorldBuilder extends Component {
           className={css.titleInput}
         />
 
+        {showQuestConfig && (
+          <div className={css.jsonEditor}>
+            <div className={css.content}>
+              {/* <div className="menu">
+              <button onClick={this.updateTime}>
+                Create/update a field "time"
+              </button>
+            </div> */}
+
+              <JSONEditorDemo
+                json={jsonUnderEdit}
+                onChangeJSON={this.onChangeJSON}
+              />
+            </div>
+            <ButtonGroup
+              vertical={true}
+              className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
+            >
+              <Button
+                className={css.saveButton}
+                onClick={() =>
+                  this.saveBookChanges({
+                    questConfig: jsonUnderEdit,
+                    worldId: world.id,
+                  })
+                }
+              >
+                Save Changes
+              </Button>
+              <Button
+                className={css.saveButton}
+                onClick={() =>
+                  this.saveBookChanges({
+                    questConfig: jsonUnderEdit,
+                    worldId: world.id,
+                  })
+                }
+              >
+                Exit
+              </Button>
+            </ButtonGroup>
+          </div>
+        )}
         {!showFrameBuilder && (
           <div className={css.header}>
             <div className={css.titles}>
