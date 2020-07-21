@@ -28,6 +28,20 @@ export default function App() {
 
   localStateStore.setIsProdRelease(IS_PROD_RELEASE)
 
+  // let useDefaultWorldId
+  // useDefaultWorldId = true
+  // useDefaultWorldId = false
+
+  const defaultWorldInProd = "aH5MjGenT8svEaPaty7G"
+  const defaultWorldInNonProd = "aH5MjGenT8svEaPaty7G"
+  const isProdRelease = localStateStore.getIsProdRelease()
+
+  const defaultWorldId = isProdRelease
+    ? defaultWorldInProd
+    : defaultWorldInNonProd
+
+  localStateStore.setDefaultWorldId(defaultWorldId)
+
   maps.fetch()
 
   return (

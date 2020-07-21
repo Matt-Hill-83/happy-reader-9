@@ -1,16 +1,15 @@
-import React, { Component, useState } from "react";
-// import { TruncatedFormat, Cell, Column, Table } from "@blueprintjs/table";
+import React, { Component } from "react"
 
-import cx from "classnames";
+import cx from "classnames"
 
-import { observer } from "mobx-react";
-import { toJS } from "mobx";
-import _get from "lodash.get";
-import css from "./MiniTable2.module.scss";
-import images from "../../images/images";
+import { observer } from "mobx-react"
+import { toJS } from "mobx"
+import _get from "lodash.get"
+import css from "./MiniTable2.module.scss"
+import images from "../../images/images"
 
 // import React from 'react';
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles"
 import {
   Table,
   TableBody,
@@ -19,15 +18,9 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@material-ui/core";
+} from "@material-ui/core"
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
-
-const headers = ["one", "two", "three", "four", "five", "six", "seven"];
+const headers = ["one", "two", "three", "four", "five", "six", "seven"]
 const xxxxdata = [
   {
     dataOne: 1,
@@ -65,22 +58,22 @@ const xxxxdata = [
     dataSix: 6,
     dataSeven: 7,
   },
-];
+]
 
 class MiniTable2 extends Component {
   renderCell = ({ content }) => {
-    const value = content;
-    let cellContent = null;
+    const value = content
+    let cellContent = null
 
     if (typeof value === "undefined") {
       // cellContent = "";
-      cellContent = <span role="img">❌</span>;
+      cellContent = <span role="img">❌</span>
     } else if (value === true) {
-      cellContent = <span role="img">✅</span>;
+      cellContent = <span role="img">✅</span>
     } else if (value === false) {
-      cellContent = <span role="img">❌</span>;
+      cellContent = <span role="img">❌</span>
     } else {
-      cellContent = value ? value.toString() : "";
+      cellContent = value ? value.toString() : ""
     }
 
     return (
@@ -90,11 +83,11 @@ class MiniTable2 extends Component {
       >
         {cellContent}
       </TableCell>
-    );
-  };
+    )
+  }
 
   render = () => {
-    const { tableData, columnNames } = this.props;
+    const { tableData, columnNames } = this.props
 
     return (
       <TableContainer component={Paper}>
@@ -117,15 +110,15 @@ class MiniTable2 extends Component {
                   return (
                     // <TableCell key={secondIndex}>{element[child]}</TableCell>
                     this.renderCell({ content: element[child] })
-                  );
+                  )
                 })}
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-    );
-  };
+    )
+  }
 }
 
-export default MiniTable2;
+export default MiniTable2
