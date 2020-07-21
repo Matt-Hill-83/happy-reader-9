@@ -1,17 +1,7 @@
 import React, { useEffect } from "react"
 import JSONEditor from "jsoneditor"
 import cx from "classnames"
-import {
-  Button,
-  Icon,
-  Menu,
-  MenuItem,
-  Popover,
-  Position,
-  InputGroup,
-  Classes,
-  ButtonGroup,
-} from "@blueprintjs/core"
+import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
 
 import "jsoneditor/dist/jsoneditor.css"
 import css from "./JsonEditor2.module.scss"
