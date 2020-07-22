@@ -29,7 +29,7 @@ export default function App() {
   localStateStore.setIsProdRelease(IS_PROD_RELEASE)
 
   const defaultWorldInProd = "aH5MjGenT8svEaPaty7G"
-  const defaultWorldInNonProd = "BLF0JB0FkUqFLI5zIZwX"
+  const defaultWorldInNonProd = "lvfhKpN5NXzl0nkXMpxK"
   // const defaultWorldInNonProd = "aH5MjGenT8svEaPaty7G"
   const isProdRelease = localStateStore.getIsProdRelease()
 

@@ -68,10 +68,10 @@ class MissionConsole extends Component {
       "Gold",
       "Complete",
     ]
-    // const tableProps = { columnWidths: [255, 80, 80, null, null] };
     if (!missions || missions.length === 0) {
       return null
     }
+
     const tableData = missions.map((mission) => {
       const { name, item, recipient, rewards, completed } = mission
 
@@ -90,11 +90,7 @@ class MissionConsole extends Component {
         <div className={css.body}>
           <div className={css.row}>
             <div className={css.left}>
-              <MiniTable2
-                columnNames={columnNames}
-                tableData={tableData}
-                // tableProps={tableProps}
-              />
+              <MiniTable2 columnNames={columnNames} tableData={tableData} />
             </div>
             <div className={css.right}>
               <div className={css.itemsContainerBox}>

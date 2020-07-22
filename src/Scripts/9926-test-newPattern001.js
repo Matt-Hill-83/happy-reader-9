@@ -805,18 +805,35 @@ const story9926 = {
     ],
     subQuests: [
       {
-        name: "sq1",
-        scenes: [{ name: "log" }],
-        triggers: {
-          lock: [
-            { completedMission: 0 },
-            { currentMission: 0 },
-            { completedScene: "log" },
-          ],
-          unLock: [{ completedMission: 0 }],
-          unHide: [{ completedMission: 0 }],
-          newFrameSet: [{ completedMission: 0 }],
-        },
+        name: "Meet Your New Best Friend",
+        scenes: [
+          { name: "castle" },
+          { name: "goat" },
+          { name: "fig" },
+          { name: "log" },
+        ],
+        triggers: [
+          {
+            name: "lock",
+            conditions: [
+              { completedMission: 0 },
+              { currentMission: 0 },
+              { completedScene: "log" },
+            ],
+          },
+          {
+            name: "unlock",
+            conditions: [{ completedMission: 0 }],
+          },
+          {
+            name: "hide",
+            conditions: [{ completedMission: 0 }],
+          },
+          {
+            name: "nextFrameSet",
+            conditions: [{ frameSetIndex: 1, completedMission: 0 }],
+          },
+        ],
       },
     ],
     sceneTriggersList: [

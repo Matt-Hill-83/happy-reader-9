@@ -30,7 +30,7 @@ import JsonEditor2 from "../JsonEditor2/JsonEditor2"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import Utils from "../../Utils/Utils"
 import WorldPicker from "../WorldPicker/WorldPicker"
-import QuestConfigTool from "../QuestConfigTool/QuestConfigTool"
+import SubQuestConfigTool from "../SubQuestConfigTool/SubQuestConfigTool"
 
 import css from "./WorldBuilder.module.scss"
 
@@ -43,6 +43,7 @@ class WorldBuilder extends Component {
     showFrameBuilder: false,
     showQuestConfig: false,
     showSceneConfig: false,
+    showSubQuestConfigTool: true,
   }
 
   // Changing this to DidMount breaks things
@@ -624,8 +625,8 @@ class WorldBuilder extends Component {
     }
 
     return (
-      <div className={css.questConfigTool}>
-        <QuestConfigTool props={questConfigToolProps} />
+      <div className={css.subQuestConfigTool}>
+        <SubQuestConfigTool props={questConfigToolProps} />
       </div>
     )
   }
