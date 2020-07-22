@@ -30,6 +30,7 @@ import JsonEditor2 from "../JsonEditor2/JsonEditor2"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import Utils from "../../Utils/Utils"
 import WorldPicker from "../WorldPicker/WorldPicker"
+import QuestConfigTool from "../QuestConfigTool/QuestConfigTool"
 
 import css from "./WorldBuilder.module.scss"
 
@@ -569,6 +570,34 @@ class WorldBuilder extends Component {
     this.setState({ showQuestConfig: false })
   }
 
+  renderSceneConfig = ({ world }) => {
+    return (
+      <div className={css.buttonHolder}>
+        scene config for download
+        <GetSceneConfig
+          className={css.frameSetUploaderBox1}
+          onSave={this.onChangeDialog}
+          world={world.data}
+        />
+      </div>
+    )
+  }
+
+  renderQuestConfigTool = ({ questConfig }) => {
+    const questConfigToolProps = {
+      items: questConfig && questConfig.subQuests,
+      onChangeJSON: this.onChangeJSON,
+      onSaveJSON: this.onSaveJSON,
+      onClose: this.onCloseJsonEditor,
+    }
+
+    return (
+      <div className={css.questConfigTool}>
+        <QuestConfigTool props={questConfigToolProps} />
+      </div>
+    )
+  }
+
   render() {
     const { sceneToEdit, showFrameBuilder, showQuestConfig } = this.state
 
@@ -576,7 +605,7 @@ class WorldBuilder extends Component {
     if (!world.data) {
       return null
     }
-    const { newGrid5, questConfig = { no: "data" } } = world.data
+    const { questConfig = { no: "data" } } = world.data
 
     // Record title for when map is copied
     this.previousTitle = (world.data && world.data.title) || this.previousTitle
@@ -587,7 +616,6 @@ class WorldBuilder extends Component {
     }
 
     const jsonEditorProps = {
-      // json: newGrid5,
       json: questConfig,
       onChangeJSON: this.onChangeJSON,
       onSaveJSON: this.onSaveJSON,
@@ -599,7 +627,6 @@ class WorldBuilder extends Component {
         <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
           <Button
             icon="document"
-            // rightIcon="caret-down"
             text="quest config"
             onClick={() =>
               this.setState({
@@ -625,14 +652,8 @@ class WorldBuilder extends Component {
             <Button icon="document" rightIcon="caret-down" text="Config" />
           </Popover>
         </ButtonGroup>
-        <div className={css.buttonHolder}>
-          scene config for download
-          <GetSceneConfig
-            className={css.frameSetUploaderBox1}
-            onSave={this.onChangeDialog}
-            world={world.data}
-          />
-        </div>
+        {this.renderQuestConfigTool({ questConfig })}
+        {this.renderSceneConfig({ world })}
 
         <InputGroup
           value={title}
@@ -645,9 +666,7 @@ class WorldBuilder extends Component {
 
         {showQuestConfig && (
           <div className={css.jsonEditor}>
-            <div className={css.jsonEditorContent}>
-              <JsonEditor2 props={jsonEditorProps} />
-            </div>
+            <JsonEditor2 props={jsonEditorProps} />
           </div>
         )}
         {!showFrameBuilder && (
