@@ -611,8 +611,8 @@ class WorldBuilder extends Component {
   }
 
   renderQuestConfigTool = ({ questConfig }) => {
-    const { showQuestConfigTool } = this.state
-    if (!showQuestConfigTool) {
+    const { showSubQuestConfigTool } = this.state
+    if (!showSubQuestConfigTool) {
       return null
     }
 
@@ -630,20 +630,24 @@ class WorldBuilder extends Component {
     )
   }
 
-  renderMainButtonGroup = ({ questConfig }) => {
-    const { showQuestConfig, showSceneConfig, showQuestConfigTool } = this.state
+  renderMainButtonGroup = () => {
+    const {
+      showQuestConfig,
+      showSceneConfig,
+      showSubQuestConfigTool,
+    } = this.state
 
     return (
       <ButtonGroup
-        vertical={true}
+        // vertical={true}
         className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
       >
         <Button
           icon="document"
-          text="quest config 2"
+          text="subquest config"
           onClick={() =>
             this.setState({
-              showQuestConfigTool: !showQuestConfigTool,
+              showSubQuestConfigTool: !showSubQuestConfigTool,
             })
           }
         />
@@ -705,7 +709,7 @@ class WorldBuilder extends Component {
 
     return (
       <div className={css.main}>
-        {this.renderMainButtonGroup({})}
+        {this.renderMainButtonGroup()}
         {this.renderQuestConfigTool({ questConfig })}
         {this.renderSceneConfig({ world })}
         {this.renderQuestConfig({ questConfig })}

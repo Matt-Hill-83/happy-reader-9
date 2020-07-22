@@ -35,7 +35,6 @@ export default function QuestConfigTool({ props }) {
   return (
     <div className={cx(css.main)}>
       <div className={cx(css.content)}>{renderedItems}</div>
-      {/* <div className={cx(css.jsonHolder)} ref={(elem) => (container = elem)} /> */}
       <ButtonGroup
         vertical={false}
         className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
