@@ -20,48 +20,19 @@ import {
   Paper,
 } from "@material-ui/core"
 
-const headers = ["one", "two", "three", "four", "five", "six", "seven"]
-const xxxxdata = [
-  {
-    dataOne: 1,
-    dataTwo: 2,
-    dataThree: 3,
-    dataFour: 4,
-    dataFive: 5,
-    dataSix: 6,
-    dataSeven: 7,
-  },
-  {
-    dataOne: 1,
-    dataTwo: 2,
-    dataThree: 3,
-    dataFour: 4,
-    dataFive: 5,
-    dataSix: 6,
-    dataSeven: 7,
-  },
-  {
-    dataOne: 1,
-    dataTwo: 2,
-    dataThree: 3,
-    dataFour: 4,
-    dataFive: 5,
-    dataSix: 6,
-    dataSeven: 7,
-  },
-  {
-    dataOne: 1,
-    dataTwo: 2,
-    dataThree: 3,
-    dataFour: 4,
-    dataFive: 5,
-    dataSix: 6,
-    dataSeven: 7,
-  },
-]
-
 class MiniTable2 extends Component {
   renderCell = ({ content }) => {
+    if (this.props.renderCell) {
+      return (
+        <TableCell
+          className={css.cellClass}
+          // tooltip={value ? value.toString() : ""}
+        >
+          {this.props.renderCell({ content })}
+        </TableCell>
+      )
+    }
+    console.log("content", toJS(content)) // zzz
     const value = content
     let cellContent = null
 
@@ -91,11 +62,7 @@ class MiniTable2 extends Component {
 
     return (
       <TableContainer component={Paper}>
-        <Table
-          // className={this.classes.table}
-          size="small"
-          aria-label="a dense table"
-        >
+        <Table size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
               {columnNames.map((header, index) => (
@@ -104,16 +71,17 @@ class MiniTable2 extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {tableData.map((element, firstIndex) => (
-              <TableRow key={firstIndex}>
-                {Object.keys(element).map((child, secondIndex) => {
-                  return (
-                    // <TableCell key={secondIndex}>{element[child]}</TableCell>
-                    this.renderCell({ content: element[child] })
-                  )
-                })}
-              </TableRow>
-            ))}
+            {tableData.map((element, firstIndex) => {
+              console.log("element", element) // zzz
+              return (
+                <TableRow key={firstIndex}>
+                  {Object.keys(element).map((child, secondIndex) => {
+                    console.log("child", toJS(child)) // zzz
+                    return this.renderCell({ content: element[child] })
+                  })}
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       </TableContainer>

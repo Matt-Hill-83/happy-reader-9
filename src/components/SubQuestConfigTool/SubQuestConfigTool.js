@@ -2,9 +2,13 @@ import React, { useEffect } from "react"
 import cx from "classnames"
 import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
 import MiniTable2 from "../MiniTable2/MiniTable2"
+import { toJS } from "mobx"
 
 import "jsoneditor/dist/jsoneditor.css"
 import css from "./SubQuestConfigTool.module.scss"
+import CollapsibleTable from "../CollapsibleTable/CollapsibleTable"
+import DataTable2 from "../MuiDataTable/MuiDataTable"
+import MUIDataTable from "mui-datatables"
 
 export default function SubQuestConfigTool({ props }) {
   const [items, setItems] = React.useState([])
@@ -40,24 +44,38 @@ export default function SubQuestConfigTool({ props }) {
   }
 
   const renderTriggers = ({ triggers }) => {
-    const tableData = triggers.map((trigger) => {
-      const { name, conditions } = trigger
+    const options = {
+      filter: true,
+      filterType: "dropdown",
+      responsive: "vertical",
+      enableNestedDataAccess: ".", // allows nested data separated by "." (see column names and the data structure above)
+    }
 
-      return [name, conditions]
-    })
+    const columns = [
+      {
+        name: "name",
+        label: "Name",
+        options: {
+          filter: true,
+        },
+      },
+      {
+        name: "conditions.completedMission",
+        label: "Conditions",
+        options: {
+          filter: true,
+        },
+      },
+    ]
 
-    const columnNames = ["Name", "Conditions"]
-
-    return triggers.map((trigger) => {
-      return (
-        <div className={cx(css.triggerName, css.listItem)}>
-          <span className={cx(css.listItemName, css.triggerName)}>
-            {trigger.name}
-          </span>
-          <MiniTable2 columnNames={columnNames} tableData={tableData} />
-        </div>
-      )
-    })
+    return (
+      <MUIDataTable
+        // title={"ACME Employee list"}
+        data={triggers}
+        columns={columns}
+        options={options}
+      />
+    )
   }
 
   const renderedItems = props.items.map((subQuest) => {
