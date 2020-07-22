@@ -51,7 +51,15 @@ export default function SubQuestConfigTool({ props }) {
       filter: true,
       filterType: "dropdown",
       responsive: "vertical",
-      enableNestedDataAccess: ".", // allows nested data separated by "." (see column names and the data structure above)
+      enableNestedDataAccess: ".",
+      customToolbar: null,
+      // filter: false,
+      search: false,
+      print: false,
+      download: false,
+      viewColumns: false,
+      customToolbar: null,
+      responsive: "vertical",
     }
 
     const columns = [
@@ -69,24 +77,85 @@ export default function SubQuestConfigTool({ props }) {
           filter: true,
           filterType: "multiselect",
           customBodyRender: (value, tableMeta, updateValue) => {
-            const arry = value
-
-            return arry.map((item) => {
-              const keys = Object.keys(item)
-              return keys.map((key) => {
-                return <div>{`${key}: ${item[key]}`}</div>
-              })
+            return value.map((condition) => {
+              const keys = Object.keys(condition)
+              return keys.map((key) => <div>{`${key}: ${condition[key]}`}</div>)
             })
+          },
+        },
+      },
+      {
+        name: "Delete",
+        options: {
+          filter: false,
+          sort: false,
+          empty: true,
+          customBodyRenderLite: (dataIndex) => {
+            return (
+              <button
+                onClick={() => {
+                  const { data } = this.state
+                  data.shift()
+                  this.setState({ data })
+                }}
+              >
+                Delete
+              </button>
+            )
+          },
+        },
+      },
+      {
+        name: "Edit",
+        options: {
+          filter: false,
+          sort: false,
+          empty: true,
+          customBodyRenderLite: (dataIndex, rowIndex) => {
+            return (
+              <button
+                onClick={() =>
+                  window.alert(
+                    `Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
+                  )
+                }
+              >
+                Edit
+              </button>
+            )
+          },
+        },
+      },
+      {
+        name: "Add",
+        options: {
+          filter: false,
+          sort: false,
+          empty: true,
+          customBodyRenderLite: (dataIndex) => {
+            return (
+              <button
+              // onClick={() => {
+              //   const { data } = this.state
+              //   data.unshift([
+              //     "Mason Ray",
+              //     "Computer Scientist",
+              //     "San Francisco",
+              //     39,
+              //     "$142,000",
+              //   ])
+              //   this.setState({ data })
+              // }}
+              >
+                Add
+              </button>
+            )
           },
         },
       },
     ]
 
-    return (
-      <MuiThemeProvider theme={getMuiTheme()}>
-        <MUIDataTable data={triggers} columns={columns} options={options} />{" "}
-      </MuiThemeProvider>
-    )
+    return <MUIDataTable data={triggers} columns={columns} options={options} />
   }
 
   const renderedItems = props.items.map((subQuest) => {

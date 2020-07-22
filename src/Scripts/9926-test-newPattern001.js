@@ -819,6 +819,7 @@ const story9926 = {
               { completedMission: 0 },
               { currentMission: 0 },
               { completedScene: "log" },
+              { pocketContains: "hat" },
             ],
           },
           {
@@ -844,6 +845,7 @@ const story9926 = {
             { completedMission: 0 },
             { currentMission: 0 },
             { completedScene: "log" },
+            { sceneVisited: "log" },
           ],
           unLock: [{ completedMission: 0 }],
           unHide: [{ completedMission: 0 }],
