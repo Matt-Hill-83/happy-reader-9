@@ -144,7 +144,7 @@ class FrameSetUploader extends Component {
         onClick={() => this.importMultipleWorlds()}
         className={cx(css.uploadButton)}
       >
-        Upload JSON
+        Upload multiple JSON into multiple new quests
       </Button>
     )
   }

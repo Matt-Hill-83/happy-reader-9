@@ -17,10 +17,6 @@ class GetSceneConfig extends Component {
     this.setState({ text })
   }
 
-  renderButton = () => {
-    return <Button className={cx(css.uploadButton)}>DOWNLOAD JSON</Button>
-  }
-
   formatFramesForExport = ({ frames }) => {
     const newFrames = frames.map((oldFrame) => {
       const frameConfig = {
@@ -94,7 +90,6 @@ class GetSceneConfig extends Component {
 
     return (
       <div className={css.main}>
-        {this.renderButton()}
         {flatJson}
         <TextArea
           className={`${css.jsonPaster} }`}

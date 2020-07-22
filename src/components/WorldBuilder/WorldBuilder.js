@@ -580,7 +580,7 @@ class WorldBuilder extends Component {
 
     return (
       <div className={css.buttonHolder}>
-        scene config for download
+        world config for download
         <GetSceneConfig
           className={css.frameSetUploaderBox1}
           onSave={this.onChangeDialog}
@@ -640,24 +640,6 @@ class WorldBuilder extends Component {
       >
         <Button
           icon="document"
-          text="quest config"
-          onClick={() =>
-            this.setState({
-              showQuestConfig: !showQuestConfig,
-            })
-          }
-        />
-        <Button
-          icon="document"
-          text="get JSON for world"
-          onClick={() =>
-            this.setState({
-              showSceneConfig: !showSceneConfig,
-            })
-          }
-        />
-        <Button
-          icon="document"
           text="quest config 2"
           onClick={() =>
             this.setState({
@@ -671,6 +653,24 @@ class WorldBuilder extends Component {
               vertical={true}
               className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
             >
+              <Button
+                icon="document"
+                text="quest config"
+                onClick={() =>
+                  this.setState({
+                    showQuestConfig: !showQuestConfig,
+                  })
+                }
+              />
+              <Button
+                icon="document"
+                text="get JSON for world"
+                onClick={() =>
+                  this.setState({
+                    showSceneConfig: !showSceneConfig,
+                  })
+                }
+              />
               <FrameSetUploader
                 onSave={this.onChangeDialog}
                 onImportJson={({ newWorld }) =>
