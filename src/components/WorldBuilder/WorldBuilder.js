@@ -42,6 +42,7 @@ class WorldBuilder extends Component {
     sceneToEdit: null,
     showFrameBuilder: false,
     showQuestConfig: false,
+    showSceneConfig: false,
   }
 
   // Changing this to DidMount breaks things
@@ -571,6 +572,12 @@ class WorldBuilder extends Component {
   }
 
   renderSceneConfig = ({ world }) => {
+    const { showSceneConfig } = this.state
+    console.log("showSceneConfig", showSceneConfig) // zzz
+    if (!showSceneConfig) {
+      return null
+    }
+
     return (
       <div className={css.buttonHolder}>
         scene config for download
@@ -583,7 +590,32 @@ class WorldBuilder extends Component {
     )
   }
 
+  renderQuestConfig = ({ questConfig }) => {
+    const { showQuestConfig } = this.state
+    if (!showQuestConfig) {
+      return null
+    }
+
+    const jsonEditorProps = {
+      json: questConfig,
+      onChangeJSON: this.onChangeJSON,
+      onSaveJSON: this.onSaveJSON,
+      onClose: this.onCloseJsonEditor,
+    }
+
+    return (
+      <div className={css.jsonEditor}>
+        <JsonEditor2 props={jsonEditorProps} />
+      </div>
+    )
+  }
+
   renderQuestConfigTool = ({ questConfig }) => {
+    const { showQuestConfigTool } = this.state
+    if (!showQuestConfigTool) {
+      return null
+    }
+
     const questConfigToolProps = {
       items: questConfig && questConfig.subQuests,
       onChangeJSON: this.onChangeJSON,
@@ -595,6 +627,62 @@ class WorldBuilder extends Component {
       <div className={css.questConfigTool}>
         <QuestConfigTool props={questConfigToolProps} />
       </div>
+    )
+  }
+
+  renderMainButtonGroup = ({ questConfig }) => {
+    const { showQuestConfig, showSceneConfig, showQuestConfigTool } = this.state
+
+    return (
+      <ButtonGroup
+        vertical={true}
+        className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
+      >
+        <Button
+          icon="document"
+          text="quest config"
+          onClick={() =>
+            this.setState({
+              showQuestConfig: !showQuestConfig,
+            })
+          }
+        />
+        <Button
+          icon="document"
+          text="get JSON for world"
+          onClick={() =>
+            this.setState({
+              showSceneConfig: !showSceneConfig,
+            })
+          }
+        />
+        <Button
+          icon="document"
+          text="quest config 2"
+          onClick={() =>
+            this.setState({
+              showQuestConfigTool: !showQuestConfigTool,
+            })
+          }
+        />
+        <Popover
+          content={
+            <ButtonGroup
+              vertical={true}
+              className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
+            >
+              <FrameSetUploader
+                onSave={this.onChangeDialog}
+                onImportJson={({ newWorld }) =>
+                  this.importWorldFromJson({ newWorld })
+                }
+              />
+            </ButtonGroup>
+          }
+        >
+          <Button icon="document" rightIcon="caret-down" text="Config" />
+        </Popover>
+      </ButtonGroup>
     )
   }
 
@@ -615,45 +703,12 @@ class WorldBuilder extends Component {
       title = (world.data && world.data.title) || this.previousTitle + " copy"
     }
 
-    const jsonEditorProps = {
-      json: questConfig,
-      onChangeJSON: this.onChangeJSON,
-      onSaveJSON: this.onSaveJSON,
-      onClose: this.onCloseJsonEditor,
-    }
-
     return (
       <div className={css.main}>
-        <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
-          <Button
-            icon="document"
-            text="quest config"
-            onClick={() =>
-              this.setState({
-                showQuestConfig: !this.state.showQuestConfig,
-              })
-            }
-          />
-          <Popover
-            content={
-              <ButtonGroup
-                vertical={true}
-                className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
-              >
-                <FrameSetUploader
-                  onSave={this.onChangeDialog}
-                  onImportJson={({ newWorld }) =>
-                    this.importWorldFromJson({ newWorld })
-                  }
-                />
-              </ButtonGroup>
-            }
-          >
-            <Button icon="document" rightIcon="caret-down" text="Config" />
-          </Popover>
-        </ButtonGroup>
+        {this.renderMainButtonGroup({})}
         {this.renderQuestConfigTool({ questConfig })}
         {this.renderSceneConfig({ world })}
+        {this.renderQuestConfig({ questConfig })}
 
         <InputGroup
           value={title}
@@ -664,11 +719,6 @@ class WorldBuilder extends Component {
           className={css.titleInput}
         />
 
-        {showQuestConfig && (
-          <div className={css.jsonEditor}>
-            <JsonEditor2 props={jsonEditorProps} />
-          </div>
-        )}
         {!showFrameBuilder && (
           <div className={css.header}>
             <div className={css.titles}>
