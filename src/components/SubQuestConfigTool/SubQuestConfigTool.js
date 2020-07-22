@@ -6,9 +6,8 @@ import { toJS } from "mobx"
 
 import "jsoneditor/dist/jsoneditor.css"
 import css from "./SubQuestConfigTool.module.scss"
-import CollapsibleTable from "../CollapsibleTable/CollapsibleTable"
-import DataTable2 from "../MuiDataTable/MuiDataTable"
 import MUIDataTable from "mui-datatables"
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
 
 export default function SubQuestConfigTool({ props }) {
   const [items, setItems] = React.useState([])
@@ -43,6 +42,10 @@ export default function SubQuestConfigTool({ props }) {
     })
   }
 
+  // hack to hide toolbar
+  const getMuiTheme = () =>
+    createMuiTheme({ overrides: { MuiToolbar: { root: { display: "none" } } } })
+
   const renderTriggers = ({ triggers }) => {
     const options = {
       filter: true,
@@ -60,21 +63,29 @@ export default function SubQuestConfigTool({ props }) {
         },
       },
       {
-        name: "conditions.completedMission",
+        name: "conditions",
         label: "Conditions",
         options: {
           filter: true,
+          filterType: "multiselect",
+          customBodyRender: (value, tableMeta, updateValue) => {
+            const arry = value
+
+            return arry.map((item) => {
+              const keys = Object.keys(item)
+              return keys.map((key) => {
+                return <div>{`${key}: ${item[key]}`}</div>
+              })
+            })
+          },
         },
       },
     ]
 
     return (
-      <MUIDataTable
-        // title={"ACME Employee list"}
-        data={triggers}
-        columns={columns}
-        options={options}
-      />
+      <MuiThemeProvider theme={getMuiTheme()}>
+        <MUIDataTable data={triggers} columns={columns} options={options} />{" "}
+      </MuiThemeProvider>
     )
   }
 

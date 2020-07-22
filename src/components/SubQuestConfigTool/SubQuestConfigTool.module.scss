@@ -38,7 +38,7 @@
 
         .listItemName {
           display: flex;
-          border: 1px solid orange !important;
+          // border: 1px solid orange !important;
         }
 
         .listItem {
@@ -48,10 +48,10 @@
           padding-left: 2vh;
         }
 
-        .triggerName {
-          border: 1px solid red !important;
-          min-width: 20%;
-        }
+        // .triggerName {
+        //   border: 1px solid red !important;
+        //   min-width: 20%;
+        // }
 
         .scenes {
           .scene {
