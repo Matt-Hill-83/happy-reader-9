@@ -1,18 +1,28 @@
 import React, { useEffect } from "react"
 import cx from "classnames"
 import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
-import MiniTable2 from "../MiniTable2/MiniTable2"
 import { toJS } from "mobx"
 
-import "jsoneditor/dist/jsoneditor.css"
-import css from "./SubQuestConfigTool.module.scss"
-import MUIDataTable from "mui-datatables"
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
 import { subQuestTableConfig } from "./SubQuestTableConfig"
+import DataTable3 from "../DataTable3/DataTable3"
+
+import css from "./SubQuestConfigTool.module.scss"
 
 export default function SubQuestConfigTool({ props }) {
   const [questConfig, setQuestConfig] = React.useState([])
 
+  const renderScenes = ({ scenes }) => {
+    return scenes.map((scene) => {
+      const renderedTriggers = renderTriggers({ triggers: scene.sceneTriggers })
+
+      return (
+        <div className={cx(css.sceneName, css.listItem)}>
+          <span className={cx(css.listItemName)}>{scene.name}</span>
+          {renderedTriggers}
+        </div>
+      )
+    })
+  }
   // const onChange = (questConfig) => {
   //   setQuestConfig(questConfig)
   //   props.onChangeJSON && props.onChangeJSON()
@@ -34,20 +44,12 @@ export default function SubQuestConfigTool({ props }) {
     setQuestConfig(props.questConfig || {})
   }, [props.questConfig])
 
-  const renderScenes = ({ scenes }) => {
-    return scenes.map((scene) => {
-      return (
-        <div className={cx(css.sceneName, css.listItem)}>
-          <span className={cx(css.listItemName)}>{scene.name}</span>
-        </div>
-      )
-    })
-  }
-
   const renderTriggers = ({ triggers }) => {
     const { options, columns } = subQuestTableConfig
 
-    return <MUIDataTable data={triggers} columns={columns} options={options} />
+    const props = { data: triggers, columns, options }
+    return <DataTable3 props={props} />
+    // return <MUIDataTable data={triggers} columns={columns} options={options} />
   }
   if (!questConfig) {
     return null
@@ -63,13 +65,13 @@ export default function SubQuestConfigTool({ props }) {
       return (
         <div className={cx(css.subQuest, css.listGroup)}>
           {subQuest.name}
-          <div className={cx(css.scenes, css.listGroup)}>
-            <span className={cx(css.listGroupTitle)}>Scenes</span>
-            {renderedScenes}
-          </div>
           <div className={cx(css.triggers, css.listGroup)}>
             <span className={cx(css.listGroupTitle)}>Triggers</span>
             {renderedTriggers}
+          </div>
+          <div className={cx(css.scenes, css.listGroup)}>
+            <span className={cx(css.listGroupTitle)}>Scenes</span>
+            {renderedScenes}
           </div>
         </div>
       )
