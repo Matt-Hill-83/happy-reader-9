@@ -18,7 +18,7 @@ import {
 import { IconNames } from "@blueprintjs/icons"
 import _get from "lodash.get"
 
-import { maps } from "../../Stores/InitStores"
+import { maps, gameConfig } from "../../Stores/InitStores"
 import { worldNameStore } from "../../Stores/FrameSetStore"
 import CrudMachine from "../CrudMachine/CrudMachine"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
@@ -49,6 +49,9 @@ class WorldBuilder extends Component {
   // Changing this to DidMount breaks things
   async componentWillMount() {
     await worldNameStore.fetch()
+    await gameConfig.fetch()
+    const gameConfigData = Utils.getGameConfig()
+    console.log("gameConfigData---WB", toJS(gameConfigData)) // zzz
     const defaultWorldId = localStateStore.getDefaultWorldId()
     this.onChangeWorld({ mapId: defaultWorldId })
   }

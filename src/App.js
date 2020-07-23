@@ -4,12 +4,12 @@ import getMuiTheme from "material-ui/styles/getMuiTheme"
 import MediaQuery from "react-responsive"
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 import React from "react"
+import { toJS } from "mobx"
 
 import WorldBuilder from "./components/WorldBuilder/WorldBuilder"
 import TopLevel from "./components/TopLevel/TopLevel"
-
 import localStateStore from "./Stores/LocalStateStore/LocalStateStore.js"
-import { maps } from "./Stores/InitStores"
+import { maps, gameConfig } from "./Stores/InitStores"
 
 import css from "./App.module.scss"
 
@@ -17,7 +17,7 @@ const worldItem = ({ worldId }) => {
   return `/world/${worldId}`
 }
 const defaultWorldInProd = "aH5MjGenT8svEaPaty7G"
-const defaultWorldInNonProd = "SUXyexf2nxhIOb7kK0cQ"
+const defaultWorldInNonProd = "ZNWZqpZeX88vCBPlSzmn"
 // const defaultWorldInNonProd = "aH5MjGenT8svEaPaty7G"
 
 export default function App() {
@@ -40,6 +40,10 @@ export default function App() {
   localStateStore.setDefaultWorldId(defaultWorldId)
 
   maps.fetch()
+  gameConfig.fetch()
+  // console.log("gameConfig", toJS(gameConfig)) // zzz
+  // console.log("maps", toJS(maps)) // zzz
+  // gameConfig.add({ test: 5 })
 
   const nav = IS_PROD_RELEASE ? null : (
     <nav className={`${css.nav}`}>

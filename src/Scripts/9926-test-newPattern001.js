@@ -829,7 +829,8 @@ const story9926 = {
           },
           { name: "goat" },
           { name: "fig" },
-          { name: "log" },
+          { name: "stump" },
+          { name: "pig" },
         ],
         triggers: [
           {

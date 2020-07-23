@@ -1,5 +1,5 @@
 import localStateStore from "../Stores/LocalStateStore/LocalStateStore.js"
-import { maps, books } from "../Stores/InitStores.js"
+import { gameConfig, maps, books } from "../Stores/InitStores.js"
 import { toJS } from "mobx"
 import _get from "lodash.get"
 
@@ -37,6 +37,12 @@ export default class Utils {
     merida02: 3,
   }
   // CONSTANTS ---------------------------------- end ---------------------------
+
+  static getGameConfig = () => {
+    const output = _get(gameConfig, "docs[0].data") || {}
+    console.log("output", toJS(output)) // zzz
+    return output
+  }
 
   static sortWorlds = ({ worlds, keys }) => {
     const sortedWorlds = Utils.sortDataByNestedKey({

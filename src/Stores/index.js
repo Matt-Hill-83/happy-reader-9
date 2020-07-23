@@ -1,9 +1,9 @@
 // not currently used
 
-import { UserConfigStore } from "./UserConfigStore";
+// import { UserConfigStore } from "./UserConfigStore";
 
-const stores = {
-  UserConfigStore
-};
+// const stores = {
+//   UserConfigStore
+// };
 
-module.exports = stores;
+// module.exports = stores;
