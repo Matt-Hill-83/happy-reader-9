@@ -8,18 +8,18 @@ export const subQuestTableConfig = {
     isRowSelectable: false,
     selectableRowsHideCheckboxes: false,
     selectableRows: "none",
-    renderExpandableRow: (rowData, rowMeta) => {
-      const colSpan = rowData.length + 1
-      return (
-        <TableRow>
-          <TableCell colSpan={colSpan}>
-            Custom expandable row option. Data: {JSON.stringify(rowData)}
-          </TableCell>
-        </TableRow>
-      )
-    },
-    onRowExpansionChange: (curExpanded, allExpanded, rowsExpanded) =>
-      console.log(curExpanded, allExpanded, rowsExpanded),
+    // renderExpandableRow: (rowData, rowMeta) => {
+    //   const colSpan = rowData.length + 1
+    //   return (
+    //     <TableRow>
+    //       <TableCell colSpan={colSpan}>
+    //         Custom expandable row option. Data: {JSON.stringify(rowData)}
+    //       </TableCell>
+    //     </TableRow>
+    //   )
+    // },
+    // onRowExpansionChange: (curExpanded, allExpanded, rowsExpanded) =>
+    //   console.log(curExpanded, allExpanded, rowsExpanded),
     onCellClick: () => {},
     onRowClick: () => {},
     pagination: false,

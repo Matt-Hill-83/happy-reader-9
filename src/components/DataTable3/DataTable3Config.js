@@ -1,6 +1,3 @@
-import React from "react"
-import TableRow from "@material-ui/core/TableRow"
-import TableCell from "@material-ui/core/TableCell"
 import css from "./DataTable3.module.scss"
 
 export default {

@@ -46,6 +46,10 @@ export default function SubQuestConfigTool({ props }) {
 
   const renderTriggers = ({ triggers }) => {
     const { options, columns } = subQuestTableConfig
+    console.log("triggers", toJS(triggers)) // zzz
+    if (!triggers || triggers.length === 0) {
+      return null
+    }
 
     const props = { data: triggers, columns, options }
     return <DataTable3 props={props} />
