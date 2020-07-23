@@ -618,7 +618,7 @@ class WorldBuilder extends Component {
     }
 
     const questConfigToolProps = {
-      items: questConfig && questConfig.subQuests,
+      questConfig: questConfig,
       onChangeJSON: this.onChangeJSON,
       onSaveJSON: this.onSaveJSON,
       onClose: this.onCloseJsonEditor,

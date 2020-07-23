@@ -769,43 +769,94 @@ const story9926 = {
       frames2: [],
     },
   ],
+
   questConfig: {
     missions: [
       {
         name: "Feed the pig",
         item: { name: "fig" },
+        missionType: "giveItemToPerson",
         recipient: { name: "pig" },
         rewards: [{ name: "gold", amount: 5 }],
       },
       {
+        missionType: "giveItemToPerson",
         recipient: { name: "goatInABoat" },
         name: "Feed the goat.",
         rewards: [{ name: "gold", amount: 5 }],
         item: { name: "bun" },
       },
       {
+        missionType: "giveItemToPerson",
         recipient: { name: "pinky01" },
         name: "Give Pinky a gift.",
         item: { name: "mug" },
         rewards: [{ amount: 5, name: "gold" }],
       },
       {
+        missionType: "giveItemToPerson",
         recipient: { name: "babyTroll01" },
         name: "Give a Troll a Gift.",
         rewards: [{ name: "gold", amount: 5 }],
         item: { name: "pin" },
       },
+      {
+        missionType: "getToLocation",
+        location: { name: "log" },
+      },
     ],
-    subQuestTriggersList: [
-      { subQuestId: 1, unHideTriggers: { completedMission: 0 } },
-      { subQuestId: 2, unHideTriggers: { completedMission: 1 } },
-      { subQuestId: 3, unHideTriggers: { completedMission: 2 } },
-      { unHideTriggers: { completedMission: 2 }, subQuestId: 4 },
-      { unHideTriggers: { completedMission: 3 }, subQuestId: 5 },
-    ],
+
     subQuests: [
       {
         name: "Meet Your New Best Friend",
+        scenes: [
+          {
+            name: "castle",
+            sceneTriggers: [
+              {
+                name: "lock",
+                conditions: [{ currentMission: 0 }],
+              },
+              {
+                name: "unlock",
+                conditions: [{ completedMission: 1 }],
+              },
+              {
+                name: "updateFrameSet",
+                conditions: [{ frameSetIndex: 1, completedMission: 0 }],
+              },
+            ],
+          },
+          { name: "goat" },
+          { name: "fig" },
+          { name: "log" },
+        ],
+        triggers: [
+          {
+            name: "lock",
+            conditions: [
+              { completedMission: 0 },
+              { currentMission: 0 },
+              { completedScene: "log" },
+              { pocketContains: "hat" },
+            ],
+          },
+          {
+            name: "unlock",
+            conditions: [{ completedMission: 0 }],
+          },
+          {
+            name: "hide",
+            conditions: [{ completedMission: 0 }],
+          },
+          {
+            name: "updateFrameSet",
+            conditions: [{ frameSetIndex: 1, completedMission: 0 }],
+          },
+        ],
+      },
+      {
+        name: "Win the Rap Battle",
         scenes: [
           { name: "castle" },
           { name: "goat" },
@@ -831,29 +882,11 @@ const story9926 = {
             conditions: [{ completedMission: 0 }],
           },
           {
-            name: "nextFrameSet",
+            name: "updateFrameSet",
             conditions: [{ frameSetIndex: 1, completedMission: 0 }],
           },
         ],
       },
-    ],
-    sceneTriggersList: [
-      {
-        name: "log",
-        triggers: {
-          lock: [
-            { completedMission: 0 },
-            { currentMission: 0 },
-            { completedScene: "log" },
-            { sceneVisited: "log" },
-          ],
-          unLock: [{ completedMission: 0 }],
-          unHide: [{ completedMission: 0 }],
-          newFrameSet: [{ completedMission: 0 }],
-        },
-      },
-      { name: "log", unHideTriggers: { completedMission: 0 } },
-      { name: "log", unHideTriggers: { completedMission: 0 } },
     ],
   },
 }

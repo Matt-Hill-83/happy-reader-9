@@ -8,14 +8,15 @@ import "jsoneditor/dist/jsoneditor.css"
 import css from "./SubQuestConfigTool.module.scss"
 import MUIDataTable from "mui-datatables"
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
+import { subQuestTableConfig } from "./SubQuestTableConfig"
 
 export default function SubQuestConfigTool({ props }) {
-  const [items, setItems] = React.useState([])
+  const [questConfig, setQuestConfig] = React.useState([])
 
-  const onChange = (items) => {
-    setItems(items)
-    props.onChangeJSON && props.onChangeJSON()
-  }
+  // const onChange = (questConfig) => {
+  //   setQuestConfig(questConfig)
+  //   props.onChangeJSON && props.onChangeJSON()
+  // }
 
   useEffect(() => {
     // on mount
@@ -29,8 +30,9 @@ export default function SubQuestConfigTool({ props }) {
 
   // on change in props
   useEffect(() => {
-    setItems(props.items)
-  }, [props.items])
+    // TODO: store correct prop
+    setQuestConfig(props.questConfig || {})
+  }, [props.questConfig])
 
   const renderScenes = ({ scenes }) => {
     return scenes.map((scene) => {
@@ -42,140 +44,37 @@ export default function SubQuestConfigTool({ props }) {
     })
   }
 
-  // hack to hide toolbar
-  const getMuiTheme = () =>
-    createMuiTheme({ overrides: { MuiToolbar: { root: { display: "none" } } } })
-
   const renderTriggers = ({ triggers }) => {
-    const options = {
-      filter: true,
-      filterType: "dropdown",
-      responsive: "vertical",
-      enableNestedDataAccess: ".",
-      customToolbar: null,
-      // filter: false,
-      search: false,
-      print: false,
-      download: false,
-      viewColumns: false,
-      customToolbar: null,
-      responsive: "vertical",
-    }
-
-    const columns = [
-      {
-        name: "name",
-        label: "Name",
-        options: {
-          filter: true,
-        },
-      },
-      {
-        name: "conditions",
-        label: "Conditions",
-        options: {
-          filter: true,
-          filterType: "multiselect",
-          customBodyRender: (value, tableMeta, updateValue) => {
-            return value.map((condition) => {
-              const keys = Object.keys(condition)
-              return keys.map((key) => <div>{`${key}: ${condition[key]}`}</div>)
-            })
-          },
-        },
-      },
-      {
-        name: "Delete",
-        options: {
-          filter: false,
-          sort: false,
-          empty: true,
-          customBodyRenderLite: (dataIndex) => {
-            return (
-              <button
-                onClick={() => {
-                  const { data } = this.state
-                  data.shift()
-                  this.setState({ data })
-                }}
-              >
-                Delete
-              </button>
-            )
-          },
-        },
-      },
-      {
-        name: "Edit",
-        options: {
-          filter: false,
-          sort: false,
-          empty: true,
-          customBodyRenderLite: (dataIndex, rowIndex) => {
-            return (
-              <button
-                onClick={() =>
-                  window.alert(
-                    `Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
-                  )
-                }
-              >
-                Edit
-              </button>
-            )
-          },
-        },
-      },
-      {
-        name: "Add",
-        options: {
-          filter: false,
-          sort: false,
-          empty: true,
-          customBodyRenderLite: (dataIndex) => {
-            return (
-              <button
-              // onClick={() => {
-              //   const { data } = this.state
-              //   data.unshift([
-              //     "Mason Ray",
-              //     "Computer Scientist",
-              //     "San Francisco",
-              //     39,
-              //     "$142,000",
-              //   ])
-              //   this.setState({ data })
-              // }}
-              >
-                Add
-              </button>
-            )
-          },
-        },
-      },
-    ]
+    const options = subQuestTableConfig.options
+    const columns = subQuestTableConfig.columns
 
     return <MUIDataTable data={triggers} columns={columns} options={options} />
   }
+  if (!questConfig) {
+    return null
+  }
 
-  const renderedItems = props.items.map((subQuest) => {
-    const renderedScenes = renderScenes({ scenes: subQuest.scenes })
-    const renderedTriggers = renderTriggers({ triggers: subQuest.triggers })
+  console.log("questConfig", toJS(questConfig)) // zzz
+  const renderedItems =
+    questConfig.subQuests &&
+    questConfig.subQuests.map((subQuest) => {
+      const renderedScenes = renderScenes({ scenes: subQuest.scenes })
+      const renderedTriggers = renderTriggers({ triggers: subQuest.triggers })
 
-    return (
-      <div className={cx(css.subQuest, css.listGroup)}>
-        {subQuest.name}
-        <div className={cx(css.scenes, css.listGroup)}>
-          <span className={cx(css.listGroupTitle)}>Scenes</span>
-          {renderedScenes}
+      return (
+        <div className={cx(css.subQuest, css.listGroup)}>
+          {subQuest.name}
+          <div className={cx(css.scenes, css.listGroup)}>
+            <span className={cx(css.listGroupTitle)}>Scenes</span>
+            {renderedScenes}
+          </div>
+          <div className={cx(css.triggers, css.listGroup)}>
+            <span className={cx(css.listGroupTitle)}>Triggers</span>
+            {renderedTriggers}
+          </div>
         </div>
-        <div className={cx(css.triggers, css.listGroup)}>
-          <span className={cx(css.listGroupTitle)}>Triggers</span>
-          {renderedTriggers}
-        </div>
-      </div>
-    )
-  })
+      )
+    })
 
   return (
     <div className={cx(css.main)}>
@@ -186,7 +85,7 @@ export default function SubQuestConfigTool({ props }) {
       >
         <Button
           className={css.saveButton}
-          onClick={() => props.onSaveJSON({ items })}
+          onClick={() => props.onSaveJSON({ questConfig })}
         >
           Save Changes
         </Button>

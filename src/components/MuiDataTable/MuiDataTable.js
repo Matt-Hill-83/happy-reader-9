@@ -97,7 +97,7 @@ class DataTable2 extends React.Component {
       filter: true,
       filterType: "dropdown",
       responsive: "vertical",
-      enableNestedDataAccess: ".", // allows nested data separated by "." (see column names and the data structure above)
+      enableNestedDataAccess: ".",
     }
 
     return (

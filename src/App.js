@@ -16,6 +16,9 @@ import css from "./App.module.scss"
 const worldItem = ({ worldId }) => {
   return `/world/${worldId}`
 }
+const defaultWorldInProd = "aH5MjGenT8svEaPaty7G"
+const defaultWorldInNonProd = "SUXyexf2nxhIOb7kK0cQ"
+// const defaultWorldInNonProd = "aH5MjGenT8svEaPaty7G"
 
 export default function App() {
   FocusStyleManager.onlyShowFocusOnTabs()
@@ -28,9 +31,6 @@ export default function App() {
 
   localStateStore.setIsProdRelease(IS_PROD_RELEASE)
 
-  const defaultWorldInProd = "aH5MjGenT8svEaPaty7G"
-  const defaultWorldInNonProd = "lvfhKpN5NXzl0nkXMpxK"
-  // const defaultWorldInNonProd = "aH5MjGenT8svEaPaty7G"
   const isProdRelease = localStateStore.getIsProdRelease()
 
   const defaultWorldId = isProdRelease
