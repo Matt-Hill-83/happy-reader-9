@@ -1,12 +1,12 @@
 import React from "react"
-import TableRow from "@material-ui/core/TableRow"
-import TableCell from "@material-ui/core/TableCell"
+// import TableRow from "@material-ui/core/TableRow"
+// import TableCell from "@material-ui/core/TableCell"
 
 export const subQuestTableConfig = {
   options: {
     // expandableRows: true,
-    isRowSelectable: false,
-    selectableRowsHideCheckboxes: false,
+    // isRowSelectable: false,
+    // selectableRowsHideCheckboxes: false,
     selectableRows: "none",
     // renderExpandableRow: (rowData, rowMeta) => {
     //   const colSpan = rowData.length + 1
@@ -22,19 +22,6 @@ export const subQuestTableConfig = {
     //   console.log(curExpanded, allExpanded, rowsExpanded),
     onCellClick: () => {},
     onRowClick: () => {},
-    pagination: false,
-    filter: true,
-    filterType: "dropdown",
-    responsive: "vertical",
-    enableNestedDataAccess: ".",
-    customToolbar: null,
-    filter: false,
-    search: false,
-    print: false,
-    download: false,
-    viewColumns: false,
-    customToolbar: null,
-    responsive: "vertical",
   },
   columns: [
     {

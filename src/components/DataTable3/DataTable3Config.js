@@ -2,13 +2,13 @@ import css from "./DataTable3.module.scss"
 
 export default {
   options: {
-    setCellHeaderProps: (value) => {
-      return {
-        style: {
-          textDecoration: "underline",
-        },
-      }
-    },
+    // setCellHeaderProps: (value) => {
+    //   return {
+    //     style: {
+    //       textDecoration: "underline",
+    //     },
+    //   }
+    // },
     setCellProps: (value) => {
       return {
         className: css.test,
@@ -20,8 +20,7 @@ export default {
     },
     setTableProps: () => {
       return {
-        padding: "none",
-
+        // padding: "none",
         // material ui v4 only
         size: "small",
       }

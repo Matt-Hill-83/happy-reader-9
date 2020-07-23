@@ -63,7 +63,6 @@ export default function SubQuestConfigTool({ props }) {
   const renderedItems =
     questConfig.subQuests &&
     questConfig.subQuests.map((subQuest) => {
-      const renderedScenes = renderScenes({ scenes: subQuest.scenes })
       const renderedTriggers = renderTriggers({ triggers: subQuest.triggers })
 
       return (
@@ -75,7 +74,7 @@ export default function SubQuestConfigTool({ props }) {
           </div>
           <div className={cx(css.scenes, css.listGroup)}>
             <span className={cx(css.listGroupTitle)}>Scenes</span>
-            {renderedScenes}
+            {renderScenes({ scenes: subQuest.scenes })}
           </div>
         </div>
       )
