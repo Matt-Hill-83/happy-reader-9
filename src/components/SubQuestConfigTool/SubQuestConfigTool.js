@@ -45,8 +45,7 @@ export default function SubQuestConfigTool({ props }) {
   }
 
   const renderTriggers = ({ triggers }) => {
-    const options = subQuestTableConfig.options
-    const columns = subQuestTableConfig.columns
+    const { options, columns } = subQuestTableConfig
 
     return <MUIDataTable data={triggers} columns={columns} options={options} />
   }

@@ -1,6 +1,24 @@
 import React from "react"
 
 export const subQuestTableConfig = {
+  options: {
+    expandableRows: true,
+    onCellClick: () => {},
+    onRowClick: () => {},
+    pagination: false,
+    filter: true,
+    filterType: "dropdown",
+    responsive: "vertical",
+    enableNestedDataAccess: ".",
+    customToolbar: null,
+    filter: false,
+    search: false,
+    print: false,
+    download: false,
+    viewColumns: false,
+    customToolbar: null,
+    responsive: "vertical",
+  },
   columns: [
     {
       name: "name",
@@ -95,18 +113,4 @@ export const subQuestTableConfig = {
       },
     },
   ],
-  options: {
-    filter: true,
-    filterType: "dropdown",
-    responsive: "vertical",
-    enableNestedDataAccess: ".",
-    customToolbar: null,
-    filter: false,
-    search: false,
-    print: false,
-    download: false,
-    viewColumns: false,
-    customToolbar: null,
-    responsive: "vertical",
-  },
 }
