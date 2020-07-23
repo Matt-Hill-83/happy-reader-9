@@ -5,6 +5,7 @@ import { toJS } from "mobx"
 
 import { subQuestTableConfig } from "./SubQuestTableConfig"
 import DataTable3 from "../DataTable3/DataTable3"
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
 
 import css from "./SubQuestConfigTool.module.scss"
 
@@ -51,9 +52,27 @@ export default function SubQuestConfigTool({ props }) {
       return null
     }
 
-    const props = { data: triggers, columns, options }
-    return <DataTable3 props={props} />
-    // return <MUIDataTable data={triggers} columns={columns} options={options} />
+    const getMuiTheme = () =>
+      createMuiTheme({
+        overrides: {
+          MUIDataTableHeadCell: {
+            fixedHeader: {
+              display: "none",
+            },
+          },
+        },
+      })
+
+    return (
+      <DataTable3
+        props={{
+          getMuiTheme,
+          data: triggers,
+          columns,
+          options,
+        }}
+      />
+    )
   }
   if (!questConfig) {
     return null
