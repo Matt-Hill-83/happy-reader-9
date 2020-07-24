@@ -47,9 +47,6 @@ export default class Utils {
     const questStatus = localStateStore.getQuestStatus()
     questStatus.activeSubQuest++
     localStateStore.setQuestStatus(questStatus)
-    const questStatusU2 = localStateStore.getQuestStatus()
-
-    return
   }
 
   static sortWorlds = ({ worlds, keys }) => {
