@@ -17,8 +17,8 @@ import BookPicker from "../BookPicker/BookPicker.js"
 // import BookBuilder from "../BookBuilder/BookBuilder.js"
 
 let useDefaultWorldId
-useDefaultWorldId = true
 useDefaultWorldId = false
+useDefaultWorldId = true
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -39,6 +39,7 @@ class TopLevel extends React.Component {
     console.log("") // zzz
     console.log("componentWillMount---------------------------------") // zzz
     const defaultWorldId = localStateStore.getDefaultWorldId()
+    console.log("defaultWorldId", defaultWorldId) // zzz
 
     await books.fetch()
     console.log("books.docs", toJS(books.docs)) // zzz

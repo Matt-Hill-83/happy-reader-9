@@ -82,18 +82,22 @@ export default function SubQuestConfigTool({ props }) {
   const renderedItems =
     questConfig.subQuests &&
     questConfig.subQuests.map((subQuest) => {
-      const renderedTriggers = renderTriggers({ triggers: subQuest.triggers })
+      const { triggers, scenes, missions = [] } = subQuest
 
       return (
         <div className={cx(css.subQuest, css.listGroup)}>
           {subQuest.name}
           <div className={cx(css.triggers, css.listGroup)}>
+            <span className={cx(css.listGroupTitle)}>Missions</span>
+            {renderScenes({ scenes: missions })}
+          </div>
+          <div className={cx(css.triggers, css.listGroup)}>
             <span className={cx(css.listGroupTitle)}>Triggers</span>
-            {renderedTriggers}
+            {renderTriggers({ triggers })}
           </div>
           <div className={cx(css.scenes, css.listGroup)}>
             <span className={cx(css.listGroupTitle)}>Scenes</span>
-            {renderScenes({ scenes: subQuest.scenes })}
+            {renderScenes({ scenes })}
           </div>
         </div>
       )

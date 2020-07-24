@@ -771,44 +771,43 @@ const story9926 = {
   ],
 
   questConfig: {
-    missions: [
-      {
-        name: "Feed the pig",
-        item: { name: "fig" },
-        missionType: "giveItemToPerson",
-        recipient: { name: "pig" },
-        rewards: [{ name: "gold", amount: 5 }],
-      },
-      {
-        missionType: "giveItemToPerson",
-        recipient: { name: "goatInABoat" },
-        name: "Feed the goat.",
-        rewards: [{ name: "gold", amount: 5 }],
-        item: { name: "bun" },
-      },
-      {
-        missionType: "giveItemToPerson",
-        recipient: { name: "pinky01" },
-        name: "Give Pinky a gift.",
-        item: { name: "mug" },
-        rewards: [{ amount: 5, name: "gold" }],
-      },
-      {
-        missionType: "giveItemToPerson",
-        recipient: { name: "babyTroll01" },
-        name: "Give a Troll a Gift.",
-        rewards: [{ name: "gold", amount: 5 }],
-        item: { name: "pin" },
-      },
-      {
-        missionType: "getToLocation",
-        location: { name: "log" },
-      },
-    ],
-
     subQuests: [
       {
         name: "Meet Your New Best Friend",
+        missions: [
+          {
+            name: "Feed the pig",
+            item: { name: "fig" },
+            missionType: "giveItemToPerson",
+            recipient: { name: "pig" },
+            rewards: [{ name: "gold", amount: 5 }],
+          },
+          {
+            missionType: "giveItemToPerson",
+            recipient: { name: "goatInABoat" },
+            name: "Feed the goat.",
+            rewards: [{ name: "gold", amount: 5 }],
+            item: { name: "bun" },
+          },
+          {
+            missionType: "giveItemToPerson",
+            recipient: { name: "pinky01" },
+            name: "Give Pinky a gift.",
+            item: { name: "mug" },
+            rewards: [{ amount: 5, name: "gold" }],
+          },
+          {
+            missionType: "giveItemToPerson",
+            recipient: { name: "babyTroll01" },
+            name: "Give a Troll a Gift.",
+            rewards: [{ name: "gold", amount: 5 }],
+            item: { name: "pin" },
+          },
+          {
+            missionType: "getToLocation",
+            location: { name: "log" },
+          },
+        ],
         scenes: [
           {
             name: "castle",
