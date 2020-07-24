@@ -15,6 +15,7 @@ class LocalStateStore {
   visitedScenes = []
 
   _defaultQuestStatus = {
+    activeSubQuest: 0,
     activeMission: 0,
     pockets: { gold: { amount: 0 } },
     desiredItems: [],
@@ -31,6 +32,11 @@ class LocalStateStore {
   setQuestStatus = (questStatus) => {
     this.questStatus = questStatus
   }
+
+  getDefaultQuestStatus = () => this._defaultQuestStatus
+  // setDefaultQuestStatus = (questStatus) => {
+  //   this.questStatus = questStatus
+  // }
 
   getDefaultWorldId = () => this.defaultWorldId
   setDefaultWorldId = (defaultWorldId) => {

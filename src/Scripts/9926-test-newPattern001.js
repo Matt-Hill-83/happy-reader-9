@@ -774,6 +774,7 @@ const story9926 = {
     subQuests: [
       {
         name: "Meet Your New Best Friend",
+        index: 0,
         missions: [
           {
             name: "Feed the pig",

@@ -40,8 +40,16 @@ export default class Utils {
 
   static getGameConfig = () => {
     const output = _get(gameConfig, "docs[0].data") || {}
-    console.log("output", toJS(output)) // zzz
     return output
+  }
+
+  static incrementActiveSubQuest = () => {
+    const questStatus = localStateStore.getQuestStatus()
+    questStatus.activeSubQuest++
+    localStateStore.setQuestStatus(questStatus)
+    const questStatusU2 = localStateStore.getQuestStatus()
+
+    return
   }
 
   static sortWorlds = ({ worlds, keys }) => {
@@ -459,16 +467,12 @@ export default class Utils {
 
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
     const map = mapToUpdate || localStateStore.getWorldBuilderWorld()
-    console.log("map.data", toJS(map.data)) // zzz
-    console.log("map.data.title", toJS(map.data.title)) // zzz
     Object.assign(map.data, toJS(newProps))
 
     if (mapToUpdate) {
       const {
         data: { gridDimensions, newGrid5 },
       } = mapToUpdate
-
-      console.log("newGrid5", toJS(newGrid5)) // zzz
     } else {
       // fuck.  everything broke because this does not pull from the correct grid.
       // fuck.  everything broke because this does not pull from the correct grid.
@@ -478,11 +482,9 @@ export default class Utils {
       // fuck.  everything broke because this does not pull from the correct grid.
       // fuck.  everything broke because this does not pull from the correct grid.
       map.data.newGrid5 = Utils.createCondensedGridFromGrid({})
-      // console.log("map.data.newGrid5", toJS(map.data.newGrid5)) // zzz
     }
 
     delete map.data.grid
-    console.log("map.data", toJS(map.data)) // zzz
     await map.update(map.data)
   }
 
@@ -559,14 +561,12 @@ export default class Utils {
   //   }
 
   //   let allItems = []
-  //   console.log("frame.items", toJS(frame.items)) // zzz
   //   if (frame.items && frame.items.length > 0) {
   //     allItems = (frame.items && frame.items.map((item) => item.name)) || []
   //   } else {
   //     allItems = (scene.items && scene.items.map((item) => item.name)) || []
   //   }
 
-  //   console.log("allItems", toJS(allItems)) // zzz
   //   allCreatures.push(...allItems)
 
   //   const filteredCharacters = allCreatures.filter((item) => {
