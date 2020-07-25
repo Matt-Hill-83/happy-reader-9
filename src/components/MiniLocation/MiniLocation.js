@@ -177,15 +177,10 @@ class MiniLocation extends React.Component {
 
     const locationName = scene.location.name
     const isBlank = locationName === "blank"
-
     const localClass = isActive ? css.activeClass : ""
-    const locationImage = Images.all[locationName]
 
-    const rockImage = Images.backgrounds["rock"]
-    const rockImageVertical = Images.backgrounds["rock02Vertical"]
     const cloudImage = Images.backgrounds["cloud"]
     const lockImage = Images.items["lock02"]
-    const defaultDoorImage = Images.backgrounds["door"]
 
     const showLocationOnly = locationName === "roadLeftRight01"
 
@@ -202,15 +197,25 @@ class MiniLocation extends React.Component {
       )
     }
 
+    let locationImage
     if (!locationName) {
       return <div className={`${css.main} ${className} ${localClass}`}></div>
     }
 
-    const showBottomPath = neighbors[Utils.neighborPositionsEnum.bottom]
-    const showRightPath = neighbors[Utils.neighborPositionsEnum.right]
+    let rockImage
+    let rockImageVertical
+    let defaultDoorImage
+    let showBottomPath
+    let showRightPath
     let backgroundColor = "white"
 
     if (!isBlank) {
+      locationImage = Images.all[locationName]
+      rockImage = Images.backgrounds["rock"]
+      rockImageVertical = Images.backgrounds["rock02Vertical"]
+      defaultDoorImage = Images.backgrounds["door"]
+      showBottomPath = neighbors[Utils.neighborPositionsEnum.bottom]
+      showRightPath = neighbors[Utils.neighborPositionsEnum.right]
       const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
 
       const colorIndex = questStatus.activeSubQuest % colors.length
@@ -283,11 +288,7 @@ class MiniLocation extends React.Component {
                 defaultDoorImage: defaultDoorImage,
               })}
             <div className={css.imagesBox}>
-              <img
-                className={css.miniLocationImage}
-                src={locationImage}
-                alt={"imagex"}
-              />
+              <img className={css.miniLocationImage} alt={"imagex"} />
             </div>
 
             <div className={css.characters}>
@@ -303,3 +304,4 @@ class MiniLocation extends React.Component {
 }
 
 export default observer(MiniLocation)
+src = { locationImage }

@@ -38,6 +38,23 @@ export default class Utils {
   }
   // CONSTANTS ---------------------------------- end ---------------------------
 
+  static calcListOfHiddenScenes = () => {
+    // const scenesGrid = this.getActiveWorldGrid()
+    const activeWorld = localStateStore.getActiveWorld()
+
+    const { newGrid5, questConfig } = activeWorld.data
+    console.log("newGrid5", toJS(newGrid5)) // zzz
+
+    console.log("activeWorld", toJS(activeWorld)) // zzz
+    const hiddenScenes = localStateStore.getHiddenScenes()
+    newGrid5.forEach((scene) => {
+      // for each scene, look for the hide trigger in the list
+      // // Check if any of the requirements have been met.
+      // if
+      //
+    })
+  }
+
   static getGameConfig = () => {
     const output = _get(gameConfig, "docs[0].data") || {}
     return output
@@ -445,10 +462,10 @@ export default class Utils {
     return neighbors
   }
 
-  static unLockSubQuests = ({ subQuestTriggers = [] }) => {
+  static unLockSubQuests = ({ subQuestTriggers = {} }) => {
     const { unHideTriggers, subQuestId } = subQuestTriggers
 
-    const questStatus = localStateStore.getQuestStatus()
+    // const questStatus = localStateStore.getQuestStatus()
 
     const requiredCompletedMission = _get(
       unHideTriggers,

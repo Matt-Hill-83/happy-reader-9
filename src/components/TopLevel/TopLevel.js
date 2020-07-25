@@ -118,7 +118,7 @@ class TopLevel extends React.Component {
     const questStatus = localStateStore.getQuestStatus()
     console.log("questStatus------TL1", toJS(questStatus)) // zzz
     console.log("questStatus.activeSubQuest", toJS(questStatus.activeSubQuest)) // zzz
-    Utils.incrementActiveSubQuest()
+    // Utils.incrementActiveSubQuest()
     const questStatus2 = localStateStore.getQuestStatus()
     console.log("questStatus2", toJS(questStatus2)) // zzz
     console.log(
@@ -141,15 +141,17 @@ class TopLevel extends React.Component {
   }
 
   updateQuestStatus = () => {
+    // temp
+    Utils.calcListOfHiddenScenes()
+    // temp
     toaster.clear()
     const activeScene = localStateStore.getActiveScene()
-
     const { location } = activeScene
 
     const activeFrame = localStateStore.getFirstFrame() || {}
     const { critters1 = [], critters2 = [] } = activeFrame
 
-    const activeFrameIndex = localStateStore.getActiveFrameIndex()
+    // const activeFrameIndex = localStateStore.getActiveFrameIndex()
 
     const { foundItem, completedMission } = localStateStore.updateQuestState({
       itemsInScene: [location, ...critters1, ...critters2],

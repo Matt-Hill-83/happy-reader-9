@@ -12,6 +12,7 @@ class LocalStateStore {
   showBookPicker = false
   showWorldBuilder = false
   unlockedSubQuests = [0]
+  hiddenScenes = [0]
   visitedScenes = []
 
   _defaultQuestStatus = {
@@ -41,6 +42,11 @@ class LocalStateStore {
   getDefaultWorldId = () => this.defaultWorldId
   setDefaultWorldId = (defaultWorldId) => {
     this.defaultWorldId = defaultWorldId
+  }
+
+  getHiddenScenes = () => this.hiddenScenes
+  setHiddenScenes = (hiddenScenes) => {
+    this.hiddenScenes = hiddenScenes
   }
 
   getUnlockedSubQuests = () => this.unlockedSubQuests

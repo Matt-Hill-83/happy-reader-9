@@ -814,11 +814,11 @@ const story9926 = {
             name: "castle",
             sceneTriggers: [
               {
-                name: "lock",
+                name: "hide",
                 conditions: [{ currentMission: 0 }],
               },
               {
-                name: "unlock",
+                name: "unhide",
                 conditions: [{ completedMission: 1 }],
               },
               {
