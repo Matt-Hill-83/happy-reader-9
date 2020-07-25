@@ -171,6 +171,11 @@ class MiniLocation extends React.Component {
     const showCloud = !noCloud
 
     const locationName = scene.location.name
+    let locationImage
+    if (!locationName) {
+      return <div className={`${css.main} ${className} ${localClass}`}></div>
+    }
+
     const isBlank = locationName === "blank"
     const localClass = isActive ? css.activeClass : ""
 
@@ -179,21 +184,14 @@ class MiniLocation extends React.Component {
 
     const showLocationOnly = locationName === "roadLeftRight01"
 
-    let locationImage
-    if (!locationName) {
-      return <div className={`${css.main} ${className} ${localClass}`}></div>
-    }
-
     let rockImage
     let rockImageVertical
     let defaultDoorImage
     let showBottomPath
     let showRightPath
     let backgroundColor = "white"
-    let sceneUnlocked =
-      typeof unlockSceneMission === "number" &&
-      questStatus.activeMission >= unlockSceneMission
-    let showLock = !sceneUnlocked
+    let sceneUnlocked
+    let showLock
 
     if (!isBlank) {
       if (showLocationOnly) {
@@ -212,10 +210,10 @@ class MiniLocation extends React.Component {
           </div>
         )
       }
-      const sceneUnlocked =
+      sceneUnlocked =
         typeof unlockSceneMission === "number" &&
         questStatus.activeMission >= unlockSceneMission
-      const showLock = !sceneUnlocked
+      showLock = !sceneUnlocked
       locationImage = Images.all[locationName]
       rockImage = Images.backgrounds["rock"]
       rockImageVertical = Images.backgrounds["rock02Vertical"]
