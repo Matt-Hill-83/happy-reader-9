@@ -135,11 +135,10 @@ class MiniLocation extends React.Component {
   }
 
   checkIsEndScene = () => {
-    const { scene } = this.props
+    const { scene, updateMap = () => {} } = this.props
     scene.isEndScene = !this.state.isEndScene
 
-    this.props.updateMap &&
-      this.props.updateMap({ newProps: { endScene: scene.name } })
+    updateMap({ newProps: { endScene: scene.name } })
     this.setState({ isEndScene: !this.state.isEndScene })
   }
 
@@ -268,7 +267,7 @@ class MiniLocation extends React.Component {
                 />
               </div>
             )}
-            {showLock && (
+            {false && showLock && (
               <div className={css.cloudImageContainer}>
                 <img
                   className={css.cloudImage}
