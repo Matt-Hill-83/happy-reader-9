@@ -43,9 +43,7 @@ export default class Utils {
     const activeWorld = localStateStore.getActiveWorld()
 
     const { newGrid5, questConfig } = activeWorld.data
-    console.log("newGrid5", toJS(newGrid5)) // zzz
 
-    console.log("activeWorld", toJS(activeWorld)) // zzz
     const hiddenScenes = localStateStore.getHiddenScenes()
     newGrid5.forEach((scene) => {
       // for each scene, look for the hide trigger in the list
@@ -65,8 +63,6 @@ export default class Utils {
       )
       if (subQuestMatch) {
         parentSubQuest = subQuestIndex
-        // console.log("sceneName", toJS(sceneName)) // zzz
-        console.log(sceneName, " + ", toJS(parentSubQuest)) // zzz
       }
     })
 

@@ -568,7 +568,7 @@ const story9926 = {
       frames2: [],
     },
     {
-      title: "bun",
+      title: "top",
       sceneConfig: {
         coordinates: { col: 7, row: 3 },
         subQuestId: 5,
