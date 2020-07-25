@@ -171,7 +171,6 @@ class MiniLocation extends React.Component {
     const showCloud = !noCloud
 
     const locationName = scene.location.name
-    let locationImage
     if (!locationName) {
       return <div className={`${css.main} ${className} ${localClass}`}></div>
     }
@@ -184,6 +183,7 @@ class MiniLocation extends React.Component {
 
     const showLocationOnly = locationName === "roadLeftRight01"
 
+    let locationImage
     let rockImage
     let rockImageVertical
     let defaultDoorImage
