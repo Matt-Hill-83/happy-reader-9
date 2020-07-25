@@ -55,6 +55,24 @@ export default class Utils {
     })
   }
 
+  static getParentSubQuestFromScene = ({ sceneName, sceneId }) => {
+    const activeWorld = localStateStore.getActiveWorld()
+    const { questConfig } = activeWorld.data
+    let parentSubQuest = 0
+    questConfig.subQuests.forEach((subQuest, subQuestIndex) => {
+      const subQuestMatch = subQuest.scenes.find(
+        (scene) => scene.name === sceneName
+      )
+      if (subQuestMatch) {
+        parentSubQuest = subQuestIndex
+        // console.log("sceneName", toJS(sceneName)) // zzz
+        console.log(sceneName, " + ", toJS(parentSubQuest)) // zzz
+      }
+    })
+
+    return parentSubQuest
+  }
+
   static getGameConfig = () => {
     const output = _get(gameConfig, "docs[0].data") || {}
     return output

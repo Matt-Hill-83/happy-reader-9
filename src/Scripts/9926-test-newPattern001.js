@@ -859,10 +859,10 @@ const story9926 = {
       {
         name: "Win the Rap Battle",
         scenes: [
-          { name: "castle" },
-          { name: "goat" },
-          { name: "fig" },
           { name: "log" },
+          { name: "goatInABoat" },
+          { name: "bun" },
+          { name: "pin" },
         ],
         triggers: [
           {

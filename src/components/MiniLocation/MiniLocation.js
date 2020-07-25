@@ -221,7 +221,10 @@ class MiniLocation extends React.Component {
       showRightPath = neighbors[Utils.neighborPositionsEnum.right]
       const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
 
-      const colorIndex = questStatus.activeSubQuest % colors.length
+      const parentSubQuestFromScene = Utils.getParentSubQuestFromScene({
+        sceneName: locationName,
+      })
+      const colorIndex = parentSubQuestFromScene % colors.length
       console.log("colorIndex", toJS(colorIndex)) // zzz
       backgroundColor = colors[colorIndex]
     }
