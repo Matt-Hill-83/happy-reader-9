@@ -179,19 +179,6 @@ class MiniLocation extends React.Component {
 
     const showLocationOnly = locationName === "roadLeftRight01"
 
-    if (showLocationOnly) {
-      const roadLeftRight01 = Images.items["roadLeftRight01"]
-      return (
-        <div className={`${css.main} ${className} ${localClass}`}>
-          <div className={css.container}>
-            <div className={css.roadLeftRight01}>
-              <img className={css.none} src={roadLeftRight01} alt={"imagex"} />
-            </div>
-          </div>
-        </div>
-      )
-    }
-
     let locationImage
     if (!locationName) {
       return <div className={`${css.main} ${className} ${localClass}`}></div>
@@ -209,6 +196,22 @@ class MiniLocation extends React.Component {
     let showLock = !sceneUnlocked
 
     if (!isBlank) {
+      if (showLocationOnly) {
+        const roadLeftRight01 = Images.items["roadLeftRight01"]
+        return (
+          <div className={`${css.main} ${className} ${localClass}`}>
+            <div className={css.container}>
+              <div className={css.roadLeftRight01}>
+                <img
+                  className={css.none}
+                  src={roadLeftRight01}
+                  alt={"imagex"}
+                />
+              </div>
+            </div>
+          </div>
+        )
+      }
       const sceneUnlocked =
         typeof unlockSceneMission === "number" &&
         questStatus.activeMission >= unlockSceneMission
