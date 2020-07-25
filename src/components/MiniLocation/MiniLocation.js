@@ -164,14 +164,9 @@ class MiniLocation extends React.Component {
         "sceneConfig.triggers.unlockSceneConditions.currentMission"
       ) || -1
 
-    const sceneUnlocked =
-      typeof unlockSceneMission === "number" &&
-      questStatus.activeMission >= unlockSceneMission
-
     const unlockedSubQuests = localStateStore.getUnlockedSubQuests()
     const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId)
 
-    const showLock = !sceneUnlocked
     const noCloud = isVisitedScene || subQuestIsUnlocked
     const showCloud = !noCloud
 
@@ -208,8 +203,16 @@ class MiniLocation extends React.Component {
     let showBottomPath
     let showRightPath
     let backgroundColor = "white"
+    let sceneUnlocked =
+      typeof unlockSceneMission === "number" &&
+      questStatus.activeMission >= unlockSceneMission
+    let showLock = !sceneUnlocked
 
     if (!isBlank) {
+      const sceneUnlocked =
+        typeof unlockSceneMission === "number" &&
+        questStatus.activeMission >= unlockSceneMission
+      const showLock = !sceneUnlocked
       locationImage = Images.all[locationName]
       rockImage = Images.backgrounds["rock"]
       rockImageVertical = Images.backgrounds["rock02Vertical"]
@@ -288,7 +291,11 @@ class MiniLocation extends React.Component {
                 defaultDoorImage: defaultDoorImage,
               })}
             <div className={css.imagesBox}>
-              <img className={css.miniLocationImage} alt={"imagex"} />
+              <img
+                className={css.miniLocationImage}
+                alt={"imagex"}
+                src={locationImage}
+              />
             </div>
 
             <div className={css.characters}>
@@ -304,4 +311,3 @@ class MiniLocation extends React.Component {
 }
 
 export default observer(MiniLocation)
-src = { locationImage }
