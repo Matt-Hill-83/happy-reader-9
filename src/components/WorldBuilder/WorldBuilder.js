@@ -720,19 +720,12 @@ class WorldBuilder extends Component {
       title = (world.data && world.data.title) || this.previousTitle + " copy"
     }
 
-    const top100Films = [
-      { title: "The Shawshank Redemption", year: 1994 },
-      { title: "The Godfather", year: 1972 },
-      { title: "The Godfather: Part II", year: 1974 },
-    ]
-
     return (
       <div className={css.main}>
         {this.renderMainButtonGroup()}
         {this.renderQuestConfigTool({ questConfig, newGrid5 })}
         {this.renderSceneConfig({ world })}
         {this.renderQuestConfig({ questConfig })}
-        <AutoComplete2 props={{ items: top100Films }}></AutoComplete2>
         <InputGroup
           value={title}
           id="text-input"

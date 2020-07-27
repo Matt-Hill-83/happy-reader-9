@@ -10,33 +10,39 @@ import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 import _get from "lodash.get"
 
 import css from "./SubQuestConfigTool.module.scss"
+import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 
 export default function SubQuestConfigTool({ props }) {
   const [questConfig, setQuestConfig] = React.useState([])
   const { onSave, scenes } = props
-  console.log("scenes", toJS(scenes)) // zzz
+  // console.log("scenes", toJS(scenes)) // zzz
 
   const renderScenes = ({ scenes }) => {
-    const items = props.scenes
-    const getOptionLabel = (option) => {
-      return option.location.name
-    }
+    const realScenes = props.scenes
 
     return scenes.map((scene) => {
-      const onChangeScene = (newItem) => {
-        const selectedScene = newItem.value
-        const { location, id } = selectedScene
-
+      const onChangeScene2 = (newItem) => {
+        const { location, id } = newItem
         scene.name = location.name
         scene.id = id
       }
+      console.log("scene", toJS(scene)) // zzz
+      const defaultValue = realScenes.find((item) => item.id === scene.id)
 
       return (
         <div className={cx(css.sceneName, css.listItem)}>
           <span className={cx(css.listItemName)}>{scene.name}</span>
-          <AutoComplete2
+          <SimpleSelectObj
+            items={realScenes}
+            value={defaultValue}
+            getOptionLabel={(option) => option.location.name}
+            onChange={onChangeScene2}
+            // index={tableMeta.columnIndex}
+            // change={onChangeCondition}
+          />
+          {/* <AutoComplete2
             props={{ items, getOptionLabel, onChange: onChangeScene }}
-          ></AutoComplete2>
+          ></AutoComplete2> */}
           {renderTriggers({ triggers: scene.sceneTriggers })}
         </div>
       )

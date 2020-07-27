@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import SimpleSelect from "../SimpleSelect/SimpleSelect.js"
 
 import css from "./SubQuestTableConfig.module.scss"
+import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 
 const renderConditions = (value, tableMeta, updateValue) => {
   const conditions = value
@@ -18,6 +19,7 @@ const renderConditions = (value, tableMeta, updateValue) => {
       const conditionValue = condition[conditionName]
 
       const onChangeCondition = (newValue) => {
+        console.log("newValue", toJS(newValue)) // zzz
         conditions[conditionIndex] = { [newValue]: conditionValue }
         updateValue(conditions)
       }
@@ -29,12 +31,13 @@ const renderConditions = (value, tableMeta, updateValue) => {
 
       return (
         <div className={css.conditionsKVPair}>
-          <SimpleSelect
+          {/* <SimpleSelectObj
             items={items}
             value={conditionName}
             index={tableMeta.columnIndex}
-            change={onChangeCondition}
-          />
+            onChange={onChangeCondition}
+            getOptionLabel={(option) => option}
+          /> */}
           <TextField
             id="outlined-secondary"
             variant="outlined"
@@ -52,12 +55,13 @@ const renderConditions = (value, tableMeta, updateValue) => {
 
 const renderName = (value, tableMeta, updateValue) => {
   const items = Object.values(Constants.triggers.triggerTypes)
+  return <div>test</div>
   return (
-    <SimpleSelect
+    <SimpleSelectObj
       items={items}
       value={value}
       index={tableMeta.columnIndex}
-      change={(newValue) => {
+      onChange={(newValue) => {
         updateValue(newValue)
       }}
     />
@@ -129,32 +133,32 @@ export const subQuestTableConfig = {
     //     },
     //   },
     // },
-    {
-      name: "Add",
-      options: {
-        filter: false,
-        sort: false,
-        empty: true,
-        customBodyRenderLite: (dataIndex) => {
-          return (
-            <button
-            // onClick={() => {
-            //   const { data } = this.state
-            //   data.unshift([
-            //     "Mason Ray",
-            //     "Computer Scientist",
-            //     "San Francisco",
-            //     39,
-            //     "$142,000",
-            //   ])
-            //   this.setState({ data })
-            // }}
-            >
-              Add
-            </button>
-          )
-        },
-      },
-    },
+    // {
+    //   name: "Add",
+    //   options: {
+    //     filter: false,
+    //     sort: false,
+    //     empty: true,
+    //     customBodyRenderLite: (dataIndex) => {
+    //       return (
+    //         <button
+    //         // onClick={() => {
+    //         //   const { data } = this.state
+    //         //   data.unshift([
+    //         //     "Mason Ray",
+    //         //     "Computer Scientist",
+    //         //     "San Francisco",
+    //         //     39,
+    //         //     "$142,000",
+    //         //   ])
+    //         //   this.setState({ data })
+    //         // }}
+    //         >
+    //           Add
+    //         </button>
+    //       )
+    //     },
+    //   },
+    // },
   ],
 }
