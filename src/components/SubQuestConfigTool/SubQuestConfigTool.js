@@ -6,9 +6,9 @@ import { toJS } from "mobx"
 import { subQuestTableConfig } from "./SubQuestTableConfig"
 import DataTable3 from "../DataTable3/DataTable3"
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
+// import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 import css from "./SubQuestConfigTool.module.scss"
-import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 export default function SubQuestConfigTool({ props }) {
   const [questConfig, setQuestConfig] = React.useState([])

@@ -3,6 +3,11 @@ import Cities from "./cities"
 import Constants from "../../Utils/Constants/Constants"
 import { toJS } from "mobx"
 
+import TextField from "@material-ui/core/TextField"
+import { makeStyles } from "@material-ui/core/styles"
+
+import css from "./SubQuestTableConfig.module.scss"
+
 const renderConditions = (value, tableMeta, updateValue) => {
   const conditions = value
   console.log("conditions", toJS(conditions)) // zzz
@@ -11,24 +16,35 @@ const renderConditions = (value, tableMeta, updateValue) => {
 
     return conditionNames.map((conditionName) => {
       const items = Object.values(Constants.triggers.baseConditions)
-
       const conditionValue = condition[conditionName]
 
-      const onChange = (newValue) => {
+      const onChangeCondition = (newValue) => {
         console.log("newValue", newValue) // zzz
         conditions[conditionIndex] = { [newValue]: conditionValue }
         updateValue(conditions)
       }
 
+      const onChangeValue = ({ value = 0 }) => {
+        console.log("value", value) // zzz
+        conditions[conditionIndex][conditionName] = value
+        console.log("conditions", toJS(conditions)) // zzz
+        updateValue(conditions)
+      }
+
       return (
-        <div>
+        <div className={css.conditionsKVPair}>
           <Cities
             items={items}
             value={conditionName}
             index={tableMeta.columnIndex}
-            change={onChange}
+            change={onChangeCondition}
           />
-          <div>{` : ${conditionValue}`}</div>
+          <TextField
+            id="standard-read-only-input"
+            defaultValue={conditionValue}
+            onChange={(event) => onChangeValue({ value: event.target.value })}
+            InputProps={{}}
+          />
         </div>
       )
     })
