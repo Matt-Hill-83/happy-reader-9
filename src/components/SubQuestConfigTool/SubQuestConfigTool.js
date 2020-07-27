@@ -2,31 +2,29 @@ import React, { useEffect } from "react"
 import cx from "classnames"
 import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
 import { toJS } from "mobx"
-
-import { subQuestTableConfig } from "./SubQuestTableConfig"
-import DataTable3 from "../DataTable3/DataTable3"
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
-import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 import _get from "lodash.get"
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
+
+import { getSubQuestTableConfigFunc } from "./SubQuestTableConfig"
+// import { subQuestTableConfig } from "./SubQuestTableConfig"
+import DataTable3 from "../DataTable3/DataTable3"
+import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 
 import css from "./SubQuestConfigTool.module.scss"
-import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 
 export default function SubQuestConfigTool({ props }) {
   const [questConfig, setQuestConfig] = React.useState([])
   const { onSave, scenes } = props
-  // console.log("scenes", toJS(scenes)) // zzz
 
   const renderScenes = ({ scenes }) => {
     const realScenes = props.scenes
 
     return scenes.map((scene) => {
-      const onChangeScene2 = (newItem) => {
+      const onChangeScene = (newItem) => {
         const { location, id } = newItem
         scene.name = location.name
         scene.id = id
       }
-      console.log("scene", toJS(scene)) // zzz
       const defaultValue = realScenes.find((item) => item.id === scene.id)
 
       return (
@@ -36,9 +34,7 @@ export default function SubQuestConfigTool({ props }) {
             items={realScenes}
             value={defaultValue}
             getOptionLabel={(option) => option.location.name}
-            onChange={onChangeScene2}
-            // index={tableMeta.columnIndex}
-            // change={onChangeCondition}
+            onChange={onChangeScene}
           />
           {/* <AutoComplete2
             props={{ items, getOptionLabel, onChange: onChangeScene }}
@@ -62,8 +58,15 @@ export default function SubQuestConfigTool({ props }) {
     setQuestConfig(props.questConfig || {})
   }, [props.questConfig])
 
+  const tableChangeCallback = (test) => {
+    console.log("test", test) // zzz
+  }
+
   const renderTriggers = ({ triggers }) => {
-    const { options, columns } = subQuestTableConfig
+    const { options, columns } = getSubQuestTableConfigFunc({
+      tableChangeCallback,
+    })
+    // const { options, columns } = subQuestTableConfig
     if (!triggers || triggers.length === 0) {
       return null
     }
@@ -79,6 +82,12 @@ export default function SubQuestConfigTool({ props }) {
         },
       })
 
+    const testCallBack = (test) => {
+      console.log("test", toJS(test)) // zzz
+      console.log("triggers", triggers) // zzz
+    }
+    // options.onTableChange = testCallBack
+    options.onCellClick = testCallBack
     return (
       <DataTable3
         props={{
@@ -96,7 +105,8 @@ export default function SubQuestConfigTool({ props }) {
 
   const renderedItems =
     questConfig.subQuests &&
-    questConfig.subQuests.map((subQuest) => {
+    questConfig.subQuests.slice(0, 1).map((subQuest) => {
+      // questConfig.subQuests.map((subQuest) => {
       const { triggers, scenes, missions = [] } = subQuest
 
       return (

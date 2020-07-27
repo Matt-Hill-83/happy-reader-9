@@ -52,7 +52,6 @@ class WorldBuilder extends Component {
     await worldNameStore.fetch()
     await gameConfig.fetch()
     const gameConfigData = Utils.getGameConfig()
-    console.log("gameConfigData---WB", toJS(gameConfigData)) // zzz
     const defaultWorldId = localStateStore.getDefaultWorldId()
     this.onChangeWorld({ mapId: defaultWorldId })
   }
@@ -573,8 +572,9 @@ class WorldBuilder extends Component {
   }
 
   onSaveQuestConfig = ({ questConfig }) => {
-    const world = localStateStore.getWorldBuilderWorld() || {}
+    console.log("onSaveQuestConfig") // zzz
     console.log("questConfig", toJS(questConfig)) // zzz
+    const world = localStateStore.getWorldBuilderWorld() || {}
     Utils.updateMap({ newProps: { questConfig }, mapToUpdate: world })
   }
 
@@ -584,7 +584,6 @@ class WorldBuilder extends Component {
 
   renderSceneConfig = ({ world }) => {
     const { showSceneConfig } = this.state
-    console.log("showSceneConfig", showSceneConfig) // zzz
     if (!showSceneConfig) {
       return null
     }
@@ -709,9 +708,7 @@ class WorldBuilder extends Component {
       return null
     }
     const { questConfig = { no: "data" }, newGrid5 } = world.data
-    console.log("questConfig", toJS(questConfig)) // zzz
 
-    console.log("world.data", toJS(world.data)) // zzz
     // Record title for when map is copied
     this.previousTitle = (world.data && world.data.title) || this.previousTitle
 
