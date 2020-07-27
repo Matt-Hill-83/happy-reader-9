@@ -621,7 +621,7 @@ class WorldBuilder extends Component {
     )
   }
 
-  renderQuestConfigTool = ({ questConfig }) => {
+  renderQuestConfigTool = ({ questConfig, newGrid5 }) => {
     const { showSubQuestConfigTool } = this.state
     if (!showSubQuestConfigTool) {
       return null
@@ -629,7 +629,7 @@ class WorldBuilder extends Component {
 
     const questConfigToolProps = {
       questConfig: questConfig,
-      // onChangeJSON: this.onChangeJSON,
+      scenes: newGrid5, // onChangeJSON: this.onChangeJSON,
       onSave: this.onSaveQuestConfig,
       // onClose: this.onCloseJsonEditor,
     }
@@ -708,8 +708,10 @@ class WorldBuilder extends Component {
     if (!world.data) {
       return null
     }
-    const { questConfig = { no: "data" } } = world.data
+    const { questConfig = { no: "data" }, newGrid5 } = world.data
+    console.log("questConfig", toJS(questConfig)) // zzz
 
+    console.log("world.data", toJS(world.data)) // zzz
     // Record title for when map is copied
     this.previousTitle = (world.data && world.data.title) || this.previousTitle
 
@@ -727,7 +729,7 @@ class WorldBuilder extends Component {
     return (
       <div className={css.main}>
         {this.renderMainButtonGroup()}
-        {this.renderQuestConfigTool({ questConfig })}
+        {this.renderQuestConfigTool({ questConfig, newGrid5 })}
         {this.renderSceneConfig({ world })}
         {this.renderQuestConfig({ questConfig })}
         <AutoComplete2 props={{ items: top100Films }}></AutoComplete2>

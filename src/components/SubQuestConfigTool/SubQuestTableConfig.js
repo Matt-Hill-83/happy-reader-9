@@ -1,16 +1,15 @@
 import React from "react"
-import SimpleSelect from "./SimpleSelect"
 import Constants from "../../Utils/Constants/Constants"
 import { toJS } from "mobx"
 
 import TextField from "@material-ui/core/TextField"
 import { makeStyles } from "@material-ui/core/styles"
+import SimpleSelect from "../SimpleSelect/SimpleSelect.js"
 
 import css from "./SubQuestTableConfig.module.scss"
 
 const renderConditions = (value, tableMeta, updateValue) => {
   const conditions = value
-  console.log("conditions", toJS(conditions)) // zzz
   return conditions.map((condition, conditionIndex) => {
     const conditionNames = Object.keys(condition)
 
@@ -19,15 +18,12 @@ const renderConditions = (value, tableMeta, updateValue) => {
       const conditionValue = condition[conditionName]
 
       const onChangeCondition = (newValue) => {
-        console.log("newValue", newValue) // zzz
         conditions[conditionIndex] = { [newValue]: conditionValue }
         updateValue(conditions)
       }
 
       const onChangeValue = ({ value = 0 }) => {
-        console.log("value", value) // zzz
         conditions[conditionIndex][conditionName] = value
-        console.log("conditions", toJS(conditions)) // zzz
         updateValue(conditions)
       }
 
@@ -62,7 +58,6 @@ const renderName = (value, tableMeta, updateValue) => {
       value={value}
       index={tableMeta.columnIndex}
       change={(newValue) => {
-        console.log("newValue", newValue) // zzz
         updateValue(newValue)
       }}
     />

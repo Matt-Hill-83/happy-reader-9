@@ -6,21 +6,37 @@ import { toJS } from "mobx"
 import { subQuestTableConfig } from "./SubQuestTableConfig"
 import DataTable3 from "../DataTable3/DataTable3"
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
-// import AutoComplete2 from "../AutoComplete2/AutoComplete2"
+import AutoComplete2 from "../AutoComplete2/AutoComplete2"
+import _get from "lodash.get"
 
 import css from "./SubQuestConfigTool.module.scss"
 
 export default function SubQuestConfigTool({ props }) {
   const [questConfig, setQuestConfig] = React.useState([])
-  const { onSave } = props
+  const { onSave, scenes } = props
+  console.log("scenes", toJS(scenes)) // zzz
 
   const renderScenes = ({ scenes }) => {
+    const items = props.scenes
+    const getOptionLabel = (option) => {
+      return option.location.name
+    }
+
     return scenes.map((scene) => {
-      console.log("scene", toJS(scene)) // zzz
+      const onChangeScene = (newItem) => {
+        const selectedScene = newItem.value
+        const { location, id } = selectedScene
+
+        scene.name = location.name
+        scene.id = id
+      }
 
       return (
         <div className={cx(css.sceneName, css.listItem)}>
           <span className={cx(css.listItemName)}>{scene.name}</span>
+          <AutoComplete2
+            props={{ items, getOptionLabel, onChange: onChangeScene }}
+          ></AutoComplete2>
           {renderTriggers({ triggers: scene.sceneTriggers })}
         </div>
       )
@@ -29,12 +45,9 @@ export default function SubQuestConfigTool({ props }) {
 
   useEffect(() => {
     // on mount
-    console.log("mounted") // zzz
 
     // returned function will be called on component unmount
-    return () => {
-      console.log("unmounted") // zzz
-    }
+    return () => {}
   }, [])
 
   // on change in props
@@ -45,7 +58,6 @@ export default function SubQuestConfigTool({ props }) {
 
   const renderTriggers = ({ triggers }) => {
     const { options, columns } = subQuestTableConfig
-    console.log("triggers", toJS(triggers)) // zzz
     if (!triggers || triggers.length === 0) {
       return null
     }
@@ -84,10 +96,10 @@ export default function SubQuestConfigTool({ props }) {
       return (
         <div className={cx(css.subQuest, css.listGroup)}>
           {subQuest.name}
-          <div className={cx(css.triggers, css.listGroup)}>
+          {/* <div className={cx(css.triggers, css.listGroup)}>
             <span className={cx(css.listGroupTitle)}>Missions</span>
             {renderScenes({ scenes: missions })}
-          </div>
+          </div> */}
           <div className={cx(css.triggers, css.listGroup)}>
             <span className={cx(css.listGroupTitle)}>Triggers</span>
             {renderTriggers({ triggers })}

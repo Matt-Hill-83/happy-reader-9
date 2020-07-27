@@ -7,8 +7,6 @@ import TextField from "@material-ui/core/TextField"
 import css from "./AutoComplete2.module.scss"
 
 export default function AutoComplete2({ props }) {
-  const [val, setVal] = useState({})
-
   const {
     items = [],
     getOptionLabel,
@@ -17,11 +15,6 @@ export default function AutoComplete2({ props }) {
     label,
     defaultValue = { title: "select an option" },
   } = props
-
-  const handleClick = () => {
-    setVal(items[0]) //you pass any value from the array of top100Films
-    // set value in TextField from dropdown list
-  }
 
   const defaultGetOptionLabel = (option) => option.title
   const getLabel = getOptionLabel || defaultGetOptionLabel
@@ -40,7 +33,7 @@ export default function AutoComplete2({ props }) {
         id="auto-complete"
         autoComplete
         includeInputInList
-        defaultValue={defaultValue}
+        // defaultValue={defaultValue}
         renderInput={(params) => {
           return <TextField {...params} label={label} variant="outlined" />
         }}

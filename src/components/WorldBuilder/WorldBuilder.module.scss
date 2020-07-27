@@ -23,7 +23,7 @@
 
   .jsonEditor {
     position: absolute;
-    z-index: 2;
+    z-index: 20;
 
     display: flex;
     width: 40vw;
@@ -35,6 +35,7 @@
     right: 2vh;
     top: 2vh;
     background: papayawhip;
+    overflow: auto;
   }
 
   .buttonGroup {
@@ -298,7 +299,7 @@
   flex-direction: column;
   position: absolute;
   right: 34vh;
-  width: 7vw;
+  // width: 7vw;
   overflow: hidden;
-  z-index: 1;
+  z-index: 20;
 }
