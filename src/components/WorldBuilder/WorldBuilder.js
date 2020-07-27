@@ -575,7 +575,7 @@ class WorldBuilder extends Component {
   onSaveQuestConfig = ({ questConfig }) => {
     const world = localStateStore.getWorldBuilderWorld() || {}
     console.log("questConfig", toJS(questConfig)) // zzz
-    // Utils.updateMap({ newProps: { questConfig: json }, mapToUpdate: world })
+    Utils.updateMap({ newProps: { questConfig }, mapToUpdate: world })
   }
 
   onCloseJsonEditor = () => {
@@ -630,7 +630,7 @@ class WorldBuilder extends Component {
     const questConfigToolProps = {
       questConfig: questConfig,
       // onChangeJSON: this.onChangeJSON,
-      onSaveJSON: this.onSaveQuestConfig,
+      onSave: this.onSaveQuestConfig,
       // onClose: this.onCloseJsonEditor,
     }
 

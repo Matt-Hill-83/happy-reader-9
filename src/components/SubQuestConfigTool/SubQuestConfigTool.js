@@ -12,17 +12,11 @@ import css from "./SubQuestConfigTool.module.scss"
 
 export default function SubQuestConfigTool({ props }) {
   const [questConfig, setQuestConfig] = React.useState([])
+  const { onSave } = props
 
   const renderScenes = ({ scenes }) => {
     return scenes.map((scene) => {
-      // const renderedTriggers = renderTriggers({ triggers: scene.sceneTriggers })
-
       console.log("scene", toJS(scene)) // zzz
-      const top100Films = [
-        { title: "The Shawshank Redemption", year: 1994 },
-        { title: "The Godfather", year: 1972 },
-        { title: "The Godfather: Part II", year: 1974 },
-      ]
 
       return (
         <div className={cx(css.sceneName, css.listItem)}>
@@ -115,7 +109,7 @@ export default function SubQuestConfigTool({ props }) {
       >
         <Button
           className={css.saveButton}
-          onClick={() => props.onSaveJSON({ questConfig })}
+          onClick={() => onSave({ questConfig })}
         >
           Save Changes - triggers
         </Button>

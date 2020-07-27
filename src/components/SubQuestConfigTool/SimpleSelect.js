@@ -3,7 +3,7 @@ import MenuItem from "@material-ui/core/MenuItem"
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
 
-class Cities extends React.Component {
+export default class SimpleSelect extends React.Component {
   render() {
     const { value, index, change, items } = this.props
 
@@ -24,5 +24,3 @@ class Cities extends React.Component {
     )
   }
 }
-
-export default Cities

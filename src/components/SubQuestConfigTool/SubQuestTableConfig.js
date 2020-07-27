@@ -1,5 +1,5 @@
 import React from "react"
-import Cities from "./cities"
+import SimpleSelect from "./SimpleSelect"
 import Constants from "../../Utils/Constants/Constants"
 import { toJS } from "mobx"
 
@@ -33,14 +33,17 @@ const renderConditions = (value, tableMeta, updateValue) => {
 
       return (
         <div className={css.conditionsKVPair}>
-          <Cities
+          <SimpleSelect
             items={items}
             value={conditionName}
             index={tableMeta.columnIndex}
             change={onChangeCondition}
           />
           <TextField
-            id="standard-read-only-input"
+            id="outlined-secondary"
+            variant="outlined"
+            margin="dense"
+            color="secondary"
             defaultValue={conditionValue}
             onChange={(event) => onChangeValue({ value: event.target.value })}
             InputProps={{}}
@@ -54,7 +57,7 @@ const renderConditions = (value, tableMeta, updateValue) => {
 const renderName = (value, tableMeta, updateValue) => {
   const items = Object.values(Constants.triggers.triggerTypes)
   return (
-    <Cities
+    <SimpleSelect
       items={items}
       value={value}
       index={tableMeta.columnIndex}
@@ -86,7 +89,6 @@ export const subQuestTableConfig = {
       label: "Conditions",
       options: {
         filter: true,
-        // filterType: "multiselect",
         customBodyRender: renderConditions,
       },
     },
@@ -111,27 +113,27 @@ export const subQuestTableConfig = {
         },
       },
     },
-    {
-      name: "Edit",
-      options: {
-        filter: false,
-        sort: false,
-        empty: true,
-        customBodyRenderLite: (dataIndex, rowIndex) => {
-          return (
-            <button
-              onClick={() =>
-                window.alert(
-                  `Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
-                )
-              }
-            >
-              Edit
-            </button>
-          )
-        },
-      },
-    },
+    // {
+    //   name: "Edit",
+    //   options: {
+    //     filter: false,
+    //     sort: false,
+    //     empty: true,
+    //     customBodyRenderLite: (dataIndex, rowIndex) => {
+    //       return (
+    //         <button
+    //           onClick={() =>
+    //             window.alert(
+    //               `Clicked "Edit" for row ${rowIndex} with dataIndex of ${dataIndex}`
+    //             )
+    //           }
+    //         >
+    //           Edit
+    //         </button>
+    //       )
+    //     },
+    //   },
+    // },
     {
       name: "Add",
       options: {
