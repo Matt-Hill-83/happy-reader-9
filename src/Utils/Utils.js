@@ -38,14 +38,44 @@ export default class Utils {
   }
   // CONSTANTS ---------------------------------- end ---------------------------
 
+  static getActiveQuestConfig = () => {
+    const activeWorld = localStateStore.getActiveWorld()
+    const { questConfig } = activeWorld.data
+    return questConfig
+  }
+
+  static getSceneTriggersFromScene = ({
+    sceneName,
+    subQuestIndex,
+    sceneId,
+  }) => {
+    const activeWorld = localStateStore.getActiveWorld()
+
+    const questConfig = Utils.getActiveQuestConfig()
+    console.log("questConfig", toJS(questConfig)) // zzz
+  }
+
   static calcListOfHiddenScenes = () => {
     // const scenesGrid = this.getActiveWorldGrid()
     const activeWorld = localStateStore.getActiveWorld()
 
     const { newGrid5, questConfig } = activeWorld.data
+    console.log("questConfig", toJS(questConfig)) // zzz
+    console.log("newGrid5", toJS(newGrid5)) // zzz
+
+    newGrid5.forEach((item) => {
+      console.log("item.location.name", toJS(item.location.name)) // zzz
+      console.log("item", toJS(item)) // zzz
+    })
 
     const hiddenScenes = localStateStore.getHiddenScenes()
+    // const sceneTriggers = Utils.getSceneTriggersFromScene({
+    //   sceneName,
+    // })
+
     newGrid5.forEach((scene) => {
+      const triggers = _get(scene, "sceneConfig.triggers")
+      console.log("scene.sceneConfig.triggers", toJS(triggers)) // zzz
       // for each scene, look for the hide trigger in the list
       // // Check if any of the requirements have been met.
       // if

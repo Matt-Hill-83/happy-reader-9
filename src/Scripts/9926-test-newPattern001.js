@@ -7,7 +7,6 @@ const story9926 = {
         coordinates: { row: 0, col: 1 },
         creatures: ["anna02"],
         subQuestId: 0,
-        triggers: { newFrameSetConditions: { currentMission: 1 } },
       },
       frames: [
         {
@@ -40,7 +39,6 @@ const story9926 = {
       sceneConfig: {
         coordinates: { row: 1, col: 1 },
         subQuestId: 0,
-        triggers: { newFrameSetConditions: { currentMission: 1 } },
         creatures: ["anna02", "angus01"],
       },
       frames: [
@@ -77,7 +75,6 @@ const story9926 = {
       sceneConfig: {
         coordinates: { row: 1, col: 2 },
         subQuestId: 0,
-        triggers: { newFrameSetConditions: { currentMission: 1 } },
         creatures: ["anna02", "angus01"],
       },
       frames: [
@@ -104,7 +101,6 @@ const story9926 = {
       sceneConfig: {
         coordinates: { col: 3, row: 1 },
         creatures: ["anna02"],
-        triggers: { newFrameSetConditions: { currentMission: 1 } },
         subQuestId: 0,
       },
       frames: [
@@ -268,7 +264,6 @@ const story9926 = {
       title: "pig",
       sceneConfig: {
         coordinates: { row: 2, col: 3 },
-        triggers: { newFrameSetConditions: { currentMission: 2 } },
         creatures: ["kat", "liz2"],
         subQuestId: 0,
       },
@@ -440,7 +435,6 @@ const story9926 = {
         coordinates: { row: 3, col: 1 },
         subQuestId: 1,
         creatures: ["merida02", "cub"],
-        triggers: { newFrameSetConditions: { currentMission: 2 } },
       },
       frames: [
         {
