@@ -13,6 +13,7 @@ export default class Constants {
       CURRENT_MISSION: "currentMission",
       COMPLETED_SCENE: "completedScene",
       POCKET_CONTAINS: "pocketContains",
+      FRAME_SET_INDEX: "frameSetIndex", // remove this later
     },
   }
 }

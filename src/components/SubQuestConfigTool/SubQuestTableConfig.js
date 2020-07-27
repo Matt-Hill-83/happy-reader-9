@@ -1,11 +1,37 @@
 import React from "react"
 import Cities from "./cities"
 import Constants from "../../Utils/Constants/Constants"
+import { toJS } from "mobx"
 
 const renderConditions = (value, tableMeta, updateValue) => {
-  return value.map((condition) => {
-    const keys = Object.keys(condition)
-    return keys.map((key) => <div>{`${key}: ${condition[key]}`}</div>)
+  const conditions = value
+  console.log("conditions", toJS(conditions)) // zzz
+  return conditions.map((condition, conditionIndex) => {
+    const conditionNames = Object.keys(condition)
+
+    return conditionNames.map((conditionName) => {
+      const items = Object.values(Constants.triggers.baseConditions)
+
+      const conditionValue = condition[conditionName]
+
+      const onChange = (newValue) => {
+        console.log("newValue", newValue) // zzz
+        conditions[conditionIndex] = { [newValue]: conditionValue }
+        updateValue(conditions)
+      }
+
+      return (
+        <div>
+          <Cities
+            items={items}
+            value={conditionName}
+            index={tableMeta.columnIndex}
+            change={onChange}
+          />
+          <div>{` : ${conditionValue}`}</div>
+        </div>
+      )
+    })
   })
 }
 
@@ -16,7 +42,10 @@ const renderName = (value, tableMeta, updateValue) => {
       items={items}
       value={value}
       index={tableMeta.columnIndex}
-      change={(event) => updateValue(event)}
+      change={(newValue) => {
+        console.log("newValue", newValue) // zzz
+        updateValue(newValue)
+      }}
     />
   )
 }
