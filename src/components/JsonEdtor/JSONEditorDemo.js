@@ -1,34 +1,37 @@
-import React, {Component} from 'react';
+import React, { Component } from "react"
 
-import JSONEditor from 'jsoneditor';
-import 'jsoneditor/dist/jsoneditor.css';
+import JSONEditor from "jsoneditor"
+import "jsoneditor/dist/jsoneditor.css"
 
-import './JSONEditorDemo.css';
+import "./JSONEditorDemo.css"
 
 export default class JSONEditorDemo extends Component {
-  componentDidMount () {
+  componentDidMount() {
     const options = {
-      mode: 'tree',
-      onChangeJSON: this.props.onChangeJSON
-    };
+      mode: "tree",
+      onChangeJSON: this.props.onChangeJSON,
+    }
 
-    this.jsoneditor = new JSONEditor(this.container, options);
-    this.jsoneditor.set(this.props.json);
+    this.jsoneditor = new JSONEditor(this.container, options)
+    this.jsoneditor.set(this.props.json)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.jsoneditor) {
-      this.jsoneditor.destroy();
+      this.jsoneditor.destroy()
     }
   }
 
   componentDidUpdate() {
-    this.jsoneditor.update(this.props.json);
+    this.jsoneditor.update(this.props.json)
   }
 
   render() {
     return (
-        <div className="jsoneditor-react-container" ref={elem => this.container = elem} />
-    );
+      <div
+        className="jsoneditor-react-container"
+        ref={(elem) => (this.container = elem)}
+      />
+    )
   }
 }

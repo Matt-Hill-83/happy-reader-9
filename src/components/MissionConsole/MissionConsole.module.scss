@@ -109,8 +109,6 @@
       border-left: 1px solid red;
 
       &:first-of-type {
-        // border-left: none;
-        // border: 4px solid red !important;
       }
 
       [class*="ImageDisplay_imageContainer"] {
@@ -128,7 +126,6 @@
   }
 
   .items {
-    // border: 4px solid blue !important;
     display: flex;
   }
 }

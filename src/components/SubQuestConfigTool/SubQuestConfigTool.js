@@ -8,26 +8,30 @@ import DataTable3 from "../DataTable3/DataTable3"
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
 
 import css from "./SubQuestConfigTool.module.scss"
+import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 export default function SubQuestConfigTool({ props }) {
   const [questConfig, setQuestConfig] = React.useState([])
 
   const renderScenes = ({ scenes }) => {
     return scenes.map((scene) => {
-      const renderedTriggers = renderTriggers({ triggers: scene.sceneTriggers })
+      // const renderedTriggers = renderTriggers({ triggers: scene.sceneTriggers })
+
+      console.log("scene", toJS(scene)) // zzz
+      const top100Films = [
+        { title: "The Shawshank Redemption", year: 1994 },
+        { title: "The Godfather", year: 1972 },
+        { title: "The Godfather: Part II", year: 1974 },
+      ]
 
       return (
         <div className={cx(css.sceneName, css.listItem)}>
           <span className={cx(css.listItemName)}>{scene.name}</span>
-          {renderedTriggers}
+          {renderTriggers({ triggers: scene.sceneTriggers })}
         </div>
       )
     })
   }
-  // const onChange = (questConfig) => {
-  //   setQuestConfig(questConfig)
-  //   props.onChangeJSON && props.onChangeJSON()
-  // }
 
   useEffect(() => {
     // on mount
@@ -78,7 +82,6 @@ export default function SubQuestConfigTool({ props }) {
     return null
   }
 
-  console.log("questConfig", toJS(questConfig)) // zzz
   const renderedItems =
     questConfig.subQuests &&
     questConfig.subQuests.map((subQuest) => {
@@ -114,7 +117,7 @@ export default function SubQuestConfigTool({ props }) {
           className={css.saveButton}
           onClick={() => props.onSaveJSON({ questConfig })}
         >
-          Save Changes
+          Save Changes - triggers
         </Button>
         <Button
           className={css.saveButton}

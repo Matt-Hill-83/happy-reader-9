@@ -33,6 +33,7 @@ import WorldPicker from "../WorldPicker/WorldPicker"
 import SubQuestConfigTool from "../SubQuestConfigTool/SubQuestConfigTool"
 
 import css from "./WorldBuilder.module.scss"
+import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
@@ -571,6 +572,12 @@ class WorldBuilder extends Component {
     Utils.updateMap({ newProps: { questConfig: json }, mapToUpdate: world })
   }
 
+  onSaveQuestConfig = ({ questConfig }) => {
+    const world = localStateStore.getWorldBuilderWorld() || {}
+    console.log("questConfig", toJS(questConfig)) // zzz
+    // Utils.updateMap({ newProps: { questConfig: json }, mapToUpdate: world })
+  }
+
   onCloseJsonEditor = () => {
     this.setState({ showQuestConfig: false })
   }
@@ -622,9 +629,9 @@ class WorldBuilder extends Component {
 
     const questConfigToolProps = {
       questConfig: questConfig,
-      onChangeJSON: this.onChangeJSON,
-      onSaveJSON: this.onSaveJSON,
-      onClose: this.onCloseJsonEditor,
+      // onChangeJSON: this.onChangeJSON,
+      onSaveJSON: this.onSaveQuestConfig,
+      // onClose: this.onCloseJsonEditor,
     }
 
     return (
@@ -711,13 +718,19 @@ class WorldBuilder extends Component {
       title = (world.data && world.data.title) || this.previousTitle + " copy"
     }
 
+    const top100Films = [
+      { title: "The Shawshank Redemption", year: 1994 },
+      { title: "The Godfather", year: 1972 },
+      { title: "The Godfather: Part II", year: 1974 },
+    ]
+
     return (
       <div className={css.main}>
         {this.renderMainButtonGroup()}
         {this.renderQuestConfigTool({ questConfig })}
         {this.renderSceneConfig({ world })}
         {this.renderQuestConfig({ questConfig })}
-
+        <AutoComplete2 props={{ items: top100Films }}></AutoComplete2>
         <InputGroup
           value={title}
           id="text-input"

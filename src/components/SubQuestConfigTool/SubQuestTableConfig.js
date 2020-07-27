@@ -1,25 +1,29 @@
 import React from "react"
-// import TableRow from "@material-ui/core/TableRow"
-// import TableCell from "@material-ui/core/TableCell"
+import Cities from "./cities"
+import Constants from "../../Utils/Constants/Constants"
+
+const renderConditions = (value, tableMeta, updateValue) => {
+  return value.map((condition) => {
+    const keys = Object.keys(condition)
+    return keys.map((key) => <div>{`${key}: ${condition[key]}`}</div>)
+  })
+}
+
+const renderName = (value, tableMeta, updateValue) => {
+  const items = Object.values(Constants.triggers.triggerTypes)
+  return (
+    <Cities
+      items={items}
+      value={value}
+      index={tableMeta.columnIndex}
+      change={(event) => updateValue(event)}
+    />
+  )
+}
 
 export const subQuestTableConfig = {
   options: {
-    // expandableRows: true,
-    // isRowSelectable: false,
-    // selectableRowsHideCheckboxes: false,
     selectableRows: "none",
-    // renderExpandableRow: (rowData, rowMeta) => {
-    //   const colSpan = rowData.length + 1
-    //   return (
-    //     <TableRow>
-    //       <TableCell colSpan={colSpan}>
-    //         Custom expandable row option. Data: {JSON.stringify(rowData)}
-    //       </TableCell>
-    //     </TableRow>
-    //   )
-    // },
-    // onRowExpansionChange: (curExpanded, allExpanded, rowsExpanded) =>
-    //   console.log(curExpanded, allExpanded, rowsExpanded),
     onCellClick: () => {},
     onRowClick: () => {},
   },
@@ -29,6 +33,7 @@ export const subQuestTableConfig = {
       label: "Name",
       options: {
         filter: true,
+        customBodyRender: renderName,
       },
     },
     {
@@ -36,13 +41,8 @@ export const subQuestTableConfig = {
       label: "Conditions",
       options: {
         filter: true,
-        filterType: "multiselect",
-        customBodyRender: (value, tableMeta, updateValue) => {
-          return value.map((condition) => {
-            const keys = Object.keys(condition)
-            return keys.map((key) => <div>{`${key}: ${condition[key]}`}</div>)
-          })
-        },
+        // filterType: "multiselect",
+        customBodyRender: renderConditions,
       },
     },
     {
