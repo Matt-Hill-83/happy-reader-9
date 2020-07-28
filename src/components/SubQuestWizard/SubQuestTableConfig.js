@@ -79,11 +79,7 @@ export const getSubQuestTableConfigFunc = ({
     )
   }
 
-  const renderAddDeleteButtonsForTriggerConditions = (
-    value,
-    tableMeta,
-    updateValue
-  ) => {
+  const renderAddDeleteButtonsForTriggerConditions = ({ tableMeta }) => {
     return (
       <>
         <Button
@@ -106,11 +102,7 @@ export const getSubQuestTableConfigFunc = ({
     )
   }
 
-  const renderAddDeleteButtonsForTriggers = ({
-    value,
-    tableMeta,
-    updateValue,
-  }) => {
+  const renderAddDeleteButtonsForTriggers = ({ tableMeta }) => {
     return (
       <>
         <Button
@@ -149,9 +141,7 @@ export const getSubQuestTableConfigFunc = ({
           empty: true,
           customBodyRender: (value, tableMeta, updateValue) =>
             renderAddDeleteButtonsForTriggers({
-              value,
               tableMeta,
-              updateValue,
             }),
         },
       },
