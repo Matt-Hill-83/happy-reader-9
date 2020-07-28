@@ -70,6 +70,8 @@ export default function SubQuestWizard({ props }) {
 
     const onDeleteTriggerRow = ({ rowIndex }) => {
       Utils.deleteArrayElement({ index: rowIndex, array: triggers })
+      setQuestConfig(questConfig)
+      onSave({ questConfig })
     }
 
     const onAddTriggerRow = ({ rowIndex }) => {
