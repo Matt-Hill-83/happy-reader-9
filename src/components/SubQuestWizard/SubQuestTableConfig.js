@@ -99,16 +99,12 @@ export const getSubQuestTableConfigFunc = ({
     saveConfig()
   }
 
-  const onDeleteTriggerCondition = ({
-    tableMeta,
-    conditionIndex,
-    conditions,
-  }) => {
-    return
+  const onDeleteTriggerCondition = ({ rowIndex, conditions }) => {
+    Utils.deleteArrayElement({ index: rowIndex, array: conditions })
+    saveConfig()
   }
 
   const renderAddDeleteButtonsForTriggerConditions = ({
-    tableMeta,
     conditionIndex,
     conditions,
   }) => {
@@ -126,7 +122,7 @@ export const getSubQuestTableConfigFunc = ({
         />
         <Button
           onClick={() =>
-            onDeleteTriggerCondition({ rowIndex: tableMeta.rowIndex })
+            onDeleteTriggerCondition({ rowIndex: conditionIndex, conditions })
           }
           icon={IconNames.TRASH}
         />
