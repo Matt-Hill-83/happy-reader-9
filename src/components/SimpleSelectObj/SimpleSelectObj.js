@@ -5,7 +5,7 @@ import Select from "@material-ui/core/Select"
 
 export default class SimpleSelectObj extends React.Component {
   render() {
-    const { value, onChange, items, getOptionLabel } = this.props
+    const { value, onChange, items, getOptionLabel, className } = this.props
 
     const _onChange = (event) => {
       console.log("_onChange") // zzz
@@ -15,6 +15,7 @@ export default class SimpleSelectObj extends React.Component {
     return (
       <FormControl>
         <Select
+          className={className}
           value={value}
           onChange={_onChange}
           style={{ fontSize: "inherit" }}

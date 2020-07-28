@@ -31,6 +31,7 @@ export const getSubQuestTableConfigFunc = ({ tableChangeCallback }) => {
         return (
           <div className={css.conditionsKVPair}>
             <SimpleSelectObj
+              className={css.dropdown}
               items={items}
               value={conditionName}
               index={tableMeta.columnIndex}
@@ -57,7 +58,6 @@ export const getSubQuestTableConfigFunc = ({ tableChangeCallback }) => {
     const triggerTypes = Object.values(Constants.triggers.triggerTypes)
     const onChange = (newValue) => {
       updateValue(newValue)
-      console.log("tableMeta", tableMeta) // zzz
       tableMeta.tableData[0][0] = newValue
       tableChangeCallback({ tableMeta, newValue, propertyName: "name" })
     }

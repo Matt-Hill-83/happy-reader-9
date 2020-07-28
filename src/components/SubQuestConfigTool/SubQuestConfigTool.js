@@ -29,7 +29,7 @@ export default function SubQuestConfigTool({ props }) {
 
       return (
         <div className={cx(css.sceneName, css.listItem)}>
-          <span className={cx(css.listItemName)}>{scene.name}</span>
+          {/* <span className={cx(css.listItemName)}>{scene.name}</span> */}
           <SimpleSelectObj
             items={realScenes}
             value={defaultValue}
@@ -68,7 +68,7 @@ export default function SubQuestConfigTool({ props }) {
     const { options, columns } = getSubQuestTableConfigFunc({
       tableChangeCallback,
     })
-    // const { options, columns } = subQuestTableConfig
+
     if (!triggers || triggers.length === 0) {
       return null
     }
@@ -81,18 +81,18 @@ export default function SubQuestConfigTool({ props }) {
               display: "none",
             },
           },
+          MuiTableCell: {
+            root: {
+              // display: "none",
+            },
+          },
         },
       })
 
-    const testCallBack = (test) => {
-      // console.log("test", toJS(test)) // zzz
-      // console.log("triggers", triggers) // zzz
-    }
-    // options.onTableChange = testCallBack
-    options.onCellClick = testCallBack
     return (
       <DataTable3
         props={{
+          className: css.triggersTable,
           getMuiTheme,
           data: triggers,
           columns,
