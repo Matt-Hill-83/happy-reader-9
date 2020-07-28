@@ -8,7 +8,6 @@ export default class SimpleSelectObj extends React.Component {
     const { value, onChange, items, getOptionLabel, className } = this.props
 
     const _onChange = (event) => {
-      console.log("_onChange") // zzz
       onChange(event.target.value)
     }
 

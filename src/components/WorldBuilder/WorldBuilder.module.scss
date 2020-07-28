@@ -12,13 +12,19 @@
   width: 100%;
 
   .subQuestConfigTool {
-    border: 1px solid red !important;
+    position: absolute;
+    z-index: 11;
+
+    right: 3vh;
+    top: 1vh;
+
+    border: 1px solid purple !important;
+    box-shadow: 1px 6px 17px 3px #000000bd;
+    border-radius: 9px;
+    background: #f9f9f9;
+
     width: 61vw;
     height: 90vh;
-    position: absolute;
-    background: white;
-    z-index: 11;
-    right: 0;
   }
 
   .jsonEditor {

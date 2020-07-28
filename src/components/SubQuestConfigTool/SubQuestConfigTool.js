@@ -31,6 +31,7 @@ export default function SubQuestConfigTool({ props }) {
         <div className={cx(css.sceneName, css.listItem)}>
           {/* <span className={cx(css.listItemName)}>{scene.name}</span> */}
           <SimpleSelectObj
+            className={css.sceneDropdown}
             items={realScenes}
             value={defaultValue}
             getOptionLabel={(option) => option.location.name}

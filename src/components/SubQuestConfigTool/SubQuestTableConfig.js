@@ -8,7 +8,10 @@ import { Button } from "@blueprintjs/core"
 
 import css from "./SubQuestTableConfig.module.scss"
 
-export const getSubQuestTableConfigFunc = ({ tableChangeCallback }) => {
+export const getSubQuestTableConfigFunc = ({
+  tableChangeCallback,
+  onDeleteTriggerRow,
+}) => {
   const renderConditions = (value, tableMeta, updateValue) => {
     const conditions = value
     return conditions.map((condition, conditionIndex) => {
@@ -31,7 +34,7 @@ export const getSubQuestTableConfigFunc = ({ tableChangeCallback }) => {
         return (
           <div className={css.conditionsKVPair}>
             <SimpleSelectObj
-              className={css.dropdown}
+              className={css.triggerConditionsDropdown}
               items={items}
               value={conditionName}
               index={tableMeta.columnIndex}
@@ -57,17 +60,36 @@ export const getSubQuestTableConfigFunc = ({ tableChangeCallback }) => {
   const renderName = (value, tableMeta, updateValue) => {
     const triggerTypes = Object.values(Constants.triggers.triggerTypes)
     const onChange = (newValue) => {
+      const { rowIndex, columnIndex } = tableMeta
+      console.log("onChange") // zzz
+      console.log("newValue", newValue) // zzz
       updateValue(newValue)
-      tableMeta.tableData[0][0] = newValue
+      tableMeta.tableData[rowIndex][columnIndex] = newValue
       tableChangeCallback({ tableMeta, newValue, propertyName: "name" })
     }
 
     return (
       <SimpleSelectObj
+        className={css.triggerTypesDropdown}
         items={triggerTypes}
         value={value}
         getOptionLabel={(option) => option}
         onChange={onChange}
+      />
+    )
+  }
+
+  const deleteTriggerType = ({ value, tableMeta, updateValue }) => {
+    const { rowIndex } = tableMeta
+    onDeleteTriggerRow({})
+    return
+  }
+
+  const renderDelete = (value, tableMeta, updateValue) => {
+    return (
+      <Button
+        onClick={() => deleteTriggerType({ value, tableMeta, updateValue })}
+        icon={IconNames.TRASH}
       />
     )
   }
@@ -101,18 +123,7 @@ export const getSubQuestTableConfigFunc = ({ tableChangeCallback }) => {
           filter: false,
           sort: false,
           empty: true,
-          customBodyRenderLite: (dataIndex) => {
-            return (
-              <Button
-                onClick={() => {
-                  const { data } = this.state
-                  data.shift()
-                  this.setState({ data })
-                }}
-                icon={IconNames.TRASH}
-              />
-            )
-          },
+          customBodyRender: renderDelete,
         },
       },
       // {
