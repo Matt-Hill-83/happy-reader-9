@@ -18,6 +18,7 @@ import css from "./SubQuestWizard.module.scss"
 
 export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState([])
+  const [dataTableKey, setDataTableKey] = useState([])
   // const forceUpdate = useForceUpdate()
 
   const { onSave, scenes } = props
@@ -70,8 +71,8 @@ export default function SubQuestWizard({ props }) {
 
     const onDeleteTriggerRow = ({ rowIndex }) => {
       Utils.deleteArrayElement({ index: rowIndex, array: triggers })
-      setQuestConfig(questConfig)
       onSave({ questConfig })
+      setDataTableKey(dataTableKey + 1)
     }
 
     const onAddTriggerRow = ({ rowIndex }) => {
@@ -82,8 +83,9 @@ export default function SubQuestWizard({ props }) {
         index: rowIndex,
         array: triggers,
       })
-      setQuestConfig(questConfig)
+
       onSave({ questConfig })
+      setDataTableKey(dataTableKey + 1)
     }
 
     const { options, columns } = getSubQuestTableConfigFunc({
@@ -112,6 +114,7 @@ export default function SubQuestWizard({ props }) {
 
     return (
       <DataTable3
+        key={dataTableKey}
         props={{
           className: css.triggersTable,
           getMuiTheme,
