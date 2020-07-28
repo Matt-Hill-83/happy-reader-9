@@ -18,21 +18,13 @@ export const getSubQuestTableConfigFunc = ({ tableChangeCallback }) => {
         const conditionValue = condition[conditionName]
 
         const onChangeCondition = (newValue) => {
-          console.log("newValue", toJS(newValue)) // zzz
-          console.log("conditions", toJS(conditions)) // zzz
-          const condition = conditions[conditionIndex]
-          // condition[newValue] = conditionValue
           conditions[conditionIndex] = { [newValue]: conditionValue }
           updateValue(conditions)
-          tableChangeCallback && tableChangeCallback("it worked!")
         }
 
         const onChangeValue = ({ value = 0 }) => {
           conditions[conditionIndex][conditionName] = value
           updateValue(conditions)
-          console.log("conditions", toJS(conditions)) // zzz
-          tableChangeCallback &&
-            tableChangeCallback({ newValue: conditions, tableMeta })
         }
 
         return (
@@ -60,11 +52,14 @@ export const getSubQuestTableConfigFunc = ({ tableChangeCallback }) => {
   }
 
   const renderName = (value, tableMeta, updateValue) => {
-    console.log("tableMeta", tableMeta) // zzz
     const triggerTypes = Object.values(Constants.triggers.triggerTypes)
     const onChange = (newValue) => {
       console.log("newValue", newValue) // zzz
       updateValue(newValue)
+      console.log("tableMeta", tableMeta) // zzz
+      console.log("tableData[0][0]", tableMeta.tableData[0][0]) // zzz
+      tableMeta.tableData[0][0] = newValue
+      tableChangeCallback({ tableMeta, newValue, propertyName: "name" })
     }
 
     return (

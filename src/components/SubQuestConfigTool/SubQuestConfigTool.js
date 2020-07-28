@@ -58,11 +58,16 @@ export default function SubQuestConfigTool({ props }) {
     setQuestConfig(props.questConfig || {})
   }, [props.questConfig])
 
-  const tableChangeCallback = (test) => {
-    console.log("test", test) // zzz
-  }
-
   const renderTriggers = ({ triggers }) => {
+    const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
+      console.log("newValue", newValue) // zzz
+      console.log("tableMeta", tableMeta) // zzz
+      const { rowIndex } = tableMeta
+
+      console.log("triggers", toJS(triggers)) // zzz
+      triggers[rowIndex][propertyName] = newValue
+    }
+
     const { options, columns } = getSubQuestTableConfigFunc({
       tableChangeCallback,
     })
@@ -83,8 +88,8 @@ export default function SubQuestConfigTool({ props }) {
       })
 
     const testCallBack = (test) => {
-      console.log("test", toJS(test)) // zzz
-      console.log("triggers", triggers) // zzz
+      // console.log("test", toJS(test)) // zzz
+      // console.log("triggers", triggers) // zzz
     }
     // options.onTableChange = testCallBack
     options.onCellClick = testCallBack
