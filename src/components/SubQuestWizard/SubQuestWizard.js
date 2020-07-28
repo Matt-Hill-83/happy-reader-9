@@ -68,7 +68,11 @@ export default function SubQuestWizard({ props }) {
 
     const onDeleteTriggerRow = ({ rowIndex }) => {
       Utils.deleteArrayElement({ index: rowIndex, array: triggers })
-      onSave({ questConfig })
+      saveQuestConfig()
+    }
+
+    const saveQuestConfig = async () => {
+      await onSave({ questConfig })
       setDataTableKey(dataTableKey + 1)
     }
 
@@ -81,8 +85,7 @@ export default function SubQuestWizard({ props }) {
         array: triggers,
       })
 
-      onSave({ questConfig })
-      setDataTableKey(dataTableKey + 1)
+      saveQuestConfig()
     }
 
     const { options, columns } = getSubQuestTableConfigFunc({

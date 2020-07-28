@@ -7,8 +7,9 @@ import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import TextField from "@material-ui/core/TextField"
 
 import css from "./SubQuestTableConfig.module.scss"
+import Utils from "../../Utils/Utils"
 
-const newCondition = { completedScene: "000" }
+const newCondition = { completedScene: "1234567" }
 
 export const getSubQuestTableConfigFunc = ({
   tableChangeCallback,
@@ -19,7 +20,6 @@ export const getSubQuestTableConfigFunc = ({
   const renderConditions = (value, tableMeta, updateValue) => {
     const conditions = value
     return conditions.map((condition, conditionIndex) => {
-      // console.log("condition", toJS(condition)) // zzz
       const conditionNames = Object.keys(condition)
 
       return conditionNames.map((conditionName) => {
@@ -56,12 +56,12 @@ export const getSubQuestTableConfigFunc = ({
               color="secondary"
               defaultValue={conditionValue}
               onBlur={(event) => onChangeValue({ value: event.target.value })}
-              // onChange={(event) => onChangeValue({ value: event.target.value })}
               InputProps={{}}
             />
             {renderAddDeleteButtonsForTriggerConditions({
               tableMeta,
               conditionIndex,
+              conditions,
             })}
           </div>
         )
@@ -89,8 +89,14 @@ export const getSubQuestTableConfigFunc = ({
     )
   }
 
-  const onAddTriggerCondition = ({ tableMeta, conditionIndex, conditions }) => {
-    return
+  const onAddTriggerCondition = ({ conditionIndex, conditions, before }) => {
+    Utils.addArrayElement({
+      newElement: newCondition,
+      before,
+      index: conditionIndex,
+      array: conditions,
+    })
+    saveConfig()
   }
 
   const onDeleteTriggerCondition = ({
@@ -104,13 +110,15 @@ export const getSubQuestTableConfigFunc = ({
   const renderAddDeleteButtonsForTriggerConditions = ({
     tableMeta,
     conditionIndex,
+    conditions,
   }) => {
     return (
       <>
         <Button
           onClick={() =>
             onAddTriggerCondition({
-              rowIndex: tableMeta.rowIndex,
+              conditionIndex,
+              conditions,
               before: true,
             })
           }
