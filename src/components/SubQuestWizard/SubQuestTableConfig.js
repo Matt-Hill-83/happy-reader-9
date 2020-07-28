@@ -78,12 +78,36 @@ export const getSubQuestTableConfigFunc = ({
     )
   }
 
-  const deleteTriggerType = ({ tableMeta }) => {
-    const { rowIndex } = tableMeta
-    onDeleteTriggerRow({ rowIndex })
+  const renderAddDeleteButtonsForTriggerConditions = (
+    value,
+    tableMeta,
+    updateValue
+  ) => {
+    return (
+      <>
+        <Button
+          onClick={() =>
+            onAddTriggerRow({ rowIndex: tableMeta.rowIndex, before: true })
+          }
+          icon={IconNames.ADD}
+        />
+        <Button
+          onClick={() =>
+            onDeleteTriggerRow({ rowIndex: tableMeta.rowIndex, updateValue })
+          }
+          icon={IconNames.TRASH}
+        />
+        <Button
+          onClick={() =>
+            onAddTriggerRow({ rowIndex: tableMeta.rowIndex, before: false })
+          }
+          icon={IconNames.ADD}
+        />
+      </>
+    )
   }
 
-  const renderAddDeleteButtons = (value, tableMeta, updateValue) => {
+  const renderAddDeleteButtonsForTriggers = (value, tableMeta, updateValue) => {
     return (
       <>
         <Button
@@ -138,7 +162,7 @@ export const getSubQuestTableConfigFunc = ({
           filter: false,
           sort: false,
           empty: true,
-          customBodyRender: renderAddDeleteButtons,
+          customBodyRender: renderAddDeleteButtonsForTriggers,
         },
       },
     ],
