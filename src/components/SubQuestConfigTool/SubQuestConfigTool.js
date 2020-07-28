@@ -36,9 +36,6 @@ export default function SubQuestConfigTool({ props }) {
             getOptionLabel={(option) => option.location.name}
             onChange={onChangeScene}
           />
-          {/* <AutoComplete2
-            props={{ items, getOptionLabel, onChange: onChangeScene }}
-          ></AutoComplete2> */}
           {renderTriggers({ triggers: scene.sceneTriggers })}
         </div>
       )
@@ -64,8 +61,8 @@ export default function SubQuestConfigTool({ props }) {
       console.log("tableMeta", tableMeta) // zzz
       const { rowIndex } = tableMeta
 
-      console.log("triggers", toJS(triggers)) // zzz
       triggers[rowIndex][propertyName] = newValue
+      console.log("triggers", toJS(triggers)) // zzz
     }
 
     const { options, columns } = getSubQuestTableConfigFunc({
