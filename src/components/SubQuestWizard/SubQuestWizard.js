@@ -3,7 +3,7 @@ import cx from "classnames"
 import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
 import { toJS } from "mobx"
 import _get from "lodash.get"
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
+import { createMuiTheme } from "@material-ui/core/styles"
 
 import { getSubQuestTableConfigFunc } from "./SubQuestTableConfig"
 import DataTable3 from "../DataTable3/DataTable3"
@@ -57,16 +57,18 @@ export default function SubQuestWizard({ props }) {
 
   const renderTriggers = ({ triggers }) => {
     const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
-      console.log("newValue", newValue) // zzz
-      console.log("tableMeta", tableMeta) // zzz
       const { rowIndex } = tableMeta
-
       triggers[rowIndex][propertyName] = newValue
-      console.log("triggers", toJS(triggers)) // zzz
+    }
+
+    const onDeleteTriggerRow = ({ newValue, tableMeta, propertyName }) => {
+      const { rowIndex } = tableMeta
+      triggers[rowIndex][propertyName] = newValue
     }
 
     const { options, columns } = getSubQuestTableConfigFunc({
       tableChangeCallback,
+      onDeleteTriggerRow,
     })
 
     if (!triggers || triggers.length === 0) {

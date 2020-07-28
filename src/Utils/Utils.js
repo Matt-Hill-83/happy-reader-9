@@ -2,42 +2,9 @@ import localStateStore from "../Stores/LocalStateStore/LocalStateStore.js"
 import { gameConfig, maps, books } from "../Stores/InitStores.js"
 import { toJS } from "mobx"
 import _get from "lodash.get"
+import Constants from "./Constants/Constants.js"
 
 export default class Utils {
-  // CONSTANTS ---------------------------------- start ---------------------------
-  static neighborPositionsEnum = {
-    left: "left",
-    right: "right",
-    bottom: "bottom",
-    top: "top",
-  }
-
-  static characterDialogIndex = {
-    kat: 0,
-    liz2: 1,
-    katieKooper01: 1,
-    rori: 3,
-    troll01: 2,
-    troll02: 3,
-    anna02: 2,
-    angus01: 3,
-    pup01: 2,
-    dog01: 3,
-    trumpetGirl01: 2,
-    sweaterGirl01: 3,
-    dennisTheMenace: 3,
-    crow01: 1,
-    queenZupula01: 1,
-    elf: 2,
-    babyTroll01: 2,
-    rose01: 2,
-    cub: 1,
-    goat01: 0,
-    coldGirl: 3,
-    merida02: 3,
-  }
-  // CONSTANTS ---------------------------------- end ---------------------------
-
   static getActiveQuestConfig = () => {
     const activeWorld = localStateStore.getActiveWorld()
     const { questConfig } = activeWorld.data
@@ -146,7 +113,7 @@ export default class Utils {
   }
 
   static getCharacterDialogIndex = ({ characterId, characterName }) => {
-    return this.characterDialogIndex[characterName] || 2
+    return Constants.characterDialogIndex[characterName] || 2
   }
 
   static getItemsFromDbObj = ({ dbList }) => {
@@ -449,19 +416,19 @@ export default class Utils {
     const grid = localStateStore.getActiveWorldGrid()
 
     const neighborPositions = {
-      [Utils.neighborPositionsEnum.left]: {
+      [Constants.neighborPositionsEnum.left]: {
         row: coordinates.row,
         col: coordinates.col - 1,
       },
-      [Utils.neighborPositionsEnum.right]: {
+      [Constants.neighborPositionsEnum.right]: {
         row: coordinates.row,
         col: coordinates.col + 1,
       },
-      [Utils.neighborPositionsEnum.bottom]: {
+      [Constants.neighborPositionsEnum.bottom]: {
         row: coordinates.row + 1,
         col: coordinates.col,
       },
-      [Utils.neighborPositionsEnum.top]: {
+      [Constants.neighborPositionsEnum.top]: {
         row: coordinates.row - 1,
         col: coordinates.col,
       },
@@ -477,7 +444,7 @@ export default class Utils {
   }
 
   static getNeighbors = ({ coordinates }) => {
-    const directions = Object.keys(Utils.neighborPositionsEnum)
+    const directions = Object.keys(Constants.neighborPositionsEnum)
     const neighbors = {}
 
     directions.forEach((direction) => {
@@ -491,7 +458,7 @@ export default class Utils {
   }
 
   static getNeighborsAsArray = ({ coordinates }) => {
-    const directions = Object.keys(Utils.neighborPositionsEnum)
+    const directions = Object.keys(Constants.neighborPositionsEnum)
     const neighbors = []
 
     directions.forEach((direction) => {

@@ -1,15 +1,16 @@
 import React from "react"
 import { observer } from "mobx-react"
 import { FormControl, MenuItem, OutlinedInput, Select } from "@material-ui/core"
+import cx from "classnames"
+import _get from "lodash.get"
+import { toJS } from "mobx"
 
 import Images from "../../images/images.js"
 import Utils from "../../Utils/Utils.js"
-import css from "./MiniLocation.module.scss"
+import Constants from "../../Utils/Constants/Constants.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
-import cx from "classnames"
-import _get from "lodash.get"
 
-import { toJS } from "mobx"
+import css from "./MiniLocation.module.scss"
 
 class MiniLocation extends React.Component {
   defaultDoorIsOpen = {
@@ -217,8 +218,8 @@ class MiniLocation extends React.Component {
       rockImage = Images.backgrounds["rock"]
       rockImageVertical = Images.backgrounds["rock02Vertical"]
       defaultDoorImage = Images.backgrounds["door"]
-      showBottomPath = neighbors[Utils.neighborPositionsEnum.bottom]
-      showRightPath = neighbors[Utils.neighborPositionsEnum.right]
+      showBottomPath = neighbors[Constants.neighborPositionsEnum.bottom]
+      showRightPath = neighbors[Constants.neighborPositionsEnum.right]
       const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
 
       const parentSubQuestFromScene = Utils.getParentSubQuestFromScene({
