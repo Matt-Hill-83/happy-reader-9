@@ -18,7 +18,7 @@ export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState([])
   const [dataTableKey, setDataTableKey] = useState([])
 
-  const { onSave, scenes } = props
+  const { onSave } = props
 
   useEffect(() => {
     // on mount
@@ -89,6 +89,9 @@ export default function SubQuestWizard({ props }) {
       tableChangeCallback,
       onDeleteTriggerRow,
       onAddTriggerRow,
+      saveConfig: () => {
+        onSave({ questConfig })
+      },
     })
 
     if (!triggers || triggers.length === 0) {

@@ -576,6 +576,7 @@ class WorldBuilder extends Component {
   }
 
   onSaveQuestConfig = async ({ questConfig }) => {
+    console.log("onSaveQuestConfig") // zzz
     const world = localStateStore.getWorldBuilderWorld() || {}
     await Utils.updateMap({ newProps: { questConfig }, mapToUpdate: world })
     // this.forceUpdate2()

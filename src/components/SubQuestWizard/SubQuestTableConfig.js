@@ -8,14 +8,18 @@ import TextField from "@material-ui/core/TextField"
 
 import css from "./SubQuestTableConfig.module.scss"
 
+const newCondition = { completedScene: "000" }
+
 export const getSubQuestTableConfigFunc = ({
   tableChangeCallback,
   onDeleteTriggerRow,
   onAddTriggerRow,
+  saveConfig,
 }) => {
   const renderConditions = (value, tableMeta, updateValue) => {
     const conditions = value
     return conditions.map((condition, conditionIndex) => {
+      // console.log("condition", toJS(condition)) // zzz
       const conditionNames = Object.keys(condition)
 
       return conditionNames.map((conditionName) => {
@@ -25,11 +29,13 @@ export const getSubQuestTableConfigFunc = ({
         const onChangeCondition = (newValue) => {
           conditions[conditionIndex] = { [newValue]: conditionValue }
           updateValue(conditions)
+          saveConfig()
         }
 
         const onChangeValue = ({ value = 0 }) => {
           conditions[conditionIndex][conditionName] = value
           updateValue(conditions)
+          saveConfig()
         }
 
         return (
@@ -49,10 +55,14 @@ export const getSubQuestTableConfigFunc = ({
               margin="dense"
               color="secondary"
               defaultValue={conditionValue}
-              onChange={(event) => onChangeValue({ value: event.target.value })}
+              onBlur={(event) => onChangeValue({ value: event.target.value })}
+              // onChange={(event) => onChangeValue({ value: event.target.value })}
               InputProps={{}}
             />
-            {/* {renderAddDeleteButtonsForTriggerConditions()} */}
+            {renderAddDeleteButtonsForTriggerConditions({
+              tableMeta,
+              conditionIndex,
+            })}
           </div>
         )
       })
@@ -79,22 +89,45 @@ export const getSubQuestTableConfigFunc = ({
     )
   }
 
-  const renderAddDeleteButtonsForTriggerConditions = ({ tableMeta }) => {
+  const onAddTriggerCondition = ({ tableMeta, conditionIndex, conditions }) => {
+    return
+  }
+
+  const onDeleteTriggerCondition = ({
+    tableMeta,
+    conditionIndex,
+    conditions,
+  }) => {
+    return
+  }
+
+  const renderAddDeleteButtonsForTriggerConditions = ({
+    tableMeta,
+    conditionIndex,
+  }) => {
     return (
       <>
         <Button
           onClick={() =>
-            onAddTriggerRow({ rowIndex: tableMeta.rowIndex, before: true })
+            onAddTriggerCondition({
+              rowIndex: tableMeta.rowIndex,
+              before: true,
+            })
           }
           icon={IconNames.ADD}
         />
         <Button
-          onClick={() => onDeleteTriggerRow({ rowIndex: tableMeta.rowIndex })}
+          onClick={() =>
+            onDeleteTriggerCondition({ rowIndex: tableMeta.rowIndex })
+          }
           icon={IconNames.TRASH}
         />
         <Button
           onClick={() =>
-            onAddTriggerRow({ rowIndex: tableMeta.rowIndex, before: false })
+            onAddTriggerCondition({
+              rowIndex: tableMeta.rowIndex,
+              before: false,
+            })
           }
           icon={IconNames.ADD}
         />
