@@ -75,11 +75,11 @@ export default function SubQuestWizard({ props }) {
       setDataTableKey(dataTableKey + 1)
     }
 
-    const onAddTriggerRow = ({ rowIndex }) => {
+    const onAddTriggerRow = ({ rowIndex, before }) => {
       const newElement = Constants.newTrigger()
       Utils.addArrayElement({
         newElement,
-        before: true,
+        before,
         index: rowIndex,
         array: triggers,
       })

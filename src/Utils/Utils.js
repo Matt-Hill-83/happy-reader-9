@@ -5,8 +5,9 @@ import _get from "lodash.get"
 import Constants from "./Constants/Constants.js"
 
 export default class Utils {
-  static addArrayElement = ({ newElement, before = true, index, array }) => {
-    array.splice(index + (before ? 0 : 1), 0, newElement)
+  static addArrayElement = ({ newElement, before, index, array }) => {
+    const adder = before === true ? 0 : 1
+    array.splice(index + adder, 0, newElement)
   }
 
   static deleteArrayElement = ({ array, index }) => {
