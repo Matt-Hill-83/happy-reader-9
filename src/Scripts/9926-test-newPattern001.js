@@ -1,12 +1,12 @@
 const story9926 = {
-  title: "--- 9926-test-newPattern -002---test2",
+  title: "---014",
   scenes: [
     {
       title: "castle",
       sceneConfig: {
-        coordinates: { row: 0, col: 1 },
-        creatures: ["anna02"],
+        coordinates: { col: 1, row: 0 },
         subQuestId: 0,
+        creatures: ["anna02"],
       },
       frames: [
         {
@@ -51,7 +51,7 @@ const story9926 = {
               { name: "fig" },
               { name: "note01" },
             ],
-            faces: [{ characterIndex: 1, face: "happy", character: "liz2" }],
+            faces: [{ character: "liz2", characterIndex: 1, face: "happy" }],
           },
           dialogs: [
             '{"blank" : "Liz, can you take Angus?"}',
@@ -73,7 +73,7 @@ const story9926 = {
     {
       title: "fig",
       sceneConfig: {
-        coordinates: { row: 1, col: 2 },
+        coordinates: { col: 2, row: 1 },
         subQuestId: 0,
         creatures: ["anna02", "angus01"],
       },
@@ -108,7 +108,7 @@ const story9926 = {
           frameConfig: {
             critters1: [{ name: "liz2" }],
             critters2: [{ name: "angus01" }, { name: "spaceShip01" }],
-            faces: [{ character: "liz2", face: "happy", characterIndex: 1 }],
+            faces: [{ face: "happy", characterIndex: 1, character: "liz2" }],
           },
           dialogs: [
             '{"liz2" : "oh look, a dog bed."}',
@@ -140,11 +140,11 @@ const story9926 = {
     {
       title: "cub",
       sceneConfig: {
-        coordinates: { row: 1, col: 5 },
+        coordinates: { col: 5, row: 1 },
         subQuestId: 4,
         triggers: { unlockSceneConditions: { currentMission: 3 } },
-        worldTitle: "--- 9926-test-newPattern001 - with critters---test2",
         creatures: ["anna02", "merida02"],
+        worldTitle: "--- 9926-test-newPattern001 - with critters---test2",
       },
       frames: [
         {
@@ -152,9 +152,9 @@ const story9926 = {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
+                face: "kat-happy.9e02afab.png",
                 character: "anna02",
                 characterIndex: 0,
-                face: "kat-happy.9e02afab.png",
               },
             ],
           },
@@ -189,9 +189,9 @@ const story9926 = {
     {
       title: "sassafras01Happy",
       sceneConfig: {
-        coordinates: { row: 1, col: 7 },
-        creatures: ["anna02", "merida02"],
+        coordinates: { col: 7, row: 1 },
         subQuestId: 4,
+        creatures: ["anna02", "merida02"],
       },
       frames: [
         {
@@ -199,9 +199,9 @@ const story9926 = {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
-                characterIndex: 0,
                 character: "anna02",
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
               },
             ],
           },
@@ -216,7 +216,7 @@ const story9926 = {
     {
       title: "cat01",
       sceneConfig: {
-        coordinates: { col: 8, row: 1 },
+        coordinates: { row: 1, col: 8 },
         subQuestId: 4,
         creatures: ["anna02", "merida02"],
       },
@@ -227,8 +227,8 @@ const story9926 = {
             faces: [
               {
                 character: "anna02",
-                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
+                characterIndex: 0,
               },
             ],
           },
@@ -243,7 +243,7 @@ const story9926 = {
     {
       title: "boomALoo01",
       sceneConfig: {
-        coordinates: { col: 9, row: 1 },
+        coordinates: { row: 1, col: 9 },
         creatures: ["anna02", "merida02"],
         subQuestId: 4,
       },
@@ -271,7 +271,7 @@ const story9926 = {
         {
           frameConfig: {
             critters1: [{ name: "liz2" }],
-            faces: [{ face: "happy", character: "liz2", characterIndex: 1 }],
+            faces: [{ character: "liz2", face: "happy", characterIndex: 1 }],
           },
           dialogs: ['{"liz2" : "I will wait here for kat."}'],
         },
@@ -293,7 +293,7 @@ const story9926 = {
     {
       title: "pinky01",
       sceneConfig: {
-        coordinates: { row: 2, col: 4 },
+        coordinates: { col: 4, row: 2 },
         creatures: ["anna02"],
         subQuestId: 2,
         triggers: { unlockSceneConditions: { currentMission: 2 } },
@@ -314,7 +314,7 @@ const story9926 = {
     {
       title: "dragon",
       sceneConfig: {
-        coordinates: { row: 2, col: 5 },
+        coordinates: { col: 5, row: 2 },
         creatures: ["anna02", "merida02"],
         subQuestId: 2,
       },
@@ -334,10 +334,10 @@ const story9926 = {
     {
       title: "brindle01Happy",
       sceneConfig: {
-        coordinates: { row: 2, col: 9 },
+        coordinates: { col: 9, row: 2 },
+        triggers: { unlockSceneConditions: { currentMission: 5 } },
         creatures: ["anna02", "merida02"],
         subQuestId: 7,
-        triggers: { unlockSceneConditions: { currentMission: 5 } },
       },
       frames: [
         {
@@ -345,8 +345,8 @@ const story9926 = {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
-                face: "kat-happy.9e02afab.png",
                 character: "anna02",
+                face: "kat-happy.9e02afab.png",
                 characterIndex: 0,
               },
             ],
@@ -363,8 +363,8 @@ const story9926 = {
       title: "pug",
       sceneConfig: {
         coordinates: { col: 10, row: 2 },
-        subQuestId: 7,
         creatures: ["anna02", "merida02"],
+        subQuestId: 7,
       },
       frames: [
         {
@@ -383,8 +383,8 @@ const story9926 = {
       title: "elf",
       sceneConfig: {
         coordinates: { col: 11, row: 2 },
-        subQuestId: 7,
         creatures: ["anna02", "merida02"],
+        subQuestId: 7,
       },
       frames: [
         {
@@ -409,10 +409,10 @@ const story9926 = {
     {
       title: "log",
       sceneConfig: {
-        coordinates: { row: 3, col: 0 },
-        triggers: { unlockSceneConditions: { currentMission: 1 } },
+        coordinates: { col: 0, row: 3 },
         subQuestId: 1,
         creatures: ["merida02"],
+        triggers: { unlockSceneConditions: { currentMission: 1 } },
       },
       frames: [
         {
@@ -460,7 +460,7 @@ const story9926 = {
     {
       title: "bun",
       sceneConfig: {
-        coordinates: { row: 3, col: 2 },
+        coordinates: { col: 2, row: 3 },
         subQuestId: 1,
         creatures: ["merida02", "cub"],
       },
@@ -468,7 +468,7 @@ const story9926 = {
         {
           frameConfig: {
             critters2: [{ name: "merida02" }, { name: "cub" }],
-            faces: [{ face: "happy", characterIndex: 0, character: "anna02" }],
+            faces: [{ face: "happy", character: "anna02", characterIndex: 0 }],
           },
           dialogs: [
             '{"merida02" : "Fun! Fun! Fun!"}',
@@ -483,16 +483,16 @@ const story9926 = {
     {
       title: "pin",
       sceneConfig: {
-        coordinates: { col: 3, row: 3 },
+        coordinates: { row: 3, col: 3 },
+        subQuestId: 1,
         creatures: ["merida02", "cub"],
         triggers: { unlockSceneConditions: { currentMission: 2 } },
-        subQuestId: 1,
       },
       frames: [
         {
           frameConfig: {
             critters2: [{ name: "merida02" }, { name: "cub" }],
-            faces: [{ characterIndex: 0, character: "anna02", face: "happy" }],
+            faces: [{ characterIndex: 0, face: "happy", character: "anna02" }],
           },
           dialogs: [
             '{"merida02" : "I see a pin!"}',
@@ -515,7 +515,7 @@ const story9926 = {
     {
       title: "katieKooper01",
       sceneConfig: {
-        coordinates: { col: 5, row: 3 },
+        coordinates: { row: 3, col: 5 },
         triggers: { unlockSceneConditions: { currentMission: 4 } },
         worldTitle: "--- 9926-test-newPattern001 - with critters---test2",
         creatures: ["anna02"],
@@ -527,9 +527,9 @@ const story9926 = {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
-                face: "kat-happy.9e02afab.png",
-                character: "anna02",
                 characterIndex: 0,
+                character: "anna02",
+                face: "kat-happy.9e02afab.png",
               },
             ],
           },
@@ -544,7 +544,7 @@ const story9926 = {
     {
       title: "cap",
       sceneConfig: {
-        coordinates: { col: 6, row: 3 },
+        coordinates: { row: 3, col: 6 },
         subQuestId: 5,
         creatures: ["anna02", "merida02"],
       },
@@ -562,11 +562,11 @@ const story9926 = {
       frames2: [],
     },
     {
-      title: "top",
+      title: "bun",
       sceneConfig: {
         coordinates: { col: 7, row: 3 },
-        subQuestId: 5,
         creatures: ["anna02", "merida02"],
+        subQuestId: 5,
       },
       frames: [
         {
@@ -574,8 +574,8 @@ const story9926 = {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
-                characterIndex: 0,
                 character: "anna02",
+                characterIndex: 0,
                 face: "kat-happy.9e02afab.png",
               },
             ],
@@ -621,9 +621,9 @@ const story9926 = {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
-                characterIndex: 0,
-                character: "anna02",
                 face: "kat-happy.9e02afab.png",
+                character: "anna02",
+                characterIndex: 0,
               },
             ],
           },
@@ -639,9 +639,9 @@ const story9926 = {
       title: "sassafras01Happy",
       sceneConfig: {
         coordinates: { col: 11, row: 3 },
+        creatures: ["anna02", "merida02"],
         subQuestId: 8,
         triggers: { unlockSceneConditions: { currentMission: 7 } },
-        creatures: ["anna02", "merida02"],
       },
       frames: [
         {
@@ -674,9 +674,9 @@ const story9926 = {
             ],
             faces: [
               {
-                face: "kat-happy.9e02afab.png",
-                character: "anna02",
                 characterIndex: 0,
+                character: "anna02",
+                face: "kat-happy.9e02afab.png",
               },
             ],
           },
@@ -692,8 +692,8 @@ const story9926 = {
       title: "van",
       sceneConfig: {
         coordinates: { row: 3, col: 13 },
-        subQuestId: 8,
         creatures: ["anna02", "merida02"],
+        subQuestId: 8,
       },
       frames: [
         {
@@ -702,8 +702,8 @@ const story9926 = {
             faces: [
               {
                 characterIndex: 0,
-                face: "kat-happy.9e02afab.png",
                 character: "anna02",
+                face: "kat-happy.9e02afab.png",
               },
             ],
           },
@@ -719,8 +719,8 @@ const story9926 = {
       title: "mat",
       sceneConfig: {
         coordinates: { row: 4, col: 13 },
-        subQuestId: 9,
         creatures: ["anna02", "merida02"],
+        subQuestId: 9,
       },
       frames: [
         {
@@ -728,9 +728,9 @@ const story9926 = {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
-                face: "kat-happy.9e02afab.png",
-                character: "anna02",
                 characterIndex: 0,
+                character: "anna02",
+                face: "kat-happy.9e02afab.png",
               },
             ],
           },
@@ -745,7 +745,7 @@ const story9926 = {
     {
       title: "stump",
       sceneConfig: {
-        coordinates: { col: 14, row: 4 },
+        coordinates: { row: 4, col: 14 },
         creatures: ["anna02", "merida02"],
         subQuestId: 9,
       },
@@ -763,101 +763,91 @@ const story9926 = {
       frames2: [],
     },
   ],
-
   questConfig: {
     subQuests: [
       {
-        name: "Meet Your New Best Friend",
-        index: 0,
         missions: [
           {
-            name: "Feed the pig",
+            recipient: { name: "pig" },
             item: { name: "fig" },
             missionType: "giveItemToPerson",
-            recipient: { name: "pig" },
             rewards: [{ name: "gold", amount: 5 }],
+            name: "Feed the pig",
           },
           {
-            missionType: "giveItemToPerson",
-            recipient: { name: "goatInABoat" },
             name: "Feed the goat.",
-            rewards: [{ name: "gold", amount: 5 }],
+            recipient: { name: "goatInABoat" },
             item: { name: "bun" },
-          },
-          {
             missionType: "giveItemToPerson",
-            recipient: { name: "pinky01" },
-            name: "Give Pinky a gift.",
-            item: { name: "mug" },
             rewards: [{ amount: 5, name: "gold" }],
           },
           {
+            name: "Give Pinky a gift.",
+            recipient: { name: "pinky01" },
+            item: { name: "mug" },
             missionType: "giveItemToPerson",
-            recipient: { name: "babyTroll01" },
-            name: "Give a Troll a Gift.",
             rewards: [{ name: "gold", amount: 5 }],
-            item: { name: "pin" },
           },
           {
-            missionType: "getToLocation",
-            location: { name: "log" },
+            item: { name: "pin" },
+            recipient: { name: "babyTroll01" },
+            rewards: [{ amount: 5, name: "gold" }],
+            name: "Give a Troll a Gift.",
+            missionType: "giveItemToPerson",
+          },
+          { location: { name: "log" }, missionType: "getToLocation" },
+        ],
+        index: 0,
+        name: "Meet Your New Best Friend",
+        triggers: [
+          { name: "unlock", conditions: [{ frameSetIndex: 0 }] },
+          {
+            conditions: [{ completedMission: 0, frameSetIndex: 1 }],
+            name: "unhide",
           },
         ],
         scenes: [
           {
+            id: "6db89bd8-14c7-4631-afd9-56cdda4a1af7",
             name: "castle",
             sceneTriggers: [
               {
-                name: "hide",
-                conditions: [{ currentMission: 0 }],
+                "0": "unhide",
+                conditions: [{ currentMission: "0" }],
+                name: "lock",
               },
               {
-                name: "unhide",
-                conditions: [{ completedMission: 1 }],
+                "0": "unhide",
+                name: "unlock",
+                conditions: [{ completedMission: "0" }],
               },
               {
+                "0": "unhide",
+                conditions: [{ currentMission: "2" }],
+                name: "lock",
+              },
+              { name: "unlock", conditions: [{ completedMission: "2" }] },
+              {
+                "0": "unhide",
+                conditions: [{ completedMission: "0" }, { frameSetIndex: "1" }],
                 name: "updateFrameSet",
-                conditions: [{ frameSetIndex: 1, completedMission: 0 }],
               },
             ],
           },
-          { name: "goat" },
-          { name: "fig" },
-          { name: "stump" },
-          { name: "pig" },
-        ],
-        triggers: [
-          {
-            name: "lock",
-            conditions: [
-              { completedMission: 0 },
-              { currentMission: 0 },
-              { completedScene: "log" },
-              { pocketContains: "hat" },
-            ],
-          },
-          {
-            name: "unlock",
-            conditions: [{ completedMission: 0 }],
-          },
-          {
-            name: "hide",
-            conditions: [{ completedMission: 0 }],
-          },
-          {
-            name: "updateFrameSet",
-            conditions: [{ frameSetIndex: 1, completedMission: 0 }],
-          },
+          { id: "833f99c1-9f80-4ba2-a43e-37aeba0295bc", name: "goat01" },
+          { name: "fig", id: "60e6830d-a5b8-49b6-ac08-c6b054ddaea6" },
+          { name: "stump", id: "42908835-8359-4c0b-bbc8-8dc010e3ef1c" },
+          { name: "pig", id: "96e11e7c-39f5-40de-ab0a-55d39219200e" },
         ],
       },
       {
-        name: "Win the Rap Battle",
         scenes: [
-          { name: "log" },
-          { name: "goatInABoat" },
-          { name: "bun" },
-          { name: "pin" },
+          { id: "a47365e3-98c5-4342-913d-c61fd1788c8b", name: "log" },
+          { id: "4d3e94bf-7fcc-45eb-b636-b59d3bc9dabd", name: "goatInABoat" },
+          { name: "bun", id: "33835422-0740-47b2-925b-df2f28b4aa64" },
+          { id: "38a5b2e7-aeaa-4430-b0f9-1411a0451f5b", name: "pin" },
         ],
+        name: "Win the Rap Battle",
         triggers: [
           {
             name: "lock",
@@ -868,14 +858,8 @@ const story9926 = {
               { pocketContains: "hat" },
             ],
           },
-          {
-            name: "unlock",
-            conditions: [{ completedMission: 0 }],
-          },
-          {
-            name: "hide",
-            conditions: [{ completedMission: 0 }],
-          },
+          { name: "unlock", conditions: [{ completedMission: 0 }] },
+          { name: "hide", conditions: [{ completedMission: 0 }] },
           {
             name: "updateFrameSet",
             conditions: [{ frameSetIndex: 1, completedMission: 0 }],

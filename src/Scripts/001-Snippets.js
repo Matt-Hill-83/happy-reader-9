@@ -43,6 +43,38 @@ const test = {
   '{"liz2" : "-----"}',
   '{"kat" : "-----"}',
   '{"liz2" : "-----"}',
+
+  'Bug in a bag.',
+  '------------------------',  
+  
+  '{"kat" : "A bug in a bag"}',
+  '{"liz2" : "Do what now?"}',
+
+
+
+  '{"kat" : "Can you put a big bug in a bag?"}',
+  '{"liz2" : "Oh please..."}',
+  '{"liz2" : "I can put a big bug in a bag..."}',
+  
+  '{"liz2" : "I can put a big bug in a bag in a bog."}',
+  
+  '{"liz2" : "I can put a hog on a log eating hot dogs with a hot frog."}',
+
+  '{"liz2" : "You got to check out my blog!"}',
+  '{"liz2" : "And then I\'ll put a click in your clog."}',
+  '{"liz2" : "A tick in your tick."}',
+  '{"liz2" : "A tick in your tick."}',
+  
+  '{"liz2" : "I can put a bed bug in a big a bag by your bed bub."}',
+  '{"liz2" : "You want a head rub?"}',
+
+  '{"liz2" : "-----"}',
+  '{"kat" : "-----"}',
+  '{"liz2" : "-----"}',
+  '{"kat" : "-----"}',
+  '{"liz2" : "-----"}',
+  '{"kat" : "-----"}',
+  '{"liz2" : "-----"}',
   '{"kat" : "-----"}',
   '{"liz2" : "-----"}',
 
