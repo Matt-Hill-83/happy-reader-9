@@ -168,12 +168,12 @@ export default function SubQuestWizard({ props }) {
         >
           Save Changes - triggers
         </Button>
-        <Button
+        {/* <Button
           className={css.saveButton}
           onClick={() => props.onClose && props.onClose()}
         >
           Exit
-        </Button>
+        </Button> */}
       </ButtonGroup>
     </div>
   )
