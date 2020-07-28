@@ -166,7 +166,7 @@ export default function SubQuestWizard({ props }) {
           className={css.saveButton}
           onClick={() => onSave({ questConfig })}
         >
-          Save Changes - triggers
+          Save Changes
         </Button>
         {/* <Button
           className={css.saveButton}
