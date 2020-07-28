@@ -523,10 +523,11 @@ class WorldBuilder extends Component {
     // I should probably create a new scenesGrid here, based on the required dimensions
     // I should probably create a new scenesGrid here, based on the required dimensions
     const scenesGrid = localStateStore.getWorldBuilderScenesGrid()
+    const sceneDefinitions = newWorld.scenes2 || newWorld.scenes
 
-    const theScenes = newWorld.scenes2 || newWorld.scenes
-
-    theScenes.forEach((scene, sceneIndex) => {
+    // Scene defs from imported json
+    sceneDefinitions.forEach((scene, sceneIndex) => {
+      console.log("scene", toJS(scene)) // zzz
       const { frames, sceneConfig, frames2 } = scene
 
       const coordinates = sceneConfig.coordinates || {
@@ -536,12 +537,13 @@ class WorldBuilder extends Component {
 
       const newBornScene = Utils.getBlankScene({
         props: {
-          sceneConfig,
+          // id: sceneConfig,
           coordinates,
           location: { name: scene.title },
         },
       })
-
+      console.log("newBornScene", toJS(newBornScene)) // zzz
+      console.log("newBornScene", toJS(newBornScene.asdf.asdf)) // zzz
       if (scene.sceneConfig) {
         Object.assign(newBornScene, scene.sceneConfig)
       }

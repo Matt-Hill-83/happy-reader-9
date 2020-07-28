@@ -43,7 +43,8 @@ export default function SubQuestWizard({ props }) {
         scene.id = id
       }
       const defaultValue = realScenes.find((item) => item.id === scene.id)
-
+      console.log("realScenes", toJS(realScenes)) // zzz
+      // console.log("realScenes", toJS(realScenes.wre.wer)) // zzz
       return (
         <div className={cx(css.sceneName, css.listItem)}>
           {/* <span className={cx(css.listItemName)}>{scene.name}</span> */}
