@@ -52,6 +52,7 @@ export const getSubQuestTableConfigFunc = ({
               onChange={(event) => onChangeValue({ value: event.target.value })}
               InputProps={{}}
             />
+            {/* {renderAddDeleteButtonsForTriggerConditions()} */}
           </div>
         )
       })
@@ -92,9 +93,7 @@ export const getSubQuestTableConfigFunc = ({
           icon={IconNames.ADD}
         />
         <Button
-          onClick={() =>
-            onDeleteTriggerRow({ rowIndex: tableMeta.rowIndex, updateValue })
-          }
+          onClick={() => onDeleteTriggerRow({ rowIndex: tableMeta.rowIndex })}
           icon={IconNames.TRASH}
         />
         <Button
@@ -107,7 +106,11 @@ export const getSubQuestTableConfigFunc = ({
     )
   }
 
-  const renderAddDeleteButtonsForTriggers = (value, tableMeta, updateValue) => {
+  const renderAddDeleteButtonsForTriggers = ({
+    value,
+    tableMeta,
+    updateValue,
+  }) => {
     return (
       <>
         <Button
@@ -117,9 +120,7 @@ export const getSubQuestTableConfigFunc = ({
           icon={IconNames.ADD}
         />
         <Button
-          onClick={() =>
-            onDeleteTriggerRow({ rowIndex: tableMeta.rowIndex, updateValue })
-          }
+          onClick={() => onDeleteTriggerRow({ rowIndex: tableMeta.rowIndex })}
           icon={IconNames.TRASH}
         />
         <Button
@@ -140,9 +141,25 @@ export const getSubQuestTableConfigFunc = ({
     },
     columns: [
       {
+        name: "none",
+        label: "Actions",
+        options: {
+          filter: false,
+          sort: false,
+          empty: true,
+          customBodyRender: (value, tableMeta, updateValue) =>
+            renderAddDeleteButtonsForTriggers({
+              value,
+              tableMeta,
+              updateValue,
+            }),
+        },
+      },
+      {
         name: "name",
         label: "Trigger Type",
         options: {
+          sort: false,
           filter: true,
           customBodyRender: renderName,
         },
@@ -151,18 +168,9 @@ export const getSubQuestTableConfigFunc = ({
         name: "conditions",
         label: "Trigger Conditions",
         options: {
+          sort: false,
           filter: true,
           customBodyRender: renderConditions,
-        },
-      },
-      {
-        name: "Delete",
-        label: "Actions",
-        options: {
-          filter: false,
-          sort: false,
-          empty: true,
-          customBodyRender: renderAddDeleteButtonsForTriggers,
         },
       },
     ],
