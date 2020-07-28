@@ -62,8 +62,6 @@ export const getSubQuestTableConfigFunc = ({
     const triggerTypes = Object.values(Constants.triggers.triggerTypes)
     const onChange = (newValue) => {
       const { rowIndex, columnIndex } = tableMeta
-      console.log("onChange") // zzz
-      console.log("newValue", newValue) // zzz
       updateValue(newValue)
       tableMeta.tableData[rowIndex][columnIndex] = newValue
       tableChangeCallback({ tableMeta, newValue, propertyName: "name" })
