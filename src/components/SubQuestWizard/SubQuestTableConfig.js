@@ -11,6 +11,7 @@ import css from "./SubQuestTableConfig.module.scss"
 export const getSubQuestTableConfigFunc = ({
   tableChangeCallback,
   onDeleteTriggerRow,
+  onAddTriggerRow,
 }) => {
   const renderConditions = (value, tableMeta, updateValue) => {
     const conditions = value
@@ -85,12 +86,23 @@ export const getSubQuestTableConfigFunc = ({
     return
   }
 
+  const addTriggerType = ({ value, tableMeta, updateValue }) => {
+    const { rowIndex } = tableMeta
+    onAddTriggerRow({ rowIndex })
+  }
+
   const renderDelete = (value, tableMeta, updateValue) => {
     return (
-      <Button
-        onClick={() => deleteTriggerType({ value, tableMeta, updateValue })}
-        icon={IconNames.TRASH}
-      />
+      <>
+        <Button
+          onClick={() => deleteTriggerType({ value, tableMeta, updateValue })}
+          icon={IconNames.TRASH}
+        />
+        <Button
+          onClick={() => addTriggerType({ value, tableMeta, updateValue })}
+          icon={IconNames.ADD}
+        />
+      </>
     )
   }
 

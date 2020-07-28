@@ -1,18 +1,25 @@
-import React, { useEffect } from "react"
-import cx from "classnames"
-import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
-import { toJS } from "mobx"
 import _get from "lodash.get"
+import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
 import { createMuiTheme } from "@material-ui/core/styles"
+import { toJS } from "mobx"
+import cx from "classnames"
+import React, { useEffect, useState } from "react"
 
 import { getSubQuestTableConfigFunc } from "./SubQuestTableConfig"
 import DataTable3 from "../DataTable3/DataTable3"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 
+import Utils from "../../Utils/Utils"
+import Constants from "../../Utils/Constants/Constants"
+
 import css from "./SubQuestWizard.module.scss"
 
+// const useForceUpdate = () => useState()[1]
+
 export default function SubQuestWizard({ props }) {
-  const [questConfig, setQuestConfig] = React.useState([])
+  const [questConfig, setQuestConfig] = useState([])
+  // const forceUpdate = useForceUpdate()
+
   const { onSave, scenes } = props
 
   const renderScenes = ({ scenes }) => {
@@ -61,14 +68,26 @@ export default function SubQuestWizard({ props }) {
       triggers[rowIndex][propertyName] = newValue
     }
 
-    const onDeleteTriggerRow = ({ newValue, tableMeta, propertyName }) => {
-      const { rowIndex } = tableMeta
-      triggers[rowIndex][propertyName] = newValue
+    const onDeleteTriggerRow = ({ rowIndex }) => {
+      Utils.deleteArrayElement({ index: rowIndex, array: triggers })
+    }
+
+    const onAddTriggerRow = ({ rowIndex }) => {
+      const newElement = Constants.newTrigger()
+      Utils.addArrayElement({
+        newElement,
+        before: true,
+        index: rowIndex,
+        array: triggers,
+      })
+      setQuestConfig(questConfig)
+      onSave({ questConfig })
     }
 
     const { options, columns } = getSubQuestTableConfigFunc({
       tableChangeCallback,
       onDeleteTriggerRow,
+      onAddTriggerRow,
     })
 
     if (!triggers || triggers.length === 0) {
@@ -84,9 +103,7 @@ export default function SubQuestWizard({ props }) {
             },
           },
           MuiTableCell: {
-            root: {
-              // display: "none",
-            },
+            root: {},
           },
         },
       })
@@ -131,7 +148,7 @@ export default function SubQuestWizard({ props }) {
         </div>
       )
     })
-
+  console.log("render-------------------------") // zzz
   return (
     <div className={cx(css.main)}>
       <div className={cx(css.content)}>{renderedItems}</div>

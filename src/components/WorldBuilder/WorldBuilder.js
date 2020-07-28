@@ -33,7 +33,6 @@ import WorldPicker from "../WorldPicker/WorldPicker"
 import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
 
 import css from "./WorldBuilder.module.scss"
-import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
@@ -54,6 +53,11 @@ class WorldBuilder extends Component {
     const gameConfigData = Utils.getGameConfig()
     const defaultWorldId = localStateStore.getDefaultWorldId()
     this.onChangeWorld({ mapId: defaultWorldId })
+  }
+
+  forceUpdate2 = () => {
+    console.log("-----------------------------forceUpdate--------------") // zzz
+    this.setState({ test: Math.random() })
   }
 
   onChangeWorld = ({ mapId, newWorld }) => {
@@ -576,6 +580,7 @@ class WorldBuilder extends Component {
     console.log("questConfig", toJS(questConfig)) // zzz
     const world = localStateStore.getWorldBuilderWorld() || {}
     Utils.updateMap({ newProps: { questConfig }, mapToUpdate: world })
+    this.forceUpdate2()
   }
 
   onCloseJsonEditor = () => {

@@ -5,6 +5,21 @@ import _get from "lodash.get"
 import Constants from "./Constants/Constants.js"
 
 export default class Utils {
+  static addArrayElement = ({ newElement, before = true, index, array }) => {
+    console.log("index", index) // zzz
+    console.log("array.length", array.length) // zzz
+    array.splice(index, 0, newElement)
+    // array.splice(index + before ? 0 : 1, 0, newElement)
+  }
+
+  static deleteArrayElement = ({ array, index }) => {
+    array.splice(index, 1)
+  }
+
+  static getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max))
+  }
+
   static getActiveQuestConfig = () => {
     const activeWorld = localStateStore.getActiveWorld()
     const { questConfig } = activeWorld.data

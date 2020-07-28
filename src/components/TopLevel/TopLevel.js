@@ -80,7 +80,6 @@ class TopLevel extends React.Component {
   forceUpdate = () => {
     console.log("-----------------------------forceUpdate--------------") // zzz
     this.setState({ test: Math.random() })
-    // this.setState({ test: Math.random(), keyForBookPicker: Math.random() })
   }
 
   getTerminalScene = ({ start = true }) => {
