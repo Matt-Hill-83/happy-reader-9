@@ -6,13 +6,12 @@ import _get from "lodash.get"
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
 
 import { getSubQuestTableConfigFunc } from "./SubQuestTableConfig"
-// import { subQuestTableConfig } from "./SubQuestTableConfig"
 import DataTable3 from "../DataTable3/DataTable3"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 
-import css from "./SubQuestConfigTool.module.scss"
+import css from "./SubQuestWizard.module.scss"
 
-export default function SubQuestConfigTool({ props }) {
+export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = React.useState([])
   const { onSave, scenes } = props
 

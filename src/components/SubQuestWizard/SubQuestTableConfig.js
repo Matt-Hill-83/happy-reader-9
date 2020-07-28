@@ -81,7 +81,7 @@ export const getSubQuestTableConfigFunc = ({
 
   const deleteTriggerType = ({ value, tableMeta, updateValue }) => {
     const { rowIndex } = tableMeta
-    onDeleteTriggerRow({})
+    onDeleteTriggerRow({ rowIndex })
     return
   }
 

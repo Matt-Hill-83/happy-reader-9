@@ -30,7 +30,7 @@ import JsonEditor2 from "../JsonEditor2/JsonEditor2"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import Utils from "../../Utils/Utils"
 import WorldPicker from "../WorldPicker/WorldPicker"
-import SubQuestConfigTool from "../SubQuestConfigTool/SubQuestConfigTool"
+import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
 
 import css from "./WorldBuilder.module.scss"
 import AutoComplete2 from "../AutoComplete2/AutoComplete2"
@@ -44,7 +44,7 @@ class WorldBuilder extends Component {
     showFrameBuilder: false,
     showQuestConfig: false,
     showSceneConfig: false,
-    showSubQuestConfigTool: true,
+    showSubQuestWizard: true,
   }
 
   // Changing this to DidMount breaks things
@@ -621,43 +621,35 @@ class WorldBuilder extends Component {
   }
 
   renderQuestConfigTool = ({ questConfig, newGrid5 }) => {
-    const { showSubQuestConfigTool } = this.state
-    if (!showSubQuestConfigTool) {
+    const { showSubQuestWizard } = this.state
+    if (!showSubQuestWizard) {
       return null
     }
 
     const questConfigToolProps = {
       questConfig: questConfig,
-      scenes: newGrid5, // onChangeJSON: this.onChangeJSON,
+      scenes: newGrid5,
       onSave: this.onSaveQuestConfig,
-      // onClose: this.onCloseJsonEditor,
     }
 
     return (
       <div className={css.subQuestConfigTool}>
-        <SubQuestConfigTool props={questConfigToolProps} />
+        <SubQuestWizard props={questConfigToolProps} />
       </div>
     )
   }
 
   renderMainButtonGroup = () => {
-    const {
-      showQuestConfig,
-      showSceneConfig,
-      showSubQuestConfigTool,
-    } = this.state
+    const { showQuestConfig, showSceneConfig, showSubQuestWizard } = this.state
 
     return (
-      <ButtonGroup
-        // vertical={true}
-        className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
-      >
+      <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
         <Button
           icon="document"
-          text="subquest config"
+          text="SubQuest Wizard"
           onClick={() =>
             this.setState({
-              showSubQuestConfigTool: !showSubQuestConfigTool,
+              showSubQuestWizard: !showSubQuestWizard,
             })
           }
         />
