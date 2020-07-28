@@ -1,10 +1,10 @@
-import React from "react"
-import Constants from "../../Utils/Constants/Constants"
-import { toJS } from "mobx"
-import TextField from "@material-ui/core/TextField"
-import { IconNames } from "@blueprintjs/icons"
-import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import { Button } from "@blueprintjs/core"
+import { IconNames } from "@blueprintjs/icons"
+import { toJS } from "mobx"
+import Constants from "../../Utils/Constants/Constants"
+import React from "react"
+import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
+import TextField from "@material-ui/core/TextField"
 
 import css from "./SubQuestTableConfig.module.scss"
 
@@ -83,7 +83,7 @@ export const getSubQuestTableConfigFunc = ({
     onDeleteTriggerRow({ rowIndex })
   }
 
-  const renderDelete = (value, tableMeta, updateValue) => {
+  const renderAddDeleteButtons = (value, tableMeta, updateValue) => {
     return (
       <>
         <Button
@@ -117,7 +117,7 @@ export const getSubQuestTableConfigFunc = ({
     columns: [
       {
         name: "name",
-        label: "Name",
+        label: "Trigger Type",
         options: {
           filter: true,
           customBodyRender: renderName,
@@ -125,7 +125,7 @@ export const getSubQuestTableConfigFunc = ({
       },
       {
         name: "conditions",
-        label: "Conditions",
+        label: "Trigger Conditions",
         options: {
           filter: true,
           customBodyRender: renderConditions,
@@ -133,11 +133,12 @@ export const getSubQuestTableConfigFunc = ({
       },
       {
         name: "Delete",
+        label: "Actions",
         options: {
           filter: false,
           sort: false,
           empty: true,
-          customBodyRender: renderDelete,
+          customBodyRender: renderAddDeleteButtons,
         },
       },
     ],

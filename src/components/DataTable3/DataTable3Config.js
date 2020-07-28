@@ -20,8 +20,6 @@ export default {
     },
     setTableProps: () => {
       return {
-        // padding: "none",
-        // material ui v4 only
         size: "small",
       }
     },

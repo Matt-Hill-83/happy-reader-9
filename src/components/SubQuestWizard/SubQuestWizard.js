@@ -14,14 +14,24 @@ import Constants from "../../Utils/Constants/Constants"
 
 import css from "./SubQuestWizard.module.scss"
 
-// const useForceUpdate = () => useState()[1]
-
 export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState([])
   const [dataTableKey, setDataTableKey] = useState([])
-  // const forceUpdate = useForceUpdate()
 
   const { onSave, scenes } = props
+
+  useEffect(() => {
+    // on mount
+
+    // returned function will be called on component unmount
+    return () => {}
+  }, [])
+
+  // on change in props
+  useEffect(() => {
+    // TODO: store correct prop
+    setQuestConfig(props.questConfig || {})
+  }, [props.questConfig])
 
   const renderScenes = ({ scenes }) => {
     const realScenes = props.scenes
@@ -49,19 +59,6 @@ export default function SubQuestWizard({ props }) {
       )
     })
   }
-
-  useEffect(() => {
-    // on mount
-
-    // returned function will be called on component unmount
-    return () => {}
-  }, [])
-
-  // on change in props
-  useEffect(() => {
-    // TODO: store correct prop
-    setQuestConfig(props.questConfig || {})
-  }, [props.questConfig])
 
   const renderTriggers = ({ triggers }) => {
     const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
@@ -103,7 +100,7 @@ export default function SubQuestWizard({ props }) {
         overrides: {
           MUIDataTableHeadCell: {
             fixedHeader: {
-              display: "none",
+              // display: "none",
             },
           },
           MuiTableCell: {
@@ -132,7 +129,6 @@ export default function SubQuestWizard({ props }) {
   const renderedItems =
     questConfig.subQuests &&
     questConfig.subQuests.slice(0, 1).map((subQuest) => {
-      // questConfig.subQuests.map((subQuest) => {
       const { triggers, scenes, missions = [] } = subQuest
 
       return (
@@ -153,7 +149,6 @@ export default function SubQuestWizard({ props }) {
         </div>
       )
     })
-  console.log("render-------------------------") // zzz
   return (
     <div className={cx(css.main)}>
       <div className={cx(css.content)}>{renderedItems}</div>
