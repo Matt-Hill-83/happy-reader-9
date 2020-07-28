@@ -133,7 +133,8 @@ export const getSubQuestTableConfigFunc = ({
         <Button
           onClick={() =>
             onAddTriggerCondition({
-              rowIndex: tableMeta.rowIndex,
+              conditionIndex,
+              conditions,
               before: false,
             })
           }

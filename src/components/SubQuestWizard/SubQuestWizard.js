@@ -60,6 +60,11 @@ export default function SubQuestWizard({ props }) {
     })
   }
 
+  const saveQuestConfig = async () => {
+    await onSave({ questConfig })
+    setDataTableKey(dataTableKey + 1)
+  }
+
   const renderTriggers = ({ triggers }) => {
     const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
       const { rowIndex } = tableMeta
@@ -69,11 +74,6 @@ export default function SubQuestWizard({ props }) {
     const onDeleteTriggerRow = ({ rowIndex }) => {
       Utils.deleteArrayElement({ index: rowIndex, array: triggers })
       saveQuestConfig()
-    }
-
-    const saveQuestConfig = async () => {
-      await onSave({ questConfig })
-      setDataTableKey(dataTableKey + 1)
     }
 
     const onAddTriggerRow = ({ rowIndex, before }) => {
@@ -93,7 +93,7 @@ export default function SubQuestWizard({ props }) {
       onDeleteTriggerRow,
       onAddTriggerRow,
       saveConfig: () => {
-        onSave({ questConfig })
+        saveQuestConfig()
       },
     })
 
