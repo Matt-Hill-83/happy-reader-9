@@ -83,6 +83,7 @@ export default function SubQuestWizard({ props }) {
       if (!scene.sceneTriggers) {
         scene.sceneTriggers = []
       }
+      const triggers = scene.sceneTriggers
 
       return (
         <div className={cx(css.sceneName, css.listItem)}>
@@ -94,7 +95,7 @@ export default function SubQuestWizard({ props }) {
             getOptionLabel={(option) => option.location.name}
             onChange={onChangeScene}
           />
-          {renderTriggers({ triggers: scene.sceneTriggers })}
+          {renderTriggers({ triggers })}
         </div>
       )
     })
@@ -105,17 +106,10 @@ export default function SubQuestWizard({ props }) {
     setDataTableKey(dataTableKey + 1)
   }
 
-  const renderTriggers = ({ triggers = [] }) => {
-    const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
-      const { rowIndex } = tableMeta
-      triggers[rowIndex][propertyName] = newValue
-    }
-
-    const onDeleteTriggerRow = ({ rowIndex }) => {
-      Utils.deleteArrayElement({ index: rowIndex, array: triggers })
-      saveQuestConfig()
-    }
-
+  // renderTriggers
+  // renderTriggers
+  // renderTriggers
+  const renderTriggers = ({ triggers }) => {
     const onAddTriggerRow = ({ rowIndex, before }) => {
       const newElement = Constants.newTrigger()
       Utils.addArrayElement({
@@ -128,6 +122,30 @@ export default function SubQuestWizard({ props }) {
       saveQuestConfig()
     }
 
+    if (triggers.length === 0) {
+      return (
+        <Button
+          className={css.addTriggerButton}
+          icon={IconNames.ADD}
+          onClick={() => {
+            onAddTriggerRow({ rowIndex: 0, before: false })
+          }}
+        >
+          Add Trigger
+        </Button>
+      )
+    }
+
+    const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
+      const { rowIndex } = tableMeta
+      triggers[rowIndex][propertyName] = newValue
+    }
+
+    const onDeleteTriggerRow = ({ rowIndex }) => {
+      Utils.deleteArrayElement({ index: rowIndex, array: triggers })
+      saveQuestConfig()
+    }
+
     const { options, columns } = getSubQuestTableConfigFunc({
       tableChangeCallback,
       onDeleteTriggerRow,
@@ -136,10 +154,6 @@ export default function SubQuestWizard({ props }) {
         saveQuestConfig()
       },
     })
-
-    // if (!triggers || triggers.length === 0) {
-    //   return null
-    // }
 
     const getMuiTheme = () =>
       createMuiTheme({
@@ -156,24 +170,16 @@ export default function SubQuestWizard({ props }) {
       })
 
     return (
-      <>
-        <Button
-          icon={IconNames.ADD}
-          onClick={() => {
-            onAddTriggerRow({ rowIndex: 0, before: false })
-          }}
-        />
-        <DataTable3
-          key={dataTableKey}
-          props={{
-            className: css.triggersTable,
-            getMuiTheme,
-            data: triggers,
-            columns,
-            options,
-          }}
-        />
-      </>
+      <DataTable3
+        key={dataTableKey}
+        props={{
+          className: css.triggersTable,
+          getMuiTheme,
+          data: triggers,
+          columns,
+          options,
+        }}
+      />
     )
   }
   if (!questConfig) {
@@ -221,7 +227,11 @@ export default function SubQuestWizard({ props }) {
       ]
       const accordianProps = { items }
 
-      return <MyAccordian props={accordianProps} />
+      return (
+        <div className={css.accordianContainer}>
+          <MyAccordian props={accordianProps} />
+        </div>
+      )
     })
 
   return (

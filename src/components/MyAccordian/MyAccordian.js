@@ -1,11 +1,14 @@
-import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import Accordion from "@material-ui/core/Accordion"
-import AccordionSummary from "@material-ui/core/AccordionSummary"
-import AccordionDetails from "@material-ui/core/AccordionDetails"
-import Typography from "@material-ui/core/Typography"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { toJS } from "mobx"
+import Accordion from "@material-ui/core/Accordion"
+import AccordionDetails from "@material-ui/core/AccordionDetails"
+import AccordionSummary from "@material-ui/core/AccordionSummary"
+import cx from "classnames"
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import React from "react"
+import Typography from "@material-ui/core/Typography"
+
+import css from "./MyAccordian.module.scss"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function MyAccordian({ props }) {
-  const { items } = props
+  const { items, className } = props
   const classes = useStyles()
 
   if (!items || items.length === 0) {
@@ -29,16 +32,18 @@ export default function MyAccordian({ props }) {
     const { title, content, expanded } = item
 
     return (
-      <Accordion expanded={expanded}>
+      <Accordion expanded={expanded} className={cx(css.main, className)}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}>{title}</Typography>
+          <Typography className={cx(classes.heading, css.header)}>
+            {title}
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>{content}</Typography>
+          <Typography className={css.content}>{content}</Typography>
         </AccordionDetails>
       </Accordion>
     )
