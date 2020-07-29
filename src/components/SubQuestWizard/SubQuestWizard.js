@@ -1,3 +1,4 @@
+import { IconNames } from "@blueprintjs/icons"
 import _get from "lodash.get"
 import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
 import { createMuiTheme } from "@material-ui/core/styles"
@@ -76,6 +77,13 @@ export default function SubQuestWizard({ props }) {
         scene.id = id
       }
       const defaultValue = realScenes.find((item) => item.id === scene.id)
+
+      // create a ref to an empty array so that new triggers added will be in that referenced
+      // array
+      if (!scene.sceneTriggers) {
+        scene.sceneTriggers = []
+      }
+
       return (
         <div className={cx(css.sceneName, css.listItem)}>
           {/* <span className={cx(css.listItemName)}>{scene.name}</span> */}
@@ -97,7 +105,7 @@ export default function SubQuestWizard({ props }) {
     setDataTableKey(dataTableKey + 1)
   }
 
-  const renderTriggers = ({ triggers }) => {
+  const renderTriggers = ({ triggers = [] }) => {
     const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
       const { rowIndex } = tableMeta
       triggers[rowIndex][propertyName] = newValue
@@ -129,9 +137,9 @@ export default function SubQuestWizard({ props }) {
       },
     })
 
-    if (!triggers || triggers.length === 0) {
-      return null
-    }
+    // if (!triggers || triggers.length === 0) {
+    //   return null
+    // }
 
     const getMuiTheme = () =>
       createMuiTheme({
@@ -148,16 +156,24 @@ export default function SubQuestWizard({ props }) {
       })
 
     return (
-      <DataTable3
-        key={dataTableKey}
-        props={{
-          className: css.triggersTable,
-          getMuiTheme,
-          data: triggers,
-          columns,
-          options,
-        }}
-      />
+      <>
+        <Button
+          icon={IconNames.ADD}
+          onClick={() => {
+            onAddTriggerRow({ rowIndex: 0, before: false })
+          }}
+        />
+        <DataTable3
+          key={dataTableKey}
+          props={{
+            className: css.triggersTable,
+            getMuiTheme,
+            data: triggers,
+            columns,
+            options,
+          }}
+        />
+      </>
     )
   }
   if (!questConfig) {
@@ -167,7 +183,12 @@ export default function SubQuestWizard({ props }) {
   const renderedItems =
     questConfig.subQuests &&
     questConfig.subQuests.map((subQuest) => {
-      const { triggers, scenes, missions = [] } = subQuest
+      // create a ref to an empty array so that new triggers added will be in that referenced
+      // array
+      if (!subQuest.triggers) {
+        subQuest.triggers = []
+      }
+      const { triggers, scenes = [], missions = [] } = subQuest
 
       const items = [
         {

@@ -8,6 +8,7 @@ export default class Utils {
   static addArrayElement = ({ newElement, before, index, array }) => {
     const adder = before === true ? 0 : 1
     array.splice(index + adder, 0, newElement)
+    console.log("array", toJS(array)) // zzz
   }
 
   static deleteArrayElement = ({ array, index }) => {

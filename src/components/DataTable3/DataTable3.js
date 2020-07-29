@@ -33,7 +33,6 @@ export default function DataTable3({ props }) {
 
   const theme = getMuiTheme ? getMuiTheme() : defaultGetMuiTheme()
 
-  console.log("data--------------", toJS(data)) // zzz
   return (
     <MuiThemeProvider theme={theme}>
       <MUIDataTable
