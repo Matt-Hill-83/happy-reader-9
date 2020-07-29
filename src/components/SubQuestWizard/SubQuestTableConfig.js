@@ -1,15 +1,61 @@
-import { Button } from "@blueprintjs/core"
+import { Button, ButtonGroup, Popover, Classes } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import { toJS } from "mobx"
-import Constants from "../../Utils/Constants/Constants"
-import React from "react"
-import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
+import cx from "classnames"
+import React, { Component, useState } from "react"
 import TextField from "@material-ui/core/TextField"
 
-import css from "./SubQuestTableConfig.module.scss"
 import Utils from "../../Utils/Utils"
+import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
+import Constants from "../../Utils/Constants/Constants"
+
+import css from "./SubQuestTableConfig.module.scss"
 
 const newCondition = { completedScene: "1234567" }
+
+function AddDeleteButtonsForTriggers({ props }) {
+  const { rowIndex, onDeleteTriggerRow, onAddTriggerRow } = props
+  // const [showSubQuestWizard, setShowSubQuestWizard] = React.useState(false)
+
+  return (
+    <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
+      <Popover
+        interactionKind={"HOVER"}
+        content={
+          <ButtonGroup
+            vertical={true}
+            className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
+          >
+            <Button
+              onClick={() =>
+                onAddTriggerRow({
+                  rowIndex,
+                  before: true,
+                })
+              }
+              icon={IconNames.ADD}
+            />
+            <Button
+              onClick={() => onDeleteTriggerRow({ rowIndex })}
+              icon={IconNames.TRASH}
+            />
+            <Button
+              onClick={() =>
+                onAddTriggerRow({
+                  rowIndex,
+                  before: false,
+                })
+              }
+              icon={IconNames.ADD}
+            />
+          </ButtonGroup>
+        }
+      >
+        <Button icon={IconNames.SETTINGS} />
+      </Popover>
+    </ButtonGroup>
+  )
+}
 
 export const getSubQuestTableConfigFunc = ({
   tableChangeCallback,
@@ -87,7 +133,7 @@ export const getSubQuestTableConfigFunc = ({
           getOptionLabel={(option) => option}
           onChange={onChange}
         />
-        <span className={css.spacerText1}>scene when</span>
+        {/* <span className={css.spacerText1}>scene when</span> */}
       </div>
     )
   }
@@ -143,29 +189,6 @@ export const getSubQuestTableConfigFunc = ({
     )
   }
 
-  const renderAddDeleteButtonsForTriggers = ({ tableMeta }) => {
-    return (
-      <>
-        <Button
-          onClick={() =>
-            onAddTriggerRow({ rowIndex: tableMeta.rowIndex, before: true })
-          }
-          icon={IconNames.ADD}
-        />
-        <Button
-          onClick={() => onDeleteTriggerRow({ rowIndex: tableMeta.rowIndex })}
-          icon={IconNames.TRASH}
-        />
-        <Button
-          onClick={() =>
-            onAddTriggerRow({ rowIndex: tableMeta.rowIndex, before: false })
-          }
-          icon={IconNames.ADD}
-        />
-      </>
-    )
-  }
-
   const subQuestTableConfig2 = {
     options: {
       selectableRows: "none",
@@ -175,15 +198,20 @@ export const getSubQuestTableConfigFunc = ({
     columns: [
       {
         name: "none",
-        label: "Actions",
+        label: " ",
         options: {
           filter: false,
           sort: false,
           empty: true,
-          customBodyRender: (value, tableMeta, updateValue) =>
-            renderAddDeleteButtonsForTriggers({
-              tableMeta,
-            }),
+          customBodyRender: (value, tableMeta, updateValue) => (
+            <AddDeleteButtonsForTriggers
+              props={{
+                rowIndex: tableMeta.rowIndex,
+                onDeleteTriggerRow,
+                onAddTriggerRow,
+              }}
+            />
+          ),
         },
       },
       {

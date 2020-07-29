@@ -26,10 +26,10 @@ export default function MyAccordian({ props }) {
   }
 
   const renderedAccordians = items.map((item) => {
-    const { title, content } = item
+    const { title, content, expanded } = item
 
     return (
-      <Accordion>
+      <Accordion expanded={expanded}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -44,5 +44,6 @@ export default function MyAccordian({ props }) {
     )
   })
 
+  // return renderedAccordians
   return <div className={classes.root}>{renderedAccordians}</div>
 }

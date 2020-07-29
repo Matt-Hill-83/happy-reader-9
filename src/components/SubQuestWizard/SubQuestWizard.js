@@ -172,6 +172,7 @@ export default function SubQuestWizard({ props }) {
       const items = [
         {
           title: <span className={cx(css.listGroupTitle)}>Missions</span>,
+          expanded: false,
           content: (
             <div className={cx(css.triggers, css.listGroup)}>
               {renderMissions({ missions })}
@@ -180,6 +181,7 @@ export default function SubQuestWizard({ props }) {
         },
         {
           title: <span className={cx(css.listGroupTitle)}>Triggers</span>,
+          expanded: true,
           content: (
             <div className={cx(css.triggers, css.listGroup)}>
               {renderTriggers({ triggers })}
@@ -188,6 +190,7 @@ export default function SubQuestWizard({ props }) {
         },
         {
           title: <span className={cx(css.listGroupTitle)}>Scenes</span>,
+          expanded: true,
           content: (
             <div className={cx(css.scenes, css.listGroup)}>
               {renderScenes({ scenes })}
@@ -199,6 +202,7 @@ export default function SubQuestWizard({ props }) {
 
       return <MyAccordian props={accordianProps} />
     })
+
   return (
     <div className={cx(css.main)}>
       <div className={cx(css.content)}>{renderedItems}</div>
