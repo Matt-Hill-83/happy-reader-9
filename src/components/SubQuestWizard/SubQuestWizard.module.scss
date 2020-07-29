@@ -2,7 +2,6 @@
   width: 100%;
   height: 100%;
   position: relative;
-  // border: 1px solid red !important;
   margin-right: 6px;
 
   :global {
@@ -33,18 +32,15 @@
   }
 
   .accordianContainer {
-    // border: 4px solid green !important;
     margin: 10px;
   }
 
   .missionsList {
-    // border: 1px solid red !important;
     flex-direction: row !important;
   }
 
   .sceneDropdown {
     min-width: 175px;
-    // border: 1px solid red !important;
     height: 20px;
     margin: 2px 0px;
     max-width: 193px;
@@ -55,10 +51,6 @@
     flex: 1;
     overflow: auto;
     height: 88%;
-
-    .triggersTableBox {
-      // border: 4px solid green !important;
-    }
 
     .triggersTable {
       max-width: 602px;
@@ -83,7 +75,6 @@
     }
 
     .addTriggerButton {
-      // border: 1px solid green !important;
       position: absolute;
       height: 24px;
       right: 0px;
