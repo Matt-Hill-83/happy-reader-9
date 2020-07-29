@@ -65,6 +65,7 @@
         }
       }
     }
+
     .subQuest {
       display: flex;
       flex: 1 1;
@@ -95,10 +96,9 @@
         }
 
         .listItem {
-          font-size: 1.5vh;
+          font-size: 1vh;
           display: flex;
           border-bottom: 1px solid purple !important;
-          padding-left: 2vh;
           flex-direction: column;
 
           :global {
