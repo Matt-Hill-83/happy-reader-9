@@ -6,9 +6,9 @@ import cx from "classnames"
 import { observer } from "mobx-react"
 import { toJS } from "mobx"
 import _get from "lodash.get"
-import css from "./GetSceneConfig.module.scss"
+import css from "./ExportJson.module.scss"
 
-class GetSceneConfig extends Component {
+class ExportJson extends Component {
   state = { text: `{"dumm":5}` }
 
   onChangeDialog = ({ event, lineIndex }) => {
@@ -66,8 +66,8 @@ class GetSceneConfig extends Component {
 
       const newBornScene = {
         title: scene.location.name,
+        id: scene.id,
         sceneConfig: {
-          id: scene.location.id,
           worldId: world.id,
           coordinates: scene.coordinates,
           ...scene.sceneConfig,
@@ -101,4 +101,4 @@ class GetSceneConfig extends Component {
   }
 }
 
-export default observer(GetSceneConfig)
+export default observer(ExportJson)

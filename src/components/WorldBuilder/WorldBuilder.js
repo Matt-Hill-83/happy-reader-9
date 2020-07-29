@@ -23,7 +23,7 @@ import { worldNameStore } from "../../Stores/FrameSetStore"
 import CrudMachine from "../CrudMachine/CrudMachine"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
 import FrameSetUploader from "../FrameSetUploader/FrameSetUploader"
-import GetSceneConfig from "../GetSceneConfig/GetSceneConfig"
+import ExportJson from "../ExportJson/ExportJson"
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import images from "../../images/images"
 import JsonEditor2 from "../JsonEditor2/JsonEditor2"
@@ -537,13 +537,13 @@ class WorldBuilder extends Component {
 
       const newBornScene = Utils.getBlankScene({
         props: {
-          // id: sceneConfig,
+          id: scene.id,
           coordinates,
           location: { name: scene.title },
         },
       })
       console.log("newBornScene", toJS(newBornScene)) // zzz
-      console.log("newBornScene", toJS(newBornScene.asdf.asdf)) // zzz
+      // console.log("newBornScene", toJS(newBornScene.asdf.asdf)) // zzz
       if (scene.sceneConfig) {
         Object.assign(newBornScene, scene.sceneConfig)
       }
@@ -595,7 +595,7 @@ class WorldBuilder extends Component {
     return (
       <div className={css.buttonHolder}>
         world config for download
-        <GetSceneConfig
+        <ExportJson
           className={css.frameSetUploaderBox1}
           onSave={this.onChangeDialog}
           world={world.data}
