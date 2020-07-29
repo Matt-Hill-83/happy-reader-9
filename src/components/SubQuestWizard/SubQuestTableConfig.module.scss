@@ -25,3 +25,17 @@
   min-width: 150px;
   padding: 0px 4px;
 }
+
+.nameElements {
+  display: inline-flex;
+  align-items: center;
+  // border: 1px solid red !important;
+
+  .spacerText1 {
+    display: flex;
+    // border: 1px solid green !important;
+    width: min-content;
+    margin: 0 0.5rem;
+    color: green;
+  }
+}

@@ -79,13 +79,16 @@ export const getSubQuestTableConfigFunc = ({
     }
 
     return (
-      <SimpleSelectObj
-        className={css.triggerTypesDropdown}
-        items={triggerTypes}
-        value={value}
-        getOptionLabel={(option) => option}
-        onChange={onChange}
-      />
+      <div className={css.nameElements}>
+        <SimpleSelectObj
+          className={css.triggerTypesDropdown}
+          items={triggerTypes}
+          value={value}
+          getOptionLabel={(option) => option}
+          onChange={onChange}
+        />
+        <span className={css.spacerText1}>scene when</span>
+      </div>
     )
   }
 

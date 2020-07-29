@@ -32,6 +32,10 @@
 
   .sceneDropdown {
     min-width: 175px;
+    // border: 1px solid red !important;
+    height: 20px;
+    margin: 2px 0px;
+    max-width: 193px;
   }
 
   .content {
@@ -95,6 +99,7 @@
           display: flex;
           border-bottom: 1px solid purple !important;
           padding-left: 2vh;
+          flex-direction: column;
 
           :global {
             .MuiFormControl-root {

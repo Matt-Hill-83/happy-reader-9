@@ -135,16 +135,17 @@ export default function SubQuestWizard({ props }) {
 
   const renderedItems =
     questConfig.subQuests &&
-    questConfig.subQuests.slice(0, 1).map((subQuest) => {
+    questConfig.subQuests.map((subQuest) => {
+      // questConfig.subQuests.slice(0, 1).map((subQuest) => {
       const { triggers, scenes, missions = [] } = subQuest
 
       return (
         <div className={cx(css.subQuest, css.listGroup)}>
           {subQuest.name}
-          {/* <div className={cx(css.triggers, css.listGroup)}>
+          <div className={cx(css.triggers, css.listGroup)}>
             <span className={cx(css.listGroupTitle)}>Missions</span>
             {renderScenes({ scenes: missions })}
-          </div> */}
+          </div>
           <div className={cx(css.triggers, css.listGroup)}>
             <span className={cx(css.listGroupTitle)}>Triggers</span>
             {renderTriggers({ triggers })}
