@@ -9,6 +9,7 @@ import css from "./MissionConsole.module.scss"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import MiniTable2 from "../MiniTable2/MiniTable2"
+import Utils from "../../Utils/Utils"
 
 class MissionConsole extends Component {
   state = {}
@@ -58,9 +59,13 @@ class MissionConsole extends Component {
     if (!questStatus.questConfig) {
       return null
     }
-    const { missions } = questStatus.questConfig
-    const { activeMission } = questStatus
 
+    // const test = Utils.getActiveSubQuest()
+    // console.log("test--------------------------+++++++++++++", toJS(test)) // zzz
+    const { missions, subQuests } = questStatus.questConfig
+    const { activeMission, activeSubQuestIndex } = questStatus
+    console.log("=============================subQuests", toJS(subQuests)) // zzz
+    console.log("activeSubQuestIndex", toJS(activeSubQuestIndex)) // zzz
     const columnNames = [
       "Mission",
       "Bring the...",

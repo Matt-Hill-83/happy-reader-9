@@ -16,7 +16,7 @@ class LocalStateStore {
   visitedScenes = []
 
   _defaultQuestStatus = {
-    activeSubQuest: 0,
+    activeSubQuestIndex: 0,
     activeMission: 0,
     pockets: { gold: { amount: 0 } },
     desiredItems: [],

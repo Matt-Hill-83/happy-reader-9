@@ -115,15 +115,8 @@ class TopLevel extends React.Component {
     localStateStore.unlockSubQuestForActiveScene()
 
     const questStatus = localStateStore.getQuestStatus()
-    console.log("questStatus------TL1", toJS(questStatus)) // zzz
-    console.log("questStatus.activeSubQuest", toJS(questStatus.activeSubQuest)) // zzz
-    // Utils.incrementActiveSubQuest()
-    const questStatus2 = localStateStore.getQuestStatus()
-    console.log("questStatus2", toJS(questStatus2)) // zzz
-    console.log(
-      "questStatus2.activeSubQuest",
-      toJS(questStatus2.activeSubQuest)
-    ) // zzz
+    // const questStatus2 = localStateStore.getQuestStatus()
+
     const { questConfig, hideMissionConsole } = questStatus
 
     if (!hideMissionConsole) {
@@ -213,7 +206,7 @@ class TopLevel extends React.Component {
       return
     }
     const { questConfig } = map.data
-
+    console.log("questConfig------------------------------>", toJS(questConfig)) // zzz
     if (questConfig) {
       const { missions = [] } = questConfig
       const desiredItems = missions.map((mission) => mission.item)
