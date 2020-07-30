@@ -74,6 +74,36 @@ export default function SubQuestWizard({ props }) {
   const renderScenes = ({ scenes }) => {
     const realScenes = props.scenes
 
+    const onAddScene = ({ rowIndex, before }) => {
+      const newElement = Constants.newScene
+      Utils.addArrayElement({
+        newElement,
+        before,
+        index: rowIndex,
+        array: scenes || [],
+      })
+
+      saveQuestConfig()
+    }
+
+    const onDeleteScene = ({ rowIndex }) => {
+      Utils.deleteArrayElement({ index: rowIndex, array: scenes })
+      saveQuestConfig()
+    }
+
+    if (!scenes || scenes.length === 0) {
+      return (
+        <AddDeleteButtonGroup
+          props={{
+            title: "Add Scene",
+            rowIndex: 0,
+            onDelete: () => {},
+            onAdd: onAddScene,
+          }}
+        />
+      )
+    }
+
     return scenes.map((scene, sceneIndex) => {
       console.log("scene", toJS(scene)) // zzz
 
@@ -90,23 +120,6 @@ export default function SubQuestWizard({ props }) {
         scene.sceneTriggers = []
       }
       const triggers = scene.sceneTriggers
-
-      const onAddScene = ({ rowIndex, before }) => {
-        const newElement = Constants.newScene
-        Utils.addArrayElement({
-          newElement,
-          before,
-          index: rowIndex,
-          array: scenes,
-        })
-
-        saveQuestConfig()
-      }
-
-      const onDeleteScene = ({ rowIndex }) => {
-        Utils.deleteArrayElement({ index: rowIndex, array: scenes })
-        saveQuestConfig()
-      }
 
       return (
         <div className={cx(css.sceneName, css.listItem)}>
@@ -232,7 +245,11 @@ export default function SubQuestWizard({ props }) {
       if (!subQuest.triggers) {
         subQuest.triggers = []
       }
-      const { triggers, scenes = [], missions = [] } = subQuest
+      const { triggers, scenes, missions = [] } = subQuest
+
+      if (!subQuest.scenes) {
+        subQuest.scenes = []
+      }
 
       const items = [
         {
