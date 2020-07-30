@@ -15,6 +15,7 @@ import Utils from "../../Utils/Utils"
 import Constants from "../../Utils/Constants/Constants"
 
 import css from "./SubQuestWizard.module.scss"
+import AddDeleteButtonGroup from "./AddDeleteButtonGroup"
 
 export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState([])
@@ -73,7 +74,9 @@ export default function SubQuestWizard({ props }) {
   const renderScenes = ({ scenes }) => {
     const realScenes = props.scenes
 
-    return scenes.map((scene) => {
+    return scenes.map((scene, sceneIndex) => {
+      console.log("scene", toJS(scene)) // zzz
+
       const onChangeScene = (newItem) => {
         const { location, id } = newItem
         scene.name = location.name
@@ -88,9 +91,35 @@ export default function SubQuestWizard({ props }) {
       }
       const triggers = scene.sceneTriggers
 
+      const onAddScene = ({ rowIndex, before }) => {
+        const newElement = Constants.newScene
+        Utils.addArrayElement({
+          newElement,
+          before,
+          index: rowIndex,
+          array: scenes,
+        })
+
+        saveQuestConfig()
+      }
+
+      const onDeleteScene = ({ rowIndex }) => {
+        Utils.deleteArrayElement({ index: rowIndex, array: scenes })
+        saveQuestConfig()
+      }
+
       return (
         <div className={cx(css.sceneName, css.listItem)}>
           {/* <span className={cx(css.listItemName)}>{scene.name}</span> */}
+          <AddDeleteButtonGroup
+            props={{
+              title: "Add Scene",
+              rowIndex: sceneIndex,
+              onDelete: onDeleteScene,
+              onAdd: onAddScene,
+            }}
+          />
+
           <SimpleSelectObj
             className={css.sceneDropdown}
             items={realScenes}
@@ -160,7 +189,7 @@ export default function SubQuestWizard({ props }) {
         overrides: {
           MUIDataTableHeadCell: {
             fixedHeader: {
-              // display: "none",
+              display: "none",
             },
           },
           MuiTableCell: {

@@ -21,6 +21,20 @@ export default class Constants {
       ],
     }
   }
+  static newScene = {
+    name: "blank",
+    id: "xxx",
+    sceneTriggers: [
+      {
+        conditions: [
+          {
+            currentMission: 0,
+          },
+        ],
+        name: "lock",
+      },
+    ],
+  }
 
   static neighborPositionsEnum = {
     left: "left",

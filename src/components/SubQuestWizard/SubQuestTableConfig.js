@@ -22,55 +22,58 @@ export const getSubQuestTableConfigFunc = ({
 }) => {
   const renderConditions = (value, tableMeta, updateValue) => {
     const conditions = value
-    return conditions.map((condition, conditionIndex) => {
-      const conditionNames = Object.keys(condition)
+    return (
+      conditions &&
+      conditions.map((condition, conditionIndex) => {
+        const conditionNames = Object.keys(condition)
 
-      return conditionNames.map((conditionName) => {
-        const items = Object.values(Constants.triggers.baseConditions)
-        const conditionValue = condition[conditionName]
+        return conditionNames.map((conditionName) => {
+          const items = Object.values(Constants.triggers.baseConditions)
+          const conditionValue = condition[conditionName]
 
-        const onChangeCondition = (newValue) => {
-          conditions[conditionIndex] = { [newValue]: conditionValue }
-          updateValue(conditions)
-          saveConfig()
-        }
+          const onChangeCondition = (newValue) => {
+            conditions[conditionIndex] = { [newValue]: conditionValue }
+            updateValue(conditions)
+            saveConfig()
+          }
 
-        const onChangeValue = ({ value = 0 }) => {
-          // TODO; if conditionName is a numerical input
-          conditions[conditionIndex][conditionName] = parseInt(value)
-          updateValue(conditions)
-          saveConfig()
-        }
+          const onChangeValue = ({ value = 0 }) => {
+            // TODO; if conditionName is a numerical input
+            conditions[conditionIndex][conditionName] = parseInt(value)
+            updateValue(conditions)
+            saveConfig()
+          }
 
-        return (
-          <div className={css.conditionsKVPair}>
-            <SimpleSelectObj
-              className={css.triggerConditionsDropdown}
-              items={items}
-              value={conditionName}
-              index={tableMeta.columnIndex}
-              onChange={onChangeCondition}
-              getOptionLabel={(option) => option}
-            />
-            <TextField
-              className={css.inputField}
-              id="outlined-secondary"
-              variant="outlined"
-              margin="dense"
-              color="secondary"
-              defaultValue={conditionValue}
-              onBlur={(event) => onChangeValue({ value: event.target.value })}
-              InputProps={{}}
-            />
-            {renderAddDeleteButtonsForTriggerConditions({
-              tableMeta,
-              conditionIndex,
-              conditions,
-            })}
-          </div>
-        )
+          return (
+            <div className={css.conditionsKVPair}>
+              <SimpleSelectObj
+                className={css.triggerConditionsDropdown}
+                items={items}
+                value={conditionName}
+                index={tableMeta.columnIndex}
+                onChange={onChangeCondition}
+                getOptionLabel={(option) => option}
+              />
+              <TextField
+                className={css.inputField}
+                id="outlined-secondary"
+                variant="outlined"
+                margin="dense"
+                color="secondary"
+                defaultValue={conditionValue}
+                onBlur={(event) => onChangeValue({ value: event.target.value })}
+                InputProps={{}}
+              />
+              {renderAddDeleteButtonsForTriggerConditions({
+                tableMeta,
+                conditionIndex,
+                conditions,
+              })}
+            </div>
+          )
+        })
       })
-    })
+    )
   }
 
   const renderName = (value, tableMeta, updateValue) => {
@@ -170,11 +173,6 @@ export const getSubQuestTableConfigFunc = ({
               }}
             />
           ),
-          // AddDeleteButtonGroup({
-          //   rowIndex: tableMeta.rowIndex,
-          //   onDelete: onDeleteTriggerRow,
-          //   onAdd: onAddTriggerRow,
-          // }),
         },
       },
       {
