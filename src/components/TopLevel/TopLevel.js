@@ -127,7 +127,7 @@ class TopLevel extends React.Component {
 
   updateQuestStatus = () => {
     // temp
-    Utils.calcListOfHiddenScenes()
+    Utils.calcListOfLockedScenes()
     // temp
     toaster.clear()
     const activeScene = localStateStore.getActiveScene()
@@ -199,7 +199,6 @@ class TopLevel extends React.Component {
     }
     const { questConfig } = map.data
     if (questConfig) {
-      // const { missions = [] } = questConfig
       const missions = Utils.getActiveSubQuestMissions()
       const desiredItems = missions.map((mission) => mission.item)
       console.log("desiredItems", toJS(desiredItems)) // zzz

@@ -210,9 +210,11 @@ class MiniLocation extends React.Component {
           </div>
         )
       }
+
       sceneUnlocked =
         typeof unlockSceneMission === "number" &&
         questStatus.activeMissionIndex >= unlockSceneMission
+
       showLock = !sceneUnlocked
       locationImage = Images.all[locationName]
       rockImage = Images.backgrounds["rock"]
@@ -271,7 +273,7 @@ class MiniLocation extends React.Component {
                 />
               </div>
             )}
-            {false && showLock && (
+            {true && showLock && (
               <div className={css.cloudImageContainer}>
                 <img
                   className={css.cloudImage}

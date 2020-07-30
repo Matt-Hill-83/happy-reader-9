@@ -13,6 +13,7 @@ class LocalStateStore {
   showWorldBuilder = false
   unlockedSubQuests = [0]
   hiddenScenes = [0]
+  lockedScenes = []
   visitedScenes = []
 
   _defaultQuestStatus = {
@@ -44,6 +45,11 @@ class LocalStateStore {
   getHiddenScenes = () => this.hiddenScenes
   setHiddenScenes = (hiddenScenes) => {
     this.hiddenScenes = hiddenScenes
+  }
+
+  getLockedScenes = () => this.lockedScenes
+  setLockedScenes = (lockedScenes) => {
+    this.lockedScenes = lockedScenes
   }
 
   getUnlockedSubQuests = () => this.unlockedSubQuests
@@ -400,6 +406,7 @@ decorate(LocalStateStore, {
   showWorldBuilder: observable,
   unlockedSubQuests: observable,
   visitedScenes: observable,
+  lockedScenes: observable,
 })
 
 const localStateStore = new LocalStateStore()

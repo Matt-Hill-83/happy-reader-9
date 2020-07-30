@@ -42,17 +42,66 @@ export default class Utils {
     return (activeSubQuest && activeSubQuest.missions) || null
   }
 
-  static getSceneTriggersFromScene = ({
-    sceneName,
-    subQuestIndex,
-    sceneId,
-  }) => {
-    const activeWorld = localStateStore.getActiveWorld()
-
+  static getSceneTriggersFromScene = ({ sceneId }) => {
     const questConfig = Utils.getActiveQuestConfig()
-    console.log("questConfig", toJS(questConfig)) // zzz
+
+    const allScenes = []
+
+    questConfig.subQuests &&
+      questConfig.subQuests.forEach((subQuest) => {
+        allScenes.push(...subQuest.scenes)
+      })
+
+    const foundScene = allScenes.find((scene) => scene.id === sceneId)
+
+    return (foundScene && foundScene.sceneTriggers) || []
   }
 
+  static lockScene = ({ sceneId }) => {
+    const lockedScenes = localStateStore.getLockedScenes()
+    lockedScenes.push({ sceneId })
+  }
+  //
+  //
+  //
+  //
+  //
+  static calcListOfLockedScenes = () => {
+    const activeWorld = localStateStore.getActiveWorld()
+
+    const { newGrid5, questConfig } = activeWorld.data
+    console.log("questConfig", toJS(questConfig)) // zzz
+    console.log("newGrid5", toJS(newGrid5)) // zzz
+
+    newGrid5.forEach((scene) => {
+      console.log("scene.location.name", toJS(scene.location.name)) // zzz
+      const sceneTriggers = Utils.getSceneTriggersFromScene({
+        sceneId: scene.id,
+      })
+
+      if (sceneTriggers && sceneTriggers.length > 0) {
+        console.log(
+          "------------------------------------->>>>>sceneTriggers",
+          toJS(sceneTriggers)
+        ) // zzz
+      }
+    })
+    const lockedScenes = localStateStore.getLockedScenes()
+    // console.log("---------------lockedScenes", toJS(lockedScenes)) // zzz
+
+    newGrid5.forEach((scene) => {
+      // for each scene, look for the hide trigger in the list
+      // // Check if any of the requirements have been met.
+      // if
+      //
+    })
+  }
+  //
+  //
+  //
+  //
+  //
+  //
   static calcListOfHiddenScenes = () => {
     // const scenesGrid = this.getActiveWorldGrid()
     const activeWorld = localStateStore.getActiveWorld()
