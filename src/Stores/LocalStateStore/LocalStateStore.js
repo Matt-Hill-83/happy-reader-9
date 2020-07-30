@@ -35,9 +35,6 @@ class LocalStateStore {
   }
 
   getDefaultQuestStatus = () => this._defaultQuestStatus
-  // setDefaultQuestStatus = (questStatus) => {
-  //   this.questStatus = questStatus
-  // }
 
   getDefaultWorldId = () => this.defaultWorldId
   setDefaultWorldId = (defaultWorldId) => {
@@ -259,7 +256,6 @@ class LocalStateStore {
   }
 
   _findItem = ({ itemsInScene }) => {
-    console.log("_findItem") // zzz
     const desiredItems = this.getDesiredItems() || []
     const questStatus = this.questStatus
 
@@ -267,10 +263,8 @@ class LocalStateStore {
 
     const foundItems = []
     desiredItems.forEach((desiredItem) => {
-      console.log("desiredItem", toJS(desiredItem)) // zzz
       const foundItem =
         itemsInScene.find((item) => {
-          console.log("item", toJS(item)) // zzz
           return item.name === (desiredItem && desiredItem.name)
         }) || null
       if (foundItem) {
