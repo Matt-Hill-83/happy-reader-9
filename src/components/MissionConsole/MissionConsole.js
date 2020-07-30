@@ -62,10 +62,6 @@ class MissionConsole extends Component {
     }
 
     const newMissions = Utils.getActiveSubQuestMissions()
-    console.log(
-      "newMissions--------------------------+++++++++++++",
-      toJS(newMissions)
-    ) // zzz
 
     if (newMissions && newMissions[0]) {
       missions = newMissions
