@@ -6,21 +6,13 @@ export default class Constants {
       "0": "unhide",
       name: "lock",
       conditions: [
-        // {
-        //   completedMission: Utils.getRandomInt(10),
-        // },
-        // {
-        //   completedScene: "000",
-        // },
-        // {
-        //   pocketContains: "000",
-        // },
         {
           currentMission: 0,
         },
       ],
     }
   }
+
   static newScene = {
     name: "blank",
     id: "xxx",
@@ -32,6 +24,34 @@ export default class Constants {
           },
         ],
         name: "lock",
+      },
+    ],
+  }
+
+  static newSubQuest = {
+    name: "new SubQuest",
+    triggers: [{ name: "unlock", conditions: [{ frameSetIndex: 0 }] }],
+    scenes: [
+      {
+        sceneTriggers: [
+          {
+            "0": "unhide",
+            name: "lock",
+            conditions: [{ currentMission: 0 }],
+          },
+        ],
+        name: "castle",
+        id: "2b7b601b-8ecd-40b0-9dd8-8b7bc0eb0fb0",
+      },
+    ],
+    index: 0,
+    missions: [
+      {
+        name: "Feed the pig",
+        rewards: [{ name: "gold", amount: 5 }],
+        item: { name: "fig" },
+        recipient: { name: "pig" },
+        missionType: "giveItemToPerson",
       },
     ],
   }

@@ -215,9 +215,14 @@ export default function SubQuestWizard({ props }) {
     return null
   }
 
-  const renderedItems =
-    questConfig.subQuests &&
-    questConfig.subQuests.map((subQuest) => {
+  const renderSubQuests = () => {
+    const subQuests = questConfig.subQuests
+    if (!subQuests) {
+      return null
+    }
+
+    return subQuests.map((subQuest) => {
+      console.log("subQuest", toJS(subQuest)) // zzz
       // create a ref to an empty array so that new triggers added will be in that referenced
       // array
       if (!subQuest.triggers) {
@@ -262,10 +267,11 @@ export default function SubQuestWizard({ props }) {
         </div>
       )
     })
+  }
 
   return (
     <div className={cx(css.main)}>
-      <div className={cx(css.content)}>{renderedItems}</div>
+      <div className={cx(css.content)}>{renderSubQuests()}</div>
       <ButtonGroup
         vertical={false}
         className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
