@@ -158,11 +158,11 @@ class MiniLocation extends React.Component {
     //   localStateStore.isVisitedScene(neighbor && neighbor.id)
     // );
 
-    const unlockSceneMission =
-      _get(
-        scene,
-        "sceneConfig.triggers.unlockSceneConditions.currentMission"
-      ) || -1
+    // const unlockSceneMission =
+    //   _get(
+    //     scene,
+    //     "sceneConfig.triggers.unlockSceneConditions.currentMission"
+    //   ) || -1
 
     const unlockedSubQuests = localStateStore.getUnlockedSubQuests()
     const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId)
@@ -211,9 +211,7 @@ class MiniLocation extends React.Component {
         )
       }
 
-      sceneUnlocked =
-        typeof unlockSceneMission === "number" &&
-        questStatus.activeMissionIndex >= unlockSceneMission
+      sceneUnlocked = !Utils.isSceneUnlocked({ sceneId: scene.id })
 
       showLock = !sceneUnlocked
       locationImage = Images.all[locationName]

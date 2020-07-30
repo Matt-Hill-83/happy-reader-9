@@ -57,7 +57,13 @@ export default class Utils {
 
   static lockScene = ({ sceneId }) => {
     const lockedScenes = localStateStore.getLockedScenes()
-    lockedScenes.push({ sceneId })
+    lockedScenes.push(sceneId)
+    localStateStore.setLockedScenes(lockedScenes)
+  }
+
+  static isSceneUnlocked = ({ sceneId }) => {
+    const lockedScenes = localStateStore.getLockedScenes()
+    return lockedScenes.includes(sceneId) ? true : false
   }
   //
   //
@@ -108,16 +114,12 @@ export default class Utils {
         })
       }
       console.log("sceneIsLocked++_+_+_+__++_+_____", toJS(sceneIsLocked)) // zzz
+      if (sceneIsLocked) {
+        Utils.lockScene({ sceneId: scene.id })
+      }
     })
     const lockedScenes = localStateStore.getLockedScenes()
-    // console.log("---------------lockedScenes", toJS(lockedScenes)) // zzz
-
-    newGrid5.forEach((scene) => {
-      // for each scene, look for the hide trigger in the list
-      // // Check if any of the requirements have been met.
-      // if
-      //
-    })
+    console.log("---------------lockedScenes", toJS(lockedScenes)) // zzz
   }
   //
   //
