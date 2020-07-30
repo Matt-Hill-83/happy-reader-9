@@ -79,7 +79,9 @@ export const getSubQuestTableConfigFunc = ({
         }
 
         const onChangeValue = ({ value = 0 }) => {
-          conditions[conditionIndex][conditionName] = value
+          // TODO; if conditionName is a numerical input
+          conditions[conditionIndex][conditionName] = parseInt(value)
+          // conditions[conditionIndex][conditionName] = value
           updateValue(conditions)
           saveConfig()
         }

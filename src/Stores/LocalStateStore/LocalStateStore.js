@@ -146,7 +146,6 @@ class LocalStateStore {
   }
 
   getActiveMission = () => {
-    // const { missions } = this.questStatus.questConfig
     const missions = Utils.getActiveSubQuestMissions()
     return missions[this.questStatus.activeMissionIndex] || null
   }

@@ -108,7 +108,6 @@ class TopLevel extends React.Component {
     localStateStore.unlockSubQuestForActiveScene()
 
     const questStatus = localStateStore.getQuestStatus()
-    // const questStatus2 = localStateStore.getQuestStatus()
 
     const { questConfig, hideMissionConsole } = questStatus
 
