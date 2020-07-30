@@ -28,7 +28,18 @@ export default class Utils {
   static getActiveSubQuest = () => {
     const activeWorld = localStateStore.getActiveWorld()
     const { questConfig } = activeWorld.data
-    return questConfig
+    const { subQuests } = questConfig
+
+    const questStatus = localStateStore.getQuestStatus()
+    const { activeSubQuestIndex } = questStatus
+
+    return subQuests && subQuests[activeSubQuestIndex]
+  }
+
+  static getActiveSubQuestMissions = () => {
+    const activeSubQuest = this.getActiveSubQuest()
+
+    return (activeSubQuest && activeSubQuest.missions) || null
   }
 
   static getSceneTriggersFromScene = ({

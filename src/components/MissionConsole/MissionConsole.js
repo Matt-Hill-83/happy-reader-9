@@ -54,18 +54,27 @@ class MissionConsole extends Component {
 
   render = () => {
     const { showHeader = false } = this.props
+    let missions
 
     const questStatus = localStateStore.getQuestStatus()
     if (!questStatus.questConfig) {
       return null
     }
 
-    // const test = Utils.getActiveSubQuest()
-    // console.log("test--------------------------+++++++++++++", toJS(test)) // zzz
-    const { missions, subQuests } = questStatus.questConfig
-    const { activeMission, activeSubQuestIndex } = questStatus
-    console.log("=============================subQuests", toJS(subQuests)) // zzz
-    console.log("activeSubQuestIndex", toJS(activeSubQuestIndex)) // zzz
+    const newMissions = Utils.getActiveSubQuestMissions()
+    console.log(
+      "newMissions--------------------------+++++++++++++",
+      toJS(newMissions)
+    ) // zzz
+
+    if (newMissions && newMissions[0]) {
+      missions = newMissions
+    } else {
+      // for BW compatibility
+      missions = questStatus.questConfig.missions
+    }
+
+    const { activeMission } = questStatus
     const columnNames = [
       "Mission",
       "Bring the...",
@@ -73,14 +82,21 @@ class MissionConsole extends Component {
       "Gold",
       "Complete",
     ]
+
     if (!missions || missions.length === 0) {
       return null
     }
 
     const tableData = missions.map((mission) => {
-      const { name, item, recipient, rewards, completed } = mission
+      const {
+        name,
+        item = {},
+        recipient = "",
+        rewards = [],
+        completed,
+      } = mission
 
-      const rewardString = `${rewards[0].amount}`
+      const rewardString = `${_get(rewards, "[0]amount")}`
       return [name, item.name, recipient.name, rewardString, completed]
     })
 
