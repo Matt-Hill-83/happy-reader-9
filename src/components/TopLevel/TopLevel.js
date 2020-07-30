@@ -115,27 +115,24 @@ class TopLevel extends React.Component {
       this.updateQuestStatus({ sceneId })
     }
 
-    const subQuestTriggersList = _get(questConfig, "subQuestTriggersList") || []
+    // const subQuestTriggersList = _get(questConfig, "subQuestTriggersList") || []
 
-    subQuestTriggersList.forEach((subQuestTriggers) => {
-      Utils.unLockSubQuests({ subQuestTriggers })
-    })
+    // subQuestTriggersList.forEach((subQuestTriggers) => {
+    //   Utils.unLockSubQuests({ subQuestTriggers })
+    // })
 
     // this.setState({ test: Math.random() })
   }
 
   updateQuestStatus = () => {
-    // temp
     Utils.calcListOfLockedScenes()
-    // temp
+
     toaster.clear()
     const activeScene = localStateStore.getActiveScene()
     const { location } = activeScene
 
     const activeFrame = localStateStore.getFirstFrame() || {}
     const { critters1 = [], critters2 = [] } = activeFrame
-
-    // const activeFrameIndex = localStateStore.getActiveFrameIndex()
 
     const { foundItem, completedMission } = localStateStore.updateQuestState({
       itemsInScene: [location, ...critters1, ...critters2],
@@ -179,6 +176,7 @@ class TopLevel extends React.Component {
         timeout: 30000,
       })
       toaster.show({ message, className: css.toaster, timeout: 30000 })
+      Utils.calcListOfLockedScenes()
     }
 
     this.setState({ dummy: new Date() })
