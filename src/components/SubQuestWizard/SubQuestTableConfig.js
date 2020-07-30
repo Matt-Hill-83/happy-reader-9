@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Popover, Classes } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
 import { toJS } from "mobx"
 import cx from "classnames"
-import React, { Component, useState } from "react"
+import React from "react"
 import TextField from "@material-ui/core/TextField"
 
 import Utils from "../../Utils/Utils"
@@ -14,8 +14,7 @@ import css from "./SubQuestTableConfig.module.scss"
 const newCondition = { completedScene: "1234567" }
 
 function AddDeleteButtonsForTriggers({ props }) {
-  const { rowIndex, onDeleteTriggerRow, onAddTriggerRow } = props
-  // const [showSubQuestWizard, setShowSubQuestWizard] = React.useState(false)
+  const { rowIndex, onDelete, onAdd } = props
 
   return (
     <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
@@ -28,7 +27,7 @@ function AddDeleteButtonsForTriggers({ props }) {
           >
             <Button
               onClick={() =>
-                onAddTriggerRow({
+                onAdd({
                   rowIndex,
                   before: true,
                 })
@@ -36,12 +35,12 @@ function AddDeleteButtonsForTriggers({ props }) {
               icon={IconNames.ADD}
             />
             <Button
-              onClick={() => onDeleteTriggerRow({ rowIndex })}
+              onClick={() => onDelete({ rowIndex })}
               icon={IconNames.TRASH}
             />
             <Button
               onClick={() =>
-                onAddTriggerRow({
+                onAdd({
                   rowIndex,
                   before: false,
                 })
@@ -208,8 +207,8 @@ export const getSubQuestTableConfigFunc = ({
             <AddDeleteButtonsForTriggers
               props={{
                 rowIndex: tableMeta.rowIndex,
-                onDeleteTriggerRow,
-                onAddTriggerRow,
+                onDelete: onDeleteTriggerRow,
+                onAdd: onAddTriggerRow,
               }}
             />
           ),

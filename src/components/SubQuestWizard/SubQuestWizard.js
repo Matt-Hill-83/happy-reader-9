@@ -67,6 +67,9 @@ export default function SubQuestWizard({ props }) {
     })
   }
 
+  // renderScenes
+  // renderScenes
+  // renderScenes
   const renderScenes = ({ scenes }) => {
     const realScenes = props.scenes
 
@@ -106,9 +109,6 @@ export default function SubQuestWizard({ props }) {
     setDataTableKey(dataTableKey + 1)
   }
 
-  // renderTriggers
-  // renderTriggers
-  // renderTriggers
   const renderTriggers = ({ triggers }) => {
     const onAddTriggerRow = ({ rowIndex, before }) => {
       const newElement = Constants.newTrigger()
