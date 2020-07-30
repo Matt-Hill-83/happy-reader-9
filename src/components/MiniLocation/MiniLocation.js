@@ -226,7 +226,6 @@ class MiniLocation extends React.Component {
         sceneName: locationName,
       })
       const colorIndex = parentSubQuestFromScene % colors.length
-      console.log("colorIndex", toJS(colorIndex)) // zzz
       backgroundColor = colors[colorIndex]
     }
 

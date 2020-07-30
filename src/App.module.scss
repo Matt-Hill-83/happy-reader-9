@@ -14,10 +14,10 @@ body {
 .nav {
   position: absolute;
   z-index: 10000000;
-  left: 26vw;
+  left: 31vw;
   background: wheat;
   padding: 1vh;
-  border: 1px solid red !important;
+  border: 1px solid grey !important;
   border-radius: 1vh;
 }
 
@@ -46,7 +46,6 @@ body {
 .desktop {
   --window-height: 100vh;
   --story-font-size: 30px;
-  // overflow: auto;
 
   // TODO: use this for font size:
   // font-size: 15vmin;

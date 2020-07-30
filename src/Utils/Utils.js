@@ -61,6 +61,13 @@ export default class Utils {
     localStateStore.setLockedScenes(lockedScenes)
   }
 
+  static unLockScene = ({ sceneId }) => {
+    const lockedScenes = localStateStore.getLockedScenes()
+    const filteredScenes = lockedScenes.filter((item) => item !== sceneId)
+
+    localStateStore.setLockedScenes(filteredScenes)
+  }
+
   static isSceneUnlocked = ({ sceneId }) => {
     const lockedScenes = localStateStore.getLockedScenes()
     return lockedScenes.includes(sceneId) ? true : false
@@ -98,7 +105,7 @@ export default class Utils {
               const { currentMission } = condition
 
               console.log("condition", toJS(condition)) // zzz
-              if (currentMission >= 0) {
+              if (currentMission === 0) {
                 console.log("currentMission", toJS(currentMission)) // zzz
                 console.log("activeMissionIndex", activeMissionIndex) // zzz
                 console.log(
@@ -116,6 +123,8 @@ export default class Utils {
       console.log("sceneIsLocked++_+_+_+__++_+_____", toJS(sceneIsLocked)) // zzz
       if (sceneIsLocked) {
         Utils.lockScene({ sceneId: scene.id })
+      } else {
+        Utils.unLockScene({ sceneId: scene.id })
       }
     })
     const lockedScenes = localStateStore.getLockedScenes()

@@ -6,17 +6,17 @@ export default class Constants {
       "0": "unhide",
       name: "lock",
       conditions: [
+        // {
+        //   completedMission: Utils.getRandomInt(10),
+        // },
+        // {
+        //   completedScene: "000",
+        // },
+        // {
+        //   pocketContains: "000",
+        // },
         {
-          completedMission: Utils.getRandomInt(10),
-        },
-        {
-          completedScene: "000",
-        },
-        {
-          pocketContains: "000",
-        },
-        {
-          currentMission: "000",
+          currentMission: 0,
         },
       ],
     }

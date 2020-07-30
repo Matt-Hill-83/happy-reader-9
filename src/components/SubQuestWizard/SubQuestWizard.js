@@ -199,7 +199,7 @@ export default function SubQuestWizard({ props }) {
       const items = [
         {
           title: <span className={cx(css.listGroupTitle)}>Missions</span>,
-          expanded: true,
+          expanded: false,
           content: (
             <div className={cx(css.triggers, css.listGroup)}>
               {renderMissions({ missions })}
@@ -217,7 +217,7 @@ export default function SubQuestWizard({ props }) {
         },
         {
           title: <span className={cx(css.listGroupTitle)}>Scenes</span>,
-          expanded: false,
+          expanded: true,
           content: (
             <div className={cx(css.scenes, css.listGroup)}>
               {renderScenes({ scenes })}
