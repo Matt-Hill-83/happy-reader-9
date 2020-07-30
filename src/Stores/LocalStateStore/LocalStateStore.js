@@ -118,7 +118,7 @@ class LocalStateStore {
   }
 
   getDesiredItem = () => {
-    const activeMissionIndex = this.getActiveMission()
+    const activeMissionIndex = this.getActiveMissionIndex()
     if (!activeMissionIndex) {
       return null
     }
@@ -142,13 +142,13 @@ class LocalStateStore {
     this.questStatus.desiredItems.push(...modifiedArray)
   }
 
-  getActiveMission = () => {
+  getActiveMissionIndex = () => {
     const { missions } = this.questStatus.questConfig
     return missions[this.questStatus.activeMissionIndex] || null
   }
 
   getDesiredRecipient = () => {
-    const activeMissionIndex = this.getActiveMission()
+    const activeMissionIndex = this.getActiveMissionIndex()
     if (!activeMissionIndex) {
       return null
     }
