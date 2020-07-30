@@ -104,20 +104,14 @@ export default class Utils {
             const { conditions = [] } = trigger
             conditions.forEach((condition) => {
               const { currentMission } = condition
-
               if (currentMission === activeMissionIndex) {
                 sceneIsLocked = true
               }
             })
           } else if (trigger.name === Constants.triggers.triggerTypes.UNLOCK) {
-            console.log("trigger+_+_++_+_+_+_+______________", toJS(trigger)) // zzz
             const { conditions = [] } = trigger
             conditions.forEach((condition) => {
               const { currentMission } = condition
-              console.log("condition", toJS(condition)) // zzz
-              console.log("currentMission", toJS(currentMission)) // zzz
-              console.log("activeMissionIndex", activeMissionIndex) // zzz
-
               if (currentMission === activeMissionIndex) {
                 sceneIsLocked = false
               }
@@ -125,7 +119,6 @@ export default class Utils {
           }
         })
       }
-      console.log("sceneIsLocked++_+_+_+__++_+_____", toJS(sceneIsLocked)) // zzz
       if (sceneIsLocked) {
         Utils.lockScene({ sceneId: scene.id })
       } else {
@@ -133,7 +126,6 @@ export default class Utils {
       }
     })
     const lockedScenes = localStateStore.getLockedScenes()
-    console.log("---------------lockedScenes", toJS(lockedScenes)) // zzz
   }
   //
   //
