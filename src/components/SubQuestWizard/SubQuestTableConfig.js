@@ -8,53 +8,11 @@ import TextField from "@material-ui/core/TextField"
 import Utils from "../../Utils/Utils"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import Constants from "../../Utils/Constants/Constants"
+import AddDeleteButtonGroup from "./AddDeleteButtonGroup"
 
 import css from "./SubQuestTableConfig.module.scss"
 
 const newCondition = { completedScene: "1234567" }
-
-function AddDeleteButtonsForTriggers({ props }) {
-  const { rowIndex, onDelete, onAdd } = props
-
-  return (
-    <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
-      <Popover
-        interactionKind={"HOVER"}
-        content={
-          <ButtonGroup
-            vertical={true}
-            className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
-          >
-            <Button
-              onClick={() =>
-                onAdd({
-                  rowIndex,
-                  before: true,
-                })
-              }
-              icon={IconNames.ADD}
-            />
-            <Button
-              onClick={() => onDelete({ rowIndex })}
-              icon={IconNames.TRASH}
-            />
-            <Button
-              onClick={() =>
-                onAdd({
-                  rowIndex,
-                  before: false,
-                })
-              }
-              icon={IconNames.ADD}
-            />
-          </ButtonGroup>
-        }
-      >
-        <Button icon={IconNames.SETTINGS} />
-      </Popover>
-    </ButtonGroup>
-  )
-}
 
 export const getSubQuestTableConfigFunc = ({
   tableChangeCallback,
@@ -204,7 +162,7 @@ export const getSubQuestTableConfigFunc = ({
           sort: false,
           empty: true,
           customBodyRender: (value, tableMeta, updateValue) => (
-            <AddDeleteButtonsForTriggers
+            <AddDeleteButtonGroup
               props={{
                 rowIndex: tableMeta.rowIndex,
                 onDelete: onDeleteTriggerRow,
@@ -212,6 +170,11 @@ export const getSubQuestTableConfigFunc = ({
               }}
             />
           ),
+          // AddDeleteButtonGroup({
+          //   rowIndex: tableMeta.rowIndex,
+          //   onDelete: onDeleteTriggerRow,
+          //   onAdd: onAddTriggerRow,
+          // }),
         },
       },
       {
