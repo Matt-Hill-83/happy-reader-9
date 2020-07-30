@@ -221,8 +221,12 @@ export default function SubQuestWizard({ props }) {
       return null
     }
 
-    return subQuests.map((subQuest) => {
-      console.log("subQuest", toJS(subQuest)) // zzz
+    // TODO - create a button to add a new scene when there are none
+    // TODO - create a button to add a new scene when there are none
+    // TODO - create a button to add a new scene when there are none
+    // TODO - create a button to add a new scene when there are noneas
+
+    return subQuests.map((subQuest, subQuestIndex) => {
       // create a ref to an empty array so that new triggers added will be in that referenced
       // array
       if (!subQuest.triggers) {
@@ -261,8 +265,33 @@ export default function SubQuestWizard({ props }) {
       ]
       const accordianProps = { items }
 
+      const onAddScene = ({ rowIndex, before }) => {
+        const newElement = Constants.newScene
+        Utils.addArrayElement({
+          newElement,
+          before,
+          index: rowIndex,
+          array: subQuests,
+        })
+
+        saveQuestConfig()
+      }
+
+      const onDeleteScene = ({ rowIndex }) => {
+        Utils.deleteArrayElement({ index: rowIndex, array: scenes })
+        saveQuestConfig()
+      }
+
       return (
         <div className={css.accordianContainer}>
+          <AddDeleteButtonGroup
+            props={{
+              title: "Add SubQuest",
+              rowIndex: subQuestIndex,
+              onDelete: onDeleteScene,
+              onAdd: onAddScene,
+            }}
+          />
           <MyAccordian props={accordianProps} />
         </div>
       )
