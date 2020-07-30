@@ -5,7 +5,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails"
 import AccordionSummary from "@material-ui/core/AccordionSummary"
 import cx from "classnames"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import React from "react"
+import React, { useState } from "react"
 import Typography from "@material-ui/core/Typography"
 
 import css from "./MyAccordian.module.scss"
@@ -28,11 +28,11 @@ export default function MyAccordian({ props }) {
     return null
   }
 
-  const renderedAccordians = items.map((item) => {
+  const renderedAccordian = items.map((item) => {
     const { title, content, expanded } = item
 
     return (
-      <Accordion expanded={expanded} className={cx(css.main, className)}>
+      <Accordion className={cx(css.main, className)} defaultExpanded={expanded}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -49,6 +49,6 @@ export default function MyAccordian({ props }) {
     )
   })
 
-  // return renderedAccordians
-  return <div className={classes.root}>{renderedAccordians}</div>
+  // return renderedAccordian
+  return <div className={classes.root}>{renderedAccordian}</div>
 }
