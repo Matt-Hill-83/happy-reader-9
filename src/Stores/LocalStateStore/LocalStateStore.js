@@ -13,10 +13,10 @@ class LocalStateStore {
   showWorldBuilder = false
   unlockedSubQuests = [0]
   hiddenScenes = [0]
-  lockedScenes = []
   visitedScenes = []
 
   _defaultQuestStatus = {
+    lockedScenes: [],
     activeSubQuestIndex: 0,
     activeMissionIndex: 0,
     pockets: { gold: { amount: 0 } },
@@ -47,7 +47,7 @@ class LocalStateStore {
     this.hiddenScenes = hiddenScenes
   }
 
-  getLockedScenes = () => this.lockedScenes
+  getLockedScenes = () => this.questStatus.lockedScenes || []
   setLockedScenes = (lockedScenes) => {
     this.lockedScenes = lockedScenes
   }
@@ -121,11 +121,11 @@ class LocalStateStore {
   }
 
   getDesiredItem = () => {
-    const activeMissionIndex = this.getActiveMission()
-    if (!activeMissionIndex) {
+    const activeMission = this.getActiveMission()
+    if (!activeMission) {
       return null
     }
-    return activeMissionIndex.item
+    return activeMission.item
   }
 
   getDesiredItems = () => {
@@ -151,11 +151,11 @@ class LocalStateStore {
   }
 
   getDesiredRecipient = () => {
-    const activeMissionIndex = this.getActiveMission()
-    if (!activeMissionIndex) {
+    const activeMission = this.getActiveMission()
+    if (!activeMission) {
       return null
     }
-    return activeMissionIndex.recipient
+    return activeMission.recipient
   }
 
   addToPockets = ({ newPockets }) => {
@@ -184,15 +184,14 @@ class LocalStateStore {
       return {}
     }
     const missions = Utils.getActiveSubQuestMissions()
-    // const { missions } = questStatus.questConfig
     const { pockets } = questStatus
 
     if (!missions) {
       return {}
     }
-    const activeMissionId = questStatus.activeMissionIndex
-    const activeMissionIndex = missions[activeMissionId] || null
-    if (!activeMissionIndex) {
+    const activeMissionIndex = questStatus.activeMissionIndex
+    const activeMission = missions[activeMissionIndex] || null
+    if (!activeMission) {
       return {}
     }
 
@@ -202,18 +201,20 @@ class LocalStateStore {
     })
 
     if (isMissionCompleted) {
-      this.completedMissions.push(activeMissionId)
+      console.log("isMissionCompleted") // zzz
+      this.completedMissions.push(activeMissionIndex)
 
       // remove item from pocket
       const desiredItem = this.getDesiredItem()
 
       delete pockets[desiredItem.name]
 
-      activeMissionIndex.completed = true
+      activeMission.completed = true
+
       questStatus.activeMissionIndex++
 
       const newPockets = this.convertItemToObjFormat({
-        itemsArray: activeMissionIndex.rewards,
+        itemsArray: activeMission.rewards,
       })
 
       this.addToPockets({ newPockets })
@@ -225,7 +226,7 @@ class LocalStateStore {
 
     return {
       foundItem,
-      completedMission: isMissionCompleted ? activeMissionIndex : false,
+      completedMission: isMissionCompleted ? activeMission : false,
     }
   }
 
@@ -405,7 +406,6 @@ decorate(LocalStateStore, {
   showWorldBuilder: observable,
   unlockedSubQuests: observable,
   visitedScenes: observable,
-  lockedScenes: observable,
 })
 
 const localStateStore = new LocalStateStore()

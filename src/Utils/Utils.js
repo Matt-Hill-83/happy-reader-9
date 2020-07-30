@@ -56,17 +56,30 @@ export default class Utils {
   }
 
   static lockScene = ({ sceneId }) => {
-    const lockedScenes = localStateStore.getLockedScenes()
-    lockedScenes.push(sceneId)
-    localStateStore.setLockedScenes(lockedScenes)
+    console.log("lockScene------------------------------------------>>>") // zzz
+    const questStatus = localStateStore.getQuestStatus()
+    const { lockedScenes = [] } = questStatus
+    if (!lockedScenes.includes(sceneId)) {
+      lockedScenes.push(sceneId)
+    }
+    questStatus.lockedScenes = lockedScenes
+    localStateStore.setQuestStatus(questStatus)
   }
 
   static unLockScene = ({ sceneId }) => {
-    const lockedScenes = localStateStore.getLockedScenes()
+    const questStatus = localStateStore.getQuestStatus()
+    const { lockedScenes = [] } = questStatus
     const filteredScenes = lockedScenes.filter((item) => item !== sceneId)
 
-    localStateStore.setLockedScenes(filteredScenes)
+    questStatus.lockedScenes = filteredScenes
+    localStateStore.setQuestStatus(questStatus)
   }
+  // static unLockScene = ({ sceneId }) => {
+  //   const lockedScenes = localStateStore.getLockedScenes()
+  //   const filteredScenes = lockedScenes.filter((item) => item !== sceneId)
+
+  //   localStateStore.setLockedScenes(filteredScenes)
+  // }
 
   static isSceneUnlocked = ({ sceneId }) => {
     const lockedScenes = localStateStore.getLockedScenes()
@@ -79,15 +92,11 @@ export default class Utils {
   //
   static calcListOfLockedScenes = () => {
     const activeWorld = localStateStore.getActiveWorld()
+    const { newGrid5 } = activeWorld.data
+
     const questStatus = localStateStore.getQuestStatus()
-    const { activeMissionIndex } = questStatus
     console.log("questStatus", toJS(questStatus)) // zzz
-
-    // console.log("activeMissionIndex", toJS(activeMissionIndex)) // zzz
-
-    const { newGrid5, questConfig } = activeWorld.data
-    console.log("questConfig", toJS(questConfig)) // zzz
-    console.log("newGrid5", toJS(newGrid5)) // zzz
+    const { activeMissionIndex } = questStatus
 
     newGrid5.forEach((scene) => {
       const sceneTriggers = Utils.getSceneTriggersFromScene({

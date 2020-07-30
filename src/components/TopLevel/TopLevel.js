@@ -185,6 +185,9 @@ class TopLevel extends React.Component {
   }
 
   onChangeWorld = ({ mapId }) => {
+    console.log("")
+    console.log("")
+    console.log("-------------------------------------")
     console.log(
       "-----------------------mapId---------------------------",
       mapId

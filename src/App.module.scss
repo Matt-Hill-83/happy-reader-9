@@ -14,11 +14,12 @@ body {
 .nav {
   position: absolute;
   z-index: 10000000;
-  left: 31vw;
+  left: 0vw;
   background: wheat;
-  padding: 1vh;
+  padding: 0 0.7vh;
   border: 1px solid grey !important;
   border-radius: 1vh;
+  top: 3vh;
 }
 
 .mobile {
