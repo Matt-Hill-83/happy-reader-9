@@ -56,7 +56,6 @@ export default class Utils {
   }
 
   static lockScene = ({ sceneId }) => {
-    console.log("lockScene------------------------------------------>>>") // zzz
     const questStatus = localStateStore.getQuestStatus()
     const { lockedScenes = [] } = questStatus
     if (!lockedScenes.includes(sceneId)) {
@@ -74,12 +73,6 @@ export default class Utils {
     questStatus.lockedScenes = filteredScenes
     localStateStore.setQuestStatus(questStatus)
   }
-  // static unLockScene = ({ sceneId }) => {
-  //   const lockedScenes = localStateStore.getLockedScenes()
-  //   const filteredScenes = lockedScenes.filter((item) => item !== sceneId)
-
-  //   localStateStore.setLockedScenes(filteredScenes)
-  // }
 
   static isSceneUnlocked = ({ sceneId }) => {
     const lockedScenes = localStateStore.getLockedScenes()
@@ -108,22 +101,25 @@ export default class Utils {
       if (sceneTriggers && sceneTriggers.length > 0) {
         sceneTriggers.forEach((trigger) => {
           if (trigger.name === Constants.triggers.triggerTypes.LOCK) {
-            console.log("trigger+_+_++_+_+_+_+______________", toJS(trigger)) // zzz
             const { conditions = [] } = trigger
             conditions.forEach((condition) => {
               const { currentMission } = condition
 
+              if (currentMission === activeMissionIndex) {
+                sceneIsLocked = true
+              }
+            })
+          } else if (trigger.name === Constants.triggers.triggerTypes.UNLOCK) {
+            console.log("trigger+_+_++_+_+_+_+______________", toJS(trigger)) // zzz
+            const { conditions = [] } = trigger
+            conditions.forEach((condition) => {
+              const { currentMission } = condition
               console.log("condition", toJS(condition)) // zzz
-              if (currentMission === 0) {
-                console.log("currentMission", toJS(currentMission)) // zzz
-                console.log("activeMissionIndex", activeMissionIndex) // zzz
-                console.log(
-                  "currentMission === activeMissionIndex",
-                  currentMission === activeMissionIndex
-                ) // zzz
-                if (currentMission === activeMissionIndex) {
-                  sceneIsLocked = true
-                }
+              console.log("currentMission", toJS(currentMission)) // zzz
+              console.log("activeMissionIndex", activeMissionIndex) // zzz
+
+              if (currentMission === activeMissionIndex) {
+                sceneIsLocked = false
               }
             })
           }
