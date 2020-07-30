@@ -220,7 +220,7 @@ class TopLevel extends React.Component {
       console.log("defaultQuestStatus", toJS(defaultQuestStatus)) // zzz
 
       const newProps = {
-        activeMission: 0,
+        activeMissionIndex: 0,
         pockets: combinedPockets,
         questConfig: clonedQuestConfig,
         desiredItems,
@@ -230,7 +230,7 @@ class TopLevel extends React.Component {
       localStateStore.setQuestStatus(newQuestStatus)
     } else {
       localStateStore.setQuestStatus({
-        activeMission: 0,
+        activeMissionIndex: 0,
         hideMissionConsole: true,
       })
     }

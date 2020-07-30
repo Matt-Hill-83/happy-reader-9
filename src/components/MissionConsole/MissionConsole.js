@@ -70,7 +70,7 @@ class MissionConsole extends Component {
       missions = questStatus.questConfig.missions
     }
 
-    const { activeMission } = questStatus
+    const { activeMissionIndex } = questStatus
     const columnNames = [
       "Mission",
       "Bring the...",
@@ -98,7 +98,7 @@ class MissionConsole extends Component {
 
     return (
       <div className={css.main}>
-        activeMission: {activeMission}
+        activeMissionIndex: {activeMissionIndex}
         {showHeader && (
           <div className={css.header}>
             <div className={css.title}>Your Stuff</div>

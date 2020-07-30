@@ -17,7 +17,7 @@ class LocalStateStore {
 
   _defaultQuestStatus = {
     activeSubQuestIndex: 0,
-    activeMission: 0,
+    activeMissionIndex: 0,
     pockets: { gold: { amount: 0 } },
     desiredItems: [],
     questConfig: {
@@ -118,11 +118,11 @@ class LocalStateStore {
   }
 
   getDesiredItem = () => {
-    const activeMission = this.getActiveMission()
-    if (!activeMission) {
+    const activeMissionIndex = this.getActiveMission()
+    if (!activeMissionIndex) {
       return null
     }
-    return activeMission.item
+    return activeMissionIndex.item
   }
 
   getDesiredItems = () => {
@@ -144,15 +144,15 @@ class LocalStateStore {
 
   getActiveMission = () => {
     const { missions } = this.questStatus.questConfig
-    return missions[this.questStatus.activeMission] || null
+    return missions[this.questStatus.activeMissionIndex] || null
   }
 
   getDesiredRecipient = () => {
-    const activeMission = this.getActiveMission()
-    if (!activeMission) {
+    const activeMissionIndex = this.getActiveMission()
+    if (!activeMissionIndex) {
       return null
     }
-    return activeMission.recipient
+    return activeMissionIndex.recipient
   }
 
   addToPockets = ({ newPockets }) => {
@@ -185,9 +185,9 @@ class LocalStateStore {
     if (!missions) {
       return {}
     }
-    const activeMissionId = questStatus.activeMission
-    const activeMission = missions[activeMissionId] || null
-    if (!activeMission) {
+    const activeMissionId = questStatus.activeMissionIndex
+    const activeMissionIndex = missions[activeMissionId] || null
+    if (!activeMissionIndex) {
       return {}
     }
 
@@ -204,11 +204,11 @@ class LocalStateStore {
 
       delete pockets[desiredItem.name]
 
-      activeMission.completed = true
-      questStatus.activeMission++
+      activeMissionIndex.completed = true
+      questStatus.activeMissionIndex++
 
       const newPockets = this.convertItemToObjFormat({
-        itemsArray: activeMission.rewards,
+        itemsArray: activeMissionIndex.rewards,
       })
 
       this.addToPockets({ newPockets })
@@ -220,7 +220,7 @@ class LocalStateStore {
 
     return {
       foundItem,
-      completedMission: isMissionCompleted ? activeMission : false,
+      completedMission: isMissionCompleted ? activeMissionIndex : false,
     }
   }
 
