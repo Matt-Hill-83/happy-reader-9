@@ -259,12 +259,6 @@ class Frame extends Component {
       facePickerCharacter,
     } = this.state
 
-    console.log("") // zzz
-    console.log("Frame.js-------------------------------------------->") // zzz
-    console.log("scene", toJS(scene)) // zzz
-    console.log("frame.critters1", toJS(frame.critters1)) // zzz
-    console.log("") // zzz
-
     if (!frame) {
       return null
     }

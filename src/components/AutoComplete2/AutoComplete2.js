@@ -20,7 +20,6 @@ export default function AutoComplete2({ props }) {
   const getLabel = getOptionLabel || defaultGetOptionLabel
 
   const _onChange = (event = null, value) => {
-    console.log("value", value) // zzz
     onChange && onChange({ value })
   }
 

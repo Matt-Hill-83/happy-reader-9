@@ -35,14 +35,9 @@ class TopLevel extends React.Component {
   }
 
   async componentWillMount() {
-    console.log("") // zzz
-    console.log("") // zzz
-    console.log("componentWillMount---------------------------------") // zzz
     const defaultWorldId = localStateStore.getDefaultWorldId()
-    console.log("defaultWorldId", defaultWorldId) // zzz
 
     await books.fetch()
-    console.log("books.docs", toJS(books.docs)) // zzz
 
     if (maps.docs && maps.docs[0]) {
       const defaultMap = Utils.getFirstReleasedMap()
@@ -61,7 +56,6 @@ class TopLevel extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(newProps) {
-    console.log("UNSAFE_componentWillReceiveProps--------------->>>>>>>>>>>") // zzz
     const worldId = _get(newProps, "match.params.worldId")
 
     this.setState({ showQuestPicker: false })
@@ -78,7 +72,6 @@ class TopLevel extends React.Component {
   }
 
   forceUpdate = () => {
-    console.log("-----------------------------forceUpdate--------------") // zzz
     this.setState({ test: Math.random() })
   }
 
@@ -193,7 +186,6 @@ class TopLevel extends React.Component {
   }
 
   onChangeWorld = ({ mapId }) => {
-    console.log("onChangeWorld") // zzz
     console.log(
       "-----------------------mapId---------------------------",
       mapId
@@ -206,24 +198,24 @@ class TopLevel extends React.Component {
       return
     }
     const { questConfig } = map.data
-    console.log("questConfig------------------------------>", toJS(questConfig)) // zzz
     if (questConfig) {
-      const { missions = [] } = questConfig
+      // const { missions = [] } = questConfig
+      const missions = Utils.getActiveSubQuestMissions()
       const desiredItems = missions.map((mission) => mission.item)
-
+      console.log("desiredItems", toJS(desiredItems)) // zzz
+      const desiredItems2 = desiredItems.filter((item) => !!item)
       const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig))
 
       const combinedPockets = localStateStore.addToPockets({
         newPockets: clonedQuestConfig.pockets,
       })
       const defaultQuestStatus = localStateStore.getDefaultQuestStatus()
-      console.log("defaultQuestStatus", toJS(defaultQuestStatus)) // zzz
 
       const newProps = {
         activeMissionIndex: 0,
         pockets: combinedPockets,
         questConfig: clonedQuestConfig,
-        desiredItems,
+        desiredItems: desiredItems2,
       }
       const newQuestStatus = { ...defaultQuestStatus, ...newProps }
 

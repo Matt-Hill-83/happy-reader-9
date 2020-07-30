@@ -1,15 +1,8 @@
+import _get from "lodash.get"
+import { toJS } from "mobx"
+import cx from "classnames"
 import React, { Component } from "react"
 
-import cx from "classnames"
-
-import { observer } from "mobx-react"
-import { toJS } from "mobx"
-import _get from "lodash.get"
-import css from "./MiniTable2.module.scss"
-import images from "../../images/images"
-
-// import React from 'react';
-import { makeStyles } from "@material-ui/core/styles"
 import {
   Table,
   TableBody,
@@ -19,6 +12,8 @@ import {
   TableRow,
   Paper,
 } from "@material-ui/core"
+
+import css from "./MiniTable2.module.scss"
 
 class MiniTable2 extends Component {
   renderCell = ({ content }) => {
@@ -32,7 +27,6 @@ class MiniTable2 extends Component {
         </TableCell>
       )
     }
-    console.log("content", toJS(content)) // zzz
     const value = content
     let cellContent = null
 
@@ -72,11 +66,9 @@ class MiniTable2 extends Component {
           </TableHead>
           <TableBody>
             {tableData.map((element, firstIndex) => {
-              console.log("element", element) // zzz
               return (
                 <TableRow key={firstIndex}>
                   {Object.keys(element).map((child, secondIndex) => {
-                    console.log("child", toJS(child)) // zzz
                     return this.renderCell({ content: element[child] })
                   })}
                 </TableRow>

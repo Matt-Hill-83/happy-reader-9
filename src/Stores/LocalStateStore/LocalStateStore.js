@@ -118,7 +118,7 @@ class LocalStateStore {
   }
 
   getDesiredItem = () => {
-    const activeMissionIndex = this.getActiveMissionIndex()
+    const activeMissionIndex = this.getActiveMission()
     if (!activeMissionIndex) {
       return null
     }
@@ -142,13 +142,14 @@ class LocalStateStore {
     this.questStatus.desiredItems.push(...modifiedArray)
   }
 
-  getActiveMissionIndex = () => {
-    const { missions } = this.questStatus.questConfig
+  getActiveMission = () => {
+    // const { missions } = this.questStatus.questConfig
+    const missions = Utils.getActiveSubQuestMissions()
     return missions[this.questStatus.activeMissionIndex] || null
   }
 
   getDesiredRecipient = () => {
-    const activeMissionIndex = this.getActiveMissionIndex()
+    const activeMissionIndex = this.getActiveMission()
     if (!activeMissionIndex) {
       return null
     }
@@ -174,12 +175,14 @@ class LocalStateStore {
   }
 
   updateQuestState = ({ itemsInScene, charactersInScene }) => {
+    console.log("updateQuestState") // zzz
     const questStatus = this.questStatus
 
     if (!questStatus.questConfig) {
       return {}
     }
-    const { missions } = questStatus.questConfig
+    const missions = Utils.getActiveSubQuestMissions()
+    // const { missions } = questStatus.questConfig
     const { pockets } = questStatus
 
     if (!missions) {
@@ -256,15 +259,20 @@ class LocalStateStore {
   }
 
   _findItem = ({ itemsInScene }) => {
+    console.log("_findItem") // zzz
     const desiredItems = this.getDesiredItems() || []
     const questStatus = this.questStatus
 
     const { pockets = {} } = questStatus
 
     const foundItems = []
-    desiredItems.forEach((desiredItem2) => {
+    desiredItems.forEach((desiredItem) => {
+      console.log("desiredItem", toJS(desiredItem)) // zzz
       const foundItem =
-        itemsInScene.find((item) => item.name === desiredItem2.name) || null
+        itemsInScene.find((item) => {
+          console.log("item", toJS(item)) // zzz
+          return item.name === (desiredItem && desiredItem.name)
+        }) || null
       if (foundItem) {
         foundItems.push(foundItem)
       }

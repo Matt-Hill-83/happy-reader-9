@@ -55,11 +55,6 @@ class WorldBuilder extends Component {
     this.onChangeWorld({ mapId: defaultWorldId })
   }
 
-  forceUpdate2 = () => {
-    console.log("-----------------------------forceUpdate--------------") // zzz
-    this.setState({ test: Math.random() })
-  }
-
   onChangeWorld = ({ mapId, newWorld }) => {
     this.setState({ showQuestConfig: false })
     // new map
@@ -527,7 +522,6 @@ class WorldBuilder extends Component {
 
     // Scene defs from imported json
     sceneDefinitions.forEach((scene, sceneIndex) => {
-      console.log("scene", toJS(scene)) // zzz
       const { frames, sceneConfig, frames2 } = scene
 
       const coordinates = sceneConfig.coordinates || {
@@ -542,8 +536,6 @@ class WorldBuilder extends Component {
           location: { name: scene.title },
         },
       })
-      console.log("newBornScene", toJS(newBornScene)) // zzz
-      // console.log("newBornScene", toJS(newBornScene.asdf.asdf)) // zzz
       if (scene.sceneConfig) {
         Object.assign(newBornScene, scene.sceneConfig)
       }
@@ -577,8 +569,6 @@ class WorldBuilder extends Component {
   }
 
   onSaveQuestConfig = async ({ questConfig }) => {
-    console.log("onSaveQuestConfig") // zzz
-    console.log("questConfig", toJS(questConfig)) // zzz
     const world = localStateStore.getWorldBuilderWorld() || {}
     await Utils.updateMap({ newProps: { questConfig }, mapToUpdate: world })
   }
