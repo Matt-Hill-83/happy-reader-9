@@ -94,6 +94,8 @@ export default class Constants {
       UNLOCK: "unlock",
       HIDE: "hide",
       UNHIDE: "unhide",
+      CLOUD: "cloud",
+      UNCLOUD: "uncloud",
       UPDATE_FRAME_SET: "updateFrameSet",
     },
     baseConditions: {

@@ -97,39 +97,55 @@ export default class Utils {
       })
 
       let sceneIsLocked = false
+      let sceneIsHidden = false
+      let sceneIsClouded = false
 
-      // refactor this to tighten it up
-      // refactor this to tighten it up
-      // refactor this to tighten it up
-      // refactor this to tighten it up
+      const flags = {
+        sceneIsLocked: false,
+        sceneIsHidden: false,
+        sceneIsClouded: false,
+      }
+
+      const triggerTypes = Constants.triggers.triggerTypes
+
+      const evaluators = [
+        {
+          triggerName: triggerTypes.LOCK,
+          func: () => (flags.sceneIsLocked = true),
+        },
+        {
+          triggerName: triggerTypes.UNLOCK,
+          func: () => (flags.sceneIsLocked = false),
+        },
+      ]
+
+      const runEvaluators = ({ trigger }) => {
+        evaluators.forEach((evaluator) => {
+          if (trigger.name === evaluator.triggerName) {
+            evaluator.func()
+          }
+        })
+      }
+
       if (sceneTriggers && sceneTriggers.length > 0) {
         sceneTriggers.forEach((trigger) => {
           const { conditions = [] } = trigger
           conditions.forEach((condition) => {
             const { currentMission } = condition
             if (currentMission >= 0 && currentMission === activeMissionIndex) {
-              if (trigger.name === Constants.triggers.triggerTypes.LOCK) {
-                sceneIsLocked = true
-              } else if (
-                trigger.name === Constants.triggers.triggerTypes.UNLOCK
-              ) {
-                sceneIsLocked = false
-              }
+              runEvaluators({ trigger })
+              //   if (trigger.name === Constants.triggers.triggerTypes.LOCK) {
+              //     sceneIsLocked = true
+              //   } else if (
+              //     trigger.name === Constants.triggers.triggerTypes.UNLOCK
+              //   ) {
+              //     sceneIsLocked = false
+              //   }
             }
           })
-
-          //  else if (trigger.name === Constants.triggers.triggerTypes.UNLOCK) {
-          //   const { conditions = [] } = trigger
-          //   conditions.forEach((condition) => {
-          //     const { currentMission } = condition
-          //     if (currentMission === activeMissionIndex) {
-          //       sceneIsLocked = false
-          //     }
-          //   })
-          // }
         })
       }
-      if (sceneIsLocked) {
+      if (flags.sceneIsLocked) {
         Utils.lockScene({ sceneId: scene.id })
       } else {
         Utils.unLockScene({ sceneId: scene.id })
