@@ -74,27 +74,6 @@ export default class Utils {
     localStateStore.setQuestStatus(questStatus)
   }
 
-  // static lockScene = ({ sceneId, propertyName = "lockedScenes" }) => {
-  //   const questStatus = localStateStore.getQuestStatus()
-  //   if (!questStatus[propertyName]) {
-  //     questStatus[propertyName] = []
-  //   }
-
-  //   if (!questStatus[propertyName].includes(sceneId)) {
-  //     questStatus[propertyName].push(sceneId)
-  //   }
-  //   localStateStore.setQuestStatus(questStatus)
-  // }
-
-  // static unLockScene = ({ sceneId }) => {
-  //   const questStatus = localStateStore.getQuestStatus()
-  //   const { lockedScenes = [] } = questStatus
-  //   const filteredScenes = lockedScenes.filter((item) => item !== sceneId)
-
-  //   questStatus.lockedScenes = filteredScenes
-  //   localStateStore.setQuestStatus(questStatus)
-  // }
-
   static isSceneUnlocked = ({ sceneId }) => {
     const lockedScenes = localStateStore.getLockedScenes()
     return lockedScenes.includes(sceneId) ? true : false
@@ -118,9 +97,9 @@ export default class Utils {
       })
 
       const flags = {
-        sceneIsLocked: false,
-        sceneIsHidden: false,
-        sceneIsClouded: false,
+        sceneIsLocked: { value: false, propertyName: "lockedScenes" },
+        sceneIsHidden: { value: false, propertyName: "hiddenScenes" },
+        sceneIsClouded: { value: false, propertyName: "cloudedScenes" },
       }
 
       const triggerTypes = Constants.triggers.triggerTypes
@@ -128,27 +107,27 @@ export default class Utils {
       const evaluators = [
         {
           triggerName: triggerTypes.LOCK,
-          func: () => (flags.sceneIsLocked = true),
+          func: () => (flags.sceneIsLocked.value = true),
         },
         {
           triggerName: triggerTypes.UNLOCK,
-          func: () => (flags.sceneIsLocked = false),
+          func: () => (flags.sceneIsLocked.value = false),
         },
         {
           triggerName: triggerTypes.HIDE,
-          func: () => (flags.sceneIsHidden = true),
+          func: () => (flags.sceneIsHidden.value = true),
         },
         {
           triggerName: triggerTypes.UNHIDE,
-          func: () => (flags.sceneIsHidden = false),
+          func: () => (flags.sceneIsHidden.value = false),
         },
         {
           triggerName: triggerTypes.CLOUD,
-          func: () => (flags.sceneIsClouded = true),
+          func: () => (flags.sceneIsClouded.value = true),
         },
         {
           triggerName: triggerTypes.UNCLOUD,
-          func: () => (flags.sceneIsClouded = false),
+          func: () => (flags.sceneIsClouded.value = false),
         },
       ]
 
@@ -173,20 +152,10 @@ export default class Utils {
       }
 
       Utils.updateProperty({
-        propertyName: "lockedScenes",
+        propertyName: flags.sceneIsLocked.propertyName,
         sceneId: scene.id,
-        value: flags.sceneIsLocked,
+        value: flags.sceneIsLocked.value,
       })
-
-      // flags.sceneIsLocked
-      //   ? Utils.lockScene({ sceneId: scene.id })
-      //   : Utils.unLockScene({ sceneId: scene.id })
-      // flags.sceneIsHidden
-      //   ? Utils.hideScene({ sceneId: scene.id })
-      //   : Utils.unHideScene({ sceneId: scene.id })
-      // flags.sceneIsClouded
-      //   ? Utils.cloudScene({ sceneId: scene.id })
-      //   : Utils.unCloudScene({ sceneId: scene.id })
     })
   }
   //
