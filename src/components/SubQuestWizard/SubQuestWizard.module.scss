@@ -3,6 +3,8 @@
   position: relative;
   margin-right: 6px;
   width: max-content;
+  width: 100%;
+  border: 4px solid green !important;
 
   :global {
     .bp3-button {

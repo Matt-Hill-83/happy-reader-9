@@ -12,10 +12,11 @@ import Constants from "../../Utils/Constants/Constants"
 import css from "./SubQuestTableConfig.module.scss"
 
 export default function AddDeleteButtonGroup({ props }) {
-  const { rowIndex, onDelete, onAdd, title = "" } = props
+  const { rowIndex, onDelete, onAdd, title = "", moreButtons = null } = props
 
   return (
     <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
+      {moreButtons}
       <Popover
         interactionKind={"HOVER"}
         content={

@@ -16,10 +16,12 @@ import Constants from "../../Utils/Constants/Constants"
 
 import css from "./SubQuestWizard.module.scss"
 import AddDeleteButtonGroup from "./AddDeleteButtonGroup"
+import DialogBuilder from "../DialogBuilder/DialogBuilder"
 
 export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState([])
   const [dataTableKey, setDataTableKey] = useState([])
+  const [showDialogBuilder, setShowDialogBuilder] = useState(false)
 
   const { onSave } = props
 
@@ -68,9 +70,6 @@ export default function SubQuestWizard({ props }) {
     })
   }
 
-  // renderScenes
-  // renderScenes
-  // renderScenes
   const renderScenes = ({ scenes }) => {
     const realScenes = props.scenes
 
@@ -121,15 +120,23 @@ export default function SubQuestWizard({ props }) {
       }
       const triggers = scene.sceneTriggers
 
+      const moreButtons = (
+        <Button
+          className={css.xxxsaveButton}
+          onClick={() => setShowDialogBuilder(!showDialogBuilder)}
+        >
+          DB
+        </Button>
+      )
       return (
         <div className={cx(css.sceneName, css.listItem)}>
-          {/* <span className={cx(css.listItemName)}>{scene.name}</span> */}
           <AddDeleteButtonGroup
             props={{
               title: "Add Scene",
               rowIndex: sceneIndex,
               onDelete: onDeleteScene,
               onAdd: onAddScene,
+              moreButtons,
             }}
           />
 
@@ -315,9 +322,20 @@ export default function SubQuestWizard({ props }) {
     })
   }
 
+  const renderedSubQuests = (
+    <div className={cx(css.content)}>{renderSubQuests()}</div>
+  )
+  const dialogBuilderProps = { initialValue: "9sadfsa" }
+
+  const content = showDialogBuilder ? (
+    <DialogBuilder props={dialogBuilderProps}></DialogBuilder>
+  ) : (
+    renderedSubQuests
+  )
+
   return (
     <div className={cx(css.main)}>
-      <div className={cx(css.content)}>{renderSubQuests()}</div>
+      {content}
       <ButtonGroup
         vertical={false}
         className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
@@ -328,6 +346,14 @@ export default function SubQuestWizard({ props }) {
         >
           Save Changes
         </Button>
+        {showDialogBuilder && (
+          <Button
+            className={css.saveButton}
+            onClick={() => setShowDialogBuilder(!showDialogBuilder)}
+          >
+            Close DB
+          </Button>
+        )}
         {/* <Button
           className={css.saveButton}
           onClick={() => props.onClose && props.onClose()}
