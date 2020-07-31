@@ -104,23 +104,29 @@ export default class Utils {
       // refactor this to tighten it up
       if (sceneTriggers && sceneTriggers.length > 0) {
         sceneTriggers.forEach((trigger) => {
-          if (trigger.name === Constants.triggers.triggerTypes.LOCK) {
-            const { conditions = [] } = trigger
-            conditions.forEach((condition) => {
-              const { currentMission } = condition
-              if (currentMission === activeMissionIndex) {
+          const { conditions = [] } = trigger
+          conditions.forEach((condition) => {
+            const { currentMission } = condition
+            if (currentMission >= 0 && currentMission === activeMissionIndex) {
+              if (trigger.name === Constants.triggers.triggerTypes.LOCK) {
                 sceneIsLocked = true
-              }
-            })
-          } else if (trigger.name === Constants.triggers.triggerTypes.UNLOCK) {
-            const { conditions = [] } = trigger
-            conditions.forEach((condition) => {
-              const { currentMission } = condition
-              if (currentMission === activeMissionIndex) {
+              } else if (
+                trigger.name === Constants.triggers.triggerTypes.UNLOCK
+              ) {
                 sceneIsLocked = false
               }
-            })
-          }
+            }
+          })
+
+          //  else if (trigger.name === Constants.triggers.triggerTypes.UNLOCK) {
+          //   const { conditions = [] } = trigger
+          //   conditions.forEach((condition) => {
+          //     const { currentMission } = condition
+          //     if (currentMission === activeMissionIndex) {
+          //       sceneIsLocked = false
+          //     }
+          //   })
+          // }
         })
       }
       if (sceneIsLocked) {
