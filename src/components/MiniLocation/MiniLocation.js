@@ -197,7 +197,7 @@ class MiniLocation extends React.Component {
       if (showLocationOnly) {
         const roadLeftRight01 = Images.items["roadLeftRight01"]
         return (
-          <div className={`${css.main} ${className} ${localClass}`}>
+          <div className={`${css.main} ${className} ${localClass} `}>
             <div className={css.container}>
               <div className={css.roadLeftRight01}>
                 <img
@@ -233,13 +233,15 @@ class MiniLocation extends React.Component {
       "background-color": `#${backgroundColor}`,
     }
 
+    const largeLocation = scene.location.name === "stump" ? css.large : ""
+
     return (
       <div
         key={id}
         id={id}
         className={`${css.main} ${className} ${
           this.props.scene.isStartScene ? css.isStartScene : ""
-        } ${isBlank ? css.isBlank : ""} ${localClass} `}
+        } ${isBlank ? css.isBlank : ""} ${localClass} ${largeLocation}`}
         style={style}
       >
         {!isBlank && (
