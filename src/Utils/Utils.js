@@ -55,13 +55,15 @@ export default class Utils {
     return (foundScene && foundScene.sceneTriggers) || []
   }
 
-  static lockScene = ({ sceneId }) => {
+  static lockScene = ({ sceneId, propertyName = "lockedScenes" }) => {
     const questStatus = localStateStore.getQuestStatus()
-    const { lockedScenes = [] } = questStatus
-    if (!lockedScenes.includes(sceneId)) {
-      lockedScenes.push(sceneId)
+    if (!questStatus[propertyName]) {
+      questStatus[propertyName] = []
     }
-    questStatus.lockedScenes = lockedScenes
+
+    if (!questStatus[propertyName].includes(sceneId)) {
+      questStatus[propertyName].push(sceneId)
+    }
     localStateStore.setQuestStatus(questStatus)
   }
 
@@ -96,10 +98,6 @@ export default class Utils {
         sceneId: scene.id,
       })
 
-      let sceneIsLocked = false
-      let sceneIsHidden = false
-      let sceneIsClouded = false
-
       const flags = {
         sceneIsLocked: false,
         sceneIsHidden: false,
@@ -116,6 +114,22 @@ export default class Utils {
         {
           triggerName: triggerTypes.UNLOCK,
           func: () => (flags.sceneIsLocked = false),
+        },
+        {
+          triggerName: triggerTypes.HIDE,
+          func: () => (flags.sceneIsHidden = true),
+        },
+        {
+          triggerName: triggerTypes.UNHIDE,
+          func: () => (flags.sceneIsHidden = false),
+        },
+        {
+          triggerName: triggerTypes.CLOUD,
+          func: () => (flags.sceneIsClouded = true),
+        },
+        {
+          triggerName: triggerTypes.UNCLOUD,
+          func: () => (flags.sceneIsClouded = false),
         },
       ]
 
@@ -134,58 +148,27 @@ export default class Utils {
             const { currentMission } = condition
             if (currentMission >= 0 && currentMission === activeMissionIndex) {
               runEvaluators({ trigger })
-              //   if (trigger.name === Constants.triggers.triggerTypes.LOCK) {
-              //     sceneIsLocked = true
-              //   } else if (
-              //     trigger.name === Constants.triggers.triggerTypes.UNLOCK
-              //   ) {
-              //     sceneIsLocked = false
-              //   }
             }
           })
         })
       }
-      if (flags.sceneIsLocked) {
-        Utils.lockScene({ sceneId: scene.id })
-      } else {
-        Utils.unLockScene({ sceneId: scene.id })
-      }
-    })
-    const lockedScenes = localStateStore.getLockedScenes()
-  }
-  //
-  //
-  //
-  //
-  //
-  //
-  static calcListOfHiddenScenes = () => {
-    // const scenesGrid = this.getActiveWorldGrid()
-    const activeWorld = localStateStore.getActiveWorld()
-
-    const { newGrid5, questConfig } = activeWorld.data
-    console.log("questConfig", toJS(questConfig)) // zzz
-    console.log("newGrid5", toJS(newGrid5)) // zzz
-
-    newGrid5.forEach((item) => {
-      console.log("item.location.name", toJS(item.location.name)) // zzz
-      console.log("item", toJS(item)) // zzz
-    })
-
-    const hiddenScenes = localStateStore.getHiddenScenes()
-    // const sceneTriggers = Utils.getSceneTriggersFromScene({
-    //   sceneName,
-    // })
-
-    newGrid5.forEach((scene) => {
-      const triggers = _get(scene, "sceneConfig.triggers")
-      console.log("scene.sceneConfig.triggers", toJS(triggers)) // zzz
-      // for each scene, look for the hide trigger in the list
-      // // Check if any of the requirements have been met.
-      // if
-      //
+      flags.sceneIsLocked
+        ? Utils.lockScene({ sceneId: scene.id })
+        : Utils.unLockScene({ sceneId: scene.id })
+      // flags.sceneIsHidden
+      //   ? Utils.hideScene({ sceneId: scene.id })
+      //   : Utils.unHideScene({ sceneId: scene.id })
+      // flags.sceneIsClouded
+      //   ? Utils.cloudScene({ sceneId: scene.id })
+      //   : Utils.unCloudScene({ sceneId: scene.id })
     })
   }
+  //
+  //
+  //
+  //
+  //
+  //
 
   static getParentSubQuestFromScene = ({ sceneName, sceneId }) => {
     const activeWorld = localStateStore.getActiveWorld()
@@ -613,8 +596,6 @@ export default class Utils {
 
   static unLockSubQuests = ({ subQuestTriggers = {} }) => {
     const { unHideTriggers, subQuestId } = subQuestTriggers
-
-    // const questStatus = localStateStore.getQuestStatus()
 
     const requiredCompletedMission = _get(
       unHideTriggers,

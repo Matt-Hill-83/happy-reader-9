@@ -12,11 +12,13 @@ class LocalStateStore {
   showBookPicker = false
   showWorldBuilder = false
   unlockedSubQuests = [0]
-  hiddenScenes = [0]
+  // hiddenScenes = [0]
   visitedScenes = []
 
   _defaultQuestStatus = {
     lockedScenes: [],
+    hiddenScenes: [],
+    cloudedScenes: [],
     activeSubQuestIndex: 0,
     activeMissionIndex: 0,
     pockets: { gold: { amount: 0 } },
