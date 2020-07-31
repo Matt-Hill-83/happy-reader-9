@@ -55,26 +55,45 @@ export default class Utils {
     return (foundScene && foundScene.sceneTriggers) || []
   }
 
-  static lockScene = ({ sceneId, propertyName = "lockedScenes" }) => {
+  static updateProperty = ({ sceneId, propertyName, value }) => {
     const questStatus = localStateStore.getQuestStatus()
     if (!questStatus[propertyName]) {
       questStatus[propertyName] = []
     }
-
-    if (!questStatus[propertyName].includes(sceneId)) {
-      questStatus[propertyName].push(sceneId)
+    if (value === true) {
+      // add element to list
+      if (!questStatus[propertyName].includes(sceneId)) {
+        questStatus[propertyName].push(sceneId)
+      }
+    } else {
+      // remove element from list
+      questStatus[propertyName] = questStatus[propertyName].filter(
+        (item) => item !== sceneId
+      )
     }
     localStateStore.setQuestStatus(questStatus)
   }
 
-  static unLockScene = ({ sceneId }) => {
-    const questStatus = localStateStore.getQuestStatus()
-    const { lockedScenes = [] } = questStatus
-    const filteredScenes = lockedScenes.filter((item) => item !== sceneId)
+  // static lockScene = ({ sceneId, propertyName = "lockedScenes" }) => {
+  //   const questStatus = localStateStore.getQuestStatus()
+  //   if (!questStatus[propertyName]) {
+  //     questStatus[propertyName] = []
+  //   }
 
-    questStatus.lockedScenes = filteredScenes
-    localStateStore.setQuestStatus(questStatus)
-  }
+  //   if (!questStatus[propertyName].includes(sceneId)) {
+  //     questStatus[propertyName].push(sceneId)
+  //   }
+  //   localStateStore.setQuestStatus(questStatus)
+  // }
+
+  // static unLockScene = ({ sceneId }) => {
+  //   const questStatus = localStateStore.getQuestStatus()
+  //   const { lockedScenes = [] } = questStatus
+  //   const filteredScenes = lockedScenes.filter((item) => item !== sceneId)
+
+  //   questStatus.lockedScenes = filteredScenes
+  //   localStateStore.setQuestStatus(questStatus)
+  // }
 
   static isSceneUnlocked = ({ sceneId }) => {
     const lockedScenes = localStateStore.getLockedScenes()
@@ -152,9 +171,16 @@ export default class Utils {
           })
         })
       }
-      flags.sceneIsLocked
-        ? Utils.lockScene({ sceneId: scene.id })
-        : Utils.unLockScene({ sceneId: scene.id })
+
+      Utils.updateProperty({
+        propertyName: "lockedScenes",
+        sceneId: scene.id,
+        value: flags.sceneIsLocked,
+      })
+
+      // flags.sceneIsLocked
+      //   ? Utils.lockScene({ sceneId: scene.id })
+      //   : Utils.unLockScene({ sceneId: scene.id })
       // flags.sceneIsHidden
       //   ? Utils.hideScene({ sceneId: scene.id })
       //   : Utils.unHideScene({ sceneId: scene.id })
