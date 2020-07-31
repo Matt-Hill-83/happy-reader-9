@@ -9,14 +9,14 @@ import Images from "../../images/images.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 import MiniLocation from "../MiniLocation/MiniLocation.js"
 
-import css from "./WorldViewer.module.scss"
 import MissionConsole from "../MissionConsole/MissionConsole.js"
 import Utils from "../../Utils/Utils.js"
+
+import css from "./WorldViewer.module.scss"
 
 class WorldViewer extends React.Component {
   renderSceneRows = () => {
     const map = localStateStore.getActiveWorld()
-    // const grid = map.data.grid;
 
     const {
       data: { gridDimensions, newGrid5 },
@@ -93,7 +93,11 @@ class WorldViewer extends React.Component {
     const mapBackground = Images.backgrounds["mapBackground11"]
     const hideMissionConsole = localStateStore.getQuestStatus()
       .hideMissionConsole
-    console.log("hideMissionConsole", hideMissionConsole) // zzz
+    console.log(
+      "localStateStore.getQuestStatus()------------------------------>>",
+      toJS(localStateStore.getQuestStatus())
+    ) // zzz
+
     return (
       <>
         <img className={css.backgroundImage} src={mainBackground} alt={"bk"} />

@@ -153,6 +153,7 @@ export default class Utils {
 
       const flagKeys = Object.keys(flags)
 
+      // Iterate through each accumulated value and update that property in the local store.
       flagKeys.forEach((key) => {
         const value = flags[key]
 
