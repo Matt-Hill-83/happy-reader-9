@@ -98,6 +98,10 @@ export default class Utils {
 
       let sceneIsLocked = false
 
+      // refactor this to tighten it up
+      // refactor this to tighten it up
+      // refactor this to tighten it up
+      // refactor this to tighten it up
       if (sceneTriggers && sceneTriggers.length > 0) {
         sceneTriggers.forEach((trigger) => {
           if (trigger.name === Constants.triggers.triggerTypes.LOCK) {
