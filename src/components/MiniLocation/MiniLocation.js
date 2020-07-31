@@ -233,7 +233,8 @@ class MiniLocation extends React.Component {
       "background-color": `#${backgroundColor}`,
     }
 
-    const largeLocation = scene.location.name === "stump" ? css.large : ""
+    const largeLocation =
+      false && scene.location.name === "stump" ? css.large : ""
 
     return (
       <div
