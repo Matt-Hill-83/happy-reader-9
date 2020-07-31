@@ -12,7 +12,7 @@ export default function DialogBuilder({ props }) {
   const [questConfig, setQuestConfig] = useState([])
   const [dataTableKey, setDataTableKey] = useState([])
 
-  const { onSave } = props
+  const { onSave, scene } = props
 
   useEffect(() => {
     // on mount
@@ -27,7 +27,19 @@ export default function DialogBuilder({ props }) {
     setQuestConfig(props.questConfig || {})
   }, [props.questConfig])
 
-  const dialogBuilderProps = { initialValue: "test" }
+  let content = ""
+  const frames = _get(scene, "frameSet.frames") || []
+
+  frames.forEach((frame) => {
+    frame.dialog.forEach((dialog) => {
+      content += `<p>${dialog.text || "empty"}</p>`
+    })
+
+    console.log("content", toJS(content)) // zzz
+  })
+
+  const dialogBuilderProps = { initialValue: content }
+  // const dialogBuilderProps = { initialValue: scene.location.name }
 
   return <MyTextEditor props={dialogBuilderProps}></MyTextEditor>
 }

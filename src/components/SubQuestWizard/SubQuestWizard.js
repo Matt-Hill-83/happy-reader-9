@@ -22,6 +22,7 @@ export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState([])
   const [dataTableKey, setDataTableKey] = useState([])
   const [showDialogBuilder, setShowDialogBuilder] = useState(false)
+  const [sceneForDialogBuilder, setSceneForDialogBuilder] = useState(null)
 
   const { onSave } = props
 
@@ -103,27 +104,32 @@ export default function SubQuestWizard({ props }) {
       )
     }
 
-    return scenes.map((scene, sceneIndex) => {
-      console.log("scene", toJS(scene)) // zzz
+    return scenes.map((sceneConfig, sceneIndex) => {
+      // console.log("sceneConfig", toJS(sceneConfig)) // zzz
 
       const onChangeScene = (newItem) => {
         const { location, id } = newItem
-        scene.name = location.name
-        scene.id = id
+        sceneConfig.name = location.name
+        sceneConfig.id = id
       }
-      const defaultValue = realScenes.find((item) => item.id === scene.id)
+      const realScene = realScenes.find((item) => item.id === sceneConfig.id)
 
       // create a ref to an empty array so that new triggers added will be in that referenced
       // array
-      if (!scene.sceneTriggers) {
-        scene.sceneTriggers = []
+      if (!sceneConfig.sceneTriggers) {
+        sceneConfig.sceneTriggers = []
       }
-      const triggers = scene.sceneTriggers
+      const triggers = sceneConfig.sceneTriggers
+
+      const openDialogBuilder = ({ scene }) => {
+        setSceneForDialogBuilder(scene)
+        setShowDialogBuilder(true)
+      }
 
       const moreButtons = (
         <Button
           className={css.xxxsaveButton}
-          onClick={() => setShowDialogBuilder(!showDialogBuilder)}
+          onClick={() => openDialogBuilder({ scene: realScene })}
         >
           DB
         </Button>
@@ -143,7 +149,8 @@ export default function SubQuestWizard({ props }) {
           <SimpleSelectObj
             className={css.sceneDropdown}
             items={realScenes}
-            value={defaultValue}
+            value={realScene}
+            // value={defaultValue}
             getOptionLabel={(option) => option.location.name}
             onChange={onChangeScene}
           />
@@ -322,16 +329,17 @@ export default function SubQuestWizard({ props }) {
     })
   }
 
-  const renderedSubQuests = (
-    <div className={cx(css.content)}>{renderSubQuests()}</div>
-  )
-  const dialogBuilderProps = { initialValue: "9sadfsa" }
-
-  const content = showDialogBuilder ? (
-    <DialogBuilder props={dialogBuilderProps}></DialogBuilder>
-  ) : (
-    renderedSubQuests
-  )
+  let content = null
+  if (showDialogBuilder) {
+    console.log("sceneForDialogBuilder", toJS(sceneForDialogBuilder)) // zzz
+    const dialogBuilderProps = {
+      initialValue: "9sadfsa",
+      scene: sceneForDialogBuilder,
+    }
+    content = <DialogBuilder props={dialogBuilderProps}></DialogBuilder>
+  } else {
+    content = <div className={cx(css.content)}>{renderSubQuests()}</div>
+  }
 
   return (
     <div className={cx(css.main)}>
@@ -349,7 +357,7 @@ export default function SubQuestWizard({ props }) {
         {showDialogBuilder && (
           <Button
             className={css.saveButton}
-            onClick={() => setShowDialogBuilder(!showDialogBuilder)}
+            onClick={() => setShowDialogBuilder(false)}
           >
             Close DB
           </Button>
