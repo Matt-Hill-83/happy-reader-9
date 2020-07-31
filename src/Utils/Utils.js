@@ -151,10 +151,16 @@ export default class Utils {
         })
       }
 
-      Utils.updateProperty({
-        propertyName: flags.sceneIsLocked.propertyName,
-        sceneId: scene.id,
-        value: flags.sceneIsLocked.value,
+      const flagKeys = Object.keys(flags)
+
+      flagKeys.forEach((key) => {
+        const value = flags[key]
+
+        Utils.updateProperty({
+          propertyName: value.propertyName,
+          sceneId: scene.id,
+          value: value.value,
+        })
       })
     })
   }
