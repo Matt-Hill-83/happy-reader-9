@@ -146,7 +146,7 @@ class MiniLocation extends React.Component {
   render() {
     const { scene, isActive, className, id } = this.props
     const { coordinates, sceneConfig: { subQuestId = 0 } = {} } = scene
-    const questStatus = localStateStore.getQuestStatus()
+    // const questStatus = localStateStore.getQuestStatus()
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
     const neighbors = Utils.getNeighbors({ coordinates })
 
@@ -167,8 +167,10 @@ class MiniLocation extends React.Component {
     const unlockedSubQuests = localStateStore.getUnlockedSubQuests()
     const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId)
 
-    const noCloud = isVisitedScene || subQuestIsUnlocked
+    const noCloud = isVisitedScene
+    // const noCloud = isVisitedScene || subQuestIsUnlocked
     const showCloud = !noCloud
+    // const showCloud = true
 
     const locationName = scene.location.name
     if (!locationName) {
@@ -190,7 +192,7 @@ class MiniLocation extends React.Component {
     let showBottomPath
     let showRightPath
     let backgroundColor = "white"
-    let sceneUnlocked
+    let sceneLocked
     let showLock
 
     if (!isBlank) {
@@ -211,9 +213,9 @@ class MiniLocation extends React.Component {
         )
       }
 
-      sceneUnlocked = !Utils.isSceneUnlocked({ sceneId: scene.id })
+      sceneLocked = Utils.isSceneLocked({ sceneId: scene.id })
 
-      showLock = !sceneUnlocked
+      showLock = sceneLocked
       locationImage = Images.all[locationName]
       rockImage = Images.backgrounds["rock"]
       rockImageVertical = Images.backgrounds["rock02Vertical"]

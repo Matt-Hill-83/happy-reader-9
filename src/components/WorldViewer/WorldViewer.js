@@ -93,10 +93,6 @@ class WorldViewer extends React.Component {
     const mapBackground = Images.backgrounds["mapBackground11"]
     const hideMissionConsole = localStateStore.getQuestStatus()
       .hideMissionConsole
-    console.log(
-      "localStateStore.getQuestStatus()------------------------------>>",
-      toJS(localStateStore.getQuestStatus())
-    ) // zzz
 
     return (
       <>

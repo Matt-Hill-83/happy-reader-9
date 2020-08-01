@@ -75,9 +75,17 @@ export default class Utils {
   }
 
   static isSceneUnlocked = ({ sceneId }) => {
-    const lockedScenes = localStateStore.getLockedScenes()
+    const questStatus = localStateStore.getQuestStatus()
+    const { lockedScenes = [] } = questStatus
+    return !lockedScenes.includes(sceneId) ? true : false
+  }
+
+  static isSceneLocked = ({ sceneId }) => {
+    const questStatus = localStateStore.getQuestStatus()
+    const { lockedScenes = [] } = questStatus
     return lockedScenes.includes(sceneId) ? true : false
   }
+
   //
   //
   //
@@ -145,6 +153,7 @@ export default class Utils {
           conditions.forEach((condition) => {
             const { currentMission } = condition
             if (currentMission >= 0 && currentMission === activeMissionIndex) {
+              // roll the individual result in with the running aggregate result
               runEvaluators({ trigger })
             }
           })
