@@ -74,12 +74,6 @@ export default class Utils {
     localStateStore.setQuestStatus(questStatus)
   }
 
-  static isSceneUnlocked = ({ sceneId }) => {
-    const questStatus = localStateStore.getQuestStatus()
-    const { lockedScenes = [] } = questStatus
-    return !lockedScenes.includes(sceneId) ? true : false
-  }
-
   static isSceneLocked = ({ sceneId }) => {
     const questStatus = localStateStore.getQuestStatus()
     const { lockedScenes = [] } = questStatus
@@ -90,6 +84,12 @@ export default class Utils {
     const questStatus = localStateStore.getQuestStatus()
     const { cloudedScenes = [] } = questStatus
     return cloudedScenes.includes(sceneId) ? true : false
+  }
+
+  static isSceneHidden = ({ sceneId }) => {
+    const questStatus = localStateStore.getQuestStatus()
+    const { hiddenScenes = [] } = questStatus
+    return hiddenScenes.includes(sceneId) ? true : false
   }
 
   //
@@ -111,9 +111,18 @@ export default class Utils {
       })
 
       const flags = {
-        sceneIsLocked: { value: false, propertyName: "lockedScenes" },
-        sceneIsHidden: { value: false, propertyName: "hiddenScenes" },
-        sceneIsClouded: { value: false, propertyName: "cloudedScenes" },
+        sceneIsLocked: {
+          value: false,
+          propertyName: Constants.sceneVisibilityPropNames.LOCKED_SCENES,
+        },
+        sceneIsHidden: {
+          value: false,
+          propertyName: Constants.sceneVisibilityPropNames.HIDDEN_SCENES,
+        },
+        sceneIsClouded: {
+          value: false,
+          propertyName: Constants.sceneVisibilityPropNames.CLOUDED_SCENES,
+        },
       }
 
       const triggerTypes = Constants.triggers.triggerTypes

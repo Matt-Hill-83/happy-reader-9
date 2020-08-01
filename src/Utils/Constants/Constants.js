@@ -88,6 +88,12 @@ export default class Constants {
     merida02: 3,
   }
 
+  static sceneVisibilityPropNames = {
+    LOCKED_SCENES: "lockedScenes",
+    HIDDEN_SCENES: "hiddenScenes",
+    CLOUDED_SCENES: "cloudedScenes",
+  }
+
   static triggers = {
     triggerTypes: {
       LOCK: "lock",

@@ -178,7 +178,6 @@ class MiniLocation extends React.Component {
     let showBottomPath
     let showRightPath
     let backgroundColor = "white"
-    let sceneLocked
     let showLock
     let showCloud
 
