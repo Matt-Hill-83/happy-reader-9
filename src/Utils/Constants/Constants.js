@@ -3,7 +3,6 @@ import Utils from "../Utils"
 export default class Constants {
   static newTrigger = () => {
     return {
-      "0": "unhide",
       name: "lock",
       conditions: [
         {
@@ -15,7 +14,7 @@ export default class Constants {
 
   static newScene = {
     name: "blank",
-    id: "xxx",
+    id: "xxx1",
     sceneTriggers: [
       {
         conditions: [
@@ -41,7 +40,7 @@ export default class Constants {
           },
         ],
         name: "no name",
-        id: "xxx",
+        id: "yyy",
       },
     ],
     index: 0,

@@ -93,14 +93,25 @@ export default function SubQuestWizard({ props }) {
 
     if (!scenes || scenes.length === 0) {
       return (
-        <AddDeleteButtonGroup
-          props={{
-            title: "Add Scene-----",
-            rowIndex: 0,
-            onDelete: () => {},
-            onAdd: onAddScene,
-          }}
-        />
+        // <AddDeleteButtonGroup
+        //   props={{
+        //     title: "Add Scene",
+        //     rowIndex: 0,
+        //     onDelete: () => {},
+        //     onAdd: onAddScene,
+        //   }}
+        // />
+        <Button
+          onClick={() =>
+            onAddScene({
+              rowIndex: 0,
+              before: false,
+            })
+          }
+          icon={IconNames.ADD}
+        >
+          Add Scene
+        </Button>
       )
     }
 
@@ -125,15 +136,6 @@ export default function SubQuestWizard({ props }) {
         setSceneForDialogBuilder(scene)
         setShowDialogBuilder(true)
       }
-
-      // const moreButtons = (
-      //   <Button
-      //     className={css.xxxsaveButton}
-      //     onClick={() => openDialogBuilder({ scene: realScene })}
-      //   >
-      //     DB
-      //   </Button>
-      // )
 
       const moreNestedButtons = (
         <Button
@@ -307,7 +309,7 @@ export default function SubQuestWizard({ props }) {
       const accordianProps = { items }
 
       const onAddScene = ({ rowIndex, before }) => {
-        const newElement = Constants.newScene
+        const newElement = Constants.newSubQuest
         Utils.addArrayElement({
           newElement,
           before,

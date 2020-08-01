@@ -210,15 +210,15 @@ export default class Utils {
   //
 
   static getParentSubQuestFromScene = ({ world, sceneName, sceneId }) => {
-    // const world = localStateStore.getActiveWorld()
-    // const { questConfig } = world
     const { questConfig } = world
     let parentSubQuest = -1
     questConfig.subQuests &&
       questConfig.subQuests.forEach((subQuest, subQuestIndex) => {
-        const subQuestMatch = subQuest.scenes.find((scene) => {
-          return scene.name === sceneName
-        })
+        const subQuestMatch =
+          subQuest.scenes &&
+          subQuest.scenes.find((scene) => {
+            return scene.name === sceneName
+          })
         if (subQuestMatch) {
           parentSubQuest = subQuestIndex
         }
