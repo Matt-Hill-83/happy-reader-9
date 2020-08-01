@@ -57,6 +57,11 @@
   .scenePickerGroup {
     display: flex;
     justify-self: flex-start;
+    position: absolute;
+    top: 0;
+    transform: translateY(-100%);
+    align-items: flex-end;
+    left: 0px;
   }
 
   .sceneDropdown {
@@ -131,9 +136,9 @@
         padding: 10px;
         border-radius: 6px;
         background: lightblue;
-        padding-top: 0px;
         margin: 10px;
         margin-bottom: 0px;
+        margin-top: 28px;
 
         &:nth-child(odd) {
           background: lightgreen;
