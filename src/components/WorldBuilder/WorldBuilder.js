@@ -387,9 +387,6 @@ class WorldBuilder extends Component {
           sceneName: scene.location.name,
           world: world.data,
         })
-        // const style = {
-        //   "background-color": `#${backgroundColor}`,
-        // }
 
         gridRow.push(
           <div className={css.gridCell} style={backgroundColor}>
@@ -412,7 +409,7 @@ class WorldBuilder extends Component {
                   imageSets={characterImageSets}
                 />
               )}
-              {!hideScene && (
+              {false && !hideScene && (
                 <CrudMachine
                   className={`${css.crudMachine} ${css.doorsBottomMachine}`}
                   items={doorsBottom}
@@ -422,7 +419,7 @@ class WorldBuilder extends Component {
                 />
               )}
 
-              {!hideScene && (
+              {false && !hideScene && (
                 <CrudMachine
                   className={`${css.crudMachine} ${css.doorsRightMachine}`}
                   items={doorsRight}
