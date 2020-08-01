@@ -146,7 +146,6 @@ class MiniLocation extends React.Component {
   render() {
     const { scene, isActive, className, id } = this.props
     const { coordinates, sceneConfig: { subQuestId = 0 } = {} } = scene
-    // const questStatus = localStateStore.getQuestStatus()
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
     const neighbors = Utils.getNeighbors({ coordinates })
 
@@ -163,7 +162,8 @@ class MiniLocation extends React.Component {
       return <div className={`${css.main} ${className} ${localClass}`}></div>
     }
 
-    const isBlank = locationName === "blank"
+    const showNothing = Utils.isSceneHidden({ sceneId: scene.id })
+    const isBlank = locationName === "blank" || showNothing
     const localClass = isActive ? css.activeClass : ""
 
     const cloudImage = Images.backgrounds["cloud"]

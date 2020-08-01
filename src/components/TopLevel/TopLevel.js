@@ -201,8 +201,7 @@ class TopLevel extends React.Component {
     if (questConfig) {
       const missions = Utils.getActiveSubQuestMissions()
       const desiredItems = missions.map((mission) => mission.item)
-      console.log("desiredItems", toJS(desiredItems)) // zzz
-      const desiredItems2 = desiredItems.filter((item) => !!item)
+      const desiredItemsFiltered = desiredItems.filter((item) => !!item)
       const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig))
 
       const combinedPockets = localStateStore.addToPockets({
@@ -214,7 +213,7 @@ class TopLevel extends React.Component {
         activeMissionIndex: 0,
         pockets: combinedPockets,
         questConfig: clonedQuestConfig,
-        desiredItems: desiredItems2,
+        desiredItems: desiredItemsFiltered,
       }
       const newQuestStatus = { ...defaultQuestStatus, ...newProps }
 
