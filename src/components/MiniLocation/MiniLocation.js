@@ -208,13 +208,17 @@ class MiniLocation extends React.Component {
       defaultDoorImage = Images.backgrounds["door"]
       showBottomPath = neighbors[Constants.neighborPositionsEnum.bottom]
       showRightPath = neighbors[Constants.neighborPositionsEnum.right]
-      const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
 
-      const parentSubQuestFromScene = Utils.getParentSubQuestFromScene({
-        sceneName: locationName,
-      })
-      const colorIndex = parentSubQuestFromScene % colors.length
-      backgroundColor = colors[colorIndex]
+      // const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
+
+      // const parentSubQuestFromScene = Utils.getParentSubQuestFromScene({
+      //   sceneName: locationName,
+      // })
+
+      // console.log("parentSubQuestFromScene", toJS(parentSubQuestFromScene)) // zzz
+      // const colorIndex = parentSubQuestFromScene % colors.length
+      // backgroundColor = colors[colorIndex]
+      backgroundColor = Utils.getSubQuestColor({ sceneName: locationName })
     }
 
     const style = {

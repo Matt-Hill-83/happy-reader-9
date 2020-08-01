@@ -9,8 +9,9 @@ import { toJS } from "mobx"
 
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 
-import css from "./FrameBuilder.module.scss"
 import Utils from "../../Utils/Utils"
+
+import css from "./FrameBuilder.module.scss"
 
 class FrameBuilder extends Component {
   state = {

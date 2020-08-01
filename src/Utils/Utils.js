@@ -11,6 +11,18 @@ export default class Utils {
     console.log("array", toJS(array)) // zzz
   }
 
+  static getSubQuestColor = ({ sceneName }) => {
+    const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
+
+    const parentSubQuestFromScene = Utils.getParentSubQuestFromScene({
+      sceneName,
+    })
+
+    // console.log("parentSubQuestFromScene", toJS(parentSubQuestFromScene)) // zzz
+    const colorIndex = parentSubQuestFromScene % colors.length
+    return colors[colorIndex]
+  }
+
   static deleteArrayElement = ({ array, index }) => {
     array.splice(index, 1)
   }
