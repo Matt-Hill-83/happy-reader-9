@@ -35,6 +35,7 @@
 
   .accordianContainer {
     margin: 10px;
+    min-width: 542px;
   }
 
   .missionsList {
@@ -61,7 +62,8 @@
     height: 88%;
 
     .triggersTable {
-      max-width: 602px;
+      // max-width: 602px;
+      max-width: 100%;
       box-shadow: none;
       border: 1px solid black;
       margin-top: 2px;
@@ -110,9 +112,17 @@
       .listItem {
         font-size: 1vh;
         display: flex;
-        border-bottom: 1px solid purple !important;
+        // border-bottom: 4px solid purple !important;
         flex-direction: column;
         position: relative;
+        // background: #e6d9db;
+        // border: 2px solid purple;
+        padding: 2px;
+
+        &:nth-child(odd) {
+          // border: 2px solid blue;
+          // background: lightgreen;
+        }
 
         :global {
           .MuiFormControl-root {

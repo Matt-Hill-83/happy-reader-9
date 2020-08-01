@@ -24,6 +24,7 @@ export default function AddDeleteButtonGroup({ props }) {
             vertical={true}
             className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
           >
+            {moreNestedButtons}
             <Button
               onClick={() =>
                 onAdd({

@@ -135,6 +135,15 @@ export default function SubQuestWizard({ props }) {
         </Button>
       )
 
+      const moreNestedButtons = (
+        <Button
+          className={css.xxxsaveButton}
+          onClick={() => openDialogBuilder({ scene: realScene })}
+        >
+          DB
+        </Button>
+      )
+
       return (
         <div className={cx(css.sceneName, css.listItem)}>
           <div className={css.scenePickerGroup}>
@@ -152,6 +161,7 @@ export default function SubQuestWizard({ props }) {
                 onDelete: onDeleteScene,
                 onAdd: onAddScene,
                 moreButtons,
+                moreNestedButtons,
               }}
             />
           </div>
