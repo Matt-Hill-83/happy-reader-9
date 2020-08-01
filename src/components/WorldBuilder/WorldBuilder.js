@@ -56,10 +56,6 @@ class WorldBuilder extends Component {
   }
 
   onChangeWorld = ({ mapId, newWorld }) => {
-    console.log("onChangeWorld+++++++++++++++++++++++++++") // zzz
-    console.log("onChangeWorld+++++++++++++++++++++++++++") // zzz
-    console.log("onChangeWorld+++++++++++++++++++++++++++") // zzz
-    console.log("onChangeWorld+++++++++++++++++++++++++++") // zzz
     this.setState({ showQuestConfig: false })
     // new map
     if (newWorld) {
@@ -74,17 +70,13 @@ class WorldBuilder extends Component {
       const {
         data: { gridDimensions, newGrid5 },
       } = world
-      console.log(
-        "newGrid5=---------------------------------wb",
-        toJS(newGrid5)
-      ) // zzz
+
       const reCreatedScenesGrid = Utils.reCreateGridFromCondensedGrid({
         gridDimensions,
         newGrid5,
       })
 
       localStateStore.setWorldBuilderWorld(world)
-      console.log("reCreatedScenesGrid", toJS(reCreatedScenesGrid)) // zzz
       localStateStore.setWorldBuilderScenesGrid(reCreatedScenesGrid)
     }
   }
@@ -335,7 +327,6 @@ class WorldBuilder extends Component {
   // Which is why you can change an item, but you can't add an item.
   renderScenesGrid = () => {
     const scenesGrid = localStateStore.getWorldBuilderScenesGrid()
-    console.log("scenesGrid", toJS(scenesGrid)) // zzz
 
     const itemRenderer = ({ item }) => {
       return <ImageDisplay item={item} />

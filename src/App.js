@@ -43,7 +43,6 @@ export default function App() {
   maps.fetch()
   gameConfig.fetch()
   // console.log("gameConfig", toJS(gameConfig)) // zzz
-  // console.log("maps", toJS(maps)) // zzz
   // gameConfig.add({ test: 5 })
 
   const nav = IS_PROD_RELEASE ? null : (
