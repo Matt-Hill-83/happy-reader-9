@@ -8,19 +8,21 @@ export default class Utils {
   static addArrayElement = ({ newElement, before, index, array }) => {
     const adder = before === true ? 0 : 1
     array.splice(index + adder, 0, newElement)
-    console.log("array", toJS(array)) // zzz
   }
 
-  static getSubQuestColor = ({ sceneName }) => {
+  static getSubQuestColor = ({ sceneName, world }) => {
     const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
 
     const parentSubQuestFromScene = Utils.getParentSubQuestFromScene({
       sceneName,
+      world,
     })
-
-    // console.log("parentSubQuestFromScene", toJS(parentSubQuestFromScene)) // zzz
     const colorIndex = parentSubQuestFromScene % colors.length
-    return colors[colorIndex]
+    const backgroundColor = colors[colorIndex]
+    const style = {
+      "background-color": `#${backgroundColor}`,
+    }
+    return style
   }
 
   static deleteArrayElement = ({ array, index }) => {
@@ -114,7 +116,6 @@ export default class Utils {
     const { newGrid5 } = activeWorld.data
 
     const questStatus = localStateStore.getQuestStatus()
-    console.log("questStatus", toJS(questStatus)) // zzz
     const { activeMissionIndex } = questStatus
 
     newGrid5.forEach((scene) => {
@@ -208,15 +209,16 @@ export default class Utils {
   //
   //
 
-  static getParentSubQuestFromScene = ({ sceneName, sceneId }) => {
-    const activeWorld = localStateStore.getActiveWorld()
-    const { questConfig } = activeWorld.data
+  static getParentSubQuestFromScene = ({ world, sceneName, sceneId }) => {
+    // const world = localStateStore.getActiveWorld()
+    // const { questConfig } = world
+    const { questConfig } = world
     let parentSubQuest = -1
     questConfig.subQuests &&
       questConfig.subQuests.forEach((subQuest, subQuestIndex) => {
-        const subQuestMatch = subQuest.scenes.find(
-          (scene) => scene.name === sceneName
-        )
+        const subQuestMatch = subQuest.scenes.find((scene) => {
+          return scene.name === sceneName
+        })
         if (subQuestMatch) {
           parentSubQuest = subQuestIndex
         }
@@ -537,8 +539,13 @@ export default class Utils {
         const sceneObj =
           newGrid5.find((scene) => {
             if (!scene.coordinates) {
+              debugger
               return Utils.getBlankScene({ props })
             }
+            // const matchFound =
+            //   scene.coordinates.row === rowIndex &&
+            //   scene.coordinates.col === colIndex
+
             return (
               scene.coordinates.row === rowIndex &&
               scene.coordinates.col === colIndex

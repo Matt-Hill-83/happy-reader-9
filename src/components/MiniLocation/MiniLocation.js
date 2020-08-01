@@ -177,7 +177,9 @@ class MiniLocation extends React.Component {
     let defaultDoorImage
     let showBottomPath
     let showRightPath
-    let backgroundColor = "white"
+    let backgroundColor = {
+      "background-color": `white`,
+    }
     let showLock
     let showCloud
 
@@ -209,20 +211,12 @@ class MiniLocation extends React.Component {
       showBottomPath = neighbors[Constants.neighborPositionsEnum.bottom]
       showRightPath = neighbors[Constants.neighborPositionsEnum.right]
 
-      // const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
+      const world = localStateStore.getActiveWorld()
 
-      // const parentSubQuestFromScene = Utils.getParentSubQuestFromScene({
-      //   sceneName: locationName,
-      // })
-
-      // console.log("parentSubQuestFromScene", toJS(parentSubQuestFromScene)) // zzz
-      // const colorIndex = parentSubQuestFromScene % colors.length
-      // backgroundColor = colors[colorIndex]
-      backgroundColor = Utils.getSubQuestColor({ sceneName: locationName })
-    }
-
-    const style = {
-      "background-color": `#${backgroundColor}`,
+      backgroundColor = Utils.getSubQuestColor({
+        sceneName: locationName,
+        world: world.data,
+      })
     }
 
     const largeLocation =
@@ -235,7 +229,7 @@ class MiniLocation extends React.Component {
         className={`${css.main} ${className} ${
           this.props.scene.isStartScene ? css.isStartScene : ""
         } ${isBlank ? css.isBlank : ""} ${localClass} ${largeLocation}`}
-        style={style}
+        style={backgroundColor}
       >
         {!isBlank && (
           <div className={css.container}>
