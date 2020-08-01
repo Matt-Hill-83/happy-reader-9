@@ -147,6 +147,13 @@ export default function SubQuestWizard({ props }) {
       return (
         <div className={cx(css.sceneName, css.listItem)}>
           <div className={css.scenePickerGroup}>
+            <SimpleSelectObj
+              className={css.sceneDropdown}
+              items={realScenes}
+              value={realScene}
+              getOptionLabel={(option) => option.location.name}
+              onChange={onChangeScene}
+            />
             <AddDeleteButtonGroup
               props={{
                 title: "",
@@ -155,13 +162,6 @@ export default function SubQuestWizard({ props }) {
                 onAdd: onAddScene,
                 moreNestedButtons,
               }}
-            />
-            <SimpleSelectObj
-              className={css.sceneDropdown}
-              items={realScenes}
-              value={realScene}
-              getOptionLabel={(option) => option.location.name}
-              onChange={onChangeScene}
             />
           </div>
           {renderTriggers({ triggers })}
