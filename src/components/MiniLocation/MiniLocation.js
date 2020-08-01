@@ -158,22 +158,6 @@ class MiniLocation extends React.Component {
     //   localStateStore.isVisitedScene(neighbor && neighbor.id)
     // );
 
-    // const unlockSceneMission =
-    //   _get(
-    //     scene,
-    //     "sceneConfig.triggers.unlockSceneConditions.currentMission"
-    //   ) || -1
-
-    const unlockedSubQuests = localStateStore.getUnlockedSubQuests()
-    const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId)
-
-    // const noCloud = isVisitedScene
-    // const noCloud = isVisitedScene || subQuestIsUnlocked
-    const isSceneClouded = Utils.isSceneClouded({ sceneId: scene.id })
-    console.log("isSceneClouded", toJS(isSceneClouded)) // zzz
-    const showCloud = !isVisitedScene && isSceneClouded
-    // const showCloud = true
-
     const locationName = scene.location.name
     if (!locationName) {
       return <div className={`${css.main} ${className} ${localClass}`}></div>
@@ -196,6 +180,7 @@ class MiniLocation extends React.Component {
     let backgroundColor = "white"
     let sceneLocked
     let showLock
+    let showCloud
 
     if (!isBlank) {
       if (showLocationOnly) {
@@ -215,9 +200,9 @@ class MiniLocation extends React.Component {
         )
       }
 
-      sceneLocked = Utils.isSceneLocked({ sceneId: scene.id })
+      showLock = Utils.isSceneLocked({ sceneId: scene.id })
+      showCloud = Utils.isSceneClouded({ sceneId: scene.id }) && !isVisitedScene
 
-      showLock = sceneLocked
       locationImage = Images.all[locationName]
       rockImage = Images.backgrounds["rock"]
       rockImageVertical = Images.backgrounds["rock02Vertical"]

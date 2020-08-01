@@ -12,7 +12,6 @@ class LocalStateStore {
   showBookPicker = false
   showWorldBuilder = false
   unlockedSubQuests = [0]
-  // hiddenScenes = [0]
   visitedScenes = []
 
   _defaultQuestStatus = {
