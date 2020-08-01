@@ -95,7 +95,7 @@ export default function SubQuestWizard({ props }) {
       return (
         <AddDeleteButtonGroup
           props={{
-            title: "Add Scene",
+            title: "Add Scene-----",
             rowIndex: 0,
             onDelete: () => {},
             onAdd: onAddScene,
@@ -134,26 +134,27 @@ export default function SubQuestWizard({ props }) {
           DB
         </Button>
       )
+
       return (
         <div className={cx(css.sceneName, css.listItem)}>
-          <AddDeleteButtonGroup
-            props={{
-              title: "Add Scene",
-              rowIndex: sceneIndex,
-              onDelete: onDeleteScene,
-              onAdd: onAddScene,
-              moreButtons,
-            }}
-          />
-
-          <SimpleSelectObj
-            className={css.sceneDropdown}
-            items={realScenes}
-            value={realScene}
-            // value={defaultValue}
-            getOptionLabel={(option) => option.location.name}
-            onChange={onChangeScene}
-          />
+          <div className={css.scenePickerGroup}>
+            <SimpleSelectObj
+              className={css.sceneDropdown}
+              items={realScenes}
+              value={realScene}
+              getOptionLabel={(option) => option.location.name}
+              onChange={onChangeScene}
+            />
+            <AddDeleteButtonGroup
+              props={{
+                title: "",
+                rowIndex: sceneIndex,
+                onDelete: onDeleteScene,
+                onAdd: onAddScene,
+                moreButtons,
+              }}
+            />
+          </div>
           {renderTriggers({ triggers })}
         </div>
       )

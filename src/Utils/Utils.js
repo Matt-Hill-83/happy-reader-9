@@ -86,6 +86,12 @@ export default class Utils {
     return lockedScenes.includes(sceneId) ? true : false
   }
 
+  static isSceneClouded = ({ sceneId }) => {
+    const questStatus = localStateStore.getQuestStatus()
+    const { cloudedScenes = [] } = questStatus
+    return cloudedScenes.includes(sceneId) ? true : false
+  }
+
   //
   //
   //

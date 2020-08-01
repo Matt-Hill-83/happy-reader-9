@@ -167,9 +167,11 @@ class MiniLocation extends React.Component {
     const unlockedSubQuests = localStateStore.getUnlockedSubQuests()
     const subQuestIsUnlocked = unlockedSubQuests.includes(subQuestId)
 
-    const noCloud = isVisitedScene
+    // const noCloud = isVisitedScene
     // const noCloud = isVisitedScene || subQuestIsUnlocked
-    const showCloud = !noCloud
+    const isSceneClouded = Utils.isSceneClouded({ sceneId: scene.id })
+    console.log("isSceneClouded", toJS(isSceneClouded)) // zzz
+    const showCloud = !isVisitedScene && isSceneClouded
     // const showCloud = true
 
     const locationName = scene.location.name
@@ -275,7 +277,7 @@ class MiniLocation extends React.Component {
                 />
               </div>
             )}
-            {true && showLock && (
+            {showLock && (
               <div className={css.cloudImageContainer}>
                 <img
                   className={css.cloudImage}
