@@ -112,16 +112,18 @@
       .listItem {
         font-size: 1vh;
         display: flex;
-        // border-bottom: 4px solid purple !important;
         flex-direction: column;
         position: relative;
-        // background: #e6d9db;
-        // border: 2px solid purple;
         padding: 2px;
+        border: 1px solid black !important;
+        padding: 10px;
+        border-radius: 6px;
+        background: lightblue;
+        padding-top: 0px;
+        margin: 10px;
 
         &:nth-child(odd) {
-          // border: 2px solid blue;
-          // background: lightgreen;
+          background: lightgreen;
         }
 
         :global {

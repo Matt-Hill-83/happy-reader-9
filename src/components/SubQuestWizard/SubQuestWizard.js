@@ -126,14 +126,14 @@ export default function SubQuestWizard({ props }) {
         setShowDialogBuilder(true)
       }
 
-      const moreButtons = (
-        <Button
-          className={css.xxxsaveButton}
-          onClick={() => openDialogBuilder({ scene: realScene })}
-        >
-          DB
-        </Button>
-      )
+      // const moreButtons = (
+      //   <Button
+      //     className={css.xxxsaveButton}
+      //     onClick={() => openDialogBuilder({ scene: realScene })}
+      //   >
+      //     DB
+      //   </Button>
+      // )
 
       const moreNestedButtons = (
         <Button
@@ -160,7 +160,7 @@ export default function SubQuestWizard({ props }) {
                 rowIndex: sceneIndex,
                 onDelete: onDeleteScene,
                 onAdd: onAddScene,
-                moreButtons,
+                // moreButtons,
                 moreNestedButtons,
               }}
             />
