@@ -326,14 +326,26 @@ export default function SubQuestWizard({ props }) {
 
       return (
         <div className={css.accordianContainer}>
-          <AddDeleteButtonGroup
-            props={{
-              title: "Add SubQuest",
-              rowIndex: subQuestIndex,
-              onDelete: onDeleteScene,
-              onAdd: onAddScene,
-            }}
-          />
+          <div className={css.subQuestHeader}>
+            <span className={css.subQuestTitle}>{subQuest.name}</span>
+            {/* <Button
+              onClick={() =>
+                onAddScene({
+                  rowIndex: subQuestIndex,
+                  before: false,
+                })
+              }
+              icon={IconNames.ADD}
+            /> */}
+            <AddDeleteButtonGroup
+              props={{
+                title: "",
+                rowIndex: subQuestIndex,
+                onDelete: onDeleteScene,
+                onAdd: onAddScene,
+              }}
+            />
+          </div>
           <MyAccordian props={accordianProps} />
         </div>
       )
