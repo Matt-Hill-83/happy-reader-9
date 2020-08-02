@@ -387,6 +387,7 @@ class WorldBuilder extends Component {
         const backgroundColor = QuestStatusUtils.getSubQuestColor({
           sceneName: scene.location.name,
           world: world.data,
+          sceneId: scene.id,
         })
 
         gridRow.push(

@@ -179,11 +179,10 @@ export default class QuestStatusUtils {
     return (foundScene && foundScene.sceneTriggers) || []
   }
 
-  static getSubQuestColor = ({ sceneName, world, sceneId }) => {
+  static getSubQuestColor = ({ world, sceneId }) => {
     const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
 
     const parentSubQuestFromScene = this.getParentSubQuestFromScene({
-      // sceneName,
       world,
       sceneId,
     })
