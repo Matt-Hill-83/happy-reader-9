@@ -97,7 +97,7 @@ class TopLevel extends React.Component {
     if (!startScene) return
 
     localStateStore.setVisitedScenes([])
-    localStateStore.setUnlockedSubQuests([0])
+    // localStateStore.setUnlockedSubQuests([0])
     this.updateActiveScene({ sceneId: startScene.id })
   }
 
@@ -105,7 +105,7 @@ class TopLevel extends React.Component {
     localStateStore.setActiveSceneId(sceneId)
     localStateStore.setActiveFrameIndex(0)
     localStateStore.addVisitedScenes(sceneId)
-    localStateStore.unlockSubQuestForActiveScene()
+    // localStateStore.unlockSubQuestForActiveScene()
 
     const questStatus = localStateStore.getQuestStatus()
 

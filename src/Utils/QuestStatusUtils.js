@@ -15,18 +15,28 @@ export default class QuestStatusUtils {
     const { activeMissionIndex } = questStatus
 
     // For each scene, calculate new visibility props based on conditions defined in triggers
+    // newGrid5.slice(0, 1).forEach((scene) => {
     newGrid5.forEach((scene) => {
       const sceneTriggers = this.getSceneTriggersFromScene({
         sceneId: scene.id,
       })
 
-      // const accumulatedPropertyValuesForSubQuest = this.calcAccumulatedPropertyValues(
-      //   {
-      //     sceneTriggers: subQuestTriggers,
-      //     scene,
-      //     activeMissionIndex,
-      //   }
-      // )
+      const parentSubQuestFromScene = this.getParentSubQuestIndexFromScene({
+        world: activeWorld.data,
+        sceneId: scene.id,
+      })
+      console.log("parentSubQuestFromScene", toJS(parentSubQuestFromScene)) // zzz
+
+      const { triggers: subQuestTriggers } = parentSubQuestFromScene
+      console.log("subQuestTriggers", toJS(subQuestTriggers)) // zzz
+
+      const accumulatedPropertyValuesForSubQuest = this.calcAccumulatedPropertyValues(
+        {
+          sceneTriggers: subQuestTriggers,
+          scene,
+          activeMissionIndex,
+        }
+      )
 
       const accumulatedPropertyValuesForScene = this.calcAccumulatedPropertyValues(
         {
@@ -35,6 +45,16 @@ export default class QuestStatusUtils {
           activeMissionIndex,
         }
       )
+
+      console.log(
+        "accumulatedPropertyValuesForSubQuest",
+        toJS(accumulatedPropertyValuesForSubQuest)
+      ) // zzz
+
+      console.log(
+        "accumulatedPropertyValuesForScene",
+        toJS(accumulatedPropertyValuesForScene)
+      ) // zzz
 
       const accumulatedPropertyValues = accumulatedPropertyValuesForScene
       const propertyNames = Object.keys(accumulatedPropertyValues)
@@ -142,7 +162,7 @@ export default class QuestStatusUtils {
     return subQuests && subQuests[activeSubQuestIndex]
   }
 
-  static getParentSubQuestFromScene = ({ world, sceneName, sceneId }) => {
+  static getParentSubQuestIndexFromScene = ({ world, sceneId }) => {
     const { questConfig } = world
     let parentSubQuest = -1
     questConfig.subQuests &&
@@ -150,7 +170,6 @@ export default class QuestStatusUtils {
         const subQuestMatch =
           subQuest.scenes &&
           subQuest.scenes.find((scene) => {
-            // return scene.name === sceneName
             return scene.id === sceneId
           })
         if (subQuestMatch) {
@@ -182,7 +201,7 @@ export default class QuestStatusUtils {
   static getSubQuestColor = ({ world, sceneId }) => {
     const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
 
-    const parentSubQuestFromScene = this.getParentSubQuestFromScene({
+    const parentSubQuestFromScene = this.getParentSubQuestIndexFromScene({
       world,
       sceneId,
     })

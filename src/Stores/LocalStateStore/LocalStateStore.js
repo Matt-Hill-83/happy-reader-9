@@ -12,7 +12,7 @@ class LocalStateStore {
   mapBuilderGrid = []
   showBookPicker = false
   showWorldBuilder = false
-  unlockedSubQuests = [0]
+  // unlockedSubQuests = [0]
   visitedScenes = []
 
   _defaultQuestStatus = {
@@ -54,7 +54,7 @@ class LocalStateStore {
     this.lockedScenes = lockedScenes
   }
 
-  getUnlockedSubQuests = () => this.unlockedSubQuests
+  // getUnlockedSubQuests = () => this.unlockedSubQuests
   setUnlockedSubQuests = (unlockedSubQuests) => {
     this.unlockedSubQuests = unlockedSubQuests
   }
@@ -64,24 +64,24 @@ class LocalStateStore {
     this.completedMissions = completedMissions
   }
 
-  clearUnlockedSubQuests = () => {
-    this.unlockedSubQuests.length = 0
-  }
+  // clearUnlockedSubQuests = () => {
+  //   this.unlockedSubQuests.length = 0
+  // }
 
-  unlockSubQuestForActiveScene = () => {
-    const scene = this.getActiveScene()
-    const subQuestId = _get(scene, "sceneConfig.subQuestId")
-    this.unLockSubQuestById({ subQuestId })
-  }
+  // unlockSubQuestForActiveScene = () => {
+  //   const scene = this.getActiveScene()
+  //   const subQuestId = _get(scene, "sceneConfig.subQuestId")
+  //   this.unLockSubQuestById({ subQuestId })
+  // }
 
-  unLockSubQuestById = ({ subQuestId }) => {
-    if (
-      typeof subQuestId === "number" &&
-      !this.unlockedSubQuests.includes(subQuestId)
-    ) {
-      this.unlockedSubQuests.push(subQuestId)
-    }
-  }
+  // unLockSubQuestById = ({ subQuestId }) => {
+  //   if (
+  //     typeof subQuestId === "number" &&
+  //     !this.unlockedSubQuests.includes(subQuestId)
+  //   ) {
+  //     this.unlockedSubQuests.push(subQuestId)
+  //   }
+  // }
 
   ///////////////
   ///////////////
@@ -407,7 +407,7 @@ decorate(LocalStateStore, {
   questStatus: observable,
   showBookPicker: observable,
   showWorldBuilder: observable,
-  unlockedSubQuests: observable,
+  // unlockedSubQuests: observable,
   visitedScenes: observable,
 })
 
