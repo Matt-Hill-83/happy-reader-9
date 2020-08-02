@@ -4,6 +4,9 @@ import _get from "lodash.get"
 import Constants from "./Constants/Constants.js"
 
 export default class QuestStatusUtils {
+  // update new scene visibility props based on rules in subQuest
+
+  // Object getter functions --- START
   static updateSceneVisibilityProps = () => {
     const activeWorld = localStateStore.getActiveWorld()
     const { newGrid5 } = activeWorld.data
@@ -117,6 +120,24 @@ export default class QuestStatusUtils {
     return subQuests && subQuests[activeSubQuestIndex]
   }
 
+  static getParentSubQuestFromScene = ({ world, sceneName, sceneId }) => {
+    const { questConfig } = world
+    let parentSubQuest = -1
+    questConfig.subQuests &&
+      questConfig.subQuests.forEach((subQuest, subQuestIndex) => {
+        const subQuestMatch =
+          subQuest.scenes &&
+          subQuest.scenes.find((scene) => {
+            return scene.name === sceneName
+          })
+        if (subQuestMatch) {
+          parentSubQuest = subQuestIndex
+        }
+      })
+
+    return parentSubQuest
+  }
+
   static getActiveSubQuestMissions = () => {
     const activeSubQuest = this.getActiveSubQuest()
     return (activeSubQuest && activeSubQuest.missions) || null
@@ -135,6 +156,23 @@ export default class QuestStatusUtils {
     return (foundScene && foundScene.sceneTriggers) || []
   }
 
+  static getSubQuestColor = ({ sceneName, world }) => {
+    const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
+
+    const parentSubQuestFromScene = this.getParentSubQuestFromScene({
+      sceneName,
+      world,
+    })
+    const colorIndex = parentSubQuestFromScene % colors.length
+    const backgroundColor = colors[colorIndex]
+    const style = {
+      "background-color": `#${backgroundColor}`,
+    }
+    return style
+  }
+  // Object getter functions --- END
+
+  // Data Manupulation --- START
   static updateProperty = ({ sceneId, propertyName, value }) => {
     const questStatus = localStateStore.getQuestStatus()
     if (!questStatus[propertyName]) {
@@ -171,58 +209,12 @@ export default class QuestStatusUtils {
     const { hiddenScenes = [] } = questStatus
     return hiddenScenes.includes(sceneId) ? true : false
   }
+  // Data Manupulation --- END
 
-  static getParentSubQuestFromScene = ({ world, sceneName, sceneId }) => {
-    const { questConfig } = world
-    let parentSubQuest = -1
-    questConfig.subQuests &&
-      questConfig.subQuests.forEach((subQuest, subQuestIndex) => {
-        const subQuestMatch =
-          subQuest.scenes &&
-          subQuest.scenes.find((scene) => {
-            return scene.name === sceneName
-          })
-        if (subQuestMatch) {
-          parentSubQuest = subQuestIndex
-        }
-      })
-
-    return parentSubQuest
-  }
-
+  // unused
   static incrementActiveSubQuest = () => {
     const questStatus = localStateStore.getQuestStatus()
     questStatus.activeSubQuestIndex++
     localStateStore.setQuestStatus(questStatus)
-  }
-
-  static unLockSubQuests = ({ subQuestTriggers = {} }) => {
-    const { unHideTriggers, subQuestId } = subQuestTriggers
-
-    const requiredCompletedMission = _get(
-      unHideTriggers,
-      "completedMission",
-      null
-    )
-    const completedMissions = localStateStore.getCompletedMissions()
-
-    if (completedMissions.includes(requiredCompletedMission)) {
-      localStateStore.unLockSubQuestById({ subQuestId })
-    }
-  }
-
-  static getSubQuestColor = ({ sceneName, world }) => {
-    const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
-
-    const parentSubQuestFromScene = this.getParentSubQuestFromScene({
-      sceneName,
-      world,
-    })
-    const colorIndex = parentSubQuestFromScene % colors.length
-    const backgroundColor = colors[colorIndex]
-    const style = {
-      "background-color": `#${backgroundColor}`,
-    }
-    return style
   }
 }
