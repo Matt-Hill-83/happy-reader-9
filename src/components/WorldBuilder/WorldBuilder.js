@@ -385,7 +385,6 @@ class WorldBuilder extends Component {
         const world = localStateStore.getWorldBuilderWorld() || {}
 
         const backgroundColor = QuestStatusUtils.getSubQuestColor({
-          sceneName: scene.location.name,
           world: world.data,
           sceneId: scene.id,
         })
