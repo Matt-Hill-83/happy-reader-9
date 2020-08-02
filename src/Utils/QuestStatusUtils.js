@@ -13,18 +13,25 @@ export default class QuestStatusUtils {
 
     const questStatus = localStateStore.getQuestStatus()
     const { activeMissionIndex } = questStatus
+    const questConfig = this.getActiveQuestConfig()
+    const { subQuests } = questConfig
 
     // For each scene, calculate new visibility props based on conditions defined in triggers
-    // newGrid5.slice(0, 1).forEach((scene) => {
-    newGrid5.forEach((scene) => {
+    newGrid5.slice(0, 1).forEach((scene) => {
+      // newGrid5.forEach((scene) => {
       const sceneTriggers = this.getSceneTriggersFromScene({
         sceneId: scene.id,
       })
 
-      const parentSubQuestFromScene = this.getParentSubQuestIndexFromScene({
-        world: activeWorld.data,
-        sceneId: scene.id,
-      })
+      const parentSubQuestIndexFromScene = this.getParentSubQuestIndexFromScene(
+        {
+          world: activeWorld.data,
+          sceneId: scene.id,
+        }
+      )
+
+      const parentSubQuestFromScene = subQuests[parentSubQuestIndexFromScene]
+
       console.log("parentSubQuestFromScene", toJS(parentSubQuestFromScene)) // zzz
 
       const { triggers: subQuestTriggers } = parentSubQuestFromScene
@@ -56,7 +63,15 @@ export default class QuestStatusUtils {
         toJS(accumulatedPropertyValuesForScene)
       ) // zzz
 
-      const accumulatedPropertyValues = accumulatedPropertyValuesForScene
+      const combinedProps = {
+        ...accumulatedPropertyValuesForSubQuest,
+        ...accumulatedPropertyValuesForScene,
+      }
+
+      console.log("combinedProps", toJS(combinedProps)) // zzz
+
+      const accumulatedPropertyValues = combinedProps
+      // const accumulatedPropertyValues = accumulatedPropertyValuesForScene
       const propertyNames = Object.keys(accumulatedPropertyValues)
 
       // Iterate through each accumulated value and update that property in the local store.
