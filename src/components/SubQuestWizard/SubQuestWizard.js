@@ -289,7 +289,7 @@ export default function SubQuestWizard({ props }) {
         },
         {
           title: <span className={cx(css.listGroupTitle)}>Triggers</span>,
-          expanded: false,
+          expanded: true,
           content: (
             <div className={cx(css.triggers, css.listGroup)}>
               {renderTriggers({ triggers })}
