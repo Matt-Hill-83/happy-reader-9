@@ -219,6 +219,7 @@ class MiniLocation extends React.Component {
       backgroundColor = QuestStatusUtils.getSubQuestColor({
         sceneName: locationName,
         world: world.data,
+        sceneId: scene.id,
       })
     }
 

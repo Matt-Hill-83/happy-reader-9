@@ -10,20 +10,33 @@ export default class QuestStatusUtils {
   static updateSceneVisibilityProps = () => {
     const activeWorld = localStateStore.getActiveWorld()
     const { newGrid5 } = activeWorld.data
+
     const questStatus = localStateStore.getQuestStatus()
     const { activeMissionIndex } = questStatus
 
+    // For each scene, calculate new visibility props based on conditions defined in triggers
     newGrid5.forEach((scene) => {
       const sceneTriggers = this.getSceneTriggersFromScene({
         sceneId: scene.id,
       })
 
-      const accumulatedPropertyValues = this.calcAccumulatedPropertyValues({
-        sceneTriggers,
-        scene,
-        activeMissionIndex,
-      })
+      // const accumulatedPropertyValuesForSubQuest = this.calcAccumulatedPropertyValues(
+      //   {
+      //     sceneTriggers: subQuestTriggers,
+      //     scene,
+      //     activeMissionIndex,
+      //   }
+      // )
 
+      const accumulatedPropertyValuesForScene = this.calcAccumulatedPropertyValues(
+        {
+          sceneTriggers,
+          scene,
+          activeMissionIndex,
+        }
+      )
+
+      const accumulatedPropertyValues = accumulatedPropertyValuesForScene
       const propertyNames = Object.keys(accumulatedPropertyValues)
 
       // Iterate through each accumulated value and update that property in the local store.
@@ -137,7 +150,8 @@ export default class QuestStatusUtils {
         const subQuestMatch =
           subQuest.scenes &&
           subQuest.scenes.find((scene) => {
-            return scene.name === sceneName
+            // return scene.name === sceneName
+            return scene.id === sceneId
           })
         if (subQuestMatch) {
           parentSubQuest = subQuestIndex
@@ -165,12 +179,13 @@ export default class QuestStatusUtils {
     return (foundScene && foundScene.sceneTriggers) || []
   }
 
-  static getSubQuestColor = ({ sceneName, world }) => {
+  static getSubQuestColor = ({ sceneName, world, sceneId }) => {
     const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
 
     const parentSubQuestFromScene = this.getParentSubQuestFromScene({
-      sceneName,
+      // sceneName,
       world,
+      sceneId,
     })
     const colorIndex = parentSubQuestFromScene % colors.length
     const backgroundColor = colors[colorIndex]
