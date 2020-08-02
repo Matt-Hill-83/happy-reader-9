@@ -7,6 +7,7 @@ class LocalStateStore {
   activeFrameIndex = 0
   activeMapId = null
   activeSceneId = null
+  // move this to questStatus
   completedMissions = []
   defaultWorldId = null
   mapBuilderGrid = []

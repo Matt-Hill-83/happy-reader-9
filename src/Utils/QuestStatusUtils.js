@@ -152,11 +152,23 @@ export default class QuestStatusUtils {
     }
 
     if (sceneTriggers && sceneTriggers.length > 0) {
+      const completedMissions = localStateStore.getCompletedMissions()
+
       sceneTriggers.forEach((trigger) => {
+        // each execution is goverened by the trigger type
         const { conditions = [] } = trigger
         conditions.forEach((condition) => {
-          const { currentMission } = condition
+          const { currentMission, completedMission } = condition
           if (currentMission >= 0 && currentMission === activeMissionIndex) {
+            // This only updates when currentMission === activeMissionIndex, which
+            // will prevent flags from turning off when currentMission !== activeMissionIndex
+            // roll the individual result in with the running aggregate result
+            runEvaluators({ trigger })
+          }
+          if (
+            completedMission >= 0 &&
+            completedMissions.includes(completedMission)
+          ) {
             // roll the individual result in with the running aggregate result
             runEvaluators({ trigger })
           }
