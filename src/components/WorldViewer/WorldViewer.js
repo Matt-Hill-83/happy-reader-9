@@ -94,6 +94,12 @@ class WorldViewer extends React.Component {
     const hideMissionConsole = localStateStore.getQuestStatus()
       .hideMissionConsole
 
+    const questStatus = localStateStore.getQuestStatus()
+    console.log("questStatus", toJS(questStatus)) // zzz
+
+    const completedMissions = localStateStore.getCompletedMissions()
+    console.log("completedMissions", toJS(completedMissions)) // zzz
+
     return (
       <>
         <img className={css.backgroundImage} src={mainBackground} alt={"bk"} />
