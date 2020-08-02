@@ -14,6 +14,7 @@ import WorldBuilder from "../WorldBuilder/WorldBuilder.js"
 
 import css from "./TopLevel.module.scss"
 import BookPicker from "../BookPicker/BookPicker.js"
+import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 // import BookBuilder from "../BookBuilder/BookBuilder.js"
 
 let useDefaultWorldId
@@ -104,7 +105,6 @@ class TopLevel extends React.Component {
     localStateStore.setActiveSceneId(sceneId)
     localStateStore.setActiveFrameIndex(0)
     localStateStore.addVisitedScenes(sceneId)
-
     localStateStore.unlockSubQuestForActiveScene()
 
     const questStatus = localStateStore.getQuestStatus()
@@ -115,17 +115,11 @@ class TopLevel extends React.Component {
       this.updateQuestStatus({ sceneId })
     }
 
-    // const subQuestTriggersList = _get(questConfig, "subQuestTriggersList") || []
-
-    // subQuestTriggersList.forEach((subQuestTriggers) => {
-    //   Utils.unLockSubQuests({ subQuestTriggers })
-    // })
-
     // this.setState({ test: Math.random() })
   }
 
   updateQuestStatus = () => {
-    Utils.calcListOfLockedScenes()
+    QuestStatusUtils.calcListOfLockedScenes()
 
     toaster.clear()
     const activeScene = localStateStore.getActiveScene()
@@ -176,7 +170,7 @@ class TopLevel extends React.Component {
         timeout: 30000,
       })
       toaster.show({ message, className: css.toaster, timeout: 30000 })
-      Utils.calcListOfLockedScenes()
+      QuestStatusUtils.calcListOfLockedScenes()
     }
 
     this.setState({ dummy: new Date() })
@@ -199,7 +193,7 @@ class TopLevel extends React.Component {
     }
     const { questConfig } = map.data
     if (questConfig) {
-      const missions = Utils.getActiveSubQuestMissions()
+      const missions = QuestStatusUtils.getActiveSubQuestMissions()
       const desiredItems = missions.map((mission) => mission.item)
       const desiredItemsFiltered = desiredItems.filter((item) => !!item)
       const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig))

@@ -10,6 +10,7 @@ import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import MiniTable2 from "../MiniTable2/MiniTable2"
 import Utils from "../../Utils/Utils"
+import QuestStatusUtils from "../../Utils/QuestStatusUtils"
 
 class MissionConsole extends Component {
   state = {}
@@ -61,7 +62,7 @@ class MissionConsole extends Component {
       return null
     }
 
-    const newMissions = Utils.getActiveSubQuestMissions()
+    const newMissions = QuestStatusUtils.getActiveSubQuestMissions()
 
     if (newMissions && newMissions[0]) {
       missions = newMissions

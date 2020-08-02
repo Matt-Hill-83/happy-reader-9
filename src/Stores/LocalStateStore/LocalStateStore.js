@@ -1,6 +1,7 @@
 import { decorate, observable, toJS } from "mobx"
 import Utils from "../../Utils/Utils"
 import _get from "lodash.get"
+import QuestStatusUtils from "../../Utils/QuestStatusUtils"
 
 class LocalStateStore {
   activeFrameIndex = 0
@@ -148,7 +149,7 @@ class LocalStateStore {
   }
 
   getActiveMission = () => {
-    const missions = Utils.getActiveSubQuestMissions()
+    const missions = QuestStatusUtils.getActiveSubQuestMissions()
     return missions[this.questStatus.activeMissionIndex] || null
   }
 
@@ -185,7 +186,7 @@ class LocalStateStore {
     if (!questStatus.questConfig) {
       return {}
     }
-    const missions = Utils.getActiveSubQuestMissions()
+    const missions = QuestStatusUtils.getActiveSubQuestMissions()
     const { pockets } = questStatus
 
     if (!missions) {

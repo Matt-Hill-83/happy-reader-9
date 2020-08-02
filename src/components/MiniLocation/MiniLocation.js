@@ -11,6 +11,7 @@ import Constants from "../../Utils/Constants/Constants.js"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore.js"
 
 import css from "./MiniLocation.module.scss"
+import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 
 class MiniLocation extends React.Component {
   defaultDoorIsOpen = {
@@ -162,7 +163,7 @@ class MiniLocation extends React.Component {
       return <div className={`${css.main} ${className} ${localClass}`}></div>
     }
 
-    const showNothing = Utils.isSceneHidden({ sceneId: scene.id })
+    const showNothing = QuestStatusUtils.isSceneHidden({ sceneId: scene.id })
     const isBlank = locationName === "blank" || showNothing
     const localClass = isActive ? css.activeClass : ""
 
@@ -201,8 +202,10 @@ class MiniLocation extends React.Component {
         )
       }
 
-      showLock = Utils.isSceneLocked({ sceneId: scene.id })
-      showCloud = Utils.isSceneClouded({ sceneId: scene.id }) && !isVisitedScene
+      showLock = QuestStatusUtils.isSceneLocked({ sceneId: scene.id })
+      showCloud =
+        QuestStatusUtils.isSceneClouded({ sceneId: scene.id }) &&
+        !isVisitedScene
 
       locationImage = Images.all[locationName]
       rockImage = Images.backgrounds["rock"]
@@ -213,7 +216,7 @@ class MiniLocation extends React.Component {
 
       const world = localStateStore.getActiveWorld()
 
-      backgroundColor = Utils.getSubQuestColor({
+      backgroundColor = QuestStatusUtils.getSubQuestColor({
         sceneName: locationName,
         world: world.data,
       })

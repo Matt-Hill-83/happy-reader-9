@@ -33,6 +33,7 @@ import WorldPicker from "../WorldPicker/WorldPicker"
 import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
 
 import css from "./WorldBuilder.module.scss"
+import QuestStatusUtils from "../../Utils/QuestStatusUtils"
 
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
@@ -383,7 +384,7 @@ class WorldBuilder extends Component {
 
         const world = localStateStore.getWorldBuilderWorld() || {}
 
-        const backgroundColor = Utils.getSubQuestColor({
+        const backgroundColor = QuestStatusUtils.getSubQuestColor({
           sceneName: scene.location.name,
           world: world.data,
         })
