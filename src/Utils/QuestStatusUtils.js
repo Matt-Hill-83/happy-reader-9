@@ -10,7 +10,6 @@ export default class QuestStatusUtils {
   static updateSceneVisibilityProps = () => {
     const activeWorld = localStateStore.getActiveWorld()
     const { newGrid5 } = activeWorld.data
-
     const questStatus = localStateStore.getQuestStatus()
     const { activeMissionIndex } = questStatus
 
@@ -19,80 +18,17 @@ export default class QuestStatusUtils {
         sceneId: scene.id,
       })
 
-      const flags = {
-        sceneIsLocked: {
-          value: false,
-          propertyName: Constants.sceneVisibilityPropNames.LOCKED_SCENES,
-        },
-        sceneIsHidden: {
-          value: false,
-          propertyName: Constants.sceneVisibilityPropNames.HIDDEN_SCENES,
-        },
-        sceneIsClouded: {
-          value: false,
-          propertyName: Constants.sceneVisibilityPropNames.CLOUDED_SCENES,
-        },
-      }
+      const accumulatedPropertyValues = this.calcAccumulatedPropertyValues({
+        sceneTriggers,
+        scene,
+        activeMissionIndex,
+      })
 
-      const triggerTypes = Constants.triggers.triggerTypes
-
-      const evaluators = [
-        {
-          triggerName: triggerTypes.LOCK,
-          func: () => (flags.sceneIsLocked.value = true),
-        },
-        {
-          triggerName: triggerTypes.UNLOCK,
-          func: () => (flags.sceneIsLocked.value = false),
-        },
-        {
-          triggerName: triggerTypes.HIDE,
-          func: () => (flags.sceneIsHidden.value = true),
-        },
-        {
-          triggerName: triggerTypes.UNHIDE,
-          func: () => (flags.sceneIsHidden.value = false),
-        },
-        {
-          triggerName: triggerTypes.CLOUD,
-          func: () => (flags.sceneIsClouded.value = true),
-        },
-        {
-          triggerName: triggerTypes.UNCLOUD,
-          func: () => (flags.sceneIsClouded.value = false),
-        },
-      ]
-
-      const runEvaluators = ({ trigger }) => {
-        evaluators.forEach((evaluator) => {
-          if (trigger.name === evaluator.triggerName) {
-            evaluator.func()
-          }
-        })
-      }
-
-      // TODO: put an else statement here that says if there are no scene triggers, use the parent
-      // subquest triggers
-      let myTriggers = null
-
-      if (sceneTriggers && sceneTriggers.length > 0) {
-        sceneTriggers.forEach((trigger) => {
-          const { conditions = [] } = trigger
-          conditions.forEach((condition) => {
-            const { currentMission } = condition
-            if (currentMission >= 0 && currentMission === activeMissionIndex) {
-              // roll the individual result in with the running aggregate result
-              runEvaluators({ trigger })
-            }
-          })
-        })
-      }
-
-      const flagKeys = Object.keys(flags)
+      const propertyNames = Object.keys(accumulatedPropertyValues)
 
       // Iterate through each accumulated value and update that property in the local store.
-      flagKeys.forEach((key) => {
-        const value = flags[key]
+      propertyNames.forEach((key) => {
+        const value = accumulatedPropertyValues[key]
 
         this.updateProperty({
           propertyName: value.propertyName,
@@ -101,6 +37,79 @@ export default class QuestStatusUtils {
         })
       })
     })
+  }
+
+  static calcAccumulatedPropertyValues = ({
+    sceneTriggers,
+    scene,
+    activeMissionIndex,
+  }) => {
+    const propValueAccumulators = {
+      sceneIsLocked: {
+        value: false,
+        propertyName: Constants.sceneVisibilityPropNames.LOCKED_SCENES,
+      },
+      sceneIsHidden: {
+        value: false,
+        propertyName: Constants.sceneVisibilityPropNames.HIDDEN_SCENES,
+      },
+      sceneIsClouded: {
+        value: false,
+        propertyName: Constants.sceneVisibilityPropNames.CLOUDED_SCENES,
+      },
+    }
+
+    const triggerTypes = Constants.triggers.triggerTypes
+
+    const evaluators = [
+      {
+        triggerName: triggerTypes.LOCK,
+        func: () => (propValueAccumulators.sceneIsLocked.value = true),
+      },
+      {
+        triggerName: triggerTypes.UNLOCK,
+        func: () => (propValueAccumulators.sceneIsLocked.value = false),
+      },
+      {
+        triggerName: triggerTypes.HIDE,
+        func: () => (propValueAccumulators.sceneIsHidden.value = true),
+      },
+      {
+        triggerName: triggerTypes.UNHIDE,
+        func: () => (propValueAccumulators.sceneIsHidden.value = false),
+      },
+      {
+        triggerName: triggerTypes.CLOUD,
+        func: () => (propValueAccumulators.sceneIsClouded.value = true),
+      },
+      {
+        triggerName: triggerTypes.UNCLOUD,
+        func: () => (propValueAccumulators.sceneIsClouded.value = false),
+      },
+    ]
+
+    const runEvaluators = ({ trigger }) => {
+      evaluators.forEach((evaluator) => {
+        if (trigger.name === evaluator.triggerName) {
+          evaluator.func()
+        }
+      })
+    }
+
+    if (sceneTriggers && sceneTriggers.length > 0) {
+      sceneTriggers.forEach((trigger) => {
+        const { conditions = [] } = trigger
+        conditions.forEach((condition) => {
+          const { currentMission } = condition
+          if (currentMission >= 0 && currentMission === activeMissionIndex) {
+            // roll the individual result in with the running aggregate result
+            runEvaluators({ trigger })
+          }
+        })
+      })
+    }
+
+    return propValueAccumulators
   }
 
   static getActiveQuestConfig = () => {
