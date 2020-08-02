@@ -4,99 +4,7 @@ import _get from "lodash.get"
 import Constants from "./Constants/Constants.js"
 
 export default class QuestStatusUtils {
-  static getActiveQuestConfig = () => {
-    const activeWorld = localStateStore.getActiveWorld()
-    const { questConfig } = activeWorld.data
-    return questConfig
-  }
-
-  static getSubQuestColor = ({ sceneName, world }) => {
-    const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
-
-    const parentSubQuestFromScene = this.getParentSubQuestFromScene({
-      sceneName,
-      world,
-    })
-    const colorIndex = parentSubQuestFromScene % colors.length
-    const backgroundColor = colors[colorIndex]
-    const style = {
-      "background-color": `#${backgroundColor}`,
-    }
-    return style
-  }
-
-  static getActiveSubQuest = () => {
-    const activeWorld = localStateStore.getActiveWorld()
-    const { questConfig } = activeWorld.data
-    const { subQuests } = questConfig
-
-    const questStatus = localStateStore.getQuestStatus()
-    const { activeSubQuestIndex } = questStatus
-
-    return subQuests && subQuests[activeSubQuestIndex]
-  }
-
-  static getActiveSubQuestMissions = () => {
-    const activeSubQuest = this.getActiveSubQuest()
-    return (activeSubQuest && activeSubQuest.missions) || null
-  }
-
-  static getSceneTriggersFromScene = ({ sceneId }) => {
-    const questConfig = this.getActiveQuestConfig()
-    const allScenes = []
-
-    questConfig.subQuests &&
-      questConfig.subQuests.forEach((subQuest) => {
-        allScenes.push(...subQuest.scenes)
-      })
-
-    const foundScene = allScenes.find((scene) => scene.id === sceneId)
-    return (foundScene && foundScene.sceneTriggers) || []
-  }
-
-  static updateProperty = ({ sceneId, propertyName, value }) => {
-    const questStatus = localStateStore.getQuestStatus()
-    if (!questStatus[propertyName]) {
-      questStatus[propertyName] = []
-    }
-    if (value === true) {
-      // add element to list
-      if (!questStatus[propertyName].includes(sceneId)) {
-        questStatus[propertyName].push(sceneId)
-      }
-    } else {
-      // remove element from list
-      questStatus[propertyName] = questStatus[propertyName].filter(
-        (item) => item !== sceneId
-      )
-    }
-    localStateStore.setQuestStatus(questStatus)
-  }
-
-  static isSceneLocked = ({ sceneId }) => {
-    const questStatus = localStateStore.getQuestStatus()
-    const { lockedScenes = [] } = questStatus
-    return lockedScenes.includes(sceneId) ? true : false
-  }
-
-  static isSceneClouded = ({ sceneId }) => {
-    const questStatus = localStateStore.getQuestStatus()
-    const { cloudedScenes = [] } = questStatus
-    return cloudedScenes.includes(sceneId) ? true : false
-  }
-
-  static isSceneHidden = ({ sceneId }) => {
-    const questStatus = localStateStore.getQuestStatus()
-    const { hiddenScenes = [] } = questStatus
-    return hiddenScenes.includes(sceneId) ? true : false
-  }
-
-  //
-  //
-  //
-  //
-  //
-  static calcListOfLockedScenes = () => {
+  static updateSceneVisibilityProps = () => {
     const activeWorld = localStateStore.getActiveWorld()
     const { newGrid5 } = activeWorld.data
 
@@ -192,6 +100,78 @@ export default class QuestStatusUtils {
     })
   }
 
+  static getActiveQuestConfig = () => {
+    const activeWorld = localStateStore.getActiveWorld()
+    const { questConfig } = activeWorld.data
+    return questConfig
+  }
+
+  static getActiveSubQuest = () => {
+    const activeWorld = localStateStore.getActiveWorld()
+    const { questConfig } = activeWorld.data
+    const { subQuests } = questConfig
+
+    const questStatus = localStateStore.getQuestStatus()
+    const { activeSubQuestIndex } = questStatus
+
+    return subQuests && subQuests[activeSubQuestIndex]
+  }
+
+  static getActiveSubQuestMissions = () => {
+    const activeSubQuest = this.getActiveSubQuest()
+    return (activeSubQuest && activeSubQuest.missions) || null
+  }
+
+  static getSceneTriggersFromScene = ({ sceneId }) => {
+    const questConfig = this.getActiveQuestConfig()
+    const allScenes = []
+
+    questConfig.subQuests &&
+      questConfig.subQuests.forEach((subQuest) => {
+        allScenes.push(...subQuest.scenes)
+      })
+
+    const foundScene = allScenes.find((scene) => scene.id === sceneId)
+    return (foundScene && foundScene.sceneTriggers) || []
+  }
+
+  static updateProperty = ({ sceneId, propertyName, value }) => {
+    const questStatus = localStateStore.getQuestStatus()
+    if (!questStatus[propertyName]) {
+      questStatus[propertyName] = []
+    }
+    if (value === true) {
+      // add element to list
+      if (!questStatus[propertyName].includes(sceneId)) {
+        questStatus[propertyName].push(sceneId)
+      }
+    } else {
+      // remove element from list
+      questStatus[propertyName] = questStatus[propertyName].filter(
+        (item) => item !== sceneId
+      )
+    }
+    localStateStore.setQuestStatus(questStatus)
+  }
+
+  static isSceneLocked = ({ sceneId }) => {
+    const questStatus = localStateStore.getQuestStatus()
+    const { lockedScenes = [] } = questStatus
+    return lockedScenes.includes(sceneId) ? true : false
+  }
+
+  static isSceneClouded = ({ sceneId }) => {
+    const questStatus = localStateStore.getQuestStatus()
+    const { cloudedScenes = [] } = questStatus
+    return cloudedScenes.includes(sceneId) ? true : false
+  }
+
+  static isSceneHidden = ({ sceneId }) => {
+    const questStatus = localStateStore.getQuestStatus()
+    const { hiddenScenes = [] } = questStatus
+    return hiddenScenes.includes(sceneId) ? true : false
+  }
+
   static getParentSubQuestFromScene = ({ world, sceneName, sceneId }) => {
     const { questConfig } = world
     let parentSubQuest = -1
@@ -229,5 +209,20 @@ export default class QuestStatusUtils {
     if (completedMissions.includes(requiredCompletedMission)) {
       localStateStore.unLockSubQuestById({ subQuestId })
     }
+  }
+
+  static getSubQuestColor = ({ sceneName, world }) => {
+    const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
+
+    const parentSubQuestFromScene = this.getParentSubQuestFromScene({
+      sceneName,
+      world,
+    })
+    const colorIndex = parentSubQuestFromScene % colors.length
+    const backgroundColor = colors[colorIndex]
+    const style = {
+      "background-color": `#${backgroundColor}`,
+    }
+    return style
   }
 }

@@ -119,7 +119,7 @@ class TopLevel extends React.Component {
   }
 
   updateQuestStatus = () => {
-    QuestStatusUtils.calcListOfLockedScenes()
+    QuestStatusUtils.updateSceneVisibilityProps()
 
     toaster.clear()
     const activeScene = localStateStore.getActiveScene()
@@ -170,7 +170,7 @@ class TopLevel extends React.Component {
         timeout: 30000,
       })
       toaster.show({ message, className: css.toaster, timeout: 30000 })
-      QuestStatusUtils.calcListOfLockedScenes()
+      QuestStatusUtils.updateSceneVisibilityProps()
     }
 
     this.setState({ dummy: new Date() })
