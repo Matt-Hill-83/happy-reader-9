@@ -75,13 +75,13 @@ export default class QuestStatusUtils {
       const propertyNames = Object.keys(accumulatedPropertyValues)
 
       // Iterate through each accumulated value and update that property in the local store.
-      propertyNames.forEach((key) => {
-        const value = accumulatedPropertyValues[key]
+      propertyNames.forEach((propertyName) => {
+        const value = accumulatedPropertyValues[propertyName]
 
         this.updateProperty({
-          propertyName: value.propertyName,
+          propertyName,
           sceneId: scene.id,
-          value: value.value,
+          value,
         })
       })
     })
@@ -89,20 +89,19 @@ export default class QuestStatusUtils {
 
   static calcAccumulatedPropertyValues = ({
     sceneTriggers,
-    scene,
     activeMissionIndex,
   }) => {
     const propValueAccumulators = {
       sceneIsLocked: {
-        value: false,
+        value: null,
         propertyName: Constants.sceneVisibilityPropNames.LOCKED_SCENES,
       },
       sceneIsHidden: {
-        value: false,
+        value: null,
         propertyName: Constants.sceneVisibilityPropNames.HIDDEN_SCENES,
       },
       sceneIsClouded: {
-        value: false,
+        value: null,
         propertyName: Constants.sceneVisibilityPropNames.CLOUDED_SCENES,
       },
     }
@@ -157,7 +156,21 @@ export default class QuestStatusUtils {
       })
     }
 
-    return propValueAccumulators
+    const output = {}
+    const accumulatorKeys = Object.keys(propValueAccumulators)
+    accumulatorKeys.forEach((key) => {
+      const value = propValueAccumulators[key]
+      console.log("value", value) // zzz
+
+      if (value.value !== null) {
+        output[value.propertyName] = value.value
+      }
+    })
+
+    console.log("output", toJS(output)) // zzz
+
+    return output
+    // return propValueAccumulators
   }
 
   static getActiveQuestConfig = () => {
