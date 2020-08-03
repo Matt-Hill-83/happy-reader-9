@@ -43,20 +43,13 @@ export const getTableConfig = ({
   }
 
   const renderRecipient = (value, tableMeta, updateValue) => {
-    console.log("value", toJS(value)) // zzz
-
     const onChange = (newValue) => {
-      console.log("newValue", toJS(newValue)) // zzz
-      // const { rowIndex, columnIndex } = tableMeta
-
       const transformedValue = {
         name: newValue.location.name,
         id: newValue.id,
       }
-      console.log("transformedValue", toJS(transformedValue)) // zzz
 
       updateValue(newValue)
-      // tableMeta.tableData[rowIndex][columnIndex] = { ...newValue }
       tableChangeCallback({
         tableMeta,
         newValue: transformedValue,
@@ -70,7 +63,6 @@ export const getTableConfig = ({
     //     scene.location.name === _get(value, "location.name") ||
     //     scene.location.name === value.name
     // )
-    console.log("scene", toJS(scene)) // zzz
 
     return (
       <SimpleSelectObj

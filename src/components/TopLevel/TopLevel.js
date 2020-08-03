@@ -108,8 +108,7 @@ class TopLevel extends React.Component {
     // localStateStore.unlockSubQuestForActiveScene()
 
     const questStatus = localStateStore.getQuestStatus()
-
-    const { questConfig, hideMissionConsole } = questStatus
+    const { hideMissionConsole } = questStatus
 
     if (!hideMissionConsole) {
       this.updateQuestStatus({ sceneId })

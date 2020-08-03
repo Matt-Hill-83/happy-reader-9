@@ -246,7 +246,9 @@ class LocalStateStore {
   }
 
   _findItem = ({ itemsInScene }) => {
+    console.log("itemsInScene", toJS(itemsInScene)) // zzz
     const desiredItems = this.getDesiredItems() || []
+    console.log("desiredItems", toJS(desiredItems)) // zzz
     const questStatus = this.questStatus
 
     const { pockets = {} } = questStatus
@@ -261,6 +263,7 @@ class LocalStateStore {
         foundItems.push(foundItem)
       }
     })
+    console.log("foundItems", toJS(foundItems)) // zzz
     const foundItem = foundItems[0]
     if (!foundItem) {
       return null

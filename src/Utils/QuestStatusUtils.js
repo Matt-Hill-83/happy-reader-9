@@ -41,7 +41,6 @@ export default class QuestStatusUtils {
       console.log("parentSubQuestFromScene", toJS(parentSubQuestFromScene)) // zzz
 
       const subQuestTriggers = _get(parentSubQuestFromScene, "triggers") || []
-      // const { triggers: subQuestTriggers } = parentSubQuestFromScene
 
       const accumulatedPropertyValuesForSubQuest = this.calcAccumulatedPropertyValues(
         {
