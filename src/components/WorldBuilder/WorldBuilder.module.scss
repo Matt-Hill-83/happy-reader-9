@@ -282,6 +282,11 @@
 
 .subTitle {
   font-size: 24px;
+  display: flex;
+  width: 693px;
+  justify-self: center;
+  border: 1px solid green !important;
+  margin-left: auto;
 }
 
 .content {

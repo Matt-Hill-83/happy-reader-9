@@ -701,15 +701,7 @@ class WorldBuilder extends Component {
           <div className={css.header}>
             <div className={css.titles}>
               <div className={css.title}>
-                {`World Builder - world: ${world.data && world.data.name}`}
-                {` --- ${world.id}`}
-              </div>
-              start:
-              {this.renderTerminalScenePicker({ isStartScene: true })}
-              end:
-              {this.renderTerminalScenePicker({ isStartScene: false })}
-              <div className={css.subTitle}>
-                <div className={css.editWorldButtons}>
+                <div className={css.subTitle}>
                   <WorldPicker
                     initialValue={world.data.title}
                     showDelete={true}
@@ -719,6 +711,7 @@ class WorldBuilder extends Component {
                     updateReleasedToProd={this.updateReleasedToProd}
                     onChangeWorld={this.onChangeWorld}
                   />
+                  {`${world.id}`}
 
                   <Button
                     text={"+ New Map"}
@@ -726,6 +719,10 @@ class WorldBuilder extends Component {
                   />
                 </div>
               </div>
+              start:
+              {this.renderTerminalScenePicker({ isStartScene: true })}
+              end:
+              {this.renderTerminalScenePicker({ isStartScene: false })}
             </div>
           </div>
         )}
