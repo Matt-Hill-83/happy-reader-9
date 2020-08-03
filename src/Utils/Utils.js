@@ -11,10 +11,8 @@ export default class Utils {
   }
 
   static getAllItemsInScene = ({ scene }) => {
-    console.log("scene----------------------->>>>", toJS(scene)) // zzz
     const allItems = []
     scene.frameSet.frames.forEach((item) => {
-      console.log("item", toJS(item)) // zzz
       allItems.push(...item.critters1, ...item.critters2)
     })
     return allItems

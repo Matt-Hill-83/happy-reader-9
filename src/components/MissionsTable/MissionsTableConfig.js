@@ -25,7 +25,7 @@ export const getTableConfig = ({
     const onChange = (newValue) => {
       const { rowIndex, columnIndex } = tableMeta
       updateValue(newValue)
-      tableMeta.tableData[rowIndex][columnIndex] = newValue
+      tableMeta.tableData[rowIndex][columnIndex] = { ...newValue }
       tableChangeCallback({ tableMeta, newValue, propertyName: "item" })
     }
 
@@ -43,26 +43,34 @@ export const getTableConfig = ({
   }
 
   const renderRecipient = (value, tableMeta, updateValue) => {
-    console.log("value------------------------>>>", toJS(value)) // zzz
-    const onChange = (newValue) => {
-      const { rowIndex, columnIndex } = tableMeta
+    console.log("value", toJS(value)) // zzz
 
-      const transformedValue = { name: newValue.location.name }
+    const onChange = (newValue) => {
+      console.log("newValue", toJS(newValue)) // zzz
+      // const { rowIndex, columnIndex } = tableMeta
+
+      const transformedValue = {
+        name: newValue.location.name,
+        id: newValue.id,
+      }
+      console.log("transformedValue", toJS(transformedValue)) // zzz
 
       updateValue(newValue)
-      console.log("newValue", toJS(newValue)) // zzz
-      tableMeta.tableData[rowIndex][columnIndex] = transformedValue
+      // tableMeta.tableData[rowIndex][columnIndex] = { ...newValue }
       tableChangeCallback({
         tableMeta,
         newValue: transformedValue,
         propertyName: "recipient",
       })
+      saveConfig()
     }
-    console.log("scenes", toJS(scenes)) // zzz
-    const scene = scenes.find((scene) => scene.location.name === value.name)
-    scenes.forEach((item) => {
-      console.log("item.name", toJS(item.name))
-    })
+
+    const scene = scenes.find((scene) => scene.id === value.id)
+    //   (scene) =>
+    //     scene.location.name === _get(value, "location.name") ||
+    //     scene.location.name === value.name
+    // )
+    console.log("scene", toJS(scene)) // zzz
 
     return (
       <SimpleSelectObj
@@ -70,7 +78,7 @@ export const getTableConfig = ({
         items={scenes}
         value={scene}
         getOptionLabel={(option) => {
-          return _get(option, "location.name") || option.name
+          return _get(option, "location.name") || "error!!!"
         }}
         onChange={onChange}
       />

@@ -26,7 +26,6 @@ export default function MissionsTable({ props }) {
   } = props
 
   const allItems = Utils.getAllItemsInScenes({ scenes })
-  console.log("allItems------------------------>>>>", toJS(allItems)) // zzz
 
   useEffect(() => {
     // on mount
@@ -71,6 +70,7 @@ export default function MissionsTable({ props }) {
     const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
       const { rowIndex } = tableMeta
       items[rowIndex][propertyName] = newValue
+      console.log("items", toJS(items)) // zzz
     }
 
     const onDeleteTriggerRow = ({ rowIndex }) => {
