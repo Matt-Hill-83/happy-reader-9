@@ -660,7 +660,12 @@ class WorldBuilder extends Component {
   }
 
   render() {
-    const { sceneToEdit, showFrameBuilder, showQuestConfig } = this.state
+    const {
+      sceneToEdit,
+      showSubQuestWizard,
+      showFrameBuilder,
+      showQuestConfig,
+    } = this.state
 
     const world = localStateStore.getWorldBuilderWorld() || {}
     if (!world.data) {
@@ -679,9 +684,10 @@ class WorldBuilder extends Component {
     return (
       <div className={css.main}>
         {this.renderMainButtonGroup()}
-        {this.renderQuestConfigTool({ questConfig, newGrid5 })}
+
         {this.renderSceneConfig({ world })}
         {this.renderQuestConfig({ questConfig })}
+
         <InputGroup
           value={title}
           id="text-input"
@@ -724,7 +730,14 @@ class WorldBuilder extends Component {
           </div>
         )}
         {!showFrameBuilder && (
-          <div className={css.content}>{this.renderScenesGrid()}</div>
+          <div className={css.content}>
+            <div className={css.left}>{this.renderScenesGrid()}</div>
+            {showSubQuestWizard && (
+              <div className={css.right}>
+                {this.renderQuestConfigTool({ questConfig, newGrid5 })}
+              </div>
+            )}
+          </div>
         )}
         {showFrameBuilder && (
           <div className={css.content2}>
