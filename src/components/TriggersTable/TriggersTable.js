@@ -7,10 +7,9 @@ import cx from "classnames"
 import React, { useEffect, useState } from "react"
 
 import { getSubQuestTableConfigFunc } from "./SubQuestTableConfig"
-import DataTable3 from "../DataTable3/DataTable3"
-
-import Utils from "../../Utils/Utils"
 import Constants from "../../Utils/Constants/Constants"
+import DataTable3 from "../DataTable3/DataTable3"
+import Utils from "../../Utils/Utils"
 
 import css from "./TriggersTable.module.scss"
 

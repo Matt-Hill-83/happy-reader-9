@@ -8,7 +8,6 @@ import _get from "lodash.get"
 
 import Utils from "../../Utils/Utils"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
-import Constants from "../../Utils/Constants/Constants"
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 
 import css from "./MissionsTableConfig.module.scss"
@@ -38,6 +37,37 @@ export const getTableConfig = ({
         value={itemToGet}
         getOptionLabel={(option) => option.name}
         onChange={onChange}
+      />
+    )
+  }
+
+  const renderName = (value, tableMeta, updateValue) => {
+    const onChange = (newValue) => {
+      // const transformedValue = {
+      //   name: newValue.location.name,
+      //   id: newValue.id,
+      // }
+      console.log("newValue", toJS(newValue)) // zzz
+      updateValue(newValue)
+      tableChangeCallback({
+        tableMeta,
+        newValue: newValue.value,
+        // newValue: transformedValue,
+        propertyName: "name",
+      })
+      saveConfig()
+    }
+
+    return (
+      <TextField
+        className={css.inputField}
+        id="outlined-secondary"
+        variant="outlined"
+        margin="dense"
+        color="secondary"
+        defaultValue={value}
+        onBlur={(event) => onChange({ value: event.target.value })}
+        InputProps={{}}
       />
     )
   }
@@ -116,7 +146,7 @@ export const getTableConfig = ({
         options: {
           sort: false,
           filter: true,
-          // customBodyRender: renderName,
+          customBodyRender: renderName,
         },
       },
       {
