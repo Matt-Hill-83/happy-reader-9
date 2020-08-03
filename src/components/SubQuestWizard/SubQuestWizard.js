@@ -6,20 +6,16 @@ import { toJS } from "mobx"
 import cx from "classnames"
 import React, { useEffect, useState } from "react"
 
-// import { getSubQuestTableConfigFunc } from "./SubQuestTableConfig"
-// import DataTable3 from "../DataTable3/DataTable3"
+import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
+import Constants from "../../Utils/Constants/Constants"
+import DialogBuilder from "../DialogBuilder/DialogBuilder"
+import MissionsTable from "../MissionsTable/MissionsTable"
 import MyAccordian from "../MyAccordian/MyAccordian"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
-
+import TriggersTable from "../TriggersTable/TriggersTable"
 import Utils from "../../Utils/Utils"
-import Constants from "../../Utils/Constants/Constants"
 
 import css from "./SubQuestWizard.module.scss"
-// import AddDeleteButtonGroup from "./AddDeleteButtonGroup"
-import DialogBuilder from "../DialogBuilder/DialogBuilder"
-// import MiniTable2 from "../MiniTable2/MiniTable2"
-import TriggersTable from "../TriggersTable/TriggersTable"
-import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 
 export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState([])
@@ -43,6 +39,18 @@ export default function SubQuestWizard({ props }) {
   }, [props.questConfig])
 
   const renderMissions = ({ missions }) => {
+    const missionTableProps = {
+      items: missions,
+      questConfig,
+      saveQuestConfig,
+      setQuestConfig,
+    }
+    return (
+      <div className={cx(css.triggers, css.listGroup)}>
+        <MissionsTable props={missionTableProps}></MissionsTable>
+      </div>
+    )
+
     const realScenes = props.scenes
     console.log("missions", toJS(missions)) // zzz
 
@@ -58,11 +66,6 @@ export default function SubQuestWizard({ props }) {
         (thing) => thing.location.name === _get(mission, "item.name") || ""
       )
 
-      // return (
-      //   <div className={css.left}>
-      //     <MiniTable2 columnNames={columnNames} tableData={tableData} />
-      //   </div>
-      // )
       return (
         <div className={cx(css.sceneName, css.listItem, css.missionsList)}>
           <span className={cx(css.listItemName)}>{mission.name}</span>
@@ -333,12 +336,6 @@ export default function SubQuestWizard({ props }) {
             Close DB
           </Button>
         )}
-        {/* <Button
-          className={css.saveButton}
-          onClick={() => props.onClose && props.onClose()}
-        >
-          Exit
-        </Button> */}
       </ButtonGroup>
     </div>
   )
