@@ -69,8 +69,8 @@ export default function MissionsTable({ props }) {
     }
 
     const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
-      // const { rowIndex } = tableMeta
-      // items[rowIndex][propertyName] = newValue
+      const { rowIndex } = tableMeta
+      items[rowIndex][propertyName] = newValue
     }
 
     const onDeleteTriggerRow = ({ rowIndex }) => {
@@ -85,7 +85,7 @@ export default function MissionsTable({ props }) {
       saveConfig: () => {
         saveQuestConfig()
       },
-      scenes: allItems,
+      scenes: scenes,
       itemsToGet: allItems,
     })
 

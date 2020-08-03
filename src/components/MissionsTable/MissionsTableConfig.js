@@ -4,6 +4,7 @@ import { toJS } from "mobx"
 import cx from "classnames"
 import React from "react"
 import TextField from "@material-ui/core/TextField"
+import _get from "lodash.get"
 
 import Utils from "../../Utils/Utils"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
@@ -11,8 +12,6 @@ import Constants from "../../Utils/Constants/Constants"
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 
 import css from "./MissionsTableConfig.module.scss"
-
-const newCondition = { completedScene: "1234567" }
 
 export const getTableConfig = ({
   tableChangeCallback = () => {},
@@ -23,23 +22,20 @@ export const getTableConfig = ({
   itemsToGet,
 }) => {
   const renderItem = (value, tableMeta, updateValue) => {
-    console.log("value", toJS(value)) // zzz
     const onChange = (newValue) => {
       const { rowIndex, columnIndex } = tableMeta
       updateValue(newValue)
-      // tableMeta.tableData[rowIndex][columnIndex] = newValue
-      // tableChangeCallback({ tableMeta, newValue, propertyName: "name" })
+      tableMeta.tableData[rowIndex][columnIndex] = newValue
+      tableChangeCallback({ tableMeta, newValue, propertyName: "item" })
     }
 
-    const realScenes = itemsToGet || []
-    console.log("realScenes", toJS(realScenes)) // zzz
-    const realScene = realScenes.find((scene) => scene.id === value.id)
+    const itemToGet = itemsToGet.find((item) => item.name === value.name)
 
     return (
       <SimpleSelectObj
         className={css.sceneDropdown}
-        items={realScenes}
-        value={realScene}
+        items={itemsToGet}
+        value={itemToGet}
         getOptionLabel={(option) => option.name}
         onChange={onChange}
       />
@@ -47,100 +43,37 @@ export const getTableConfig = ({
   }
 
   const renderRecipient = (value, tableMeta, updateValue) => {
-    console.log("value", toJS(value)) // zzz
+    console.log("value------------------------>>>", toJS(value)) // zzz
     const onChange = (newValue) => {
       const { rowIndex, columnIndex } = tableMeta
-      updateValue(newValue)
-      // tableMeta.tableData[rowIndex][columnIndex] = newValue
-      // tableChangeCallback({ tableMeta, newValue, propertyName: "name" })
-    }
 
-    const realScenes = scenes || []
-    console.log("realScenes", toJS(realScenes)) // zzz
-    const realScene = realScenes.find((scene) => scene.id === value.id)
+      const transformedValue = { name: newValue.location.name }
+
+      updateValue(newValue)
+      console.log("newValue", toJS(newValue)) // zzz
+      tableMeta.tableData[rowIndex][columnIndex] = transformedValue
+      tableChangeCallback({
+        tableMeta,
+        newValue: transformedValue,
+        propertyName: "recipient",
+      })
+    }
+    console.log("scenes", toJS(scenes)) // zzz
+    const scene = scenes.find((scene) => scene.location.name === value.name)
+    scenes.forEach((item) => {
+      console.log("item.name", toJS(item.name))
+    })
 
     return (
       <SimpleSelectObj
         className={css.sceneDropdown}
-        items={realScenes}
-        value={realScene}
-        getOptionLabel={(option) => option.name}
+        items={scenes}
+        value={scene}
+        getOptionLabel={(option) => {
+          return _get(option, "location.name") || option.name
+        }}
         onChange={onChange}
       />
-    )
-  }
-
-  const renderName = (value, tableMeta, updateValue) => {
-    const triggerTypes = Object.values(Constants.triggers.triggerTypes)
-    const onChange = (newValue) => {
-      const { rowIndex, columnIndex } = tableMeta
-      updateValue(newValue)
-      tableMeta.tableData[rowIndex][columnIndex] = newValue
-      tableChangeCallback({ tableMeta, newValue, propertyName: "name" })
-    }
-
-    return (
-      <div className={css.nameElements}>
-        <SimpleSelectObj
-          className={css.triggerTypesDropdown}
-          items={triggerTypes}
-          value={value}
-          getOptionLabel={(option) => option}
-          onChange={onChange}
-        />
-        {/* <span className={css.spacerText1}>scene when</span> */}
-      </div>
-    )
-  }
-
-  const onAddTriggerCondition = ({ conditionIndex, conditions, before }) => {
-    Utils.addArrayElement({
-      newElement: newCondition,
-      before,
-      index: conditionIndex,
-      array: conditions,
-    })
-    saveConfig()
-  }
-
-  const onDeleteTriggerCondition = ({ rowIndex, conditions }) => {
-    Utils.deleteArrayElement({ index: rowIndex, array: conditions })
-    saveConfig()
-  }
-
-  const renderAddDeleteButtonsForTriggerConditions = ({
-    conditionIndex,
-    conditions,
-  }) => {
-    return (
-      <>
-        <Button
-          onClick={() =>
-            onAddTriggerCondition({
-              conditionIndex,
-              conditions,
-              before: true,
-            })
-          }
-          icon={IconNames.ADD}
-        />
-        <Button
-          onClick={() =>
-            onDeleteTriggerCondition({ rowIndex: conditionIndex, conditions })
-          }
-          icon={IconNames.TRASH}
-        />
-        <Button
-          onClick={() =>
-            onAddTriggerCondition({
-              conditionIndex,
-              conditions,
-              before: false,
-            })
-          }
-          icon={IconNames.ADD}
-        />
-      </>
     )
   }
 
@@ -187,7 +120,7 @@ export const getTableConfig = ({
         },
       },
       {
-        name: "item.name",
+        name: "item",
         label: "Bring the...",
         options: {
           sort: false,
@@ -196,7 +129,7 @@ export const getTableConfig = ({
         },
       },
       {
-        name: "item.name",
+        name: "recipient",
         label: "to the...",
         options: {
           sort: false,
