@@ -1,39 +1,4 @@
 .main {
-  :global {
-    .bp3-button {
-      min-width: 16px;
-      min-height: 16px;
-    }
-
-    .MuiInput-underline {
-      border: 1px solid rgb(180, 180, 180) !important;
-      padding: 0px 4px !important;
-      border-radius: 3px;
-      background: #dedede;
-    }
-
-    .MuiInput-underline:focus,
-    .MuiInput-underline:visited,
-    .MuiInput-underline:active,
-    .MuiInput-underline:hover {
-      &:before {
-        border: none !important;
-      }
-    }
-
-    .MuiInput-underline:before {
-      border: none;
-    }
-  }
-
-  .sceneDropdown {
-    min-width: 175px;
-    height: 20px;
-    margin: 2px 0px;
-    max-width: 193px;
-    background: lightpink;
-  }
-
   .triggersTable {
     max-width: 100%;
     box-shadow: none;
