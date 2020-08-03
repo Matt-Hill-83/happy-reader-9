@@ -16,6 +16,7 @@ import TriggersTable from "../TriggersTable/TriggersTable"
 import Utils from "../../Utils/Utils"
 
 import css from "./SubQuestWizard.module.scss"
+import { TextField } from "@material-ui/core"
 
 export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState([])
@@ -278,10 +279,25 @@ export default function SubQuestWizard({ props }) {
         saveQuestConfig()
       }
 
+      const onChangeValue = ({ value = 0 }) => {
+        subQuest.name = value
+        saveQuestConfig()
+      }
+
       return (
         <div className={css.accordianContainer}>
           <div className={css.subQuestHeader}>
-            <span className={css.subQuestTitle}>{subQuest.name}</span>
+            <TextField
+              className={css.inputField}
+              id="outlined-secondary"
+              variant="outlined"
+              margin="dense"
+              color="secondary"
+              defaultValue={subQuest.name}
+              onBlur={(event) => onChangeValue({ value: event.target.value })}
+              // InputProps={{}}
+            />
+            {/* <span className={css.subQuestTitle}>{subQuest.name}</span> */}
             {/* <Button
               onClick={() =>
                 onAddScene({

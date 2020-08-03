@@ -62,7 +62,7 @@ export const getSubQuestTableConfigFunc = ({
                 color="secondary"
                 defaultValue={conditionValue}
                 onBlur={(event) => onChangeValue({ value: event.target.value })}
-                InputProps={{}}
+                // InputProps={{}}
               />
               {renderAddDeleteButtonsForTriggerConditions({
                 tableMeta,
