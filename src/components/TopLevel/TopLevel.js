@@ -194,7 +194,8 @@ class TopLevel extends React.Component {
     const { questConfig } = map.data
     if (questConfig) {
       const missions = QuestStatusUtils.getActiveSubQuestMissions()
-      const desiredItems = missions.map((mission) => mission.item)
+      const desiredItems =
+        (missions && missions.map((mission) => mission.item)) || []
       const desiredItemsFiltered = desiredItems.filter((item) => !!item)
       const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig))
 

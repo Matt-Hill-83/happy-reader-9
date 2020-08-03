@@ -15,6 +15,9 @@ export default class QuestStatusUtils {
     const { activeMissionIndex } = questStatus
     const questConfig = this.getActiveQuestConfig()
     const { subQuests } = questConfig
+    if (!subQuests) {
+      return
+    }
 
     // For each scene, calculate new visibility props based on conditions defined in triggers
     // newGrid5.slice(0, 9).forEach((scene) => {
@@ -247,7 +250,7 @@ export default class QuestStatusUtils {
   }
 
   static getSubQuestColor = ({ world, sceneId }) => {
-    const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd"]
+    const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd", "ffe7bc", "ffebf8"]
 
     const parentSubQuestFromScene = this.getParentSubQuestIndexFromScene({
       world,

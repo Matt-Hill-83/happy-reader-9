@@ -74,6 +74,15 @@ import moon01 from "./items/moon01.png"
 import spaceShip01 from "./items/spaceShip01.png"
 import note01 from "./items/note01.png"
 
+import shimmer01 from "./creatures/shimmer01.png"
+import leah01 from "./creatures/leah01.png"
+import shine01 from "./creatures/shine01.png"
+import zita01 from "./creatures/zita01.png"
+import nazboo01 from "./creatures/nazboo01.png"
+
+import zac01 from "./creatures/zac01.png"
+import genie01 from "./creatures/genie01.png"
+
 import angus01 from "./creatures/angus01.png"
 import anna from "./creatures/anna.png"
 import anna02 from "./creatures/anna02.png"
@@ -555,6 +564,13 @@ const creatures = {
   vulcan01,
   wizard,
   zanyDog01: dog01,
+  shimmer01,
+  leah01,
+  shine01,
+  zita01,
+  nazboo01,
+  zac01,
+  genie01,
 }
 
 const items = {

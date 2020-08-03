@@ -150,13 +150,13 @@ class MiniLocation extends React.Component {
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
     const neighbors = Utils.getNeighbors({ coordinates })
 
-    // const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
-    //   (neighbor) => neighbor && neighbor.id
-    // )
+    const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
+      (neighbor) => neighbor && neighbor.id
+    )
 
-    // const neighborWasVisited = neighborsArray.some((neighbor) =>
-    //   localStateStore.isVisitedScene(neighbor && neighbor.id)
-    // );
+    const neighborWasVisited = neighborsArray.some((neighbor) =>
+      localStateStore.isVisitedScene(neighbor && neighbor.id)
+    )
 
     const locationName = scene.location.name
     if (!locationName) {
@@ -205,7 +205,8 @@ class MiniLocation extends React.Component {
       showLock = QuestStatusUtils.isSceneLocked({ sceneId: scene.id })
       showCloud =
         QuestStatusUtils.isSceneClouded({ sceneId: scene.id }) &&
-        !isVisitedScene
+        !isVisitedScene &&
+        !neighborWasVisited
 
       locationImage = Images.all[locationName]
       rockImage = Images.backgrounds["rock"]

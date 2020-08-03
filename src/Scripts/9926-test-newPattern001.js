@@ -1,10 +1,10 @@
 const story9926 = {
-  title: "---021",
+  title: "---022",
   scenes: [
     {
       title: "castle",
       id: "2b7b601b-8ecd-40b0-9dd8-8b7bc0eb0fb0",
-      sceneConfig: { coordinates: { row: 0, col: 1 } },
+      sceneConfig: { coordinates: { col: 1, row: 0 } },
       frames: [
         {
           frameConfig: {
@@ -27,7 +27,7 @@ const story9926 = {
             critters2: [{ name: "empty" }],
             faces: [
               { characterIndex: 1, face: "happy", character: "liz2" },
-              { characterIndex: 0, face: "happy", character: "kat" },
+              { characterIndex: 0, character: "kat", face: "happy" },
             ],
           },
           dialogs: [
@@ -44,8 +44,8 @@ const story9926 = {
             critters1: [{ name: "kat" }, { name: "liz2" }],
             critters2: [{ name: "empty" }],
             faces: [
-              { characterIndex: 1, character: "liz2", face: "happy" },
-              { face: "happy", characterIndex: 0, character: "kat" },
+              { face: "happy", character: "liz2", characterIndex: 1 },
+              { character: "kat", characterIndex: 0, face: "happy" },
             ],
           },
           dialogs: [
@@ -63,7 +63,7 @@ const story9926 = {
             critters2: [{ name: "empty" }],
             faces: [
               { characterIndex: 1, face: "happy", character: "liz2" },
-              { face: "happy", characterIndex: 0, character: "kat" },
+              { characterIndex: 0, character: "kat", face: "happy" },
             ],
           },
           dialogs: [
@@ -80,8 +80,8 @@ const story9926 = {
             critters1: [{ name: "kat" }, { name: "liz2" }],
             critters2: [{ name: "empty" }],
             faces: [
-              { character: "liz2", face: "happy", characterIndex: 1 },
-              { character: "kat", characterIndex: 0, face: "happy" },
+              { characterIndex: 1, face: "happy", character: "liz2" },
+              { characterIndex: 0, character: "kat", face: "happy" },
             ],
           },
           dialogs: [
@@ -107,7 +107,7 @@ const story9926 = {
     {
       title: "goat01",
       id: "ae0eb93f-d74d-482f-b259-9b5865c1a9fa",
-      sceneConfig: { coordinates: { row: 1, col: 1 } },
+      sceneConfig: { coordinates: { col: 1, row: 1 } },
       frames: [
         {
           frameConfig: {
@@ -115,10 +115,9 @@ const story9926 = {
             critters2: [
               { name: "elsa02" },
               { name: "angus01" },
-              { name: "fig" },
               { name: "note01" },
             ],
-            faces: [{ face: "happy", characterIndex: 1, character: "liz2" }],
+            faces: [{ characterIndex: 1, face: "happy", character: "liz2" }],
           },
           dialogs: [
             '{"blank" : "Liz, can you take Angus?"}',
@@ -163,7 +162,7 @@ const story9926 = {
     {
       title: "stump",
       id: "5eecdb96-c253-496b-a181-ba117ef6f16a",
-      sceneConfig: { coordinates: { row: 1, col: 3 } },
+      sceneConfig: { coordinates: { col: 3, row: 1 } },
       frames: [
         {
           frameConfig: {
@@ -208,9 +207,9 @@ const story9926 = {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
-                character: "anna02",
-                face: "kat-happy.9e02afab.png",
                 characterIndex: 0,
+                face: "kat-happy.9e02afab.png",
+                character: "anna02",
               },
             ],
           },
@@ -242,16 +241,16 @@ const story9926 = {
     {
       title: "sassafras01Happy",
       id: "f715b6bc-f7bb-4ab8-8dbe-94f2ae56f24f",
-      sceneConfig: { coordinates: { col: 7, row: 1 } },
+      sceneConfig: { coordinates: { row: 1, col: 7 } },
       frames: [
         {
           frameConfig: {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
-                face: "kat-happy.9e02afab.png",
                 characterIndex: 0,
                 character: "anna02",
+                face: "kat-happy.9e02afab.png",
               },
             ],
           },
@@ -266,15 +265,15 @@ const story9926 = {
     {
       title: "cat01",
       id: "5dcc24ae-53a8-4349-818f-07d312aa366d",
-      sceneConfig: { coordinates: { col: 8, row: 1 } },
+      sceneConfig: { coordinates: { row: 1, col: 8 } },
       frames: [
         {
           frameConfig: {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
-                character: "anna02",
                 characterIndex: 0,
+                character: "anna02",
                 face: "kat-happy.9e02afab.png",
               },
             ],
@@ -305,6 +304,32 @@ const story9926 = {
       frames2: [],
     },
     {
+      title: "log",
+      id: "555631be-57ad-4a7e-9cc2-93dbaca824b5",
+      sceneConfig: { coordinates: { row: 2, col: 1 } },
+      frames: [
+        {
+          frameConfig: {
+            critters1: [{ name: "kat" }, { name: "liz2" }],
+            critters2: [{ name: "mug" }],
+            faces: [
+              { face: "happy", characterIndex: 1, character: "liz2" },
+              { character: "kat", face: "happy", characterIndex: 0 },
+            ],
+          },
+          dialogs: [
+            '{"kat" : "asdf"}',
+            '{"liz2" : "asdgf"}',
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+          ],
+        },
+      ],
+      frames2: [],
+    },
+    {
       title: "pig",
       id: "9e2873f2-fe02-4b39-a6aa-be69f9688c91",
       sceneConfig: { coordinates: { row: 2, col: 3 } },
@@ -312,7 +337,7 @@ const story9926 = {
         {
           frameConfig: {
             critters1: [{ name: "liz2" }],
-            faces: [{ face: "happy", character: "liz2", characterIndex: 1 }],
+            faces: [{ characterIndex: 1, face: "happy", character: "liz2" }],
           },
           dialogs: ['{"liz2" : "I will wait here for kat."}'],
         },
@@ -351,7 +376,7 @@ const story9926 = {
     {
       title: "dragon",
       id: "97b0888c-5246-4933-ad33-752ec1d59e4d",
-      sceneConfig: { coordinates: { row: 2, col: 5 } },
+      sceneConfig: { coordinates: { col: 5, row: 2 } },
       frames: [
         {
           frameConfig: {
@@ -368,16 +393,16 @@ const story9926 = {
     {
       title: "brindle01Happy",
       id: "c2840885-08d7-4b25-b5cd-afbda2b95121",
-      sceneConfig: { coordinates: { col: 9, row: 2 } },
+      sceneConfig: { coordinates: { row: 2, col: 9 } },
       frames: [
         {
           frameConfig: {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
-                character: "anna02",
-                face: "kat-happy.9e02afab.png",
                 characterIndex: 0,
+                face: "kat-happy.9e02afab.png",
+                character: "anna02",
               },
             ],
           },
@@ -401,25 +426,6 @@ const story9926 = {
           dialogs: [
             '{"anna02" : "---------------"}',
             '{"merida02" : "---------------"}',
-          ],
-        },
-      ],
-      frames2: [],
-    },
-    {
-      title: "log",
-      id: "e637450a-ba0b-4b73-8182-643077ca4afe",
-      sceneConfig: { coordinates: { col: 0, row: 3 } },
-      frames: [
-        {
-          frameConfig: {
-            critters1: [{ name: "kat" }],
-            faces: [{ characterIndex: 0, character: "kat", face: "happy" }],
-          },
-          dialogs: [
-            '{"kat" : "I will go find liz"}',
-            '{"kat" : ""}',
-            '{"kat" : ""}',
           ],
         },
       ],
@@ -453,12 +459,12 @@ const story9926 = {
     {
       title: "bun",
       id: "917b5276-eb79-4711-bb85-b7d3244e0ca8",
-      sceneConfig: { coordinates: { col: 2, row: 3 } },
+      sceneConfig: { coordinates: { row: 3, col: 2 } },
       frames: [
         {
           frameConfig: {
             critters2: [{ name: "merida02" }, { name: "cub" }],
-            faces: [{ character: "anna02", characterIndex: 0, face: "happy" }],
+            faces: [{ character: "anna02", face: "happy", characterIndex: 0 }],
           },
           dialogs: [
             '{"merida02" : "Fun! Fun! Fun!"}',
@@ -473,12 +479,12 @@ const story9926 = {
     {
       title: "pin",
       id: "c74d66fb-23f8-4d0a-96e7-18a70790d5bd",
-      sceneConfig: { coordinates: { col: 3, row: 3 } },
+      sceneConfig: { coordinates: { row: 3, col: 3 } },
       frames: [
         {
           frameConfig: {
             critters2: [{ name: "merida02" }, { name: "cub" }],
-            faces: [{ face: "happy", characterIndex: 0, character: "anna02" }],
+            faces: [{ character: "anna02", face: "happy", characterIndex: 0 }],
           },
           dialogs: [
             '{"merida02" : "I see a pin!"}',
@@ -488,7 +494,7 @@ const story9926 = {
         {
           frameConfig: {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
-            faces: [{ characterIndex: 0, face: "happy", character: "anna02" }],
+            faces: [{ face: "happy", characterIndex: 0, character: "anna02" }],
           },
           dialogs: [
             '{"anna02" : "---------------"}',
@@ -501,7 +507,7 @@ const story9926 = {
     {
       title: "katieKooper01",
       id: "4807801b-1c79-4f46-a87a-8b98ebcc1c86",
-      sceneConfig: { coordinates: { row: 3, col: 5 } },
+      sceneConfig: { coordinates: { col: 5, row: 3 } },
       frames: [
         {
           frameConfig: {
@@ -542,16 +548,16 @@ const story9926 = {
     {
       title: "foxy01",
       id: "4b828107-5be5-4edc-9c49-396396af4149",
-      sceneConfig: { coordinates: { col: 7, row: 3 } },
+      sceneConfig: { coordinates: { row: 3, col: 7 } },
       frames: [
         {
           frameConfig: {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
-                character: "anna02",
-                face: "kat-happy.9e02afab.png",
                 characterIndex: 0,
+                face: "kat-happy.9e02afab.png",
+                character: "anna02",
               },
             ],
           },
@@ -566,7 +572,7 @@ const story9926 = {
     {
       title: "fan",
       id: "cd5fe3ec-4349-4e69-9000-8d950e2321d2",
-      sceneConfig: { coordinates: { col: 8, row: 3 } },
+      sceneConfig: { coordinates: { row: 3, col: 8 } },
       frames: [
         {
           frameConfig: {
@@ -581,7 +587,7 @@ const story9926 = {
       frames2: [],
     },
     {
-      title: "cat_king",
+      title: "babyTroll01",
       id: "67c3bd4c-d436-46dc-ba00-62d62c03ba87",
       sceneConfig: { coordinates: { row: 3, col: 9 } },
       frames: [
@@ -590,8 +596,8 @@ const story9926 = {
             critters2: [{ name: "anna02" }, { name: "merida02" }],
             faces: [
               {
-                character: "anna02",
                 face: "kat-happy.9e02afab.png",
+                character: "anna02",
                 characterIndex: 0,
               },
             ],
@@ -604,29 +610,160 @@ const story9926 = {
       ],
       frames2: [],
     },
+    {
+      title: "cave",
+      id: "1df10ac0-56ef-4bb1-9527-e48ffcb1c20b",
+      sceneConfig: { coordinates: { row: 4, col: 2 } },
+      frames: [
+        {
+          frameConfig: {
+            critters1: [{ name: "kat" }, { name: "liz2" }],
+            critters2: [{ name: "mug" }],
+            faces: [
+              { face: "happy", characterIndex: 1, character: "liz2" },
+              { character: "kat", characterIndex: 0, face: "happy" },
+            ],
+          },
+          dialogs: [
+            '{"kat" : "asdf"}',
+            '{"liz2" : "asdf"}',
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+          ],
+        },
+      ],
+      frames2: [],
+    },
+    {
+      title: "bees",
+      id: "be455c17-b6c9-4350-b6e0-6b0434ab963f",
+      sceneConfig: { coordinates: { col: 2, row: 5 } },
+      frames: [
+        {
+          frameConfig: {
+            faces: [
+              { character: "liz2", characterIndex: 1, face: "happy" },
+              { face: "happy", character: "kat", characterIndex: 0 },
+            ],
+          },
+          dialogs: [
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+          ],
+        },
+      ],
+      frames2: [],
+    },
+    {
+      title: "coop",
+      id: "7b5ec959-3562-49c4-9ce9-e26ddf66ef41",
+      sceneConfig: { coordinates: { row: 5, col: 3 } },
+      frames: [
+        {
+          frameConfig: {
+            faces: [
+              { characterIndex: 1, face: "happy", character: "liz2" },
+              { character: "kat", characterIndex: 0, face: "happy" },
+            ],
+          },
+          dialogs: [
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+          ],
+        },
+      ],
+      frames2: [],
+    },
+    {
+      title: "waterfall",
+      id: "8942420e-74b3-423a-af23-030155903efc",
+      sceneConfig: { coordinates: { col: 4, row: 5 } },
+      frames: [
+        {
+          frameConfig: {
+            faces: [
+              { face: "happy", character: "liz2", characterIndex: 1 },
+              { characterIndex: 0, face: "happy", character: "kat" },
+            ],
+          },
+          dialogs: [
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+            '{"kat" : ""}',
+            '{"liz2" : ""}',
+          ],
+        },
+      ],
+      frames2: [],
+    },
   ],
   questConfig: {
     subQuests: [
       {
+        triggers: [{ conditions: [{ currentMission: 0 }], name: "cloud" }],
+        missions: [
+          {
+            recipient: { name: "pig" },
+            name: "Feed the pig",
+            missionType: "giveItemToPerson",
+            item: { name: "fig" },
+            rewards: [{ name: "gold", amount: 5 }],
+          },
+          {
+            recipient: { name: "goatInABoat" },
+            name: "Feed the goat.",
+            missionType: "giveItemToPerson",
+            item: { name: "bun" },
+            rewards: [{ name: "gold", amount: 5 }],
+          },
+          {
+            recipient: { name: "pinky01" },
+            missionType: "giveItemToPerson",
+            rewards: [{ amount: 5, name: "gold" }],
+            item: { name: "mug" },
+            name: "Give Pinky a gift.",
+          },
+          {
+            item: { name: "pin" },
+            rewards: [{ name: "gold", amount: 5 }],
+            name: "Give a Troll a Gift.",
+            recipient: { name: "babyTroll01" },
+            missionType: "giveItemToPerson",
+          },
+        ],
+        name: "Meet Your New Best Friend",
+        index: 0,
         scenes: [
           {
             sceneTriggers: [],
-            id: "2b7b601b-8ecd-40b0-9dd8-8b7bc0eb0fb0",
             name: "castle",
+            id: "2b7b601b-8ecd-40b0-9dd8-8b7bc0eb0fb0",
           },
           {
-            id: "ae0eb93f-d74d-482f-b259-9b5865c1a9fa",
-            sceneTriggers: [],
             name: "goat01",
+            sceneTriggers: [],
+            id: "ae0eb93f-d74d-482f-b259-9b5865c1a9fa",
           },
           {
-            sceneTriggers: [],
-            id: "24b9464f-53de-4da0-ba52-ddd604df8e61",
             name: "fig",
+            id: "24b9464f-53de-4da0-ba52-ddd604df8e61",
+            sceneTriggers: [],
           },
           {
-            sceneTriggers: [],
             name: "stump",
+            sceneTriggers: [],
             id: "5eecdb96-c253-496b-a181-ba117ef6f16a",
           },
           {
@@ -635,58 +772,23 @@ const story9926 = {
             sceneTriggers: [],
           },
         ],
-        missions: [
-          {
-            name: "Feed the pig",
-            recipient: { name: "pig" },
-            item: { name: "fig" },
-            rewards: [{ amount: 5, name: "gold" }],
-            missionType: "giveItemToPerson",
-          },
-          {
-            missionType: "giveItemToPerson",
-            rewards: [{ name: "gold", amount: 5 }],
-            recipient: { name: "goatInABoat" },
-            name: "Feed the goat.",
-            item: { name: "bun" },
-          },
-          {
-            rewards: [{ amount: 5, name: "gold" }],
-            recipient: { name: "pinky01" },
-            missionType: "giveItemToPerson",
-            name: "Give Pinky a gift.",
-            item: { name: "mug" },
-          },
-          {
-            rewards: [{ amount: 5, name: "gold" }],
-            name: "Give a Troll a Gift.",
-            item: { name: "pin" },
-            recipient: { name: "babyTroll01" },
-            missionType: "giveItemToPerson",
-          },
-          { location: { name: "log" }, missionType: "getToLocation" },
-        ],
-        triggers: [{ name: "cloud", conditions: [{ currentMission: 0 }] }],
-        name: "Meet Your New Best Friend",
-        index: 0,
       },
       {
-        triggers: [
-          { conditions: [{ currentMission: 0 }], name: "cloud" },
-          { name: "uncloud", conditions: [{ completedMission: 0 }] },
-        ],
+        name: "Win the Rap Battle",
+        triggers: [{ name: "cloud", conditions: [{ currentMission: 0 }] }],
         scenes: [
           {
-            sceneTriggers: [
-              { name: "uncloud", conditions: [{ currentMission: 1 }] },
-            ],
-            id: "e637450a-ba0b-4b73-8182-643077ca4afe",
             name: "log",
+            id: "555631be-57ad-4a7e-9cc2-93dbaca824b5",
+            sceneTriggers: [
+              { name: "lock", conditions: [{ currentMission: 0 }] },
+              { name: "unlock", conditions: [{ completedMission: 0 }] },
+            ],
           },
           {
-            name: "goatInABoat",
             id: "70aa676a-b748-4a47-9b63-0ef8a1888f30",
             sceneTriggers: [],
+            name: "goatInABoat",
           },
           {
             id: "917b5276-eb79-4711-bb85-b7d3244e0ca8",
@@ -694,43 +796,55 @@ const story9926 = {
             sceneTriggers: [],
           },
           {
+            id: "c74d66fb-23f8-4d0a-96e7-18a70790d5bd",
             name: "pin",
             sceneTriggers: [
-              { conditions: [{ completedMission: 0 }], name: "lock" },
+              { name: "lock", conditions: [{ completedMission: 0 }] },
+              { conditions: [{ completedMission: 1 }], name: "unlock" },
             ],
-            id: "c74d66fb-23f8-4d0a-96e7-18a70790d5bd",
+          },
+          {
+            id: "1df10ac0-56ef-4bb1-9527-e48ffcb1c20b",
+            sceneTriggers: [
+              { conditions: [{ currentMission: 0 }], name: "lock" },
+              { conditions: [{ completedMission: 2 }], name: "unlock" },
+            ],
+            name: "cave",
           },
         ],
-        name: "Win the Rap Battle",
       },
       {
-        sceneTriggers: [{ name: "lock", conditions: [{ currentMission: 0 }] }],
-        id: "xxx",
         scenes: [
           {
-            name: "pinky01",
+            id: "5b4acf11-ddcd-4db2-acda-51865a23db39",
             sceneTriggers: [
               { name: "lock", conditions: [{ completedMission: 0 }] },
+              { conditions: [{ completedMission: 1 }], name: "unlock" },
             ],
-            id: "5b4acf11-ddcd-4db2-acda-51865a23db39",
+            name: "pinky01",
           },
           {
-            name: "dragon",
             sceneTriggers: [],
             id: "97b0888c-5246-4933-ad33-752ec1d59e4d",
+            name: "dragon",
           },
         ],
-        name: "Talk to Pinky",
         triggers: [
-          { "0": "unhide", conditions: [{ currentMission: 0 }], name: "cloud" },
+          { "0": "unhide", name: "cloud", conditions: [{ currentMission: 0 }] },
         ],
+        id: "xxx",
+        name: "Talk to Pinky",
+        sceneTriggers: [{ name: "lock", conditions: [{ currentMission: 0 }] }],
       },
       {
         scenes: [
           {
-            id: "87c89f27-17c0-4baf-874d-4b4a36ffa67e",
-            sceneTriggers: [],
+            sceneTriggers: [
+              { conditions: [{ currentMission: 0 }], name: "lock" },
+              { name: "unlock", conditions: [{ completedMission: 3 }] },
+            ],
             name: "cub",
+            id: "87c89f27-17c0-4baf-874d-4b4a36ffa67e",
           },
           {
             name: "hog",
@@ -743,9 +857,9 @@ const story9926 = {
             sceneTriggers: [],
           },
           {
-            id: "5dcc24ae-53a8-4349-818f-07d312aa366d",
             name: "cat01",
             sceneTriggers: [],
+            id: "5dcc24ae-53a8-4349-818f-07d312aa366d",
           },
           {
             id: "623fe6fd-7c2b-4b47-b808-1e0985cd3ec4",
@@ -754,12 +868,12 @@ const story9926 = {
           },
         ],
         id: "xxx",
-        triggers: [{ name: "cloud", conditions: [{ currentMission: 0 }] }],
+        triggers: [{ conditions: [{ currentMission: 0 }], name: "cloud" }],
         name: "Find the Cub",
-        sceneTriggers: [{ conditions: [{ currentMission: 0 }], name: "lock" }],
+        sceneTriggers: [{ name: "lock", conditions: [{ currentMission: 0 }] }],
       },
       {
-        index: 0,
+        triggers: [{ name: "cloud", conditions: [{ currentMission: 0 }] }],
         scenes: [
           {
             id: "4807801b-1c79-4f46-a87a-8b98ebcc1c86",
@@ -767,47 +881,84 @@ const story9926 = {
             name: "katieKooper01",
           },
           {
-            name: "cap",
             id: "f19edf3b-1ab1-4b23-a394-f92e849d2a4d",
+            name: "cap",
             sceneTriggers: [],
           },
           {
-            sceneTriggers: [],
-            id: "4b828107-5be5-4edc-9c49-396396af4149",
             name: "foxy01",
+            id: "4b828107-5be5-4edc-9c49-396396af4149",
+            sceneTriggers: [],
           },
           {
-            id: "cd5fe3ec-4349-4e69-9000-8d950e2321d2",
             name: "fan",
             sceneTriggers: [],
+            id: "cd5fe3ec-4349-4e69-9000-8d950e2321d2",
           },
           {
             id: "67c3bd4c-d436-46dc-ba00-62d62c03ba87",
-            name: "cat_king",
             sceneTriggers: [],
+            name: "cat_king",
           },
           {
+            sceneTriggers: [],
             id: "c2840885-08d7-4b25-b5cd-afbda2b95121",
             name: "brindle01Happy",
-            sceneTriggers: [],
           },
           {
-            id: "74217613-4c3d-45fc-9a6c-f14c64cb230a",
             name: "pug",
+            id: "74217613-4c3d-45fc-9a6c-f14c64cb230a",
             sceneTriggers: [],
           },
         ],
+        index: 0,
+        missions: [
+          {
+            name: "Feed the pig",
+            missionType: "giveItemToPerson",
+            rewards: [{ amount: 5, name: "gold" }],
+            recipient: { name: "pig" },
+            item: { name: "fig" },
+          },
+        ],
         name: "Win the game",
+      },
+      {
+        triggers: [
+          { name: "cloud", conditions: [{ currentMission: 0 }] },
+          { conditions: [{ currentMission: 0 }], name: "hide" },
+          { name: "unhide", conditions: [{ completedMission: 2 }] },
+        ],
         missions: [
           {
             rewards: [{ amount: 5, name: "gold" }],
             name: "Feed the pig",
             recipient: { name: "pig" },
-            item: { name: "fig" },
             missionType: "giveItemToPerson",
+            item: { name: "fig" },
           },
         ],
-        triggers: [{ conditions: [{ currentMission: 0 }], name: "cloud" }],
+        scenes: [
+          {
+            id: "be455c17-b6c9-4350-b6e0-6b0434ab963f",
+            name: "bees",
+            sceneTriggers: [],
+          },
+          {
+            sceneTriggers: [
+              { conditions: [{ currentMission: 0 }], name: "lock" },
+            ],
+            name: "coop",
+            id: "7b5ec959-3562-49c4-9ce9-e26ddf66ef41",
+          },
+          {
+            name: "waterfall",
+            sceneTriggers: [],
+            id: "8942420e-74b3-423a-af23-030155903efc",
+          },
+        ],
+        name: "new SubQuest",
+        index: 0,
       },
     ],
   },
