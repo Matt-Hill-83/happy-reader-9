@@ -34,6 +34,7 @@ import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
 
 import css from "./WorldBuilder.module.scss"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils"
+import Constants from "../../Utils/Constants/Constants"
 
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
@@ -207,46 +208,47 @@ class WorldBuilder extends Component {
 
     const newGrid5 = []
 
-    const questConfig = {
-      missions: [
-        {
-          name: "Feed the pig",
-          item: { name: "fig" },
-          recipient: { name: "pig" },
-          rewards: [{ name: "gold", amount: 5 }],
-        },
-        {
-          recipient: { name: "goatInABoat" },
-          name: "Feed the goat.",
-          rewards: [{ name: "gold", amount: 5 }],
-          item: { name: "bun" },
-        },
-        {
-          recipient: { name: "pinky01" },
-          name: "Give Pinky a gift.",
-          item: { name: "mug" },
-          rewards: [{ amount: 5, name: "gold" }],
-        },
-        {
-          recipient: { name: "babyTroll01" },
-          name: "Give a Troll a Gift.",
-          rewards: [{ name: "gold", amount: 5 }],
-          item: { name: "pin" },
-        },
-      ],
-      subQuestTriggersList: [
-        { subQuestId: 1, unHideTriggers: { completedMission: 0 } },
-        { subQuestId: 2, unHideTriggers: { completedMission: 1 } },
-        { subQuestId: 3, unHideTriggers: { completedMission: 2 } },
-        { unHideTriggers: { completedMission: 2 }, subQuestId: 4 },
-        { unHideTriggers: { completedMission: 3 }, subQuestId: 5 },
-      ],
-    }
+    const questConfig = Constants.newQuestConfig
+    // const questConfig = {
+    //   missions: [
+    //     {
+    //       name: "Feed the pig",
+    //       item: { name: "fig" },
+    //       recipient: { name: "pig" },
+    //       rewards: [{ name: "gold", amount: 5 }],
+    //     },
+    //     {
+    //       recipient: { name: "goatInABoat" },
+    //       name: "Feed the goat.",
+    //       rewards: [{ name: "gold", amount: 5 }],
+    //       item: { name: "bun" },
+    //     },
+    //     {
+    //       recipient: { name: "pinky01" },
+    //       name: "Give Pinky a gift.",
+    //       item: { name: "mug" },
+    //       rewards: [{ amount: 5, name: "gold" }],
+    //     },
+    //     {
+    //       recipient: { name: "babyTroll01" },
+    //       name: "Give a Troll a Gift.",
+    //       rewards: [{ name: "gold", amount: 5 }],
+    //       item: { name: "pin" },
+    //     },
+    //   ],
+    //   subQuestTriggersList: [
+    //     { subQuestId: 1, unHideTriggers: { completedMission: 0 } },
+    //     { subQuestId: 2, unHideTriggers: { completedMission: 1 } },
+    //     { subQuestId: 3, unHideTriggers: { completedMission: 2 } },
+    //     { unHideTriggers: { completedMission: 2 }, subQuestId: 4 },
+    //     { unHideTriggers: { completedMission: 3 }, subQuestId: 5 },
+    //   ],
+    // }
 
     localStateStore.setWorldBuilderScenesGrid(grid)
     const newMap = {
       name: newName,
-      title: "Test Map" + newName,
+      title: "-------" + newName,
       newGrid5,
       released: true,
       releasedToProd: true,

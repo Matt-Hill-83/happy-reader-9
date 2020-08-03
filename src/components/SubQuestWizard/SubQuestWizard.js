@@ -75,7 +75,7 @@ export default function SubQuestWizard({ props }) {
     const realScenes = props.scenes
 
     const onAddScene = ({ rowIndex, before }) => {
-      const newElement = Constants.newScene
+      const newElement = Constants.getNewScene({})
       Utils.addArrayElement({
         newElement,
         before,
@@ -309,7 +309,7 @@ export default function SubQuestWizard({ props }) {
       const accordianProps = { items }
 
       const onAddScene = ({ rowIndex, before }) => {
-        const newElement = Constants.newSubQuest
+        const newElement = Constants.getNewSubQuest({})
         Utils.addArrayElement({
           newElement,
           before,

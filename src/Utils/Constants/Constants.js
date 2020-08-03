@@ -1,6 +1,72 @@
 import Utils from "../Utils"
 
 export default class Constants {
+  static getNewScene = ({ name = "blank" }) => {
+    return {
+      name,
+      id: "xxx1",
+      sceneTriggers: [
+        {
+          conditions: [
+            {
+              currentMission: 0,
+            },
+          ],
+          name: "lock",
+        },
+      ],
+    }
+  }
+
+  static getNewSubQuest = ({ name = "new SubQuest" }) => {
+    const newSubQuest = {
+      name,
+      triggers: [{ name: "unlock", conditions: [{ frameSetIndex: 0 }] }],
+      scenes: [this.getNewScene({})],
+      index: 0,
+      missions: [
+        {
+          name: "Feed the pig",
+          rewards: [{ name: "gold", amount: 5 }],
+          item: { name: "fig" },
+          recipient: { name: "pig" },
+          missionType: "giveItemToPerson",
+        },
+      ],
+    }
+    return newSubQuest
+  }
+
+  static newQuestConfig = {
+    missions: [
+      {
+        name: "Feed the pig",
+        item: { name: "fig" },
+        recipient: { name: "pig" },
+        rewards: [{ name: "gold", amount: 5 }],
+      },
+      {
+        recipient: { name: "goatInABoat" },
+        name: "Feed the goat.",
+        rewards: [{ name: "gold", amount: 5 }],
+        item: { name: "bun" },
+      },
+      {
+        recipient: { name: "pinky01" },
+        name: "Give Pinky a gift.",
+        item: { name: "mug" },
+        rewards: [{ amount: 5, name: "gold" }],
+      },
+      {
+        recipient: { name: "babyTroll01" },
+        name: "Give a Troll a Gift.",
+        rewards: [{ name: "gold", amount: 5 }],
+        item: { name: "pin" },
+      },
+    ],
+    subQuests: [Constants.getNewSubQuest({})],
+  }
+
   static newTrigger = () => {
     return {
       name: "lock",
@@ -10,49 +76,6 @@ export default class Constants {
         },
       ],
     }
-  }
-
-  static newScene = {
-    name: "blank",
-    id: "xxx1",
-    sceneTriggers: [
-      {
-        conditions: [
-          {
-            currentMission: 0,
-          },
-        ],
-        name: "lock",
-      },
-    ],
-  }
-
-  static newSubQuest = {
-    name: "new SubQuest",
-    triggers: [{ name: "unlock", conditions: [{ frameSetIndex: 0 }] }],
-    scenes: [
-      {
-        sceneTriggers: [
-          {
-            "0": "unhide",
-            name: "lock",
-            conditions: [{ currentMission: 0 }],
-          },
-        ],
-        name: "no name",
-        id: "yyy",
-      },
-    ],
-    index: 0,
-    missions: [
-      {
-        name: "Feed the pig",
-        rewards: [{ name: "gold", amount: 5 }],
-        item: { name: "fig" },
-        recipient: { name: "pig" },
-        missionType: "giveItemToPerson",
-      },
-    ],
   }
 
   static neighborPositionsEnum = {
