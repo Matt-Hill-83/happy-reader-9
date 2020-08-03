@@ -10,6 +10,25 @@ export default class Utils {
     array.splice(index + adder, 0, newElement)
   }
 
+  static getAllItemsInScene = ({ scene }) => {
+    console.log("scene----------------------->>>>", toJS(scene)) // zzz
+    const allItems = []
+    scene.frameSet.frames.forEach((item) => {
+      console.log("item", toJS(item)) // zzz
+      allItems.push(...item.critters1, ...item.critters2)
+    })
+    return allItems
+  }
+
+  static getAllItemsInScenes = ({ scenes }) => {
+    const allItems = []
+    scenes.forEach((scene) => {
+      const items = Utils.getAllItemsInScene({ scene })
+      allItems.push(...items)
+    })
+    return allItems
+  }
+
   static deleteArrayElement = ({ array, index }) => {
     array.splice(index, 1)
   }

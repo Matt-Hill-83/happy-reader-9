@@ -38,12 +38,15 @@ export default function SubQuestWizard({ props }) {
     setQuestConfig(props.questConfig || {})
   }, [props.questConfig])
 
+  const scenes = props.scenes || []
+
   const renderMissions = ({ missions }) => {
     const missionTableProps = {
       items: missions,
       questConfig,
       saveQuestConfig,
       setQuestConfig,
+      scenes,
     }
     return (
       <div className={cx(css.triggers, css.listGroup)}>

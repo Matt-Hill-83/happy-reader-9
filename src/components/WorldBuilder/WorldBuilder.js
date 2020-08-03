@@ -591,11 +591,12 @@ class WorldBuilder extends Component {
     if (!showSubQuestWizard) {
       return null
     }
-
+    const world = localStateStore.getWorldBuilderWorld() || {}
     const questConfigToolProps = {
       questConfig: questConfig,
       scenes: newGrid5,
       onSave: this.onSaveQuestConfig,
+      worldId: world.id,
     }
 
     return (

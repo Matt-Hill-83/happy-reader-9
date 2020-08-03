@@ -6,7 +6,7 @@ import { toJS } from "mobx"
 import cx from "classnames"
 import React, { useEffect, useState } from "react"
 
-import { getSubQuestTableConfigFunc } from "./MissionsTableConfig"
+import { getTableConfig } from "./MissionsTableConfig"
 import DataTable3 from "../DataTable3/DataTable3"
 
 import Utils from "../../Utils/Utils"
@@ -21,7 +21,12 @@ export default function MissionsTable({ props }) {
     setQuestConfig,
     dataTableKey,
     questConfig,
+    scenes,
+    worldId,
   } = props
+
+  const allItems = Utils.getAllItemsInScenes({ scenes })
+  console.log("allItems------------------------>>>>", toJS(allItems)) // zzz
 
   useEffect(() => {
     // on mount
@@ -36,9 +41,9 @@ export default function MissionsTable({ props }) {
     setQuestConfig(props.questConfig || {})
   }, [props.questConfig])
 
-  const renderTriggers = ({ items }) => {
-    const onAddTriggerRow = ({ rowIndex, before }) => {
-      const newElement = Constants.getNewTrigger()
+  const renderItems = ({ items }) => {
+    const onAddItem = ({ rowIndex, before }) => {
+      const newElement = Constants.getNewMission()
       Utils.addArrayElement({
         newElement,
         before,
@@ -55,17 +60,17 @@ export default function MissionsTable({ props }) {
           className={css.addTriggerButton}
           icon={IconNames.ADD}
           onClick={() => {
-            onAddTriggerRow({ rowIndex: 0, before: false })
+            onAddItem({ rowIndex: 0, before: false })
           }}
         >
-          Add Trigger
+          Add Mission
         </Button>
       )
     }
 
     const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
-      const { rowIndex } = tableMeta
-      items[rowIndex][propertyName] = newValue
+      // const { rowIndex } = tableMeta
+      // items[rowIndex][propertyName] = newValue
     }
 
     const onDeleteTriggerRow = ({ rowIndex }) => {
@@ -73,13 +78,15 @@ export default function MissionsTable({ props }) {
       saveQuestConfig()
     }
 
-    const { options, columns } = getSubQuestTableConfigFunc({
+    const { options, columns } = getTableConfig({
       tableChangeCallback,
       onDeleteTriggerRow,
-      onAddTriggerRow,
+      onAddItem,
       saveConfig: () => {
         saveQuestConfig()
       },
+      scenes: allItems,
+      itemsToGet: allItems,
     })
 
     const getMuiTheme = () =>
@@ -87,7 +94,7 @@ export default function MissionsTable({ props }) {
         overrides: {
           MUIDataTableHeadCell: {
             fixedHeader: {
-              display: "none",
+              // display: "none",
             },
           },
           MuiTableCell: {
@@ -112,6 +119,6 @@ export default function MissionsTable({ props }) {
   if (!questConfig) {
     return null
   }
-
-  return <div className={cx(css.main)}>{renderTriggers({ items })}</div>
+  console.log("items", toJS(items)) // zzz
+  return <div className={cx(css.main)}>{renderItems({ items })}</div>
 }

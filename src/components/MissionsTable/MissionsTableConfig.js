@@ -8,71 +8,65 @@ import TextField from "@material-ui/core/TextField"
 import Utils from "../../Utils/Utils"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import Constants from "../../Utils/Constants/Constants"
+import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 
 import css from "./MissionsTableConfig.module.scss"
-import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 
 const newCondition = { completedScene: "1234567" }
 
-export const getSubQuestTableConfigFunc = ({
-  tableChangeCallback,
+export const getTableConfig = ({
+  tableChangeCallback = () => {},
   onDeleteTriggerRow,
-  onAddTriggerRow,
+  onAddItem,
   saveConfig,
+  scenes,
+  itemsToGet,
 }) => {
-  const renderConditions = (value, tableMeta, updateValue) => {
-    const conditions = value
+  const renderItem = (value, tableMeta, updateValue) => {
+    console.log("value", toJS(value)) // zzz
+    const onChange = (newValue) => {
+      const { rowIndex, columnIndex } = tableMeta
+      updateValue(newValue)
+      // tableMeta.tableData[rowIndex][columnIndex] = newValue
+      // tableChangeCallback({ tableMeta, newValue, propertyName: "name" })
+    }
+
+    const realScenes = itemsToGet || []
+    console.log("realScenes", toJS(realScenes)) // zzz
+    const realScene = realScenes.find((scene) => scene.id === value.id)
+
     return (
-      conditions &&
-      conditions.map((condition, conditionIndex) => {
-        const conditionNames = Object.keys(condition)
+      <SimpleSelectObj
+        className={css.sceneDropdown}
+        items={realScenes}
+        value={realScene}
+        getOptionLabel={(option) => option.name}
+        onChange={onChange}
+      />
+    )
+  }
 
-        return conditionNames.map((conditionName) => {
-          const items = Object.values(Constants.triggers.baseConditions)
-          const conditionValue = condition[conditionName]
+  const renderRecipient = (value, tableMeta, updateValue) => {
+    console.log("value", toJS(value)) // zzz
+    const onChange = (newValue) => {
+      const { rowIndex, columnIndex } = tableMeta
+      updateValue(newValue)
+      // tableMeta.tableData[rowIndex][columnIndex] = newValue
+      // tableChangeCallback({ tableMeta, newValue, propertyName: "name" })
+    }
 
-          const onChangeCondition = (newValue) => {
-            conditions[conditionIndex] = { [newValue]: conditionValue }
-            updateValue(conditions)
-            saveConfig()
-          }
+    const realScenes = scenes || []
+    console.log("realScenes", toJS(realScenes)) // zzz
+    const realScene = realScenes.find((scene) => scene.id === value.id)
 
-          const onChangeValue = ({ value = 0 }) => {
-            // TODO; if conditionName is a numerical input
-            conditions[conditionIndex][conditionName] = parseInt(value)
-            updateValue(conditions)
-            saveConfig()
-          }
-
-          return (
-            <div className={css.conditionsKVPair}>
-              <SimpleSelectObj
-                className={css.triggerConditionsDropdown}
-                items={items}
-                value={conditionName}
-                index={tableMeta.columnIndex}
-                onChange={onChangeCondition}
-                getOptionLabel={(option) => option}
-              />
-              <TextField
-                className={css.inputField}
-                id="outlined-secondary"
-                variant="outlined"
-                margin="dense"
-                color="secondary"
-                defaultValue={conditionValue}
-                onBlur={(event) => onChangeValue({ value: event.target.value })}
-                InputProps={{}}
-              />
-              {renderAddDeleteButtonsForTriggerConditions({
-                tableMeta,
-                conditionIndex,
-                conditions,
-              })}
-            </div>
-          )
-        })
-      })
+    return (
+      <SimpleSelectObj
+        className={css.sceneDropdown}
+        items={realScenes}
+        value={realScene}
+        getOptionLabel={(option) => option.name}
+        onChange={onChange}
+      />
     )
   }
 
@@ -150,7 +144,15 @@ export const getSubQuestTableConfigFunc = ({
     )
   }
 
-  const subQuestTableConfig2 = {
+  const columnNames = [
+    "Mission",
+    "Bring the...",
+    "to the...",
+    "Gold",
+    "Complete",
+  ]
+
+  const tableConfig = {
     options: {
       selectableRows: "none",
       onCellClick: () => {},
@@ -169,7 +171,7 @@ export const getSubQuestTableConfigFunc = ({
               props={{
                 rowIndex: tableMeta.rowIndex,
                 onDelete: onDeleteTriggerRow,
-                onAdd: onAddTriggerRow,
+                onAdd: onAddItem,
               }}
             />
           ),
@@ -177,24 +179,34 @@ export const getSubQuestTableConfigFunc = ({
       },
       {
         name: "name",
-        label: "Trigger Type",
+        label: "Mission",
         options: {
           sort: false,
           filter: true,
-          customBodyRender: renderName,
+          // customBodyRender: renderName,
         },
       },
       {
-        name: "conditions",
-        label: "Trigger Conditions",
+        name: "item.name",
+        label: "Bring the...",
         options: {
           sort: false,
           filter: true,
-          customBodyRender: renderConditions,
+          customBodyRender: renderItem,
+        },
+      },
+      {
+        name: "item.name",
+        label: "to the...",
+        options: {
+          sort: false,
+          filter: true,
+          // customBodyRender: renderItem,
+          customBodyRender: renderRecipient,
         },
       },
     ],
   }
 
-  return subQuestTableConfig2
+  return tableConfig
 }

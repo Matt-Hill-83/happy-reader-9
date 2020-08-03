@@ -96,6 +96,16 @@ export default class Constants {
     }
   }
 
+  static getNewMission = () => {
+    return {
+      name: "Feed the pig",
+      missionType: "giveItemToPerson",
+      rewards: [{ amount: 5, name: "gold" }],
+      recipient: { name: "pig" },
+      item: { name: "fig" },
+    }
+  }
+
   static neighborPositionsEnum = {
     left: "left",
     right: "right",
