@@ -85,7 +85,7 @@ export default class Constants {
     }
   }
 
-  static newTrigger = () => {
+  static getNewTrigger = () => {
     return {
       name: "lock",
       conditions: [

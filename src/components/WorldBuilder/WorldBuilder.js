@@ -31,10 +31,10 @@ import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import Utils from "../../Utils/Utils"
 import WorldPicker from "../WorldPicker/WorldPicker"
 import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
-
-import css from "./WorldBuilder.module.scss"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils"
 import Constants from "../../Utils/Constants/Constants"
+
+import css from "./WorldBuilder.module.scss"
 
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
@@ -50,6 +50,8 @@ class WorldBuilder extends Component {
 
   // Changing this to DidMount breaks things
   async componentWillMount() {
+    console.log("worldNameStore.fetch()-------------------->>>>>>>>>>>>>>>") // zzz
+
     await worldNameStore.fetch()
     await gameConfig.fetch()
     const gameConfigData = Utils.getGameConfig()

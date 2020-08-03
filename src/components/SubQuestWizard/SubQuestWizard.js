@@ -179,7 +179,7 @@ export default function SubQuestWizard({ props }) {
 
   const renderTriggers = ({ triggers }) => {
     const onAddTriggerRow = ({ rowIndex, before }) => {
-      const newElement = Constants.newTrigger()
+      const newElement = Constants.getNewTrigger()
       Utils.addArrayElement({
         newElement,
         before,
