@@ -205,59 +205,18 @@ class WorldBuilder extends Component {
       })
     }
     const { grid, gridDimensions } = this.createNewGrid()
-
-    const newGrid5 = []
-
-    const questConfig = Constants.newQuestConfig
-    // const questConfig = {
-    //   missions: [
-    //     {
-    //       name: "Feed the pig",
-    //       item: { name: "fig" },
-    //       recipient: { name: "pig" },
-    //       rewards: [{ name: "gold", amount: 5 }],
-    //     },
-    //     {
-    //       recipient: { name: "goatInABoat" },
-    //       name: "Feed the goat.",
-    //       rewards: [{ name: "gold", amount: 5 }],
-    //       item: { name: "bun" },
-    //     },
-    //     {
-    //       recipient: { name: "pinky01" },
-    //       name: "Give Pinky a gift.",
-    //       item: { name: "mug" },
-    //       rewards: [{ amount: 5, name: "gold" }],
-    //     },
-    //     {
-    //       recipient: { name: "babyTroll01" },
-    //       name: "Give a Troll a Gift.",
-    //       rewards: [{ name: "gold", amount: 5 }],
-    //       item: { name: "pin" },
-    //     },
-    //   ],
-    //   subQuestTriggersList: [
-    //     { subQuestId: 1, unHideTriggers: { completedMission: 0 } },
-    //     { subQuestId: 2, unHideTriggers: { completedMission: 1 } },
-    //     { subQuestId: 3, unHideTriggers: { completedMission: 2 } },
-    //     { unHideTriggers: { completedMission: 2 }, subQuestId: 4 },
-    //     { unHideTriggers: { completedMission: 3 }, subQuestId: 5 },
-    //   ],
-    // }
+    // const questConfig = Constants.getNewQuestConfig({ props: {} })
 
     localStateStore.setWorldBuilderScenesGrid(grid)
-    const newMap = {
+    const newWorldProps = {
       name: newName,
       title: "-------" + newName,
-      newGrid5,
-      released: true,
-      releasedToProd: true,
-      ignore: false,
       gridDimensions,
-      questConfig,
     }
 
-    const newMapReturned = await maps.add(newMap)
+    const newWorld = Constants.getNewWorld({ props: newWorldProps })
+
+    const newMapReturned = await maps.add(newWorld)
     localStateStore.setWorldBuilderWorld(newMapReturned)
   }
 

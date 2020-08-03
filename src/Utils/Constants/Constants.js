@@ -37,34 +37,52 @@ export default class Constants {
     return newSubQuest
   }
 
-  static newQuestConfig = {
-    missions: [
-      {
-        name: "Feed the pig",
-        item: { name: "fig" },
-        recipient: { name: "pig" },
-        rewards: [{ name: "gold", amount: 5 }],
-      },
-      {
-        recipient: { name: "goatInABoat" },
-        name: "Feed the goat.",
-        rewards: [{ name: "gold", amount: 5 }],
-        item: { name: "bun" },
-      },
-      {
-        recipient: { name: "pinky01" },
-        name: "Give Pinky a gift.",
-        item: { name: "mug" },
-        rewards: [{ amount: 5, name: "gold" }],
-      },
-      {
-        recipient: { name: "babyTroll01" },
-        name: "Give a Troll a Gift.",
-        rewards: [{ name: "gold", amount: 5 }],
-        item: { name: "pin" },
-      },
-    ],
-    subQuests: [Constants.getNewSubQuest({})],
+  static getNewWorld = ({ props = {} }) => {
+    const questConfig = Constants.getNewQuestConfig({ props: {} })
+    const defaultProps = {
+      name: "My New Name",
+      title: "My New Title",
+      newGrid5: [],
+      released: true,
+      releasedToProd: true,
+      ignore: false,
+      gridDimensions: {},
+      questConfig,
+    }
+
+    return { ...defaultProps, ...props }
+  }
+
+  static getNewQuestConfig = ({ props = {} }) => {
+    return {
+      missions: [
+        {
+          name: "Feed the pig",
+          item: { name: "fig" },
+          recipient: { name: "pig" },
+          rewards: [{ name: "gold", amount: 5 }],
+        },
+        {
+          recipient: { name: "goatInABoat" },
+          name: "Feed the goat.",
+          rewards: [{ name: "gold", amount: 5 }],
+          item: { name: "bun" },
+        },
+        {
+          recipient: { name: "pinky01" },
+          name: "Give Pinky a gift.",
+          item: { name: "mug" },
+          rewards: [{ amount: 5, name: "gold" }],
+        },
+        {
+          recipient: { name: "babyTroll01" },
+          name: "Give a Troll a Gift.",
+          rewards: [{ name: "gold", amount: 5 }],
+          item: { name: "pin" },
+        },
+      ],
+      subQuests: [Constants.getNewSubQuest({})],
+    }
   }
 
   static newTrigger = () => {
