@@ -6,8 +6,8 @@ import { toJS } from "mobx"
 import cx from "classnames"
 import React, { useEffect, useState } from "react"
 
-import { getSubQuestTableConfigFunc } from "./SubQuestTableConfig"
-import DataTable3 from "../DataTable3/DataTable3"
+// import { getSubQuestTableConfigFunc } from "./SubQuestTableConfig"
+// import DataTable3 from "../DataTable3/DataTable3"
 import MyAccordian from "../MyAccordian/MyAccordian"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 
@@ -15,8 +15,11 @@ import Utils from "../../Utils/Utils"
 import Constants from "../../Utils/Constants/Constants"
 
 import css from "./SubQuestWizard.module.scss"
-import AddDeleteButtonGroup from "./AddDeleteButtonGroup"
+// import AddDeleteButtonGroup from "./AddDeleteButtonGroup"
 import DialogBuilder from "../DialogBuilder/DialogBuilder"
+// import MiniTable2 from "../MiniTable2/MiniTable2"
+import TriggersTable from "../TriggersTable/TriggersTable"
+import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 
 export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState([])
@@ -41,6 +44,7 @@ export default function SubQuestWizard({ props }) {
 
   const renderMissions = ({ missions }) => {
     const realScenes = props.scenes
+    console.log("missions", toJS(missions)) // zzz
 
     return missions.map((mission) => {
       const onChangeScene = (newItem) => {
@@ -53,6 +57,12 @@ export default function SubQuestWizard({ props }) {
       const defaultValue = realScenes.find(
         (thing) => thing.location.name === _get(mission, "item.name") || ""
       )
+
+      // return (
+      //   <div className={css.left}>
+      //     <MiniTable2 columnNames={columnNames} tableData={tableData} />
+      //   </div>
+      // )
       return (
         <div className={cx(css.sceneName, css.listItem, css.missionsList)}>
           <span className={cx(css.listItemName)}>{mission.name}</span>
@@ -178,81 +188,95 @@ export default function SubQuestWizard({ props }) {
   }
 
   const renderTriggers = ({ triggers }) => {
-    const onAddTriggerRow = ({ rowIndex, before }) => {
-      const newElement = Constants.getNewTrigger()
-      Utils.addArrayElement({
-        newElement,
-        before,
-        index: rowIndex,
-        array: triggers,
-      })
-
-      saveQuestConfig()
+    const triggerTableProps = {
+      triggers,
+      questConfig,
+      saveQuestConfig,
+      setQuestConfig,
     }
-
-    if (triggers.length === 0) {
-      return (
-        <Button
-          className={css.addTriggerButton}
-          icon={IconNames.ADD}
-          onClick={() => {
-            onAddTriggerRow({ rowIndex: 0, before: false })
-          }}
-        >
-          Add Trigger
-        </Button>
-      )
-    }
-
-    const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
-      const { rowIndex } = tableMeta
-      triggers[rowIndex][propertyName] = newValue
-    }
-
-    const onDeleteTriggerRow = ({ rowIndex }) => {
-      Utils.deleteArrayElement({ index: rowIndex, array: triggers })
-      saveQuestConfig()
-    }
-
-    const { options, columns } = getSubQuestTableConfigFunc({
-      tableChangeCallback,
-      onDeleteTriggerRow,
-      onAddTriggerRow,
-      saveConfig: () => {
-        saveQuestConfig()
-      },
-    })
-
-    const getMuiTheme = () =>
-      createMuiTheme({
-        overrides: {
-          MUIDataTableHeadCell: {
-            fixedHeader: {
-              display: "none",
-            },
-          },
-          MuiTableCell: {
-            root: {},
-          },
-        },
-      })
-
     return (
-      <DataTable3
-        key={dataTableKey}
-        props={{
-          className: css.triggersTable,
-          getMuiTheme,
-          data: triggers,
-          columns,
-          options,
-        }}
-      />
+      <div className={cx(css.triggers, css.listGroup)}>
+        <TriggersTable props={triggerTableProps}></TriggersTable>
+      </div>
     )
   }
-  if (!questConfig) {
-    return null
-  }
+
+  // const renderTriggers = ({ triggers }) => {
+  //   const onAddTriggerRow = ({ rowIndex, before }) => {
+  //     const newElement = Constants.getNewTrigger()
+  //     Utils.addArrayElement({
+  //       newElement,
+  //       before,
+  //       index: rowIndex,
+  //       array: triggers,
+  //     })
+
+  //     saveQuestConfig()
+  //   }
+
+  //   if (triggers.length === 0) {
+  //     return (
+  //       <Button
+  //         className={css.addTriggerButton}
+  //         icon={IconNames.ADD}
+  //         onClick={() => {
+  //           onAddTriggerRow({ rowIndex: 0, before: false })
+  //         }}
+  //       >
+  //         Add Trigger
+  //       </Button>
+  //     )
+  //   }
+
+  //   const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
+  //     const { rowIndex } = tableMeta
+  //     triggers[rowIndex][propertyName] = newValue
+  //   }
+
+  //   const onDeleteTriggerRow = ({ rowIndex }) => {
+  //     Utils.deleteArrayElement({ index: rowIndex, array: triggers })
+  //     saveQuestConfig()
+  //   }
+
+  //   const { options, columns } = getSubQuestTableConfigFunc({
+  //     tableChangeCallback,
+  //     onDeleteTriggerRow,
+  //     onAddTriggerRow,
+  //     saveConfig: () => {
+  //       saveQuestConfig()
+  //     },
+  //   })
+
+  //   const getMuiTheme = () =>
+  //     createMuiTheme({
+  //       overrides: {
+  //         MUIDataTableHeadCell: {
+  //           fixedHeader: {
+  //             display: "none",
+  //           },
+  //         },
+  //         MuiTableCell: {
+  //           root: {},
+  //         },
+  //       },
+  //     })
+
+  //   return (
+  //     <DataTable3
+  //       key={dataTableKey}
+  //       props={{
+  //         className: css.triggersTable,
+  //         getMuiTheme,
+  //         data: triggers,
+  //         columns,
+  //         options,
+  //       }}
+  //     />
+  //   )
+  // }
+  // if (!questConfig) {
+  //   return null
+  // }
 
   const renderSubQuests = () => {
     const subQuests = questConfig.subQuests
@@ -280,7 +304,7 @@ export default function SubQuestWizard({ props }) {
       const items = [
         {
           title: <span className={cx(css.listGroupTitle)}>Missions</span>,
-          expanded: false,
+          expanded: true,
           content: (
             <div className={cx(css.triggers, css.listGroup)}>
               {renderMissions({ missions })}

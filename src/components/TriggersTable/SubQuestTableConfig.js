@@ -8,9 +8,9 @@ import TextField from "@material-ui/core/TextField"
 import Utils from "../../Utils/Utils"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import Constants from "../../Utils/Constants/Constants"
-import AddDeleteButtonGroup from "./AddDeleteButtonGroup"
 
 import css from "./SubQuestTableConfig.module.scss"
+import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 
 const newCondition = { completedScene: "1234567" }
 

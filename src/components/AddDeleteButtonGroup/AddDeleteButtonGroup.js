@@ -4,7 +4,7 @@ import { toJS } from "mobx"
 import cx from "classnames"
 import React from "react"
 
-import css from "./SubQuestTableConfig.module.scss"
+import css from "./AddDeleteButtonGroup.module.scss"
 
 export default function AddDeleteButtonGroup({ props }) {
   const {
