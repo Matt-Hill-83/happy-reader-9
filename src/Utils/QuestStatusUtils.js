@@ -24,7 +24,7 @@ export default class QuestStatusUtils {
     newGrid5.forEach((scene) => {
       console.log("") // zzz
       console.log("") // zzz
-      console.log("") // zzz
+      console.log("scene", toJS(scene)) // zzz
       console.log("scene.location.name", scene.location.name) // zzz
       const sceneTriggers = this.getSceneTriggersFromScene({
         sceneId: scene.id,
@@ -38,15 +38,10 @@ export default class QuestStatusUtils {
       )
 
       const parentSubQuestFromScene = subQuests[parentSubQuestIndexFromScene]
-      // console.log(
-      //   "parentSubQuestIndexFromScene",
-      //   toJS(parentSubQuestIndexFromScene)
-      // ) // zzz
+      console.log("parentSubQuestFromScene", toJS(parentSubQuestFromScene)) // zzz
 
-      // console.log("parentSubQuestFromScene", toJS(parentSubQuestFromScene)) // zzz
-
-      const { triggers: subQuestTriggers } = parentSubQuestFromScene
-      // console.log("subQuestTriggers", toJS(subQuestTriggers)) // zzz
+      const subQuestTriggers = _get(parentSubQuestFromScene, "triggers") || []
+      // const { triggers: subQuestTriggers } = parentSubQuestFromScene
 
       const accumulatedPropertyValuesForSubQuest = this.calcAccumulatedPropertyValues(
         {
@@ -63,16 +58,6 @@ export default class QuestStatusUtils {
           activeMissionIndex,
         }
       )
-
-      console.log(
-        "accumulatedPropertyValuesForSubQuest",
-        toJS(accumulatedPropertyValuesForSubQuest)
-      ) // zzz
-
-      console.log(
-        "accumulatedPropertyValuesForScene",
-        toJS(accumulatedPropertyValuesForScene)
-      ) // zzz
 
       const combinedProps = {
         ...accumulatedPropertyValuesForSubQuest,

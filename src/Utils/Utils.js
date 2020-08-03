@@ -442,21 +442,13 @@ export default class Utils {
   }
 
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
+    console.log("newProps", toJS(newProps)) // zzz
+
     const map = mapToUpdate || localStateStore.getWorldBuilderWorld()
     Object.assign(map.data, toJS(newProps))
 
     if (mapToUpdate) {
-      const {
-        data: { gridDimensions, newGrid5 },
-      } = mapToUpdate
     } else {
-      // fuck.  everything broke because this does not pull from the correct grid.
-      // fuck.  everything broke because this does not pull from the correct grid.
-      // fuck.  everything broke because this does not pull from the correct grid.
-      // fuck.  everything broke because this does not pull from the correct grid.
-      // fuck.  everything broke because this does not pull from the correct grid.
-      // fuck.  everything broke because this does not pull from the correct grid.
-      // fuck.  everything broke because this does not pull from the correct grid.
       map.data.newGrid5 = Utils.createCondensedGridFromGrid({})
     }
 

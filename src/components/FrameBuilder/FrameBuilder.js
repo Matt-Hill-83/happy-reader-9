@@ -94,31 +94,14 @@ class FrameBuilder extends Component {
     return (this.state.scene && this.state.scene.frameSet) || {}
   }
 
-  getnewWorld = () => {
-    return {
-      name: "test",
-      title: "test",
-      frames: [this.getNewFrame()],
-    }
-  }
-
   renderFrames = () => {
-    const {
-      scene,
-      scene: { frameSet },
-      updateMap,
-    } = this.props
+    const { scene, updateMap } = this.props
 
-    if (!frameSet) {
-      this.getnewWorld()
-      updateMap({})
+    if (!scene.frameSet) {
+      scene.frameSet = { frames: [this.getNewFrame()] }
     }
 
-    let frames = frameSet.frames && frameSet.frames.length && frameSet.frames
-    if (!frames) {
-      frames = [this.getNewFrame()]
-      updateMap({})
-    }
+    let frames = scene.frameSet.frames
 
     return frames.map((frame, index) => {
       return (

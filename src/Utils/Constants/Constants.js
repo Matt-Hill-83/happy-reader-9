@@ -21,7 +21,7 @@ export default class Constants {
   static getNewSubQuest = ({ name = "new SubQuest" }) => {
     const newSubQuest = {
       name,
-      triggers: [{ name: "unlock", conditions: [{ frameSetIndex: 0 }] }],
+      triggers: [Constants.getNewTrigger()],
       scenes: [this.getNewScene({})],
       index: 0,
       missions: [
@@ -87,7 +87,7 @@ export default class Constants {
 
   static getNewTrigger = () => {
     return {
-      name: "lock",
+      name: "cloud",
       conditions: [
         {
           currentMission: 0,
