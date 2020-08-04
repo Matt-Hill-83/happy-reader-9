@@ -76,33 +76,28 @@ export const getTableConfig = ({
 
   const renderRecipient = (value, tableMeta, updateValue) => {
     const onChange = (newValue) => {
-      const transformedValue = {
-        name: newValue.location.name,
-        id: newValue.id,
-      }
-
       updateValue(newValue)
       tableChangeCallback({
         tableMeta,
-        newValue: transformedValue,
+        newValue: newValue,
         propertyName: "recipient",
       })
       saveConfig()
     }
 
-    const scene = scenes.find((scene) => scene.id === value.id)
-    //   (scene) =>
-    //     scene.location.name === _get(value, "location.name") ||
-    //     scene.location.name === value.name
-    // )
+    const transformedData = scenes.map((scene) => {
+      return { name: scene.location.name, id: scene.id }
+    })
+
+    const scene = transformedData.find((scene) => scene.id === value.id)
 
     return (
       <SimpleSelectObj
         // className={css.sceneDropdown}
-        items={scenes}
+        items={transformedData}
         value={scene}
         getOptionLabel={(option) => {
-          return _get(option, "location.name") || "error!!!"
+          return _get(option, "name") || "error!!!"
         }}
         onChange={onChange}
       />
@@ -166,7 +161,6 @@ export const getTableConfig = ({
         options: {
           sort: false,
           filter: true,
-          // customBodyRender: renderItem,
           customBodyRender: renderRecipient,
         },
       },
