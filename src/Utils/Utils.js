@@ -19,12 +19,16 @@ export default class Utils {
   }
 
   static getAllItemsInScenes = ({ scenes }) => {
-    const allItems = []
+    const allItems = {}
     scenes.forEach((scene) => {
       const items = Utils.getAllItemsInScene({ scene })
-      allItems.push(...items)
+      items.forEach((item) => {
+        if (!allItems[item.name]) {
+          allItems[item.name] = item
+        }
+      })
     })
-    return allItems
+    return Object.values(allItems)
   }
 
   static deleteArrayElement = ({ array, index }) => {

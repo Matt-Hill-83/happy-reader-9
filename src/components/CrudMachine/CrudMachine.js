@@ -1,14 +1,13 @@
 import { Button, Popover, PopoverInteractionKind } from "@blueprintjs/core"
-
 import { IconNames } from "@blueprintjs/icons"
 import { observer } from "mobx-react"
 import { toJS } from "mobx"
 import React, { Component } from "react"
 
 import images from "../../images/images"
-
-import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import CharacterPicker from "../CharacterPicker/CharacterPicker"
+import ImageDisplay from "../ImageDisplay/ImageDisplay"
+import Utils from "../../Utils/Utils"
 
 import css from "./CrudMachine.module.scss"
 
@@ -32,7 +31,8 @@ class CrudMachine extends Component {
   }
 
   getNewItem = () => {
-    return { name: "empty" }
+    const id = Utils.generateUuid()
+    return { name: "empty", id }
   }
 
   addItemIfNone = ({ items }) => {

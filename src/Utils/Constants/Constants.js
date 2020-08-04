@@ -86,7 +86,9 @@ export default class Constants {
   }
 
   static getNewTrigger = () => {
+    const id = Utils.generateUuid()
     return {
+      id,
       name: "cloud",
       conditions: [
         {
@@ -97,7 +99,9 @@ export default class Constants {
   }
 
   static getNewMission = () => {
+    const id = Utils.generateUuid()
     return {
+      id,
       name: "Feed the pig",
       missionType: "giveItemToPerson",
       rewards: [{ amount: 5, name: "gold" }],
