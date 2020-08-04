@@ -8,7 +8,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import React, { useState } from "react"
 import Typography from "@material-ui/core/Typography"
 
-import css from "./MyAccordian.module.scss"
+import css from "./MyAccordion.module.scss"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function MyAccordian({ props }) {
+export default function MyAccordion({ props }) {
   const { items, className } = props
   const classes = useStyles()
 
@@ -28,7 +28,7 @@ export default function MyAccordian({ props }) {
     return null
   }
 
-  const renderedAccordian = items.map((item) => {
+  const renderedAccordion = items.map((item) => {
     const { title, content, expanded } = item
 
     return (
@@ -49,6 +49,6 @@ export default function MyAccordian({ props }) {
     )
   })
 
-  // return renderedAccordian
-  return <div className={classes.root}>{renderedAccordian}</div>
+  // return renderedAccordion
+  return <div className={classes.root}>{renderedAccordion}</div>
 }

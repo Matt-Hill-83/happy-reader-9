@@ -1,7 +1,8 @@
-import { IconNames } from "@blueprintjs/icons"
 import _get from "lodash.get"
 import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
-import { createMuiTheme } from "@material-ui/core/styles"
+import { Checkbox } from "material-ui"
+import { TextField } from "@material-ui/core"
+import { IconNames } from "@blueprintjs/icons"
 import { toJS } from "mobx"
 import cx from "classnames"
 import React, { useEffect, useState } from "react"
@@ -10,13 +11,12 @@ import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import Constants from "../../Utils/Constants/Constants"
 import DialogBuilder from "../DialogBuilder/DialogBuilder"
 import MissionsTable from "../MissionsTable/MissionsTable"
-import MyAccordian from "../MyAccordian/MyAccordian"
+import MyAccordion from "../MyAccordion/MyAccordion"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import TriggersTable from "../TriggersTable/TriggersTable"
 import Utils from "../../Utils/Utils"
 
 import css from "./SubQuestWizard.module.scss"
-import { TextField } from "@material-ui/core"
 
 export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState([])
@@ -54,38 +54,6 @@ export default function SubQuestWizard({ props }) {
         <MissionsTable props={missionTableProps}></MissionsTable>
       </div>
     )
-
-    const realScenes = props.scenes
-    console.log("missions", toJS(missions)) // zzz
-
-    return missions.map((mission) => {
-      const onChangeScene = (newItem) => {
-        // const { location, id } = newItem
-        // mission.name = location.name
-        // mission.id = id
-      }
-
-      // const defaultValue = missions[0]
-      const defaultValue = realScenes.find(
-        (thing) => thing.location.name === _get(mission, "item.name") || ""
-      )
-
-      return (
-        <div className={cx(css.sceneName, css.listItem, css.missionsList)}>
-          <span className={cx(css.listItemName)}>{mission.name}</span>
-          <span className={cx(css.listItemName)}>{"give the"}</span>
-
-          <SimpleSelectObj
-            className={css.sceneDropdown}
-            items={realScenes}
-            value={defaultValue}
-            getOptionLabel={(option) => option.location.name}
-            onChange={onChangeScene}
-          />
-          <span className={cx(css.listItemName)}>{"to the"}</span>
-        </div>
-      )
-    })
   }
 
   const renderScenes = ({ scenes }) => {
@@ -110,14 +78,6 @@ export default function SubQuestWizard({ props }) {
 
     if (!scenes || scenes.length === 0) {
       return (
-        // <AddDeleteButtonGroup
-        //   props={{
-        //     title: "Add Scene",
-        //     rowIndex: 0,
-        //     onDelete: () => {},
-        //     onAdd: onAddScene,
-        //   }}
-        // />
         <Button
           onClick={() =>
             onAddScene({
@@ -133,13 +93,19 @@ export default function SubQuestWizard({ props }) {
     }
 
     return scenes.map((sceneConfig, sceneIndex) => {
-      // console.log("sceneConfig", toJS(sceneConfig)) // zzz
-
       const onChangeScene = (newItem) => {
         const { location, id } = newItem
         sceneConfig.name = location.name
         sceneConfig.id = id
       }
+
+      let largeImage = sceneConfig.largeImage
+
+      const toggleLargeImage = () => {
+        sceneConfig.largeImage = !sceneConfig.largeImage
+        saveQuestConfig()
+      }
+
       const realScene = realScenes.find((item) => item.id === sceneConfig.id)
 
       // create a ref to an empty array so that new triggers added will be in that referenced
@@ -166,6 +132,13 @@ export default function SubQuestWizard({ props }) {
       return (
         <div className={cx(css.sceneName, css.listItem)}>
           <div className={css.scenePickerGroup}>
+            <span className={css.mapPickerButton}>
+              big
+              <Checkbox
+                onClick={() => toggleLargeImage()}
+                checked={largeImage}
+              />
+            </span>
             <SimpleSelectObj
               className={css.sceneDropdown}
               items={realScenes}
@@ -214,11 +187,6 @@ export default function SubQuestWizard({ props }) {
       return null
     }
 
-    // TODO - create a button to add a new scene when there are none
-    // TODO - create a button to add a new scene when there are none
-    // TODO - create a button to add a new scene when there are none
-    // TODO - create a button to add a new scene when there are noneas
-
     return subQuests.map((subQuest, subQuestIndex) => {
       // create a ref to an empty array so that new triggers added will be in that referenced
       // array
@@ -260,7 +228,7 @@ export default function SubQuestWizard({ props }) {
           ),
         },
       ]
-      const accordianProps = { items }
+      const accordionProps = { items }
 
       const onAddScene = ({ rowIndex, before }) => {
         const newElement = Constants.getNewSubQuest({})
@@ -285,7 +253,7 @@ export default function SubQuestWizard({ props }) {
       }
 
       return (
-        <div className={css.accordianContainer}>
+        <div className={css.accordionContainer}>
           <div className={css.subQuestHeader}>
             <TextField
               className={css.inputField}
@@ -295,18 +263,8 @@ export default function SubQuestWizard({ props }) {
               color="secondary"
               defaultValue={subQuest.name}
               onBlur={(event) => onChangeValue({ value: event.target.value })}
-              // InputProps={{}}
             />
-            {/* <span className={css.subQuestTitle}>{subQuest.name}</span> */}
-            {/* <Button
-              onClick={() =>
-                onAddScene({
-                  rowIndex: subQuestIndex,
-                  before: false,
-                })
-              }
-              icon={IconNames.ADD}
-            /> */}
+
             <AddDeleteButtonGroup
               props={{
                 title: "",
@@ -316,7 +274,7 @@ export default function SubQuestWizard({ props }) {
               }}
             />
           </div>
-          <MyAccordian props={accordianProps} />
+          <MyAccordion props={accordionProps} />
         </div>
       )
     })

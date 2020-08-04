@@ -48,11 +48,6 @@ class MiniLocation extends React.Component {
       isEndScene,
     } = newProps
 
-    // TODO - do all this for end scene
-    // TODO - do all this for end scene
-    // TODO - do all this for end scene
-    // TODO - do all this for end scene
-    // TODO - do all this for end scene
     this.setState({ isStartScene, isEndScene })
 
     if (doors) {
@@ -146,10 +141,14 @@ class MiniLocation extends React.Component {
 
   render() {
     const { scene, isActive, className, id } = this.props
-    const { coordinates, sceneConfig: { subQuestId = 0 } = {} } = scene
+    const {
+      coordinates,
+      sceneConfig = {},
+      sceneConfig: { subQuestId = 0 } = {},
+    } = scene
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
     const neighbors = Utils.getNeighbors({ coordinates })
-
+    console.log("sceneConfig", toJS(sceneConfig)) // zzz
     const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
       (neighbor) => neighbor && neighbor.id
     )
@@ -224,8 +223,7 @@ class MiniLocation extends React.Component {
       })
     }
 
-    const largeLocation =
-      false && scene.location.name === "stump" ? css.large : ""
+    const largeLocation = sceneConfig.largeImage ? css.large : ""
 
     return (
       <div
