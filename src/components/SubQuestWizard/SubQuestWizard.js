@@ -144,7 +144,7 @@ export default function SubQuestWizard({ props }) {
               className={css.sceneDropdown}
               items={realScenes}
               value={realScene}
-              getOptionLabel={(option) => option.location.name}
+              getOptionLabel={(option) => _get(option, "location.name")}
               onChange={onChangeScene}
             />
             <AddDeleteButtonGroup

@@ -64,6 +64,16 @@ export default class Utils {
     return sortedWorlds
   }
 
+  static sortScenes = ({ scenes }) => {
+    const sortedData = Utils.sortDataByNestedKey({
+      data: scenes,
+      keys: ["location", "name"],
+      order: "ASC",
+    })
+
+    return sortedData
+  }
+
   static belongsToABook = ({ worldId }) => {
     const owningBooks = []
 

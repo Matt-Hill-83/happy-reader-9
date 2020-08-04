@@ -185,7 +185,6 @@ class BookPicker extends React.Component {
     const isProdRelease = false
 
     const {} = this.props
-    // const { selectedBook } = this.state
 
     const sortedBooks = Utils.sortDataByNestedKey({
       data: books.docs,

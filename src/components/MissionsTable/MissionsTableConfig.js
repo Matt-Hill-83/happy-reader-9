@@ -11,6 +11,7 @@ import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 
 import css from "./MissionsTableConfig.module.scss"
+import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 export const getTableConfig = ({
   tableChangeCallback = () => {},
@@ -22,37 +23,38 @@ export const getTableConfig = ({
 }) => {
   const renderItem = (value, tableMeta, updateValue) => {
     const onChange = (newValue) => {
+      console.log("newValue", toJS(newValue)) // zzz
       const { rowIndex, columnIndex } = tableMeta
       updateValue(newValue)
       tableMeta.tableData[rowIndex][columnIndex] = { ...newValue }
       tableChangeCallback({ tableMeta, newValue, propertyName: "item" })
     }
 
+    console.log("value", toJS(value)) // zzz
+    console.log("value.name", toJS(value.name)) // zzz
+    console.log("itemsToGet", toJS(itemsToGet)) // zzz
     const itemToGet = itemsToGet.find((item) => item.name === value.name)
+    console.log("itemToGet", toJS(itemToGet)) // zzz
 
-    return (
-      <SimpleSelectObj
-        className={css.sceneDropdown}
-        items={itemsToGet}
-        value={itemToGet}
-        getOptionLabel={(option) => option.name}
-        onChange={onChange}
-      />
-    )
+    console.log("itemToGet", toJS(itemToGet)) // zzz
+    const props = {
+      sortKeys: ["name"],
+      // className: css.sceneDropdown,
+      items: itemsToGet,
+      defaultValue: itemToGet,
+      getOptionLabel: (option) => option.name,
+      onChange: onChange,
+    }
+
+    return <AutoComplete2 props={props} />
   }
 
   const renderName = (value, tableMeta, updateValue) => {
     const onChange = (newValue) => {
-      // const transformedValue = {
-      //   name: newValue.location.name,
-      //   id: newValue.id,
-      // }
-      console.log("newValue", toJS(newValue)) // zzz
       updateValue(newValue)
       tableChangeCallback({
         tableMeta,
         newValue: newValue.value,
-        // newValue: transformedValue,
         propertyName: "name",
       })
       saveConfig()
@@ -96,7 +98,7 @@ export const getTableConfig = ({
 
     return (
       <SimpleSelectObj
-        className={css.sceneDropdown}
+        // className={css.sceneDropdown}
         items={scenes}
         value={scene}
         getOptionLabel={(option) => {
