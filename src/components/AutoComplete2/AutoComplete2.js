@@ -25,10 +25,8 @@ export default function AutoComplete2({ props }) {
     onChange && onChange(value)
   }
 
-  console.log("sortKeys", toJS(sortKeys)) // zzz
   let sortedData
   if (sortKeys && sortKeys.length > 0) {
-    console.log("sortKeys", toJS(sortKeys)) // zzz
     sortedData = Utils.sortDataByNestedKey({
       data: items,
       keys: sortKeys,

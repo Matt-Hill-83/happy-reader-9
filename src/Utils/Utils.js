@@ -31,6 +31,12 @@ export default class Utils {
     return Object.values(allItems)
   }
 
+  static getSimpleSceneObjects = ({ scenes }) => {
+    return scenes.map((scene) => {
+      return { name: scene.location.name, id: scene.id }
+    })
+  }
+
   static deleteArrayElement = ({ array, index }) => {
     array.splice(index, 1)
   }

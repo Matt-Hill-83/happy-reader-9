@@ -23,20 +23,14 @@ export const getTableConfig = ({
 }) => {
   const renderItem = (value, tableMeta, updateValue) => {
     const onChange = (newValue) => {
-      console.log("newValue", toJS(newValue)) // zzz
       const { rowIndex, columnIndex } = tableMeta
       updateValue(newValue)
       tableMeta.tableData[rowIndex][columnIndex] = { ...newValue }
       tableChangeCallback({ tableMeta, newValue, propertyName: "item" })
     }
 
-    console.log("value", toJS(value)) // zzz
-    console.log("value.name", toJS(value.name)) // zzz
-    console.log("itemsToGet", toJS(itemsToGet)) // zzz
     const itemToGet = itemsToGet.find((item) => item.name === value.name)
-    console.log("itemToGet", toJS(itemToGet)) // zzz
 
-    console.log("itemToGet", toJS(itemToGet)) // zzz
     const props = {
       sortKeys: ["name"],
       // className: css.sceneDropdown,
@@ -85,6 +79,10 @@ export const getTableConfig = ({
       saveConfig()
     }
 
+    const allItems = Utils.getAllItemsInScenes({ scenes })
+    const allScenes = Utils.getSimpleSceneObjects({ scenes })
+    const combinedItems = [...allItems, ...allScenes]
+
     const transformedData = scenes.map((scene) => {
       return { name: scene.location.name, id: scene.id }
     })
@@ -94,7 +92,8 @@ export const getTableConfig = ({
     return (
       <SimpleSelectObj
         // className={css.sceneDropdown}
-        items={transformedData}
+        items={combinedItems}
+        // items={transformedData}
         value={scene}
         getOptionLabel={(option) => {
           return _get(option, "name") || "error!!!"

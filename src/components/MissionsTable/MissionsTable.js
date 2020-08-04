@@ -25,6 +25,8 @@ export default function MissionsTable({ props }) {
   } = props
 
   const allItems = Utils.getAllItemsInScenes({ scenes })
+  const allScenes = Utils.getSimpleSceneObjects({ scenes })
+  const combinedItems = [...allItems, ...allScenes]
 
   useEffect(() => {
     // on mount
@@ -85,7 +87,8 @@ export default function MissionsTable({ props }) {
         saveQuestConfig()
       },
       scenes: scenes,
-      itemsToGet: allItems,
+      itemsToGet: combinedItems,
+      // itemsToGet: allItems,
     })
 
     const getMuiTheme = () =>
