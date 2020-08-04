@@ -442,8 +442,6 @@ export default class Utils {
   }
 
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
-    console.log("newProps", toJS(newProps)) // zzz
-
     const map = mapToUpdate || localStateStore.getWorldBuilderWorld()
     Object.assign(map.data, toJS(newProps))
 
@@ -451,6 +449,7 @@ export default class Utils {
     } else {
       map.data.newGrid5 = Utils.createCondensedGridFromGrid({})
     }
+    console.log("map.data", toJS(map.data)) // zzz
 
     delete map.data.grid
     await map.update(map.data)

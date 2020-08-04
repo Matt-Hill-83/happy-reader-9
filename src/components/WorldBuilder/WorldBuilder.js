@@ -499,13 +499,18 @@ class WorldBuilder extends Component {
         col: sceneIndex,
         row: 0,
       }
+      const newSceneProps = {
+        // id: scene.id,
+        coordinates,
+        location: { name: scene.title },
+      }
+
+      if (scene.id) {
+        newSceneProps.id = scene.id
+      }
 
       const newBornScene = Utils.getBlankScene({
-        props: {
-          id: scene.id,
-          coordinates,
-          location: { name: scene.title },
-        },
+        props: newSceneProps,
       })
       if (scene.sceneConfig) {
         Object.assign(newBornScene, scene.sceneConfig)

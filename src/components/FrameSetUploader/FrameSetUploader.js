@@ -8,9 +8,6 @@ import { toJS } from "mobx"
 import _get from "lodash.get"
 import css from "./FrameSetUploader.module.scss"
 
-// import story9104 from "../../Scripts/000-charlieAndLucy.js"
-import story0001 from "../../Scripts/----- test-001.js"
-import story0002 from "../../Scripts/----- test-002.js"
 import story002 from "../../Scripts/002-BrightNewDay"
 import story003 from "../../Scripts/003-KatGetsADress"
 import story004 from "../../Scripts/004-KatGoesOffScript"
@@ -38,9 +35,6 @@ import story9000 from "../../Scripts/9000-ANewSoundInTheWoods"
 import story9100 from "../../Scripts/9100-KatsSecondQuest"
 import story9102 from "../../Scripts/9102-ThisOneIsFunnyISwear.js"
 import story9103 from "../../Scripts/000-ScriptTemplate.js"
-import story9104 from "../../Scripts/9104-ThisOneIsNotFunny-001.js"
-import story9901 from "../../Scripts/9901-randomBits01"
-import story9902 from "../../Scripts/9902-randomBits02"
 import story9903 from "../../Scripts/9903-randomBits03-LizHasElfEars.js"
 import story9904 from "../../Scripts/9904-randomBits04-Pantloads.js"
 import story9905 from "../../Scripts/9905-randomBits-aFlyInMyEye.js"
@@ -69,14 +63,7 @@ import story9927 from "../../Scripts/9927-test-end-2-end-test.js"
 const worlds = [
   // story020,
   // story100,
-  //
-  //
-  //
-  //
   // story110,
-  // story9104,
-  // story9927,
-  // story002,
   // story003,
   // story004,
   // story005,
@@ -99,8 +86,6 @@ const worlds = [
   // story9100,
   // story9102,
   // story9103,
-  // story9901,
-  // story9902,
   // story9903,
   // story9904,
   // story9905,
@@ -125,8 +110,6 @@ const worlds = [
   // story9924,
   // story9925,
   story9926,
-  // story0001,
-  // story0002,
 ]
 
 class FrameSetUploader extends Component {

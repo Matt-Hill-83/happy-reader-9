@@ -22,10 +22,6 @@ export default class QuestStatusUtils {
     // For each scene, calculate new visibility props based on conditions defined in triggers
     // newGrid5.slice(0, 9).forEach((scene) => {
     newGrid5.forEach((scene) => {
-      console.log("") // zzz
-      console.log("") // zzz
-      console.log("scene", toJS(scene)) // zzz
-      console.log("scene.location.name", scene.location.name) // zzz
       const sceneTriggers = this.getSceneTriggersFromScene({
         sceneId: scene.id,
       })
@@ -38,7 +34,6 @@ export default class QuestStatusUtils {
       )
 
       const parentSubQuestFromScene = subQuests[parentSubQuestIndexFromScene]
-      console.log("parentSubQuestFromScene", toJS(parentSubQuestFromScene)) // zzz
 
       const subQuestTriggers = _get(parentSubQuestFromScene, "triggers") || []
 
@@ -62,8 +57,6 @@ export default class QuestStatusUtils {
         ...accumulatedPropertyValuesForSubQuest,
         ...accumulatedPropertyValuesForScene,
       }
-
-      console.log("combinedProps", toJS(combinedProps)) // zzz
 
       const accumulatedPropertyValues = combinedProps
       // const accumulatedPropertyValues = accumulatedPropertyValuesForScene
@@ -167,17 +160,13 @@ export default class QuestStatusUtils {
     const accumulatorKeys = Object.keys(propValueAccumulators)
     accumulatorKeys.forEach((key) => {
       const value = propValueAccumulators[key]
-      // console.log("value", value) // zzz
 
       if (value.value !== null) {
         output[value.propertyName] = value.value
       }
     })
 
-    console.log("output", toJS(output)) // zzz
-
     return output
-    // return propValueAccumulators
   }
 
   static getActiveQuestConfig = () => {

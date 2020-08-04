@@ -18,8 +18,8 @@ import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 // import BookBuilder from "../BookBuilder/BookBuilder.js"
 
 let useDefaultWorldId
-useDefaultWorldId = true
 useDefaultWorldId = false
+useDefaultWorldId = true
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -247,7 +247,6 @@ class TopLevel extends React.Component {
     localStateStore.setShowBookPicker(false)
     this.setState({
       showQuestPicker: !this.state.showQuestPicker,
-      // showBookPicker: false,
     })
   }
 
