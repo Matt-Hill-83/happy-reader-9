@@ -29,6 +29,7 @@ import images from "../../images/images"
 import JsonEditor2 from "../JsonEditor2/JsonEditor2"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import Utils from "../../Utils/Utils"
+import JsonUtils from "../../Utils/JsonUtils"
 import WorldPicker from "../WorldPicker/WorldPicker"
 import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils"
@@ -402,134 +403,135 @@ class WorldBuilder extends Component {
     return <div className={css.newGrid}>{gridRows}</div>
   }
 
-  createNewFramesFromJson = ({ frames, sceneConfig }) => {
-    // arrays of frames extracted from the json which has an easy to write struture,
-    // but need to be transformed.
+  // createNewFramesFromJson = ({ frames, sceneConfig }) => {
+  //   // arrays of frames extracted from the json which has an easy to write struture,
+  //   // but need to be transformed.
 
-    // For each frame...
-    const newFrames = frames.map((frame) => {
-      const { dialogs, frameConfig } = frame
-      if (!frameConfig) {
-        return []
-      }
+  //   // For each frame...
+  //   const newFrames = frames.map((frame) => {
+  //     const { dialogs, frameConfig } = frame
+  //     if (!frameConfig) {
+  //       return []
+  //     }
 
-      // Turn each row of dialog into a json object...
-      const newDialogs = this.createNewDialogs({ dialogs })
+  //     // Turn each row of dialog into a json object...
+  //     const newDialogs = this.createNewDialogs({ dialogs })
 
-      const configProps = {}
-      if (frameConfig.faces) {
-        configProps.faces = frameConfig.faces
-      } else {
-        configProps.faces = sceneConfig.faces || []
-      }
+  //     const configProps = {}
+  //     if (frameConfig.faces) {
+  //       configProps.faces = frameConfig.faces
+  //     } else {
+  //       configProps.faces = sceneConfig.faces || []
+  //     }
 
-      if (frameConfig.critters1) {
-        configProps.critters1 = frameConfig.critters1
-      } else {
-        const critters1 =
-          Utils.getCritters1New({ frameConfig, sceneConfig }) || []
-        configProps.critters1 = critters1.map((item) => {
-          return { name: item }
-        })
-      }
+  //     if (frameConfig.critters1) {
+  //       configProps.critters1 = frameConfig.critters1
+  //     } else {
+  //       const critters1 =
+  //         Utils.getCritters1New({ frameConfig, sceneConfig }) || []
+  //       configProps.critters1 = critters1.map((item) => {
+  //         return { name: item }
+  //       })
+  //     }
 
-      if (frameConfig.critters2) {
-        configProps.critters2 = frameConfig.critters2
-      } else {
-        const critters2 =
-          Utils.getCritters2New({ frameConfig, sceneConfig }) || []
+  //     if (frameConfig.critters2) {
+  //       configProps.critters2 = frameConfig.critters2
+  //     } else {
+  //       const critters2 =
+  //         Utils.getCritters2New({ frameConfig, sceneConfig }) || []
 
-        configProps.critters2 = critters2.map((item) => {
-          return { name: item }
-        })
-      }
+  //       configProps.critters2 = critters2.map((item) => {
+  //         return { name: item }
+  //       })
+  //     }
 
-      // and put the properties into the new Frame...
-      const newFrame = Utils.getNewFrame({
-        props: { ...configProps, dialog: newDialogs },
-      })
-      return newFrame
-    })
+  //     // and put the properties into the new Frame...
+  //     const newFrame = Utils.getNewFrame({
+  //       props: { ...configProps, dialog: newDialogs },
+  //     })
+  //     return newFrame
+  //   })
 
-    return newFrames
-  }
+  //   return newFrames
+  // }
 
-  createNewDialogs = ({ dialogs }) => {
-    if (!dialogs) {
-      return []
-    }
-    const newDialogs = dialogs.map((sentenceObj) => {
-      const itemObj = JSON.parse(sentenceObj)
-      const itemKey = Object.keys(itemObj)[0]
-      const itemValue = itemObj[itemKey]
+  // createNewDialogs = ({ dialogs }) => {
+  //   if (!dialogs) {
+  //     return []
+  //   }
+  //   const newDialogs = dialogs.map((sentenceObj) => {
+  //     const itemObj = JSON.parse(sentenceObj)
+  //     const itemKey = Object.keys(itemObj)[0]
+  //     const itemValue = itemObj[itemKey]
 
-      let characterIndex = Utils.getCharacterDialogIndex({
-        characterName: itemKey,
-      })
+  //     let characterIndex = Utils.getCharacterDialogIndex({
+  //       characterName: itemKey,
+  //     })
 
-      return {
-        character: itemKey,
-        text: itemValue,
-        characterIndex,
-      }
-    })
-    return newDialogs
-  }
+  //     return {
+  //       character: itemKey,
+  //       text: itemValue,
+  //       characterIndex,
+  //     }
+  //   })
+  //   return newDialogs
+  // }
 
   importWorldFromJson = async ({ newWorld }) => {
     await this.addNewWorld()
 
-    const {
-      title = "no title",
-      description = "none",
-      questConfig = { data: "none" },
-    } = newWorld
+    // const {
+    //   title = "no title",
+    //   description = "none",
+    //   questConfig = { data: "none" },
+    // } = newWorld
 
     // I should probably create a new scenesGrid here, based on the required dimensions
     // I should probably create a new scenesGrid here, based on the required dimensions
     // I should probably create a new scenesGrid here, based on the required dimensions
     const scenesGrid = localStateStore.getWorldBuilderScenesGrid()
-    const sceneDefinitions = newWorld.scenes2 || newWorld.scenes
+    const newProps = JsonUtils.importWorldFromJson({ newWorld, scenesGrid })
 
-    // Scene defs from imported json
-    sceneDefinitions.forEach((scene, sceneIndex) => {
-      const { frames, sceneConfig, frames2 } = scene
+    // const sceneDefinitions = newWorld.scenes2 || newWorld.scenes
+    // // Scene defs from imported json
+    // sceneDefinitions.forEach((scene, sceneIndex) => {
+    //   const { frames, sceneConfig, frames2 } = scene
 
-      const coordinates = sceneConfig.coordinates || {
-        col: sceneIndex,
-        row: 0,
-      }
-      const newSceneProps = {
-        coordinates,
-        location: { name: scene.title },
-      }
+    //   const coordinates = sceneConfig.coordinates || {
+    //     col: sceneIndex,
+    //     row: 0,
+    //   }
+    //   const newSceneProps = {
+    //     coordinates,
+    //     location: { name: scene.title },
+    //   }
 
-      if (scene.id) {
-        newSceneProps.id = scene.id
-      }
+    //   if (scene.id) {
+    //     newSceneProps.id = scene.id
+    //   }
 
-      const newBornScene = Utils.getBlankScene({
-        props: newSceneProps,
-      })
-      if (scene.sceneConfig) {
-        Object.assign(newBornScene, scene.sceneConfig)
-      }
+    //   const newBornScene = Utils.getBlankScene({
+    //     props: newSceneProps,
+    //   })
+    //   if (scene.sceneConfig) {
+    //     Object.assign(newBornScene, scene.sceneConfig)
+    //   }
 
-      newBornScene.frameSet.frames = this.createNewFramesFromJson({
-        frames,
-        sceneConfig,
-      })
+    //   newBornScene.frameSet.frames = this.createNewFramesFromJson({
+    //     frames,
+    //     sceneConfig,
+    //   })
 
-      if (frames2 && frames2.length > 0) {
-        newBornScene.frameSet.frames2 = this.createNewFramesFromJson({
-          frames: frames2,
-          sceneConfig,
-        })
-      }
-      scenesGrid[coordinates.row][coordinates.col] = newBornScene
-    })
+    //   if (frames2 && frames2.length > 0) {
+    //     newBornScene.frameSet.frames2 = this.createNewFramesFromJson({
+    //       frames: frames2,
+    //       sceneConfig,
+    //     })
+    //   }
+    //   scenesGrid[coordinates.row][coordinates.col] = newBornScene
+    // })
 
-    const newProps = { title: title, description, questConfig }
+    // const newProps = { title: title, description, questConfig }
     // const newProps = { title: title + "---test2", description, questConfig }
     Utils.updateMap({ newProps })
   }

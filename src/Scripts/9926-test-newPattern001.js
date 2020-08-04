@@ -1,5 +1,5 @@
 const story9926 = {
-  title: "---022",
+  title: "---024",
   scenes: [
     {
       title: "castle",
