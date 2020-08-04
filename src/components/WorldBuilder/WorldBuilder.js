@@ -669,15 +669,22 @@ class WorldBuilder extends Component {
 
     const world = localStateStore.getWorldBuilderWorld() || {}
     if (!world.data) {
-      return null
+      // return null
     }
-    const { questConfig = { no: "data" }, newGrid5 } = world.data
 
-    // Record title for when map is copied
-    this.previousTitle = (world.data && world.data.title) || this.previousTitle
-
+    let questConfig
+    let newGrid5
     let title = "no title"
+
     if (world.data) {
+      questConfig = world.data.questConfig || {}
+      newGrid5 = world.data.newGrid5 || []
+      // const { questConfig = { no: "data" }, newGrid5 } = world.data
+
+      // Record title for when map is copied
+      this.previousTitle =
+        (world.data && world.data.title) || this.previousTitle
+
       title = (world.data && world.data.title) || this.previousTitle + " copy"
     }
 
@@ -703,7 +710,7 @@ class WorldBuilder extends Component {
               <div className={css.title}>
                 <div className={css.subTitle}>
                   <WorldPicker
-                    initialValue={world.data.title}
+                    initialValue={title}
                     showDelete={true}
                     showReleased={true}
                     showReleasedToProd={true}

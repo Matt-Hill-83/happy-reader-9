@@ -6,7 +6,7 @@ import firebase from "@firebase/app"
 import { toJS } from "mobx"
 
 firebase.initializeApp({
-  projectId: "happy-reader-4",
+  projectId: "troll-need-gold-01",
 })
 
 initFirestorter({ firebase: firebase })

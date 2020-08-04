@@ -198,6 +198,8 @@ export default class QuestStatusUtils {
   }
 
   static getParentSubQuestIndexFromScene = ({ world, sceneId }) => {
+    if (!world) return 0
+
     const { questConfig } = world
     let parentSubQuest = -1
     questConfig.subQuests &&

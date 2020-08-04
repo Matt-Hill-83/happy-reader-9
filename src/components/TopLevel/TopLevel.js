@@ -18,8 +18,8 @@ import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 // import BookBuilder from "../BookBuilder/BookBuilder.js"
 
 let useDefaultWorldId
-useDefaultWorldId = false
 useDefaultWorldId = true
+useDefaultWorldId = false
 
 const toaster = Toaster.create({
   position: Position.TOP,
@@ -187,7 +187,7 @@ class TopLevel extends React.Component {
 
     localStateStore.setActiveMapId(mapId)
     const map = localStateStore.getActiveWorld()
-    if (!map) {
+    if (!map || !map.data) {
       return
     }
     const { questConfig } = map.data
