@@ -81,7 +81,6 @@ class LocalStateStore {
   }
 
   isVisitedScene = (sceneId) => {
-    // console.log("this.visitedScenes", toJS(this.visitedScenes)) // zzz
     return this.visitedScenes.some((scene) => scene === sceneId)
   }
 

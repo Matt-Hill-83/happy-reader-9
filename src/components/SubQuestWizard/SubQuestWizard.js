@@ -102,7 +102,8 @@ export default function SubQuestWizard({ props }) {
       let largeImage = sceneConfig.largeImage
 
       const toggleLargeImage = () => {
-        sceneConfig.largeImage = !sceneConfig.largeImage
+        const largeImage = sceneConfig.largeImage
+        sceneConfig.largeImage = !!largeImage
         saveQuestConfig()
       }
 

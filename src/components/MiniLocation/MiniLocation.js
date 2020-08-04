@@ -148,7 +148,7 @@ class MiniLocation extends React.Component {
     } = scene
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
     const neighbors = Utils.getNeighbors({ coordinates })
-    console.log("sceneConfig", toJS(sceneConfig)) // zzz
+    // console.log("sceneConfig", toJS(sceneConfig)) // zzz
     const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
       (neighbor) => neighbor && neighbor.id
     )
@@ -222,7 +222,11 @@ class MiniLocation extends React.Component {
         sceneId: scene.id,
       })
     }
-
+    if (sceneConfig.largeImage) {
+      console.log("sceneConfig.largeImage", toJS(sceneConfig.largeImage)) // zzz
+      console.log("sceneConfig.largeImage", toJS(sceneConfig.largeImage)) // zzz
+      console.log("sceneConfig.largeImage", toJS(sceneConfig.largeImage)) // zzz
+    }
     const largeLocation = sceneConfig.largeImage ? css.large : ""
 
     return (

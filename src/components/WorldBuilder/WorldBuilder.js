@@ -500,7 +500,6 @@ class WorldBuilder extends Component {
         row: 0,
       }
       const newSceneProps = {
-        // id: scene.id,
         coordinates,
         location: { name: scene.title },
       }

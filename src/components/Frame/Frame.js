@@ -135,8 +135,6 @@ class Frame extends Component {
           </div>
           <TextArea
             className={`${css.line} ${css[className]}`}
-            // growVertically={true}
-            // large={true}
             onChange={(event) => this.onChangeDialog({ event, lineIndex })}
             id="text-input"
             value={text}
