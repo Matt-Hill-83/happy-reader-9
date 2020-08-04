@@ -563,7 +563,6 @@ class WorldBuilder extends Component {
     if (world.data) {
       questConfig = world.data.questConfig || {}
       newGrid5 = world.data.newGrid5 || []
-      // const { questConfig = { no: "data" }, newGrid5 } = world.data
 
       // Record title for when map is copied
       this.previousTitle =
