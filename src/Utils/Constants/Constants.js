@@ -6,14 +6,14 @@ export default class Constants {
       name,
       id: "xxx1",
       sceneTriggers: [
-        {
-          conditions: [
-            {
-              currentMission: 0,
-            },
-          ],
-          name: "lock",
-        },
+        // {
+        //   conditions: [
+        //     {
+        //       currentMission: 0,
+        //     },
+        //   ],
+        //   name: "lock",
+        // },
       ],
     }
   }
@@ -21,7 +21,8 @@ export default class Constants {
   static getNewSubQuest = ({ name = "new SubQuest" }) => {
     const newSubQuest = {
       name,
-      triggers: [Constants.getNewTrigger()],
+      triggers: [],
+      // triggers: [Constants.getNewTrigger()],
       scenes: [this.getNewScene({})],
       index: 0,
       missions: [

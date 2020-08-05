@@ -20,12 +20,13 @@
   .left {
     // border: 4px solid green !important;
     flex: 1;
-    min-width: 40%;
+    max-width: 40vw;
   }
 
   .right {
-    border: 1px solid red !important;
-    width: 75%;
+    border: 7px solid red !important;
+    // width: 75vw;
+    width: 55vw;
   }
 
   .subQuestConfigTool {
@@ -34,6 +35,7 @@
     overflow: auto;
     height: 100%;
     width: 100%;
+    border: 4px solid blue !important;
   }
 
   .jsonEditor {
