@@ -115,6 +115,7 @@ export default function SubQuestWizard({ props }) {
         sceneConfig.sceneTriggers = []
       }
       const triggers = sceneConfig.sceneTriggers
+      const sceneHasTriggers = triggers.length > 0
 
       const openDialogBuilder = ({ scene }) => {
         setSceneForDialogBuilder(scene)
@@ -130,15 +131,19 @@ export default function SubQuestWizard({ props }) {
         </Button>
       )
 
-      return (
-        <div className={cx(css.sceneName, css.listItem)}>
+      const renderedSceneTriggers = sceneHasTriggers
+        ? renderTriggers({ triggers, includeAddButton: false })
+        : null
+
+      const accordion = {
+        title: (
           <div className={css.scenePickerGroup}>
             <span className={css.mapPickerButton}>
-              big
               <Checkbox
+                label="big"
                 onClick={() => toggleLargeImage()}
                 checked={largeImage}
-              />
+              ></Checkbox>
             </span>
             <SimpleSelectObj
               className={css.sceneDropdown}
@@ -156,9 +161,18 @@ export default function SubQuestWizard({ props }) {
                 moreNestedButtons,
               }}
             />
+            {renderAddTriggerButton({ triggers })}
           </div>
-          {renderTriggers({ triggers })}
-        </div>
+        ),
+        myFlag: true,
+        expanded: sceneHasTriggers,
+        content: renderedSceneTriggers,
+      }
+
+      return (
+        <MyAccordion
+          props={{ items: [accordion], className: css.sceneTriggersAccordion }}
+        />
       )
     })
   }
@@ -168,7 +182,35 @@ export default function SubQuestWizard({ props }) {
     setDataTableKey(dataTableKey + 1)
   }
 
-  const renderTriggers = ({ triggers }) => {
+  const renderAddTriggerButton = ({ triggers }) => {
+    const onAddTriggerRow = ({ rowIndex, before }) => {
+      const newElement = Constants.getNewTrigger()
+      Utils.addArrayElement({
+        newElement,
+        before,
+        index: rowIndex,
+        array: triggers,
+      })
+
+      saveQuestConfig()
+    }
+
+    if (triggers.length === 0) {
+      return (
+        <Button
+          className={css.addTriggerButton}
+          icon={IconNames.ADD}
+          onClick={() => {
+            onAddTriggerRow({ rowIndex: 0, before: false })
+          }}
+        >
+          Add Trigger
+        </Button>
+      )
+    }
+  }
+
+  const renderTriggers = ({ triggers, includeAddButton = true }) => {
     const triggerTableProps = {
       triggers,
       questConfig,
@@ -177,6 +219,7 @@ export default function SubQuestWizard({ props }) {
     }
     return (
       <div className={cx(css.triggers, css.listGroup)}>
+        {includeAddButton && renderAddTriggerButton({ triggers })}
         <TriggersTable props={triggerTableProps}></TriggersTable>
       </div>
     )

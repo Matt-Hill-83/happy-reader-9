@@ -71,7 +71,6 @@ export default function MissionsTable({ props }) {
     const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
       const { rowIndex } = tableMeta
       items[rowIndex][propertyName] = newValue
-      console.log("items", toJS(items)) // zzz
     }
 
     const onDeleteTriggerRow = ({ rowIndex }) => {

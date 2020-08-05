@@ -49,6 +49,7 @@ export default function TriggersTable({ props }) {
     }
 
     if (triggers.length === 0) {
+      return null
       return (
         <Button
           className={css.addTriggerButton}

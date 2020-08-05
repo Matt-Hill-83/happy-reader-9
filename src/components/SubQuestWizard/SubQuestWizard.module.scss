@@ -5,6 +5,11 @@
   width: max-content;
   width: 100%;
 
+  .sceneTriggersAccordion {
+    border: 1px solid black !important;
+    margin: 4px 10px 0px 10px !important;
+  }
+
   .subQuestHeader {
     display: flex;
     align-items: center;

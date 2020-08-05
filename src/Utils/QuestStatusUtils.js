@@ -225,7 +225,7 @@ export default class QuestStatusUtils {
     return (foundScene && foundScene.sceneTriggers) || []
   }
 
-  static getSceneConfigFromScene = ({ sceneId }) => {
+  static getSceneTriggerConfigFromScene = ({ sceneId }) => {
     const questConfig = this.getActiveQuestConfig()
     const allScenes = []
 
