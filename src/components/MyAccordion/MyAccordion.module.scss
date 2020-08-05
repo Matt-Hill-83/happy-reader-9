@@ -5,6 +5,8 @@
       min-height: unset !important;
       height: 40px;
       padding: 0px 11px !important;
+      border: 1px solid black !important;
+      border-bottom: none !important;
     }
 
     .MuiAccordionDetails-root {
@@ -13,7 +15,9 @@
   }
   .content {
     width: 100%;
+    border: 1px solid black !important;
   }
+
   .header {
   }
 }
