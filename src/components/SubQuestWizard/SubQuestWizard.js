@@ -50,7 +50,7 @@ export default function SubQuestWizard({ props }) {
       scenes,
     }
     return (
-      <div className={cx(css.triggers, css.listGroup)}>
+      <div className={cx(css.triggers, css.xxxlistGroup)}>
         <MissionsTable props={missionTableProps}></MissionsTable>
       </div>
     )
@@ -217,8 +217,9 @@ export default function SubQuestWizard({ props }) {
       saveQuestConfig,
       setQuestConfig,
     }
+
     return (
-      <div className={cx(css.triggers, css.listGroup)}>
+      <div className={cx(css.triggers, css.xxxlistGroup)}>
         {includeAddButton && renderAddTriggerButton({ triggers })}
         <TriggersTable props={triggerTableProps}></TriggersTable>
       </div>
@@ -248,7 +249,7 @@ export default function SubQuestWizard({ props }) {
           title: <span className={cx(css.listGroupTitle)}>Missions</span>,
           expanded: true,
           content: (
-            <div className={cx(css.triggers, css.listGroup)}>
+            <div className={cx(css.triggers, css.xxxlistGroup)}>
               {renderMissions({ missions })}
             </div>
           ),
@@ -257,7 +258,7 @@ export default function SubQuestWizard({ props }) {
           title: <span className={cx(css.listGroupTitle)}>Triggers</span>,
           expanded: true,
           content: (
-            <div className={cx(css.triggers, css.listGroup)}>
+            <div className={cx(css.triggers, css.xxxlistGroup)}>
               {renderTriggers({ triggers })}
             </div>
           ),
@@ -266,7 +267,7 @@ export default function SubQuestWizard({ props }) {
           title: <span className={cx(css.listGroupTitle)}>Scenes</span>,
           expanded: true,
           content: (
-            <div className={cx(css.scenes, css.listGroup)}>
+            <div className={cx(css.scenes, css.xxxlistGroup)}>
               {renderScenes({ scenes })}
             </div>
           ),
