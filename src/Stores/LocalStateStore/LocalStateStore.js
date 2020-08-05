@@ -160,7 +160,6 @@ class LocalStateStore {
   }
 
   updateQuestState = ({ itemsInScene, charactersInScene }) => {
-    console.log("updateQuestState") // zzz
     const questStatus = this.questStatus
 
     if (!questStatus.questConfig) {
@@ -184,7 +183,6 @@ class LocalStateStore {
     })
 
     if (isMissionCompleted) {
-      console.log("isMissionCompleted") // zzz
       this.completedMissions.push(activeMissionIndex)
 
       // remove item from pocket
@@ -245,9 +243,7 @@ class LocalStateStore {
   }
 
   _findItem = ({ itemsInScene }) => {
-    console.log("itemsInScene", toJS(itemsInScene)) // zzz
     const desiredItems = this.getDesiredItems() || []
-    console.log("desiredItems", toJS(desiredItems)) // zzz
     const questStatus = this.questStatus
 
     const { pockets = {} } = questStatus
@@ -262,7 +258,6 @@ class LocalStateStore {
         foundItems.push(foundItem)
       }
     })
-    console.log("foundItems", toJS(foundItems)) // zzz
     const foundItem = foundItems[0]
     if (!foundItem) {
       return null
