@@ -149,6 +149,7 @@ class MiniLocation extends React.Component {
       coordinates,
       sceneConfig = {},
       sceneConfig: { subQuestId = 0 } = {},
+      isStartScene,
     } = scene
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
 
@@ -207,23 +208,22 @@ class MiniLocation extends React.Component {
     const world = localStateStore.getActiveWorld()
 
     const backgroundColor = QuestStatusUtils.getSubQuestColor({
-      sceneName: locationName,
       world: world.data,
       sceneId: scene.id,
     })
 
-    if (sceneConfig.largeImage) {
-      console.log("sceneConfig.largeImage", toJS(sceneConfig.largeImage)) // zzz
-      console.log("sceneConfig.largeImage", toJS(sceneConfig.largeImage)) // zzz
-      console.log("sceneConfig.largeImage", toJS(sceneConfig.largeImage)) // zzz
-    }
-    const largeLocation = sceneConfig.largeImage ? css.large : ""
+    const sceneTrggerConfig = QuestStatusUtils.getSceneTriggerConfigFromScene({
+      sceneId: scene.id,
+    })
+
+    const largeLocation = false
+    // const largeLocation = sceneTrggerConfig.largeImage ? css.large : ""
 
     return (
       <div
         key={id}
         className={`${css.main} ${className} ${
-          this.props.scene.isStartScene ? css.isStartScene : ""
+          isStartScene ? css.isStartScene : ""
         }  ${localClass} ${largeLocation}`}
         style={backgroundColor}
       >
