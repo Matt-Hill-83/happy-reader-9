@@ -211,20 +211,6 @@ export default class QuestStatusUtils {
     return (activeSubQuest && activeSubQuest.missions) || null
   }
 
-  static getSceneTriggersFromScene = ({ sceneId }) => {
-    // const questConfig = this.getActiveQuestConfig()
-    // const allScenes = []
-
-    // questConfig.subQuests &&
-    //   questConfig.subQuests.forEach((subQuest) => {
-    //     allScenes.push(...subQuest.scenes)
-    //   })
-
-    const foundScene = this.getSceneConfigFromScene({ sceneId })
-    // const foundScene = allScenes.find((scene) => scene.id === sceneId)
-    return (foundScene && foundScene.sceneTriggers) || []
-  }
-
   static getSceneTriggerConfigFromScene = ({ sceneId }) => {
     const questConfig = this.getActiveQuestConfig()
     const allScenes = []
@@ -236,6 +222,11 @@ export default class QuestStatusUtils {
 
     const foundScene = allScenes.find((scene) => scene.id === sceneId)
     return foundScene || {}
+  }
+
+  static getSceneTriggersFromScene = ({ sceneId }) => {
+    const foundScene = this.getSceneTriggerConfigFromScene({ sceneId })
+    return (foundScene && foundScene.sceneTriggers) || []
   }
 
   static getSubQuestColor = ({ world, sceneId }) => {
