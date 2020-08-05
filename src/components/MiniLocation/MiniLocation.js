@@ -194,10 +194,13 @@ class MiniLocation extends React.Component {
     }
 
     const showLock = QuestStatusUtils.isSceneLocked({ sceneId: scene.id })
-    const showCloud =
-      QuestStatusUtils.isSceneClouded({ sceneId: scene.id }) &&
-      !isVisitedScene &&
-      !neighborWasVisited
+
+    const hideCloud =
+      isVisitedScene ||
+      (neighborWasVisited &&
+        !QuestStatusUtils.isSceneClouded({ sceneId: scene.id }))
+
+    const showCloud = !hideCloud
 
     const locationImage = Images.all[locationName]
     const rockImage = Images.backgrounds["rock"]

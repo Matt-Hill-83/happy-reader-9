@@ -137,13 +137,6 @@ export default function SubQuestWizard({ props }) {
       const accordion = {
         title: (
           <div className={css.scenePickerGroup}>
-            <span className={css.mapPickerButton}>
-              <Checkbox
-                label="big"
-                onClick={() => toggleLargeImage()}
-                checked={largeImage}
-              ></Checkbox>
-            </span>
             <SimpleSelectObj
               className={css.sceneDropdown}
               items={realScenes}
@@ -160,6 +153,13 @@ export default function SubQuestWizard({ props }) {
                 moreNestedButtons,
               }}
             />
+            <span className={css.mapPickerButton}>
+              <Checkbox
+                label="big"
+                onClick={() => toggleLargeImage()}
+                checked={largeImage}
+              />
+            </span>
             {renderAddTriggerButton({ triggers })}
           </div>
         ),
