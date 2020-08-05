@@ -147,15 +147,6 @@ class MiniLocation extends React.Component {
       sceneConfig: { subQuestId = 0 } = {},
     } = scene
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
-    const neighbors = Utils.getNeighbors({ coordinates })
-    // console.log("sceneConfig", toJS(sceneConfig)) // zzz
-    const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
-      (neighbor) => neighbor && neighbor.id
-    )
-
-    const neighborWasVisited = neighborsArray.some((neighbor) =>
-      localStateStore.isVisitedScene(neighbor && neighbor.id)
-    )
 
     const locationName = scene.location.name
     if (!locationName) {
@@ -184,6 +175,15 @@ class MiniLocation extends React.Component {
     let showCloud
 
     if (!isBlank) {
+      const neighbors = Utils.getNeighbors({ coordinates })
+      const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
+        (neighbor) => neighbor && neighbor.id
+      )
+
+      const neighborWasVisited = neighborsArray.some((neighbor) =>
+        localStateStore.isVisitedScene(neighbor && neighbor.id)
+      )
+
       if (showLocationOnly) {
         const roadLeftRight01 = Images.items["roadLeftRight01"]
         return (
