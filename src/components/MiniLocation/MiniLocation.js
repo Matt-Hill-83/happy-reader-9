@@ -139,6 +139,10 @@ class MiniLocation extends React.Component {
     this.setState({ isEndScene: !this.state.isEndScene })
   }
 
+  renderBlankScene = ({ id }) => {
+    return <div key={id} className={`${css.main} ${css.isBlank} `}></div>
+  }
+
   render() {
     const { scene, isActive, className, id } = this.props
     const {
@@ -155,8 +159,11 @@ class MiniLocation extends React.Component {
 
     const showNothing = QuestStatusUtils.isSceneHidden({ sceneId: scene.id })
     const isBlank = locationName === "blank" || showNothing
-    const localClass = isActive ? css.activeClass : ""
+    if (isBlank) {
+      return this.renderBlankScene({ id })
+    }
 
+    const localClass = isActive ? css.activeClass : ""
     const cloudImage = Images.backgrounds["cloud"]
     const lockImage = Images.items["lock02"]
 
