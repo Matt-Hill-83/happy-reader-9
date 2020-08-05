@@ -153,9 +153,9 @@ class MiniLocation extends React.Component {
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
 
     const locationName = scene.location.name
-    if (!locationName) {
-      return <div className={`${css.main} ${className} ${localClass}`}></div>
-    }
+    // if (!locationName) {
+    //   return <div className={`${css.main} ${className} ${localClass}`}></div>
+    // }
 
     const showNothing = QuestStatusUtils.isSceneHidden({ sceneId: scene.id })
     const isBlank = locationName === "blank" || showNothing
@@ -169,66 +169,49 @@ class MiniLocation extends React.Component {
 
     const showLocationOnly = locationName === "roadLeftRight01"
 
-    let locationImage
-    let rockImage
-    let rockImageVertical
-    let defaultDoorImage
-    let showBottomPath
-    let showRightPath
-    let backgroundColor = {
-      "background-color": `white`,
-    }
-    let showLock
-    let showCloud
+    const neighbors = Utils.getNeighbors({ coordinates })
+    const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
+      (neighbor) => neighbor && neighbor.id
+    )
 
-    if (!isBlank) {
-      const neighbors = Utils.getNeighbors({ coordinates })
-      const neighborsArray = Utils.getNeighborsAsArray({ coordinates }).filter(
-        (neighbor) => neighbor && neighbor.id
-      )
+    const neighborWasVisited = neighborsArray.some((neighbor) =>
+      localStateStore.isVisitedScene(neighbor && neighbor.id)
+    )
 
-      const neighborWasVisited = neighborsArray.some((neighbor) =>
-        localStateStore.isVisitedScene(neighbor && neighbor.id)
-      )
-
-      if (showLocationOnly) {
-        const roadLeftRight01 = Images.items["roadLeftRight01"]
-        return (
-          <div className={`${css.main} ${className} ${localClass} `}>
-            <div className={css.container}>
-              <div className={css.roadLeftRight01}>
-                <img
-                  className={css.none}
-                  src={roadLeftRight01}
-                  alt={"imagex"}
-                />
-              </div>
+    if (showLocationOnly) {
+      const roadLeftRight01 = Images.items["roadLeftRight01"]
+      return (
+        <div className={`${css.main} ${className} ${localClass} `}>
+          <div className={css.container}>
+            <div className={css.roadLeftRight01}>
+              <img className={css.none} src={roadLeftRight01} alt={"imagex"} />
             </div>
           </div>
-        )
-      }
-
-      showLock = QuestStatusUtils.isSceneLocked({ sceneId: scene.id })
-      showCloud =
-        QuestStatusUtils.isSceneClouded({ sceneId: scene.id }) &&
-        !isVisitedScene &&
-        !neighborWasVisited
-
-      locationImage = Images.all[locationName]
-      rockImage = Images.backgrounds["rock"]
-      rockImageVertical = Images.backgrounds["rock02Vertical"]
-      defaultDoorImage = Images.backgrounds["door"]
-      showBottomPath = neighbors[Constants.neighborPositionsEnum.bottom]
-      showRightPath = neighbors[Constants.neighborPositionsEnum.right]
-
-      const world = localStateStore.getActiveWorld()
-
-      backgroundColor = QuestStatusUtils.getSubQuestColor({
-        sceneName: locationName,
-        world: world.data,
-        sceneId: scene.id,
-      })
+        </div>
+      )
     }
+
+    const showLock = QuestStatusUtils.isSceneLocked({ sceneId: scene.id })
+    const showCloud =
+      QuestStatusUtils.isSceneClouded({ sceneId: scene.id }) &&
+      !isVisitedScene &&
+      !neighborWasVisited
+
+    const locationImage = Images.all[locationName]
+    const rockImage = Images.backgrounds["rock"]
+    const rockImageVertical = Images.backgrounds["rock02Vertical"]
+    const defaultDoorImage = Images.backgrounds["door"]
+    const showBottomPath = neighbors[Constants.neighborPositionsEnum.bottom]
+    const showRightPath = neighbors[Constants.neighborPositionsEnum.right]
+
+    const world = localStateStore.getActiveWorld()
+
+    const backgroundColor = QuestStatusUtils.getSubQuestColor({
+      sceneName: locationName,
+      world: world.data,
+      sceneId: scene.id,
+    })
+
     if (sceneConfig.largeImage) {
       console.log("sceneConfig.largeImage", toJS(sceneConfig.largeImage)) // zzz
       console.log("sceneConfig.largeImage", toJS(sceneConfig.largeImage)) // zzz
@@ -239,78 +222,66 @@ class MiniLocation extends React.Component {
     return (
       <div
         key={id}
-        id={id}
         className={`${css.main} ${className} ${
           this.props.scene.isStartScene ? css.isStartScene : ""
-        } ${isBlank ? css.isBlank : ""} ${localClass} ${largeLocation}`}
+        }  ${localClass} ${largeLocation}`}
         style={backgroundColor}
       >
-        {!isBlank && (
-          <div className={css.container}>
-            {/* Paths that connect scenes */}
-            {showRightPath && (
-              <div className={css.rightPath}>
-                <img className={css.rockImage} src={rockImage} alt={"imagex"} />
-              </div>
-            )}
-            {showBottomPath && (
-              <div className={css.bottomPath}>
-                <img
-                  className={css.rockImageVertical}
-                  src={rockImageVertical}
-                  alt={"imagex"}
-                />
-              </div>
-            )}
-
-            {false && <div className={css.hexagon}></div>}
-            {showCloud && (
-              <div className={css.cloudImageContainer}>
-                <img
-                  className={css.cloudImage}
-                  src={cloudImage}
-                  alt={"imagex"}
-                />
-              </div>
-            )}
-            {showLock && (
-              <div className={css.cloudImageContainer}>
-                <img
-                  className={css.cloudImage}
-                  src={lockImage}
-                  alt={"imagex"}
-                />
-              </div>
-            )}
-
-            {/* Right door */}
-            {false &&
-              this.renderButton({
-                position: "right",
-                className: css.rightDoor,
-                defaultDoorImage: defaultDoorImage,
-              })}
-            {false &&
-              this.renderButton({
-                position: "bottom",
-                className: css.bottomDoor,
-                defaultDoorImage: defaultDoorImage,
-              })}
-            <div className={css.imagesBox}>
+        <div className={css.container}>
+          {/* Paths that connect scenes */}
+          {showRightPath && (
+            <div className={css.rightPath}>
+              <img className={css.rockImage} src={rockImage} alt={"imagex"} />
+            </div>
+          )}
+          {showBottomPath && (
+            <div className={css.bottomPath}>
               <img
-                className={css.miniLocationImage}
+                className={css.rockImageVertical}
+                src={rockImageVertical}
                 alt={"imagex"}
-                src={locationImage}
               />
             </div>
+          )}
 
-            <div className={css.characters}>
-              {this.renderCreatures({ isActive })}
+          {showCloud && (
+            <div className={css.cloudImageContainer}>
+              <img className={css.cloudImage} src={cloudImage} alt={"imagex"} />
             </div>
+          )}
+          {showLock && (
+            <div className={css.cloudImageContainer}>
+              <img className={css.cloudImage} src={lockImage} alt={"imagex"} />
+            </div>
+          )}
 
-            <span className={css.locationTitle}>{locationName}</span>
+          {/* Right door */}
+          {false &&
+            this.renderButton({
+              position: "right",
+              className: css.rightDoor,
+              defaultDoorImage: defaultDoorImage,
+            })}
+          {false &&
+            this.renderButton({
+              position: "bottom",
+              className: css.bottomDoor,
+              defaultDoorImage: defaultDoorImage,
+            })}
+          <div className={css.imagesBox}>
+            <img
+              className={css.miniLocationImage}
+              alt={"imagex"}
+              src={locationImage}
+            />
           </div>
-        )}
+
+          <div className={css.characters}>
+            {this.renderCreatures({ isActive })}
+          </div>
+
+          <span className={css.locationTitle}>{locationName}</span>
+        </div>
       </div>
     )
   }
