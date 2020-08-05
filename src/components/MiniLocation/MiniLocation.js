@@ -195,10 +195,12 @@ class MiniLocation extends React.Component {
 
     const showLock = QuestStatusUtils.isSceneLocked({ sceneId: scene.id })
 
-    const hideCloud =
-      isVisitedScene ||
-      (neighborWasVisited &&
-        !QuestStatusUtils.isSceneClouded({ sceneId: scene.id }))
+    // const hideCloud =
+    //   isVisitedScene ||
+    //   (neighborWasVisited &&
+    //     !QuestStatusUtils.isSceneClouded({ sceneId: scene.id }))
+
+    const hideCloud = isVisitedScene || neighborWasVisited
 
     const showCloud = !hideCloud
 

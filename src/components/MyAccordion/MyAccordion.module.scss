@@ -1,14 +1,10 @@
 .main {
-  // border: 1px solid black !important;
-
   :global {
     .MuiAccordionSummary-root {
       background: lightblue;
       min-height: unset !important;
       height: 40px;
       padding: 0px 11px !important;
-      // border: 1px solid black !important;
-      // border-bottom: none !important;
     }
 
     .MuiAccordionDetails-root {
@@ -19,8 +15,6 @@
   .content {
     background: #e6e6e6;
     width: 100%;
-    // border: 1px solid black !important;
-    // border-top: none !important;
   }
 
   .header {
