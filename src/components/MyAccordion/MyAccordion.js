@@ -32,7 +32,10 @@ export default function MyAccordion({ props }) {
     const { title, content, expanded } = item
 
     return (
-      <Accordion className={cx(css.main, className)} defaultExpanded={expanded}>
+      <Accordion
+        // className={cx(css.xxmain, className)}
+        defaultExpanded={expanded}
+      >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -50,5 +53,9 @@ export default function MyAccordion({ props }) {
   })
 
   // return renderedAccordion
-  return <div className={classes.root}>{renderedAccordion}</div>
+  return (
+    <div className={cx(classes.root, css.main, className)}>
+      {renderedAccordion}
+    </div>
+  )
 }

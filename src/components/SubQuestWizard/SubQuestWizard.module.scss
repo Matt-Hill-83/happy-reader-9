@@ -6,8 +6,10 @@
   width: 100%;
 
   .sceneTriggersAccordion {
-    border: 1px solid black !important;
-    margin: 4px 10px 0px 10px !important;
+    box-shadow: none;
+    border-radius: 0px !important;
+    border: 2px solid black !important;
+    border-bottom: none !important;
 
     :global {
       .MuiAccordionSummary-root {
@@ -20,7 +22,13 @@
       .MuiCollapse-container .MuiCollapse-entered {
         padding: 4px 6px;
         padding-bottom: 0px;
-        border: 1px solid blue !important;
+        // border-top: 2px solid purple !important;
+        // border: 1px solid blue !important;
+      }
+
+      .MuiAccordionDetails-root {
+        border-top: 1px solid black !important;
+        // border: 1px solid blue !important;
       }
     }
   }

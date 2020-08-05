@@ -2,13 +2,19 @@
   .triggersTable {
     max-width: 100%;
     box-shadow: none;
-    // border: 1px solid black;
-    margin-top: 2px;
 
     :global {
       .MuiTableCell-body {
         padding: 2px 5px;
         border-bottom: 1px solid black;
+      }
+
+      .MuiTableRow-root {
+        &:last-of-type {
+          .MuiTableCell-body {
+            border-bottom: none !important;
+          }
+        }
       }
 
       .MuiSelect-selectMenu {
@@ -19,20 +25,5 @@
         padding-right: 24px;
       }
     }
-  }
-
-  .addTriggerButton {
-    position: absolute;
-    height: 24px;
-    right: 0px;
-  }
-
-  .buttonGroup {
-    display: flex;
-    flex: 1 1;
-    border: 1px solid green !important;
-    position: relative;
-    overflow: hidden;
-    justify-content: flex-end;
   }
 }

@@ -1,6 +1,4 @@
-import { IconNames } from "@blueprintjs/icons"
 import _get from "lodash.get"
-import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
 import { createMuiTheme } from "@material-ui/core/styles"
 import { toJS } from "mobx"
 import cx from "classnames"
@@ -50,17 +48,6 @@ export default function TriggersTable({ props }) {
 
     if (triggers.length === 0) {
       return null
-      return (
-        <Button
-          className={css.addTriggerButton}
-          icon={IconNames.ADD}
-          onClick={() => {
-            onAddTriggerRow({ rowIndex: 0, before: false })
-          }}
-        >
-          Add Trigger
-        </Button>
-      )
     }
 
     const tableChangeCallback = ({ newValue, tableMeta, propertyName }) => {
