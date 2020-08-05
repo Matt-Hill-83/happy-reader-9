@@ -102,8 +102,7 @@ export default function SubQuestWizard({ props }) {
       let largeImage = sceneConfig.largeImage
 
       const toggleLargeImage = () => {
-        const largeImage = sceneConfig.largeImage
-        sceneConfig.largeImage = !!largeImage
+        sceneConfig.largeImage = !sceneConfig.largeImage
         saveQuestConfig()
       }
 
@@ -327,7 +326,6 @@ export default function SubQuestWizard({ props }) {
 
   let content = null
   if (showDialogBuilder) {
-    console.log("sceneForDialogBuilder", toJS(sceneForDialogBuilder)) // zzz
     const dialogBuilderProps = {
       initialValue: "9sadfsa",
       scene: sceneForDialogBuilder,
