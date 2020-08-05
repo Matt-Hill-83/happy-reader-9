@@ -150,6 +150,7 @@ class MiniLocation extends React.Component {
       sceneConfig = {},
       sceneConfig: { subQuestId = 0 } = {},
       isStartScene,
+      onClick,
     } = scene
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
 
@@ -226,6 +227,7 @@ class MiniLocation extends React.Component {
           isStartScene ? css.isStartScene : ""
         }  ${localClass} ${largeLocation}`}
         style={backgroundColor}
+        onClick={onClick}
       >
         <div className={css.container}>
           {/* Paths that connect scenes */}
