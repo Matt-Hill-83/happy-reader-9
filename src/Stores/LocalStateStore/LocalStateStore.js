@@ -7,14 +7,13 @@ class LocalStateStore {
   activeFrameIndex = 0
   activeMapId = null
   activeSceneId = null
-  // move this to questStatus
   defaultWorldId = null
   mapBuilderGrid = []
   showBookPicker = false
   showWorldBuilder = false
-  visitedScenes = []
 
   _defaultQuestStatus = {
+    visitedScenes: [],
     completedMissions: [],
     lockedScenes: [],
     hiddenScenes: [],
@@ -78,21 +77,33 @@ class LocalStateStore {
   ///////////////
   ///////////////
   ///////////////
-  getVisitedScenes = () => this.visitedScenes
+  getVisitedScenes = () => this.questStatus.visitedScenes
   setVisitedScenes = (visitedScenes) => {
-    this.visitedScenes = visitedScenes
+    const questStatus = this.questStatus
+    questStatus.visitedScenes = visitedScenes
+    this.questStatus = questStatus
   }
 
   clearVisitedScenes = () => {
-    this.visitedScenes.length = 0
+    const questStatus = this.questStatus
+    if (!questStatus.visitedScenes) {
+      questStatus.visitedScenes = []
+    }
+    questStatus.visitedScenes.length = 0
+    this.questStatus = questStatus
   }
 
   addVisitedScenes = (sceneId) => {
-    this.visitedScenes.push(sceneId)
+    const questStatus = this.questStatus
+    if (!questStatus.visitedScenes) {
+      questStatus.visitedScenes = []
+    }
+    questStatus.visitedScenes.push(sceneId)
+    this.questStatus = questStatus
   }
 
   isVisitedScene = (sceneId) => {
-    return this.visitedScenes.some((scene) => scene === sceneId)
+    return this.questStatus.visitedScenes.some((scene) => scene === sceneId)
   }
 
   convertItemToObjFormat = ({ itemsArray = [] }) => {
@@ -389,7 +400,6 @@ decorate(LocalStateStore, {
   activeFrameIndex: observable,
   activeMapId: observable,
   activeSceneId: observable,
-  // completedMissions: observable,
   defaultWorldId: observable,
   desiredItems: observable,
   mapBuilderGrid: observable,
@@ -397,7 +407,6 @@ decorate(LocalStateStore, {
   questStatus: observable,
   showBookPicker: observable,
   showWorldBuilder: observable,
-  visitedScenes: observable,
 })
 
 const localStateStore = new LocalStateStore()
