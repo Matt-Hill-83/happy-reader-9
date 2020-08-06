@@ -97,10 +97,8 @@ class WorldViewer extends React.Component {
     const bookCoil01 = Images.backgrounds["bookCoil01"]
 
     const mapBackground = Images.backgrounds["mapBackground11"]
-    const hideMissionConsole = localStateStore.getQuestStatus()
-      .hideMissionConsole
+    const { hideMissionConsole } = localStateStore.getQuestStatus()
 
-    // const questStatus = localStateStore.getQuestStatus()
     const completedMissions = localStateStore.getCompletedMissions()
     console.log(
       "completedMissions-----------------------------",
