@@ -23,7 +23,7 @@ class WorldPicker extends Component {
 
   changeMap = ({ index, mapId }) => {
     const { onChangeWorld } = this.props
-    const map = Utils.getMapFromId({ id: mapId })
+    const map = Utils.getWorldFromId({ id: mapId })
 
     const mapName = map ? map.data && map.data.title : ""
 

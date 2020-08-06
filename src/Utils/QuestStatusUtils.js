@@ -224,6 +224,19 @@ export default class QuestStatusUtils {
     return foundScene || {}
   }
 
+  static getSceneNameFromId = ({ sceneId, worldId }) => {
+    const questConfig = this.getActiveQuestConfig()
+    const allScenes = []
+
+    questConfig.subQuests &&
+      questConfig.subQuests.forEach((subQuest) => {
+        allScenes.push(...subQuest.scenes)
+      })
+
+    const foundScene = allScenes.find((scene) => scene.id === sceneId)
+    return foundScene || {}
+  }
+
   static getSceneTriggersFromScene = ({ sceneId }) => {
     const foundScene = this.getSceneTriggerConfigFromScene({ sceneId })
     return (foundScene && foundScene.sceneTriggers) || []

@@ -31,12 +31,16 @@ export const getTableConfig = ({
 
     const itemToGet = itemsToGet.find((item) => item.name === value.name)
 
+    const getOptionLabel = (option) => {
+      return `${option.name} - ${option.id}`
+    }
+
     const props = {
       sortKeys: ["name"],
       // className: css.sceneDropdown,
       items: itemsToGet,
       defaultValue: itemToGet,
-      getOptionLabel: (option) => option.name,
+      getOptionLabel,
       onChange: onChange,
     }
 

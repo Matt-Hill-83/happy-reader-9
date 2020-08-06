@@ -339,12 +339,12 @@ class LocalStateStore {
   }
 
   getActiveWorld = () => {
-    const world = Utils.getMapFromId({ id: this.activeMapId })
+    const world = Utils.getWorldFromId({ id: this.activeMapId })
     return world
   }
 
   getActiveWorldGrid = () => {
-    const map = Utils.getMapFromId({ id: this.activeMapId })
+    const map = Utils.getWorldFromId({ id: this.activeMapId })
     return map.data.newGrid5 || []
   }
 

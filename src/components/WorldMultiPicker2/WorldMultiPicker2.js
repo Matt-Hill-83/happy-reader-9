@@ -57,7 +57,7 @@ export default function WorldMultiPicker2({ props }) {
 
   useEffect(() => {
     const selectedWorldObjs = selectedWorlds.map((item) => {
-      return Utils.getMapFromId({ id: item })
+      return Utils.getWorldFromId({ id: item })
     })
     const filteredWorlds = selectedWorldObjs.filter((item) => !!item)
     setSelectedItems(filteredWorlds)

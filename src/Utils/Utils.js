@@ -217,7 +217,7 @@ export default class Utils {
     })
   }
 
-  static getMapFromId = ({ id }) => {
+  static getWorldFromId = ({ id }) => {
     const mapsDocs = toJS(maps.docs)
     const defaultMap = this.getFirstReleasedMap() || {}
 
@@ -231,7 +231,7 @@ export default class Utils {
     return foundMap
   }
 
-  static getMapFromId2 = ({ id }) => {
+  static getWorldFromId2 = ({ id }) => {
     const mapsDocs = toJS(maps.docs)
     const defaultMap = this.getFirstReleasedMap() || {}
 

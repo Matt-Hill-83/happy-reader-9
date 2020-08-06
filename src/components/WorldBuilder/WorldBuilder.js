@@ -67,7 +67,7 @@ class WorldBuilder extends Component {
       this.addNewWorld()
       return
     } else {
-      const world = Utils.getMapFromId2({ id: mapId })
+      const world = Utils.getWorldFromId2({ id: mapId })
       if (!world || !world.data) {
         return
       }
