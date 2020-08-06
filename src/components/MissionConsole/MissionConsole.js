@@ -66,7 +66,7 @@ class MissionConsole extends Component {
 
     if (newMissions && newMissions[0]) {
       missions = newMissions
-      console.log("newMissions") // zzz
+      console.log("newMissions") // K
     } else {
       // for BW compatibility
       missions = questStatus.questConfig.missions

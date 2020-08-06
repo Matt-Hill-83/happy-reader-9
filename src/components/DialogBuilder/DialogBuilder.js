@@ -34,12 +34,9 @@ export default function DialogBuilder({ props }) {
     frame.dialog.forEach((dialog) => {
       content += `<p>${dialog.text || "empty"}</p>`
     })
-
-    console.log("content", toJS(content)) // zzz
   })
 
   const dialogBuilderProps = { initialValue: content }
-  // const dialogBuilderProps = { initialValue: scene.location.name }
 
   return <MyTextEditor props={dialogBuilderProps}></MyTextEditor>
 }

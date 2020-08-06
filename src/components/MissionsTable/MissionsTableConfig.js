@@ -36,13 +36,11 @@ export const getTableConfig = ({
     const world = localStateStore.getWorldBuilderWorld()
     const getOptionLabel = (option) => {
       const sceneId = option.sceneId
-      console.log("sceneId", toJS(sceneId)) // zzz
 
       let sceneName = ""
       const scene = scenes.find((scene) => {
         return scene.id === option.sceneId
       })
-      console.log("scene", toJS(scene)) // zzz
 
       if (scene && scene.id) {
         sceneName = ` [${scene.location.name}]`

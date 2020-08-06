@@ -100,10 +100,6 @@ class WorldViewer extends React.Component {
     const { hideMissionConsole } = localStateStore.getQuestStatus()
 
     const completedMissions = localStateStore.getCompletedMissions()
-    console.log(
-      "completedMissions-----------------------------",
-      toJS(completedMissions)
-    ) // zzz
 
     return (
       <>

@@ -121,6 +121,5 @@ export default function MissionsTable({ props }) {
   if (!questConfig) {
     return null
   }
-  console.log("items-----------missions", toJS(items)) // zzz
   return <div className={cx(css.main)}>{renderItems({ items })}</div>
 }
