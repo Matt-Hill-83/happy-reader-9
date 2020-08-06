@@ -239,23 +239,6 @@ export default class QuestStatusUtils {
     return Object.values(allItems)
   }
 
-  static getSceneFromItemId = ({ sceneId, worldId }) => {
-    const world = Utils.getWorldFromId2({ id: worldId })
-
-    const questConfig = world.data.questConfig
-    const scenes = world.data.newGrid5
-
-    // scene.forEach((scene) => {
-    //   return
-    // })
-
-    const test = QuestStatusUtils.helper({ scenes })
-
-    // const foundScene = allScenes.find((scene) => scene.id === sceneId)
-    return {}
-    // return foundScene || {}
-  }
-
   static getSceneTriggersFromScene = ({ sceneId }) => {
     const foundScene = this.getSceneTriggerConfigFromScene({ sceneId })
     return (foundScene && foundScene.sceneTriggers) || []
