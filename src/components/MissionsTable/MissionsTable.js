@@ -21,6 +21,7 @@ export default function MissionsTable({ props }) {
     dataTableKey,
     questConfig,
     scenes,
+    sceneId,
     worldId,
   } = props
 
@@ -87,7 +88,7 @@ export default function MissionsTable({ props }) {
       },
       scenes: scenes,
       itemsToGet: combinedItems,
-      // itemsToGet: allItems,
+      sceneId,
     })
 
     const getMuiTheme = () =>
@@ -120,6 +121,6 @@ export default function MissionsTable({ props }) {
   if (!questConfig) {
     return null
   }
-  console.log("items", toJS(items)) // zzz
+  console.log("items-----------missions", toJS(items)) // zzz
   return <div className={cx(css.main)}>{renderItems({ items })}</div>
 }

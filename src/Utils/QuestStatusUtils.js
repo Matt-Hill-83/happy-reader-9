@@ -2,6 +2,7 @@ import localStateStore from "../Stores/LocalStateStore/LocalStateStore.js"
 import { toJS } from "mobx"
 import _get from "lodash.get"
 import Constants from "./Constants/Constants.js"
+import Utils from "./Utils.js"
 
 export default class QuestStatusUtils {
   // update new scene visibility props based on rules in subQuest
@@ -224,17 +225,35 @@ export default class QuestStatusUtils {
     return foundScene || {}
   }
 
-  static getSceneNameFromId = ({ sceneId, worldId }) => {
-    const questConfig = this.getActiveQuestConfig()
-    const allScenes = []
-
-    questConfig.subQuests &&
-      questConfig.subQuests.forEach((subQuest) => {
-        allScenes.push(...subQuest.scenes)
+  static helper = ({ scenes }) => {
+    const allItems = {}
+    console.log("allItems-------------->", toJS(allItems)) // zzz
+    scenes.forEach((scene) => {
+      const items = Utils.getAllItemsInScene({ scene })
+      items.forEach((item) => {
+        if (!allItems[item.name]) {
+          allItems[item.name] = item
+        }
       })
+    })
+    return Object.values(allItems)
+  }
 
-    const foundScene = allScenes.find((scene) => scene.id === sceneId)
-    return foundScene || {}
+  static getSceneFromItemId = ({ sceneId, worldId }) => {
+    const world = Utils.getWorldFromId2({ id: worldId })
+
+    const questConfig = world.data.questConfig
+    const scenes = world.data.newGrid5
+
+    // scene.forEach((scene) => {
+    //   return
+    // })
+
+    const test = QuestStatusUtils.helper({ scenes })
+
+    // const foundScene = allScenes.find((scene) => scene.id === sceneId)
+    return {}
+    // return foundScene || {}
   }
 
   static getSceneTriggersFromScene = ({ sceneId }) => {

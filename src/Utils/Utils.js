@@ -24,6 +24,7 @@ export default class Utils {
       const items = Utils.getAllItemsInScene({ scene })
       items.forEach((item) => {
         if (!allItems[item.name]) {
+          item.sceneId = scene.id
           allItems[item.name] = item
         }
       })
@@ -361,12 +362,8 @@ export default class Utils {
         const sceneObj =
           newGrid5.find((scene) => {
             if (!scene.coordinates) {
-              debugger
               return Utils.getBlankScene({ props })
             }
-            // const matchFound =
-            //   scene.coordinates.row === rowIndex &&
-            //   scene.coordinates.col === colIndex
 
             return (
               scene.coordinates.row === rowIndex &&
@@ -469,7 +466,6 @@ export default class Utils {
     } else {
       map.data.newGrid5 = Utils.createCondensedGridFromGrid({})
     }
-    console.log("map.data", toJS(map.data)) // zzz
 
     delete map.data.grid
     await map.update(map.data)

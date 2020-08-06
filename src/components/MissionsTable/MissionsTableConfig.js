@@ -12,6 +12,8 @@ import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 
 import css from "./MissionsTableConfig.module.scss"
 import AutoComplete2 from "../AutoComplete2/AutoComplete2"
+import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
+import QuestStatusUtils from "../../Utils/QuestStatusUtils"
 
 export const getTableConfig = ({
   tableChangeCallback = () => {},
@@ -31,8 +33,22 @@ export const getTableConfig = ({
 
     const itemToGet = itemsToGet.find((item) => item.name === value.name)
 
+    const world = localStateStore.getWorldBuilderWorld()
     const getOptionLabel = (option) => {
-      return `${option.name} - ${option.id}`
+      const sceneId = option.sceneId
+      console.log("sceneId", toJS(sceneId)) // zzz
+
+      let sceneName = ""
+      const scene = scenes.find((scene) => {
+        return scene.id === option.sceneId
+      })
+      console.log("scene", toJS(scene)) // zzz
+
+      if (scene && scene.id) {
+        sceneName = ` [${scene.location.name}]`
+      }
+
+      return `${option.name}${sceneName}`
     }
 
     const props = {
