@@ -8,7 +8,6 @@ class LocalStateStore {
   activeMapId = null
   activeSceneId = null
   // move this to questStatus
-  completedMissions = []
   defaultWorldId = null
   mapBuilderGrid = []
   showBookPicker = false
@@ -16,6 +15,7 @@ class LocalStateStore {
   visitedScenes = []
 
   _defaultQuestStatus = {
+    completedMissions: [],
     lockedScenes: [],
     hiddenScenes: [],
     cloudedScenes: [],
@@ -59,9 +59,20 @@ class LocalStateStore {
     this.unlockedSubQuests = unlockedSubQuests
   }
 
-  getCompletedMissions = () => this.completedMissions
+  getCompletedMissions = () => this.questStatus.completedMissions
   setCompletedMissions = (completedMissions) => {
-    this.completedMissions = completedMissions
+    const questStatus = this.questStatus
+    questStatus.completedMissions = completedMissions
+    this.questStatus = questStatus
+  }
+
+  addCompletedMission = (completedMission) => {
+    const questStatus = this.questStatus
+    if (!questStatus.completedMissions) {
+      questStatus.completedMissions = []
+    }
+    questStatus.completedMissions.push(completedMission)
+    this.questStatus = questStatus
   }
 
   ///////////////
@@ -166,11 +177,15 @@ class LocalStateStore {
       return {}
     }
     const missions = QuestStatusUtils.getActiveSubQuestMissions()
-    const { pockets } = questStatus
+    const { pockets, completedMissions } = questStatus
+    if (!questStatus.completedMissions) {
+      questStatus.completedMissions = []
+    }
 
     if (!missions) {
       return {}
     }
+
     const activeMissionIndex = questStatus.activeMissionIndex
     const activeMission = missions[activeMissionIndex] || null
     if (!activeMission) {
@@ -183,15 +198,12 @@ class LocalStateStore {
     })
 
     if (isMissionCompleted) {
-      this.completedMissions.push(activeMissionIndex)
+      completedMissions.push(activeMissionIndex)
 
       // remove item from pocket
       const desiredItem = this.getDesiredItem()
-
       delete pockets[desiredItem.name]
-
       activeMission.completed = true
-
       questStatus.activeMissionIndex++
 
       const newPockets = this.convertItemToObjFormat({
@@ -377,7 +389,7 @@ decorate(LocalStateStore, {
   activeFrameIndex: observable,
   activeMapId: observable,
   activeSceneId: observable,
-  completedMissions: observable,
+  // completedMissions: observable,
   defaultWorldId: observable,
   desiredItems: observable,
   mapBuilderGrid: observable,
