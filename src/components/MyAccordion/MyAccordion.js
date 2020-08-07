@@ -39,21 +39,16 @@ export default function MyAccordion({ props }) {
   }, [])
 
   const onChange = (event, value) => {
+    console.log("onChange") // zzz
     setExpanded(value)
     props.onChange && props.onChange()
   }
 
   console.log("expanded", toJS(expanded)) // zzz
-  // const renderedContent = !expanded ? content() : null
   const renderedContent = expanded ? content() : null
 
   const renderedAccordion = (
-    <Accordion
-      defaultExpanded={false}
-      // defaultExpanded={expanded}
-      // className={cx(className)}
-      onChange={onChange}
-    >
+    <Accordion defaultExpanded={expanded} onChange={onChange}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"

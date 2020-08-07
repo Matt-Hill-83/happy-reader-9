@@ -6,27 +6,41 @@
   width: 100%;
 
   .subQuestAccordion {
-    // box-shadow: none;
-    border-radius: 0px !important;
-    border: 2px solid purple !important;
-    margin: 6px !important;
+    border: 1px solid red;
+  }
+  //   // box-shadow: none;
+  //   border-radius: 0px !important;
+  //   border: 2px solid purple !important;
+  //   margin: 6px !important;
 
-    :global {
-      .MuiAccordionSummary-root {
-        height: 32px;
-        display: flex;
-        align-items: center;
-        background: #cef7d1;
+  :global {
+    .MuiAccordionSummary-root {
+      height: 32px;
+      display: flex;
+      align-items: center;
+      background: #cef7d1;
+    }
+
+    [class*="MyAccordionGroup_main"] {
+      // border: 4px solid blue !important;
+
+      [class*="SubQuestWizard_subQuestAccordion"] {
+        border: 4px solid green !important;
       }
 
-      // I need to target this at just the top level somehow
-      :not(.MuiAccordionDetails-root
-          .MuiAccordionDetails-root).MuiAccordionDetails-root {
-        border-top: 1px solid black !important;
-        padding: 10px !important;
+      // Applied to outermost accordion
+      > [class*="SubQuestWizard_subQuestAccordion"] {
+        border: 4px solid orange !important;
+        padding: 10px;
+
+        .MuiAccordionDetails-root {
+          // border-top: 10px solid red !important;
+          padding: 10px !important;
+        }
       }
     }
   }
+  // }
 
   .sceneTriggersAccordion {
     box-shadow: none;
