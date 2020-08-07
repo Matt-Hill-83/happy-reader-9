@@ -151,7 +151,8 @@ class LocalStateStore {
   }
 
   getActiveMission = () => {
-    const missions = QuestStatusUtils.getActiveSubQuestMissions()
+    const world = localStateStore.getActiveWorld()
+    const missions = QuestStatusUtils.getActiveSubQuestMissions({ world })
     return missions[this.questStatus.activeMissionIndex] || null
   }
 
@@ -187,7 +188,9 @@ class LocalStateStore {
     if (!questStatus.questConfig) {
       return {}
     }
-    const missions = QuestStatusUtils.getActiveSubQuestMissions()
+
+    const world = localStateStore.getActiveWorld()
+    const missions = QuestStatusUtils.getActiveSubQuestMissions({ world })
     const { pockets, completedMissions } = questStatus
     if (!questStatus.completedMissions) {
       questStatus.completedMissions = []

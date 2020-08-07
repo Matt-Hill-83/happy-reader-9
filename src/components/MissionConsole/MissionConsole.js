@@ -61,8 +61,8 @@ class MissionConsole extends Component {
     if (!questStatus.questConfig) {
       return null
     }
-
-    const newMissions = QuestStatusUtils.getActiveSubQuestMissions()
+    const world = localStateStore.getActiveWorld()
+    const newMissions = QuestStatusUtils.getActiveSubQuestMissions({ world })
 
     if (newMissions && newMissions[0]) {
       missions = newMissions
@@ -84,7 +84,7 @@ class MissionConsole extends Component {
     if (!missions || missions.length === 0) {
       return null
     }
-
+    console.log("missions", toJS(missions)) // zzz
     const tableData = missions.map((mission) => {
       const {
         name,

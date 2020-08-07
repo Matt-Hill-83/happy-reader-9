@@ -33,10 +33,7 @@ export const getTableConfig = ({
 
     const itemToGet = itemsToGet.find((item) => item.name === value.name)
 
-    const world = localStateStore.getWorldBuilderWorld()
     const getOptionLabel = (option) => {
-      const sceneId = option.sceneId
-
       let sceneName = ""
       const scene = scenes.find((scene) => {
         return scene.id === option.sceneId
@@ -46,7 +43,8 @@ export const getTableConfig = ({
         sceneName = ` [${scene.location.name}]`
       }
 
-      return `${option.name}${sceneName}`
+      const test = `${option.name}${sceneName}`
+      return test
     }
 
     const props = {

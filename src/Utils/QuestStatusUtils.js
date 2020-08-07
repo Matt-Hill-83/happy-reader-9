@@ -176,7 +176,7 @@ export default class QuestStatusUtils {
     return questConfig
   }
 
-  static getActiveSubQuest = () => {
+  static getActiveSubQuest = ({ world }) => {
     const activeWorld = localStateStore.getActiveWorld()
     const { questConfig } = activeWorld.data
     const { subQuests } = questConfig
@@ -207,8 +207,8 @@ export default class QuestStatusUtils {
     return parentSubQuest
   }
 
-  static getActiveSubQuestMissions = () => {
-    const activeSubQuest = this.getActiveSubQuest()
+  static getActiveSubQuestMissions = ({ world }) => {
+    const activeSubQuest = this.getActiveSubQuest({ world })
     return (activeSubQuest && activeSubQuest.missions) || null
   }
 
@@ -223,20 +223,6 @@ export default class QuestStatusUtils {
 
     const foundScene = allScenes.find((scene) => scene.id === sceneId)
     return foundScene || {}
-  }
-
-  static helper = ({ scenes }) => {
-    const allItems = {}
-    console.log("allItems-------------->", toJS(allItems)) // zzz
-    scenes.forEach((scene) => {
-      const items = Utils.getAllItemsInScene({ scene })
-      items.forEach((item) => {
-        if (!allItems[item.name]) {
-          allItems[item.name] = item
-        }
-      })
-    })
-    return Object.values(allItems)
   }
 
   static getSceneTriggersFromScene = ({ sceneId }) => {

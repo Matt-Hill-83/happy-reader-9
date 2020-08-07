@@ -192,7 +192,9 @@ class TopLevel extends React.Component {
     }
     const { questConfig } = map.data
     if (questConfig) {
-      const missions = QuestStatusUtils.getActiveSubQuestMissions()
+      const missions = QuestStatusUtils.getActiveSubQuestMissions({
+        world: map,
+      })
       const desiredItems =
         (missions && missions.map((mission) => mission.item)) || []
       console.log("desiredItems", toJS(desiredItems)) // zzz

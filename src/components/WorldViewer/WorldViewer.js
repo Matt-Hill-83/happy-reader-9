@@ -13,6 +13,7 @@ import MissionConsole from "../MissionConsole/MissionConsole.js"
 import Utils from "../../Utils/Utils.js"
 
 import css from "./WorldViewer.module.scss"
+import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 
 class WorldViewer extends React.Component {
   renderSceneRows = () => {
@@ -100,6 +101,12 @@ class WorldViewer extends React.Component {
     const { hideMissionConsole } = localStateStore.getQuestStatus()
 
     const completedMissions = localStateStore.getCompletedMissions()
+
+    const world = localStateStore.getActiveWorld()
+    const missions = QuestStatusUtils.getActiveSubQuestMissions({ world })
+
+    const activeSubQuest = QuestStatusUtils.getActiveSubQuest({ world })
+    console.log("activeSubQuest", toJS(activeSubQuest)) // zzz
 
     return (
       <>
