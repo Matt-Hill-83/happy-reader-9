@@ -176,9 +176,14 @@ class MiniLocation extends React.Component {
       (neighbor) => neighbor && neighbor.id
     )
 
-    const neighborWasVisited = neighborsArray.some((neighbor) =>
-      localStateStore.isVisitedScene(neighbor && neighbor.id)
-    )
+    // const neighborWasVisited = neighborsArray.some((neighbor) =>
+    //   localStateStore.isVisitedScene(neighbor && neighbor.id)
+    // )
+
+    const neighborIsActive = neighborsArray.some((neighbor) => {
+      const activeSceneId = localStateStore.getActiveSceneId()
+      return neighbor && neighbor.id === activeSceneId
+    })
 
     if (showLocationOnly) {
       const roadLeftRight01 = Images.items["roadLeftRight01"]
@@ -195,12 +200,7 @@ class MiniLocation extends React.Component {
 
     const showLock = QuestStatusUtils.isSceneLocked({ sceneId: scene.id })
 
-    // const hideCloud =
-    //   isVisitedScene ||
-    //   (neighborWasVisited &&
-    //     !QuestStatusUtils.isSceneClouded({ sceneId: scene.id }))
-
-    const hideCloud = isVisitedScene || neighborWasVisited
+    const hideCloud = isVisitedScene || neighborIsActive
 
     const showCloud = !hideCloud
 

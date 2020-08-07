@@ -153,10 +153,88 @@ export default class QuestStatusUtils {
       })
     }
 
+    const evaluateCurrentMission = ({
+      activeMissionIndex,
+      currentMission,
+      falseFunc = () => {},
+      trueFunc = () => {},
+    }) => {
+      if (currentMission >= 0) {
+        if (currentMission === activeMissionIndex) {
+          trueFunc()
+        } else {
+          falseFunc()
+        }
+      }
+    }
+
     if (sceneTriggers && sceneTriggers.length > 0) {
       const completedMissions = localStateStore.getCompletedMissions()
 
       sceneTriggers.forEach((trigger) => {
+        if (trigger.name === triggerTypes.LOCK) {
+          const { conditions = [] } = trigger
+          conditions.forEach((condition) => {
+            const { currentMission, completedMission } = condition
+
+            const trueFunc = () =>
+              (propValueAccumulators.sceneIsLocked.value = true)
+            const falseFunc = () =>
+              (propValueAccumulators.sceneIsLocked.value = true)
+
+            evaluateCurrentMission({
+              activeMissionIndex,
+              currentMission,
+              falseFunc,
+              trueFunc,
+            })
+            // for condition: currentMission
+            // if (currentMission >= 0) {
+            //   if (currentMission === activeMissionIndex) {
+            //     propValueAccumulators.sceneIsLocked.value = true
+            //   } else {
+            //     propValueAccumulators.sceneIsLocked.value = false
+            //   }
+            // }
+
+            // for condition: completedMission
+            if (
+              completedMission >= 0 &&
+              completedMissions.includes(completedMission)
+            ) {
+              propValueAccumulators.sceneIsLocked.value = true
+            }
+          })
+
+          return
+        }
+
+        if (trigger.name === triggerTypes.UNLOCK) {
+          const { conditions = [] } = trigger
+          conditions.forEach((condition) => {
+            const { currentMission, completedMission } = condition
+
+            // for condition: currentMission
+            if (currentMission >= 0) {
+              if (currentMission === activeMissionIndex) {
+                propValueAccumulators.sceneIsLocked.value = false
+              } else {
+                // propValueAccumulators.sceneIsLocked.value = false
+              }
+            }
+
+            // for condition: completedMission
+            if (
+              completedMission >= 0 &&
+              completedMissions.includes(completedMission)
+            ) {
+              propValueAccumulators.sceneIsLocked.value = false
+            }
+          })
+
+          return
+        }
+
         // each execution is goverened by the trigger type
         const { conditions = [] } = trigger
         conditions.forEach((condition) => {
@@ -165,9 +243,6 @@ export default class QuestStatusUtils {
           // for condition: currentMission
           if (currentMission >= 0) {
             if (currentMission === activeMissionIndex) {
-              // This only updates when currentMission === activeMissionIndex, which
-              // will prevent flags from turning off when currentMission !== activeMissionIndex
-              // roll the individual result in with the running aggregate result
               runEvaluators({ trigger })
             } else {
               runEvaluators({ trigger, invert: true })
