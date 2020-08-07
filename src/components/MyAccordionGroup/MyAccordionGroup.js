@@ -9,6 +9,7 @@ import React, { useState } from "react"
 import Typography from "@material-ui/core/Typography"
 
 import css from "./MyAccordionGroup.module.scss"
+import MyAccordion from "../MyAccordion/MyAccordion"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +32,7 @@ export default function MyAccordionGroup({ props }) {
   const renderedAccordion = items.map((item) => {
     const { title, content, expanded } = item
 
+    return <MyAccordion props={{ ...item }}></MyAccordion>
     return (
       <Accordion
         // className={cx(css.xxmain, className)}

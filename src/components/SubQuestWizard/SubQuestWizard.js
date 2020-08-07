@@ -271,7 +271,7 @@ export default function SubQuestWizard({ props }) {
           ),
         },
       ]
-      const accordionProps = { items }
+      const categoryAccordionProps = { items }
 
       const onAddScene = ({ rowIndex, before }) => {
         const newElement = Constants.getNewSubQuest({})
@@ -319,14 +319,14 @@ export default function SubQuestWizard({ props }) {
           </div>
         ),
         expanded: false,
-        content: <MyAccordionGroup props={accordionProps} />,
+        content: <MyAccordionGroup props={categoryAccordionProps} />,
       }
 
       return (
         <MyAccordionGroup
           props={{
             items: [subQuestAccordion],
-            className: css.xxxsceneTriggersAccordion,
+            className: css.subQuestAccordion,
           }}
         />
       )

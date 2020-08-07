@@ -5,6 +5,27 @@
   width: max-content;
   width: 100%;
 
+  .subQuestAccordion {
+    box-shadow: none;
+    border-radius: 0px !important;
+    padding: 3px;
+    border: 2px solid purple !important;
+    // border-bottom: none !important;
+
+    :global {
+      .MuiAccordionSummary-root {
+        height: 32px;
+        display: flex;
+        align-items: center;
+        background: #cef7d1;
+      }
+
+      .MuiAccordionDetails-root {
+        border-top: 1px solid black !important;
+      }
+    }
+  }
+
   .sceneTriggersAccordion {
     box-shadow: none;
     border-radius: 0px !important;
