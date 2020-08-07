@@ -8,7 +8,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import React, { useState } from "react"
 import Typography from "@material-ui/core/Typography"
 
-import css from "./MyAccordion.module.scss"
+import css from "./MyAccordionGroup.module.scss"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function MyAccordion({ props }) {
+export default function MyAccordionGroup({ props }) {
   const { items, className } = props
   const classes = useStyles()
 

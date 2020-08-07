@@ -11,7 +11,7 @@ import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import Constants from "../../Utils/Constants/Constants"
 import DialogBuilder from "../DialogBuilder/DialogBuilder"
 import MissionsTable from "../MissionsTable/MissionsTable"
-import MyAccordion from "../MyAccordion/MyAccordion"
+import MyAccordionGroup from "../MyAccordionGroup/MyAccordionGroup"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import TriggersTable from "../TriggersTable/TriggersTable"
 import Utils from "../../Utils/Utils"
@@ -168,7 +168,7 @@ export default function SubQuestWizard({ props }) {
       }
 
       return (
-        <MyAccordion
+        <MyAccordionGroup
           props={{ items: [accordion], className: css.sceneTriggersAccordion }}
         />
       )
@@ -319,11 +319,11 @@ export default function SubQuestWizard({ props }) {
           </div>
         ),
         expanded: false,
-        content: <MyAccordion props={accordionProps} />,
+        content: <MyAccordionGroup props={accordionProps} />,
       }
 
       return (
-        <MyAccordion
+        <MyAccordionGroup
           props={{
             items: [subQuestAccordion],
             className: css.xxxsceneTriggersAccordion,
