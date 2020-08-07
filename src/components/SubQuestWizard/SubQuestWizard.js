@@ -17,6 +17,7 @@ import TriggersTable from "../TriggersTable/TriggersTable"
 import Utils from "../../Utils/Utils"
 
 import css from "./SubQuestWizard.module.scss"
+import MyAccordion from "../MyAccordion/MyAccordion"
 
 export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState([])
@@ -171,10 +172,9 @@ export default function SubQuestWizard({ props }) {
       }
 
       return (
-        <MyAccordionGroup
+        <MyAccordion
           props={{
-            items: [sceneTriggersAccordion],
-            className: css.sceneTriggersAccordion,
+            ...sceneTriggersAccordion,
           }}
         />
       )
