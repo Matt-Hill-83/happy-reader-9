@@ -65,5 +65,5 @@ export default function MyAccordion({ props }) {
   )
 
   // return renderedAccordion
-  return <div className={cx(className)}>{renderedAccordion}</div>
+  return <div className={cx(css.main, className)}>{renderedAccordion}</div>
 }

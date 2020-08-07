@@ -7,46 +7,22 @@
 
   .subQuestAccordion {
     border: 1px solid red;
+    margin: 6px;
   }
-  //   // box-shadow: none;
-  //   border-radius: 0px !important;
-  //   border: 2px solid purple !important;
-  //   margin: 6px !important;
 
   :global {
     .MuiAccordionSummary-root {
       height: 32px;
       display: flex;
       align-items: center;
-      background: #cef7d1;
-    }
-
-    [class*="MyAccordionGroup_main"] {
-      // border: 4px solid blue !important;
-
-      [class*="SubQuestWizard_subQuestAccordion"] {
-        border: 4px solid green !important;
-      }
-
-      // Applied to outermost accordion
-      > [class*="SubQuestWizard_subQuestAccordion"] {
-        border: 1px solid orange !important;
-        padding: 10px;
-
-        .MuiAccordionDetails-root {
-          // border-top: 10px solid red !important;
-          padding: 10px !important;
-        }
-      }
+      // background: #cef7d1;
     }
   }
-  // }
 
   .sceneTriggersAccordion {
     box-shadow: none;
     border-radius: 0px !important;
-    border: 2px solid black !important;
-    border-bottom: none !important;
+    border: 1px solid black !important;
 
     :global {
       .MuiAccordionSummary-root {
@@ -57,7 +33,29 @@
       }
 
       .MuiAccordionDetails-root {
-        border-top: 1px solid black !important;
+        // border-top: 1px solid black !important;
+      }
+    }
+  }
+
+  .sectionsAccordion {
+    box-shadow: none;
+    border-radius: 0px !important;
+    // border: 2px solid black !important;
+    border-bottom: none !important;
+    border: 1px solid blue !important;
+    margin: 6px !important;
+
+    :global {
+      .MuiAccordionSummary-root {
+        height: 32px;
+        display: flex;
+        align-items: center;
+        background: #cef7d1;
+      }
+
+      .MuiAccordionDetails-root {
+        // border-top: 1px solid black !important;
       }
     }
   }
@@ -141,7 +139,7 @@
 
     .listGroupTitle {
       display: flex;
-      background: lightblue;
+      // background: lightblue;
       padding: 0.5vh 1vh;
     }
 
