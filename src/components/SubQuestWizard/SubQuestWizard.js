@@ -163,7 +163,6 @@ export default function SubQuestWizard({ props }) {
             {renderAddTriggerButton({ triggers })}
           </div>
         ),
-        myFlag: true,
         expanded: sceneHasTriggers,
         content: renderedSceneTriggers,
       }
@@ -296,8 +295,8 @@ export default function SubQuestWizard({ props }) {
         saveQuestConfig()
       }
 
-      return (
-        <div className={css.accordionContainer}>
+      const subQuestAccordion = {
+        title: (
           <div className={css.subQuestHeader}>
             <TextField
               className={css.inputField}
@@ -318,8 +317,18 @@ export default function SubQuestWizard({ props }) {
               }}
             />
           </div>
-          <MyAccordion props={accordionProps} />
-        </div>
+        ),
+        expanded: false,
+        content: <MyAccordion props={accordionProps} />,
+      }
+
+      return (
+        <MyAccordion
+          props={{
+            items: [subQuestAccordion],
+            className: css.xxxsceneTriggersAccordion,
+          }}
+        />
       )
     })
   }
