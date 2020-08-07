@@ -71,6 +71,7 @@ export default class QuestStatusUtils {
       }
 
       const accumulatedPropertyValues = combinedProps
+      console.log("accumulatedPropertyValues", toJS(accumulatedPropertyValues)) // zzz
       // const accumulatedPropertyValues = accumulatedPropertyValuesForScene
       const propertyNames = Object.keys(accumulatedPropertyValues)
 
@@ -112,36 +113,42 @@ export default class QuestStatusUtils {
     const evaluators = [
       {
         triggerName: triggerTypes.LOCK,
-        func: () => (propValueAccumulators.sceneIsLocked.value = true),
+        func: ({ invert }) =>
+          (propValueAccumulators.sceneIsLocked.value = invert ? false : true),
       },
       {
         triggerName: triggerTypes.UNLOCK,
-        func: () => (propValueAccumulators.sceneIsLocked.value = false),
+        func: ({ invert }) =>
+          (propValueAccumulators.sceneIsLocked.value = invert ? true : false),
       },
       {
         triggerName: triggerTypes.HIDE,
-        func: () => (propValueAccumulators.sceneIsHidden.value = true),
+        func: ({ invert }) =>
+          (propValueAccumulators.sceneIsHidden.value = invert ? false : true),
       },
       {
         triggerName: triggerTypes.UNHIDE,
-        func: () => (propValueAccumulators.sceneIsHidden.value = false),
+        func: ({ invert }) =>
+          (propValueAccumulators.sceneIsHidden.value = invert ? true : false),
       },
       {
         triggerName: triggerTypes.CLOUD,
-        func: () => (propValueAccumulators.sceneIsClouded.value = true),
+        func: ({ invert }) =>
+          (propValueAccumulators.sceneIsClouded.value = invert ? false : true),
       },
       {
         triggerName: triggerTypes.UNCLOUD,
-        func: () => (propValueAccumulators.sceneIsClouded.value = false),
+        func: ({ invert }) =>
+          (propValueAccumulators.sceneIsClouded.value = invert ? true : false),
       },
     ]
 
-    const runEvaluators = ({ trigger }) => {
+    const runEvaluators = ({ trigger, invert }) => {
       evaluators.forEach((evaluator) => {
         // find the single evaluator that corresponds to the trigger in question and run it.
         // evaluators are pretty dumb and just update a prop value in the accumulator.
         if (trigger.name === evaluator.triggerName) {
-          evaluator.func()
+          evaluator.func({ invert })
         }
       })
     }
@@ -154,12 +161,20 @@ export default class QuestStatusUtils {
         const { conditions = [] } = trigger
         conditions.forEach((condition) => {
           const { currentMission, completedMission } = condition
-          if (currentMission >= 0 && currentMission === activeMissionIndex) {
-            // This only updates when currentMission === activeMissionIndex, which
-            // will prevent flags from turning off when currentMission !== activeMissionIndex
-            // roll the individual result in with the running aggregate result
-            runEvaluators({ trigger })
+
+          // for condition: currentMission
+          if (currentMission >= 0) {
+            if (currentMission === activeMissionIndex) {
+              // This only updates when currentMission === activeMissionIndex, which
+              // will prevent flags from turning off when currentMission !== activeMissionIndex
+              // roll the individual result in with the running aggregate result
+              runEvaluators({ trigger })
+            } else {
+              runEvaluators({ trigger, invert: true })
+            }
           }
+
+          // for condition: completedMission
           if (
             completedMission >= 0 &&
             completedMissions.includes(completedMission)
