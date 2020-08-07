@@ -171,13 +171,7 @@ export default function SubQuestWizard({ props }) {
         content: renderContent,
       }
 
-      return (
-        <MyAccordion
-          props={{
-            ...sceneTriggersAccordion,
-          }}
-        />
-      )
+      return <MyAccordion props={sceneTriggersAccordion} />
     })
   }
 
@@ -329,14 +323,7 @@ export default function SubQuestWizard({ props }) {
         className: css.subQuestAccordion,
       }
 
-      return (
-        <MyAccordionGroup
-          props={{
-            items: [subQuestAccordion],
-            // className: css.subQuestAccordion,
-          }}
-        />
-      )
+      return <MyAccordion props={subQuestAccordion} />
     })
   }
 
