@@ -35,7 +35,6 @@ export default class QuestStatusUtils {
       )
 
       const parentSubQuestFromScene = subQuests[parentSubQuestIndexFromScene]
-
       const subQuestTriggers = _get(parentSubQuestFromScene, "triggers") || []
 
       const accumulatedPropertyValuesForSubQuest = this.calcAccumulatedPropertyValues(
@@ -53,6 +52,18 @@ export default class QuestStatusUtils {
           activeMissionIndex,
         }
       )
+      console.log("") // zzz
+      console.log("") // zzz
+      console.log("-----------") // zzz
+      console.log("scene.location.name", toJS(scene.location.name)) // zzz
+      console.log(
+        "accumulatedPropertyValuesForSubQuest",
+        toJS(accumulatedPropertyValuesForSubQuest)
+      ) // zzz
+      console.log(
+        "accumulatedPropertyValuesForScene",
+        toJS(accumulatedPropertyValuesForScene)
+      ) // zzz
 
       const combinedProps = {
         ...accumulatedPropertyValuesForSubQuest,
@@ -80,6 +91,9 @@ export default class QuestStatusUtils {
     sceneTriggers,
     activeMissionIndex,
   }) => {
+    const triggerTypes = Constants.triggers.triggerTypes
+
+    //  The accumulators store the cumulative value of the props while the evaluators run.
     const propValueAccumulators = {
       sceneIsLocked: {
         value: null,
@@ -94,8 +108,6 @@ export default class QuestStatusUtils {
         propertyName: Constants.sceneVisibilityPropNames.CLOUDED_SCENES,
       },
     }
-
-    const triggerTypes = Constants.triggers.triggerTypes
 
     const evaluators = [
       {
@@ -126,6 +138,8 @@ export default class QuestStatusUtils {
 
     const runEvaluators = ({ trigger }) => {
       evaluators.forEach((evaluator) => {
+        // find the single evaluator that corresponds to the trigger in question and run it.
+        // evaluators are pretty dumb and just update a prop value in the accumulator.
         if (trigger.name === evaluator.triggerName) {
           evaluator.func()
         }
