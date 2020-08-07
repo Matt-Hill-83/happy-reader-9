@@ -130,11 +130,14 @@ export default function SubQuestWizard({ props }) {
         </Button>
       )
 
-      const renderedSceneTriggers = sceneHasTriggers
-        ? renderTriggers({ triggers, includeAddButton: false })
-        : null
+      const renderContent = () => {
+        const renderedSceneTriggers = sceneHasTriggers
+          ? renderTriggers({ triggers, includeAddButton: false })
+          : null
+        return renderedSceneTriggers
+      }
 
-      const accordion = {
+      const sceneTriggersAccordion = {
         title: (
           <div className={css.scenePickerGroup}>
             <SimpleSelectObj
@@ -163,13 +166,16 @@ export default function SubQuestWizard({ props }) {
             {renderAddTriggerButton({ triggers })}
           </div>
         ),
-        expanded: sceneHasTriggers,
-        content: renderedSceneTriggers,
+        expanded: false,
+        content: renderContent,
       }
 
       return (
         <MyAccordionGroup
-          props={{ items: [accordion], className: css.sceneTriggersAccordion }}
+          props={{
+            items: [sceneTriggersAccordion],
+            className: css.sceneTriggersAccordion,
+          }}
         />
       )
     })
@@ -246,7 +252,7 @@ export default function SubQuestWizard({ props }) {
         {
           title: <span className={cx(css.listGroupTitle)}>Missions</span>,
           expanded: true,
-          content: (
+          content: () => (
             <div className={cx(css.triggers, css.xxxlistGroup)}>
               {renderMissions({ missions })}
             </div>
@@ -255,7 +261,7 @@ export default function SubQuestWizard({ props }) {
         {
           title: <span className={cx(css.listGroupTitle)}>Triggers</span>,
           expanded: true,
-          content: (
+          content: () => (
             <div className={cx(css.triggers, css.xxxlistGroup)}>
               {renderTriggers({ triggers })}
             </div>
@@ -264,7 +270,7 @@ export default function SubQuestWizard({ props }) {
         {
           title: <span className={cx(css.listGroupTitle)}>Scenes</span>,
           expanded: true,
-          content: (
+          content: () => (
             <div className={cx(css.scenes, css.xxxlistGroup)}>
               {renderScenes({ scenes })}
             </div>
@@ -319,14 +325,15 @@ export default function SubQuestWizard({ props }) {
           </div>
         ),
         expanded: false,
-        content: <MyAccordionGroup props={categoryAccordionProps} />,
+        content: () => <MyAccordionGroup props={categoryAccordionProps} />,
+        className: css.subQuestAccordion,
       }
 
       return (
         <MyAccordionGroup
           props={{
             items: [subQuestAccordion],
-            className: css.subQuestAccordion,
+            // className: css.subQuestAccordion,
           }}
         />
       )

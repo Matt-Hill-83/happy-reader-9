@@ -21,10 +21,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function MyAccordion({ props }) {
-  // const { accordion, className } = props
   const { title, content, className = "" } = props
   const classes = useStyles()
-  const [expanded, setExpanded] = useState([])
+  const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
     return
@@ -39,16 +38,20 @@ export default function MyAccordion({ props }) {
     }
   }, [])
 
-  const onChange = (event) => {
-    console.log("event", toJS(event)) // zzz
-    setExpanded(!expanded)
+  const onChange = (event, value) => {
+    setExpanded(value)
     props.onChange && props.onChange()
   }
 
+  console.log("expanded", toJS(expanded)) // zzz
+  // const renderedContent = !expanded ? content() : null
+  const renderedContent = expanded ? content() : null
+
   const renderedAccordion = (
     <Accordion
-      defaultExpanded={expanded}
-      className={cx(className)}
+      defaultExpanded={false}
+      // defaultExpanded={expanded}
+      // className={cx(className)}
       onChange={onChange}
     >
       <AccordionSummary
@@ -61,11 +64,11 @@ export default function MyAccordion({ props }) {
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography className={css.content}>{content}</Typography>
+        <Typography className={css.content}>{renderedContent}</Typography>
       </AccordionDetails>
     </Accordion>
   )
 
   // return renderedAccordion
-  return renderedAccordion
+  return <div className={cx(className)}>{renderedAccordion}</div>
 }

@@ -6,11 +6,10 @@
   width: 100%;
 
   .subQuestAccordion {
-    box-shadow: none;
+    // box-shadow: none;
     border-radius: 0px !important;
-    padding: 3px;
     border: 2px solid purple !important;
-    // border-bottom: none !important;
+    margin: 6px !important;
 
     :global {
       .MuiAccordionSummary-root {
@@ -20,8 +19,11 @@
         background: #cef7d1;
       }
 
-      .MuiAccordionDetails-root {
+      // I need to target this at just the top level somehow
+      :not(.MuiAccordionDetails-root
+          .MuiAccordionDetails-root).MuiAccordionDetails-root {
         border-top: 1px solid black !important;
+        padding: 10px !important;
       }
     }
   }

@@ -30,28 +30,7 @@ export default function MyAccordionGroup({ props }) {
   }
 
   const renderedAccordion = items.map((item) => {
-    const { title, content, expanded } = item
-
     return <MyAccordion props={{ ...item }}></MyAccordion>
-    return (
-      <Accordion
-        // className={cx(css.xxmain, className)}
-        defaultExpanded={expanded}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={cx(classes.heading, css.header)}>
-            {title}
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography className={css.content}>{content}</Typography>
-        </AccordionDetails>
-      </Accordion>
-    )
   })
 
   // return renderedAccordion
