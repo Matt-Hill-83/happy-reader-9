@@ -167,12 +167,44 @@ export default class QuestStatusUtils {
         }
       }
     }
+    const evaluateCompletedMission = ({
+      completedMission,
+      completedMissions,
+      trueFunc = () => {},
+    }) => {
+      if (
+        completedMission >= 0 &&
+        completedMissions.includes(completedMission)
+      ) {
+        trueFunc()
+      }
+    }
+
+    const evaluateAllConditions = ({
+      completedMission,
+      completedMissions,
+      activeMissionIndex,
+      currentMission,
+      falseFunc,
+      trueFunc,
+    }) => {
+      evaluateCurrentMission({
+        activeMissionIndex,
+        currentMission,
+        falseFunc,
+        trueFunc,
+      })
+      evaluateCompletedMission({
+        completedMission,
+        completedMissions,
+        trueFunc,
+      })
+    }
 
     if (sceneTriggers && sceneTriggers.length > 0) {
       const completedMissions = localStateStore.getCompletedMissions()
-      const trueFuncLock = () =>
-        (propValueAccumulators.sceneIsLocked.value = true)
-      const falseFuncLock = () =>
+      const lockScene = () => (propValueAccumulators.sceneIsLocked.value = true)
+      const unLockScene = () =>
         (propValueAccumulators.sceneIsLocked.value = false)
 
       sceneTriggers.forEach((trigger) => {
@@ -181,52 +213,43 @@ export default class QuestStatusUtils {
           conditions.forEach((condition) => {
             const { currentMission, completedMission } = condition
 
-            evaluateCurrentMission({
+            evaluateAllConditions({
               activeMissionIndex,
               currentMission,
-              falseFunc: falseFuncLock,
-              trueFunc: trueFuncLock,
+              completedMission,
+              completedMissions,
+              falseFunc: unLockScene,
+              trueFunc: lockScene,
             })
-
-            if (
-              completedMission >= 0 &&
-              completedMissions.includes(completedMission)
-            ) {
-              propValueAccumulators.sceneIsLocked.value = true
-            }
           })
 
           return
         }
 
-        // I still need to make this like the one above
-        // I still need to make this like the one above
-        // I still need to make this like the one above
         if (trigger.name === triggerTypes.UNLOCK) {
           const { conditions = [] } = trigger
           conditions.forEach((condition) => {
             const { currentMission, completedMission } = condition
 
-            // for condition: currentMission
-            // if (currentMission >= 0) {
-            //   if (currentMission === activeMissionIndex) {
-            //     propValueAccumulators.sceneIsLocked.value = false
-            //   } else {
-            //     // propValueAccumulators.sceneIsLocked.value = false
-            //   }
-            // }
-            evaluateCurrentMission({
+            evaluateAllConditions({
               activeMissionIndex,
               currentMission,
-              trueFunc: falseFuncLock,
+              completedMission,
+              completedMissions,
+              trueFunc: unLockScene,
             })
-            // for condition: completedMission
-            if (
-              completedMission >= 0 &&
-              completedMissions.includes(completedMission)
-            ) {
-              propValueAccumulators.sceneIsLocked.value = false
-            }
+
+            // evaluateCurrentMission({
+            //   activeMissionIndex,
+            //   currentMission,
+            //   trueFunc: unLockScene,
+            // })
+
+            // evaluateCompletedMission({
+            //   completedMission,
+            //   completedMissions,
+            //   trueFunc: unLockScene,
+            // })
           })
 
           return
