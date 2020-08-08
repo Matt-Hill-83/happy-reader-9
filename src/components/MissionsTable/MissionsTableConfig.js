@@ -60,6 +60,7 @@ export const getTableConfig = ({
   }
 
   const renderName = (value, tableMeta, updateValue) => {
+    console.log("tableMeta", tableMeta) // zzz
     const onChange = (newValue) => {
       updateValue(newValue)
       tableChangeCallback({

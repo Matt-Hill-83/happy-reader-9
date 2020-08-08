@@ -16,13 +16,15 @@ import {
 import css from "./MiniTable2.module.scss"
 
 class MiniTable2 extends Component {
-  renderCell = ({ content }) => {
+  renderCell = ({ content, firstIndex }) => {
+    console.log("firstIndex", firstIndex) // zzz
     if (this.props.renderCell) {
       return (
         <TableCell
           className={css.cellClass}
           // tooltip={value ? value.toString() : ""}
         >
+          {firstIndex}
           {this.props.renderCell({ content })}
         </TableCell>
       )
@@ -69,7 +71,10 @@ class MiniTable2 extends Component {
               return (
                 <TableRow key={firstIndex}>
                   {Object.keys(element).map((child, secondIndex) => {
-                    return this.renderCell({ content: element[child] })
+                    return this.renderCell({
+                      content: element[child],
+                      firstIndex,
+                    })
                   })}
                 </TableRow>
               )
