@@ -110,48 +110,48 @@ export default class QuestStatusUtils {
       },
     }
 
-    const evaluators = [
-      {
-        triggerName: triggerTypes.LOCK,
-        func: ({ invert }) =>
-          (propValueAccumulators.sceneIsLocked.value = invert ? false : true),
-      },
-      {
-        triggerName: triggerTypes.UNLOCK,
-        func: ({ invert }) =>
-          (propValueAccumulators.sceneIsLocked.value = invert ? true : false),
-      },
-      {
-        triggerName: triggerTypes.HIDE,
-        func: ({ invert }) =>
-          (propValueAccumulators.sceneIsHidden.value = invert ? false : true),
-      },
-      {
-        triggerName: triggerTypes.UNHIDE,
-        func: ({ invert }) =>
-          (propValueAccumulators.sceneIsHidden.value = invert ? true : false),
-      },
-      {
-        triggerName: triggerTypes.CLOUD,
-        func: ({ invert }) =>
-          (propValueAccumulators.sceneIsClouded.value = invert ? false : true),
-      },
-      {
-        triggerName: triggerTypes.UNCLOUD,
-        func: ({ invert }) =>
-          (propValueAccumulators.sceneIsClouded.value = invert ? true : false),
-      },
-    ]
+    // const evaluators = [
+    //   {
+    //     triggerName: triggerTypes.LOCK,
+    //     func: ({ invert }) =>
+    //       (propValueAccumulators.sceneIsLocked.value = invert ? false : true),
+    //   },
+    //   {
+    //     triggerName: triggerTypes.UNLOCK,
+    //     func: ({ invert }) =>
+    //       (propValueAccumulators.sceneIsLocked.value = invert ? true : false),
+    //   },
+    //   {
+    //     triggerName: triggerTypes.HIDE,
+    //     func: ({ invert }) =>
+    //       (propValueAccumulators.sceneIsHidden.value = invert ? false : true),
+    //   },
+    //   {
+    //     triggerName: triggerTypes.UNHIDE,
+    //     func: ({ invert }) =>
+    //       (propValueAccumulators.sceneIsHidden.value = invert ? true : false),
+    //   },
+    //   {
+    //     triggerName: triggerTypes.CLOUD,
+    //     func: ({ invert }) =>
+    //       (propValueAccumulators.sceneIsClouded.value = invert ? false : true),
+    //   },
+    //   {
+    //     triggerName: triggerTypes.UNCLOUD,
+    //     func: ({ invert }) =>
+    //       (propValueAccumulators.sceneIsClouded.value = invert ? true : false),
+    //   },
+    // ]
 
-    const runEvaluators = ({ trigger, invert }) => {
-      evaluators.forEach((evaluator) => {
-        // find the single evaluator that corresponds to the trigger in question and run it.
-        // evaluators are pretty dumb and just update a prop value in the accumulator.
-        if (trigger.name === evaluator.triggerName) {
-          evaluator.func({ invert })
-        }
-      })
-    }
+    // const runEvaluators = ({ trigger, invert }) => {
+    //   evaluators.forEach((evaluator) => {
+    //     // find the single evaluator that corresponds to the trigger in question and run it.
+    //     // evaluators are pretty dumb and just update a prop value in the accumulator.
+    //     if (trigger.name === evaluator.triggerName) {
+    //       evaluator.func({ invert })
+    //     }
+    //   })
+    // }
 
     const evaluateCurrentMission = ({
       activeMissionIndex,
@@ -206,13 +206,21 @@ export default class QuestStatusUtils {
       const lockScene = () => (propValueAccumulators.sceneIsLocked.value = true)
       const unLockScene = () =>
         (propValueAccumulators.sceneIsLocked.value = false)
+      const hideScene = () => (propValueAccumulators.sceneIsHidden.value = true)
+      const unHideScene = () =>
+        (propValueAccumulators.sceneIsHidden.value = false)
+      const cloudScene = () =>
+        (propValueAccumulators.sceneIsClouded.value = true)
+      const unCloudScene = () =>
+        (propValueAccumulators.sceneIsClouded.value = false)
 
       sceneTriggers.forEach((trigger) => {
-        if (trigger.name === triggerTypes.LOCK) {
-          const { conditions = [] } = trigger
-          conditions.forEach((condition) => {
-            const { currentMission, completedMission } = condition
+        const { conditions = [] } = trigger
 
+        conditions.forEach((condition) => {
+          const { currentMission, completedMission } = condition
+
+          if (trigger.name === triggerTypes.LOCK) {
             evaluateAllConditions({
               activeMissionIndex,
               currentMission,
@@ -221,16 +229,8 @@ export default class QuestStatusUtils {
               falseFunc: unLockScene,
               trueFunc: lockScene,
             })
-          })
-
-          return
-        }
-
-        if (trigger.name === triggerTypes.UNLOCK) {
-          const { conditions = [] } = trigger
-          conditions.forEach((condition) => {
-            const { currentMission, completedMission } = condition
-
+          }
+          if (trigger.name === triggerTypes.UNLOCK) {
             evaluateAllConditions({
               activeMissionIndex,
               currentMission,
@@ -238,44 +238,44 @@ export default class QuestStatusUtils {
               completedMissions,
               trueFunc: unLockScene,
             })
-
-            // evaluateCurrentMission({
-            //   activeMissionIndex,
-            //   currentMission,
-            //   trueFunc: unLockScene,
-            // })
-
-            // evaluateCompletedMission({
-            //   completedMission,
-            //   completedMissions,
-            //   trueFunc: unLockScene,
-            // })
-          })
-
-          return
-        }
-
-        // each execution is goverened by the trigger type
-        const { conditions = [] } = trigger
-        conditions.forEach((condition) => {
-          const { currentMission, completedMission } = condition
-
-          // for condition: currentMission
-          if (currentMission >= 0) {
-            if (currentMission === activeMissionIndex) {
-              runEvaluators({ trigger })
-            } else {
-              runEvaluators({ trigger, invert: true })
-            }
           }
-
-          // for condition: completedMission
-          if (
-            completedMission >= 0 &&
-            completedMissions.includes(completedMission)
-          ) {
-            // roll the individual result in with the running aggregate result
-            runEvaluators({ trigger })
+          if (trigger.name === triggerTypes.HIDE) {
+            evaluateAllConditions({
+              activeMissionIndex,
+              currentMission,
+              completedMission,
+              completedMissions,
+              falseFunc: unHideScene,
+              trueFunc: hideScene,
+            })
+          }
+          if (trigger.name === triggerTypes.UNHIDE) {
+            evaluateAllConditions({
+              activeMissionIndex,
+              currentMission,
+              completedMission,
+              completedMissions,
+              trueFunc: unHideScene,
+            })
+          }
+          if (trigger.name === triggerTypes.CLOUD) {
+            evaluateAllConditions({
+              activeMissionIndex,
+              currentMission,
+              completedMission,
+              completedMissions,
+              falseFunc: unCloudScene,
+              trueFunc: cloudScene,
+            })
+          }
+          if (trigger.name === triggerTypes.UNCLOUD) {
+            evaluateAllConditions({
+              activeMissionIndex,
+              currentMission,
+              completedMission,
+              completedMissions,
+              trueFunc: unCloudScene,
+            })
           }
         })
       })
