@@ -35,11 +35,12 @@ export default function DialogBuilder({ props }) {
     const frames = _get(scene, "frameSet.frames") || []
     frames.forEach((frame) => {
       frame.dialog.forEach((dialog) => {
-        const newContent = `${dialog.text || ""}\n`
-        content += newContent
-        fakeDivs.push(
-          <div className={css.fakeDiv}>
-            <AddDeleteButtonGroup
+        const newContent = `${dialog.text}\n`
+        if (dialog.text) {
+          content += newContent
+          fakeDivs.push(
+            <div className={css.fakeDiv}>
+              {/* <AddDeleteButtonGroup
               props={
                 {
                   // rowIndex: tableMeta.rowIndex,
@@ -47,10 +48,11 @@ export default function DialogBuilder({ props }) {
                   // onAdd: onAddItem,
                 }
               }
-            />
-            {newContent}
-          </div>
-        )
+            /> */}
+              {newContent}
+            </div>
+          )
+        }
       })
     })
   })

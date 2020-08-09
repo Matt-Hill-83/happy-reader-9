@@ -10,8 +10,11 @@
   display: flex;
   width: 100%;
   // height: calc(1.4vh * 1.5);
+  height: 15px;
   border: 1px solid purple !important;
   position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  white-space: nowrap;
 }
 
 .controlPanel {
