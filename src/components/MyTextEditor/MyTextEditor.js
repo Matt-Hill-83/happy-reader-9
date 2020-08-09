@@ -6,7 +6,8 @@ import { TextareaAutosize } from "@material-ui/core"
 import css from "./MyTextEditor.module.scss"
 
 export default function MyTextEditor({ props }) {
-  const [content, setContent] = useState([])
+  const { onChange } = props
+  const [content, setContent] = useState("")
 
   useEffect(() => {
     // on mount
@@ -22,19 +23,16 @@ export default function MyTextEditor({ props }) {
   }, [props.content])
 
   console.log("props", props) // zzz
-  const { initialValue = "" } = props
 
   const handleEditorChange = (content, editor) => {
     // console.log("Content was updated:", content)
     // console.log("editor", toJS(editor)) // zzz
   }
-  const onTextAreaChange = (content, editor) => {
-    // setContent(props.content)
-    console.log("text area:", content)
-
-    console.log("editor", toJS(editor)) // zzz
+  const onTextAreaChange = (newContent) => {
+    setContent(newContent)
+    console.log("text area:", newContent)
   }
-  console.log("content", toJS(content)) // zzz
+
   return (
     <>
       <TextareaAutosize
