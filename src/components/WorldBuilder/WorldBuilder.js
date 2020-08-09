@@ -605,7 +605,7 @@ class WorldBuilder extends Component {
 
     const dialogBuilderProps = {
       initialValue: "9sadfsa",
-      // scene: sceneForDialogBuilder,
+      world,
     }
 
     return (

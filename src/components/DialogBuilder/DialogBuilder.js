@@ -12,7 +12,8 @@ export default function DialogBuilder({ props }) {
   const [questConfig, setQuestConfig] = useState([])
   const [dataTableKey, setDataTableKey] = useState([])
 
-  const { onSave, scene } = props
+  const { onSave, world, scene } = props
+  const scenes = _get(world, "data.newGrid5") || []
 
   useEffect(() => {
     // on mount
@@ -28,15 +29,22 @@ export default function DialogBuilder({ props }) {
   }, [props.questConfig])
 
   let content = ""
-  const frames = _get(scene, "frameSet.frames") || []
 
-  frames.forEach((frame) => {
-    frame.dialog.forEach((dialog) => {
-      content += `<p>${dialog.text || "empty"}</p>`
+  scenes.forEach((scene) => {
+    const frames = _get(scene, "frameSet.frames") || []
+    frames.forEach((frame) => {
+      frame.dialog.forEach((dialog) => {
+        content += `${dialog.text || ""}\n`
+        // content += `<p>${dialog.text || "empty"}</p>`
+      })
     })
   })
 
-  const dialogBuilderProps = { initialValue: content }
-
-  return <MyTextEditor props={dialogBuilderProps}></MyTextEditor>
+  const dialogBuilderProps = { content }
+  console.log("content", toJS(content)) // zzz
+  return (
+    <div className={css.main}>
+      <MyTextEditor props={dialogBuilderProps}></MyTextEditor>
+    </div>
+  )
 }
