@@ -36,6 +36,9 @@ import QuestStatusUtils from "../../Utils/QuestStatusUtils"
 import Constants from "../../Utils/Constants/Constants"
 
 import css from "./WorldBuilder.module.scss"
+import DialogBuilder from "../DialogBuilder/DialogBuilder"
+import worldBuilderStore from "../../Stores/WorldBuilderStore"
+import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
@@ -47,6 +50,7 @@ class WorldBuilder extends Component {
     showQuestConfig: false,
     showSceneConfig: false,
     showSubQuestWizard: true,
+    showDialogBuilder: false,
   }
 
   // Changing this to DidMount breaks things
@@ -58,6 +62,16 @@ class WorldBuilder extends Component {
     const gameConfigData = Utils.getGameConfig()
     const defaultWorldId = localStateStore.getDefaultWorldId()
     this.onChangeWorld({ mapId: defaultWorldId })
+  }
+
+  hideAllModals = () => {
+    this.setState({
+      showFrameBuilder: false,
+      showQuestConfig: false,
+      showSceneConfig: false,
+      showSubQuestWizard: false,
+      showDialogBuilder: false,
+    })
   }
 
   onChangeWorld = ({ mapId, newWorld }) => {
@@ -81,8 +95,8 @@ class WorldBuilder extends Component {
         newGrid5,
       })
 
-      localStateStore.setWorldBuilderWorld(world)
-      localStateStore.setWorldBuilderScenesGrid(reCreatedScenesGrid)
+      worldBuilderStore.setWorldBuilderWorld(world)
+      worldBuilderStore.setWorldBuilderScenesGrid(reCreatedScenesGrid)
     }
   }
 
@@ -125,12 +139,12 @@ class WorldBuilder extends Component {
       map.data.endScene = name
     }
 
-    Utils.updateMap({ newProps: { ...map.data }, mapToUpdate: map })
+    WorldBuilderUtils.updateMap({ newProps: { ...map.data }, mapToUpdate: map })
   }
 
   // turn this into a component
   renderTerminalScenePicker = ({ isStartScene }) => {
-    const map = localStateStore.getWorldBuilderWorld()
+    const map = worldBuilderStore.getWorldBuilderWorld()
     if (!map) return null
 
     if (!map.data) {
@@ -223,7 +237,7 @@ class WorldBuilder extends Component {
   }
 
   onChangeTitle = async ({ event }) => {
-    const world = localStateStore.getWorldBuilderWorld()
+    const world = worldBuilderStore.getWorldBuilderWorld()
     world.data.title = event.target.value
     localStateStore.setWorldBuilderWorld(world)
     this.setState({ world })
@@ -231,7 +245,7 @@ class WorldBuilder extends Component {
 
   saveTitle = async ({ event }) => {
     const title = event.target.value
-    await Utils.updateMap({ title })
+    await WorldBuilderUtils.updateMap({ title })
   }
 
   createNewGrid = () => {
@@ -274,7 +288,7 @@ class WorldBuilder extends Component {
   }
 
   saveItems = async () => {
-    await Utils.updateMap({})
+    await WorldBuilderUtils.updateMap({})
   }
 
   generateRandomLocation = ({ location, locationNames }) => {
@@ -282,7 +296,7 @@ class WorldBuilder extends Component {
       locationNames[Math.floor(Math.random() * locationNames.length)]
 
     location.name = randomName
-    Utils.updateMap({})
+    WorldBuilderUtils.updateMap({})
   }
 
   // TODO: on save, Crudmachine shoud return the mutated list and a callback should save it
@@ -290,7 +304,7 @@ class WorldBuilder extends Component {
   // Right now, CrudMachine simply mutates a reference and calls a generic update.
   // Which is why you can change an item, but you can't add an item.
   renderScenesGrid = () => {
-    const scenesGrid = localStateStore.getWorldBuilderScenesGrid()
+    const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
 
     const itemRenderer = ({ item }) => {
       return <ImageDisplay item={item} />
@@ -345,7 +359,7 @@ class WorldBuilder extends Component {
             ? randomLocationGenerator
             : locationCrudMachine
 
-        const world = localStateStore.getWorldBuilderWorld() || {}
+        const world = worldBuilderStore.getWorldBuilderWorld() || {}
 
         const backgroundColor = QuestStatusUtils.getSubQuestColor({
           world: world.data,
@@ -408,10 +422,10 @@ class WorldBuilder extends Component {
     // I should probably create a new scenesGrid here, based on the required dimensions
     // I should probably create a new scenesGrid here, based on the required dimensions
     // I should probably create a new scenesGrid here, based on the required dimensions
-    const scenesGrid = localStateStore.getWorldBuilderScenesGrid()
+    const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
     const newProps = JsonUtils.importWorldFromJson({ newWorld, scenesGrid })
 
-    Utils.updateMap({ newProps })
+    WorldBuilderUtils.updateMap({ newProps })
   }
 
   onChangeJSON = (json) => {
@@ -419,13 +433,19 @@ class WorldBuilder extends Component {
   }
 
   onSaveJSON = ({ json }) => {
-    const world = localStateStore.getWorldBuilderWorld() || {}
-    Utils.updateMap({ newProps: { questConfig: json }, mapToUpdate: world })
+    const world = worldBuilderStore.getWorldBuilderWorld() || {}
+    WorldBuilderUtils.updateMap({
+      newProps: { questConfig: json },
+      mapToUpdate: world,
+    })
   }
 
   onSaveQuestConfig = async ({ questConfig }) => {
-    const world = localStateStore.getWorldBuilderWorld() || {}
-    await Utils.updateMap({ newProps: { questConfig }, mapToUpdate: world })
+    const world = worldBuilderStore.getWorldBuilderWorld() || {}
+    await WorldBuilderUtils.updateMap({
+      newProps: { questConfig },
+      mapToUpdate: world,
+    })
   }
 
   onCloseJsonEditor = () => {
@@ -475,7 +495,7 @@ class WorldBuilder extends Component {
     if (!showSubQuestWizard) {
       return null
     }
-    const world = localStateStore.getWorldBuilderWorld() || {}
+    const world = worldBuilderStore.getWorldBuilderWorld() || {}
     const questConfigToolProps = {
       questConfig: questConfig,
       scenes: newGrid5,
@@ -490,8 +510,15 @@ class WorldBuilder extends Component {
     )
   }
 
+  openDialogBuilder = ({ scene }) => {
+    this.hideAllModals()
+    this.setState({ showDialogBuilder: !this.state.showDialogBuilder })
+  }
+
   renderMainButtonGroup = () => {
     const { showQuestConfig, showSceneConfig, showSubQuestWizard } = this.state
+
+    const world = worldBuilderStore.getWorldBuilderWorld() || {}
 
     return (
       <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
@@ -519,6 +546,12 @@ class WorldBuilder extends Component {
                   })
                 }
               />
+              <Button
+                className={css.xxxsaveButton}
+                onClick={() => this.openDialogBuilder({ world })}
+              >
+                Dialog Builder
+              </Button>
               <Button
                 icon="document"
                 text="get JSON for world"
@@ -548,10 +581,10 @@ class WorldBuilder extends Component {
       sceneToEdit,
       showSubQuestWizard,
       showFrameBuilder,
-      showQuestConfig,
+      showDialogBuilder,
     } = this.state
 
-    const world = localStateStore.getWorldBuilderWorld() || {}
+    const world = worldBuilderStore.getWorldBuilderWorld() || {}
     if (!world.data) {
       // return null
     }
@@ -569,6 +602,11 @@ class WorldBuilder extends Component {
         (world.data && world.data.title) || this.previousTitle
 
       title = (world.data && world.data.title) || this.previousTitle + " copy"
+    }
+
+    const dialogBuilderProps = {
+      initialValue: "9sadfsa",
+      // scene: sceneForDialogBuilder,
     }
 
     return (
@@ -624,6 +662,11 @@ class WorldBuilder extends Component {
                 {this.renderQuestConfigTool({ questConfig, newGrid5 })}
               </div>
             )}
+            {showDialogBuilder && (
+              <div className={css.right}>
+                <DialogBuilder props={dialogBuilderProps}></DialogBuilder>
+              </div>
+            )}
           </div>
         )}
         {showFrameBuilder && (
@@ -632,7 +675,7 @@ class WorldBuilder extends Component {
               world={world}
               scene={sceneToEdit}
               onExitFrameBuilder={(frame) => this.onExitFrameBuilder({ frame })}
-              updateMap={Utils.updateMap}
+              updateMap={WorldBuilderUtils.updateMap}
             />
           </div>
         )}

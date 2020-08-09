@@ -8,7 +8,6 @@ class LocalStateStore {
   activeMapId = null
   activeSceneId = null
   defaultWorldId = null
-  mapBuilderGrid = []
   showBookPicker = false
   showWorldBuilder = false
 
@@ -321,21 +320,6 @@ class LocalStateStore {
     return questItems
   }
 
-  getWorldBuilderScenesGrid = () => this.mapBuilderGrid
-  setWorldBuilderScenesGrid = (mapBuilderGrid) => {
-    this.mapBuilderGrid = mapBuilderGrid
-  }
-
-  getWorldBuilderWorld = () => this.mapBuilderWorld
-  setWorldBuilderWorld = (mapBuilderWorld) => {
-    this.mapBuilderWorld = mapBuilderWorld
-  }
-
-  getShowWorldBuilder = () => this.showWorldBuilder
-  setShowWorldBuilder = (showWorldBuilder) => {
-    this.showWorldBuilder = showWorldBuilder
-  }
-
   getShowBookPicker = () => this.showBookPicker
   setShowBookPicker = (showBookPicker) => {
     this.showBookPicker = showBookPicker
@@ -405,7 +389,6 @@ decorate(LocalStateStore, {
   activeSceneId: observable,
   defaultWorldId: observable,
   desiredItems: observable,
-  mapBuilderGrid: observable,
   mapBuilderWorld: observable,
   questStatus: observable,
   showBookPicker: observable,

@@ -3,6 +3,8 @@ import { gameConfig, maps, books } from "../Stores/InitStores.js"
 import { toJS } from "mobx"
 import _get from "lodash.get"
 import Constants from "./Constants/Constants.js"
+import worldBuilderStore from "../Stores/WorldBuilderStore.js"
+import WorldBuilderUtils from "./WorldBuilderUtils.js"
 
 export default class Utils {
   static addArrayElement = ({ newElement, before, index, array }) => {
@@ -107,69 +109,6 @@ export default class Utils {
     return filteredItems || []
   }
 
-  static getNewFrame = ({ characters, props = {} }) => {
-    let allCharacters = []
-
-    if (characters && characters.length) {
-      const friendNames = characters.map((creature) => creature.name)
-      allCharacters.push(...friendNames)
-    }
-
-    const creatureName0 = allCharacters[0] || "kat"
-    const creatureName1 = allCharacters[1] || "liz2"
-
-    const critters2 = []
-    const critters1 = allCharacters.map((item) => {
-      return {
-        name: item,
-      }
-    })
-
-    const newFrame = {
-      critters1: critters1,
-      critters2,
-      faces: [
-        { character: creatureName1, characterIndex: 1, face: "happy" },
-        { character: creatureName0, characterIndex: 0, face: "happy" },
-      ],
-      dialog: [
-        {
-          character: creatureName0,
-          characterIndex: 0,
-          text: ``,
-        },
-        {
-          character: creatureName1,
-          characterIndex: 1,
-          text: ``,
-        },
-        {
-          character: creatureName0,
-          characterIndex: 0,
-          text: ``,
-        },
-        {
-          character: creatureName1,
-          characterIndex: 1,
-          text: ``,
-        },
-        {
-          character: creatureName0,
-          characterIndex: 0,
-          text: ``,
-        },
-        {
-          character: creatureName1,
-          characterIndex: 1,
-          text: ``,
-        },
-      ],
-    }
-    props && Object.assign(newFrame, props)
-
-    return newFrame
-  }
-
   static sortDataByKey(data, key, order, tiebreakerKey) {
     const isAscending = order === "ASC"
     return data.sort(function (item1, item2) {
@@ -267,52 +206,8 @@ export default class Utils {
     return uuid
   }
 
-  static getDummyFrame = ({ props }) => {
-    const dummyFrame = {
-      creatures: ["kat", "liz2"],
-      dialog: [
-        {
-          character: "kat",
-          characterIndex: 0,
-          text: "Something funny here.",
-        },
-        {
-          character: "liz2",
-          characterIndex: 1,
-          text: "",
-        },
-        {
-          character: "liz2",
-          characterIndex: 0,
-          text: "",
-        },
-        {
-          character: "liz2",
-          characterIndex: 1,
-          text: "",
-        },
-      ],
-      faces: [
-        {
-          character: "liz2",
-          characterIndex: 1,
-          face: "happy",
-        },
-        {
-          character: "kat",
-          characterIndex: 0,
-          face: "kat-happy.9e02afab.png",
-        },
-      ],
-      story: ["I am Kat"],
-    }
-    props && Object.assign(dummyFrame, props)
-
-    return dummyFrame
-  }
-
   static getBlankScene = ({ props }) => {
-    const dummyFrame = this.getNewFrame({ props: {} })
+    const dummyFrame = WorldBuilderUtils.getNewFrame({ props: {} })
 
     const id = Utils.generateUuid()
 
@@ -384,7 +279,7 @@ export default class Utils {
     // defined by the 2 array position
 
     const condensedGrid = []
-    const worldBuilderGrid = localStateStore.getWorldBuilderScenesGrid()
+    const worldBuilderGrid = worldBuilderStore.getWorldBuilderScenesGrid()
 
     worldBuilderGrid.forEach((row) => {
       row.forEach((col) => {
@@ -457,104 +352,4 @@ export default class Utils {
 
     return neighbors
   }
-
-  static updateMap = async ({ newProps = {}, mapToUpdate }) => {
-    const map = mapToUpdate || localStateStore.getWorldBuilderWorld()
-    Object.assign(map.data, toJS(newProps))
-
-    if (mapToUpdate) {
-    } else {
-      map.data.newGrid5 = Utils.createCondensedGridFromGrid({})
-    }
-
-    delete map.data.grid
-    await map.update(map.data)
-  }
-
-  static getCritters1New = ({ frameConfig, sceneConfig }) => {
-    let allCreatures = []
-    if (frameConfig.creatures && frameConfig.creatures.length > 0) {
-      allCreatures = [...frameConfig.creatures]
-    } else {
-      allCreatures =
-        (sceneConfig.creatures &&
-          sceneConfig.creatures.map((item) => item.name)) ||
-        []
-    }
-
-    let allItems = []
-
-    if (frameConfig.items && frameConfig.items.length > 0) {
-      allItems = [...frameConfig.items]
-    } else {
-      allItems =
-        (sceneConfig.items && sceneConfig.items.map((item) => item.name)) || []
-    }
-
-    allCreatures.push(...allItems)
-
-    const filteredCharacters = allCreatures.filter((item) => {
-      return item && ["liz2", "kat"].includes(item)
-    })
-
-    return filteredCharacters
-  }
-
-  static getCritters2New = ({ frameConfig, sceneConfig }) => {
-    let allCreatures = []
-    if (frameConfig.creatures && frameConfig.creatures.length > 0) {
-      allCreatures = [...frameConfig.creatures]
-    } else {
-      allCreatures =
-        (sceneConfig.creatures &&
-          sceneConfig.creatures.map((item) => item.name)) ||
-        []
-    }
-
-    let allItems = []
-
-    if (frameConfig.items && frameConfig.items.length > 0) {
-      allItems = [...frameConfig.items]
-    } else {
-      allItems =
-        (sceneConfig.items && sceneConfig.items.map((item) => item.name)) || []
-    }
-
-    allCreatures.push(...allItems)
-
-    const filteredCharacters = allCreatures.filter((item) => {
-      return item && !["liz2", "kat"].includes(item)
-    })
-
-    return filteredCharacters
-  }
-
-  // static getCritters2 = ({ frame, scene }) => {
-  //   let allCreatures = []
-
-  //   const { critters2 = null } = frame
-
-  //   if (critters2 && critters2.length > 0) {
-  //     allCreatures = [...frame.critters2.map((item) => item.name)]
-  //   } else if (frame.creatures && frame.creatures.length > 0) {
-  //     allCreatures = [...frame.creatures]
-  //   } else {
-  //     allCreatures =
-  //       (scene.characters && scene.characters.map((item) => item.name)) || []
-  //   }
-
-  //   let allItems = []
-  //   if (frame.items && frame.items.length > 0) {
-  //     allItems = (frame.items && frame.items.map((item) => item.name)) || []
-  //   } else {
-  //     allItems = (scene.items && scene.items.map((item) => item.name)) || []
-  //   }
-
-  //   allCreatures.push(...allItems)
-
-  //   const filteredCharacters = allCreatures.filter((item) => {
-  //     return !["liz2", "kat"].includes(item)
-  //   })
-  //   return filteredCharacters
-  // }
 }

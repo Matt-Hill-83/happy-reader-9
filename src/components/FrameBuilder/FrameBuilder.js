@@ -12,6 +12,7 @@ import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import Utils from "../../Utils/Utils"
 
 import css from "./FrameBuilder.module.scss"
+import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 
 class FrameBuilder extends Component {
   state = {
@@ -41,7 +42,7 @@ class FrameBuilder extends Component {
       scene: { characters = [] },
     } = this.state
 
-    return Utils.getNewFrame({ characters: characters })
+    return WorldBuilderUtils.getNewFrame({ characters: characters })
   }
 
   onAddFrame = async () => {
@@ -50,7 +51,7 @@ class FrameBuilder extends Component {
     } = this.state
     const { updateMap } = this.props
 
-    const newFrame = this.getNewFrame()
+    const newFrame = WorldBuilderUtils.getNewFrame()
     frameSet.frames.push(newFrame)
 
     await updateMap({})
@@ -98,7 +99,7 @@ class FrameBuilder extends Component {
     const { scene, updateMap } = this.props
 
     if (!scene.frameSet) {
-      scene.frameSet = { frames: [this.getNewFrame()] }
+      scene.frameSet = { frames: [WorldBuilderUtils.getNewFrame()] }
     }
 
     let frames = scene.frameSet.frames

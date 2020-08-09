@@ -122,23 +122,6 @@ class MiniLocation extends React.Component {
     return <div className={css.charactersContainer}>{renderedCharacters}</div>
   }
 
-  checkIsStartScene = () => {
-    const { scene } = this.props
-    scene.isStartScene = !this.state.isStartScene
-
-    this.props.updateMap &&
-      this.props.updateMap({ newProps: { startScene: scene.name } })
-    this.setState({ isStartScene: !this.state.isStartScene })
-  }
-
-  checkIsEndScene = () => {
-    const { scene, updateMap = () => {} } = this.props
-    scene.isEndScene = !this.state.isEndScene
-
-    updateMap({ newProps: { endScene: scene.name } })
-    this.setState({ isEndScene: !this.state.isEndScene })
-  }
-
   renderBlankScene = ({ id }) => {
     return <div key={id} className={`${css.main} ${css.isBlank} `}></div>
   }
@@ -155,9 +138,6 @@ class MiniLocation extends React.Component {
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
 
     const locationName = scene.location.name
-    // if (!locationName) {
-    //   return <div className={`${css.main} ${className} ${localClass}`}></div>
-    // }
 
     const showNothing = QuestStatusUtils.isSceneHidden({ sceneId: scene.id })
     const isBlank = locationName === "blank" || showNothing

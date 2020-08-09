@@ -1,9 +1,7 @@
-import localStateStore from "../Stores/LocalStateStore/LocalStateStore.js"
-import { gameConfig, maps, books } from "../Stores/InitStores.js"
 import { toJS } from "mobx"
 import _get from "lodash.get"
-import Constants from "./Constants/Constants.js"
 import Utils from "./Utils.js"
+import WorldBuilderUtils from "./WorldBuilderUtils.js"
 
 export default class JsonUtils {
   static addArrayElement = ({ newElement, before, index, array }) => {
@@ -23,7 +21,6 @@ export default class JsonUtils {
     // I should probably create a new scenesGrid here, based on the required dimensions
     // I should probably create a new scenesGrid here, based on the required dimensions
     // I should probably create a new scenesGrid here, based on the required dimensions
-    // const scenesGrid = localStateStore.getWorldBuilderScenesGrid()
     const sceneDefinitions = newWorld.scenes2 || newWorld.scenes
 
     // Scene defs from imported json
@@ -93,7 +90,7 @@ export default class JsonUtils {
         configProps.critters1 = frameConfig.critters1
       } else {
         const critters1 =
-          Utils.getCritters1New({ frameConfig, sceneConfig }) || []
+          WorldBuilderUtils.getCritters1New({ frameConfig, sceneConfig }) || []
         configProps.critters1 = critters1.map((item) => {
           return { name: item }
         })
@@ -103,7 +100,7 @@ export default class JsonUtils {
         configProps.critters2 = frameConfig.critters2
       } else {
         const critters2 =
-          Utils.getCritters2New({ frameConfig, sceneConfig }) || []
+          WorldBuilderUtils.getCritters2New({ frameConfig, sceneConfig }) || []
 
         configProps.critters2 = critters2.map((item) => {
           return { name: item }
@@ -111,7 +108,7 @@ export default class JsonUtils {
       }
 
       // and put the properties into the new Frame...
-      const newFrame = Utils.getNewFrame({
+      const newFrame = WorldBuilderUtils.getNewFrame({
         props: { ...configProps, dialog: newDialogs },
       })
       return newFrame
