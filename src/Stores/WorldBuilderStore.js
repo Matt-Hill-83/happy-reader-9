@@ -2,12 +2,12 @@ import { decorate, observable, toJS } from "mobx"
 import _get from "lodash.get"
 
 class WorldBuilderStore {
-  mapBuilderGrid = []
+  worldBuilderGrid = []
   mapBuilderWorld = null
 
-  getWorldBuilderScenesGrid = () => this.mapBuilderGrid
-  setWorldBuilderScenesGrid = (mapBuilderGrid) => {
-    this.mapBuilderGrid = mapBuilderGrid
+  getWorldBuilderScenesGrid = () => this.worldBuilderGrid
+  setWorldBuilderScenesGrid = (worldBuilderGrid) => {
+    this.worldBuilderGrid = worldBuilderGrid
   }
 
   getWorldBuilderWorld = () => this.mapBuilderWorld
@@ -22,7 +22,7 @@ class WorldBuilderStore {
 }
 
 decorate(WorldBuilderStore, {
-  mapBuilderGrid: observable,
+  worldBuilderGrid: observable,
   mapBuilderWorld: observable,
 })
 
