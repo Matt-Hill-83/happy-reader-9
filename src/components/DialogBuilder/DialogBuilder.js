@@ -4,8 +4,9 @@ import { Button, Classes, ButtonGroup } from "@blueprintjs/core"
 import { toJS } from "mobx"
 import cx from "classnames"
 import React, { useEffect, useState } from "react"
-import MyTextEditor from "../MyTextEditor/MyTextEditor"
 
+import MyTextEditor from "../MyTextEditor/MyTextEditor"
+import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import css from "./DialogBuilder.module.scss"
 
 export default function DialogBuilder({ props }) {
@@ -36,7 +37,20 @@ export default function DialogBuilder({ props }) {
       frame.dialog.forEach((dialog) => {
         const newContent = `${dialog.text || ""}\n`
         content += newContent
-        fakeDivs.push(<div className={css.fakeDiv}>{newContent}</div>)
+        fakeDivs.push(
+          <div className={css.fakeDiv}>
+            <AddDeleteButtonGroup
+              props={
+                {
+                  // rowIndex: tableMeta.rowIndex,
+                  // onDelete: onDeleteTriggerRow,
+                  // onAdd: onAddItem,
+                }
+              }
+            />
+            {newContent}
+          </div>
+        )
       })
     })
   })

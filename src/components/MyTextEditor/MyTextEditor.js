@@ -33,8 +33,8 @@ export default function MyTextEditor({ props }) {
     setContent(newContent)
     console.log("text area:", newContent)
   }
-
-  console.log("className", toJS(className)) // zzz
+  console.log("content", toJS(content)) // zzz
+  // // console.log("className", toJS(className)) // zzz
   return (
     <>
       <TextareaAutosize

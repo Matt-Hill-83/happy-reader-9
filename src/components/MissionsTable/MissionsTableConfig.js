@@ -12,8 +12,6 @@ import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 
 import css from "./MissionsTableConfig.module.scss"
 import AutoComplete2 from "../AutoComplete2/AutoComplete2"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
-import QuestStatusUtils from "../../Utils/QuestStatusUtils"
 
 export const getTableConfig = ({
   tableChangeCallback = () => {},
