@@ -20,25 +20,24 @@ import _get from "lodash.get"
 
 import { maps, gameConfig } from "../../Stores/InitStores"
 import { worldNameStore } from "../../Stores/FrameSetStore"
+import Constants from "../../Utils/Constants/Constants"
 import CrudMachine from "../CrudMachine/CrudMachine"
+import css from "./WorldBuilder.module.scss"
+import DialogBuilder from "../DialogBuilder/DialogBuilder"
+import ExportJson from "../ExportJson/ExportJson"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
 import FrameSetUploader from "../FrameSetUploader/FrameSetUploader"
-import ExportJson from "../ExportJson/ExportJson"
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import images from "../../images/images"
 import JsonEditor2 from "../JsonEditor2/JsonEditor2"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
-import Utils from "../../Utils/Utils"
 import JsonUtils from "../../Utils/JsonUtils"
-import WorldPicker from "../WorldPicker/WorldPicker"
-import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
+import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils"
-import Constants from "../../Utils/Constants/Constants"
-
-import css from "./WorldBuilder.module.scss"
-import DialogBuilder from "../DialogBuilder/DialogBuilder"
+import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
+import Utils from "../../Utils/Utils"
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
+import WorldPicker from "../WorldPicker/WorldPicker"
 
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
@@ -49,8 +48,8 @@ class WorldBuilder extends Component {
     showFrameBuilder: false,
     showQuestConfig: false,
     showSceneConfig: false,
-    showSubQuestWizard: true,
-    showDialogBuilder: false,
+    showSubQuestWizard: false,
+    showDialogBuilder: true,
   }
 
   // Changing this to DidMount breaks things
