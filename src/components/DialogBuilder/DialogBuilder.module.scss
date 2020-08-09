@@ -2,5 +2,31 @@
   display: flex;
   width: 100%;
   height: 100%;
-  border: 4px solid green !important;
+  border: 1px solid green !important;
+  position: relative;
+}
+
+.fakeDiv {
+  display: flex;
+  width: 100%;
+  height: calc(1.4vh * 1.5);
+  border: 1px solid purple !important;
+  position: relative;
+}
+
+.controlPanel {
+  position: absolute;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border: 1px solid blue !important;
+  background: lightskyblue;
+
+  .textEditor {
+    position: relative;
+    z-index: 1;
+    display: flex;
+  }
 }

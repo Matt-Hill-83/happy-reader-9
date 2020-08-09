@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react"
 import { Editor } from "@tinymce/tinymce-react"
 import { toJS } from "mobx"
 import { TextareaAutosize } from "@material-ui/core"
+import cx from "classnames"
 
 import css from "./MyTextEditor.module.scss"
 
 export default function MyTextEditor({ props }) {
-  const { onChange } = props
+  const { onChange, className = "" } = props
   const [content, setContent] = useState("")
 
   useEffect(() => {
@@ -33,10 +34,11 @@ export default function MyTextEditor({ props }) {
     console.log("text area:", newContent)
   }
 
+  console.log("className", toJS(className)) // zzz
   return (
     <>
       <TextareaAutosize
-        className={css.main}
+        className={cx(css.main, className)}
         onChange={onTextAreaChange}
         value={content}
       >

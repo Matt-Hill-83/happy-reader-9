@@ -9,8 +9,7 @@ import MyTextEditor from "../MyTextEditor/MyTextEditor"
 import css from "./DialogBuilder.module.scss"
 
 export default function DialogBuilder({ props }) {
-  const [questConfig, setQuestConfig] = useState([])
-  const [dataTableKey, setDataTableKey] = useState([])
+  // const [questConfig, setQuestConfig] = useState([])
 
   const { onSave, world, scene } = props
   const scenes = _get(world, "data.newGrid5") || []
@@ -25,25 +24,29 @@ export default function DialogBuilder({ props }) {
   // on change in props
   useEffect(() => {
     // TODO: store correct prop
-    setQuestConfig(props.questConfig || {})
+    // setQuestConfig(props.questConfig || {})
   }, [props.questConfig])
 
   let content = ""
+  let fakeDivs = []
 
   scenes.forEach((scene) => {
     const frames = _get(scene, "frameSet.frames") || []
     frames.forEach((frame) => {
       frame.dialog.forEach((dialog) => {
-        content += `${dialog.text || ""}\n`
-        // content += `<p>${dialog.text || "empty"}</p>`
+        const newContent = `${dialog.text || ""}\n`
+        content += newContent
+        fakeDivs.push(<div className={css.fakeDiv}>{newContent}</div>)
       })
     })
   })
 
-  const dialogBuilderProps = { content }
+  const dialogBuilderProps = { content, className: css.textEditor }
   console.log("content", toJS(content)) // zzz
+
   return (
     <div className={css.main}>
+      <div className={css.controlPanel}>{fakeDivs}</div>
       <MyTextEditor props={dialogBuilderProps}></MyTextEditor>
     </div>
   )
