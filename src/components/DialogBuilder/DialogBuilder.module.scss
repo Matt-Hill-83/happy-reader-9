@@ -6,9 +6,8 @@
   position: relative;
 
   :global {
-    --test-var: orange;
+    // --test-var: orange;
     --row-font-size: 4vh;
-    // --row-height: 4.6vh;
     --row-height: calc(var(--row-font-size) * 1.15);
   }
 }
@@ -28,7 +27,12 @@
   white-space: nowrap;
   font-size: var(--row-font-size);
   height: var(--row-height);
+  max-height: var(--row-height);
   // padding-left: 1vh;
+
+  &:nth-child(even) {
+    background: rgb(188, 188, 255);
+  }
 }
 
 .controlPanel {
