@@ -6,7 +6,6 @@ import { toJS } from "mobx"
 import cx from "classnames"
 import React, { Component } from "react"
 
-import { maps } from "../../Stores/InitStores"
 import Constants from "../../Utils/Constants/Constants"
 import CrudMachine from "../CrudMachine/CrudMachine"
 import css from "./WorldBuilderScenesGrid.module.scss"

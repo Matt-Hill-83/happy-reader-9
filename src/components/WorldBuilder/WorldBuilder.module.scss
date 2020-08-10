@@ -78,11 +78,11 @@
   width: 100%;
   flex-direction: column;
 
-  [class*="MiniLocation_main"] {
-    border: 1px solid blue !important;
-    width: 150px;
-    height: 150px;
-  }
+  // [class*="MiniLocation_main"] {
+  //   border: 1px solid blue !important;
+  //   width: 150px;
+  //   height: 150px;
+  // }
 }
 
 .worldPickerDropdown {
