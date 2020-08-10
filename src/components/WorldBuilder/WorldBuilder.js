@@ -481,7 +481,7 @@ class WorldBuilder extends Component {
     }
 
     const dialogBuilderProps = {
-      initialValue: "9sadfsa",
+      saveItems: this.saveItems,
       world,
     }
 

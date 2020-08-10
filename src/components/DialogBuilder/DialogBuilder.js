@@ -10,11 +10,12 @@ import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import css from "./DialogBuilder.module.scss"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
+import Constants from "../../Utils/Constants/Constants"
 
 export default function DialogBuilder({ props }) {
   // const [questConfig, setQuestConfig] = useState([])
 
-  const { onSave, world, scene } = props
+  const { saveItems, world } = props
   const scenes = _get(world, "data.newGrid5") || []
 
   useEffect(() => {
@@ -42,8 +43,10 @@ export default function DialogBuilder({ props }) {
     )
 
     const onChangeCritter = (newValue) => {
-      console.log("newValue", toJS(newValue)) // zzz
-      dialog.character = newValue
+      console.log("newValue.name", toJS(newValue.name)) // zzz
+      dialog.character = newValue.name
+
+      saveItems()
       // const { rowIndex, columnIndex } = tableMeta
       // updateValue(newValue)
       // tableMeta.tableData[rowIndex][columnIndex] = { ...newValue }
@@ -66,18 +69,17 @@ export default function DialogBuilder({ props }) {
   scenes.forEach((scene, sceneIndex) => {
     const frames = _get(scene, "frameSet.frames") || []
 
-    const backgroundColor = QuestStatusUtils.getSubQuestColor({
-      world: world.data,
-      sceneId: scene.id,
-    })
+    // const backgroundColor = QuestStatusUtils.getSubQuestColor({
+    //   world: world.data,
+    //   sceneId: scene.id,
+    // })
+    const colors = Constants.subQuestColors
+    const colorIndex = sceneIndex % colors.length
+    const backgroundColor = colors[colorIndex]
+    const style = {
+      "background-color": `#${backgroundColor}`,
+    }
 
-    // fakeDivs.push(
-    //   <div
-    //     className={cx(css.fakeDiv, css.newSceneRow)}
-    //     style={backgroundColor}
-    //   ></div>
-    // )
-    // content += `Scene ${sceneIndex}: ===${scene.location.name}===============\n`
     frames.forEach((frame, frameIndex) => {
       console.log("frame.dialog", toJS(frame.dialog)) // zzz
       console.log("frame", toJS(frame)) // zzz
@@ -87,8 +89,7 @@ export default function DialogBuilder({ props }) {
           className={`${css.fakeDiv} ${
             frameIndex === 0 ? css.newSceneRow : ""
           }`}
-          // className={cx(css.fakeDiv, { [frameIndex === 0]: css.newSceneRow })}
-          style={backgroundColor}
+          style={style}
         >
           {`[${sceneIndex}] - ${scene.location.name}  - F${frameIndex}`}
         </div>
@@ -99,7 +100,7 @@ export default function DialogBuilder({ props }) {
           const newContent = `${dialog.text}\n`
           content += newContent
           fakeDivs.push(
-            <div className={css.fakeDiv} style={backgroundColor}>
+            <div className={css.fakeDiv} style={style}>
               <AddDeleteButtonGroup
                 props={{
                   // rowIndex: tableMeta.rowIndex,

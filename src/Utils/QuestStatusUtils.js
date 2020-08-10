@@ -355,7 +355,8 @@ export default class QuestStatusUtils {
   }
 
   static getSubQuestColor = ({ world, sceneId }) => {
-    const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd", "ffe7bc", "ffebf8"]
+    const colors = Constants.subQuestColors
+    // const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd", "ffe7bc", "ffebf8"]
 
     const parentSubQuestFromScene = this.getParentSubQuestIndexFromScene({
       world,

@@ -143,6 +143,15 @@ export default class Constants {
     merida02: 3,
   }
 
+  static subQuestColors = [
+    "a9def9",
+    "d0f4de",
+    "e4c1f9",
+    "fcf6bd",
+    "ffe7bc",
+    "ffebf8",
+  ]
+
   static sceneVisibilityPropNames = {
     LOCKED_SCENES: "lockedScenes",
     HIDDEN_SCENES: "hiddenScenes",
