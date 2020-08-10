@@ -28,7 +28,7 @@ export default function MyTextEditor({ props }) {
   }
 
   const onTextAreaChange = (event) => {
-    console.log("text area:", event.target.value)
+    // console.log("text area:", event.target.value)
     setContent(event.target.value)
   }
 
