@@ -223,7 +223,7 @@ class WorldBuilder extends Component {
     }
     const { grid, gridDimensions } = this.createNewGrid()
 
-    localStateStore.setWorldBuilderScenesGrid(grid)
+    worldBuilderStore.setWorldBuilderScenesGrid(grid)
     const newWorldProps = {
       name: newName,
       title: "-------" + newName,
@@ -233,13 +233,13 @@ class WorldBuilder extends Component {
     const newWorld = Constants.getNewWorld({ props: newWorldProps })
 
     const newMapReturned = await maps.add(newWorld)
-    localStateStore.setWorldBuilderWorld(newMapReturned)
+    worldBuilderStore.setWorldBuilderWorld(newMapReturned)
   }
 
   onChangeTitle = async ({ event }) => {
     const world = worldBuilderStore.getWorldBuilderWorld()
     world.data.title = event.target.value
-    localStateStore.setWorldBuilderWorld(world)
+    worldBuilderStore.setWorldBuilderWorld(world)
     this.setState({ world })
   }
 
@@ -493,8 +493,6 @@ class WorldBuilder extends Component {
 
     return (
       <div className={css.main}>
-        {this.renderMainButtonGroup()}
-
         {this.renderSceneConfig({ world })}
         {this.renderQuestConfig({ questConfig })}
 
@@ -508,32 +506,28 @@ class WorldBuilder extends Component {
         />
 
         {!showFrameBuilder && (
-          <div className={css.header}>
-            <div className={css.titles}>
-              <div className={css.title}>
-                <div className={css.subTitle}>
-                  <WorldPicker
-                    initialValue={title}
-                    showDelete={true}
-                    showReleased={true}
-                    showReleasedToProd={true}
-                    updateIsReleasedProperty={this.updateIsReleasedProperty}
-                    updateReleasedToProd={this.updateReleasedToProd}
-                    onChangeWorld={this.onChangeWorld}
-                  />
-                  {`${world.id}`}
-
-                  <Button
-                    text={"+ New Map"}
-                    onClick={() => this.onChangeWorld({ newWorld: true })}
-                  />
-                </div>
-              </div>
+          <div className={css.subTitle}>
+            <WorldPicker
+              initialValue={title}
+              showDelete={true}
+              showReleased={true}
+              showReleasedToProd={true}
+              updateIsReleasedProperty={this.updateIsReleasedProperty}
+              updateReleasedToProd={this.updateReleasedToProd}
+              onChangeWorld={this.onChangeWorld}
+            />
+            {`${world.id}`}
+            <div className={css.terminalScenePickers}>
               start:
               {this.renderTerminalScenePicker({ isStartScene: true })}
               end:
               {this.renderTerminalScenePicker({ isStartScene: false })}
             </div>
+            <Button
+              text={"+ New Map"}
+              onClick={() => this.onChangeWorld({ newWorld: true })}
+            />
+            {this.renderMainButtonGroup()}
           </div>
         )}
         {!showFrameBuilder && (
@@ -543,7 +537,6 @@ class WorldBuilder extends Component {
                 {...worldBuilderScenesGridProps}
               ></WorldBuilderScenesGrid>
             </div>
-            {/* <div className={css.left}>{this.renderScenesGrid()}</div> */}
             {showSubQuestWizard && (
               <div className={css.right}>
                 {this.renderQuestConfigTool({ questConfig, newGrid5 })}
