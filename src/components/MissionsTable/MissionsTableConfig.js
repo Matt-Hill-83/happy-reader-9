@@ -106,9 +106,7 @@ export const getTableConfig = ({
 
     return (
       <SimpleSelectObj
-        // className={css.sceneDropdown}
         items={combinedItems}
-        // items={transformedData}
         value={scene}
         getOptionLabel={(option) => {
           return _get(option, "name") || "error!!!"

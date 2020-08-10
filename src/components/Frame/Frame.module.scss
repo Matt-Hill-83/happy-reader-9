@@ -186,7 +186,6 @@
   .character0,
   .character1 {
     padding: 0.5vh 1vh;
-    // font-size: 1.5vh;
 
     &:focus {
       border: 2px solid red !important;
@@ -204,7 +203,6 @@
     }
   }
 
-  // TODO - move colors to colors.css
   .character0 {
     border: 1px solid #ff005c !important;
     background: #ffcee6;

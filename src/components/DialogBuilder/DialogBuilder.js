@@ -9,6 +9,7 @@ import MyTextEditor from "../MyTextEditor/MyTextEditor"
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import css from "./DialogBuilder.module.scss"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
+import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 
 export default function DialogBuilder({ props }) {
   // const [questConfig, setQuestConfig] = useState([])
@@ -40,37 +41,65 @@ export default function DialogBuilder({ props }) {
       (item) => item.name === dialog.character
     )
 
+    const onChangeCritter = (newValue) => {
+      console.log("newValue", toJS(newValue)) // zzz
+      dialog.character = newValue
+      // const { rowIndex, columnIndex } = tableMeta
+      // updateValue(newValue)
+      // tableMeta.tableData[rowIndex][columnIndex] = { ...newValue }
+      // tableChangeCallback({ tableMeta, newValue, propertyName: "item" })
+    }
+    crittersInFrame.forEach((item) => {
+      console.log("item", toJS(item)) // zzz
+    })
     return (
       <SimpleSelectObj
         className={css.sceneDropdown}
         items={crittersInFrame}
         value={selectedItem}
         getOptionLabel={(option) => _get(option, "name")}
-        // onChange={onChangeScene}
+        onChange={onChangeCritter}
       />
     )
   }
 
   scenes.forEach((scene, sceneIndex) => {
     const frames = _get(scene, "frameSet.frames") || []
-    fakeDivs.push(
-      <div
-        className={cx(css.fakeDiv, css.newSceneRow)}
-      >{`===Scene [${sceneIndex}] ===${scene.location.name}===============`}</div>
-    )
-    content += `=======================\n`
-    frames.forEach((frame) => {
+
+    const backgroundColor = QuestStatusUtils.getSubQuestColor({
+      world: world.data,
+      sceneId: scene.id,
+    })
+
+    // fakeDivs.push(
+    //   <div
+    //     className={cx(css.fakeDiv, css.newSceneRow)}
+    //     style={backgroundColor}
+    //   ></div>
+    // )
+    // content += `Scene ${sceneIndex}: ===${scene.location.name}===============\n`
+    frames.forEach((frame, frameIndex) => {
       console.log("frame.dialog", toJS(frame.dialog)) // zzz
       console.log("frame", toJS(frame)) // zzz
       // insert dummy content between frames.
-      fakeDivs.push(<div className={css.fakeDiv}>-------------------</div>)
-      content += `---------------------\n`
+      fakeDivs.push(
+        <div
+          className={`${css.fakeDiv} ${
+            frameIndex === 0 ? css.newSceneRow : ""
+          }`}
+          // className={cx(css.fakeDiv, { [frameIndex === 0]: css.newSceneRow })}
+          style={backgroundColor}
+        >
+          {`[${sceneIndex}] - ${scene.location.name}  - F${frameIndex}`}
+        </div>
+      )
+      content += `-------------------\n`
       frame.dialog.forEach((dialog) => {
         if (dialog.text) {
           const newContent = `${dialog.text}\n`
           content += newContent
           fakeDivs.push(
-            <div className={css.fakeDiv}>
+            <div className={css.fakeDiv} style={backgroundColor}>
               <AddDeleteButtonGroup
                 props={{
                   // rowIndex: tableMeta.rowIndex,
@@ -80,7 +109,8 @@ export default function DialogBuilder({ props }) {
                   moreButtons: renderCritterPicker({ dialog, frame }),
                 }}
               />
-              {newContent}
+              <div className={css.emptySpace}></div>
+              {/* {newContent} */}
             </div>
           )
         }
