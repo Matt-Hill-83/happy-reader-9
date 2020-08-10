@@ -6,9 +6,9 @@
   position: relative;
 
   :global {
-    // --test-var: orange;
     --row-font-size: 4vh;
     --row-height: calc(var(--row-font-size) * 1.15);
+    --row-font-family: Arial, Helvetica, sans-serif;
   }
 }
 
@@ -23,12 +23,11 @@
   display: flex;
   width: 100%;
   position: relative;
-  font-family: Arial, Helvetica, sans-serif;
   white-space: nowrap;
+  font-family: var(--row-font-family);
   font-size: var(--row-font-size);
   height: var(--row-height);
   max-height: var(--row-height);
-  // padding-left: 1vh;
 
   &:nth-child(even) {
     background: rgb(188, 188, 255);
