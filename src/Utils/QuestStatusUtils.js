@@ -21,7 +21,6 @@ export default class QuestStatusUtils {
     }
 
     // For each scene, calculate new visibility props based on conditions defined in triggers
-    // newGrid5.slice(0, 9).forEach((scene) => {
     newGrid5.forEach((scene) => {
       const sceneTriggers = this.getSceneTriggersFromScene({
         sceneId: scene.id,

@@ -86,9 +86,11 @@ export default function DialogBuilder({ props }) {
       // insert dummy content between frames.
       fakeDivs.push(
         <div
-          className={`${css.fakeDiv} ${
-            frameIndex === 0 ? css.newSceneRow : ""
-          }`}
+          className={`${css.fakeDiv}
+           ${css.frameSeparatorDiv}
+           ${frameIndex === 0 ? css.newSceneRow : ""}
+           
+           `}
           style={style}
         >
           {`[${sceneIndex}] - ${scene.location.name}  - F${frameIndex}`}

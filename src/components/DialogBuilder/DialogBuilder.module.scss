@@ -35,7 +35,7 @@
   align-items: center;
   top: 4px;
   overflow: hidden;
-  border-bottom: 1px solid red !important;
+  border-bottom: 1px solid gray !important;
 
   &:nth-child(even) {
     opacity: 0.5;
@@ -58,6 +58,11 @@
   margin-left: 178px;
 }
 
+.frameSeparatorDiv {
+  // border-bottom: 1px solid blue !important;
+  background: rgb(216, 216, 216) !important;
+}
+
 .newSceneRow {
   border-top: 2px solid black !important;
   border-bottom: 2px solid black !important;
@@ -65,7 +70,7 @@
 }
 
 .emptySpace {
-  border: 1px solid green !important;
+  // border: 1px solid green !important;
   display: flex;
   flex: 1;
   height: 100%;
