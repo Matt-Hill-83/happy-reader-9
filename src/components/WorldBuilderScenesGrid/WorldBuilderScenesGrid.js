@@ -25,7 +25,8 @@ class WorldBuilderScenesGrid extends Component {
   async componentWillMount() {}
 
   saveItems = async () => {
-    await WorldBuilderUtils.updateMap({})
+    // await WorldBuilderUtils.updateMap({})
+    await this.props.saveItems()
   }
 
   generateRandomLocation = ({ location, locationNames }) => {
@@ -33,12 +34,16 @@ class WorldBuilderScenesGrid extends Component {
       locationNames[Math.floor(Math.random() * locationNames.length)]
 
     location.name = randomName
-    WorldBuilderUtils.updateMap({})
+    WorldBuilderUtils.updateMap({ world: this.props.world })
   }
 
   // TODO: on save, Crudmachine shoud return the mutated list and a callback should save it
   // in the appropriate place.
   // Right now, CrudMachine simply mutates a reference and calls a generic update.
+  editFrameSet = ({ sceneToEdit }) => {
+    this.props.editFrameSet && this.props.editFrameSet({ sceneToEdit })
+  }
+
   renderScenesGrid = () => {
     const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
 
