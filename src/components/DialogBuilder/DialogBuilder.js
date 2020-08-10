@@ -36,23 +36,22 @@ export default function DialogBuilder({ props }) {
 
   const renderCritterPicker = ({ dialog, frame }) => {
     const { critters1, critters2 } = frame
-    console.log("dialog", toJS(dialog)) // zzz
     const crittersInFrame = [...critters1, ...critters2]
     const selectedItem = crittersInFrame.find(
       (item) => item.name === dialog.character
     )
 
     const onChangeCritter = (newValue) => {
-      console.log("newValue.name", toJS(newValue.name)) // zzz
+      // console.log("newValue.name", toJS(newValue.name)) // zzz
       dialog.character = newValue.name
 
       saveItems()
     }
     crittersInFrame.forEach((item) => {
-      console.log("item", toJS(item)) // zzz
+      // console.log("item", toJS(item)) // zzz
     })
 
-    const test = (
+    return (
       <SimpleSelectObj
         className={css.sceneDropdown}
         items={crittersInFrame}
@@ -61,17 +60,11 @@ export default function DialogBuilder({ props }) {
         onChange={onChangeCritter}
       />
     )
-    console.log("test-------------------------------------------", toJS(test)) // zzz
-    return test
   }
 
   scenes.forEach((scene, sceneIndex) => {
     const frames = _get(scene, "frameSet.frames") || []
 
-    // const backgroundColor = QuestStatusUtils.getSubQuestColor({
-    //   world: world.data,
-    //   sceneId: scene.id,
-    // })
     const colors = Constants.subQuestColors
     const colorIndex = sceneIndex % colors.length
     const backgroundColor = colors[colorIndex]
@@ -98,7 +91,7 @@ export default function DialogBuilder({ props }) {
       content += `-------------------\n`
       frame.dialog.forEach((dialog, dialogIndex) => {
         if (dialog.text) {
-          const metaInfo = `===>${sceneIndex}---${frameIndex}---${dialogIndex}`
+          const metaInfo = `===>${sceneIndex}---${frameIndex}---${dialogIndex}<==`
           const newContent = `${dialog.text} ${metaInfo}\n`
           content += newContent
           fakeDivs.push(
@@ -125,10 +118,48 @@ export default function DialogBuilder({ props }) {
     })
   })
 
-  const dialogBuilderProps = { content, className: css.textEditor }
+  const onSubmit = ({ content }) => {
+    // console.log("content", toJS(content)) // zzz
+    const linesArray = content.split("\n")
+
+    linesArray.slice(0.5).forEach((item) => {
+      // linesArray.forEach((item) => {
+      const reg = new RegExp(/(.*)===>(.+)---(.+)---(.+)<==/)
+      // const reg = new RegExp(/==>/)
+      const match = item.match(reg)
+      // console.log("match", toJS(match)) // zzz
+
+      if (match) {
+        console.log("match", match) // zzz
+        const newText = match[1]
+        const sceneIndex = match[2]
+        const frameIndex = match[3]
+        const dialogIndex = match[4]
+
+        const scene = scenes[sceneIndex]
+        // console.log("scene", toJS(scene)) // zzz
+        const frames = _get(scene, "frameSet.frames") || []
+        const frame = frames[frameIndex]
+        console.log("frame", toJS(frame)) // zzz
+        const dialog = frame.dialog[dialogIndex]
+        console.log("") // zzz
+        console.log("") // zzz
+        console.log("dialog.text", toJS(dialog.text)) // zzz
+        console.log("newText", newText) // zzz
+
+        if (dialog !== newText) {
+          frame.dialog[dialogIndex].text = newText
+        }
+      }
+    })
+    saveItems()
+  }
+
+  const dialogBuilderProps = { content, className: css.textEditor, onSubmit }
 
   return (
     <div className={css.main}>
+      {/* <Button onClick={() => onSubmit({})} icon={IconNames.SAVED} /> */}
       <div className={css.controlPanel}>{fakeDivs}</div>
       <MyTextEditor props={dialogBuilderProps}></MyTextEditor>
     </div>

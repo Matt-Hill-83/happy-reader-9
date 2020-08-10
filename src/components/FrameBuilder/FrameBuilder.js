@@ -51,7 +51,7 @@ class FrameBuilder extends Component {
     } = this.state
     const { updateMap } = this.props
 
-    const newFrame = WorldBuilderUtils.getNewFrame()
+    const newFrame = WorldBuilderUtils.getNewFrame({})
     frameSet.frames.push(newFrame)
 
     await updateMap({})

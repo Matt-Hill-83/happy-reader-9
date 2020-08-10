@@ -10,3 +10,11 @@
   font-size: var(--row-font-size);
   margin-left: 8.3vw;
 }
+
+.submitButton {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border: 1px solid red !important;
+  z-index: 100;
+}

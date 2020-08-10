@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react"
-import { Editor } from "@tinymce/tinymce-react"
-import { toJS } from "mobx"
+import { Button } from "@blueprintjs/core"
+import { IconNames } from "@blueprintjs/icons"
 import { TextareaAutosize } from "@material-ui/core"
+import { toJS } from "mobx"
 import cx from "classnames"
+import React, { useState, useEffect } from "react"
 
 import css from "./MyTextEditor.module.scss"
 
 export default function MyTextEditor({ props }) {
-  const { onChange, className = "" } = props
+  const { className = "" } = props
   const [content, setContent] = useState("")
 
   useEffect(() => {
@@ -22,15 +23,22 @@ export default function MyTextEditor({ props }) {
     setContent(props.content)
   }, [props.content])
 
-  const handleEditorChange = (content, editor) => {
-    // console.log("Content was updated:", content)
+  const onSubmit = () => {
+    props.onSubmit && props.onSubmit({ content })
   }
+
   const onTextAreaChange = (event) => {
     console.log("text area:", event.target.value)
     setContent(event.target.value)
   }
+
   return (
     <>
+      <Button
+        className={css.submitButton}
+        onClick={() => onSubmit({})}
+        icon={IconNames.SAVED}
+      />
       <TextareaAutosize
         className={cx(css.main, className)}
         onChange={onTextAreaChange}
@@ -38,26 +46,6 @@ export default function MyTextEditor({ props }) {
       >
         {content}
       </TextareaAutosize>
-      {/* <Editor
-        apiKey="2d0u7t6q8ximue5owrnarok24dxh778nce7b4rm6m58qckqj"
-        // content={initialValue}
-        value={initialValue}
-        // initialValue="<p>This is the initial content of the editor</p>"
-        init={{
-          height: 500,
-          menubar: false,
-          plugins: [
-            "advlist autolink lists link image charmap print preview anchor",
-            "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table paste code help wordcount",
-          ],
-          toolbar:
-            "undo redo | formatselect | bold italic backcolor | \
-        alignleft aligncenter alignright alignjustify | \
-        bullist numlist outdent indent | removeformat | help",
-        }}
-        onEditorChange={handleEditorChange}
-      /> */}
     </>
   )
 }
