@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react"
 import MyTextEditor from "../MyTextEditor/MyTextEditor"
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import css from "./DialogBuilder.module.scss"
+import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 
 export default function DialogBuilder({ props }) {
   // const [questConfig, setQuestConfig] = useState([])
@@ -31,12 +32,42 @@ export default function DialogBuilder({ props }) {
   let content = ""
   let fakeDivs = []
 
-  scenes.forEach((scene) => {
+  const renderCritterPicker = ({ dialog, frame }) => {
+    const { critters1, critters2 } = frame
+    console.log("dialog", toJS(dialog)) // zzz
+    const crittersInFrame = [...critters1, ...critters2]
+    const selectedItem = crittersInFrame.find(
+      (item) => item.name === dialog.character
+    )
+
+    return (
+      <SimpleSelectObj
+        className={css.sceneDropdown}
+        items={crittersInFrame}
+        value={selectedItem}
+        getOptionLabel={(option) => _get(option, "name")}
+        // onChange={onChangeScene}
+      />
+    )
+  }
+
+  scenes.forEach((scene, sceneIndex) => {
     const frames = _get(scene, "frameSet.frames") || []
+    fakeDivs.push(
+      <div
+        className={cx(css.fakeDiv, css.newSceneRow)}
+      >{`===Scene [${sceneIndex}] ===${scene.location.name}===============`}</div>
+    )
+    content += `=======================\n`
     frames.forEach((frame) => {
+      console.log("frame.dialog", toJS(frame.dialog)) // zzz
+      console.log("frame", toJS(frame)) // zzz
+      // insert dummy content between frames.
+      fakeDivs.push(<div className={css.fakeDiv}>-------------------</div>)
+      content += `---------------------\n`
       frame.dialog.forEach((dialog) => {
-        const newContent = `${dialog.text}\n`
         if (dialog.text) {
+          const newContent = `${dialog.text}\n`
           content += newContent
           fakeDivs.push(
             <div className={css.fakeDiv}>
@@ -46,6 +77,7 @@ export default function DialogBuilder({ props }) {
                   // onDelete: onDeleteTriggerRow,
                   // onAdd: onAddItem,
                   className: css.dialogBuilderButtonGroup,
+                  moreButtons: renderCritterPicker({ dialog, frame }),
                 }}
               />
               {newContent}
@@ -57,7 +89,6 @@ export default function DialogBuilder({ props }) {
   })
 
   const dialogBuilderProps = { content, className: css.textEditor }
-  console.log("content", toJS(content)) // zzz
 
   return (
     <div className={css.main}>

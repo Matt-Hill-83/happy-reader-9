@@ -19,22 +19,16 @@ export default function MyTextEditor({ props }) {
 
   // on change in props
   useEffect(() => {
-    console.log("props change==========================>>>") // zzz
     setContent(props.content)
   }, [props.content])
 
-  console.log("props", props) // zzz
-
   const handleEditorChange = (content, editor) => {
     // console.log("Content was updated:", content)
-    // console.log("editor", toJS(editor)) // zzz
   }
   const onTextAreaChange = (event) => {
     console.log("text area:", event.target.value)
     setContent(event.target.value)
   }
-  console.log("content", toJS(content)) // zzz
-  // // console.log("className", toJS(className)) // zzz
   return (
     <>
       <TextareaAutosize
