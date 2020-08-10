@@ -30,6 +30,11 @@ class LocalStateStore {
 
   getQuestNames = () => this.questStatus.quests.map((item) => item.name)
 
+  getShowWorldBuilder = () => this.showWorldBuilder
+  setShowWorldBuilder = (showWorldBuilder) => {
+    this.showWorldBuilder = showWorldBuilder
+  }
+
   getQuestStatus = () => this.questStatus
   setQuestStatus = (questStatus) => {
     this.questStatus = questStatus

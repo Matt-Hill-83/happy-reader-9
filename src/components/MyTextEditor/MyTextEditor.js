@@ -29,9 +29,9 @@ export default function MyTextEditor({ props }) {
     // console.log("Content was updated:", content)
     // console.log("editor", toJS(editor)) // zzz
   }
-  const onTextAreaChange = (newContent) => {
-    setContent(newContent)
-    console.log("text area:", newContent)
+  const onTextAreaChange = (event) => {
+    console.log("text area:", event.target.value)
+    setContent(event.target.value)
   }
   console.log("content", toJS(content)) // zzz
   // // console.log("className", toJS(className)) // zzz
