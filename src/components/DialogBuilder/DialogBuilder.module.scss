@@ -15,16 +15,12 @@
 .dialogBuilderButtonGroup {
   border: 1px solid red !important;
   display: flex;
-  // min-width: 17.8vh;
   overflow: hidden;
   align-items: flex-end;
-  // background: white;
   background: transparent;
 }
 
 .fakeDiv {
-  // color: green;
-  // color: transparent;
   display: flex;
   width: 100%;
   position: relative;
@@ -36,6 +32,7 @@
   top: 4px;
   overflow: hidden;
   border-bottom: 1px solid gray !important;
+  align-items: flex-start;
 
   &:nth-child(even) {
     opacity: 0.5;
@@ -55,11 +52,10 @@
   position: relative;
   z-index: 1;
   display: flex;
-  margin-left: 178px;
+  margin-left: 239px;
 }
 
 .frameSeparatorDiv {
-  // border-bottom: 1px solid blue !important;
   background: rgb(216, 216, 216) !important;
 }
 
@@ -70,7 +66,6 @@
 }
 
 .emptySpace {
-  // border: 1px solid green !important;
   display: flex;
   flex: 1;
   height: 100%;

@@ -15,7 +15,44 @@ export default function AddDeleteButtonGroup({ props }) {
     title = "",
     moreButtons = null,
     className = "",
+    noPopover = false,
+    vertical = false,
   } = props
+
+  console.log("moreNestedButtons", toJS(moreNestedButtons)) // zzz
+
+  const buttons = (
+    <ButtonGroup
+      vertical={vertical}
+      className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
+    >
+      {moreButtons}
+      {moreNestedButtons}
+      <Button
+        onClick={() =>
+          onAdd({
+            rowIndex,
+            before: true,
+          })
+        }
+        icon={IconNames.ADD}
+      />
+      <Button onClick={() => onDelete({ rowIndex })} icon={IconNames.TRASH} />
+      <Button
+        onClick={() =>
+          onAdd({
+            rowIndex,
+            before: false,
+          })
+        }
+        icon={IconNames.ADD}
+      />
+    </ButtonGroup>
+  )
+
+  if (noPopover) {
+    return buttons
+  }
 
   return (
     <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup, className)}>
@@ -23,34 +60,12 @@ export default function AddDeleteButtonGroup({ props }) {
       <Popover
         interactionKind={"HOVER"}
         content={
-          <ButtonGroup
-            vertical={true}
-            className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
-          >
-            {moreNestedButtons}
-            <Button
-              onClick={() =>
-                onAdd({
-                  rowIndex,
-                  before: true,
-                })
-              }
-              icon={IconNames.ADD}
-            />
-            <Button
-              onClick={() => onDelete({ rowIndex })}
-              icon={IconNames.TRASH}
-            />
-            <Button
-              onClick={() =>
-                onAdd({
-                  rowIndex,
-                  before: false,
-                })
-              }
-              icon={IconNames.ADD}
-            />
-          </ButtonGroup>
+          // <ButtonGroup
+          //   vertical={true}
+          //   className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
+          // >
+          { buttons }
+          // </ButtonGroup>
         }
       >
         <Button icon={IconNames.SETTINGS} />

@@ -47,15 +47,12 @@ export default function DialogBuilder({ props }) {
       dialog.character = newValue.name
 
       saveItems()
-      // const { rowIndex, columnIndex } = tableMeta
-      // updateValue(newValue)
-      // tableMeta.tableData[rowIndex][columnIndex] = { ...newValue }
-      // tableChangeCallback({ tableMeta, newValue, propertyName: "item" })
     }
     crittersInFrame.forEach((item) => {
       console.log("item", toJS(item)) // zzz
     })
-    return (
+
+    const test = (
       <SimpleSelectObj
         className={css.sceneDropdown}
         items={crittersInFrame}
@@ -64,6 +61,8 @@ export default function DialogBuilder({ props }) {
         onChange={onChangeCritter}
       />
     )
+    console.log("test-------------------------------------------", toJS(test)) // zzz
+    return test
   }
 
   scenes.forEach((scene, sceneIndex) => {
@@ -93,23 +92,28 @@ export default function DialogBuilder({ props }) {
            `}
           style={style}
         >
-          {`[${sceneIndex}] - ${scene.location.name}  - F${frameIndex}`}
+          {`${scene.location.name}  - F${frameIndex}`}
         </div>
       )
       content += `-------------------\n`
-      frame.dialog.forEach((dialog) => {
+      frame.dialog.forEach((dialog, dialogIndex) => {
         if (dialog.text) {
-          const newContent = `${dialog.text}\n`
+          const metaInfo = `===>${sceneIndex}---${frameIndex}---${dialogIndex}`
+          const newContent = `${dialog.text} ${metaInfo}\n`
           content += newContent
           fakeDivs.push(
             <div className={css.fakeDiv} style={style}>
+              {/* {renderCritterPicker({ dialog, frame })} */}
               <AddDeleteButtonGroup
                 props={{
                   // rowIndex: tableMeta.rowIndex,
                   // onDelete: onDeleteTriggerRow,
                   // onAdd: onAddItem,
+                  vertical: false,
+                  noPopover: true,
                   className: css.dialogBuilderButtonGroup,
                   moreButtons: renderCritterPicker({ dialog, frame }),
+                  // moreNestedButtons: renderCritterPicker({ dialog, frame }),
                 }}
               />
               <div className={css.emptySpace}></div>
