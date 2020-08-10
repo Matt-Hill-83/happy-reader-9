@@ -1,11 +1,11 @@
 .main {
   display: flex;
-  border: 1px solid red !important;
   min-width: 100% !important;
-  font-size: 1.4vh;
-  white-space: nowrap;
   min-height: 100%;
+  white-space: nowrap;
   background: transparent;
-  color: blue;
+  color: var(--test-var);
   font-family: Arial, Helvetica, sans-serif;
+  line-height: var(--row-height);
+  font-size: var(--row-font-size);
 }

@@ -14,10 +14,11 @@ export default function AddDeleteButtonGroup({ props }) {
     onAdd,
     title = "",
     moreButtons = null,
+    className = "",
   } = props
 
   return (
-    <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
+    <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup, className)}>
       {moreButtons}
       <Popover
         interactionKind={"HOVER"}

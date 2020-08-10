@@ -41,13 +41,12 @@ export default function DialogBuilder({ props }) {
           fakeDivs.push(
             <div className={css.fakeDiv}>
               <AddDeleteButtonGroup
-                props={
-                  {
-                    // rowIndex: tableMeta.rowIndex,
-                    // onDelete: onDeleteTriggerRow,
-                    // onAdd: onAddItem,
-                  }
-                }
+                props={{
+                  // rowIndex: tableMeta.rowIndex,
+                  // onDelete: onDeleteTriggerRow,
+                  // onAdd: onAddItem,
+                  className: css.dialogBuilderButtonGroup,
+                }}
               />
               {newContent}
             </div>
