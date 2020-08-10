@@ -152,7 +152,11 @@ class Frame extends Component {
     const dialog = (frame && frame.dialog) || []
 
     const newLine = event.target.value
-    dialog[lineIndex]["text"] = newLine
+    if (dialog[lineIndex]["text"]) {
+      dialog[lineIndex]["text"] = newLine
+    } else {
+      frame.dialog[lineIndex] = { text: newLine }
+    }
     this.setState({ frame })
   }
 

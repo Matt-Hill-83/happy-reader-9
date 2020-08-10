@@ -19,8 +19,6 @@ export default function AddDeleteButtonGroup({ props }) {
     vertical = false,
   } = props
 
-  console.log("moreNestedButtons", toJS(moreNestedButtons)) // zzz
-
   const buttons = (
     <ButtonGroup
       vertical={vertical}
@@ -57,17 +55,7 @@ export default function AddDeleteButtonGroup({ props }) {
   return (
     <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup, className)}>
       {moreButtons}
-      <Popover
-        interactionKind={"HOVER"}
-        content={
-          // <ButtonGroup
-          //   vertical={true}
-          //   className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
-          // >
-          { buttons }
-          // </ButtonGroup>
-        }
-      >
+      <Popover interactionKind={"HOVER"} content={{ buttons }}>
         <Button icon={IconNames.SETTINGS} />
       </Popover>
       {title}
