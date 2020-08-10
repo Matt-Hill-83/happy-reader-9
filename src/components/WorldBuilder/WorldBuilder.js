@@ -34,6 +34,7 @@ import JsonUtils from "../../Utils/JsonUtils"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils"
 import SubQuestWizard from "../SubQuestWizard/SubQuestWizard"
+import WorldBuilderScenesGrid from "../WorldBuilderScenesGrid/WorldBuilderScenesGrid"
 import Utils from "../../Utils/Utils"
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
@@ -608,6 +609,8 @@ class WorldBuilder extends Component {
       world,
     }
 
+    const worldBuilderScenesGridProps = {}
+
     return (
       <div className={css.main}>
         {this.renderMainButtonGroup()}
@@ -655,7 +658,12 @@ class WorldBuilder extends Component {
         )}
         {!showFrameBuilder && (
           <div className={css.content}>
-            <div className={css.left}>{this.renderScenesGrid()}</div>
+            <div className={css.left}>
+              <WorldBuilderScenesGrid
+                {...worldBuilderScenesGridProps}
+              ></WorldBuilderScenesGrid>
+            </div>
+            {/* <div className={css.left}>{this.renderScenesGrid()}</div> */}
             {showSubQuestWizard && (
               <div className={css.right}>
                 {this.renderQuestConfigTool({ questConfig, newGrid5 })}
