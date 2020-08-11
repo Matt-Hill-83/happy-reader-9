@@ -389,54 +389,74 @@ class WorldBuilder extends Component {
     const { showQuestConfig, showSceneConfig, showSubQuestWizard } = this.state
 
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
+    const dialogBuilderButton = (
+      <Button
+        className={css.xxxsaveButton}
+        onClick={() => this.openDialogBuilder({ world })}
+      >
+        Dialog Builder
+      </Button>
+    )
+
+    const subQuestWizardButton = (
+      <Button
+        icon="document"
+        text="SubQuest Wizard"
+        onClick={() =>
+          this.setState({
+            showSubQuestWizard: !showSubQuestWizard,
+          })
+        }
+      />
+    )
+
+    const questConfigButton = (
+      <Button
+        icon="document"
+        text="quest config"
+        onClick={() =>
+          this.setState({
+            showQuestConfig: !showQuestConfig,
+          })
+        }
+      />
+    )
+    const getJsonButton = (
+      <Button
+        icon="document"
+        text="get JSON for world"
+        onClick={() =>
+          this.setState({
+            showSceneConfig: !showSceneConfig,
+          })
+        }
+      />
+    )
+    const uploadJsonButton = (
+      <Button
+        icon="document"
+        text="get JSON for world"
+        onClick={() =>
+          this.setState({
+            showSceneConfig: !showSceneConfig,
+          })
+        }
+      />
+    )
 
     return (
       <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
-        <Button
-          icon="document"
-          text="SubQuest Wizard"
-          onClick={() =>
-            this.setState({
-              showSubQuestWizard: !showSubQuestWizard,
-            })
-          }
-        />
+        {dialogBuilderButton}
+        {subQuestWizardButton}
         <Popover
           content={
             <ButtonGroup
               vertical={true}
               className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
             >
-              <Button
-                icon="document"
-                text="quest config"
-                onClick={() =>
-                  this.setState({
-                    showQuestConfig: !showQuestConfig,
-                  })
-                }
-              />
-              <Button
-                className={css.xxxsaveButton}
-                onClick={() => this.openDialogBuilder({ world })}
-              >
-                Dialog Builder
-              </Button>
-              <Button
-                icon="document"
-                text="get JSON for world"
-                onClick={() =>
-                  this.setState({
-                    showSceneConfig: !showSceneConfig,
-                  })
-                }
-              />
-              <FrameSetUploader
-                onSave={this.onChangeDialog}
-                onImportJson={({ newWorld }) =>
-                  this.importWorldFromJson({ newWorld })
-                }
-              />
+              {questConfigButton}
+              {getJsonButton}
+              {uploadJsonButton}
             </ButtonGroup>
           }
         >
