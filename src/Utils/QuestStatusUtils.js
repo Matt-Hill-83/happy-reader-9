@@ -51,18 +51,18 @@ export default class QuestStatusUtils {
           activeMissionIndex,
         }
       )
-      console.log("") // zzz
-      console.log("") // zzz
-      console.log("-----------") // zzz
-      console.log("scene.location.name", toJS(scene.location.name)) // zzz
-      console.log(
-        "accumulatedPropertyValuesForSubQuest",
-        toJS(accumulatedPropertyValuesForSubQuest)
-      ) // zzz
-      console.log(
-        "accumulatedPropertyValuesForScene",
-        toJS(accumulatedPropertyValuesForScene)
-      ) // zzz
+      // console.log("") // zzz
+      // console.log("") // zzz
+      // console.log("-----------") // zzz
+      // console.log("scene.location.name", toJS(scene.location.name)) // zzz
+      // console.log(
+      //   "accumulatedPropertyValuesForSubQuest",
+      //   toJS(accumulatedPropertyValuesForSubQuest)
+      // ) // zzz
+      // console.log(
+      //   "accumulatedPropertyValuesForScene",
+      //   toJS(accumulatedPropertyValuesForScene)
+      // ) // zzz
 
       const combinedProps = {
         ...accumulatedPropertyValuesForSubQuest,
@@ -70,7 +70,7 @@ export default class QuestStatusUtils {
       }
 
       const accumulatedPropertyValues = combinedProps
-      console.log("accumulatedPropertyValues", toJS(accumulatedPropertyValues)) // zzz
+      // console.log("accumulatedPropertyValues", toJS(accumulatedPropertyValues)) // zzz
       // const accumulatedPropertyValues = accumulatedPropertyValuesForScene
       const propertyNames = Object.keys(accumulatedPropertyValues)
 
