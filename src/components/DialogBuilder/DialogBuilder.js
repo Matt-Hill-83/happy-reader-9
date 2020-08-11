@@ -12,98 +12,8 @@ import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import Constants from "../../Utils/Constants/Constants"
 import Utils from "../../Utils/Utils"
 
-const onSubmit = ({ content, scenes, saveItems }) => {
-  const linesArray = content.split("\n")
-
-  linesArray.slice(0.5).forEach((item) => {
-    // linesArray.forEach((item) => {
-    const reg = new RegExp(/(.*)==>(.+)---(.+)---(.+)<==/)
-    const match = item.match(reg)
-
-    if (match) {
-      const newText = match[1]
-      const sceneIndex = match[2]
-      const frameIndex = match[3]
-      const dialogIndex = match[4]
-
-      const scene = scenes[sceneIndex]
-      const frames = _get(scene, "frameSet.frames") || []
-      const frame = frames[frameIndex]
-      const dialog = frame.dialog[dialogIndex]
-
-      if (dialog !== newText) {
-        frame.dialog[dialogIndex].text = newText
-      }
-    }
-  })
-  saveItems()
-}
-
-const renderCritterPicker = ({ dialog, frame, saveItems }) => {
-  const { critters1, critters2 } = frame
-  const crittersInFrame = [...critters1, ...critters2]
-  const selectedItem = crittersInFrame.find(
-    (item) => item.name === dialog.character
-  )
-
-  const onChangeCritter = (newValue) => {
-    dialog.character = newValue.name
-    saveItems()
-  }
-
-  return (
-    <SimpleSelectObj
-      className={css.sceneDropdown}
-      items={crittersInFrame}
-      value={selectedItem}
-      getOptionLabel={(option) => _get(option, "name")}
-      onChange={onChangeCritter}
-    />
-  )
-}
-
-const getStyles = ({ sceneIndex }) => {
-  const colors = Constants.subQuestColors
-  const colorIndex = sceneIndex % colors.length
-  const backgroundColor = colors[colorIndex]
-  return {
-    "background-color": `#${backgroundColor}`,
-  }
-}
-
-const addNewRowToTextArea = ({ text, fakeDiv, rowNum, dataParts }) => {
-  dataParts.fakeDivs.push(fakeDiv)
-  dataParts.content += `${text}\n`
-  rowNum.value++
-}
-
-const insertDummyRowBetweenFrames = ({
-  frameIndex,
-  scene,
-  style,
-  rowNum,
-  dataParts,
-}) => {
-  const fakeDiv = (
-    <div
-      className={`${css.fakeDiv}
-   ${css.frameSeparatorDiv}
-   ${frameIndex === 0 ? css.newSceneRow : ""}
-   
-   `}
-      style={style}
-    >
-      {`${scene.location.name}  - F${frameIndex}`}
-    </div>
-  )
-
-  const text = "-------------------"
-
-  addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
-}
-
 export default function DialogBuilder({ props }) {
-  // const [questConfig, setQuestConfig] = useState([])
+  const [rowData, setrowData] = useState({})
 
   const { saveItems, world } = props
   const scenes = _get(world, "data.newGrid5") || []
@@ -126,7 +36,97 @@ export default function DialogBuilder({ props }) {
   }
 
   let rowNum = { value: 0 }
-  const rowRecords = []
+
+  const updateTextChanges = ({ content, scenes, saveItems, metaInfoMap }) => {
+    const linesArray = content.split("\n")
+
+    console.log("metaInfoMap", toJS(metaInfoMap)) // zzz
+    linesArray.forEach((line, lineIndex) => {
+      const dataStructureIndices = metaInfoMap[lineIndex]
+      // console.log("dataStructureIndices", toJS(dataStructureIndices)) // zzz
+      const reg = new RegExp(/(.*)==>(.+)---(.+)---(.+)<==/)
+      const match = line.match(reg)
+
+      if (dataStructureIndices) {
+        const newText = match[1]
+
+        const { sceneIndex, frameIndex, dialogIndex } = dataStructureIndices
+
+        const scene = scenes[sceneIndex]
+        const frames = _get(scene, "frameSet.frames") || []
+        const frame = frames[frameIndex]
+        const dialog = frame.dialog[dialogIndex]
+
+        if (dialog !== newText) {
+          frame.dialog[dialogIndex].text = newText
+        }
+      }
+    })
+    saveItems()
+  }
+
+  const renderCritterPicker = ({ dialog, frame, saveItems }) => {
+    const { critters1, critters2 } = frame
+    const crittersInFrame = [...critters1, ...critters2]
+    const selectedItem = crittersInFrame.find(
+      (item) => item.name === dialog.character
+    )
+
+    const onChangeCritter = (newValue) => {
+      dialog.character = newValue.name
+      saveItems()
+    }
+
+    return (
+      <SimpleSelectObj
+        className={css.sceneDropdown}
+        items={crittersInFrame}
+        value={selectedItem}
+        getOptionLabel={(option) => _get(option, "name")}
+        onChange={onChangeCritter}
+      />
+    )
+  }
+
+  const getStyles = ({ sceneIndex }) => {
+    const colors = Constants.subQuestColors
+    const colorIndex = sceneIndex % colors.length
+    const backgroundColor = colors[colorIndex]
+    return {
+      "background-color": `#${backgroundColor}`,
+    }
+  }
+
+  const addNewRowToTextArea = ({ text, fakeDiv, rowNum, dataParts }) => {
+    dataParts.fakeDivs.push(fakeDiv)
+    dataParts.content += `${text}\n`
+    rowNum.value++
+  }
+
+  const insertDummyRowBetweenFrames = ({
+    frameIndex,
+    scene,
+    style,
+    rowNum,
+    dataParts,
+  }) => {
+    const fakeDiv = (
+      <div
+        className={`${css.fakeDiv}
+   ${css.frameSeparatorDiv}
+   ${frameIndex === 0 ? css.newSceneRow : ""}
+   
+   `}
+        style={style}
+      >
+        {`${scene.location.name}  - F${frameIndex}`}
+      </div>
+    )
+
+    const text = "-------------------"
+
+    addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
+  }
 
   const onAddRow = ({ rowIndex, before, items }) => {
     const newElement = Constants.getNewDialog()
@@ -145,6 +145,7 @@ export default function DialogBuilder({ props }) {
     saveItems()
   }
 
+  const metaInfoMap = { test: 555 }
   const insertRowInTextArea = ({
     dialogs,
     dialog,
@@ -153,9 +154,11 @@ export default function DialogBuilder({ props }) {
     sceneIndex,
     frameIndex,
     dialogIndex,
+    rowNum,
   }) => {
     if (dialog.text) {
       const metaInfo = `==>${sceneIndex}---${frameIndex}---${dialogIndex}<==`
+      metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
 
       const text = `${dialog.text} ${metaInfo}`
       const fakeDiv = (
@@ -163,7 +166,6 @@ export default function DialogBuilder({ props }) {
           <AddDeleteButtonGroup
             props={{
               rowIndex: dialogIndex,
-              // onDelete: onDeleteRow,
               onDelete: ({ rowIndex }) =>
                 onDeleteRow({ items: dialogs, rowIndex }),
               onAdd: ({ rowIndex, before }) =>
@@ -201,6 +203,7 @@ export default function DialogBuilder({ props }) {
       frame.dialog.forEach((dialog, dialogIndex) => {
         insertRowInTextArea({
           dialogs: frame.dialog,
+          rowNum,
           dialog,
           style,
           frame,
@@ -215,7 +218,8 @@ export default function DialogBuilder({ props }) {
   const myTextEditorProps = {
     content: dataParts.content,
     className: css.textEditor,
-    onSubmit: ({ content }) => onSubmit({ content, scenes, saveItems }),
+    onSubmit: ({ content }) =>
+      updateTextChanges({ content, scenes, saveItems, metaInfoMap }),
   }
 
   return (
