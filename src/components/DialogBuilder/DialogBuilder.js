@@ -11,6 +11,33 @@ import css from "./DialogBuilder.module.scss"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import Constants from "../../Utils/Constants/Constants"
 
+const onSubmit = ({ content, scenes, saveItems }) => {
+  const linesArray = content.split("\n")
+
+  linesArray.slice(0.5).forEach((item) => {
+    // linesArray.forEach((item) => {
+    const reg = new RegExp(/(.*)==>(.+)---(.+)---(.+)<==/)
+    const match = item.match(reg)
+
+    if (match) {
+      const newText = match[1]
+      const sceneIndex = match[2]
+      const frameIndex = match[3]
+      const dialogIndex = match[4]
+
+      const scene = scenes[sceneIndex]
+      const frames = _get(scene, "frameSet.frames") || []
+      const frame = frames[frameIndex]
+      const dialog = frame.dialog[dialogIndex]
+
+      if (dialog !== newText) {
+        frame.dialog[dialogIndex].text = newText
+      }
+    }
+  })
+  saveItems()
+}
+
 const renderCritterPicker = ({ dialog, frame, saveItems }) => {
   const { critters1, critters2 } = frame
   const crittersInFrame = [...critters1, ...critters2]
@@ -144,6 +171,7 @@ export default function DialogBuilder({ props }) {
         rowNum,
         dataParts,
       })
+
       if (!frame.dialog) {
         frame.dialog = []
       }
@@ -161,43 +189,16 @@ export default function DialogBuilder({ props }) {
     })
   })
 
-  const onSubmit = ({ content }) => {
-    const linesArray = content.split("\n")
-
-    linesArray.slice(0.5).forEach((item) => {
-      // linesArray.forEach((item) => {
-      const reg = new RegExp(/(.*)==>(.+)---(.+)---(.+)<==/)
-      const match = item.match(reg)
-
-      if (match) {
-        const newText = match[1]
-        const sceneIndex = match[2]
-        const frameIndex = match[3]
-        const dialogIndex = match[4]
-
-        const scene = scenes[sceneIndex]
-        const frames = _get(scene, "frameSet.frames") || []
-        const frame = frames[frameIndex]
-        const dialog = frame.dialog[dialogIndex]
-
-        if (dialog !== newText) {
-          frame.dialog[dialogIndex].text = newText
-        }
-      }
-    })
-    saveItems()
-  }
-
-  const dialogBuilderProps = {
+  const myTextEditorProps = {
     content: dataParts.content,
     className: css.textEditor,
-    onSubmit,
+    onSubmit: ({ content }) => onSubmit({ content, scenes, saveItems }),
   }
 
   return (
     <div className={css.main}>
       <div className={css.controlPanel}>{dataParts.fakeDivs}</div>
-      <MyTextEditor props={dialogBuilderProps}></MyTextEditor>
+      <MyTextEditor props={myTextEditorProps}></MyTextEditor>
     </div>
   )
 }
