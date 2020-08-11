@@ -2,38 +2,23 @@ import Utils from "../Utils"
 
 export default class Constants {
   static getNewScene = ({ name = "blank" }) => {
+    const id = Utils.generateUuid()
     return {
       name,
-      id: "xxx1",
-      sceneTriggers: [
-        // {
-        //   conditions: [
-        //     {
-        //       currentMission: 0,
-        //     },
-        //   ],
-        //   name: "lock",
-        // },
-      ],
+      id,
+      sceneTriggers: [],
     }
   }
 
   static getNewSubQuest = ({ name = "new SubQuest" }) => {
+    const id = Utils.generateUuid()
+
     const newSubQuest = {
+      id,
       name,
       triggers: [],
-      // triggers: [Constants.getNewTrigger()],
       scenes: [this.getNewScene({})],
-      index: 0,
-      missions: [
-        {
-          name: "Feed the pig",
-          rewards: [{ name: "gold", amount: 5 }],
-          item: { name: "fig" },
-          recipient: { name: "pig" },
-          missionType: "giveItemToPerson",
-        },
-      ],
+      missions: [Constants.getNewMission],
     }
     return newSubQuest
   }
@@ -55,33 +40,11 @@ export default class Constants {
   }
 
   static getNewQuestConfig = ({ props = {} }) => {
+    const id = Utils.generateUuid()
+
     return {
-      missions: [
-        {
-          name: "Feed the pig",
-          item: { name: "fig" },
-          recipient: { name: "pig" },
-          rewards: [{ name: "gold", amount: 5 }],
-        },
-        {
-          recipient: { name: "goatInABoat" },
-          name: "Feed the goat.",
-          rewards: [{ name: "gold", amount: 5 }],
-          item: { name: "bun" },
-        },
-        {
-          recipient: { name: "pinky01" },
-          name: "Give Pinky a gift.",
-          item: { name: "mug" },
-          rewards: [{ amount: 5, name: "gold" }],
-        },
-        {
-          recipient: { name: "babyTroll01" },
-          name: "Give a Troll a Gift.",
-          rewards: [{ name: "gold", amount: 5 }],
-          item: { name: "pin" },
-        },
-      ],
+      id,
+      missions: [Constants.getNewMission],
       subQuests: [Constants.getNewSubQuest({})],
     }
   }
@@ -108,6 +71,15 @@ export default class Constants {
       rewards: [{ amount: 5, name: "gold" }],
       recipient: { name: "pig" },
       item: { name: "fig" },
+    }
+  }
+
+  static getNewDialog = () => {
+    const id = Utils.generateUuid()
+    return {
+      id,
+      character: "empty",
+      text: "----------------------------",
     }
   }
 

@@ -121,7 +121,7 @@ class Frame extends Component {
   renderDialog = () => {
     const { frame } = this.state
     const dialog = (frame && frame.dialog) || []
-    console.log("dialog", toJS(dialog)) // zzz
+    console.log("dialog-------------------", toJS(dialog)) // zzz
 
     const renderedDialogs = dialog.map((line, lineIndex) => {
       const { text, characterIndex = 1 } = line
@@ -157,7 +157,7 @@ class Frame extends Component {
     if (dialog[lineIndex]["text"]) {
       dialog[lineIndex]["text"] = newLine
     } else {
-      frame.dialog[lineIndex] = { text: newLine }
+      // frame.dialog[lineIndex] = { text: newLine }
     }
     this.setState({ frame })
   }

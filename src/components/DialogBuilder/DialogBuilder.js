@@ -10,6 +10,7 @@ import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import css from "./DialogBuilder.module.scss"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import Constants from "../../Utils/Constants/Constants"
+import Utils from "../../Utils/Utils"
 
 const onSubmit = ({ content, scenes, saveItems }) => {
   const linesArray = content.split("\n")
@@ -127,7 +128,25 @@ export default function DialogBuilder({ props }) {
   let rowNum = { value: 0 }
   const rowRecords = []
 
+  const onAddRow = ({ rowIndex, before, items }) => {
+    const newElement = Constants.getNewDialog()
+    Utils.addArrayElement({
+      newElement,
+      before,
+      index: rowIndex,
+      array: items,
+    })
+
+    saveItems()
+  }
+
+  const onDeleteRow = ({ rowIndex, items }) => {
+    Utils.deleteArrayElement({ index: rowIndex, array: items })
+    saveItems()
+  }
+
   const insertRowInTextArea = ({
+    dialogs,
     dialog,
     style,
     frame,
@@ -143,9 +162,12 @@ export default function DialogBuilder({ props }) {
         <div className={css.fakeDiv} style={style}>
           <AddDeleteButtonGroup
             props={{
-              // rowIndex: tableMeta.rowIndex,
+              rowIndex: dialogIndex,
               // onDelete: onDeleteRow,
-              // onAdd: onAddRow,
+              onDelete: ({ rowIndex }) =>
+                onDeleteRow({ items: dialogs, rowIndex }),
+              onAdd: ({ rowIndex, before }) =>
+                onAddRow({ items: dialogs, rowIndex, before }),
               vertical: false,
               noPopover: true,
               className: css.dialogBuilderButtonGroup,
@@ -178,6 +200,7 @@ export default function DialogBuilder({ props }) {
 
       frame.dialog.forEach((dialog, dialogIndex) => {
         insertRowInTextArea({
+          dialogs: frame.dialog,
           dialog,
           style,
           frame,

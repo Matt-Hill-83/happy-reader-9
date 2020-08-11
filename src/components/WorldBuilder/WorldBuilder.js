@@ -23,7 +23,6 @@ import css from "./WorldBuilder.module.scss"
 import DialogBuilder from "../DialogBuilder/DialogBuilder"
 import ExportJson from "../ExportJson/ExportJson"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
-import FrameSetUploader from "../FrameSetUploader/FrameSetUploader"
 import JsonEditor2 from "../JsonEditor2/JsonEditor2"
 import JsonUtils from "../../Utils/JsonUtils"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
@@ -286,6 +285,12 @@ class WorldBuilder extends Component {
     await WorldBuilderUtils.updateMap({ mapToUpdate: world })
   }
 
+  saveItemsDialogBuilder = async () => {
+    const world = worldBuilderStore.getWorldBuilderWorld() || {}
+    await WorldBuilderUtils.updateMap({ mapToUpdate: world })
+    this.setState({ saveItemsDialogBuilder: new Date() })
+  }
+
   importWorldFromJson = async ({ newWorld }) => {
     await this.addNewWorld()
 
@@ -517,6 +522,7 @@ class WorldBuilder extends Component {
       showSubQuestWizard,
       showFrameBuilder,
       showDialogBuilder,
+      dialogBuilderKey,
     } = this.state
 
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
@@ -537,7 +543,7 @@ class WorldBuilder extends Component {
     }
 
     const dialogBuilderProps = {
-      saveItems: this.saveItems,
+      saveItems: this.saveItemsDialogBuilder,
       world,
     }
 
@@ -574,6 +580,7 @@ class WorldBuilder extends Component {
         {showFrameBuilder && (
           <div className={css.content2}>
             <FrameBuilder
+              key={dialogBuilderKey}
               world={world}
               scene={sceneToEdit}
               onExitFrameBuilder={(frame) => this.onExitFrameBuilder({ frame })}
