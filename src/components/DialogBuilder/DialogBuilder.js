@@ -11,6 +11,15 @@ import css from "./DialogBuilder.module.scss"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import Constants from "../../Utils/Constants/Constants"
 
+const getStyles = ({ sceneIndex }) => {
+  const colors = Constants.subQuestColors
+  const colorIndex = sceneIndex % colors.length
+  const backgroundColor = colors[colorIndex]
+  return {
+    "background-color": `#${backgroundColor}`,
+  }
+}
+
 export default function DialogBuilder({ props }) {
   // const [questConfig, setQuestConfig] = useState([])
 
@@ -115,15 +124,6 @@ export default function DialogBuilder({ props }) {
         </div>
       )
       addNewRow({ text, fakeDiv, rowNum, dataParts })
-    }
-  }
-
-  const getStyles = ({ sceneIndex }) => {
-    const colors = Constants.subQuestColors
-    const colorIndex = sceneIndex % colors.length
-    const backgroundColor = colors[colorIndex]
-    return {
-      "background-color": `#${backgroundColor}`,
     }
   }
 
