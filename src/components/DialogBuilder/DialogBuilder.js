@@ -11,6 +11,7 @@ import css from "./DialogBuilder.module.scss"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import Constants from "../../Utils/Constants/Constants"
 import Utils from "../../Utils/Utils"
+import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 
 export default function DialogBuilder({ props }) {
   const [rowData, setrowData] = useState({})
@@ -40,12 +41,8 @@ export default function DialogBuilder({ props }) {
   const updateTextChanges = ({ content, scenes, saveItems, metaInfoMap }) => {
     const linesArray = content.split("\n")
 
-    console.log("metaInfoMap", toJS(metaInfoMap)) // zzz
-
     linesArray.forEach((line, lineIndex) => {
       const dataStructureIndices = metaInfoMap[lineIndex]
-      // const reg = new RegExp(/(.*)==>(.+)---(.+)---(.+)<==/)
-      // const match = line.match(reg)
 
       if (dataStructureIndices) {
         const newText = line
@@ -128,7 +125,7 @@ export default function DialogBuilder({ props }) {
     addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
   }
 
-  const onAddRow = ({ rowIndex, before, items }) => {
+  const onAddDialogRow = ({ rowIndex, before, items }) => {
     const newElement = Constants.getNewDialog()
     Utils.addArrayElement({
       newElement,
@@ -145,23 +142,70 @@ export default function DialogBuilder({ props }) {
     saveItems()
   }
 
-  const metaInfoMap = { test: 555 }
-  const insertRowInTextArea = ({
-    dialogs,
+  const splitFrame = ({ rowIndex, frame, frames }) => {
+    console.log("frame", toJS(frame)) // zzz
+    console.log("frame.dialog", toJS(frame.dialog)) // zzz
+    // const newElement = Constants.getNewDialog()
+    const newFrame = WorldBuilderUtils.getNewFrame({})
+    const dialog1 = frame.dialog.slice(0, rowIndex)
+    const dialog2 = frame.dialog.slice(rowIndex)
+
+    console.log("dialog1", toJS(dialog1)) // zzz
+    console.log("dialog2", toJS(dialog2)) // zzz
+
+    frame.dialog.length = 0
+    frame.dialog.push(...dialog1)
+    newFrame.dialog = [...dialog2]
+
+    Utils.addArrayElement({
+      newElement: newFrame,
+      before: false,
+      index: rowIndex,
+      array: frames,
+    })
+
+    saveItems()
+  }
+
+  const metaInfoMap = {}
+  const renderTextAreaRow = ({
     dialog,
-    style,
-    frame,
-    sceneIndex,
-    frameIndex,
     dialogIndex,
+    dialogs,
+    frame,
+    frameIndex,
+    frames,
     rowNum,
+    sceneIndex,
+    style,
   }) => {
     if (dialog.text) {
-      const metaInfo = ``
-      // const metaInfo = `==>${sceneIndex}---${frameIndex}---${dialogIndex}<==`
+      const renderSplitFrameButton = ({}) => {
+        return (
+          <Button
+            onClick={() =>
+              splitFrame({
+                rowIndex: frameIndex,
+                frames,
+                frame,
+                // before: true,
+              })
+            }
+            // icon={IconNames.ADD}
+          >
+            S
+          </Button>
+        )
+      }
+
+      const moreButtons = [
+        renderCritterPicker({ dialog, frame, saveItems }),
+        renderSplitFrameButton({}),
+      ]
+
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
 
-      const text = `${dialog.text} ${metaInfo}`
+      const text = `${dialog.text}`
       const fakeDiv = (
         <div className={css.fakeDiv} style={style}>
           <AddDeleteButtonGroup
@@ -170,11 +214,11 @@ export default function DialogBuilder({ props }) {
               onDelete: ({ rowIndex }) =>
                 onDeleteRow({ items: dialogs, rowIndex }),
               onAdd: ({ rowIndex, before }) =>
-                onAddRow({ items: dialogs, rowIndex, before }),
+                onAddDialogRow({ items: dialogs, rowIndex, before }),
               vertical: false,
               noPopover: true,
               className: css.dialogBuilderButtonGroup,
-              moreButtons: renderCritterPicker({ dialog, frame, saveItems }),
+              moreButtons: moreButtons,
             }}
           />
           <div className={css.emptySpace}></div>
@@ -202,15 +246,16 @@ export default function DialogBuilder({ props }) {
       }
 
       frame.dialog.forEach((dialog, dialogIndex) => {
-        insertRowInTextArea({
-          dialogs: frame.dialog,
-          rowNum,
+        renderTextAreaRow({
           dialog,
-          style,
-          frame,
-          sceneIndex,
-          frameIndex,
           dialogIndex,
+          dialogs: frame.dialog,
+          frame,
+          frameIndex,
+          frames,
+          rowNum,
+          sceneIndex,
+          style,
         })
       })
     })
