@@ -41,7 +41,7 @@ class WorldBuilder extends Component {
   state = {
     sceneToEdit: null,
     showFrameBuilder: false,
-    showQuestConfig: true,
+    showQuestConfig: false,
     showSceneConfig: false,
     showSubQuestWizard: false,
     showDialogBuilder: false,
@@ -447,22 +447,67 @@ class WorldBuilder extends Component {
     return (
       <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
         {dialogBuilderButton}
-        {subQuestWizardButton}
         <Popover
           content={
             <ButtonGroup
               vertical={true}
               className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
             >
-              {questConfigButton}
+              {subQuestWizardButton}
+              {false && questConfigButton}
               {getJsonButton}
               {uploadJsonButton}
             </ButtonGroup>
           }
-        >
-          <Button icon="document" rightIcon="caret-down" text="Config" />
-        </Popover>
+          target={
+            <Button icon="document" rightIcon="caret-down" text="Config" />
+          }
+        ></Popover>
       </ButtonGroup>
+    )
+  }
+
+  renderHeaders = ({ title, world }) => {
+    return (
+      <div className={css.subTitle}>
+        <WorldPicker
+          initialValue={title}
+          showDelete={true}
+          showReleased={true}
+          showReleasedToProd={true}
+          updateIsReleasedProperty={this.updateIsReleasedProperty}
+          updateReleasedToProd={this.updateReleasedToProd}
+          onChangeWorld={this.onChangeWorld}
+        />
+        <div className={css.terminalScenePickers}>
+          start:
+          {this.renderTerminalScenePicker({ isStartScene: true })}
+          end:
+          {this.renderTerminalScenePicker({ isStartScene: false })}
+        </div>
+        {`${world.id}`}
+        <Button
+          text={"+ New Map"}
+          onClick={() => this.onChangeWorld({ newWorld: true })}
+        />
+        {this.renderMainButtonGroup()}
+      </div>
+    )
+  }
+
+  renderScenesGrid = ({ world }) => {
+    const worldBuilderScenesGridProps = {
+      editFrameSet: this.editFrameSet,
+      saveItems: this.saveItems,
+      world,
+    }
+
+    return (
+      <div className={css.left}>
+        <WorldBuilderScenesGrid
+          {...worldBuilderScenesGridProps}
+        ></WorldBuilderScenesGrid>
+      </div>
     )
   }
 
@@ -475,9 +520,6 @@ class WorldBuilder extends Component {
     } = this.state
 
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
-    if (!world.data) {
-      // return null
-    }
 
     let questConfig
     let newGrid5
@@ -499,12 +541,6 @@ class WorldBuilder extends Component {
       world,
     }
 
-    const worldBuilderScenesGridProps = {
-      editFrameSet: this.editFrameSet,
-      saveItems: this.saveItems,
-      world,
-    }
-
     return (
       <div className={css.main}>
         {this.renderSceneConfig({ world })}
@@ -519,38 +555,10 @@ class WorldBuilder extends Component {
           className={css.titleInput}
         />
 
-        {!showFrameBuilder && (
-          <div className={css.subTitle}>
-            <WorldPicker
-              initialValue={title}
-              showDelete={true}
-              showReleased={true}
-              showReleasedToProd={true}
-              updateIsReleasedProperty={this.updateIsReleasedProperty}
-              updateReleasedToProd={this.updateReleasedToProd}
-              onChangeWorld={this.onChangeWorld}
-            />
-            {`${world.id}`}
-            <div className={css.terminalScenePickers}>
-              start:
-              {this.renderTerminalScenePicker({ isStartScene: true })}
-              end:
-              {this.renderTerminalScenePicker({ isStartScene: false })}
-            </div>
-            <Button
-              text={"+ New Map"}
-              onClick={() => this.onChangeWorld({ newWorld: true })}
-            />
-            {this.renderMainButtonGroup()}
-          </div>
-        )}
+        {!showFrameBuilder && this.renderHeaders({ title, world })}
         {!showFrameBuilder && (
           <div className={css.content}>
-            <div className={css.left}>
-              <WorldBuilderScenesGrid
-                {...worldBuilderScenesGridProps}
-              ></WorldBuilderScenesGrid>
-            </div>
+            {this.renderScenesGrid({ world })}
             {showSubQuestWizard && (
               <div className={css.right}>
                 {this.renderQuestConfigTool({ questConfig, newGrid5 })}
