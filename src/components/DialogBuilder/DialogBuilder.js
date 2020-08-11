@@ -14,7 +14,7 @@ import Utils from "../../Utils/Utils"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 
 export default function DialogBuilder({ props }) {
-  const [rowData, setrowData] = useState({})
+  // const [rowData, setrowData] = useState({})
 
   const { saveItems, world } = props
   const scenes = _get(world, "data.newGrid5") || []
@@ -126,6 +126,19 @@ export default function DialogBuilder({ props }) {
     addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
   }
 
+  const onDuplicateFrame = ({ rowIndex, frames, frame }) => {
+    const newElement = WorldBuilderUtils.getNewFrame({ props: { ...frame } })
+
+    Utils.addArrayElement({
+      newElement,
+      before: false,
+      index: rowIndex,
+      array: frames,
+    })
+
+    saveItems()
+  }
+
   const onAddDialogRow = ({ rowIndex, before, items }) => {
     const newElement = Constants.getNewDialog()
     Utils.addArrayElement({
@@ -200,6 +213,23 @@ export default function DialogBuilder({ props }) {
         )
       }
 
+      const renderDuplicateFrameButton = ({}) => {
+        return (
+          <Button
+            onClick={() =>
+              onDuplicateFrame({
+                rowIndex: frameIndex,
+                frames,
+                frame,
+              })
+            }
+            // icon={IconNames.ADD}
+          >
+            Dup
+          </Button>
+        )
+      }
+
       const renderJoinFramesButton = ({}) => {
         return (
           <Button
@@ -222,6 +252,7 @@ export default function DialogBuilder({ props }) {
         renderCritterPicker({ dialog, frame, saveItems }),
         renderSplitFrameButton({}),
         renderJoinFramesButton({}),
+        renderDuplicateFrameButton({}),
       ]
 
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
