@@ -11,6 +11,29 @@ import css from "./DialogBuilder.module.scss"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import Constants from "../../Utils/Constants/Constants"
 
+const renderCritterPicker = ({ dialog, frame, saveItems }) => {
+  const { critters1, critters2 } = frame
+  const crittersInFrame = [...critters1, ...critters2]
+  const selectedItem = crittersInFrame.find(
+    (item) => item.name === dialog.character
+  )
+
+  const onChangeCritter = (newValue) => {
+    dialog.character = newValue.name
+    saveItems()
+  }
+
+  return (
+    <SimpleSelectObj
+      className={css.sceneDropdown}
+      items={crittersInFrame}
+      value={selectedItem}
+      getOptionLabel={(option) => _get(option, "name")}
+      onChange={onChangeCritter}
+    />
+  )
+}
+
 const getStyles = ({ sceneIndex }) => {
   const colors = Constants.subQuestColors
   const colorIndex = sceneIndex % colors.length
@@ -18,6 +41,37 @@ const getStyles = ({ sceneIndex }) => {
   return {
     "background-color": `#${backgroundColor}`,
   }
+}
+
+const addNewRowToTextArea = ({ text, fakeDiv, rowNum, dataParts }) => {
+  dataParts.fakeDivs.push(fakeDiv)
+  dataParts.content += `${text}\n`
+  rowNum.value++
+}
+
+const insertDummyRowBetweenFrames = ({
+  frameIndex,
+  scene,
+  style,
+  rowNum,
+  dataParts,
+}) => {
+  const fakeDiv = (
+    <div
+      className={`${css.fakeDiv}
+   ${css.frameSeparatorDiv}
+   ${frameIndex === 0 ? css.newSceneRow : ""}
+   
+   `}
+      style={style}
+    >
+      {`${scene.location.name}  - F${frameIndex}`}
+    </div>
+  )
+
+  const text = "-------------------"
+
+  addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
 }
 
 export default function DialogBuilder({ props }) {
@@ -35,7 +89,6 @@ export default function DialogBuilder({ props }) {
 
   // on change in props
   useEffect(() => {
-    // TODO: store correct prop
     // setQuestConfig(props.questConfig || {})
   }, [props.questConfig])
 
@@ -44,56 +97,8 @@ export default function DialogBuilder({ props }) {
     fakeDivs: [],
   }
 
-  const renderCritterPicker = ({ dialog, frame }) => {
-    const { critters1, critters2 } = frame
-    const crittersInFrame = [...critters1, ...critters2]
-    const selectedItem = crittersInFrame.find(
-      (item) => item.name === dialog.character
-    )
-
-    const onChangeCritter = (newValue) => {
-      dialog.character = newValue.name
-      saveItems()
-    }
-
-    return (
-      <SimpleSelectObj
-        className={css.sceneDropdown}
-        items={crittersInFrame}
-        value={selectedItem}
-        getOptionLabel={(option) => _get(option, "name")}
-        onChange={onChangeCritter}
-      />
-    )
-  }
-
   let rowNum = { value: 0 }
   const rowRecords = []
-
-  const addNewRow = ({ text, fakeDiv, rowNum, dataParts }) => {
-    dataParts.fakeDivs.push(fakeDiv)
-    dataParts.content += `${text}\n`
-    rowNum.value++
-  }
-
-  const insertDummyRowBetweenFrames = ({ frameIndex, scene, style }) => {
-    const fakeDiv = (
-      <div
-        className={`${css.fakeDiv}
-     ${css.frameSeparatorDiv}
-     ${frameIndex === 0 ? css.newSceneRow : ""}
-     
-     `}
-        style={style}
-      >
-        {`${scene.location.name}  - F${frameIndex}`}
-      </div>
-    )
-
-    const text = "-------------------"
-
-    addNewRow({ text, fakeDiv, rowNum, dataParts })
-  }
 
   const insertRowInTextArea = ({
     dialog,
@@ -117,13 +122,13 @@ export default function DialogBuilder({ props }) {
               vertical: false,
               noPopover: true,
               className: css.dialogBuilderButtonGroup,
-              moreButtons: renderCritterPicker({ dialog, frame }),
+              moreButtons: renderCritterPicker({ dialog, frame, saveItems }),
             }}
           />
           <div className={css.emptySpace}></div>
         </div>
       )
-      addNewRow({ text, fakeDiv, rowNum, dataParts })
+      addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
     }
   }
 
@@ -132,7 +137,13 @@ export default function DialogBuilder({ props }) {
     const style = getStyles({ sceneIndex })
 
     frames.forEach((frame, frameIndex) => {
-      insertDummyRowBetweenFrames({ frameIndex, scene, style })
+      insertDummyRowBetweenFrames({
+        frameIndex,
+        scene,
+        style,
+        rowNum,
+        dataParts,
+      })
       if (!frame.dialog) {
         frame.dialog = []
       }
