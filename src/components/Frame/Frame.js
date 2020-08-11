@@ -157,7 +157,7 @@ class Frame extends Component {
     if (dialog[lineIndex]["text"]) {
       dialog[lineIndex]["text"] = newLine
     } else {
-      // frame.dialog[lineIndex] = { text: newLine }
+      frame.dialog[lineIndex] = { text: newLine }
     }
     this.setState({ frame })
   }

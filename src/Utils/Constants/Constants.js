@@ -18,7 +18,7 @@ export default class Constants {
       name,
       triggers: [],
       scenes: [this.getNewScene({})],
-      missions: [Constants.getNewMission],
+      missions: [Constants.getNewMission()],
     }
     return newSubQuest
   }
@@ -44,7 +44,7 @@ export default class Constants {
 
     return {
       id,
-      missions: [Constants.getNewMission],
+      // missions: [Constants.getNewMission()],
       subQuests: [Constants.getNewSubQuest({})],
     }
   }
