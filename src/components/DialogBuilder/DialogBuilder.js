@@ -107,20 +107,21 @@ export default function DialogBuilder({ props }) {
     rowNum,
     dataParts,
   }) => {
+    const dummyRowLabel = `${scene.location.name}  - F${frameIndex}`
+
     const fakeDiv = (
       <div
-        className={`${css.fakeDiv}
-   ${css.frameSeparatorDiv}
+        className={`${css.fakeDiv} ${css.frameSeparatorDiv}
    ${frameIndex === 0 ? css.newSceneRow : ""}
    
    `}
         style={style}
       >
-        {`${scene.location.name}  - F${frameIndex}`}
+        {dummyRowLabel}
       </div>
     )
 
-    const text = "-------------------"
+    const text = dummyRowLabel
 
     addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
   }
@@ -130,7 +131,7 @@ export default function DialogBuilder({ props }) {
     Utils.addArrayElement({
       newElement,
       before,
-      index: rowIndex,
+      index: rowIndex - 1,
       array: items,
     })
 
@@ -142,16 +143,16 @@ export default function DialogBuilder({ props }) {
     saveItems()
   }
 
-  const splitFrame = ({ rowIndex, frame, frames }) => {
+  const splitFrame = ({ dialogIndex, frame, frames, frameIndex }) => {
     console.log("frame", toJS(frame)) // zzz
-    console.log("frame.dialog", toJS(frame.dialog)) // zzz
-    // const newElement = Constants.getNewDialog()
-    const newFrame = WorldBuilderUtils.getNewFrame({})
-    const dialog1 = frame.dialog.slice(0, rowIndex)
-    const dialog2 = frame.dialog.slice(rowIndex)
+    const newFrame = WorldBuilderUtils.getNewFrame({ props: {} })
+    // const newFrame = WorldBuilderUtils.getNewFrame({ props: { ...frame } })
+    const dialog1 = frame.dialog.slice(0, dialogIndex)
+    const dialog2 = frame.dialog.slice(dialogIndex)
 
-    console.log("dialog1", toJS(dialog1)) // zzz
-    console.log("dialog2", toJS(dialog2)) // zzz
+    console.log("dialogIndex", dialogIndex) // zzz
+    console.log("dialog1", dialog1) // zzz
+    console.log("dialog2", dialog2) // zzz
 
     frame.dialog.length = 0
     frame.dialog.push(...dialog1)
@@ -160,9 +161,16 @@ export default function DialogBuilder({ props }) {
     Utils.addArrayElement({
       newElement: newFrame,
       before: false,
-      index: rowIndex,
+      index: frameIndex,
       array: frames,
     })
+
+    saveItems()
+  }
+
+  const joinFrames = ({ rowIndex, frame, frames, prevFrame }) => {
+    prevFrame.dialog.push(...frame.dialog)
+    Utils.deleteArrayElement({ index: rowIndex, array: frames })
 
     saveItems()
   }
@@ -185,15 +193,33 @@ export default function DialogBuilder({ props }) {
           <Button
             onClick={() =>
               splitFrame({
-                rowIndex: frameIndex,
+                dialogIndex,
+                frameIndex,
                 frames,
                 frame,
-                // before: true,
               })
             }
             // icon={IconNames.ADD}
           >
-            S
+            Sp
+          </Button>
+        )
+      }
+
+      const renderJoinFramesButton = ({}) => {
+        return (
+          <Button
+            onClick={() =>
+              joinFrames({
+                rowIndex: frameIndex,
+                prevFrame: frames[frameIndex - 1],
+                frames,
+                frame,
+              })
+            }
+            // icon={IconNames.ADD}
+          >
+            Join
           </Button>
         )
       }
@@ -201,6 +227,7 @@ export default function DialogBuilder({ props }) {
       const moreButtons = [
         renderCritterPicker({ dialog, frame, saveItems }),
         renderSplitFrameButton({}),
+        renderJoinFramesButton({}),
       ]
 
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
