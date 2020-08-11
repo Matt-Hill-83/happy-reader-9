@@ -41,14 +41,14 @@ export default function DialogBuilder({ props }) {
     const linesArray = content.split("\n")
 
     console.log("metaInfoMap", toJS(metaInfoMap)) // zzz
+
     linesArray.forEach((line, lineIndex) => {
       const dataStructureIndices = metaInfoMap[lineIndex]
-      // console.log("dataStructureIndices", toJS(dataStructureIndices)) // zzz
-      const reg = new RegExp(/(.*)==>(.+)---(.+)---(.+)<==/)
-      const match = line.match(reg)
+      // const reg = new RegExp(/(.*)==>(.+)---(.+)---(.+)<==/)
+      // const match = line.match(reg)
 
       if (dataStructureIndices) {
-        const newText = match[1]
+        const newText = line
 
         const { sceneIndex, frameIndex, dialogIndex } = dataStructureIndices
 
@@ -157,7 +157,8 @@ export default function DialogBuilder({ props }) {
     rowNum,
   }) => {
     if (dialog.text) {
-      const metaInfo = `==>${sceneIndex}---${frameIndex}---${dialogIndex}<==`
+      const metaInfo = ``
+      // const metaInfo = `==>${sceneIndex}---${frameIndex}---${dialogIndex}<==`
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
 
       const text = `${dialog.text} ${metaInfo}`
