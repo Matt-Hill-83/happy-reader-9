@@ -145,6 +145,7 @@
   .charactersContainer {
     overflow: hidden;
     z-index: 10;
+    display: flex;
   }
 
   .cloudImageContainer {
@@ -263,7 +264,7 @@
   }
 
   .character1Mini {
-    height: 2vh;
+    height: 4vh;
     width: auto;
     display: inline-flex;
   }
