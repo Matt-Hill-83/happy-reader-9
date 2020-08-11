@@ -20,40 +20,31 @@ class FrameViewer extends Component {
   renderDialog = ({ cloneIndex }) => {
     const { frame, scene } = this.props
     const dialog = (frame && frame.dialog) || []
-    console.log("scene", toJS(scene)) // zzz
     const allCharactersInScene = {}
     scene.frameSet &&
       scene.frameSet.frames &&
       scene.frameSet.frames.forEach((frame) => {
-        console.log("frame", toJS(frame)) // zzz
         const test = [...frame.critters1, ...frame.critters2]
         test.forEach((char) => {
           allCharactersInScene[char.id] = char
         })
       })
-    console.log("allCharactersInScene", toJS(allCharactersInScene)) // zzz
 
     const allCharactersInScene2 = Object.values(allCharactersInScene)
 
-    allCharactersInScene2.forEach((item) => {
-      console.log("item", toJS(item)) // zzz
-    })
+    allCharactersInScene2.forEach((item) => {})
     const charIndexMap = {}
     allCharactersInScene2.forEach((char, charIndex) => {
       charIndexMap[char.name] = charIndex
     })
-    console.log("charIndexMap", toJS(charIndexMap)) // zzz
 
-    // console.log("allCharactersInScene2", toJS(allCharactersInScene2)) // zzz
     const renderedDialogs = dialog.map((line, lineIndex) => {
       const { text } = line
 
       const characterName = line.character || ""
       const characterIndex = charIndexMap[characterName]
-      // const { text, characterIndex } = line
 
       if (!text) return null
-      console.log("characterIndex", toJS(characterIndex)) // zzz
       const className = `character${characterIndex}`
 
       const indexIsEven = characterIndex % 2 === 0
