@@ -47,8 +47,6 @@ export default function DialogBuilder({ props }) {
       saveItems()
     }
 
-    // crittersInFrame.forEach((item) => {})
-
     return (
       <SimpleSelectObj
         className={css.sceneDropdown}
@@ -69,61 +67,85 @@ export default function DialogBuilder({ props }) {
     rowNum.value++
   }
 
-  scenes.forEach((scene, sceneIndex) => {
-    const frames = _get(scene, "frameSet.frames") || []
+  const insertDummyRowBetweenFrames = ({ frameIndex, scene, style }) => {
+    const fakeDiv = (
+      <div
+        className={`${css.fakeDiv}
+     ${css.frameSeparatorDiv}
+     ${frameIndex === 0 ? css.newSceneRow : ""}
+     
+     `}
+        style={style}
+      >
+        {`${scene.location.name}  - F${frameIndex}`}
+      </div>
+    )
 
+    const text = "-------------------"
+
+    addNewRow({ text, fakeDiv, rowNum, dataParts })
+  }
+
+  const insertRowInTextArea = ({
+    dialog,
+    style,
+    frame,
+    sceneIndex,
+    frameIndex,
+    dialogIndex,
+  }) => {
+    if (dialog.text) {
+      const metaInfo = `==>${sceneIndex}---${frameIndex}---${dialogIndex}<==`
+
+      const text = `${dialog.text} ${metaInfo}`
+      const fakeDiv = (
+        <div className={css.fakeDiv} style={style}>
+          <AddDeleteButtonGroup
+            props={{
+              // rowIndex: tableMeta.rowIndex,
+              // onDelete: onDeleteRow,
+              // onAdd: onAddRow,
+              vertical: false,
+              noPopover: true,
+              className: css.dialogBuilderButtonGroup,
+              moreButtons: renderCritterPicker({ dialog, frame }),
+            }}
+          />
+          <div className={css.emptySpace}></div>
+        </div>
+      )
+      addNewRow({ text, fakeDiv, rowNum, dataParts })
+    }
+  }
+
+  const getStyles = ({ sceneIndex }) => {
     const colors = Constants.subQuestColors
     const colorIndex = sceneIndex % colors.length
     const backgroundColor = colors[colorIndex]
-    const style = {
+    return {
       "background-color": `#${backgroundColor}`,
     }
+  }
+
+  scenes.forEach((scene, sceneIndex) => {
+    const frames = _get(scene, "frameSet.frames") || []
+    const style = getStyles({ sceneIndex })
 
     frames.forEach((frame, frameIndex) => {
-      // insert dummy content between frames.
-      const fakeDiv = (
-        <div
-          className={`${css.fakeDiv}
-         ${css.frameSeparatorDiv}
-         ${frameIndex === 0 ? css.newSceneRow : ""}
-         
-         `}
-          style={style}
-        >
-          {`${scene.location.name}  - F${frameIndex}`}
-        </div>
-      )
-
-      const text = "-------------------"
-
-      addNewRow({ text, fakeDiv, rowNum, dataParts })
-
-      console.log("rowNum.value", rowNum.value) // zzz
+      insertDummyRowBetweenFrames({ frameIndex, scene, style })
+      if (!frame.dialog) {
+        frame.dialog = []
+      }
 
       frame.dialog.forEach((dialog, dialogIndex) => {
-        if (dialog.text) {
-          const metaInfo = `==>${sceneIndex}---${frameIndex}---${dialogIndex}<==`
-
-          const text = `${dialog.text} ${metaInfo}`
-          // dataParts.content += newContent
-          const fakeDiv = (
-            <div className={css.fakeDiv} style={style}>
-              <AddDeleteButtonGroup
-                props={{
-                  // rowIndex: tableMeta.rowIndex,
-                  // onDelete: onDeleteRow,
-                  // onAdd: onAddRow,
-                  vertical: false,
-                  noPopover: true,
-                  className: css.dialogBuilderButtonGroup,
-                  moreButtons: renderCritterPicker({ dialog, frame }),
-                }}
-              />
-              <div className={css.emptySpace}></div>
-            </div>
-          )
-          addNewRow({ text, fakeDiv, rowNum, dataParts })
-        }
+        insertRowInTextArea({
+          dialog,
+          style,
+          frame,
+          sceneIndex,
+          frameIndex,
+          dialogIndex,
+        })
       })
     })
   })
