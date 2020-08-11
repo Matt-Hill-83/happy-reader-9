@@ -144,15 +144,9 @@ export default function DialogBuilder({ props }) {
   }
 
   const splitFrame = ({ dialogIndex, frame, frames, frameIndex }) => {
-    console.log("frame", toJS(frame)) // zzz
-    const newFrame = WorldBuilderUtils.getNewFrame({ props: {} })
-    // const newFrame = WorldBuilderUtils.getNewFrame({ props: { ...frame } })
+    const newFrame = WorldBuilderUtils.getNewFrame({ props: { ...frame } })
     const dialog1 = frame.dialog.slice(0, dialogIndex)
     const dialog2 = frame.dialog.slice(dialogIndex)
-
-    console.log("dialogIndex", dialogIndex) // zzz
-    console.log("dialog1", dialog1) // zzz
-    console.log("dialog2", dialog2) // zzz
 
     frame.dialog.length = 0
     frame.dialog.push(...dialog1)
