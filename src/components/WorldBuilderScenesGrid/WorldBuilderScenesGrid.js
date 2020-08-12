@@ -42,92 +42,97 @@ class WorldBuilderScenesGrid extends Component {
 
   renderScenesGrid = () => {
     const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
-
     const gridRows = []
-    const onSave = this.saveItems
-    const buttons = { add: false, trash: false, edit: true }
-    const characterImageSets = [images.creatures]
-    const locationImageSets = [images.all]
-    const locationNames = Object.keys(images.locations)
 
     scenesGrid.forEach((row) => {
       const gridRow = []
-
       row.forEach((scene) => {
-        const locations = [scene.location]
-        const characters = scene.characters
-        const hideScene = scene.location && scene.location.name === "blank"
-
-        const locationCrudMachine = (
-          <CrudMachine
-            className={`${css.crudMachine} ${css.locationMachine}`}
-            items={locations}
-            buttons={buttons}
-            itemRenderer={this.itemRenderer}
-            saveItems={onSave}
-            imageSets={locationImageSets}
-          />
-        )
-
-        const randomLocationGenerator = (
-          <div
-            className={`${css.crudMachine} ${css.locationMachine}`}
-            onClick={() =>
-              this.generateRandomLocation({
-                location: scene.location,
-                locationNames,
-              })
-            }
-          />
-        )
-
-        const locationPicker =
-          scene.location.name === "blank"
-            ? randomLocationGenerator
-            : locationCrudMachine
-
-        const world = worldBuilderStore.getWorldBuilderWorld() || {}
-
-        const backgroundColor = QuestStatusUtils.getSubQuestColor({
-          world: world.data,
-          sceneId: scene.id,
-        })
-
-        gridRow.push(
-          <div className={css.gridCell} style={backgroundColor}>
-            <div className={css.critters1}>
-              {this.itemRenderer({
-                item: { name: "sparkle01" },
-                className: css.test,
-              })}
-            </div>
-            {!hideScene && (
-              <Button
-                className={css.scenePropsButton}
-                onClick={() => this.editFrameSet({ sceneToEdit: scene })}
-              >
-                <Icon icon={IconNames.SETTINGS} />
-              </Button>
-            )}
-            <div className={css.column1}>
-              {locationPicker}
-              {!hideScene && (
-                <CrudMachine
-                  className={`${css.crudMachine} ${css.itemBox} ${css.charactersMachine}`}
-                  items={characters}
-                  itemRenderer={this.itemRenderer}
-                  saveItems={onSave}
-                  imageSets={characterImageSets}
-                />
-              )}
-            </div>
-          </div>
-        )
+        gridRow.push(this.renderCell({ scene }))
       })
       gridRows.push(<div className={css.gridRow}>{gridRow}</div>)
     })
 
     return <div className={css.main}>{gridRows}</div>
+  }
+
+  renderRandomLocationGenerator = ({ scene }) => {
+    const locationNames = Object.keys(images.locations)
+
+    return (
+      <div
+        className={`${css.crudMachine} ${css.locationMachine}`}
+        onClick={() =>
+          this.generateRandomLocation({
+            location: scene.location,
+            locationNames,
+          })
+        }
+      />
+    )
+  }
+
+  renderCell = ({ scene }) => {
+    const buttons = { add: false, trash: false, edit: true }
+    const onSave = this.saveItems
+    const locationImageSets = [images.all]
+    const characterImageSets = [images.creatures]
+    const locations = [scene.location]
+
+    const world = worldBuilderStore.getWorldBuilderWorld() || {}
+    const backgroundColor = QuestStatusUtils.getSubQuestColor({
+      world: world.data,
+      sceneId: scene.id,
+    })
+
+    const locationCrudMachine = (
+      <CrudMachine
+        className={`${css.crudMachine} ${css.locationMachine}`}
+        items={locations}
+        buttons={buttons}
+        itemRenderer={this.itemRenderer}
+        saveItems={onSave}
+        imageSets={locationImageSets}
+      />
+    )
+
+    const locationPicker =
+      scene.location.name === "blank"
+        ? this.renderRandomLocationGenerator({})
+        : locationCrudMachine
+
+    const characters = scene.characters
+    const hideScene = scene.location && scene.location.name === "blank"
+
+    return (
+      <div className={css.gridCell} style={backgroundColor}>
+        <div className={css.critters1}>
+          {this.itemRenderer({
+            item: { name: "sparkle01" },
+            className: css.test,
+          })}
+        </div>
+        {!hideScene && (
+          <Button
+            className={css.scenePropsButton}
+            onClick={() => this.editFrameSet({ sceneToEdit: scene })}
+          >
+            <Icon icon={IconNames.SETTINGS} />
+          </Button>
+        )}
+        <div className={css.column1}>
+          {locationPicker}
+          {!hideScene && (
+            <CrudMachine
+              className={`${css.crudMachine} ${css.itemBox} ${css.charactersMachine}`}
+              items={characters}
+              itemRenderer={this.itemRenderer}
+              saveItems={onSave}
+              imageSets={characterImageSets}
+            />
+          )}
+        </div>
+      </div>
+    )
   }
 
   render() {
