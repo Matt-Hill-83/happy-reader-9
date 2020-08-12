@@ -23,7 +23,7 @@
   .sceneTriggersAccordion {
     box-shadow: none;
     border-radius: 0px !important;
-    border: 1px solid black !important;
+    border-top: 1px solid black;
 
     :global {
       .MuiAccordionSummary-root {
@@ -44,7 +44,7 @@
     border-radius: 0px !important;
     // border: 2px solid black !important;
     border-bottom: none !important;
-    border: 1px solid blue !important;
+    border: 1px solid black !important;
     margin: 6px !important;
 
     :global {

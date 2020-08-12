@@ -43,7 +43,7 @@ class WorldBuilder extends Component {
     showFrameBuilder: false,
     showQuestConfig: false,
     showSceneConfig: false,
-    showSubQuestWizard: true,
+    // showSubQuestWizard: true,
     showSubQuestWizard: false,
     // showDialogBuilder: false,
     showDialogBuilder: true,
@@ -391,9 +391,16 @@ class WorldBuilder extends Component {
     )
   }
 
-  openDialogBuilder = ({ scene }) => {
+  openDialogBuilder = ({}) => {
     this.hideAllModals()
     this.setState({ showDialogBuilder: !this.state.showDialogBuilder })
+  }
+
+  toggleSubQuestPicker = () => {
+    this.hideAllModals()
+    this.setState({
+      showSubQuestWizard: !this.state.showSubQuestWizard,
+    })
   }
 
   renderMainButtonGroup = () => {
@@ -413,11 +420,7 @@ class WorldBuilder extends Component {
       <Button
         icon="document"
         text="SubQuest Wizard"
-        onClick={() =>
-          this.setState({
-            showSubQuestWizard: !showSubQuestWizard,
-          })
-        }
+        onClick={this.toggleSubQuestPicker}
       />
     )
 
@@ -458,14 +461,14 @@ class WorldBuilder extends Component {
     return (
       <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}>
         {dialogBuilderButton}
+        {subQuestWizardButton}
         <Popover
           content={
             <ButtonGroup
               vertical={true}
               className={cx(Classes.ALIGN_LEFT, css.buttonGroup)}
             >
-              {subQuestWizardButton}
-              {false && questConfigButton}
+              {questConfigButton}
               {getJsonButton}
               {uploadJsonButton}
             </ButtonGroup>
