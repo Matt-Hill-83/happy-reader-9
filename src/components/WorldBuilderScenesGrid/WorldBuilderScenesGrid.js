@@ -36,12 +36,12 @@ class WorldBuilderScenesGrid extends Component {
     this.props.editFrameSet && this.props.editFrameSet({ sceneToEdit })
   }
 
+  itemRenderer = ({ item, className }) => {
+    return <ImageDisplay className={className} item={item} />
+  }
+
   renderScenesGrid = () => {
     const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
-
-    const itemRenderer = ({ item, className }) => {
-      return <ImageDisplay className={className} item={item} />
-    }
 
     const gridRows = []
     const onSave = this.saveItems
@@ -63,7 +63,7 @@ class WorldBuilderScenesGrid extends Component {
             className={`${css.crudMachine} ${css.locationMachine}`}
             items={locations}
             buttons={buttons}
-            itemRenderer={itemRenderer}
+            itemRenderer={this.itemRenderer}
             saveItems={onSave}
             imageSets={locationImageSets}
           />
@@ -96,11 +96,10 @@ class WorldBuilderScenesGrid extends Component {
         gridRow.push(
           <div className={css.gridCell} style={backgroundColor}>
             <div className={css.critters1}>
-              {itemRenderer({
+              {this.itemRenderer({
                 item: { name: "sparkle01" },
                 className: css.test,
               })}
-              {/* {itemRenderer({ item: { name: "sparkle01" },className:css.test}} )} */}
             </div>
             {!hideScene && (
               <Button
@@ -116,7 +115,7 @@ class WorldBuilderScenesGrid extends Component {
                 <CrudMachine
                   className={`${css.crudMachine} ${css.itemBox} ${css.charactersMachine}`}
                   items={characters}
-                  itemRenderer={itemRenderer}
+                  itemRenderer={this.itemRenderer}
                   saveItems={onSave}
                   imageSets={characterImageSets}
                 />
