@@ -97,12 +97,27 @@ export const getTableConfig = ({
     const allScenes = Utils.getSimpleSceneObjects({ scenes })
     const combinedItems = [...allItems, ...allScenes]
 
-    const transformedData = scenes.map((scene) => {
-      return { name: scene.location.name, id: scene.id }
-    })
+    // const transformedData = scenes.map((scene) => {
+    //   return { name: scene.location.name, id: scene.id }
+    // })
 
-    const scene = transformedData.find((scene) => scene.id === value.id)
+    const scene = combinedItems.find((item) => item.id === value.id)
+    // TODO - pig does not have an id
+    // TODO - pig does not have an id
+    // TODO - pig does not have an id
+    // TODO - pig does not have an id
+    // TODO - pig does not have an id
 
+    if (!scene) {
+      console.log("value", toJS(value)) // zzz
+      combinedItems.forEach((item) => {
+        console.log(
+          "item.id",
+          toJS(item.id || "none!!-------------------------------")
+        ) // zzz
+      })
+    }
+    console.log("scene", toJS(scene)) // zzz
     return (
       <SimpleSelectObj
         items={combinedItems}
