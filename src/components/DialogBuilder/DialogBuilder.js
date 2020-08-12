@@ -79,7 +79,7 @@ export default function DialogBuilder({ props }) {
       className: css.sceneDropdown,
       items: crittersInFrame,
       defaultValue: selectedItem,
-      getOptionLabel: (option) => _get(option, "name"),
+      getOptionLabel: (option) => _get(option, "name") || "--",
       onChange: onChangeCritter,
     }
     // return null
