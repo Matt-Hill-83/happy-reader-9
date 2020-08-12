@@ -206,10 +206,12 @@ export default function DialogBuilder({ props }) {
         style={style}
       >
         {dummyRowLabel}
-        {renderJoinFramesButton({})}
-        {renderDuplicateFrameButton({})}
-        {renderDeleteFrameButton({})}
-        {showAddDialogButton && renderAddDialogRowButton({})}
+        <ButtonGroup className={css.frameButtons}>
+          {renderJoinFramesButton({})}
+          {renderDuplicateFrameButton({})}
+          {renderDeleteFrameButton({})}
+          {showAddDialogButton && renderAddDialogRowButton({})}
+        </ButtonGroup>
       </div>
     )
 
@@ -304,7 +306,7 @@ export default function DialogBuilder({ props }) {
               })
             }
           >
-            Sp
+            Split
           </Button>
         )
       }
@@ -387,7 +389,7 @@ export default function DialogBuilder({ props }) {
         <div className={css.controlPanel}>{fakeDivs}</div>
         {/* To size the parent container of an absolute div, create a
          dup of the absolute div that is hidden. */}
-        <div className={cx(css.controlPanel, css.hidden)}>{fakeDivs}</div>
+        {/* <div className={cx(css.controlPanel, css.hidden)}>{fakeDivs}</div> */}
         <MyTextEditor props={myTextEditorProps}></MyTextEditor>
       </div>
     </div>
