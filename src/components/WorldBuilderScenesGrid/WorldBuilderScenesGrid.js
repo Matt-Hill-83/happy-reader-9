@@ -71,6 +71,17 @@ class WorldBuilderScenesGrid extends Component {
     )
   }
 
+  renderCritters1 = ({ className }) => {
+    return (
+      <div className={css.critters1}>
+        {this.itemRenderer({
+          item: { name: "sparkle01" },
+          className,
+        })}
+      </div>
+    )
+  }
+
   renderCell = ({ scene }) => {
     const buttons = { add: false, trash: false, edit: true }
     const onSave = this.saveItems
@@ -105,12 +116,7 @@ class WorldBuilderScenesGrid extends Component {
 
     return (
       <div className={css.gridCell} style={backgroundColor}>
-        <div className={css.critters1}>
-          {this.itemRenderer({
-            item: { name: "sparkle01" },
-            className: css.test,
-          })}
-        </div>
+        {this.renderCritters1({ className: css.test })}
         {!hideScene && (
           <Button
             className={css.scenePropsButton}

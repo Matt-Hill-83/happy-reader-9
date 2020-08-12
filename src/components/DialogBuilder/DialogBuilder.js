@@ -385,6 +385,8 @@ export default function DialogBuilder({ props }) {
     <div className={css.main}>
       <div className={css.containerToGetMaxHeight}>
         <div className={css.controlPanel}>{fakeDivs}</div>
+        {/* To size the parent container of an absolute div, create a dup of the absolute div that is hidden. */}
+        <div className={cx(css.controlPanel, css.hidden)}>{fakeDivs}</div>
         <MyTextEditor props={myTextEditorProps}></MyTextEditor>
       </div>
     </div>
