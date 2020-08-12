@@ -14,7 +14,6 @@
 }
 
 .containerToGetMaxHeight {
-  // border: 4px solid orange !important;
   display: flex;
   position: relative;
   flex: 1 1;
@@ -22,7 +21,6 @@
 }
 
 .dialogBuilderButtonGroup {
-  // border: 1px solid red !important;
   display: flex;
   overflow: hidden;
   align-items: flex-end;
@@ -56,14 +54,14 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  // border: 4px solid green !important;
 }
 
 .hidden {
   visibility: hidden;
   position: relative;
   overflow: hidden;
-  min-width: 400px;
+  width: 0px;
+  // min-width: 400px;
   min-height: fit-content;
 }
 
@@ -71,7 +69,7 @@
   position: relative;
   z-index: 1;
   display: flex;
-  margin-left: 363px;
+  margin-left: 300px;
 }
 
 .frameSeparatorDiv {
