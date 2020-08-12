@@ -9,6 +9,7 @@ import MyTextEditor from "../MyTextEditor/MyTextEditor"
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import css from "./DialogBuilder.module.scss"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
+import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 import Constants from "../../Utils/Constants/Constants"
 import Utils from "../../Utils/Utils"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
@@ -74,15 +75,15 @@ export default function DialogBuilder({ props }) {
       saveItems()
     }
 
-    return (
-      <SimpleSelectObj
-        className={css.sceneDropdown}
-        items={crittersInFrame}
-        value={selectedItem}
-        getOptionLabel={(option) => _get(option, "name")}
-        onChange={onChangeCritter}
-      />
-    )
+    const dropDownProps = {
+      className: css.sceneDropdown,
+      items: crittersInFrame,
+      defaultValue: selectedItem,
+      getOptionLabel: (option) => _get(option, "name"),
+      onChange: onChangeCritter,
+    }
+    // return null
+    return <AutoComplete2 props={dropDownProps} />
   }
 
   const getStyles = ({ sceneIndex }) => {
@@ -96,8 +97,6 @@ export default function DialogBuilder({ props }) {
 
   const addNewRowToTextArea = ({ text, fakeDiv, rowNum, dataParts }) => {
     fakeDivs.push(fakeDiv)
-    // setFakeDivs(fakeDivs)
-    // dataParts.fakeDivs.push(fakeDiv)
     dataParts.content += `${text}\n`
     rowNum.value++
   }
@@ -176,6 +175,24 @@ export default function DialogBuilder({ props }) {
       saveItems()
     }
 
+    const renderJoinFramesButton = ({}) => {
+      return (
+        <Button
+          onClick={() =>
+            joinFrames({
+              rowIndex: frameIndex,
+              prevFrame: frames[frameIndex - 1],
+              frames,
+              frame,
+            })
+          }
+          // icon={IconNames.ADD}
+        >
+          Join
+        </Button>
+      )
+    }
+
     const showAddDialogButton = !dialog || dialog.length === 0
     console.log(
       "scene.location.name--------------------",
@@ -192,6 +209,7 @@ export default function DialogBuilder({ props }) {
         style={style}
       >
         {dummyRowLabel}
+        {renderJoinFramesButton({})}
         {renderDuplicateFrameButton({})}
         {renderDeleteFrameButton({})}
         {showAddDialogButton && renderAddDialogRowButton({})}
@@ -295,28 +313,28 @@ export default function DialogBuilder({ props }) {
         )
       }
 
-      const renderJoinFramesButton = ({}) => {
-        return (
-          <Button
-            onClick={() =>
-              joinFrames({
-                rowIndex: frameIndex,
-                prevFrame: frames[frameIndex - 1],
-                frames,
-                frame,
-              })
-            }
-            // icon={IconNames.ADD}
-          >
-            Join
-          </Button>
-        )
-      }
+      // const renderJoinFramesButton = ({}) => {
+      //   return (
+      //     <Button
+      //       onClick={() =>
+      //         joinFrames({
+      //           rowIndex: frameIndex,
+      //           prevFrame: frames[frameIndex - 1],
+      //           frames,
+      //           frame,
+      //         })
+      //       }
+      //       // icon={IconNames.ADD}
+      //     >
+      //       Join
+      //     </Button>
+      //   )
+      // }
 
       const moreButtons = [
         renderCritterPicker({ dialog, frame, saveItems }),
         renderSplitFrameButton({}),
-        renderJoinFramesButton({}),
+        // renderJoinFramesButton({}),
       ]
 
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
