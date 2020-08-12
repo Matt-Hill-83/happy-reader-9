@@ -6,17 +6,14 @@ import { toJS } from "mobx"
 import cx from "classnames"
 import React, { Component } from "react"
 
-import Constants from "../../Utils/Constants/Constants"
 import CrudMachine from "../CrudMachine/CrudMachine"
-import css from "./WorldBuilderScenesGrid.module.scss"
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import images from "../../images/images"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils"
-import Utils from "../../Utils/Utils"
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 
+import css from "./WorldBuilderScenesGrid.module.scss"
 class WorldBuilderScenesGrid extends Component {
   state = {}
 
@@ -42,8 +39,8 @@ class WorldBuilderScenesGrid extends Component {
   renderScenesGrid = () => {
     const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
 
-    const itemRenderer = ({ item }) => {
-      return <ImageDisplay item={item} />
+    const itemRenderer = ({ item, className }) => {
+      return <ImageDisplay className={className} item={item} />
     }
 
     const gridRows = []
@@ -59,7 +56,6 @@ class WorldBuilderScenesGrid extends Component {
       row.forEach((scene) => {
         const locations = [scene.location]
         const characters = scene.characters
-
         const hideScene = scene.location && scene.location.name === "blank"
 
         const locationCrudMachine = (
@@ -99,6 +95,13 @@ class WorldBuilderScenesGrid extends Component {
 
         gridRow.push(
           <div className={css.gridCell} style={backgroundColor}>
+            <div className={css.critters1}>
+              {itemRenderer({
+                item: { name: "sparkle01" },
+                className: css.test,
+              })}
+              {/* {itemRenderer({ item: { name: "sparkle01" },className:css.test}} )} */}
+            </div>
             {!hideScene && (
               <Button
                 className={css.scenePropsButton}
@@ -125,7 +128,7 @@ class WorldBuilderScenesGrid extends Component {
       gridRows.push(<div className={css.gridRow}>{gridRow}</div>)
     })
 
-    return <div className={css.newGrid}>{gridRows}</div>
+    return <div className={css.main}>{gridRows}</div>
   }
 
   render() {

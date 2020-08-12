@@ -1,22 +1,19 @@
+import _get from "lodash.get"
 import { Button, Icon, TextArea } from "@blueprintjs/core"
-import React, { Component } from "react"
-
-import Character from "../Character/Character"
-import Head from "../Head/Head"
 import { IconNames } from "@blueprintjs/icons"
 import { observer } from "mobx-react"
 import { toJS } from "mobx"
-import _get from "lodash.get"
+import cx from "classnames"
+import React, { Component } from "react"
 
+import Character from "../Character/Character"
+import CrudMachine from "../CrudMachine/CrudMachine"
+import Head from "../Head/Head"
+import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import Images from "../../images/images"
+import Utils from "../../Utils/Utils"
 
 import css from "./Frame.module.scss"
-import CharacterPicker from "../CharacterPicker/CharacterPicker"
-import images from "../../images/images"
-import CrudMachine from "../CrudMachine/CrudMachine"
-import ImageDisplay from "../ImageDisplay/ImageDisplay"
-import Utils from "../../Utils/Utils"
-import cx from "classnames"
 
 class Frame extends Component {
   state = {
@@ -253,26 +250,40 @@ class Frame extends Component {
     )
   }
 
+  renderCritters = ({ imageSet }) => {
+    if (!imageSet) return null
+
+    const renderedImages = Object.keys(imageSet).map((key, index) => {
+      const image = imageSet[key]
+
+      return (
+        <div
+          className={css.itemImageContainer}
+          key={index}
+          onClick={() => this.selectItem({ name: key })}
+        >
+          <span className={css.itemLabel}>{key}</span>
+          <img className={css.itemImage} src={image} alt={"imagex"} />
+        </div>
+      )
+    })
+
+    return (
+      <div className={css.girlPickerContainer}>
+        <div className={css.girlPicker}>{renderedImages}</div>
+      </div>
+    )
+  }
+
   render() {
     const { scene } = this.props
 
-    const {
-      frame,
-      showFacePicker,
-      showItemPicker,
-      facePickerCharacter,
-    } = this.state
+    const { frame, showFacePicker, facePickerCharacter } = this.state
 
     if (!frame) {
       return null
     }
 
-    // TODO -  I need put in a dummy frame for when there is none.
-    // TODO -  I need put in a dummy frame for when there is none.
-    // TODO -  I need put in a dummy frame for when there is none.
-    // TODO -  I need put in a dummy frame for when there is none.
-    // TODO -  I need put in a dummy frame for when there is none.
-    // TODO -  I need put in a dummy frame for when there is none.
     const { critters1 = [], critters2 = [] } = frame
 
     const itemRenderer = ({ item }) => {
@@ -314,20 +325,6 @@ class Frame extends Component {
               <Icon icon={IconNames.CROSS} />
             </Button>
           </div>
-        )}
-
-        {showItemPicker && (
-          <CharacterPicker
-            imageSets={[
-              images.creatures,
-              images.all,
-              images.vehicles,
-              images.items,
-            ]}
-            className={css.test}
-            onClose={this.toggleItemPicker}
-            onSelectItem={this.onSelectItem}
-          />
         )}
       </div>
     )

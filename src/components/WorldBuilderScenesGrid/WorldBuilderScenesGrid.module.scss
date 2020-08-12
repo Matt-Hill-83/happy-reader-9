@@ -1,4 +1,4 @@
-.newGrid {
+.main {
   border: 1px solid red !important;
   display: flex;
   flex-direction: column;
@@ -6,6 +6,15 @@
 
   .gridRow {
     display: flex;
+  }
+  .critters1 {
+    border: 1px solid red !important;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 10%;
+    width: 100%;
   }
 
   .gridCell {
