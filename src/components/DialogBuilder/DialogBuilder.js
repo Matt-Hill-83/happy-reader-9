@@ -102,12 +102,31 @@ export default function DialogBuilder({ props }) {
 
   const insertDummyRowBetweenFrames = ({
     frameIndex,
+    frame,
+    frames,
     scene,
     style,
     rowNum,
     dataParts,
   }) => {
     const dummyRowLabel = `${scene.location.name}  - F${frameIndex}`
+
+    const renderDuplicateFrameButton = ({}) => {
+      return (
+        <Button
+          onClick={() =>
+            onDuplicateFrame({
+              rowIndex: frameIndex,
+              frames,
+              frame,
+            })
+          }
+          // icon={IconNames.ADD}
+        >
+          Dup
+        </Button>
+      )
+    }
 
     const fakeDiv = (
       <div
@@ -118,6 +137,7 @@ export default function DialogBuilder({ props }) {
         style={style}
       >
         {dummyRowLabel}
+        {renderDuplicateFrameButton({})}
       </div>
     )
 
@@ -213,23 +233,6 @@ export default function DialogBuilder({ props }) {
         )
       }
 
-      const renderDuplicateFrameButton = ({}) => {
-        return (
-          <Button
-            onClick={() =>
-              onDuplicateFrame({
-                rowIndex: frameIndex,
-                frames,
-                frame,
-              })
-            }
-            // icon={IconNames.ADD}
-          >
-            Dup
-          </Button>
-        )
-      }
-
       const renderJoinFramesButton = ({}) => {
         return (
           <Button
@@ -252,7 +255,6 @@ export default function DialogBuilder({ props }) {
         renderCritterPicker({ dialog, frame, saveItems }),
         renderSplitFrameButton({}),
         renderJoinFramesButton({}),
-        renderDuplicateFrameButton({}),
       ]
 
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
@@ -287,6 +289,8 @@ export default function DialogBuilder({ props }) {
     frames.forEach((frame, frameIndex) => {
       insertDummyRowBetweenFrames({
         frameIndex,
+        frame,
+        frames,
         scene,
         style,
         rowNum,
