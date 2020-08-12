@@ -25,11 +25,7 @@ class WordPage extends React.Component {
       ) || 0
 
     const framesUnlocked = false
-    // const framesUnlocked =
-    //   typeof missionToUnlockFramesAfter === "number" &&
-    //   questStatus.activeMissionIndex >= missionToUnlockFramesAfter
 
-    console.log("framesUnlocked", toJS(framesUnlocked)) // zzz
     if (framesUnlocked && frameSet && frameSet.frames2) {
       frame = frameSet && frameSet.frames2 && frameSet.frames2[activeFrameIndex]
     } else {

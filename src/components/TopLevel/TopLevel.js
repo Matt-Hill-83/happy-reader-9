@@ -197,7 +197,6 @@ class TopLevel extends React.Component {
       })
       const desiredItems =
         (missions && missions.map((mission) => mission.item)) || []
-      console.log("desiredItems", toJS(desiredItems)) // zzz
 
       const desiredItemsFiltered = desiredItems.filter((item) => !!item)
       const clonedQuestConfig = JSON.parse(JSON.stringify(questConfig))

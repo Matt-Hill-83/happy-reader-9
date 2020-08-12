@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MyAccordion({ props }) {
   const { title, content, className = "" } = props
   const classes = useStyles()
+  // const [expanded, setExpanded] = useState(true)
   const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
@@ -39,12 +40,12 @@ export default function MyAccordion({ props }) {
   }, [])
 
   const onChange = (event, value) => {
-    console.log("onChange") // zzz
+    // console.log("onChange") // zzz
     setExpanded(value)
     props.onChange && props.onChange()
   }
 
-  console.log("expanded", toJS(expanded)) // zzz
+  // console.log("expanded", toJS(expanded)) // zzz
   const renderedContent = expanded ? content() : null
 
   const renderedAccordion = (

@@ -20,8 +20,10 @@ export default function AutoComplete2({ props }) {
     sortKeys = ["name"],
   } = props
 
-  const defaultGetOptionLabel = (option) => option.title
-  const getLabel = getOptionLabel || defaultGetOptionLabel
+  const defaultGetOptionLabel = (option) => option.title || "----"
+  const getLabel = getOptionLabel
+    ? (option) => getOptionLabel(option) || "---"
+    : defaultGetOptionLabel
 
   const _onChange = (event = null, value) => {
     onChange && onChange(value)

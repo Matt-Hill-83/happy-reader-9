@@ -42,8 +42,8 @@ class WorldBuilder extends Component {
     showFrameBuilder: false,
     showQuestConfig: false,
     showSceneConfig: false,
-    showSubQuestWizard: false,
-    showDialogBuilder: true,
+    showSubQuestWizard: true,
+    showDialogBuilder: false,
   }
 
   // Changing this to DidMount breaks things
