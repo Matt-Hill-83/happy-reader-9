@@ -108,6 +108,7 @@ class MiniLocation extends React.Component {
       .map((item) => item.name)
       .map((creature) => {
         const image = Images.all[creature] || null
+        if (!image) return null
 
         const friend = (
           <img
@@ -119,6 +120,7 @@ class MiniLocation extends React.Component {
 
         return friend
       })
+    console.log("renderedCharacters", toJS(renderedCharacters)) // zzz
     return <div className={css.charactersContainer}>{renderedCharacters}</div>
   }
 
