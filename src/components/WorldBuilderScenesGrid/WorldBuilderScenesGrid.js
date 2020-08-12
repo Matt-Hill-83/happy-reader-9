@@ -144,7 +144,7 @@ class WorldBuilderScenesGrid extends Component {
 
     const locationPicker =
       scene.location.name === "blank"
-        ? this.renderRandomLocationGenerator({})
+        ? this.renderRandomLocationGenerator({ scene })
         : locationCrudMachine
 
     const characters = scene.characters

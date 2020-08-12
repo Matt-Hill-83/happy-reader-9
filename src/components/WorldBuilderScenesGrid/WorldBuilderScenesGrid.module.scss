@@ -9,32 +9,28 @@
   }
 
   .crittersContainer {
+    position: absolute;
     display: flex;
     flex-direction: column;
-    // border: 1px solid red !important;
-    position: absolute;
     top: 0;
     left: 0;
-    // width: 100%;
-    // background: white;
   }
 
   .critters1 {
-    // border: 1px solid blue !important;
+    position: relative;
     display: flex;
     align-items: center;
-    position: relative;
     width: min-content;
   }
 
   .critterImage {
-    height: 2.6vh;
     display: flex;
     border: 1px solid green !important;
+    border-radius: 3px;
     background: white;
     margin: 1px 0 0 1px;
     padding: 1px;
-    border-radius: 3px;
+    height: 2.6vh;
   }
 
   .gridCell {
