@@ -20,11 +20,7 @@ import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 class WorldBuilderScenesGrid extends Component {
   state = {}
 
-  // Changing this to DidMount breaks things
-  async componentWillMount() {}
-
   saveItems = async () => {
-    // await WorldBuilderUtils.updateMap({})
     await this.props.saveItems()
   }
 
@@ -53,10 +49,8 @@ class WorldBuilderScenesGrid extends Component {
     const gridRows = []
     const onSave = this.saveItems
     const buttons = { add: false, trash: false, edit: true }
-
     const characterImageSets = [images.creatures]
     const locationImageSets = [images.all]
-
     const locationNames = Object.keys(images.locations)
 
     scenesGrid.forEach((row) => {
@@ -135,8 +129,6 @@ class WorldBuilderScenesGrid extends Component {
   }
 
   render() {
-    const {} = this.state
-
     return this.renderScenesGrid()
   }
 }

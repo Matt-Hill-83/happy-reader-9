@@ -19,7 +19,6 @@ import _get from "lodash.get"
 import { maps, gameConfig } from "../../Stores/InitStores"
 import { worldNameStore } from "../../Stores/FrameSetStore"
 import Constants from "../../Utils/Constants/Constants"
-import css from "./WorldBuilder.module.scss"
 import DialogBuilder from "../DialogBuilder/DialogBuilder"
 import ExportJson from "../ExportJson/ExportJson"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
@@ -32,6 +31,8 @@ import WorldBuilderScenesGrid from "../WorldBuilderScenesGrid/WorldBuilderScenes
 import worldBuilderStore from "../../Stores/WorldBuilderStore"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import WorldPicker from "../WorldPicker/WorldPicker"
+
+import css from "./WorldBuilder.module.scss"
 
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
