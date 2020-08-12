@@ -9,21 +9,18 @@ import React, { useEffect, useState } from "react"
 
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import Constants from "../../Utils/Constants/Constants"
-import DialogBuilder from "../DialogBuilder/DialogBuilder"
 import MissionsTable from "../MissionsTable/MissionsTable"
+import MyAccordion from "../MyAccordion/MyAccordion"
 import MyAccordionGroup from "../MyAccordionGroup/MyAccordionGroup"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import TriggersTable from "../TriggersTable/TriggersTable"
 import Utils from "../../Utils/Utils"
 
 import css from "./SubQuestWizard.module.scss"
-import MyAccordion from "../MyAccordion/MyAccordion"
 
 export default function SubQuestWizard({ props }) {
   const [questConfig, setQuestConfig] = useState([])
   const [dataTableKey, setDataTableKey] = useState([])
-  const [showDialogBuilder, setShowDialogBuilder] = useState(false)
-  const [sceneForDialogBuilder, setSceneForDialogBuilder] = useState(null)
 
   const { onSave } = props
 
@@ -118,20 +115,6 @@ export default function SubQuestWizard({ props }) {
       const triggers = sceneConfig.sceneTriggers
       const sceneHasTriggers = triggers.length > 0
 
-      const openDialogBuilder = ({ scene }) => {
-        setSceneForDialogBuilder(scene)
-        setShowDialogBuilder(true)
-      }
-
-      const moreNestedButtons = (
-        <Button
-          className={css.xxxsaveButton}
-          onClick={() => openDialogBuilder({ scene: realScene })}
-        >
-          DB
-        </Button>
-      )
-
       const renderContent = () => {
         const renderedSceneTriggers = sceneHasTriggers
           ? renderTriggers({ triggers, includeAddButton: false })
@@ -155,7 +138,6 @@ export default function SubQuestWizard({ props }) {
                 rowIndex: sceneIndex,
                 onDelete: onDeleteScene,
                 onAdd: onAddScene,
-                moreNestedButtons,
               }}
             />
             <span className={css.mapPickerButton}>
@@ -333,16 +315,7 @@ export default function SubQuestWizard({ props }) {
     })
   }
 
-  let content = null
-  if (showDialogBuilder) {
-    const dialogBuilderProps = {
-      initialValue: "9sadfsa",
-      scene: sceneForDialogBuilder,
-    }
-    content = <DialogBuilder props={dialogBuilderProps}></DialogBuilder>
-  } else {
-    content = <div className={cx(css.content)}>{renderSubQuests()}</div>
-  }
+  const content = <div className={cx(css.content)}>{renderSubQuests()}</div>
 
   return (
     <div className={cx(css.main)}>
@@ -357,14 +330,6 @@ export default function SubQuestWizard({ props }) {
         >
           Save Changes
         </Button>
-        {showDialogBuilder && (
-          <Button
-            className={css.saveButton}
-            onClick={() => setShowDialogBuilder(false)}
-          >
-            Close DB
-          </Button>
-        )}
       </ButtonGroup>
     </div>
   )

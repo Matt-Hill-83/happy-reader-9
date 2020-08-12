@@ -20,6 +20,8 @@ export default function DialogBuilder({ props }) {
   const scenes = _get(world, "data.newGrid5") || []
 
   useEffect(() => {
+    console.log("useEffect - mount-----------------") // zzz
+    setFakeDivs([])
     // on mount
 
     // returned function will be called on component unmount
@@ -28,8 +30,9 @@ export default function DialogBuilder({ props }) {
 
   // on change in props
   useEffect(() => {
-    // setQuestConfig(props.questConfig || {})
-  }, [props.questConfig])
+    console.log("change in props") // zzz
+    setFakeDivs([])
+  }, [props.world])
 
   const dataParts = {
     content: "",
@@ -38,7 +41,7 @@ export default function DialogBuilder({ props }) {
 
   let rowNum = { value: 0 }
 
-  const updateTextChanges = ({ content, scenes, saveItems, metaInfoMap }) => {
+  const updateTextChanges = ({ content, scenes, metaInfoMap }) => {
     const linesArray = content.split("\n")
 
     linesArray.forEach((line, lineIndex) => {
@@ -62,7 +65,7 @@ export default function DialogBuilder({ props }) {
     saveItems()
   }
 
-  const renderCritterPicker = ({ dialog, frame, saveItems }) => {
+  const renderCritterPicker = ({ dialog, frame }) => {
     const { critters1, critters2 } = frame
     const crittersInFrame = [...critters1, ...critters2]
     const selectedItem = crittersInFrame.find(
@@ -193,11 +196,6 @@ export default function DialogBuilder({ props }) {
     }
 
     const showAddDialogButton = !dialog || dialog.length === 0
-    console.log(
-      "scene.location.name--------------------",
-      toJS(scene.location.name)
-    ) // zzz
-    console.log("dialog--------------------", toJS(dialog)) // zzz
 
     const fakeDiv = (
       <div
@@ -305,35 +303,15 @@ export default function DialogBuilder({ props }) {
                 frame,
               })
             }
-            // icon={IconNames.ADD}
           >
             Sp
           </Button>
         )
       }
 
-      // const renderJoinFramesButton = ({}) => {
-      //   return (
-      //     <Button
-      //       onClick={() =>
-      //         joinFrames({
-      //           rowIndex: frameIndex,
-      //           prevFrame: frames[frameIndex - 1],
-      //           frames,
-      //           frame,
-      //         })
-      //       }
-      //       // icon={IconNames.ADD}
-      //     >
-      //       Join
-      //     </Button>
-      //   )
-      // }
-
       const moreButtons = [
-        renderCritterPicker({ dialog, frame, saveItems }),
+        renderCritterPicker({ dialog, frame }),
         renderSplitFrameButton({}),
-        // renderJoinFramesButton({}),
       ]
 
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
@@ -400,7 +378,7 @@ export default function DialogBuilder({ props }) {
     content: dataParts.content,
     className: css.textEditor,
     onSubmit: ({ content }) =>
-      updateTextChanges({ content, scenes, saveItems, metaInfoMap }),
+      updateTextChanges({ content, scenes, metaInfoMap }),
   }
 
   return (

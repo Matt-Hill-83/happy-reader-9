@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
 export default function MyAccordion({ props }) {
   const { title, content, className = "" } = props
   const classes = useStyles()
-  // const [expanded, setExpanded] = useState(true)
-  const [expanded, setExpanded] = useState(false)
+  const [expanded, setExpanded] = useState(true)
+  // const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
     return
