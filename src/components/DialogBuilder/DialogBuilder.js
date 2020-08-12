@@ -132,6 +132,23 @@ export default function DialogBuilder({ props }) {
       )
     }
 
+    const renderDeleteFrameButton = ({}) => {
+      return (
+        <Button
+          onClick={() =>
+            onDeleteFrame({
+              rowIndex: frameIndex,
+              frames,
+              frame,
+            })
+          }
+          icon={IconNames.Trash}
+        >
+          Del
+        </Button>
+      )
+    }
+
     const renderAddDialogRowButton = ({}) => {
       return (
         <Button
@@ -176,6 +193,7 @@ export default function DialogBuilder({ props }) {
       >
         {dummyRowLabel}
         {renderDuplicateFrameButton({})}
+        {renderDeleteFrameButton({})}
         {showAddDialogButton && renderAddDialogRowButton({})}
       </div>
     )
@@ -195,6 +213,11 @@ export default function DialogBuilder({ props }) {
       array: frames,
     })
 
+    saveItems()
+  }
+
+  const onDeleteFrame = ({ rowIndex, frames }) => {
+    Utils.deleteArrayElement({ index: rowIndex, array: frames })
     saveItems()
   }
 
