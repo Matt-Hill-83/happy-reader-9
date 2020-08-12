@@ -71,15 +71,48 @@ class WorldBuilderScenesGrid extends Component {
     )
   }
 
-  renderCritters1 = ({ className }) => {
-    return (
-      <div className={css.critters1}>
-        {this.itemRenderer({
-          item: { name: "sparkle01" },
-          className,
-        })}
-      </div>
-    )
+  renderCritters = ({ className, items }) => {
+    const renderedItems = items.map((item) => {
+      return this.itemRenderer({
+        item,
+        className,
+      })
+    })
+    return <div className={css.critters1}>{renderedItems}</div>
+  }
+
+  getAllCritters1InScene = ({ scene }) => {
+    const frames = _get(scene, "frameSet.frames") || []
+    const allCritters = {}
+
+    frames.forEach((frame) => {
+      const { critters1 = [] } = frame
+
+      critters1.forEach((item) => {
+        if (item.name) {
+          allCritters[item.name] = item
+        }
+      })
+    })
+
+    return Object.values(allCritters)
+  }
+
+  getAllCritters2InScene = ({ scene }) => {
+    const frames = _get(scene, "frameSet.frames") || []
+    const allCritters = {}
+
+    frames.forEach((frame) => {
+      const { critters2 = [] } = frame
+
+      critters2.forEach((item) => {
+        if (item.name) {
+          allCritters[item.name] = item
+        }
+      })
+    })
+
+    return Object.values(allCritters)
   }
 
   renderCell = ({ scene }) => {
@@ -94,6 +127,9 @@ class WorldBuilderScenesGrid extends Component {
       world: world.data,
       sceneId: scene.id,
     })
+
+    const allCritters1 = this.getAllCritters1InScene({ scene })
+    const allCritters2 = this.getAllCritters2InScene({ scene })
 
     const locationCrudMachine = (
       <CrudMachine
@@ -116,7 +152,6 @@ class WorldBuilderScenesGrid extends Component {
 
     return (
       <div className={css.gridCell} style={backgroundColor}>
-        {this.renderCritters1({ className: css.test })}
         {!hideScene && (
           <Button
             className={css.scenePropsButton}
@@ -137,6 +172,18 @@ class WorldBuilderScenesGrid extends Component {
             />
           )}
         </div>
+        {!hideScene && (
+          <div className={css.crittersContainer}>
+            {this.renderCritters({
+              className: css.critterImage,
+              items: allCritters1,
+            })}
+            {this.renderCritters({
+              className: css.critterImage,
+              items: allCritters2,
+            })}
+          </div>
+        )}
       </div>
     )
   }

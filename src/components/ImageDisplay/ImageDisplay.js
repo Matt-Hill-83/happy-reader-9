@@ -25,6 +25,7 @@ class ImageDisplay extends Component {
       showLabel,
       amount = 0,
       className,
+      showAmount = false,
     } = this.props
 
     const image = this.props.images || Images.all[name]
@@ -34,7 +35,7 @@ class ImageDisplay extends Component {
         className={`${css.main} ${className ? className : ""}`}
         key={id || index}
       >
-        <div className={css.amount}>{amount}</div>
+        {showAmount && <div className={css.amount}>{amount}</div>}
         <div className={css.imageContainer}>
           {image && <img className={css.image} src={image} alt={name} />}
           {showLabel && <span className={`${css.itemLabel}`}>{name}</span>}
