@@ -50,13 +50,15 @@ class WorldBuilder extends Component {
 
   // Changing this to DidMount breaks things
   async componentWillMount() {
-    console.log("worldNameStore.fetch()-------------------->>>>>>>>>>>>>>>") // zzz
-
     await worldNameStore.fetch()
     await gameConfig.fetch()
     const gameConfigData = Utils.getGameConfig()
     const defaultWorldId = localStateStore.getDefaultWorldId()
     this.onChangeWorld({ mapId: defaultWorldId })
+  }
+
+  forceUpdate2 = () => {
+    this.setState({ test: Math.random() })
   }
 
   hideAllModals = () => {
@@ -290,7 +292,7 @@ class WorldBuilder extends Component {
   saveItemsDialogBuilder = async () => {
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
     await WorldBuilderUtils.updateMap({ mapToUpdate: world })
-    this.setState({ saveItemsDialogBuilder: new Date() })
+    this.setState({ dialogBuilderKey: new Date() })
   }
 
   importWorldFromJson = async ({ newWorld }) => {
@@ -323,6 +325,7 @@ class WorldBuilder extends Component {
       newProps: { questConfig },
       mapToUpdate: world,
     })
+    // this.setState({ update: Math.random() })
   }
 
   onCloseJsonEditor = () => {
@@ -367,13 +370,13 @@ class WorldBuilder extends Component {
     )
   }
 
-  renderQuestConfigTool = ({ questConfig, newGrid5 }) => {
+  renderSubQuestWizard = ({ questConfig, newGrid5 }) => {
     const { showSubQuestWizard } = this.state
     if (!showSubQuestWizard) {
       return null
     }
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
-    const questConfigToolProps = {
+    const subQuestWizardProps = {
       questConfig: questConfig,
       scenes: newGrid5,
       onSave: this.onSaveQuestConfig,
@@ -382,7 +385,7 @@ class WorldBuilder extends Component {
 
     return (
       <div className={css.subQuestConfigTool}>
-        <SubQuestWizard props={questConfigToolProps} />
+        <SubQuestWizard props={subQuestWizardProps} />
       </div>
     )
   }
@@ -569,12 +572,15 @@ class WorldBuilder extends Component {
             {this.renderScenesGrid({ world })}
             {showSubQuestWizard && (
               <div className={css.right}>
-                {this.renderQuestConfigTool({ questConfig, newGrid5 })}
+                {this.renderSubQuestWizard({ questConfig, newGrid5 })}
               </div>
             )}
             {showDialogBuilder && (
               <div className={css.right}>
-                <DialogBuilder props={dialogBuilderProps}></DialogBuilder>
+                <DialogBuilder
+                  key={dialogBuilderKey}
+                  props={dialogBuilderProps}
+                ></DialogBuilder>
               </div>
             )}
           </div>
@@ -582,7 +588,6 @@ class WorldBuilder extends Component {
         {showFrameBuilder && (
           <div className={css.content2}>
             <FrameBuilder
-              key={dialogBuilderKey}
               world={world}
               scene={sceneToEdit}
               onExitFrameBuilder={(frame) => this.onExitFrameBuilder({ frame })}
