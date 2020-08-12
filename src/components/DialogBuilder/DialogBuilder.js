@@ -14,7 +14,7 @@ import Utils from "../../Utils/Utils"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 
 export default function DialogBuilder({ props }) {
-  // const [rowData, setrowData] = useState({})
+  const [fakeDivs, setFakeDivs] = useState([])
 
   const { saveItems, world } = props
   const scenes = _get(world, "data.newGrid5") || []
@@ -33,7 +33,7 @@ export default function DialogBuilder({ props }) {
 
   const dataParts = {
     content: "",
-    fakeDivs: [],
+    // fakeDivs: [],
   }
 
   let rowNum = { value: 0 }
@@ -95,7 +95,9 @@ export default function DialogBuilder({ props }) {
   }
 
   const addNewRowToTextArea = ({ text, fakeDiv, rowNum, dataParts }) => {
-    dataParts.fakeDivs.push(fakeDiv)
+    fakeDivs.push(fakeDiv)
+    // setFakeDivs(fakeDivs)
+    // dataParts.fakeDivs.push(fakeDiv)
     dataParts.content += `${text}\n`
     rowNum.value++
   }
@@ -110,6 +112,8 @@ export default function DialogBuilder({ props }) {
     dataParts,
   }) => {
     const dummyRowLabel = `${scene.location.name}  - F${frameIndex}`
+
+    const { dialog = [] } = frame
 
     const renderDuplicateFrameButton = ({}) => {
       return (
@@ -128,6 +132,40 @@ export default function DialogBuilder({ props }) {
       )
     }
 
+    const renderAddDialogRowButton = ({}) => {
+      return (
+        <Button
+          onClick={() =>
+            onAddDialogRow({
+              items: dialog,
+            })
+          }
+          icon={IconNames.ADD}
+        >
+          dialog
+        </Button>
+      )
+    }
+
+    const onAddDialogRow = ({ items }) => {
+      const newElement = Constants.getNewDialog()
+      Utils.addArrayElement({
+        newElement,
+        before: false,
+        index: 0,
+        array: items,
+      })
+
+      saveItems()
+    }
+
+    const showAddDialogButton = !dialog || dialog.length === 0
+    console.log(
+      "scene.location.name--------------------",
+      toJS(scene.location.name)
+    ) // zzz
+    console.log("dialog--------------------", toJS(dialog)) // zzz
+
     const fakeDiv = (
       <div
         className={`${css.fakeDiv} ${css.frameSeparatorDiv}
@@ -138,6 +176,7 @@ export default function DialogBuilder({ props }) {
       >
         {dummyRowLabel}
         {renderDuplicateFrameButton({})}
+        {showAddDialogButton && renderAddDialogRowButton({})}
       </div>
     )
 
@@ -214,7 +253,7 @@ export default function DialogBuilder({ props }) {
     sceneIndex,
     style,
   }) => {
-    if (dialog.text) {
+    if (dialog.text.length >= 0) {
       const renderSplitFrameButton = ({}) => {
         return (
           <Button
@@ -326,8 +365,10 @@ export default function DialogBuilder({ props }) {
 
   return (
     <div className={css.main}>
-      <div className={css.controlPanel}>{dataParts.fakeDivs}</div>
-      <MyTextEditor props={myTextEditorProps}></MyTextEditor>
+      <div className={css.containerToGetMaxHeight}>
+        <div className={css.controlPanel}>{fakeDivs}</div>
+        <MyTextEditor props={myTextEditorProps}></MyTextEditor>
+      </div>
     </div>
   )
 }

@@ -31,41 +31,19 @@ export default class WorldBuilderUtils {
     })
 
     const newFrame = {
-      critters1: critters1,
+      critters1,
       critters2,
       faces: [
-        { character: creatureName1, characterIndex: 1, face: "happy" },
-        { character: creatureName0, characterIndex: 0, face: "happy" },
+        { character: creatureName1, face: "happy" },
+        { character: creatureName0, face: "happy" },
       ],
       dialog: [
         {
           character: creatureName0,
-          characterIndex: 0,
           text: ``,
         },
         {
           character: creatureName1,
-          characterIndex: 1,
-          text: ``,
-        },
-        {
-          character: creatureName0,
-          characterIndex: 0,
-          text: ``,
-        },
-        {
-          character: creatureName1,
-          characterIndex: 1,
-          text: ``,
-        },
-        {
-          character: creatureName0,
-          characterIndex: 0,
-          text: ``,
-        },
-        {
-          character: creatureName1,
-          characterIndex: 1,
           text: ``,
         },
       ],
