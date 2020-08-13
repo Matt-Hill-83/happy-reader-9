@@ -1,18 +1,8 @@
-.conditionsKVPair {
-  display: flex;
-  align-items: center;
-  align-self: center;
+.inputField {
+  margin: 0px !important;
 
-  .inputField {
-    margin: 0px !important;
-    margin-left: 12px !important;
-    margin-right: 12px !important;
-
-    input {
-      padding: 0px 5px;
-      max-width: 4vh;
-      margin: 0px !important;
-    }
+  input {
+    padding: 0px 4px !important;
   }
 }
 

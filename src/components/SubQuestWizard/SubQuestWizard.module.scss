@@ -5,19 +5,58 @@
   width: max-content;
   width: 100%;
 
-  .subQuestAccordion {
-    border: 1px solid red;
-    margin: 6px;
-    min-width: 550px !important;
-  }
-
   :global {
+    .bp3-button {
+      min-width: 16px;
+      min-height: 16px;
+    }
+
+    .MuiInput-underline {
+      border: 1px solid rgb(180, 180, 180) !important;
+      padding: 0px 4px !important;
+      border-radius: 3px;
+      background: #dedede;
+    }
+
+    .MuiInput-underline:focus,
+    .MuiInput-underline:visited,
+    .MuiInput-underline:active,
+    .MuiInput-underline:hover {
+      &:before {
+        border: none !important;
+      }
+    }
+
+    .MuiInput-underline:before {
+      border: none;
+    }
+
     .MuiAccordionSummary-root {
       height: 32px;
       display: flex;
       align-items: center;
-      // background: #cef7d1;
     }
+  }
+
+  .subQuestHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
+
+    .inputField {
+      margin: 0px;
+
+      input {
+        padding: 0px 4px;
+      }
+    }
+  }
+
+  .subQuestAccordion {
+    border: 1px solid black;
+    margin: 6px;
+    min-width: 550px !important;
   }
 
   .sceneTriggersAccordion {
@@ -58,40 +97,6 @@
       .MuiAccordionDetails-root {
         // border-top: 1px solid black !important;
       }
-    }
-  }
-
-  .subQuestHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px 10px;
-  }
-
-  :global {
-    .bp3-button {
-      min-width: 16px;
-      min-height: 16px;
-    }
-
-    .MuiInput-underline {
-      border: 1px solid rgb(180, 180, 180) !important;
-      padding: 0px 4px !important;
-      border-radius: 3px;
-      background: #dedede;
-    }
-
-    .MuiInput-underline:focus,
-    .MuiInput-underline:visited,
-    .MuiInput-underline:active,
-    .MuiInput-underline:hover {
-      &:before {
-        border: none !important;
-      }
-    }
-
-    .MuiInput-underline:before {
-      border: none;
     }
   }
 

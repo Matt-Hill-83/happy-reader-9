@@ -223,15 +223,15 @@ export default function SubQuestWizard({ props }) {
       if (!subQuest.scenes) {
         subQuest.scenes = []
       }
-      // const missionsContent =
+
+      const missionsAccordion = {
+        title: <span className={cx(css.listGroupTitle)}>Missions</span>,
+        expanded: true,
+        className: css.sectionsAccordion,
+        content: () => renderMissions({ missions, subQuestIndex }),
+      }
 
       const items = [
-        {
-          title: <span className={cx(css.listGroupTitle)}>Missions</span>,
-          expanded: true,
-          className: css.sectionsAccordion,
-          content: () => renderMissions({ missions, subQuestIndex }),
-        },
         {
           title: <span className={cx(css.listGroupTitle)}>Triggers</span>,
           expanded: true,
@@ -245,6 +245,10 @@ export default function SubQuestWizard({ props }) {
           content: () => renderScenes({ scenes }),
         },
       ]
+
+      if (subQuestIndex === 0) {
+        items.unshift(missionsAccordion)
+      }
       const categoryAccordionProps = { items }
 
       const onAddScene = ({ rowIndex, before }) => {

@@ -1,5 +1,3 @@
-import { Button, ButtonGroup, Popover, Classes } from "@blueprintjs/core"
-import { IconNames } from "@blueprintjs/icons"
 import { toJS } from "mobx"
 import cx from "classnames"
 import React from "react"
@@ -9,9 +7,9 @@ import _get from "lodash.get"
 import Utils from "../../Utils/Utils"
 import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
+import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 import css from "./MissionsTableConfig.module.scss"
-import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 export const getTableConfig = ({
   tableChangeCallback = () => {},
@@ -98,16 +96,6 @@ export const getTableConfig = ({
     const combinedItems = [...allItems, ...allScenes]
     const scene = combinedItems.find((item) => item.id === value.id)
 
-    if (!scene) {
-      console.log("value", toJS(value)) // zzz
-      combinedItems.forEach((item) => {
-        console.log(
-          "item.id",
-          toJS(item.id || "none!!-------------------------------")
-        ) // zzz
-      })
-    }
-    console.log("scene", toJS(scene)) // zzz
     return (
       <SimpleSelectObj
         items={combinedItems}
