@@ -22,11 +22,6 @@ export default class QuestStatusUtils {
 
     // For each scene, calculate new visibility props based on conditions defined in triggers
     newGrid5.forEach((scene) => {
-      console.log("") // zzz
-      console.log("") // zzz
-      console.log("-----------") // zzz
-      console.log("scene.location.name", toJS(scene.location.name)) // zzz
-
       const sceneTriggers = this.getSceneTriggersFromScene({
         sceneId: scene.id,
       })
@@ -39,7 +34,6 @@ export default class QuestStatusUtils {
       )
 
       const parentSubQuestFromScene = subQuests[parentSubQuestIndexFromScene]
-      console.log("parentSubQuestFromScene", toJS(parentSubQuestFromScene)) // zzz
       const subQuestTriggers = _get(parentSubQuestFromScene, "triggers") || []
 
       const accumulatedPropertyValuesForSubQuest = this.calcAccumulatedPropertyValues(
@@ -63,19 +57,6 @@ export default class QuestStatusUtils {
         ...accumulatedPropertyValuesForScene,
       }
 
-      console.log(
-        "accumulatedPropertyValuesForSubQuest",
-        toJS(accumulatedPropertyValuesForSubQuest)
-      ) // zzz
-      console.log(
-        "accumulatedPropertyValuesForScene",
-        toJS(accumulatedPropertyValuesForScene)
-      ) // zzz
-
-      console.log(
-        "accumulatedPropertyValuesCombined",
-        toJS(accumulatedPropertyValuesCombined)
-      ) // zzz
       const propertyNames = Object.keys(accumulatedPropertyValuesCombined)
 
       // Iterate through each accumulated value and update that property in the local store.
@@ -130,17 +111,6 @@ export default class QuestStatusUtils {
       completedMissions,
       trueFunc = () => {},
     }) => {
-      console.log("completedMission >= 0", toJS(completedMission >= 0)) // zzz
-      console.log(
-        "completedMission >= 0-------------2",
-        toJS(parseInt(completedMission) >= 0)
-      ) // zzz
-      console.log("completedMissions", toJS(completedMissions)) // zzz
-
-      console.log(
-        "completedMissions.includes(completedMission)",
-        toJS(completedMissions.includes(completedMission))
-      ) // zzz
       if (
         completedMission >= 0 &&
         completedMissions.includes(completedMission)
@@ -169,20 +139,16 @@ export default class QuestStatusUtils {
         trueFunc,
       })
     }
-    console.log("triggers", toJS(triggers)) // zzz
     if (triggers && triggers.length > 0) {
       const completedMissions = localStateStore.getCompletedMissions()
-      console.log("completedMissions", toJS(completedMissions)) // zzz
       const lockScene = () => (propValueAccumulators.sceneIsLocked.value = true)
       const unLockScene = () =>
         (propValueAccumulators.sceneIsLocked.value = false)
 
       const hideScene = () => {
-        console.log("hideScene") // zzz
         propValueAccumulators.sceneIsHidden.value = true
       }
       const unHideScene = () => {
-        console.log("unHideScene") // zzz
         propValueAccumulators.sceneIsHidden.value = false
       }
 
@@ -192,11 +158,9 @@ export default class QuestStatusUtils {
         (propValueAccumulators.sceneIsClouded.value = false)
 
       triggers.forEach((trigger) => {
-        console.log("trigger", toJS(trigger)) // zzz
         const { conditions = [] } = trigger
 
         conditions.forEach((condition) => {
-          console.log("condition", toJS(condition)) // zzz
           const { currentMission, completedMission } = condition
 
           if (trigger.name === triggerTypes.LOCK) {

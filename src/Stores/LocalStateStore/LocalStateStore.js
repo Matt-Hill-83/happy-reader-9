@@ -196,10 +196,6 @@ class LocalStateStore {
     const world = localStateStore.getActiveWorld()
     const missions = QuestStatusUtils.getActiveSubQuestMissions({ world })
     const { pockets, completedMissions } = questStatus
-    console.log(
-      "questStatus.completedMissions",
-      toJS(questStatus.completedMissions)
-    ) // zzz
     if (!questStatus.completedMissions) {
       questStatus.completedMissions = []
     }
@@ -218,15 +214,6 @@ class LocalStateStore {
       charactersInScene,
       questStatus,
     })
-
-    console.log(
-      "isMissionCompleted-----------------------------",
-      toJS(isMissionCompleted)
-    ) // zzz
-    console.log(
-      "isMissionCompleted-----------------------------",
-      toJS(isMissionCompleted)
-    ) // zzz
 
     if (isMissionCompleted) {
       completedMissions.push(activeMissionIndex)

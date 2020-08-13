@@ -55,7 +55,6 @@ export default function SubQuestWizard({ props }) {
     const realScenes = props.scenes
 
     const onAddScene = ({ rowIndex, before }) => {
-      console.log("onAddScene") // zzz
       const newElement = Constants.getNewScene({})
       Utils.addArrayElement({
         newElement,
@@ -163,7 +162,6 @@ export default function SubQuestWizard({ props }) {
 
   const renderAddTriggerButton = ({ triggers }) => {
     const onAddTriggerRow = ({ rowIndex, before }) => {
-      console.log("onAddTriggerRow") // zzz
       const newElement = Constants.getNewTrigger()
       Utils.addArrayElement({
         newElement,

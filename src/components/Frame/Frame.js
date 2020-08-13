@@ -118,12 +118,10 @@ class Frame extends Component {
   renderDialog = () => {
     const { frame } = this.state
     const dialog = (frame && frame.dialog) || []
-    console.log("dialog-------------------", toJS(dialog)) // zzz
 
     const renderedDialogs = dialog.map((line, lineIndex) => {
       const { text, characterIndex = 1 } = line
-      console.log("text", toJS(text)) // zzz
-      // const className = `character0`
+
       const className = `character${characterIndex}`
       const characterName = line.character || ""
 

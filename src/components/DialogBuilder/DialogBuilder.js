@@ -20,7 +20,6 @@ export default function DialogBuilder({ props }) {
   const scenes = _get(world, "data.newGrid5") || []
 
   useEffect(() => {
-    console.log("useEffect - mount-----------------") // zzz
     setFakeDivs([])
     // on mount
 
@@ -30,7 +29,6 @@ export default function DialogBuilder({ props }) {
 
   // on change in props
   useEffect(() => {
-    console.log("change in props") // zzz
     setFakeDivs([])
   }, [props.world])
 

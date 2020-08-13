@@ -102,7 +102,6 @@ class WorldViewer extends React.Component {
     const world = localStateStore.getActiveWorld()
 
     const activeSubQuest = QuestStatusUtils.getActiveSubQuest({ world })
-    console.log("activeSubQuest", toJS(activeSubQuest)) // zzz
 
     return (
       <>

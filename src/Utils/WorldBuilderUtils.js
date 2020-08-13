@@ -72,7 +72,6 @@ export default class WorldBuilderUtils {
   }
 
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
-    console.log("mapToUpdate", toJS(mapToUpdate)) // zzz
     const map = mapToUpdate || worldBuilderStore.getWorldBuilderWorld()
     Object.assign(map.data, toJS(newProps))
 

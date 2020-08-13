@@ -140,8 +140,6 @@ class MiniLocation extends React.Component {
 
     const showNothing = QuestStatusUtils.isSceneHidden({ sceneId: scene.id })
     if (showNothing) {
-      console.log("locationName", locationName) // zzz
-      console.log("showNothing", showNothing) // zzz
     }
     const isBlank = locationName === "blank" || showNothing
     if (isBlank) {
