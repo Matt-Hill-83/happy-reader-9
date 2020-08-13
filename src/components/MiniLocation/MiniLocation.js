@@ -120,7 +120,6 @@ class MiniLocation extends React.Component {
 
         return friend
       })
-    console.log("renderedCharacters", toJS(renderedCharacters)) // zzz
     return <div className={css.charactersContainer}>{renderedCharacters}</div>
   }
 
@@ -139,9 +138,6 @@ class MiniLocation extends React.Component {
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
 
     const locationName = scene.location.name
-    console.log("mini") // zzz
-    console.log("mini") // zzz
-    console.log("locationName", toJS(locationName)) // zzz
 
     const showNothing = QuestStatusUtils.isSceneHidden({ sceneId: scene.id })
     const isBlank = locationName === "blank" || showNothing
@@ -151,9 +147,6 @@ class MiniLocation extends React.Component {
 
     const questStatus = localStateStore.getQuestStatus()
     const isClouded = QuestStatusUtils.isSceneClouded({ sceneId: scene.id })
-
-    console.log("questStatus.cloudedScenes", toJS(questStatus.cloudedScenes)) // zzz
-    console.log("isClouded", isClouded) // zzz
 
     const localClass = isActive ? css.activeClass : ""
     const cloudImage = Images.backgrounds["cloud"]
@@ -190,8 +183,8 @@ class MiniLocation extends React.Component {
 
     const showLock = QuestStatusUtils.isSceneLocked({ sceneId: scene.id })
     // apply position based clouded state
-    const hideCloud = isVisitedScene || neighborIsActive || !isClouded
     // If cloud is still hidden, apply config based state
+    const hideCloud = isVisitedScene || neighborIsActive || !isClouded
     const showCloud = !hideCloud
 
     const locationImage = Images.all[locationName]
