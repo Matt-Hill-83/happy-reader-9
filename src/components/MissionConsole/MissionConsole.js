@@ -9,7 +9,6 @@ import css from "./MissionConsole.module.scss"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import MiniTable2 from "../MiniTable2/MiniTable2"
-import Utils from "../../Utils/Utils"
 import QuestStatusUtils from "../../Utils/QuestStatusUtils"
 
 class MissionConsole extends Component {
@@ -46,6 +45,7 @@ class MissionConsole extends Component {
           item={newItem}
           showLabel={true}
           amount={amount}
+          showAmount={true}
         />
       )
     })
