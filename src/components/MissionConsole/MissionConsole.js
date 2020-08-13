@@ -16,7 +16,6 @@ class MissionConsole extends Component {
 
   renderPocketItems = ({ goldOnly = false }) => {
     const questStatus = localStateStore.getQuestStatus()
-
     const items = _get(questStatus, "pockets") || null
 
     const itemKeys = Object.keys(items)
@@ -58,11 +57,6 @@ class MissionConsole extends Component {
     let missions
 
     const questStatus = localStateStore.getQuestStatus()
-
-    console.log(
-      "questStatus.completedMissions",
-      toJS(questStatus.completedMissions)
-    ) // zzz
 
     if (!questStatus.questConfig) {
       return null

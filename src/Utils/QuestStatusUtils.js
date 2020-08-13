@@ -51,18 +51,18 @@ export default class QuestStatusUtils {
           activeMissionIndex,
         }
       )
-      // console.log("") // zzz
-      // console.log("") // zzz
-      // console.log("-----------") // zzz
-      // console.log("scene.location.name", toJS(scene.location.name)) // zzz
-      // console.log(
-      //   "accumulatedPropertyValuesForSubQuest",
-      //   toJS(accumulatedPropertyValuesForSubQuest)
-      // ) // zzz
-      // console.log(
-      //   "accumulatedPropertyValuesForScene",
-      //   toJS(accumulatedPropertyValuesForScene)
-      // ) // zzz
+      console.log("") // zzz
+      console.log("") // zzz
+      console.log("-----------") // zzz
+      console.log("scene.location.name", toJS(scene.location.name)) // zzz
+      console.log(
+        "accumulatedPropertyValuesForSubQuest",
+        toJS(accumulatedPropertyValuesForSubQuest)
+      ) // zzz
+      console.log(
+        "accumulatedPropertyValuesForScene",
+        toJS(accumulatedPropertyValuesForScene)
+      ) // zzz
 
       const combinedProps = {
         ...accumulatedPropertyValuesForSubQuest,
@@ -70,8 +70,7 @@ export default class QuestStatusUtils {
       }
 
       const accumulatedPropertyValues = combinedProps
-      // console.log("accumulatedPropertyValues", toJS(accumulatedPropertyValues)) // zzz
-      // const accumulatedPropertyValues = accumulatedPropertyValuesForScene
+      console.log("accumulatedPropertyValues", toJS(accumulatedPropertyValues)) // zzz
       const propertyNames = Object.keys(accumulatedPropertyValues)
 
       // Iterate through each accumulated value and update that property in the local store.
@@ -108,49 +107,6 @@ export default class QuestStatusUtils {
         propertyName: Constants.sceneVisibilityPropNames.CLOUDED_SCENES,
       },
     }
-
-    // const evaluators = [
-    //   {
-    //     triggerName: triggerTypes.LOCK,
-    //     func: ({ invert }) =>
-    //       (propValueAccumulators.sceneIsLocked.value = invert ? false : true),
-    //   },
-    //   {
-    //     triggerName: triggerTypes.UNLOCK,
-    //     func: ({ invert }) =>
-    //       (propValueAccumulators.sceneIsLocked.value = invert ? true : false),
-    //   },
-    //   {
-    //     triggerName: triggerTypes.HIDE,
-    //     func: ({ invert }) =>
-    //       (propValueAccumulators.sceneIsHidden.value = invert ? false : true),
-    //   },
-    //   {
-    //     triggerName: triggerTypes.UNHIDE,
-    //     func: ({ invert }) =>
-    //       (propValueAccumulators.sceneIsHidden.value = invert ? true : false),
-    //   },
-    //   {
-    //     triggerName: triggerTypes.CLOUD,
-    //     func: ({ invert }) =>
-    //       (propValueAccumulators.sceneIsClouded.value = invert ? false : true),
-    //   },
-    //   {
-    //     triggerName: triggerTypes.UNCLOUD,
-    //     func: ({ invert }) =>
-    //       (propValueAccumulators.sceneIsClouded.value = invert ? true : false),
-    //   },
-    // ]
-
-    // const runEvaluators = ({ trigger, invert }) => {
-    //   evaluators.forEach((evaluator) => {
-    //     // find the single evaluator that corresponds to the trigger in question and run it.
-    //     // evaluators are pretty dumb and just update a prop value in the accumulator.
-    //     if (trigger.name === evaluator.triggerName) {
-    //       evaluator.func({ invert })
-    //     }
-    //   })
-    // }
 
     const evaluateCurrentMission = ({
       activeMissionIndex,
