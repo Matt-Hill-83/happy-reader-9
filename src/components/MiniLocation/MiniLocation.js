@@ -136,16 +136,18 @@ class MiniLocation extends React.Component {
       onClick,
     } = scene
     const isVisitedScene = localStateStore.isVisitedScene(scene.id)
-
     const locationName = scene.location.name
 
     const showNothing = QuestStatusUtils.isSceneHidden({ sceneId: scene.id })
+    if (showNothing) {
+      console.log("locationName", locationName) // zzz
+      console.log("showNothing", showNothing) // zzz
+    }
     const isBlank = locationName === "blank" || showNothing
     if (isBlank) {
       return this.renderBlankScene({ id })
     }
 
-    const questStatus = localStateStore.getQuestStatus()
     const isClouded = QuestStatusUtils.isSceneClouded({ sceneId: scene.id })
 
     const localClass = isActive ? css.activeClass : ""

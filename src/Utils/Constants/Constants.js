@@ -44,7 +44,6 @@ export default class Constants {
 
     return {
       id,
-      // missions: [Constants.getNewMission()],
       subQuests: [Constants.getNewSubQuest({})],
     }
   }

@@ -69,14 +69,14 @@ class LocalStateStore {
     this.questStatus = questStatus
   }
 
-  addCompletedMission = (completedMission) => {
-    const questStatus = this.questStatus
-    if (!questStatus.completedMissions) {
-      questStatus.completedMissions = []
-    }
-    questStatus.completedMissions.push(completedMission)
-    this.questStatus = questStatus
-  }
+  // addCompletedMission = (completedMission) => {
+  //   const questStatus = this.questStatus
+  //   if (!questStatus.completedMissions) {
+  //     questStatus.completedMissions = []
+  //   }
+  //   questStatus.completedMissions.push(completedMission)
+  //   this.questStatus = questStatus
+  // }
 
   ///////////////
   ///////////////
@@ -219,7 +219,14 @@ class LocalStateStore {
       questStatus,
     })
 
-    console.log("isMissionCompleted", toJS(isMissionCompleted)) // zzz
+    console.log(
+      "isMissionCompleted-----------------------------",
+      toJS(isMissionCompleted)
+    ) // zzz
+    console.log(
+      "isMissionCompleted-----------------------------",
+      toJS(isMissionCompleted)
+    ) // zzz
 
     if (isMissionCompleted) {
       completedMissions.push(activeMissionIndex)

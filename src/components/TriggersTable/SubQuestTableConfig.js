@@ -12,7 +12,7 @@ import Constants from "../../Utils/Constants/Constants"
 import css from "./SubQuestTableConfig.module.scss"
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 
-const newCondition = { completedMission: "0" }
+const newCondition = { completedMission: 0 }
 
 export const getSubQuestTableConfigFunc = ({
   tableChangeCallback,

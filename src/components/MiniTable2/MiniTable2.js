@@ -17,7 +17,6 @@ import css from "./MiniTable2.module.scss"
 
 class MiniTable2 extends Component {
   renderCell = ({ content, firstIndex }) => {
-    console.log("firstIndex", firstIndex) // zzz
     if (this.props.renderCell) {
       return (
         <TableCell
@@ -33,7 +32,6 @@ class MiniTable2 extends Component {
     let cellContent = null
 
     if (typeof value === "undefined") {
-      // cellContent = "";
       cellContent = <span role="img">❌</span>
     } else if (value === true) {
       cellContent = <span role="img">✅</span>

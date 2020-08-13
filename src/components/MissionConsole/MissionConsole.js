@@ -65,7 +65,6 @@ class MissionConsole extends Component {
     const { completedMissions } = questStatus
     const world = localStateStore.getActiveWorld()
     const newMissions = QuestStatusUtils.getActiveSubQuestMissions({ world })
-    console.log("newMissions", toJS(newMissions)) // zzz
 
     missions = newMissions
     // if (newMissions && newMissions[0]) {
@@ -89,13 +88,11 @@ class MissionConsole extends Component {
     if (!missions || missions.length === 0) {
       return null
     }
-    console.log("missions--------------------------", toJS(missions)) // zzz
     const tableData = missions.map((mission, missionIndex) => {
       const { name, item = {}, recipient = "", rewards = [] } = mission
 
       const rewardString = `${_get(rewards, "[0]amount")}`
 
-      console.log("missionIndex", missionIndex) // zzz
       const completed = completedMissions.includes(missionIndex)
 
       return [name, item.name, recipient.name, rewardString, completed]

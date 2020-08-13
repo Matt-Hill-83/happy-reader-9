@@ -22,6 +22,11 @@ export default class QuestStatusUtils {
 
     // For each scene, calculate new visibility props based on conditions defined in triggers
     newGrid5.forEach((scene) => {
+      console.log("") // zzz
+      console.log("") // zzz
+      console.log("-----------") // zzz
+      console.log("scene.location.name", toJS(scene.location.name)) // zzz
+
       const sceneTriggers = this.getSceneTriggersFromScene({
         sceneId: scene.id,
       })
@@ -34,11 +39,12 @@ export default class QuestStatusUtils {
       )
 
       const parentSubQuestFromScene = subQuests[parentSubQuestIndexFromScene]
+      console.log("parentSubQuestFromScene", toJS(parentSubQuestFromScene)) // zzz
       const subQuestTriggers = _get(parentSubQuestFromScene, "triggers") || []
 
       const accumulatedPropertyValuesForSubQuest = this.calcAccumulatedPropertyValues(
         {
-          sceneTriggers: subQuestTriggers,
+          triggers: subQuestTriggers,
           scene,
           activeMissionIndex,
         }
@@ -46,36 +52,35 @@ export default class QuestStatusUtils {
 
       const accumulatedPropertyValuesForScene = this.calcAccumulatedPropertyValues(
         {
-          sceneTriggers,
+          triggers: sceneTriggers,
           scene,
           activeMissionIndex,
         }
       )
-      // console.log("") // zzz
-      // console.log("") // zzz
-      // console.log("-----------") // zzz
-      // console.log("scene.location.name", toJS(scene.location.name)) // zzz
-      // console.log(
-      //   "accumulatedPropertyValuesForSubQuest",
-      //   toJS(accumulatedPropertyValuesForSubQuest)
-      // ) // zzz
-      // console.log(
-      //   "accumulatedPropertyValuesForScene",
-      //   toJS(accumulatedPropertyValuesForScene)
-      // ) // zzz
 
-      const combinedProps = {
+      const accumulatedPropertyValuesCombined = {
         ...accumulatedPropertyValuesForSubQuest,
         ...accumulatedPropertyValuesForScene,
       }
 
-      const accumulatedPropertyValues = combinedProps
-      // console.log("accumulatedPropertyValues", toJS(accumulatedPropertyValues)) // zzz
-      const propertyNames = Object.keys(accumulatedPropertyValues)
+      console.log(
+        "accumulatedPropertyValuesForSubQuest",
+        toJS(accumulatedPropertyValuesForSubQuest)
+      ) // zzz
+      console.log(
+        "accumulatedPropertyValuesForScene",
+        toJS(accumulatedPropertyValuesForScene)
+      ) // zzz
+
+      console.log(
+        "accumulatedPropertyValuesCombined",
+        toJS(accumulatedPropertyValuesCombined)
+      ) // zzz
+      const propertyNames = Object.keys(accumulatedPropertyValuesCombined)
 
       // Iterate through each accumulated value and update that property in the local store.
       propertyNames.forEach((propertyName) => {
-        const value = accumulatedPropertyValues[propertyName]
+        const value = accumulatedPropertyValuesCombined[propertyName]
 
         this.updateProperty({
           propertyName,
@@ -86,10 +91,7 @@ export default class QuestStatusUtils {
     })
   }
 
-  static calcAccumulatedPropertyValues = ({
-    sceneTriggers,
-    activeMissionIndex,
-  }) => {
+  static calcAccumulatedPropertyValues = ({ triggers, activeMissionIndex }) => {
     const triggerTypes = Constants.triggers.triggerTypes
 
     //  The accumulators store the cumulative value of the props while the evaluators run.
@@ -122,11 +124,23 @@ export default class QuestStatusUtils {
         }
       }
     }
+
     const evaluateCompletedMission = ({
       completedMission,
       completedMissions,
       trueFunc = () => {},
     }) => {
+      console.log("completedMission >= 0", toJS(completedMission >= 0)) // zzz
+      console.log(
+        "completedMission >= 0-------------2",
+        toJS(parseInt(completedMission) >= 0)
+      ) // zzz
+      console.log("completedMissions", toJS(completedMissions)) // zzz
+
+      console.log(
+        "completedMissions.includes(completedMission)",
+        toJS(completedMissions.includes(completedMission))
+      ) // zzz
       if (
         completedMission >= 0 &&
         completedMissions.includes(completedMission)
@@ -155,24 +169,34 @@ export default class QuestStatusUtils {
         trueFunc,
       })
     }
-
-    if (sceneTriggers && sceneTriggers.length > 0) {
+    console.log("triggers", toJS(triggers)) // zzz
+    if (triggers && triggers.length > 0) {
       const completedMissions = localStateStore.getCompletedMissions()
+      console.log("completedMissions", toJS(completedMissions)) // zzz
       const lockScene = () => (propValueAccumulators.sceneIsLocked.value = true)
       const unLockScene = () =>
         (propValueAccumulators.sceneIsLocked.value = false)
-      const hideScene = () => (propValueAccumulators.sceneIsHidden.value = true)
-      const unHideScene = () =>
-        (propValueAccumulators.sceneIsHidden.value = false)
+
+      const hideScene = () => {
+        console.log("hideScene") // zzz
+        propValueAccumulators.sceneIsHidden.value = true
+      }
+      const unHideScene = () => {
+        console.log("unHideScene") // zzz
+        propValueAccumulators.sceneIsHidden.value = false
+      }
+
       const cloudScene = () =>
         (propValueAccumulators.sceneIsClouded.value = true)
       const unCloudScene = () =>
         (propValueAccumulators.sceneIsClouded.value = false)
 
-      sceneTriggers.forEach((trigger) => {
+      triggers.forEach((trigger) => {
+        console.log("trigger", toJS(trigger)) // zzz
         const { conditions = [] } = trigger
 
         conditions.forEach((condition) => {
+          console.log("condition", toJS(condition)) // zzz
           const { currentMission, completedMission } = condition
 
           if (trigger.name === triggerTypes.LOCK) {
@@ -311,7 +335,6 @@ export default class QuestStatusUtils {
 
   static getSubQuestColor = ({ world, sceneId }) => {
     const colors = Constants.subQuestColors
-    // const colors = ["a9def9", "d0f4de", "e4c1f9", "fcf6bd", "ffe7bc", "ffebf8"]
 
     const parentSubQuestFromScene = this.getParentSubQuestIndexFromScene({
       world,
