@@ -58,19 +58,30 @@ class MissionConsole extends Component {
     let missions
 
     const questStatus = localStateStore.getQuestStatus()
+
+    console.log(
+      "questStatus.completedMissions",
+      toJS(questStatus.completedMissions)
+    ) // zzz
+
     if (!questStatus.questConfig) {
       return null
     }
+
+    const { completedMissions } = questStatus
     const world = localStateStore.getActiveWorld()
     const newMissions = QuestStatusUtils.getActiveSubQuestMissions({ world })
+    console.log("newMissions", toJS(newMissions)) // zzz
 
-    if (newMissions && newMissions[0]) {
-      missions = newMissions
-      console.log("newMissions") // K
-    } else {
-      // for BW compatibility
-      missions = questStatus.questConfig.missions
-    }
+    missions = newMissions
+    // if (newMissions && newMissions[0]) {
+    //   missions = newMissions
+    //   // console.log("newMissions") // K
+    // } else {
+    //   // for BW compatibility
+    //   missions = []
+    //   // missions = questStatus.questConfig.missions
+    // }
 
     const { activeMissionIndex } = questStatus
     const columnNames = [
@@ -84,17 +95,15 @@ class MissionConsole extends Component {
     if (!missions || missions.length === 0) {
       return null
     }
-    console.log("missions", toJS(missions)) // zzz
-    const tableData = missions.map((mission) => {
-      const {
-        name,
-        item = {},
-        recipient = "",
-        rewards = [],
-        completed,
-      } = mission
+    console.log("missions--------------------------", toJS(missions)) // zzz
+    const tableData = missions.map((mission, missionIndex) => {
+      const { name, item = {}, recipient = "", rewards = [] } = mission
 
       const rewardString = `${_get(rewards, "[0]amount")}`
+
+      console.log("missionIndex", missionIndex) // zzz
+      const completed = completedMissions.includes(missionIndex)
+
       return [name, item.name, recipient.name, rewardString, completed]
     })
 
