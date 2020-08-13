@@ -29,7 +29,6 @@ export default function TriggersTable({ props }) {
 
   // on change in props
   useEffect(() => {
-    // TODO: store correct prop
     setQuestConfig(props.questConfig || {})
   }, [props.questConfig])
 
