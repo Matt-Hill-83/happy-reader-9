@@ -34,7 +34,6 @@ export default function DialogBuilder({ props }) {
 
   const dataParts = {
     content: "",
-    // fakeDivs: [],
   }
 
   let rowNum = { value: 0 }
@@ -164,18 +163,6 @@ export default function DialogBuilder({ props }) {
         </Button>
       )
     }
-
-    // const onAddDialogRow = ({ items }) => {
-    //   const newElement = Constants.getNewDialog()
-    //   Utils.addArrayElement({
-    //     newElement,
-    //     before: false,
-    //     index: 0,
-    //     array: items,
-    //   })
-
-    //   saveItems()
-    // }
 
     const renderJoinFramesButton = ({}) => {
       return (
