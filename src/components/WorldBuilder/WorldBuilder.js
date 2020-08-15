@@ -45,8 +45,8 @@ class WorldBuilder extends Component {
     showSceneConfig: false,
     // showSubQuestWizard: true,
     showSubQuestWizard: false,
-    showDialogBuilder: false,
-    // showDialogBuilder: true,
+    showDialogBuilder: true,
+    // showDialogBuilder: false,
   }
 
   // Changing this to DidMount breaks things
@@ -404,7 +404,7 @@ class WorldBuilder extends Component {
   }
 
   renderMainButtonGroup = () => {
-    const { showQuestConfig, showSceneConfig, showSubQuestWizard } = this.state
+    const { showQuestConfig, showSceneConfig } = this.state
 
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
     const dialogBuilderButton = (

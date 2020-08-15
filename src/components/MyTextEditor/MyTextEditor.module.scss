@@ -12,8 +12,10 @@
 }
 
 .submitButton {
-  position: absolute;
   top: 0px;
   right: 0px;
   z-index: 20;
+  position: fixed;
+  border: 2px solid red !important;
+  background: pink !important;
 }

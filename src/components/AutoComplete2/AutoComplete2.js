@@ -40,41 +40,41 @@ export default function AutoComplete2({ props }) {
     sortedData = items
   }
 
-  const defaultGetMuiTheme = () =>
-    createMuiTheme({
-      overrides: {
-        MuiAutocomplete: {
-          popper: {
-            backgroundColor: "#FF0000",
-            width: "1000px !important",
-            border: "4px solid red !important",
-          },
-        },
-      },
-    })
+  // const defaultGetMuiTheme = () =>
+  //   createMuiTheme({
+  //     overrides: {
+  //       MuiAutocomplete: {
+  //         popper: {
+  //           backgroundColor: "#FF0000",
+  //           width: "1000px !important",
+  //           border: "4px solid red !important",
+  //         },
+  //       },
+  //     },
+  //   })
 
-  const theme = defaultGetMuiTheme()
+  // const theme = defaultGetMuiTheme()
 
   const listboxProps = { className: css.test }
   return (
     <div className={cx(css.main, className)}>
-      <MuiThemeProvider theme={theme}>
-        <Autocomplete
-          ListboxProps={listboxProps}
-          disableListWrap={true}
-          options={sortedData}
-          clearOnEscape={true}
-          getOptionLabel={getLabel}
-          onChange={_onChange}
-          id="auto-complete"
-          autoComplete
-          includeInputInList
-          defaultValue={defaultValue}
-          renderInput={(params) => {
-            return <TextField {...params} label={label} variant="outlined" />
-          }}
-        />
-      </MuiThemeProvider>
+      {/* <MuiThemeProvider theme={theme}> */}
+      <Autocomplete
+        ListboxProps={listboxProps}
+        disableListWrap={true}
+        options={sortedData}
+        clearOnEscape={true}
+        getOptionLabel={getLabel}
+        onChange={_onChange}
+        id="auto-complete"
+        autoComplete
+        includeInputInList
+        defaultValue={defaultValue}
+        renderInput={(params) => {
+          return <TextField {...params} label={label} variant="outlined" />
+        }}
+      />
+      {/* </MuiThemeProvider> */}
     </div>
   )
 }

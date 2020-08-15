@@ -81,7 +81,6 @@ export default function DialogBuilder({ props }) {
       getOptionLabel: (option) => _get(option, "name") || "--",
       onChange: onChangeCritter,
     }
-    // return null
     return <AutoComplete2 props={dropDownProps} />
   }
 
