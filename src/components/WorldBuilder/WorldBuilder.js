@@ -20,6 +20,7 @@ import { maps, gameConfig } from "../../Stores/InitStores"
 import { worldNameStore } from "../../Stores/FrameSetStore"
 import Constants from "../../Utils/Constants/Constants"
 import DialogBuilder from "../DialogBuilder/DialogBuilder"
+import DialogBuilder2 from "../DialogBuilder2/DialogBuilder2"
 import ExportJson from "../ExportJson/ExportJson"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
 import JsonEditor2 from "../JsonEditor2/JsonEditor2"
@@ -551,10 +552,22 @@ class WorldBuilder extends Component {
       title = (world.data && world.data.title) || this.previousTitle + " copy"
     }
 
-    const dialogBuilderProps = {
-      saveItems: this.saveItemsDialogBuilder,
-      world,
-    }
+    const scenes = _get(world, "data.newGrid5") || []
+
+    const dialogBuilders = scenes.map((scene, sceneIndex) => {
+      const dialogBuilderProps = {
+        saveItems: this.saveItemsDialogBuilder,
+        scene,
+        world,
+        sceneIndex,
+      }
+      return (
+        <DialogBuilder2
+          key={dialogBuilderKey}
+          props={dialogBuilderProps}
+        ></DialogBuilder2>
+      )
+    })
 
     return (
       <div className={css.main}>
@@ -581,12 +594,19 @@ class WorldBuilder extends Component {
             )}
             {showDialogBuilder && (
               <div className={css.right}>
+                <div className={css.dialogBuildersContainer}>
+                  {dialogBuilders}
+                </div>
+              </div>
+            )}
+            {/* {showDialogBuilder && (
+              <div className={css.right}>
                 <DialogBuilder
                   key={dialogBuilderKey}
                   props={dialogBuilderProps}
                 ></DialogBuilder>
               </div>
-            )}
+            )} */}
           </div>
         )}
         {showFrameBuilder && (
