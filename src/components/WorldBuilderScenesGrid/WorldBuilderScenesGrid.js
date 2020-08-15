@@ -22,15 +22,18 @@ class WorldBuilderScenesGrid extends Component {
   }
 
   generateRandomUnusedLocation = ({ location, locationNames }) => {
-    const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
+    const world = worldBuilderStore.getWorldBuilderWorld()
+    const { newGrid5 } = world.data
+    const usedNames = newGrid5.map((scene) => scene.location.name)
 
-    const filteredLocationNames = []
-    // TODO: make random locations not duplicates
-    // TODO: make random locations not duplicates
-    // TODO: make random locations not duplicates
-    // TODO: make random locations not duplicates
+    const filteredLocationNames = locationNames.filter((name) => {
+      return !usedNames.includes(name)
+    })
+
     const randomName =
-      locationNames[Math.floor(Math.random() * locationNames.length)]
+      filteredLocationNames[
+        Math.floor(Math.random() * filteredLocationNames.length)
+      ]
 
     location.name = randomName
     WorldBuilderUtils.updateMap({ world: this.props.world })
