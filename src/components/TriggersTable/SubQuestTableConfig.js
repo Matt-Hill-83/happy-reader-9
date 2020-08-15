@@ -3,14 +3,14 @@ import { IconNames } from "@blueprintjs/icons"
 import { toJS } from "mobx"
 import cx from "classnames"
 import React from "react"
-import TextField from "@material-ui/core/TextField"
 
-import Utils from "../../Utils/Utils"
-import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
+import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import Constants from "../../Utils/Constants/Constants"
+import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
+import TextField from "@material-ui/core/TextField"
+import Utils from "../../Utils/Utils"
 
 import css from "./SubQuestTableConfig.module.scss"
-import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 
 const newCondition = { completedMission: 0 }
 

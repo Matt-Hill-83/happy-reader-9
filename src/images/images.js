@@ -110,6 +110,7 @@ import cow01 from "./creatures/cow01.png"
 import crow01 from "./creatures/crow01.png"
 import cub from "./creatures/cub.png"
 import dennisTheMenace from "./creatures/dennisTheMenace.png"
+import zack01 from "./creatures/zack01.png"
 import dog01 from "./creatures/dog01.png"
 import dragon from "./creatures/dragon.png"
 import drake from "./creatures/drake.png"
@@ -422,6 +423,7 @@ const locations = {
   donutShop01,
   bees,
   bog,
+  bog02: bog,
   castle,
   cave,
   coop,
@@ -513,6 +515,7 @@ const creatures = {
   cop,
   cub,
   dennisTheMenace,
+  zack01,
   dragon,
   drake,
   drake01,

@@ -21,7 +21,14 @@ class WorldBuilderScenesGrid extends Component {
     await this.props.saveItems()
   }
 
-  generateRandomLocation = ({ location, locationNames }) => {
+  generateRandomUnusedLocation = ({ location, locationNames }) => {
+    const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
+
+    const filteredLocationNames = []
+    // TODO: make random locations not duplicates
+    // TODO: make random locations not duplicates
+    // TODO: make random locations not duplicates
+    // TODO: make random locations not duplicates
     const randomName =
       locationNames[Math.floor(Math.random() * locationNames.length)]
 
@@ -62,7 +69,7 @@ class WorldBuilderScenesGrid extends Component {
       <div
         className={`${css.crudMachine} ${css.locationMachine}`}
         onClick={() =>
-          this.generateRandomLocation({
+          this.generateRandomUnusedLocation({
             location: scene.location,
             locationNames,
           })

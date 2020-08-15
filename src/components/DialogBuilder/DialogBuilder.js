@@ -154,6 +154,8 @@ export default function DialogBuilder({ props }) {
           onClick={() =>
             onAddDialogRow({
               items: dialog,
+              before: false,
+              rowIndex: 0,
             })
           }
           icon={IconNames.ADD}
@@ -163,17 +165,17 @@ export default function DialogBuilder({ props }) {
       )
     }
 
-    const onAddDialogRow = ({ items }) => {
-      const newElement = Constants.getNewDialog()
-      Utils.addArrayElement({
-        newElement,
-        before: false,
-        index: 0,
-        array: items,
-      })
+    // const onAddDialogRow = ({ items }) => {
+    //   const newElement = Constants.getNewDialog()
+    //   Utils.addArrayElement({
+    //     newElement,
+    //     before: false,
+    //     index: 0,
+    //     array: items,
+    //   })
 
-      saveItems()
-    }
+    //   saveItems()
+    // }
 
     const renderJoinFramesButton = ({}) => {
       return (
@@ -241,7 +243,7 @@ export default function DialogBuilder({ props }) {
     Utils.addArrayElement({
       newElement,
       before,
-      index: rowIndex - 1,
+      index: rowIndex,
       array: items,
     })
 

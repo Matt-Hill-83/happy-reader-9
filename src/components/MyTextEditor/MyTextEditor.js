@@ -37,7 +37,9 @@ export default function MyTextEditor({ props }) {
         className={css.submitButton}
         onClick={() => onSubmit({})}
         icon={IconNames.SAVED}
-      />
+      >
+        Save Text
+      </Button>
       <TextareaAutosize
         className={cx(css.main, className)}
         onChange={onTextAreaChange}
