@@ -24,12 +24,15 @@ export default function MyTextEditor({ props }) {
   }, [props.content])
 
   const onSubmit = () => {
+    console.log("content -= MyTE", toJS(content)) // zzz
     props.onSubmit && props.onSubmit({ content })
   }
 
   const onTextAreaChange = (event) => {
     setContent(event.target.value)
   }
+
+  console.log("MyTextEditor") // zzz
 
   return (
     <>

@@ -5,19 +5,24 @@ import { toJS } from "mobx"
 import cx from "classnames"
 import React, { useEffect, useState } from "react"
 
-import MyTextEditor from "../MyTextEditor/MyTextEditor"
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
-import css from "./DialogBuilder2.module.scss"
 import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 import Constants from "../../Utils/Constants/Constants"
+import MyTextEditor from "../MyTextEditor/MyTextEditor"
 import Utils from "../../Utils/Utils"
 import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 
+import css from "./DialogBuilder2.module.scss"
+
 export default function DialogBuilder2({ props }) {
   const [fakeDivs, setFakeDivs] = useState([])
+  const [metaInfoMap, setMetaInfoMap] = useState({})
+  let [content, setContent] = useState("")
 
-  const { saveItems, world, scene, sceneIndex } = props
+  const { world, scene, sceneIndex } = props
   // const scenes = _get(world, "data.newGrid5") || []
+
+  // const metaInfoMap = {}
 
   useEffect(() => {
     setFakeDivs([])
@@ -30,20 +35,39 @@ export default function DialogBuilder2({ props }) {
   // on change in props
   useEffect(() => {
     setFakeDivs([])
-  }, [props.world])
+  }, [props.scene])
 
-  const dataParts = {
-    content: "",
-  }
+  // const dataParts = {
+  //   content: "",
+  // }
 
+  // TODO: get save text to work again
+  // TODO: get save text to work again
+  // TODO: get save text to work again
   let rowNum = { value: 0 }
 
-  const updateTextChanges = ({ content, metaInfoMap }) => {
-    const linesArray = content.split("\n")
+  const localSave = () => {
+    console.log(
+      "frames - in DB ",
+      toJS(world.data.newGrid5[0].frameSet.frames[0])
+    ) // zzz
+    props.saveItems()
+  }
 
+  const updateTextChanges = ({ content }) => {
+    console.log(
+      "content - updateTextChanges=======================>",
+      toJS(content)
+    ) // zzz
+    console.log(
+      "content - updateTextChanges=======================>",
+      toJS(content)
+    ) // zzz
+    const linesArray = content.split("\n")
+    console.log("metaInfoMap", toJS(metaInfoMap)) // zzz
     linesArray.forEach((line, lineIndex) => {
       const dataStructureIndices = metaInfoMap[lineIndex]
-
+      console.log("dataStructureIndices", toJS(dataStructureIndices)) // zzz
       if (dataStructureIndices) {
         const newText = line
 
@@ -59,7 +83,7 @@ export default function DialogBuilder2({ props }) {
         }
       }
     })
-    saveItems()
+    localSave()
   }
 
   const renderCritterPicker = ({ dialog, frame }) => {
@@ -71,7 +95,7 @@ export default function DialogBuilder2({ props }) {
 
     const onChangeCritter = (newValue) => {
       dialog.character = newValue.name
-      saveItems()
+      localSave()
     }
 
     const dropDownProps = {
@@ -93,9 +117,13 @@ export default function DialogBuilder2({ props }) {
     }
   }
 
-  const addNewRowToTextArea = ({ text, fakeDiv, rowNum, dataParts }) => {
+  const addNewRowToTextArea = ({ text, fakeDiv, rowNum }) => {
+    // const addNewRowToTextArea = ({ text, fakeDiv, rowNum, dataParts }) => {
     fakeDivs.push(fakeDiv)
-    dataParts.content += `${text}\n`
+    const newText = `${text}\n`
+    // setContent(content + newText)
+    // dataParts.content += `${text}\n`
+    content += `${text}\n`
     rowNum.value++
   }
 
@@ -106,7 +134,7 @@ export default function DialogBuilder2({ props }) {
     scene,
     style,
     rowNum,
-    dataParts,
+    // dataParts,
   }) => {
     const dummyRowLabel = `${scene.location.name}  - F${frameIndex}`
 
@@ -203,7 +231,8 @@ export default function DialogBuilder2({ props }) {
 
     const text = dummyRowLabel
 
-    addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
+    addNewRowToTextArea({ text, fakeDiv, rowNum })
+    // addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
   }
 
   const onDuplicateFrame = ({ rowIndex, frames, frame }) => {
@@ -216,12 +245,12 @@ export default function DialogBuilder2({ props }) {
       array: frames,
     })
 
-    saveItems()
+    localSave()
   }
 
   const onDeleteFrame = ({ rowIndex, frames }) => {
     Utils.deleteArrayElement({ index: rowIndex, array: frames })
-    saveItems()
+    localSave()
   }
 
   const onAddDialogRow = ({ rowIndex, before, items }) => {
@@ -233,12 +262,12 @@ export default function DialogBuilder2({ props }) {
       array: items,
     })
 
-    saveItems()
+    localSave()
   }
 
   const onDeleteRow = ({ rowIndex, items }) => {
     Utils.deleteArrayElement({ index: rowIndex, array: items })
-    saveItems()
+    localSave()
   }
 
   const splitFrame = ({ dialogIndex, frame, frames, frameIndex }) => {
@@ -257,17 +286,16 @@ export default function DialogBuilder2({ props }) {
       array: frames,
     })
 
-    saveItems()
+    localSave()
   }
 
   const joinFrames = ({ rowIndex, frame, frames, prevFrame }) => {
     prevFrame.dialog.push(...frame.dialog)
     Utils.deleteArrayElement({ index: rowIndex, array: frames })
 
-    saveItems()
+    localSave()
   }
 
-  const metaInfoMap = {}
   const renderTextAreaRow = ({
     dialog,
     dialogIndex,
@@ -279,6 +307,9 @@ export default function DialogBuilder2({ props }) {
     sceneIndex,
     style,
   }) => {
+    // console.log("dialogs", toJS(dialogs)) // zzz
+    // console.log("dialog", toJS(dialog)) // zzz
+    // console.log("dialog.text.length >= 0", toJS(dialog.text.length >= 0)) // zzz
     if (dialog.text.length >= 0) {
       const renderSplitFrameButton = ({}) => {
         return (
@@ -303,6 +334,7 @@ export default function DialogBuilder2({ props }) {
       ]
 
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
+      // setMetaInfoMap(metaInfoMap  )
 
       const text = `${dialog.text}`
       const fakeDiv = (
@@ -323,12 +355,12 @@ export default function DialogBuilder2({ props }) {
           <div className={css.emptySpace}></div>
         </div>
       )
-      addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
+      addNewRowToTextArea({ text, fakeDiv, rowNum })
+      // addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
     }
+    console.log("metaInfoMap", toJS(metaInfoMap)) // zzz
   }
 
-  // const scenes2 = [scene]
-  // scenes2.forEach((scene, sceneIndex) => {
   const frames = _get(scene, "frameSet.frames") || []
   const style = getStyles({ sceneIndex })
 
@@ -340,7 +372,7 @@ export default function DialogBuilder2({ props }) {
       scene,
       style,
       rowNum,
-      dataParts,
+      // dataParts,
     })
 
     if (!frame.dialog) {
@@ -361,14 +393,15 @@ export default function DialogBuilder2({ props }) {
       })
     })
   })
-  // })
 
   const myTextEditorProps = {
-    content: dataParts.content,
+    content: content,
+    // content: dataParts.content,
     className: css.textEditor,
-    onSubmit: ({ content }) => updateTextChanges({ content, metaInfoMap }),
+    onSubmit: ({ content }) => updateTextChanges({ content }),
   }
 
+  console.log("DialogBuilder2 ----------------------------->>>>") // zzz
   return (
     <div className={css.main}>
       <div className={css.containerToGetMaxHeight}>

@@ -54,11 +54,10 @@ export default function AddDeleteButtonGroup({ props }) {
     </ButtonGroup>
   )
 
-  console.log("AddDeleteButtonGroup -------render") // zzz
-
   if (noPopover) {
     return buttons
   }
+
   return (
     <ButtonGroup className={cx(Classes.ALIGN_LEFT, css.buttonGroup, className)}>
       {moreButtons}

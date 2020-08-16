@@ -552,8 +552,12 @@ class WorldBuilder extends Component {
       title = (world.data && world.data.title) || this.previousTitle + " copy"
     }
 
+    // const scenes = _get(world, "data.newGrid5") || []
     const scenes = _get(world, "data.newGrid5") || []
+    // const test1 = [scenes[0]]
+    // const test1 = [scenes[0], scenes[1]]
 
+    // const dialogBuilders = test1.map((scene, sceneIndex) => {
     const dialogBuilders = scenes.map((scene, sceneIndex) => {
       const dialogBuilderProps = {
         saveItems: this.saveItemsDialogBuilder,
@@ -561,12 +565,7 @@ class WorldBuilder extends Component {
         world,
         sceneIndex,
       }
-      return (
-        <DialogBuilder2
-          key={dialogBuilderKey}
-          props={dialogBuilderProps}
-        ></DialogBuilder2>
-      )
+      return <DialogBuilder2 props={dialogBuilderProps}></DialogBuilder2>
     })
 
     return (
@@ -594,7 +593,10 @@ class WorldBuilder extends Component {
             )}
             {showDialogBuilder && (
               <div className={css.right}>
-                <div className={css.dialogBuildersContainer}>
+                <div
+                  key={dialogBuilderKey}
+                  className={css.dialogBuildersContainer}
+                >
                   {dialogBuilders}
                 </div>
               </div>

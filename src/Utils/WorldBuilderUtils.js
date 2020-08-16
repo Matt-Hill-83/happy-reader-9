@@ -1,4 +1,3 @@
-import localStateStore from "../Stores/LocalStateStore/LocalStateStore.js"
 import { toJS } from "mobx"
 import _get from "lodash.get"
 import worldBuilderStore from "../Stores/WorldBuilderStore.js"
@@ -72,10 +71,16 @@ export default class WorldBuilderUtils {
   }
 
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
+    console.log("mapToUpdate", toJS(mapToUpdate)) // zzz
     const map = mapToUpdate || worldBuilderStore.getWorldBuilderWorld()
     Object.assign(map.data, toJS(newProps))
+    console.log(
+      "mapToUpdate.data.newGrid5[0].frameSet.frames[0]",
+      toJS(mapToUpdate.data.newGrid5[0].frameSet.frames[0])
+    ) // zzz
 
     if (mapToUpdate) {
+      map.data.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid({})
     } else {
       map.data.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid({})
     }

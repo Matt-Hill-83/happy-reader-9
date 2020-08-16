@@ -17,7 +17,7 @@ const worldItem = ({ worldId }) => {
   return `/world/${worldId}`
 }
 const defaultWorldInProd = "aH5MjGenT8svEaPaty7G"
-const defaultWorldInNonProd = "aPHczWhVxO9HrZGogtx0"
+const defaultWorldInNonProd = "XBfZG8H8TNQUACmHF8ki"
 // const defaultWorldInNonProd = "4B6imaQ7XGgTPFydovBT"
 // const defaultWorldInNonProd = "aH5MjGenT8svEaPaty7G"
 
