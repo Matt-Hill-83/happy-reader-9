@@ -23,6 +23,8 @@ export default function DialogBuilder2({ props }) {
 
   useEffect(() => {
     setFakeDivs([])
+    setMetaInfoMap({})
+    setContent("")
     // on mount
 
     // returned function will be called on component unmount
@@ -32,6 +34,8 @@ export default function DialogBuilder2({ props }) {
   // on change in props
   useEffect(() => {
     setFakeDivs([])
+    setMetaInfoMap({})
+    setContent("")
   }, [props.scene])
 
   let rowNum = { value: 0 }

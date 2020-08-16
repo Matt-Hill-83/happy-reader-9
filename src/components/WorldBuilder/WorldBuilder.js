@@ -554,6 +554,7 @@ class WorldBuilder extends Component {
 
     // const scenes = _get(world, "data.newGrid5") || []
     const scenes = _get(world, "data.newGrid5") || []
+    console.log("scenes.length", toJS(scenes.length)) // zzz
     // const test1 = [scenes[0]]
     // const test1 = [scenes[0], scenes[1]]
 
