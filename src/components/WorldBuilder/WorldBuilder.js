@@ -293,8 +293,8 @@ class WorldBuilder extends Component {
 
   saveItemsDialogBuilder = async () => {
     const world = worldBuilderStore.getWorldBuilderWorld() || {}
-    await WorldBuilderUtils.updateMap({ mapToUpdate: world })
     this.setState({ dialogBuilderKey: new Date() })
+    await WorldBuilderUtils.updateMap({ mapToUpdate: world })
   }
 
   importWorldFromJson = async ({ newWorld }) => {

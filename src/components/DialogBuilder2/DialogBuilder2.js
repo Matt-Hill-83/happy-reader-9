@@ -51,9 +51,8 @@ export default function DialogBuilder2({ props }) {
       if (dataStructureIndices) {
         const newText = line
 
-        const { sceneIndex, frameIndex, dialogIndex } = dataStructureIndices
+        const { frameIndex, dialogIndex } = dataStructureIndices
 
-        // const scene = scenes[sceneIndex]
         const frames = _get(scene, "frameSet.frames") || []
         const frame = frames[frameIndex]
         const dialog = frame.dialog[dialogIndex]
@@ -99,7 +98,7 @@ export default function DialogBuilder2({ props }) {
 
   const addNewRowToTextArea = ({ text, fakeDiv, rowNum }) => {
     fakeDivs.push(fakeDiv)
-    const newText = `${text}\n`
+    // const newText = `${text}\n`
     content += `${text}\n`
     rowNum.value++
   }
@@ -347,6 +346,7 @@ export default function DialogBuilder2({ props }) {
       frame.dialog = []
     }
 
+    console.log("frame.dialog.length", toJS(frame.dialog.length)) // zzz
     frame.dialog.forEach((dialog, dialogIndex) => {
       renderTextAreaRow({
         dialog,
