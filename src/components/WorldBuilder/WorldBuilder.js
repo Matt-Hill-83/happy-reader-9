@@ -34,6 +34,7 @@ import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import WorldPicker from "../WorldPicker/WorldPicker"
 
 import css from "./WorldBuilder.module.scss"
+import MyAccordion from "../MyAccordion/MyAccordion"
 
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
@@ -561,7 +562,19 @@ class WorldBuilder extends Component {
         world,
         sceneIndex,
       }
-      return <DialogBuilder2 props={dialogBuilderProps}></DialogBuilder2>
+
+      const subQuestAccordion = {
+        title: <div className={css.subQuestHeader}>{scene.location.name}</div>,
+        expanded: true,
+        content: () => (
+          <DialogBuilder2 props={dialogBuilderProps}></DialogBuilder2>
+        ),
+        className: css.subQuestAccordion,
+      }
+
+      return <MyAccordion props={subQuestAccordion} />
+
+      // return <DialogBuilder2 props={dialogBuilderProps}></DialogBuilder2>
     })
 
     return (
