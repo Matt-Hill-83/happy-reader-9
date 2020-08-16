@@ -19,10 +19,7 @@ export default function DialogBuilder2({ props }) {
   const [metaInfoMap, setMetaInfoMap] = useState({})
   let [content, setContent] = useState("")
 
-  const { world, scene, sceneIndex } = props
-  // const scenes = _get(world, "data.newGrid5") || []
-
-  // const metaInfoMap = {}
+  const { scene, sceneIndex } = props
 
   useEffect(() => {
     setFakeDivs([])
@@ -37,37 +34,16 @@ export default function DialogBuilder2({ props }) {
     setFakeDivs([])
   }, [props.scene])
 
-  // const dataParts = {
-  //   content: "",
-  // }
-
-  // TODO: get save text to work again
-  // TODO: get save text to work again
-  // TODO: get save text to work again
   let rowNum = { value: 0 }
 
   const localSave = () => {
-    console.log(
-      "frames - in DB ",
-      toJS(world.data.newGrid5[0].frameSet.frames[0])
-    ) // zzz
     props.saveItems()
   }
 
   const updateTextChanges = ({ content }) => {
-    console.log(
-      "content - updateTextChanges=======================>",
-      toJS(content)
-    ) // zzz
-    console.log(
-      "content - updateTextChanges=======================>",
-      toJS(content)
-    ) // zzz
     const linesArray = content.split("\n")
-    console.log("metaInfoMap", toJS(metaInfoMap)) // zzz
     linesArray.forEach((line, lineIndex) => {
       const dataStructureIndices = metaInfoMap[lineIndex]
-      console.log("dataStructureIndices", toJS(dataStructureIndices)) // zzz
       if (dataStructureIndices) {
         const newText = line
 
@@ -118,11 +94,8 @@ export default function DialogBuilder2({ props }) {
   }
 
   const addNewRowToTextArea = ({ text, fakeDiv, rowNum }) => {
-    // const addNewRowToTextArea = ({ text, fakeDiv, rowNum, dataParts }) => {
     fakeDivs.push(fakeDiv)
     const newText = `${text}\n`
-    // setContent(content + newText)
-    // dataParts.content += `${text}\n`
     content += `${text}\n`
     rowNum.value++
   }
@@ -134,7 +107,6 @@ export default function DialogBuilder2({ props }) {
     scene,
     style,
     rowNum,
-    // dataParts,
   }) => {
     const dummyRowLabel = `${scene.location.name}  - F${frameIndex}`
 
@@ -232,7 +204,6 @@ export default function DialogBuilder2({ props }) {
     const text = dummyRowLabel
 
     addNewRowToTextArea({ text, fakeDiv, rowNum })
-    // addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
   }
 
   const onDuplicateFrame = ({ rowIndex, frames, frame }) => {
@@ -307,9 +278,6 @@ export default function DialogBuilder2({ props }) {
     sceneIndex,
     style,
   }) => {
-    // console.log("dialogs", toJS(dialogs)) // zzz
-    // console.log("dialog", toJS(dialog)) // zzz
-    // console.log("dialog.text.length >= 0", toJS(dialog.text.length >= 0)) // zzz
     if (dialog.text.length >= 0) {
       const renderSplitFrameButton = ({}) => {
         return (
@@ -334,7 +302,6 @@ export default function DialogBuilder2({ props }) {
       ]
 
       metaInfoMap[rowNum.value] = { sceneIndex, frameIndex, dialogIndex }
-      // setMetaInfoMap(metaInfoMap  )
 
       const text = `${dialog.text}`
       const fakeDiv = (
@@ -356,9 +323,7 @@ export default function DialogBuilder2({ props }) {
         </div>
       )
       addNewRowToTextArea({ text, fakeDiv, rowNum })
-      // addNewRowToTextArea({ text, fakeDiv, rowNum, dataParts })
     }
-    console.log("metaInfoMap", toJS(metaInfoMap)) // zzz
   }
 
   const frames = _get(scene, "frameSet.frames") || []
@@ -372,7 +337,6 @@ export default function DialogBuilder2({ props }) {
       scene,
       style,
       rowNum,
-      // dataParts,
     })
 
     if (!frame.dialog) {
@@ -396,12 +360,10 @@ export default function DialogBuilder2({ props }) {
 
   const myTextEditorProps = {
     content: content,
-    // content: dataParts.content,
     className: css.textEditor,
     onSubmit: ({ content }) => updateTextChanges({ content }),
   }
 
-  console.log("DialogBuilder2 ----------------------------->>>>") // zzz
   return (
     <div className={css.main}>
       <div className={css.containerToGetMaxHeight}>
