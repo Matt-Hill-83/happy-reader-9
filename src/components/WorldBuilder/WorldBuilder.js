@@ -552,13 +552,8 @@ class WorldBuilder extends Component {
       title = (world.data && world.data.title) || this.previousTitle + " copy"
     }
 
-    // const scenes = _get(world, "data.newGrid5") || []
     const scenes = _get(world, "data.newGrid5") || []
-    console.log("scenes.length", toJS(scenes.length)) // zzz
-    // const test1 = [scenes[0]]
-    // const test1 = [scenes[0], scenes[1]]
 
-    // const dialogBuilders = test1.map((scene, sceneIndex) => {
     const dialogBuilders = scenes.map((scene, sceneIndex) => {
       const dialogBuilderProps = {
         saveItems: this.saveItemsDialogBuilder,

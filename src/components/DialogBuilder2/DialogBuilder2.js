@@ -346,7 +346,6 @@ export default function DialogBuilder2({ props }) {
       frame.dialog = []
     }
 
-    console.log("frame.dialog.length", toJS(frame.dialog.length)) // zzz
     frame.dialog.forEach((dialog, dialogIndex) => {
       renderTextAreaRow({
         dialog,
