@@ -74,10 +74,10 @@ export default class WorldBuilderUtils {
     console.log("mapToUpdate", toJS(mapToUpdate)) // zzz
     const map = mapToUpdate || worldBuilderStore.getWorldBuilderWorld()
     Object.assign(map.data, toJS(newProps))
-    console.log(
-      "mapToUpdate.data.newGrid5[0].frameSet.frames[0]",
-      toJS(mapToUpdate.data.newGrid5[0].frameSet.frames[0])
-    ) // zzz
+    // console.log(
+    //   "mapToUpdate.data.newGrid5[0].frameSet.frames[0]",
+    //   toJS(mapToUpdate.data.newGrid5[0].frameSet.frames[0])
+    // ) // zzz
 
     if (mapToUpdate) {
       map.data.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid({})

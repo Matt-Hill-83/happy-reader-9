@@ -561,11 +561,6 @@ class WorldBuilder extends Component {
       }
 
       return <MyAccordion props={subQuestAccordion} />
-
-      // TODO: keep track of which ones are open
-      // TODO: keep track of which ones are open
-      // TODO: keep track of which ones are open
-      // TODO: keep track of which ones are open
     })
     console.log("expandedDialogAccordions", toJS(expandedDialogAccordions)) // zzz
 

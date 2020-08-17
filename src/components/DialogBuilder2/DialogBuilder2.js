@@ -15,14 +15,15 @@ import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import css from "./DialogBuilder2.module.scss"
 
 export default function DialogBuilder2({ props }) {
-  const [fakeDivs, setFakeDivs] = useState([])
+  // const [fakeDivs, setFakeDivs] = useState([])
+  const fakeDivs = []
   const [metaInfoMap, setMetaInfoMap] = useState({})
   let [content, setContent] = useState("")
 
   const { scene, sceneIndex } = props
 
   useEffect(() => {
-    setFakeDivs([])
+    // setFakeDivs([])
     setMetaInfoMap({})
     setContent("")
     // on mount
@@ -32,12 +33,16 @@ export default function DialogBuilder2({ props }) {
   }, [])
 
   // on change in props
-  console.log("// on change in props") // zzz
+  console.log("") // zzz
+  console.log("// on change in props==============================") // zzz
+  console.log("props.scene.location.name", toJS(props.scene.location.name)) // zzz
   useEffect(() => {
-    setFakeDivs([])
+    // setFakeDivs([])
     setMetaInfoMap({})
     setContent("")
-  }, [props.scene])
+    console.log("fakeDivs.length", toJS(fakeDivs.length)) // zzz
+  }, [])
+  // }, [props.scene])
 
   let rowNum = { value: 0 }
 
