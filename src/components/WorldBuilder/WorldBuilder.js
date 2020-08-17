@@ -626,14 +626,6 @@ class WorldBuilder extends Component {
                 </div>
               </div>
             )}
-            {/* {showDialogBuilder && (
-              <div className={css.right}>
-                <DialogBuilder
-                  key={dialogBuilderKey}
-                  props={dialogBuilderProps}
-                ></DialogBuilder>
-              </div>
-            )} */}
           </div>
         )}
         {showFrameBuilder && (
