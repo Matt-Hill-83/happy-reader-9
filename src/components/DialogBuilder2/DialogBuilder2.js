@@ -32,6 +32,7 @@ export default function DialogBuilder2({ props }) {
   }, [])
 
   // on change in props
+  console.log("// on change in props") // zzz
   useEffect(() => {
     setFakeDivs([])
     setMetaInfoMap({})
@@ -366,6 +367,8 @@ export default function DialogBuilder2({ props }) {
     className: css.textEditor,
     onSubmit: ({ content }) => updateTextChanges({ content }),
   }
+
+  console.log("fakeDivs.length", toJS(fakeDivs.length)) // zzz
 
   return (
     <div className={css.main}>

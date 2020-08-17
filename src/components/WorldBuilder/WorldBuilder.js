@@ -48,6 +48,7 @@ class WorldBuilder extends Component {
     // showSubQuestWizard: true,
     showSubQuestWizard: false,
     showDialogBuilder: true,
+    expandedDialogAccordions: {},
     // showDialogBuilder: false,
   }
 
@@ -527,6 +528,50 @@ class WorldBuilder extends Component {
     )
   }
 
+  renderDialogBuilder = ({ world }) => {
+    const { expandedDialogAccordions } = this.state
+
+    const scenes = _get(world, "data.newGrid5") || []
+
+    const dialogBuilders = scenes.map((scene, sceneIndex) => {
+      const dialogBuilderProps = {
+        saveItems: this.saveItemsDialogBuilder,
+        scene,
+        world,
+        sceneIndex,
+      }
+
+      const onChange = ({ expanded }) => {
+        console.log("expanded", toJS(expanded)) // zzz
+        console.log("sceneIndex", toJS(sceneIndex)) // zzz
+        const { expandedDialogAccordions } = this.state
+
+        expandedDialogAccordions[sceneIndex] = expanded
+        this.setState({ expandedDialogAccordions })
+      }
+
+      const subQuestAccordion = {
+        title: <div className={css.subQuestHeader}>{scene.location.name}</div>,
+        expanded: expandedDialogAccordions[sceneIndex],
+        onChange,
+        content: () => (
+          <DialogBuilder2 props={dialogBuilderProps}></DialogBuilder2>
+        ),
+        // className: css.subQuestAccordion,
+      }
+
+      return <MyAccordion props={subQuestAccordion} />
+
+      // TODO: keep track of which ones are open
+      // TODO: keep track of which ones are open
+      // TODO: keep track of which ones are open
+      // TODO: keep track of which ones are open
+    })
+    console.log("expandedDialogAccordions", toJS(expandedDialogAccordions)) // zzz
+
+    return dialogBuilders
+  }
+
   render() {
     const {
       sceneToEdit,
@@ -552,30 +597,6 @@ class WorldBuilder extends Component {
 
       title = (world.data && world.data.title) || this.previousTitle + " copy"
     }
-
-    const scenes = _get(world, "data.newGrid5") || []
-
-    const dialogBuilders = scenes.map((scene, sceneIndex) => {
-      const dialogBuilderProps = {
-        saveItems: this.saveItemsDialogBuilder,
-        scene,
-        world,
-        sceneIndex,
-      }
-
-      const subQuestAccordion = {
-        title: <div className={css.subQuestHeader}>{scene.location.name}</div>,
-        expanded: true,
-        content: () => (
-          <DialogBuilder2 props={dialogBuilderProps}></DialogBuilder2>
-        ),
-        className: css.subQuestAccordion,
-      }
-
-      return <MyAccordion props={subQuestAccordion} />
-
-      // return <DialogBuilder2 props={dialogBuilderProps}></DialogBuilder2>
-    })
 
     return (
       <div className={css.main}>
@@ -606,7 +627,7 @@ class WorldBuilder extends Component {
                   key={dialogBuilderKey}
                   className={css.dialogBuildersContainer}
                 >
-                  {dialogBuilders}
+                  {this.renderDialogBuilder({ world })}
                 </div>
               </div>
             )}

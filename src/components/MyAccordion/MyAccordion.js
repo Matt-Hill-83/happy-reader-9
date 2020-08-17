@@ -26,7 +26,7 @@ export default function MyAccordion({ props }) {
   const [expanded, setExpanded] = useState(true)
 
   useEffect(() => {
-    return
+    setExpanded(props.expanded)
   }, [props.expanded])
 
   useEffect(() => {
@@ -40,13 +40,17 @@ export default function MyAccordion({ props }) {
 
   const onChange = (event, value) => {
     setExpanded(value)
-    props.onChange && props.onChange()
+    props.onChange && props.onChange({ expanded: value })
   }
 
   const renderedContent = expanded ? content() : null
 
   const renderedAccordion = (
-    <Accordion defaultExpanded={expanded} onChange={onChange}>
+    <Accordion
+      expanded={expanded}
+      // defaultExpanded={expanded}
+      onChange={onChange}
+    >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
