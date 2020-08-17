@@ -70,9 +70,13 @@ export default function DialogBuilder2({ props }) {
       localSave()
     }
 
+    const filteredCritters = crittersInFrame.filter(
+      (item) => item.name !== "blank"
+    )
+
     const dropDownProps = {
       className: css.sceneDropdown,
-      items: crittersInFrame,
+      items: filteredCritters,
       defaultValue: selectedItem,
       getOptionLabel: (option) => _get(option, "name") || "--",
       onChange: onChangeCritter,
@@ -91,8 +95,8 @@ export default function DialogBuilder2({ props }) {
 
   const addNewRowToTextArea = ({ text, fakeDiv, rowNum }) => {
     fakeDivs.push(fakeDiv)
-    // const newText = `${text}\n`
-    content += `${text}\n`
+    const newText = `${text}\n`
+    content += newText
     rowNum.value++
   }
 

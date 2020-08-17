@@ -53,7 +53,7 @@ export default class WorldBuilderUtils {
   }
 
   static createCondensedGridFromGrid = ({ world }) => {
-    // trim down the grid to just the non-bank scenes and make them accessible by id, instead of
+    // trim down the grid to just the non-blank scenes and make them accessible by id, instead of
     // defined by the 2 array position
 
     const condensedGrid = []
