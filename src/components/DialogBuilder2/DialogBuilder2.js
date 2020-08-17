@@ -16,13 +16,12 @@ import css from "./DialogBuilder2.module.scss"
 
 export default function DialogBuilder2({ props }) {
   const fakeDivs = []
-  const [metaInfoMap, setMetaInfoMap] = useState({})
+  const metaInfoMap = {}
   let content = ""
 
   const { scene, sceneIndex } = props
 
   useEffect(() => {
-    setMetaInfoMap({})
     // on mount
 
     // returned function will be called on component unmount
@@ -30,9 +29,7 @@ export default function DialogBuilder2({ props }) {
   }, [])
 
   // on change in props
-  useEffect(() => {
-    setMetaInfoMap({})
-  }, [])
+  useEffect(() => {}, [])
 
   let rowNum = { value: 0 }
 
