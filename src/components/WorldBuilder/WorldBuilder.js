@@ -557,7 +557,7 @@ class WorldBuilder extends Component {
         content: () => (
           <DialogBuilder2 props={dialogBuilderProps}></DialogBuilder2>
         ),
-        // className: css.subQuestAccordion,
+        className: css.sceneDialogAccordion,
       }
 
       return <MyAccordion props={subQuestAccordion} />

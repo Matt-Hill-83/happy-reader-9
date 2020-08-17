@@ -10,6 +10,10 @@
   width: 100%;
   height: 90vh;
 
+  .sceneDialogAccordion {
+    border-bottom: 1px solid blue !important;
+  }
+
   .dialogBuildersContainer {
     display: flex;
     // border: 4px solid purple !important;

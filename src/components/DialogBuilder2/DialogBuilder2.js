@@ -18,14 +18,15 @@ export default function DialogBuilder2({ props }) {
   // const [fakeDivs, setFakeDivs] = useState([])
   const fakeDivs = []
   const [metaInfoMap, setMetaInfoMap] = useState({})
-  let [content, setContent] = useState("")
+  // let [content, setContent] = useState("")
+  let content = ""
 
   const { scene, sceneIndex } = props
 
   useEffect(() => {
     // setFakeDivs([])
     setMetaInfoMap({})
-    setContent("")
+    // setContent("")
     // on mount
 
     // returned function will be called on component unmount
@@ -39,7 +40,7 @@ export default function DialogBuilder2({ props }) {
   useEffect(() => {
     // setFakeDivs([])
     setMetaInfoMap({})
-    setContent("")
+    // setContent("")
     console.log("fakeDivs.length", toJS(fakeDivs.length)) // zzz
   }, [])
   // }, [props.scene])
