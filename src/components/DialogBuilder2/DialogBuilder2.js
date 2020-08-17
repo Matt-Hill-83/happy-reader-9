@@ -15,18 +15,14 @@ import WorldBuilderUtils from "../../Utils/WorldBuilderUtils"
 import css from "./DialogBuilder2.module.scss"
 
 export default function DialogBuilder2({ props }) {
-  // const [fakeDivs, setFakeDivs] = useState([])
   const fakeDivs = []
   const [metaInfoMap, setMetaInfoMap] = useState({})
-  // let [content, setContent] = useState("")
   let content = ""
 
   const { scene, sceneIndex } = props
 
   useEffect(() => {
-    // setFakeDivs([])
     setMetaInfoMap({})
-    // setContent("")
     // on mount
 
     // returned function will be called on component unmount
@@ -34,16 +30,9 @@ export default function DialogBuilder2({ props }) {
   }, [])
 
   // on change in props
-  console.log("") // zzz
-  console.log("// on change in props==============================") // zzz
-  console.log("props.scene.location.name", toJS(props.scene.location.name)) // zzz
   useEffect(() => {
-    // setFakeDivs([])
     setMetaInfoMap({})
-    // setContent("")
-    console.log("fakeDivs.length", toJS(fakeDivs.length)) // zzz
   }, [])
-  // }, [props.scene])
 
   let rowNum = { value: 0 }
 
@@ -373,8 +362,6 @@ export default function DialogBuilder2({ props }) {
     className: css.textEditor,
     onSubmit: ({ content }) => updateTextChanges({ content }),
   }
-
-  console.log("fakeDivs.length", toJS(fakeDivs.length)) // zzz
 
   return (
     <div className={css.main}>

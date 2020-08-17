@@ -542,8 +542,6 @@ class WorldBuilder extends Component {
       }
 
       const onChange = ({ expanded }) => {
-        console.log("expanded", toJS(expanded)) // zzz
-        console.log("sceneIndex", toJS(sceneIndex)) // zzz
         const { expandedDialogAccordions } = this.state
 
         expandedDialogAccordions[sceneIndex] = expanded
@@ -562,7 +560,6 @@ class WorldBuilder extends Component {
 
       return <MyAccordion props={subQuestAccordion} />
     })
-    console.log("expandedDialogAccordions", toJS(expandedDialogAccordions)) // zzz
 
     return dialogBuilders
   }
