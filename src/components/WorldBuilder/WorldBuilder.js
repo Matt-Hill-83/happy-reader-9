@@ -19,7 +19,7 @@ import _get from "lodash.get"
 import { maps, gameConfig } from "../../Stores/InitStores"
 import { worldNameStore } from "../../Stores/FrameSetStore"
 import Constants from "../../Utils/Constants/Constants"
-import DialogBuilder from "../DialogBuilder/DialogBuilder"
+// import DialogBuilder from "../DialogBuilder/DialogBuilder"
 import DialogBuilder2 from "../DialogBuilder2/DialogBuilder2"
 import ExportJson from "../ExportJson/ExportJson"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
@@ -35,6 +35,7 @@ import WorldPicker from "../WorldPicker/WorldPicker"
 
 import css from "./WorldBuilder.module.scss"
 import MyAccordion from "../MyAccordion/MyAccordion"
+import FrameSetUploader from "../FrameSetUploader/FrameSetUploader"
 
 const NUM_ROWS_LOCATIONS_GRID = 8
 const NUM_COLS_LOCATIONS_GRID = 20
@@ -452,7 +453,7 @@ class WorldBuilder extends Component {
     const uploadJsonButton = (
       <Button
         icon="document"
-        text="get JSON for world"
+        text="upload JSON"
         onClick={() =>
           this.setState({
             showSceneConfig: !showSceneConfig,
@@ -474,6 +475,9 @@ class WorldBuilder extends Component {
               {questConfigButton}
               {getJsonButton}
               {uploadJsonButton}
+              <FrameSetUploader
+                onImportJson={this.importWorldFromJson}
+              ></FrameSetUploader>
             </ButtonGroup>
           }
           target={
