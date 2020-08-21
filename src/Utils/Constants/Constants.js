@@ -82,6 +82,8 @@ export default class Constants {
     }
   }
 
+  static posableCharacters = ["liz2", "kat"]
+
   static neighborPositionsEnum = {
     left: "left",
     right: "right",

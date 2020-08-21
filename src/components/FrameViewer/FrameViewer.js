@@ -12,6 +12,7 @@ import Images from "../../images/images"
 import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import Utils from "../../Utils/Utils"
 import WordGroup from "../WordGroup/WordGroup"
+import Constants from "../../Utils/Constants/Constants"
 
 import css from "./FrameViewer.module.scss"
 
@@ -127,34 +128,33 @@ class FrameViewer extends Component {
     )
   }
 
-  renderCritters2 = () => {
-    const { frame } = this.props
-    if (!frame) return null
+  renderCritters = ({ critters, className }) => {
+    const filteredCritters =
+      critters.filter((item) => {
+        return !Constants.posableCharacters.includes(item.name)
+      }) || []
 
-    const critters = frame.critters2 || []
-    const critterNames = critters.map((item) => item.name)
+    const critterNames = filteredCritters.map((item) => item.name)
 
     return critterNames.map((character, index) => {
       return (
-        <div className={`${css.characterContainer}`} key={index}>
+        <div className={cx(css.characterContainer, className)} key={index}>
           <Character name={character} isEditMode={false} showHeadOnly={false} />
         </div>
       )
     })
   }
 
-  renderCritters1 = () => {
+  renderPosableCritters = () => {
     const { frame } = this.props
     const { faces = [] } = frame
 
     if (!frame) return null
 
-    const posableCharacters = ["liz2", "kat"]
+    const posableCharacters = Constants.posableCharacters
 
     const critters =
       frame.critters1.filter((item) => {
-        console.log("item.name", toJS(item.name)) // zzz
-
         return posableCharacters.includes(item.name)
       }) || []
 
@@ -233,8 +233,9 @@ class FrameViewer extends Component {
   }
 
   renderFrame = () => {
-    const { scene, isLastFrame } = this.props
-
+    const { frame, scene, isLastFrame } = this.props
+    const critters1 = frame.critters1 || []
+    const critters2 = frame.critters2 || []
     const sceneName = scene.location.name
 
     return (
@@ -252,10 +253,16 @@ class FrameViewer extends Component {
           </div>
           <div className={css.imageGroupsContainer}>
             <div className={css.lizAndKatContainer}>
-              {this.renderCritters1()}
+              {this.renderPosableCritters()}
             </div>
             <div className={css.charactersContainer}>
-              {this.renderCritters2()}
+              {this.renderCritters({
+                critters: critters1,
+                className: css.critters1,
+              })}
+              {this.renderCritters({
+                critters: critters2,
+              })}
             </div>
           </div>
         </div>
