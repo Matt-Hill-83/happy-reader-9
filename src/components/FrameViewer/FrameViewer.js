@@ -258,8 +258,11 @@ class FrameViewer extends Component {
             <div className={css.charactersContainer}>
               {this.renderCritters({
                 critters: critters1,
-                className: css.critters1,
               })}
+            </div>
+            <div
+              className={cx(css.charactersContainer, css.charactersContainer2)}
+            >
               {this.renderCritters({
                 critters: critters2,
               })}
