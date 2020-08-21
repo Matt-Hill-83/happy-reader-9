@@ -9,8 +9,12 @@
       display: flex;
       align-items: center;
 
-      font-size: var(--story-font-size);
+      // font-size: var(--story-font-size);
       flex-wrap: wrap;
+
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+      font-size: 2.5vh;
 
       .sentenceWord {
         border: 1px solid transparent !important;
@@ -18,6 +22,10 @@
         margin-left: 0;
         padding-right: 0.4em;
         font-weight: 400;
+        // padding-right: 0.5rem;
+        // padding-left: 0.5rem;
+        // This sets the row height
+        // font-size: 2.5vh;
       }
 
       .sentenceWord:focus {

@@ -6,7 +6,7 @@ import firebase from "@firebase/app"
 import { toJS } from "mobx"
 
 firebase.initializeApp({
-  projectId: "troll-need-gold-01",
+  projectId: "troll-need-gold-02",
 })
 
 initFirestorter({ firebase: firebase })
@@ -21,6 +21,17 @@ class Map extends Document {
 
 const maps = new Collection("maps", {
   DocumentClass: Map,
+})
+class Quest extends Document {
+  constructor(source, options) {
+    super(source, {
+      ...(options || {}),
+    })
+  }
+}
+
+const quests = new Collection("quests", {
+  DocumentClass: Quest,
 })
 
 class Book extends Document {
@@ -47,4 +58,5 @@ const gameConfig = new Collection("gameConfig", {
   DocumentClass: GameConfig,
 })
 
-export { maps, books, gameConfig }
+// quests is a duplicate of maps used for transfering items to a new collection
+export { maps, books, gameConfig, quests }

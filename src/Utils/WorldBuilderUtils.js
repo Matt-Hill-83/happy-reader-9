@@ -1,6 +1,7 @@
 import { toJS } from "mobx"
 import _get from "lodash.get"
 import worldBuilderStore from "../Stores/WorldBuilderStore.js"
+import { quests } from "../Stores/InitStores.js"
 
 export default class WorldBuilderUtils {
   static getAllItemsInScene = ({ scene }) => {
@@ -86,6 +87,7 @@ export default class WorldBuilderUtils {
 
     delete map.data.grid
     await map.update(map.data)
+    // await quests.add(map.data)
   }
 
   static getCritters1New = ({ frameConfig, sceneConfig }) => {
