@@ -172,7 +172,7 @@ class WorldBuilderScenesGrid extends Component {
         )}
         <div className={css.column1}>
           {locationPicker}
-          {!hideScene && (
+          {false && !hideScene && (
             <CrudMachine
               className={`${css.crudMachine} ${css.itemBox} ${css.charactersMachine}`}
               items={characters}
