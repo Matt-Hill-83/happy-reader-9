@@ -18,8 +18,8 @@ import QuestStatusUtils from "../../Utils/QuestStatusUtils.js"
 // import BookBuilder from "../BookBuilder/BookBuilder.js"
 
 let useDefaultWorldId
-useDefaultWorldId = true
 useDefaultWorldId = false
+useDefaultWorldId = true
 
 const toaster = Toaster.create({
   position: Position.TOP,

@@ -64,6 +64,15 @@ import dummyQuest01 from "./bookcovers/dummyQuest01.png"
 // creatures
 // creatures
 
+import smallGoose01 from "./creatures/smallGoose01.png"
+import goosehHead01 from "./creatures/goosehHead01.png"
+import goose01 from "./creatures/goose01.png"
+import goose02 from "./creatures/goose02.png"
+import goose03 from "./creatures/goose03.png"
+import goose04 from "./creatures/goose04.png"
+import queenGoose01 from "./creatures/queenGoose01.png"
+import pigeon01 from "./creatures/pigeon01.png"
+
 import snake01 from "./creatures/snake01.png"
 import bee01 from "./creatures/bee01.png"
 
@@ -574,6 +583,16 @@ const creatures = {
   nazboo01,
   zac01,
   genie01,
+  snake01,
+
+  goosehHead01,
+  smallGoose01,
+  goose01,
+  goose02,
+  goose03,
+  goose04,
+  queenGoose01,
+  pigeon01,
 }
 
 const items = {
@@ -611,7 +630,6 @@ const items = {
   rori,
   barkPhone01,
 
-  snake01,
   spaceShip01,
 
   angusBalloon01,
