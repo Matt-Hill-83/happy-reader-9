@@ -2,17 +2,18 @@ import { Button } from "@blueprintjs/core"
 import React, { Component } from "react"
 import cx from "classnames"
 
-import Character from "../Character/Character"
 import { observer } from "mobx-react"
 import { toJS } from "mobx"
 import _get from "lodash.get"
 
-import Images from "../../images/images"
-import WordGroup from "../WordGroup/WordGroup"
-import css from "./FrameViewer.module.scss"
-import Utils from "../../Utils/Utils"
-import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
 import ArrowNavigator from "../ArrowNavigator/ArrowNavigator"
+import Character from "../Character/Character"
+import Images from "../../images/images"
+import localStateStore from "../../Stores/LocalStateStore/LocalStateStore"
+import Utils from "../../Utils/Utils"
+import WordGroup from "../WordGroup/WordGroup"
+
+import css from "./FrameViewer.module.scss"
 
 class FrameViewer extends Component {
   state = {}
@@ -148,7 +149,14 @@ class FrameViewer extends Component {
 
     if (!frame) return null
 
-    const critters = frame.critters1 || []
+    const posableCharacters = ["liz2", "kat"]
+
+    const critters =
+      frame.critters1.filter((item) => {
+        console.log("item.name", toJS(item.name)) // zzz
+
+        return posableCharacters.includes(item.name)
+      }) || []
 
     const critterNames = critters.map((item) => item.name)
     return critterNames.map((character, index) => {
