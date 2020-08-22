@@ -67,6 +67,8 @@ import dummyQuest01 from "./bookcovers/dummyQuest01.png"
 import smallGoose01 from "./creatures/smallGoose01.png"
 import goosehHead01 from "./creatures/goosehHead01.png"
 import goose01 from "./creatures/goose01.png"
+import lucy02 from "./creatures/lucy02.png"
+import charlie02 from "./creatures/charlie02.png"
 import goose02 from "./creatures/goose02.png"
 import goose03 from "./creatures/goose03.png"
 import goose04 from "./creatures/goose04.png"
@@ -588,9 +590,13 @@ const creatures = {
   goosehHead01,
   smallGoose01,
   goose01,
+  lucy02,
+  charlie02,
   goose02,
-  goose03,
-  goose04,
+  // goose03,
+  littleGoose: goose03,
+  sillyGoose01: goose04,
+  // goose04,
   queenGoose01,
   pigeon01,
 }
