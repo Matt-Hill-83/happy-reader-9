@@ -87,6 +87,7 @@ export default class WorldBuilderUtils {
 
     delete map.data.grid
     await map.update(map.data)
+    // // console.log("map.data", toJS(map.data)) // zzz
     // await quests.add(map.data)
   }
 
