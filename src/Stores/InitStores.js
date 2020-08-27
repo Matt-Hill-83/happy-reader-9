@@ -19,7 +19,8 @@ class Map extends Document {
   }
 }
 
-const maps = new Collection("maps", {
+const maps = new Collection("quests", {
+  // const maps = new Collection("maps", {
   DocumentClass: Map,
 })
 class Quest extends Document {

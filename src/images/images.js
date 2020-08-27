@@ -593,24 +593,20 @@ const creatures = {
   lucy02,
   charlie02,
   goose02,
-  // goose03,
   littleGoose: goose03,
   sillyGoose01: goose04,
-  // goose04,
   queenGoose01,
   pigeon01,
 }
 
 const items = {
   blank,
-  // roadLeftRight01,
   bag,
   smoke,
 
   skull01,
   lock02,
   ringOfZandar01,
-  // glenda01NoFace,
 
   bun,
   cap,
