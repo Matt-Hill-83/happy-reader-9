@@ -1,10 +1,10 @@
 const story9904 = {
-  title: "9904-randomBits03-Pantloads",
+  title: "9904 - Pantloads",
   scenes: [
     {
       title: "cat01",
       sceneConfig: {
-        worldTitle: "000 - random dialog - 001",
+        worldTitle: "000 - 001",
         coordinates: { row: 0, col: 0 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -72,5 +72,5 @@ const story9904 = {
     },
   ],
   questConfig: { data: "none" },
-};
-export default story9904;
+}
+export default story9904

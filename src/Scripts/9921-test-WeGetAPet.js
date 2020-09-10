@@ -1,5 +1,5 @@
 const story9921 = {
-  title: "----WeGetAPet - 001",
+  title: "9921 - WeGetAPet - 001",
   questConfig: {
     missions: [
       {
@@ -852,5 +852,5 @@ const story9921 = {
       frames2: [],
     },
   ],
-};
-export default story9921;
+}
+export default story9921

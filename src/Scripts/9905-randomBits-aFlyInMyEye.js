@@ -1,10 +1,10 @@
 const story9905 = {
-  title: "9905-randomBits-aFlyInMyEye",
+  title: "9905 - aFlyInMyEye",
   scenes: [
     {
       title: "cat01",
       sceneConfig: {
-        worldTitle: "000 - random dialog - 001",
+        worldTitle: "000 - 001",
         coordinates: { row: 0, col: 0 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -64,5 +64,5 @@ const story9905 = {
     },
   ],
   questConfig: { data: "none" },
-};
-export default story9905;
+}
+export default story9905

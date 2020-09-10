@@ -1,5 +1,5 @@
 const story9104 = {
-  title: "-----9104-ThisOneIsNotFunny-001",
+  title: "9104-ThisOneIsNotFunny-001",
   scenes: [
     {
       title: "cat01",
@@ -577,5 +577,5 @@ const story9104 = {
       },
     ],
   },
-};
-export default story9104;
+}
+export default story9104

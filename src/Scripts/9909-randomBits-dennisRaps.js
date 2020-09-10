@@ -1,5 +1,5 @@
 const story9909 = {
-  title: "9909-randomBits-dennisRaps",
+  title: "9909-dennisRaps",
   scenes: [
     {
       title: "bubbleGirl01",
@@ -130,5 +130,5 @@ const story9909 = {
       ],
     },
   ],
-};
-export default story9909;
+}
+export default story9909

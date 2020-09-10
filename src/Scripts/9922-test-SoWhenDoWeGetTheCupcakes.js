@@ -1,5 +1,5 @@
 const story9922 = {
-  title: "-----9922-test-SoWhenDoWeGetTheCupcakes - need to finish",
+  title: "9922 - SoWhenDoWeGetTheCupcakes - need to finish",
   scenes: [
     {
       title: "home",
@@ -16,11 +16,6 @@ const story9922 = {
         {
           frameConfig: {
             items: [],
-            // faces: [
-            //   { characterIndex: 1, character: "liz2", face: "happy" },
-            //   { character: "kat", characterIndex: 0, face: "happy" },
-            // ],
-            // creatures: ["helicopter01", "frogHopper01"],
           },
           dialogs: [
             '{"kat" : "Hi Liz."}',

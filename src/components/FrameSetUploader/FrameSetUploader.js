@@ -56,8 +56,6 @@ import story9921 from "../../Scripts/9921-test-WeGetAPet.js"
 import story9922 from "../../Scripts/9922-test-SoWhenDoWeGetTheCupcakes.js"
 import story9923 from "../../Scripts/9923-test-FrogHopper.js"
 import story9924 from "../../Scripts/9924-test-FrogHopperPart01.js"
-import story9925 from "../../Scripts/9925-test-AnnaWantCupcake.js"
-import story9926 from "../../Scripts/9926-test-newPattern001.js"
 import story9927 from "../../Scripts/9927-test-end-2-end-test.js"
 
 const worlds = [
@@ -96,20 +94,18 @@ const worlds = [
   // story9910,
   // story9912,
   // story9913,
-  story9914,
-  story9915,
-  story9916,
-  story9917,
-  story9918,
-  story9919,
-  story9920,
-  story9921,
-  story9922,
-  story9923,
-  story8013,
-  story9924,
-  story9925,
-  // story9926,
+  // story9914,
+  // story9915,
+  // story9916,
+  // story9917,
+  // story9918,
+  // story9919,
+  // story9920,
+  // story9921,
+  // story9922,
+  // story9923,
+  // story8013,
+  // story9924,
 ]
 
 class FrameSetUploader extends Component {

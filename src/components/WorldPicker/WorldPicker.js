@@ -35,6 +35,7 @@ class WorldPicker extends Component {
     if (this._deleting) return
     this._deleting = true
     try {
+      console.log("deleting")
       await map.delete()
       this._deleting = false
     } catch (err) {
@@ -73,7 +74,7 @@ class WorldPicker extends Component {
           {/* {`map ${name}: ${title}`} */}
           {/* {`id: ${id}`} */}
           <div className={css.mapPickerRowButtons}>
-            <span className={css.mapPickerButton}>{`${name}  ---  `}</span>
+            <span xxxclassName={css.mapPickerButton}>{`${name}  ---  `}</span>
             {showReleased && (
               <span className={css.mapPickerButton}>
                 Released

@@ -18,6 +18,7 @@
     "firebase-tools": "^8.4.2",
     "firebaseui": "^4.1.0",
     "firestorter": "^1.2.2",
+    "jscs": "^3.0.7",
     "jsoneditor": "^9.0.3",
     "lodash.get": "^4.4.2",
     "lodash.pick": "^4.4.0",

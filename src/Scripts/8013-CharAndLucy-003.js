@@ -1,5 +1,5 @@
 const story8013 = {
-  title: "--- 8013-CharAndLucy-003",
+  title: "8013-CharAndLucy-003",
   questConfig: {
     subQuestTriggersList: [
       // { subQuestId: 0, unHideTriggers: {} },

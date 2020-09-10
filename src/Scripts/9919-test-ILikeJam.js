@@ -1,10 +1,10 @@
 const story9919 = {
-  title: "9919-test-ILikeJam",
+  title: "9919 - ILikeJam",
   scenes: [
     {
       title: "bun",
       sceneConfig: {
-        worldTitle: "9918-test-KatMightGetADress - 2",
+        worldTitle: "9918 - KatMightGetADress - 2",
         coordinates: { row: 1, col: 1 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -49,7 +49,7 @@ const story9919 = {
     {
       title: "mop",
       sceneConfig: {
-        worldTitle: "9918-test-KatMightGetADress - 2",
+        worldTitle: "9918 - KatMightGetADress - 2",
         coordinates: { col: 2, row: 1 },
         creatures: ["kat", "liz2"],
         isEndScene: false,

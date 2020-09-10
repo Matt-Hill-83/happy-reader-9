@@ -1,6 +1,5 @@
 const story9115 = {
-  status: "needs new upload",
-  title: "9915-randomBits-KatGetsADressForReal",
+  title: "9915-KatGetsADressForReal",
   questConfig: {
     // pockets: { cup: { amount: 1 }, gold: { amount: 5 } },
     missions: [
@@ -391,5 +390,5 @@ const story9115 = {
       ],
     },
   ],
-};
-export default story9115;
+}
+export default story9115

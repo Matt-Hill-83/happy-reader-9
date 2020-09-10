@@ -1,4 +1,3 @@
-import { toJS } from "mobx"
 import _get from "lodash.get"
 import Utils from "./Utils.js"
 import WorldBuilderUtils from "./WorldBuilderUtils.js"
@@ -9,9 +8,7 @@ export default class JsonUtils {
     array.splice(index + adder, 0, newElement)
   }
 
-  static importWorldFromJson = async ({ newWorld, scenesGrid }) => {
-    // await this.addNewWorld()
-
+  static importWorldFromJson = ({ newWorld, scenesGrid }) => {
     const {
       title = "no title",
       description = "none",

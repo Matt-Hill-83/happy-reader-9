@@ -1,10 +1,10 @@
 const story9907 = {
-  title: "9907-randomBits-greenBeans",
+  title: "9907-greenBeans",
   scenes: [
     {
       title: "cat01",
       sceneConfig: {
-        worldTitle: "000 - random dialog - 001",
+        worldTitle: "000 - 001",
         coordinates: { row: 0, col: 0 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -59,5 +59,5 @@ const story9907 = {
     },
   ],
   questConfig: { data: "none" },
-};
-export default story9907;
+}
+export default story9907

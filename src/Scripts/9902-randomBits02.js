@@ -1,10 +1,10 @@
 const story9902 = {
-  title: "9902 - random dialog - 002 - Space Dog",
+  title: "9902 - Space Dog",
   scenes: [
     {
       title: "log",
       sceneConfig: {
-        worldTitle: "000 - random dialog - 001",
+        worldTitle: "000 - 001",
         coordinates: { row: 0, col: 0 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -95,7 +95,7 @@ const story9902 = {
     {
       title: "stump",
       sceneConfig: {
-        worldTitle: "000 - random dialog - 001",
+        worldTitle: "000 - 001",
         coordinates: { row: 0, col: 1 },
         creatures: ["kat", "liz2"],
         isEndScene: false,

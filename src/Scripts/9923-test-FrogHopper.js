@@ -1,5 +1,5 @@
 const story9123 = {
-  title: "------9923-test-FrogHopper - 001",
+  title: "9923 - FrogHopper - 001",
   scenes: [
     {
       title: "log",

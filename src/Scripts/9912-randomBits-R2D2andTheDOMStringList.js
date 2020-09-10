@@ -1,5 +1,5 @@
 const story9912 = {
-  title: "9912-randomBits-R2D2andTheDOMStringList",
+  title: "9912-R2D2andTheDOMStringList",
   scenes: [
     {
       title: "bubbleGirl01",
@@ -75,6 +75,6 @@ const story9912 = {
       ],
     },
   ],
-};
+}
 
-export default story9912;
+export default story9912

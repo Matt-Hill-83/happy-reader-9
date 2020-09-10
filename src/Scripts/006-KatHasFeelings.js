@@ -1,5 +1,5 @@
 const story006 = {
-  title: "story output",
+  title: "006 - I see a bun",
   scenes: [
     {
       title: "cave",

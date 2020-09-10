@@ -1,10 +1,10 @@
 const story9906 = {
-  title: "9906-randomBits-bunnyRap",
+  title: "9906 - bunnyRap",
   scenes: [
     {
       title: "cat01",
       sceneConfig: {
-        worldTitle: "000 - random dialog - 001",
+        worldTitle: "000 - 001",
         coordinates: { row: 0, col: 0 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -50,5 +50,5 @@ const story9906 = {
     },
   ],
   questConfig: { data: "none" },
-};
-export default story9906;
+}
+export default story9906

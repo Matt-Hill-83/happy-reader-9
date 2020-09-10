@@ -1,10 +1,10 @@
 const story9911 = {
-  title: "9911-randomBits-theWeirdWhateverThing",
+  title: "9911-theWeirdWhateverThing",
   scenes: [
     {
       title: "cat01",
       sceneConfig: {
-        worldTitle: "9911-randomBits-theWeirdWhateverThing",
+        worldTitle: "9911-theWeirdWhateverThing",
         coordinates: { col: 0, row: 0 },
         creatures: ["kat", "sassafras01Happy"],
         isEndScene: false,
@@ -71,7 +71,7 @@ const story9911 = {
     {
       title: "coop",
       sceneConfig: {
-        worldTitle: "9911-randomBits-theWeirdWhateverThing",
+        worldTitle: "9911-theWeirdWhateverThing",
         coordinates: { col: 1, row: 0 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -174,7 +174,7 @@ const story9911 = {
     {
       title: "home",
       sceneConfig: {
-        worldTitle: "9911-randomBits-theWeirdWhateverThing",
+        worldTitle: "9911-theWeirdWhateverThing",
         coordinates: { col: 1, row: 1 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -313,7 +313,7 @@ const story9911 = {
     {
       title: "slide",
       sceneConfig: {
-        worldTitle: "9911-randomBits-theWeirdWhateverThing",
+        worldTitle: "9911-theWeirdWhateverThing",
         coordinates: { col: 1, row: 2 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -346,7 +346,7 @@ const story9911 = {
     {
       title: "brindle01Happy",
       sceneConfig: {
-        worldTitle: "9911-randomBits-theWeirdWhateverThing",
+        worldTitle: "9911-theWeirdWhateverThing",
         coordinates: { col: 1, row: 3 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -379,7 +379,7 @@ const story9911 = {
     {
       title: "barn",
       sceneConfig: {
-        worldTitle: "9911-randomBits-theWeirdWhateverThing",
+        worldTitle: "9911-theWeirdWhateverThing",
         coordinates: { row: 3, col: 2 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -412,7 +412,7 @@ const story9911 = {
     {
       title: "end",
       sceneConfig: {
-        worldTitle: "9911-randomBits-theWeirdWhateverThing",
+        worldTitle: "9911-theWeirdWhateverThing",
         coordinates: { col: 1, row: 4 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -443,5 +443,5 @@ const story9911 = {
       ],
     },
   ],
-};
-export default story9911;
+}
+export default story9911

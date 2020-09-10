@@ -1,10 +1,10 @@
 const story9918 = {
-  title: "9918-test-KatMightGetADress - 2",
+  title: "9918 - KatMightGetADress - 2",
   scenes: [
     {
       title: "bun",
       sceneConfig: {
-        worldTitle: "9918-test-KatMightGetADress - 2",
+        worldTitle: "9918 - KatMightGetADress - 2",
         coordinates: { row: 1, col: 1 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -37,7 +37,7 @@ const story9918 = {
     {
       title: "mop",
       sceneConfig: {
-        worldTitle: "9918-test-KatMightGetADress - 2",
+        worldTitle: "9918 - KatMightGetADress - 2",
         coordinates: { col: 3, row: 1 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -70,7 +70,7 @@ const story9918 = {
     {
       title: "stump",
       sceneConfig: {
-        worldTitle: "9918-test-KatMightGetADress - 2",
+        worldTitle: "9918 - KatMightGetADress - 2",
         coordinates: { row: 2, col: 0 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -103,7 +103,7 @@ const story9918 = {
     {
       title: "pigInAWig",
       sceneConfig: {
-        worldTitle: "9918-test-KatMightGetADress - 2",
+        worldTitle: "9918 - KatMightGetADress - 2",
         coordinates: { row: 2, col: 1 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -136,7 +136,7 @@ const story9918 = {
     {
       title: "rori",
       sceneConfig: {
-        worldTitle: "9918-test-KatMightGetADress - 2",
+        worldTitle: "9918 - KatMightGetADress - 2",
         coordinates: { row: 2, col: 2 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -169,7 +169,7 @@ const story9918 = {
     {
       title: "oopsieCat01",
       sceneConfig: {
-        worldTitle: "9918-test-KatMightGetADress - 2",
+        worldTitle: "9918 - KatMightGetADress - 2",
         coordinates: { row: 2, col: 3 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -202,7 +202,7 @@ const story9918 = {
     {
       title: "donutShop01",
       sceneConfig: {
-        worldTitle: "9918-test-KatMightGetADress - 2",
+        worldTitle: "9918 - KatMightGetADress - 2",
         coordinates: { col: 4, row: 2 },
         creatures: ["kat", "liz2"],
         isEndScene: true,
@@ -235,7 +235,7 @@ const story9918 = {
     {
       title: "smoke",
       sceneConfig: {
-        worldTitle: "9918-test-KatMightGetADress - 2",
+        worldTitle: "9918 - KatMightGetADress - 2",
         coordinates: { col: 2, row: 3 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
@@ -294,5 +294,5 @@ const story9918 = {
       },
     ],
   },
-};
-export default story9918;
+}
+export default story9918

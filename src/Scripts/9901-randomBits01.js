@@ -1,10 +1,10 @@
 const story9901 = {
-  title: "9901 - random dialog - 001 - Abigail got the Pony",
+  title: "9901 - Abigail got the Pony",
   scenes: [
     {
       title: "log",
       sceneConfig: {
-        worldTitle: "000 - random dialog - 001",
+        worldTitle: "000 - 001",
         coordinates: { row: 0, col: 1 },
         creatures: ["kat", "liz2"],
         isEndScene: false,
