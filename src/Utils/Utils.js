@@ -23,7 +23,6 @@ export default class Utils {
   static addIdToAllItemsInScene = ({ scene }) => {
     const allItems = []
     scene.frameSet.frames.forEach((item) => {
-      console.log("item.critters1", toJS(item.critters1)) // zzz
       allItems.push(...item.critters1, ...item.critters2)
     })
     allItems.forEach((item) => {
@@ -31,7 +30,6 @@ export default class Utils {
         item.id = Utils.generateUuid()
       }
     })
-    console.log("allItems", toJS(allItems)) // zzz
   }
 
   static getAllItemsInScenes = ({ scenes }) => {
