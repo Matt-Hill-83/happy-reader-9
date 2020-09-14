@@ -17,9 +17,7 @@ const worldItem = ({ worldId }) => {
   return `/world/${worldId}`
 }
 const defaultWorldInProd = "aH5MjGenT8svEaPaty7G"
-const defaultWorldInNonProd = "phSGKxjTKM0HBm5xO4Mv"
-
-// const defaultWorldInNonProd = "aPHczWhVxO9HrZGogtx0"
+const defaultWorldInNonProd = "ATmQ92SsHDPV9docBHWX"
 
 export default function App() {
   FocusStyleManager.onlyShowFocusOnTabs()
@@ -42,8 +40,6 @@ export default function App() {
 
   maps.fetch()
   gameConfig.fetch()
-  // console.log("gameConfig", toJS(gameConfig)) // zzz
-  // gameConfig.add({ test: 5 })
 
   const nav = IS_PROD_RELEASE ? null : (
     <nav className={`${css.nav}`}>
