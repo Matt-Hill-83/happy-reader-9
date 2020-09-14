@@ -108,14 +108,6 @@ export const getTableConfig = ({
     )
   }
 
-  const columnNames = [
-    "Mission",
-    "Bring the...",
-    "to the...",
-    "Gold",
-    "Complete",
-  ]
-
   const tableConfig = {
     options: {
       selectableRows: "none",

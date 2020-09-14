@@ -72,24 +72,16 @@ export default class WorldBuilderUtils {
   }
 
   static updateMap = async ({ newProps = {}, mapToUpdate }) => {
+    console.log("updateMap-------------")
+    console.log("updateMap-------------")
     const map = mapToUpdate || worldBuilderStore.getWorldBuilderWorld()
     Object.assign(map.data, toJS(newProps))
-    // console.log(
-    //   "mapToUpdate.data.newGrid5[0].frameSet.frames[0]",
-    //   toJS(mapToUpdate.data.newGrid5[0].frameSet.frames[0])
-    // ) // zzz
 
-    if (mapToUpdate) {
-      map.data.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid({})
-    } else {
-      map.data.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid({})
-    }
+    map.data.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid({})
 
     delete map.data.grid
     console.log("map.data", toJS(map.data)) // zzz
     await map.update(map.data)
-    // // console.log("map.data", toJS(map.data)) // zzz
-    // await quests.add(map.data)
   }
 
   static getCritters1New = ({ frameConfig, sceneConfig }) => {
