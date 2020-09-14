@@ -57,7 +57,8 @@ import story9921 from "../../Scripts/9921-test-WeGetAPet.js"
 import story9922 from "../../Scripts/9922-test-SoWhenDoWeGetTheCupcakes.js"
 
 const worlds = [
-  story050,
+  // Stories that didn't upload
+  // story050,
 
   // story020,
   // story100,
@@ -91,7 +92,7 @@ const worlds = [
   // story9904,
 
   // story9905,
-  // story9906,
+  story9906,
   // story9907,
   // story9908,
   // story9909,
