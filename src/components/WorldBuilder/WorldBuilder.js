@@ -307,7 +307,6 @@ class WorldBuilder extends Component {
     // I should probably create a new scenesGrid here, based on the required dimensions
     const scenesGrid = worldBuilderStore.getWorldBuilderScenesGrid()
     const newProps = JsonUtils.importWorldFromJson({ newWorld, scenesGrid })
-    console.log("newProps", newProps) // zzz
     WorldBuilderUtils.updateMap({ newProps })
   }
 

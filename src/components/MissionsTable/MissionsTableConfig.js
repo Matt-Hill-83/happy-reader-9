@@ -81,7 +81,6 @@ export const getTableConfig = ({
   }
 
   const renderRecipient = (value, tableMeta, updateValue) => {
-    console.log("value", toJS(value)) // zzz
     const onChange = (newValue) => {
       updateValue(newValue)
       tableChangeCallback({
@@ -112,11 +111,7 @@ export const getTableConfig = ({
       <AutoComplete2
         items={combinedItems}
         defaultValue={scene}
-        // value={scene}
         getOptionLabel={(option) => {
-          if (!_get(option, "name")) {
-            console.log("option-----------------------", option) // zzz
-          }
           return _get(option, "name") || "error!!!"
         }}
         onChange={onChange}

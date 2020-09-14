@@ -12,7 +12,6 @@ import Constants from "../../Utils/Constants/Constants"
 import MissionsTable from "../MissionsTable/MissionsTable"
 import MyAccordion from "../MyAccordion/MyAccordion"
 import MyAccordionGroup from "../MyAccordionGroup/MyAccordionGroup"
-// import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import TriggersTable from "../TriggersTable/TriggersTable"
 import Utils from "../../Utils/Utils"
 
@@ -126,7 +125,6 @@ export default function SubQuestWizard({ props }) {
               className={css.sceneDropdown}
               items={realScenes}
               defaultValue={realScene}
-              // value={realScene}
               getOptionLabel={(option) => _get(option, "location.name")}
               onChange={onChangeScene}
             />
@@ -208,15 +206,12 @@ export default function SubQuestWizard({ props }) {
 
   const renderSubQuests = () => {
     if (!questConfig) {
-      console.log("no quest config") // zzz
       return <div>no questConfig</div>
     }
     const subQuests = questConfig.subQuests
 
     // this is a vestigal prop
     delete questConfig.missions
-    console.log("questConfig", toJS(questConfig)) // zzz
-    console.log("subQuests", toJS(subQuests)) // zzz
 
     if (!subQuests) {
       return <div> no subquests</div>

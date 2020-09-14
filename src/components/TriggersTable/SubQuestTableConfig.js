@@ -1,12 +1,9 @@
 import { Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
-// import { toJS } from "mobx"
-// import cx from "classnames"
 import React from "react"
 
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import Constants from "../../Utils/Constants/Constants"
-// import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import TextField from "@material-ui/core/TextField"
 import Utils from "../../Utils/Utils"
 
@@ -50,7 +47,6 @@ export const getSubQuestTableConfigFunc = ({
               <AutoComplete2
                 className={css.triggerConditionsDropdown}
                 items={items}
-                // value={conditionName}
                 defaultValue={conditionName}
                 index={tableMeta.columnIndex}
                 onChange={onChangeCondition}
@@ -64,7 +60,6 @@ export const getSubQuestTableConfigFunc = ({
                 color="secondary"
                 defaultValue={conditionValue}
                 onBlur={(event) => onChangeValue({ value: event.target.value })}
-                // InputProps={{}}
               />
               {renderAddDeleteButtonsForTriggerConditions({
                 tableMeta,
@@ -93,7 +88,6 @@ export const getSubQuestTableConfigFunc = ({
           className={css.triggerTypesDropdown}
           items={triggerTypes}
           defaultValue={value}
-          // value={value}
           getOptionLabel={(option) => option}
           onChange={onChange}
         />
