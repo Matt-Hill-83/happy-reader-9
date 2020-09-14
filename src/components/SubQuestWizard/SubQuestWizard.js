@@ -206,8 +206,10 @@ export default function SubQuestWizard({ props }) {
 
   const renderSubQuests = () => {
     const subQuests = questConfig.subQuests
+    console.log("questConfig", toJS(questConfig)) // zzz
+    console.log("subQuests", toJS(subQuests)) // zzz
     if (!subQuests) {
-      return null
+      return <div> no subquests</div>
     }
 
     return subQuests.map((subQuest, subQuestIndex) => {
