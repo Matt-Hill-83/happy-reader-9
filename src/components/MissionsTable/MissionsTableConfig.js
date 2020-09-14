@@ -18,7 +18,6 @@ export const getTableConfig = ({
   itemsToGet,
 }) => {
   const renderItem = (value, tableMeta, updateValue) => {
-    // return value.name
     const onChange = (newValue) => {
       const { rowIndex, columnIndex } = tableMeta
       updateValue(newValue)
@@ -45,7 +44,6 @@ export const getTableConfig = ({
 
     const props = {
       sortKeys: ["name"],
-      // className: css.sceneDropdown,
       items: itemsToGet,
       defaultValue: itemToGet,
       getOptionLabel,
