@@ -1,13 +1,13 @@
 import { toJS } from "mobx"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import cx from "classnames"
-import React, { useState } from "react"
+import React from "react"
 import TextField from "@material-ui/core/TextField"
 import Utils from "../../Utils/Utils"
 
 import css from "./AutoComplete2.module.scss"
 
-export default function AutoComplete2({ props }) {
+export default function AutoComplete2(props) {
   const {
     className = "",
     defaultValue = { title: "select an option" },

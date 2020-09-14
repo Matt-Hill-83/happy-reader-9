@@ -1,11 +1,9 @@
 import { toJS } from "mobx"
-import cx from "classnames"
 import React from "react"
 import TextField from "@material-ui/core/TextField"
 import _get from "lodash.get"
 
 import Utils from "../../Utils/Utils"
-import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
@@ -20,6 +18,7 @@ export const getTableConfig = ({
   itemsToGet,
 }) => {
   const renderItem = (value, tableMeta, updateValue) => {
+    // return value.name
     const onChange = (newValue) => {
       const { rowIndex, columnIndex } = tableMeta
       updateValue(newValue)
@@ -31,9 +30,10 @@ export const getTableConfig = ({
 
     const getOptionLabel = (option) => {
       let sceneName = ""
-      const scene = scenes.find((scene) => {
-        return scene.id === option.sceneId
-      })
+      const scene =
+        scenes.find((scene) => {
+          return scene.id === option.sceneId
+        }) || null
 
       if (scene && scene.id) {
         sceneName = ` [${scene.location.name}]`
@@ -52,7 +52,7 @@ export const getTableConfig = ({
       onChange: onChange,
     }
 
-    return <AutoComplete2 props={props} />
+    return <AutoComplete2 {...props} />
   }
 
   const renderName = (value, tableMeta, updateValue) => {
@@ -81,6 +81,7 @@ export const getTableConfig = ({
   }
 
   const renderRecipient = (value, tableMeta, updateValue) => {
+    console.log("value", toJS(value)) // zzz
     const onChange = (newValue) => {
       updateValue(newValue)
       tableChangeCallback({
@@ -94,13 +95,28 @@ export const getTableConfig = ({
     const allItems = Utils.getAllItemsInScenes({ scenes })
     const allScenes = Utils.getSimpleSceneObjects({ scenes })
     const combinedItems = [...allItems, ...allScenes]
-    const scene = combinedItems.find((item) => item.id === value.id)
+
+    combinedItems.forEach((item) => {
+      if (!item.id) {
+        item.id = Utils.generateUuid()
+      }
+    })
+
+    const scene = combinedItems.find((item) => {
+      const match = item.id === value.id
+
+      return match
+    })
 
     return (
-      <SimpleSelectObj
+      <AutoComplete2
         items={combinedItems}
-        value={scene}
+        defaultValue={scene}
+        // value={scene}
         getOptionLabel={(option) => {
+          if (!_get(option, "name")) {
+            console.log("option-----------------------", option) // zzz
+          }
           return _get(option, "name") || "error!!!"
         }}
         onChange={onChange}

@@ -1,16 +1,17 @@
-import { Button, ButtonGroup, Popover, Classes } from "@blueprintjs/core"
+import { Button } from "@blueprintjs/core"
 import { IconNames } from "@blueprintjs/icons"
-import { toJS } from "mobx"
-import cx from "classnames"
+// import { toJS } from "mobx"
+// import cx from "classnames"
 import React from "react"
 
 import AddDeleteButtonGroup from "../AddDeleteButtonGroup/AddDeleteButtonGroup"
 import Constants from "../../Utils/Constants/Constants"
-import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
+// import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import TextField from "@material-ui/core/TextField"
 import Utils from "../../Utils/Utils"
 
 import css from "./SubQuestTableConfig.module.scss"
+import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 const newCondition = { completedMission: 0 }
 
@@ -46,10 +47,11 @@ export const getSubQuestTableConfigFunc = ({
 
           return (
             <div className={css.conditionsKVPair}>
-              <SimpleSelectObj
+              <AutoComplete2
                 className={css.triggerConditionsDropdown}
                 items={items}
-                value={conditionName}
+                // value={conditionName}
+                defaultValue={conditionName}
                 index={tableMeta.columnIndex}
                 onChange={onChangeCondition}
                 getOptionLabel={(option) => option}
@@ -87,10 +89,11 @@ export const getSubQuestTableConfigFunc = ({
 
     return (
       <div className={css.nameElements}>
-        <SimpleSelectObj
+        <AutoComplete2
           className={css.triggerTypesDropdown}
           items={triggerTypes}
-          value={value}
+          defaultValue={value}
+          // value={value}
           getOptionLabel={(option) => option}
           onChange={onChange}
         />

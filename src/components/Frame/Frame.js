@@ -11,7 +11,6 @@ import CrudMachine from "../CrudMachine/CrudMachine"
 import Head from "../Head/Head"
 import ImageDisplay from "../ImageDisplay/ImageDisplay"
 import Images from "../../images/images"
-import Utils from "../../Utils/Utils"
 
 import css from "./Frame.module.scss"
 
@@ -274,7 +273,7 @@ class Frame extends Component {
   }
 
   render() {
-    const { scene } = this.props
+    // const { scene } = this.props
 
     const { frame, showFacePicker, facePickerCharacter } = this.state
 

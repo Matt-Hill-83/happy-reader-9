@@ -12,14 +12,15 @@ import Constants from "../../Utils/Constants/Constants"
 import MissionsTable from "../MissionsTable/MissionsTable"
 import MyAccordion from "../MyAccordion/MyAccordion"
 import MyAccordionGroup from "../MyAccordionGroup/MyAccordionGroup"
-import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
+// import SimpleSelectObj from "../SimpleSelectObj/SimpleSelectObj"
 import TriggersTable from "../TriggersTable/TriggersTable"
 import Utils from "../../Utils/Utils"
 
 import css from "./SubQuestWizard.module.scss"
+import AutoComplete2 from "../AutoComplete2/AutoComplete2"
 
 export default function SubQuestWizard({ props }) {
-  const [questConfig, setQuestConfig] = useState([])
+  const [questConfig, setQuestConfig] = useState(null)
   const [dataTableKey, setDataTableKey] = useState([])
 
   const { onSave } = props
@@ -121,10 +122,11 @@ export default function SubQuestWizard({ props }) {
       const sceneTriggersAccordion = {
         title: (
           <div className={css.scenePickerGroup}>
-            <SimpleSelectObj
+            <AutoComplete2
               className={css.sceneDropdown}
               items={realScenes}
-              value={realScene}
+              defaultValue={realScene}
+              // value={realScene}
               getOptionLabel={(option) => _get(option, "location.name")}
               onChange={onChangeScene}
             />
@@ -205,9 +207,17 @@ export default function SubQuestWizard({ props }) {
   }
 
   const renderSubQuests = () => {
+    if (!questConfig) {
+      console.log("no quest config") // zzz
+      return <div>no questConfig</div>
+    }
     const subQuests = questConfig.subQuests
+
+    // this is a vestigal prop
+    delete questConfig.missions
     console.log("questConfig", toJS(questConfig)) // zzz
     console.log("subQuests", toJS(subQuests)) // zzz
+
     if (!subQuests) {
       return <div> no subquests</div>
     }
@@ -218,11 +228,16 @@ export default function SubQuestWizard({ props }) {
       if (!subQuest.triggers) {
         subQuest.triggers = []
       }
-      const { triggers, scenes, missions = [] } = subQuest
 
       if (!subQuest.scenes) {
         subQuest.scenes = []
       }
+
+      if (!subQuest.missions) {
+        subQuest.missions = []
+      }
+
+      const { triggers, scenes, missions } = subQuest
 
       const missionsAccordion = {
         title: <span className={cx(css.listGroupTitle)}>Missions</span>,

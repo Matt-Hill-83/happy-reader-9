@@ -2,6 +2,7 @@ import { toJS } from "mobx"
 import _get from "lodash.get"
 import worldBuilderStore from "../Stores/WorldBuilderStore.js"
 import { quests } from "../Stores/InitStores.js"
+import Utils from "./Utils.js"
 
 export default class WorldBuilderUtils {
   static getAllItemsInScene = ({ scene }) => {
@@ -78,6 +79,10 @@ export default class WorldBuilderUtils {
     Object.assign(map.data, toJS(newProps))
 
     map.data.newGrid5 = WorldBuilderUtils.createCondensedGridFromGrid({})
+    map.data.newGrid5.forEach((scene) => {
+      Utils.addIdToAllItemsInScene({ scene })
+    })
+    console.log("map.data.newGrid5", toJS(map.data.newGrid5)) // zzz
 
     delete map.data.grid
     console.log("map.data", toJS(map.data)) // zzz

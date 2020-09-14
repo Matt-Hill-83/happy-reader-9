@@ -19,7 +19,6 @@ import _get from "lodash.get"
 import { maps, gameConfig } from "../../Stores/InitStores"
 import { worldNameStore } from "../../Stores/FrameSetStore"
 import Constants from "../../Utils/Constants/Constants"
-// import DialogBuilder from "../DialogBuilder/DialogBuilder"
 import DialogBuilder2 from "../DialogBuilder2/DialogBuilder2"
 import ExportJson from "../ExportJson/ExportJson"
 import FrameBuilder from "../FrameBuilder/FrameBuilder"
@@ -57,7 +56,7 @@ class WorldBuilder extends Component {
   async componentWillMount() {
     await worldNameStore.fetch()
     await gameConfig.fetch()
-    const gameConfigData = Utils.getGameConfig()
+    // const gameConfigData = Utils.getGameConfig()
     const defaultWorldId = localStateStore.getDefaultWorldId()
     this.onChangeWorld({ mapId: defaultWorldId })
   }

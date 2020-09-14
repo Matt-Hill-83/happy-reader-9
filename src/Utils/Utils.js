@@ -15,9 +15,23 @@ export default class Utils {
   static getAllItemsInScene = ({ scene }) => {
     const allItems = []
     scene.frameSet.frames.forEach((item) => {
-      allItems.push(...item.critters1, ...item.critters2)
+      allItems.push(...toJS(item.critters1), ...toJS(item.critters2))
     })
     return allItems
+  }
+
+  static addIdToAllItemsInScene = ({ scene }) => {
+    const allItems = []
+    scene.frameSet.frames.forEach((item) => {
+      console.log("item.critters1", toJS(item.critters1)) // zzz
+      allItems.push(...item.critters1, ...item.critters2)
+    })
+    allItems.forEach((item) => {
+      if (!item.id) {
+        item.id = Utils.generateUuid()
+      }
+    })
+    console.log("allItems", toJS(allItems)) // zzz
   }
 
   static getAllItemsInScenes = ({ scenes }) => {
@@ -27,6 +41,7 @@ export default class Utils {
       items.forEach((item) => {
         if (!allItems[item.name]) {
           item.sceneId = scene.id
+
           allItems[item.name] = item
         }
       })
