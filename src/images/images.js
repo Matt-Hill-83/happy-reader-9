@@ -1,10 +1,11 @@
-import { toJS } from "mobx"
-
 //locations
+
+import mongo01 from "./creatures/mango01.png"
 
 import bag from "./locations/bag.png"
 import barn from "./locations/barn.png"
 import bees from "./locations/bees.png"
+import tree from "./locations/bees.png"
 import blank from "./locations/blank.png"
 import bog from "./locations/bog.png"
 import bun from "./locations/bun.png"
@@ -40,7 +41,7 @@ import stump from "./locations/stump.png"
 import swing from "./locations/swing.png"
 import tag from "./locations/tag.png"
 import top from "./locations/top.png"
-import tree from "./locations/treehouse.png"
+// import tree from "./locations/treehouse.png"
 import tug from "./locations/tug.png"
 import van from "./locations/van.png"
 import waterfall from "./locations/waterfall.png"
@@ -454,6 +455,8 @@ const locations = {
 }
 
 const creatures = {
+  mongo01,
+  shuri: pantherGirl01,
   blank,
 
   taffy01,

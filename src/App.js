@@ -17,7 +17,7 @@ const worldItem = ({ worldId }) => {
   return `/world/${worldId}`
 }
 const defaultWorldInProd = "aH5MjGenT8svEaPaty7G"
-const defaultWorldInNonProd = "ATmQ92SsHDPV9docBHWX"
+const defaultWorldInNonProd = "kKannCl0Dfs60JdX06tA"
 
 export default function App() {
   FocusStyleManager.onlyShowFocusOnTabs()

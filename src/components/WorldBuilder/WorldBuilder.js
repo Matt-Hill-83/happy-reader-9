@@ -506,7 +506,7 @@ class WorldBuilder extends Component {
         </div>
         {`${world.id}`}
         <Button
-          text={"+ New Map"}
+          text={"+ New Quest"}
           onClick={() => this.onChangeWorld({ newWorld: true })}
         />
         {this.renderMainButtonGroup()}

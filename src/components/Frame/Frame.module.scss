@@ -127,11 +127,14 @@
 }
 
 .wordsContainer {
+  // display: flex;
+  display: none;
+  //
+  //
   padding: 1vh;
   bottom: unset;
   top: 0%;
   padding: unset;
-  display: flex;
   z-index: 1;
   padding: 2%;
   width: 100%;
