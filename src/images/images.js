@@ -1,6 +1,12 @@
 //locations
 
 import mongo01 from "./creatures/mango01.png"
+import warriorGirl01 from "./creatures/warriorGirl01.png"
+import frizzle01 from "./creatures/frizzle01.png"
+import rockets01 from "./creatures/rockets01.png"
+
+import fionaFlying01 from "./creatures/fionaFlying01.png"
+import mongoFlying01 from "./creatures/mongoFlying01.png"
 
 import bag from "./locations/bag.png"
 import barn from "./locations/barn.png"
@@ -455,9 +461,15 @@ const locations = {
 }
 
 const creatures = {
+  blank,
   mongo01,
   shuri: pantherGirl01,
-  blank,
+
+  warriorGirl01,
+  frizzle01,
+  rockets01,
+  fionaFlying01,
+  mongoFlying01,
 
   taffy01,
   parrot01,
@@ -595,6 +607,7 @@ const creatures = {
   goose01,
   lucy02,
   charlie02,
+  fiona: charlie02,
   goose02,
   littleGoose: goose03,
   sillyGoose01: goose04,
