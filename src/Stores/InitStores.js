@@ -3,10 +3,9 @@ import "@firebase/firestore"
 import { Collection, Document, initFirestorter } from "firestorter"
 
 import firebase from "@firebase/app"
-import { toJS } from "mobx"
 
 firebase.initializeApp({
-  projectId: "troll-need-gold-02",
+  projectId: "troll-need-gold-02-staging",
 })
 
 initFirestorter({ firebase: firebase })
